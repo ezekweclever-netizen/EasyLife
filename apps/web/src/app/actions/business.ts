@@ -505,16 +505,18 @@ export async function inviteTeamMemberAction(
 export async function fetchBusinessDashboardMetrics(
   businessId: string
 ): Promise<BusinessDashboardMetrics | null> {
+  const auth = await getAuthenticatedUser();
+  if (!auth) return null;
+
   const config = getSupabasePublicConfig();
   if (!config) return null;
 
-  const auth = await getAuthenticatedUser();
   const res = await supabaseFetch<BusinessDashboardMetrics>(
     config,
     "/rest/v1/rpc/get_business_dashboard_metrics",
     {
       method: "POST",
-      accessToken: auth?.accessToken,
+      accessToken: auth.accessToken,
       body: { p_business_id: businessId },
     }
   );
@@ -527,7 +529,7 @@ export async function fetchBusinessDashboardMetrics(
 }
 
 /**
- * 9. Fetch user's accessible businesses
+ * 9. Fetch user's owned or managed businesses (excluding unrelated directory listings)
  */
 export async function fetchUserBusinesses() {
   const auth = await getAuthenticatedUser();
@@ -536,17 +538,40 @@ export async function fetchUserBusinesses() {
   const config = getSupabasePublicConfig();
   if (!config) return [];
 
-  // Query businesses where owner_id = user.id
-  const res = await supabaseFetch<Array<Record<string, unknown>>>(
-    config,
-    `/rest/v1/businesses?select=*&order=created_at.desc`,
-    {
-      accessToken: auth.accessToken,
-    }
-  );
+  const userId = encodeURIComponent(auth.user.id);
+  const [ownedRes, memberRes] = await Promise.all([
+    supabaseFetch<Array<Record<string, unknown>>>(
+      config,
+      `/rest/v1/businesses?owner_id=eq.${userId}&deleted_at=is.null&select=*&order=created_at.desc`,
+      { accessToken: auth.accessToken }
+    ),
+    supabaseFetch<Array<{ business?: Record<string, unknown> | null }>>(
+      config,
+      `/rest/v1/business_members?user_id=eq.${userId}&is_active=eq.true&select=business:businesses(*)`,
+      { accessToken: auth.accessToken }
+    ),
+  ]);
 
-  if (!res.ok) return [];
-  return res.data;
+  const byId = new Map<string, Record<string, unknown>>();
+  if (ownedRes.ok && Array.isArray(ownedRes.data)) {
+    for (const biz of ownedRes.data) {
+      if (typeof biz.id === "string") {
+        byId.set(biz.id, biz);
+      }
+    }
+  }
+  if (memberRes.ok && Array.isArray(memberRes.data)) {
+    for (const row of memberRes.data) {
+      const biz = row?.business;
+      if (biz && typeof biz.id === "string" && !biz.deleted_at && !byId.has(biz.id)) {
+        byId.set(biz.id, biz);
+      }
+    }
+  }
+
+  return Array.from(byId.values()).sort((a, b) =>
+    String(b.created_at || "").localeCompare(String(a.created_at || ""))
+  );
 }
 
 /**
@@ -709,24 +734,12 @@ export async function fetchBusinessTeam(businessId: string) {
 }
 
 /**
- * 16. Get or resolve active business for the current context
+ * 16. Get or resolve active business for the authenticated user context
  */
 export async function getActiveBusiness(): Promise<Record<string, any> | null> {
   const businesses = await fetchUserBusinesses();
   if (businesses && businesses.length > 0) {
     return businesses[0] ?? null;
-  }
-
-  const config = getSupabasePublicConfig();
-  if (!config) return null;
-
-  const res = await supabaseFetch<Array<Record<string, any>>>(
-    config,
-    "/rest/v1/businesses?select=*&limit=1&order=created_at.desc"
-  );
-
-  if (res.ok && res.data && res.data.length > 0) {
-    return res.data[0] ?? null;
   }
 
   return null;
