@@ -60,7 +60,7 @@ export function getButtonClassName({
   fullWidth?: boolean;
   className?: string;
 }): string {
-  return `inline-flex items-center justify-center font-semibold transition-colors duration-150 cursor-pointer disabled:opacity-55 disabled:cursor-not-allowed ${
+  return `inline-flex items-center justify-center whitespace-nowrap shrink-0 font-semibold transition-colors duration-150 cursor-pointer disabled:opacity-55 disabled:cursor-not-allowed ${
     VARIANT_CLASSES[variant]
   } ${SIZE_CLASSES[size]} ${fullWidth ? "w-full" : ""} ${className}`.trim();
 }

@@ -65,7 +65,7 @@ export function SiteHeader() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-[#DAE7E7] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-3">
           <Link
             href="/"
             aria-label="EasyLife — Everyday Problems. Smarter Solutions."
@@ -76,15 +76,15 @@ export function SiteHeader() {
           </Link>
 
           <nav aria-label="Primary" className="hidden xl:block">
-            <ul className="flex items-center gap-1">
+            <ul className="flex items-center gap-0.5">
               {PUBLIC_PRIMARY_NAV_LINKS.map((link) => {
                 const active = isActive(link.href);
                 return (
-                  <li key={link.href}>
+                  <li key={link.href} className="shrink-0">
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      className={`inline-flex items-center whitespace-nowrap px-2.5 py-2 rounded-lg text-[13px] font-medium transition-colors ${
                         active
                           ? "bg-[#F3F8F8] text-[#154752] font-semibold border-b-2 border-[#24989A]"
                           : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
@@ -98,7 +98,7 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="hidden xl:flex items-center gap-2">
+          <div className="hidden xl:flex items-center gap-2 shrink-0">
             {isLoggedIn ? (
               <>
                 <ButtonLink href="/bookings" variant="ghost" size="sm">
