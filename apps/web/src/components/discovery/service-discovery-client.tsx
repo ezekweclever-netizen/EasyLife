@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { ServiceCategoryItem } from "@/lib/supabase/customer";
 import type { OperatingNeighbourhood, MatchedProfessionalItem } from "@/lib/supabase/matching";
 
@@ -22,6 +23,7 @@ export function ServiceDiscoveryClient({
   defaultCategorySlug = "",
   defaultKeyword = "",
 }: ServiceDiscoveryClientProps) {
+  const router = useRouter();
   const [results, setResults] = useState<MatchedProfessionalItem[]>(initialResults);
   const [isPending, startTransition] = useTransition();
 
@@ -36,6 +38,23 @@ export function ServiceDiscoveryClient({
   const [minRating, setMinRating] = useState<string>("0");
   const [verifiedOnly, setVerifiedOnly] = useState(false);
   const [availableOnly, setAvailableOnly] = useState(false);
+
+  // Sync client state when server-side search results or URL-driven defaults update
+  useEffect(() => {
+    setResults(initialResults);
+  }, [initialResults]);
+
+  useEffect(() => {
+    setCity(defaultCity);
+  }, [defaultCity]);
+
+  useEffect(() => {
+    setCategorySlug(defaultCategorySlug);
+  }, [defaultCategorySlug]);
+
+  useEffect(() => {
+    setKeyword(defaultKeyword);
+  }, [defaultKeyword]);
 
   // Filter neighbourhoods matching current selected city
   const cityNeighbourhoods = neighbourhoods.filter(
@@ -62,7 +81,7 @@ export function ServiceDiscoveryClient({
     const activeKeyword = overrides?.keyword ?? keyword;
 
     const queryParams = new URLSearchParams();
-    if (activeKeyword) queryParams.set("q", activeKeyword);
+    if (activeKeyword.trim()) queryParams.set("q", activeKeyword.trim());
     if (activeCat) queryParams.set("cat", activeCat);
     if (activeCity && activeCity !== "All Cities") queryParams.set("city", activeCity);
     if (activeArea) queryParams.set("area", activeArea);
@@ -73,53 +92,9 @@ export function ServiceDiscoveryClient({
     if (verifiedOnly) queryParams.set("verified", "true");
     if (availableOnly) queryParams.set("available", "true");
 
+    const qs = queryParams.toString();
     startTransition(() => {
-      const qs = queryParams.toString();
-      window.history.replaceState(null, "", qs ? `/explore-services?${qs}` : "/explore-services");
-
-      let filtered = [...initialResults];
-
-      if (activeCat) {
-        filtered = filtered.filter((p) => p.category_slug === activeCat);
-      }
-
-      if (activeKeyword.trim()) {
-        const q = activeKeyword.toLowerCase();
-        filtered = filtered.filter(
-          (p) =>
-            p.business_name.toLowerCase().includes(q) ||
-            p.headline?.toLowerCase().includes(q) ||
-            p.bio?.toLowerCase().includes(q) ||
-            p.category_name.toLowerCase().includes(q) ||
-            p.service_title?.toLowerCase().includes(q)
-        );
-      }
-
-      if (activeCity !== "All Cities") {
-        filtered = filtered.filter((p) =>
-          p.primary_city.toLowerCase().includes(activeCity.toLowerCase())
-        );
-      }
-
-      if (minRating !== "0") {
-        const r = parseFloat(minRating);
-        filtered = filtered.filter((p) => Number(p.average_rating) >= r);
-      }
-
-      if (verifiedOnly) {
-        filtered = filtered.filter((p) => p.is_verified);
-      }
-
-      if (availableOnly) {
-        filtered = filtered.filter((p) => p.is_available && p.is_schedule_available);
-      }
-
-      if (maxDistanceKm && maxDistanceKm !== "all" && activeCity !== "All Cities") {
-        const d = parseFloat(maxDistanceKm);
-        filtered = filtered.filter((p) => p.distance_km <= d);
-      }
-
-      setResults(filtered);
+      router.push(qs ? `/explore-services?${qs}` : "/explore-services", { scroll: false });
     });
   };
 
@@ -139,8 +114,9 @@ export function ServiceDiscoveryClient({
     setMinRating("0");
     setVerifiedOnly(false);
     setAvailableOnly(false);
-    setResults(initialResults);
-    window.history.replaceState(null, "", "/explore-services");
+    startTransition(() => {
+      router.push("/explore-services", { scroll: false });
+    });
   };
 
   return (
