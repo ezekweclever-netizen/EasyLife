@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="EasyLife Emblem">
+  <!-- Deep Navy Rounded Shield Base -->
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#0A192F" />
+  <rect x="5" y="5" width="54" height="54" rx="13" stroke="#1E293B" stroke-width="2" />
+  <!-- Geometric E + Roofline Bar (White) -->
+  <path d="M18 20H42" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M18 32H34" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M18 44H36" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+  <path d="M18 20V44" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round" />
+  <!-- Smarter Solutions Teal Checkmark Accent -->
+  <path d="M33 35L39 41L49 27" stroke="#14B8A6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

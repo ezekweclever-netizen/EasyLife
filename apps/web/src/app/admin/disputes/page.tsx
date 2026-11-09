@@ -1,0 +1,86 @@
+import React from "react";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { supabaseAdminFetch } from "@/lib/supabase/admin";
+import { AdminDisputeManager, AdminDisputeItem } from "@/components/admin/admin-dispute-manager";
+
+export const metadata: Metadata = {
+  title: "Service Dispute Arbitration & Case Management — Admin Portal | EasyLife",
+  description: "Investigate customer disputes, review photographic evidence, assign administrators, and document binding resolution decisions.",
+};
+
+export default async function AdminDisputesPage() {
+  const [disputesRes, evidenceRes, notesRes] = await Promise.all([
+    supabaseAdminFetch<any[]>(
+      "/rest/v1/disputes?select=*,bookings(reference_code,title,status,city,agreed_amount_kobo)&order=created_at.desc&limit=100"
+    ),
+    supabaseAdminFetch<any[]>(
+      "/rest/v1/dispute_evidence?select=*&order=created_at.asc&limit=200"
+    ),
+    supabaseAdminFetch<any[]>(
+      "/rest/v1/dispute_internal_notes?select=*&order=created_at.asc&limit=300"
+    ),
+  ]);
+
+  const rawDisputes = disputesRes.ok && Array.isArray(disputesRes.data) ? disputesRes.data : [];
+  const rawEvidence = evidenceRes.ok && Array.isArray(evidenceRes.data) ? evidenceRes.data : [];
+  const rawNotes = notesRes.ok && Array.isArray(notesRes.data) ? notesRes.data : [];
+
+  const disputes: AdminDisputeItem[] = rawDisputes.map((d) => ({
+    ...d,
+    booking: d.bookings || null,
+    evidence: rawEvidence.filter((ev) => ev.dispute_id === d.id),
+    internal_notes_list: rawNotes.filter((n) => n.dispute_id === d.id),
+  }));
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] py-10 px-4 sm:px-6 lg:px-8 text-[#0F172A]">
+      <div className="max-w-7xl mx-auto space-y-6">
+        {/* Header Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+          <div>
+            <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
+              <Link href="/dashboard" className="hover:text-slate-800">
+                Dashboard
+              </Link>
+              <span>/</span>
+              <span className="text-slate-800 font-semibold">Service Accountability</span>
+              <span>/</span>
+              <span className="text-purple-700 font-bold">Dispute Management</span>
+            </div>
+            <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Service Dispute Arbitration Console
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Arbitrate complaints, evaluate evidence, assign administrators, and ensure disputed bookings are never automatically completed without rigorous oversight.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin/reviews"
+              className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition shadow-xs"
+            >
+              ★ Review Moderation
+            </Link>
+            <Link
+              href="/admin/categories"
+              className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition shadow-xs"
+            >
+              Categories
+            </Link>
+            <Link
+              href="/dashboard"
+              className="px-4 py-2.5 rounded-xl bg-[#0F766E] text-white text-xs font-bold hover:bg-[#0D655E] transition shadow-xs"
+            >
+              Dashboard
+            </Link>
+          </div>
+        </div>
+
+        {/* Dispute Manager Interactive Client */}
+        <AdminDisputeManager initialDisputes={disputes} />
+      </div>
+    </div>
+  );
+}

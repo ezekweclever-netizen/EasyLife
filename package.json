@@ -1,0 +1,39 @@
+{
+  "name": "easylife-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "EasyLife — Everyday Problems. Smarter Solutions. AI-enabled everyday services marketplace and maintenance management platform.",
+  "workspaces": [
+    "apps/web",
+    "packages/shared-types",
+    "packages/shared-config"
+  ],
+  "scripts": {
+    "dev": "npm --workspace=@easylife/web run dev",
+    "build": "npm --workspace=@easylife/web run build",
+    "start": "npm --workspace=@easylife/web run start",
+    "lint": "npm --workspace=@easylife/web run lint",
+    "typecheck": "npm --workspace=@easylife/shared-types run typecheck && npm --workspace=@easylife/shared-config run typecheck && npm --workspace=@easylife/web run typecheck",
+    "check:env": "node scripts/check-env.mjs",
+    "verify:db": "node scripts/verify-migrations.mjs",
+    "test:security": "node scripts/test-security-policies.mjs",
+    "test:public": "node scripts/test-public-pages.mjs",
+    "test:customer": "node scripts/test-customer-flow.mjs",
+    "test:pro": "node scripts/test-pro-flow.mjs",
+    "test:matching": "node scripts/test-matching-engine.mjs",
+    "test:expanded": "node scripts/test-expanded-services.mjs",
+    "test:booking": "node scripts/test-booking-engine.mjs",
+    "test:quotation": "node scripts/test-quotation-engine.mjs",
+    "test:messaging": "node scripts/test-messaging-notifications.mjs",
+    "test:accountability": "node scripts/test-accountability-system.mjs",
+    "test": "node scripts/verify-migrations.mjs && node scripts/test-security-policies.mjs && node scripts/test-public-pages.mjs && node scripts/test-customer-flow.mjs && node scripts/test-pro-flow.mjs && node scripts/test-matching-engine.mjs && node scripts/test-expanded-services.mjs && node scripts/test-booking-engine.mjs && node scripts/test-quotation-engine.mjs && node scripts/test-messaging-notifications.mjs && node scripts/test-accountability-system.mjs"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.23.1",
+    "pg": "^8.23.1",
+    "typescript": "^5.7.0"
+  }
+}

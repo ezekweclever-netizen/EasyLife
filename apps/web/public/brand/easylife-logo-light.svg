@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none" role="img" aria-label="EasyLife — Everyday Problems. Smarter Solutions.">
+  <!-- Emblem -->
+  <rect x="4" y="6" width="52" height="52" rx="13" fill="#0A192F" />
+  <path d="M17 21H39" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+  <path d="M17 32H31" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+  <path d="M17 43H33" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+  <path d="M17 21V43" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" />
+  <path d="M31 35L36.5 40.5L46 27.5" stroke="#14B8A6" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Wordmark on Light Surface -->
+  <text x="68" y="36" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="26" font-weight="800" letter-spacing="-0.5" fill="#0A192F">Easy<tspan fill="#0D9488">Life</tspan></text>
+  <text x="69" y="51" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="9.5" font-weight="600" letter-spacing="0.4" fill="#475569">EVERYDAY PROBLEMS. SMARTER SOLUTIONS.</text>
+</svg>

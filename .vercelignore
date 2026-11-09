@@ -1,0 +1,24 @@
+# Dependencies & build outputs
+node_modules
+**/node_modules
+.next
+apps/web/.next
+dist
+*.tsbuildinfo
+
+# Local secrets
+.env
+.env.local
+.env.*.local
+apps/web/.env
+apps/web/.env.local
+apps/web/.env.*.local
+
+# Mobile workspace (excluded from web deployment)
+apps/mobile
+
+# VCS & local caches
+.git
+.vercel
+supabase/.temp
+supabase/.branches

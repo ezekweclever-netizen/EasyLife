@@ -1,0 +1,123 @@
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@300,400,500,600,700&display=swap");
+@import "tailwindcss";
+
+/* Local General Sans Font Faces */
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans-Semibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/GeneralSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* =========================================================================
+     EASYLIFE DESIGN SYSTEM — PALETTE C: HARBOR TEAL & CORAL
+     ========================================================================= */
+  --easylife-primary: #154752;
+  --easylife-primary-dark: #0d282e;
+  --easylife-secondary: #24989A;
+  --easylife-secondary-hover: #1d7e80;
+  --easylife-accent: #EE9277;
+  --easylife-accent-hover: #e77858;
+  --easylife-background: #F3F8F8;
+  --easylife-surface: #FFFFFF;
+  --easylife-text: #1F2F34;
+  --easylife-muted: #68797C;
+  --easylife-border: #DAE7E7;
+  --easylife-border-strong: #c2d4d4;
+
+  /* Legacy / Compatibility Token Mappings */
+  --easylife-navy-950: #0d282e;
+  --easylife-navy-900: #154752;
+  --easylife-navy-800: #1a5663;
+  --easylife-navy-700: #206776;
+  --easylife-navy-600: #2b7a8a;
+
+  --easylife-teal-800: #186869;
+  --easylife-teal-700: #1d7e80;
+  --easylife-teal-600: #24989A;
+  --easylife-teal-500: #2dc0c2;
+  --easylife-teal-100: #d6f2f2;
+  --easylife-teal-50: #eef9f9;
+
+  --easylife-charcoal-900: #142024;
+  --easylife-charcoal-800: #1F2F34;
+  --easylife-charcoal-700: #35474c;
+  --easylife-charcoal-600: #4e6065;
+  --easylife-charcoal-500: #68797C;
+  --easylife-surface-white: #FFFFFF;
+  --easylife-surface-light: #F3F8F8;
+  --easylife-surface-muted: #e7f0f0;
+  --easylife-border-grey: #DAE7E7;
+  --easylife-border-strong: #c2d4d4;
+
+  /* Semantic Status Colors (WCAG AAA / AA Accessible) */
+  --easylife-status-success-text: #127a5b;
+  --easylife-status-success-bg: #e7f7f1;
+  --easylife-status-warning-text: #b25e0a;
+  --easylife-status-warning-bg: #fef5e7;
+  --easylife-status-error-text: #c53030;
+  --easylife-status-error-bg: #fdf0f0;
+  --easylife-status-info-text: #1a6e84;
+  --easylife-status-info-bg: #ebf6f9;
+}
+
+@theme {
+  --font-sans: "General Sans", ui-sans-serif, sans-serif;
+  --color-primary: #154752;
+  --color-secondary: #24989A;
+  --color-accent: #EE9277;
+  --color-canvas: #F3F8F8;
+}
+
+/* Smooth Scrolling for existing in-page navigation (respects reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--easylife-background);
+  color: var(--easylife-text);
+  font-family: "General Sans", ui-sans-serif, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessible Focus Ring Standard */
+:focus-visible {
+  outline: 2px solid var(--easylife-secondary);
+  outline-offset: 2px;
+}
