@@ -400,7 +400,8 @@ export function StackedCategoriesSection() {
                       <img
                         src={category.illustrationSrc}
                         alt={category.illustrationAlt}
-                        loading={index < 2 ? "eager" : "lazy"}
+                        loading="eager"
+                        decoding="async"
                         className="relative z-10 h-[250px] sm:h-[305px] lg:h-[335px] w-auto object-contain object-bottom drop-shadow-[0_16px_28px_rgba(0,0,0,0.32)] select-none"
                       />
                     </div>

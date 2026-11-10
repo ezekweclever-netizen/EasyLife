@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectPoolWithRetry, queryPoolWithRetry, runWithAuth } from './_env.mjs';
 /**
  * EasyLife Service Accountability System Test Suite (Prompt 14)
  *
@@ -140,75 +140,14 @@ console.log("\n2. Connecting to Live Remote Supabase Database:");
 const dbConnStr =
   getDatabaseUrl();
 
-const pool = new pg.Pool({
-  connectionString: dbConnStr,
-  ssl: { rejectUnauthorized: false },
-  max: 5,
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 15000,
-});
-pool.on("error", () => {});
-
-let dedicatedClient = null;
-let currentAuthUserId = null;
-
-async function getDedicatedClient() {
-  if (dedicatedClient) {
-    try {
-      await dedicatedClient.query("SELECT 1;");
-      return dedicatedClient;
-    } catch {
-      try { dedicatedClient.release(true); } catch {}
-      dedicatedClient = null;
-    }
-  }
-  dedicatedClient = await pool.connect();
-  if (currentAuthUserId) {
-    await dedicatedClient.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [currentAuthUserId]);
-    await dedicatedClient.query("SELECT set_config('request.jwt.claims', $1, false);", [
-      JSON.stringify({ sub: currentAuthUserId, role: "authenticated" }),
-    ]);
-  }
-  return dedicatedClient;
-}
+const pool = await connectPoolWithRetry(pg.Pool, dbConnStr);
 
 const client = {
-  async query(text, params) {
-    for (let attempt = 1; attempt <= 3; attempt++) {
-      try {
-        const c = await getDedicatedClient();
-        return await c.query(text, params);
-      } catch (err) {
-        const isSocketError =
-          err.code === "ECONNRESET" ||
-          err.message?.includes("Connection terminated") ||
-          err.message?.includes("not queryable") ||
-          err.message?.includes("closed");
-        if (isSocketError) {
-          try { dedicatedClient?.release(true); } catch {}
-          dedicatedClient = null;
-          if (attempt < 3) {
-            await new Promise((r) => setTimeout(r, 600));
-            continue;
-          }
-        }
-        throw err;
-      }
-    }
-  },
-  async end() {
-    try { dedicatedClient?.release(); } catch {}
-    await pool.end();
-  }
+  query: (text, params) => queryPoolWithRetry(pool, text, params),
+  end: () => pool.end(),
 };
 
-try {
-  const initClient = await pool.connect();
-  initClient.release();
-  console.log("  [CONNECTED] PostgreSQL pool connected successfully.");
-} catch (err) {
-  console.warn(`  [WARN] Live database connection skipped: ${err.message}`);
-}
+console.log("  [CONNECTED] PostgreSQL pool connected successfully.");
 
 async function runLiveDbChecks() {
 
@@ -303,10 +242,13 @@ async function runLiveDbChecks() {
   let testBookingId;
   let testCategoryId;
 
+  // Helper to run auth-scoped DB operations atomically on a single transaction-pinned connection.
+  // Essential when connecting through PgBouncer transaction pooling (port 6543).
+  function withAuth(userId, fn) {
+    return runWithAuth(pool, userId, fn);
+  }
+
   // Fetch active customer, professional, category, and administrator
-  const custRes = await client.query(`
-    SELECT id, email, full_name FROM public.profiles WHERE primary_role = 'customer' LIMIT 1;
-  `);
   const proRes = await client.query(`
     SELECT pp.id as professional_id, pp.user_id, p.email, pp.business_name, pp.completed_jobs_count
     FROM public.professional_profiles pp
@@ -314,6 +256,26 @@ async function runLiveDbChecks() {
     WHERE pp.verification_status = 'approved' AND p.is_active = true
     LIMIT 1;
   `);
+  assert.ok(proRes.rows.length > 0, "Requires at least 1 professional profile in database");
+
+  testProUserId = proRes.rows[0].user_id;
+  testProProfileId = proRes.rows[0].professional_id;
+
+  const custRes = await client.query(`
+    SELECT p.id, p.email, p.full_name
+    FROM public.profiles p
+    WHERE p.primary_role = 'customer'
+      AND p.id <> $1
+      AND NOT EXISTS (SELECT 1 FROM public.professional_profiles pp2 WHERE pp2.user_id = p.id)
+    LIMIT 1;
+  `, [testProUserId]);
+  const custFinalRes = custRes.rows.length > 0
+    ? custRes
+    : await client.query(
+        `SELECT id, email, full_name FROM public.profiles WHERE primary_role = 'customer' AND id <> $1 LIMIT 1;`,
+        [testProUserId]
+      );
+
   const catRes = await client.query(`
     SELECT id, name FROM public.service_categories WHERE is_active = true LIMIT 1;
   `);
@@ -323,32 +285,14 @@ async function runLiveDbChecks() {
     LIMIT 1;
   `);
 
-  assert.ok(custRes.rows.length > 0, "Requires at least 1 customer profile in database");
-  assert.ok(proRes.rows.length > 0, "Requires at least 1 professional profile in database");
+  assert.ok(custFinalRes.rows.length > 0, "Requires at least 1 customer profile in database");
   assert.ok(catRes.rows.length > 0, "Requires at least 1 active service category in database");
 
-  testCustomerId = custRes.rows[0].id;
-  testProUserId = proRes.rows[0].user_id;
-  testProProfileId = proRes.rows[0].professional_id;
+  testCustomerId = custFinalRes.rows[0].id;
   testCategoryId = catRes.rows[0].id;
   const adminId = adminRes.rows[0]?.user_id || testCustomerId;
 
-  async function setAuth(userId) {
-    currentAuthUserId = userId || null;
-    if (!userId) {
-      await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
-      await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
-      await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
-    } else {
-      await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [userId]);
-      await client.query("SELECT set_config('request.jwt.claims', $1, false);", [
-        JSON.stringify({ sub: userId, role: "authenticated" }),
-      ]);
-    }
-  }
-
   // Create a clean test booking in 'in_progress' status
-  await setAuth(null);
   const bookingRes = await client.query(`
     INSERT INTO public.bookings (
       reference_code,
@@ -380,16 +324,15 @@ async function runLiveDbChecks() {
 
   // 3.1 Pro submits completion request
   await asyncTest("Live DB: Pro submits completion request -> pro_marked_complete with notes and notification", async () => {
-    // Set authenticated context as test pro user
-    await setAuth(testProUserId);
-
-    const res = await client.query(`
-      SELECT * FROM public.pro_submit_job_completion(
-        p_booking_id := $1,
-        p_notes := 'Replaced 1-inch PPR elbow, pressurized test at 4 bar for 45 mins. Cleaned site.',
-        p_photos := ARRAY['https://storage.easylife.ng/test-proof-1.jpg']::TEXT[]
-      );
-    `, [testBookingId]);
+    const res = await withAuth(testProUserId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.pro_submit_job_completion(
+          p_booking_id := $1,
+          p_notes := 'Replaced 1-inch PPR elbow, pressurized test at 4 bar for 45 mins. Cleaned site.',
+          p_photos := ARRAY['https://storage.easylife.ng/test-proof-1.jpg']::TEXT[]
+        );
+      `, [testBookingId])
+    );
 
     assert.strictEqual(res.rows[0].status, "pro_marked_complete");
     assert.ok(res.rows[0].pro_completion_notes.includes("Replaced 1-inch PPR elbow"));
@@ -405,15 +348,15 @@ async function runLiveDbChecks() {
 
   // 3.2 Customer reports incomplete work -> returns to in_progress with rework notes
   await asyncTest("Live DB: Customer reports incomplete work -> reverts to in_progress with rework notes", async () => {
-    await setAuth(testCustomerId);
-
-    const res = await client.query(`
-      SELECT * FROM public.customer_report_incomplete_work(
-        p_booking_id := $1,
-        p_reason := 'Water is still leaking slightly around the tank valve union connection.',
-        p_photos := ARRAY['https://storage.easylife.ng/incomplete-leak.jpg']::TEXT[]
-      );
-    `, [testBookingId]);
+    const res = await withAuth(testCustomerId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.customer_report_incomplete_work(
+          p_booking_id := $1,
+          p_reason := 'Water is still leaking slightly around the tank valve union connection.',
+          p_photos := ARRAY['https://storage.easylife.ng/incomplete-leak.jpg']::TEXT[]
+        );
+      `, [testBookingId])
+    );
 
     assert.strictEqual(res.rows[0].status, "in_progress");
     assert.strictEqual(res.rows[0].rework_count, 1);
@@ -430,33 +373,33 @@ async function runLiveDbChecks() {
 
   // 3.3 Pro re-submits completion request
   await asyncTest("Live DB: Pro re-submits completion after addressing rework items", async () => {
-    await setAuth(testProUserId);
-
-    const res = await client.query(`
-      SELECT * FROM public.pro_submit_job_completion(
-        p_booking_id := $1,
-        p_notes := 'Tightened valve union with new PTFE gasket, zero drops detected after 1 hour test.'
-      );
-    `, [testBookingId]);
+    const res = await withAuth(testProUserId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.pro_submit_job_completion(
+          p_booking_id := $1,
+          p_notes := 'Tightened valve union with new PTFE gasket, zero drops detected after 1 hour test.'
+        );
+      `, [testBookingId])
+    );
 
     assert.strictEqual(res.rows[0].status, "pro_marked_complete");
   });
 
   // 3.4 Customer confirms completion -> completed, increments pro completed jobs count
   await asyncTest("Live DB: Customer confirms completion -> transitions to completed, updates pro jobs count", async () => {
-    await setAuth(testCustomerId);
-
     const initialProRes = await client.query(
       `SELECT completed_jobs_count FROM public.professional_profiles WHERE id = $1;`,
       [testProProfileId]
     );
     const initialCount = initialProRes.rows[0].completed_jobs_count;
 
-    const res = await client.query(`
-      SELECT * FROM public.confirm_booking_completion(
-        p_booking_id := $1
-      );
-    `, [testBookingId]);
+    const res = await withAuth(testCustomerId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.confirm_booking_completion(
+          p_booking_id := $1
+        );
+      `, [testBookingId])
+    );
 
     assert.strictEqual(res.rows[0].status, "completed");
     assert.ok(res.rows[0].customer_confirmed_at !== null);
@@ -476,17 +419,17 @@ async function runLiveDbChecks() {
 
   // 4.1 Eligible customer submits verified review
   await asyncTest("Live DB: Eligible customer submits 5-star review for completed booking", async () => {
-    await setAuth(testCustomerId);
-
-    const res = await client.query(`
-      SELECT * FROM public.submit_booking_review(
-        p_booking_id := $1,
-        p_rating := 5::SMALLINT,
-        p_title := 'Fixed tank leak cleanly',
-        p_comment := 'The technician was very responsive, returned immediately when I noticed a drip, and sealed it perfectly.',
-        p_photos := ARRAY['https://storage.easylife.ng/review-tank-proof.jpg']::TEXT[]
-      );
-    `, [testBookingId]);
+    const res = await withAuth(testCustomerId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.submit_booking_review(
+          p_booking_id := $1,
+          p_rating := 5::SMALLINT,
+          p_title := 'Fixed tank leak cleanly',
+          p_comment := 'The technician was very responsive, returned immediately when I noticed a drip, and sealed it perfectly.',
+          p_photos := ARRAY['https://storage.easylife.ng/review-tank-proof.jpg']::TEXT[]
+        );
+      `, [testBookingId])
+    );
 
     assert.strictEqual(res.rows[0].rating, 5);
     assert.strictEqual(res.rows[0].is_published, true);
@@ -503,18 +446,18 @@ async function runLiveDbChecks() {
 
   // 4.2 Prevent duplicate reviews on same booking
   await asyncTest("Live DB Rule: Duplicate review on same booking is strictly REJECTED", async () => {
-    await setAuth(testCustomerId);
-
     let rejected = false;
     try {
-      await client.query(`
-        SELECT * FROM public.submit_booking_review(
-          p_booking_id := $1,
-          p_rating := 4::SMALLINT,
-          p_title := 'Duplicate review attempt',
-          p_comment := 'This should fail because a review already exists for this booking.'
-        );
-      `, [testBookingId]);
+      await withAuth(testCustomerId, (tx) =>
+        tx.query(`
+          SELECT * FROM public.submit_booking_review(
+            p_booking_id := $1,
+            p_rating := 4::SMALLINT,
+            p_title := 'Duplicate review attempt',
+            p_comment := 'This should fail because a review already exists for this booking.'
+          );
+        `, [testBookingId])
+      );
     } catch (err) {
       rejected = true;
       assert.ok(err.message.includes("already been submitted") || err.message.includes("unique"), err.message);
@@ -524,18 +467,18 @@ async function runLiveDbChecks() {
 
   // 4.3 Prevent professional from reviewing their own job
   await asyncTest("Live DB Rule: Professional cannot review their own job -> REJECTED", async () => {
-    await setAuth(testProUserId);
-
     let rejected = false;
     try {
-      await client.query(`
-        SELECT * FROM public.submit_booking_review(
-          p_booking_id := $1,
-          p_rating := 5::SMALLINT,
-          p_title := 'Self-review fraud attempt',
-          p_comment := 'I did a fantastic job on this repair.'
-        );
-      `, [testBookingId]);
+      await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT * FROM public.submit_booking_review(
+            p_booking_id := $1,
+            p_rating := 5::SMALLINT,
+            p_title := 'Self-review fraud attempt',
+            p_comment := 'I did a fantastic job on this repair.'
+          );
+        `, [testBookingId])
+      );
     } catch (err) {
       rejected = true;
       assert.ok(err.message.includes("Only the customer") || err.message.includes("FORBIDDEN"), err.message);
@@ -545,14 +488,14 @@ async function runLiveDbChecks() {
 
   // 4.4 Review history preservation when customer edits feedback
   await asyncTest("Live DB Rule: Editing review preserves prior feedback in review_history", async () => {
-    await setAuth(testCustomerId);
-
-    await client.query(`
-      UPDATE public.reviews
-      SET comment = 'Updated feedback: Still performing well after 1 week. Highly recommend this team.',
-          updated_at = now()
-      WHERE booking_id = $1;
-    `, [testBookingId]);
+    await withAuth(testCustomerId, (tx) =>
+      tx.query(`
+        UPDATE public.reviews
+        SET comment = 'Updated feedback: Still performing well after 1 week. Highly recommend this team.',
+            updated_at = now()
+        WHERE booking_id = $1;
+      `, [testBookingId])
+    );
 
     const historyRes = await client.query(`
       SELECT * FROM public.review_history
@@ -566,14 +509,11 @@ async function runLiveDbChecks() {
 
   // 4.5 Admin review moderation (flag / reject / approve)
   await asyncTest("Live DB: Admin moderates review -> unpublishing immediately updates pro rating summary", async () => {
-    await setAuth(null);
     await client.query(`
       INSERT INTO public.user_roles (user_id, role, is_active)
       VALUES ($1, 'admin', true)
       ON CONFLICT (user_id, role) DO UPDATE SET is_active = true;
     `, [adminId]);
-
-    await setAuth(adminId);
 
     const reviewRes = await client.query(
       `SELECT id FROM public.reviews WHERE booking_id = $1;`,
@@ -582,25 +522,29 @@ async function runLiveDbChecks() {
     const reviewId = reviewRes.rows[0].id;
 
     // Reject review for abusive/unverified claim
-    const modRes = await client.query(`
-      SELECT * FROM public.admin_moderate_review(
-        p_review_id := $1,
-        p_action := 'reject',
-        p_moderation_notes := 'Content flagged for containing unverified external telephone solicitation.'
-      );
-    `, [reviewId]);
+    const modRes = await withAuth(adminId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.admin_moderate_review(
+          p_review_id := $1,
+          p_action := 'reject',
+          p_moderation_notes := 'Content flagged for containing unverified external telephone solicitation.'
+        );
+      `, [reviewId])
+    );
 
     assert.strictEqual(modRes.rows[0].is_published, false);
     assert.strictEqual(modRes.rows[0].moderation_status, "rejected");
 
     // Restore review
-    const approveRes = await client.query(`
-      SELECT * FROM public.admin_moderate_review(
-        p_review_id := $1,
-        p_action := 'approve',
-        p_moderation_notes := 'Reviewed and verified authentic customer submission.'
-      );
-    `, [reviewId]);
+    const approveRes = await withAuth(adminId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.admin_moderate_review(
+          p_review_id := $1,
+          p_action := 'approve',
+          p_moderation_notes := 'Reviewed and verified authentic customer submission.'
+        );
+      `, [reviewId])
+    );
 
     assert.strictEqual(approveRes.rows[0].is_published, true);
     assert.strictEqual(approveRes.rows[0].moderation_status, "approved");
@@ -645,23 +589,23 @@ async function runLiveDbChecks() {
 
   // 5.1 Customer files formal dispute
   await asyncTest("Live DB: Customer files formal dispute -> booking status transitions to 'disputed'", async () => {
-    await setAuth(testCustomerId);
-
     const testEvidencePath = `evidence/ac_leak_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.jpg`;
 
-    const res = await client.query(`
-      SELECT * FROM public.submit_booking_dispute(
-        p_booking_id := $1,
-        p_category := 'poor_workmanship',
-        p_description := 'The technician charged 55,000 NGN for compressor gas, but the unit blew hot air 2 hours later. Refused to return.',
-        p_disputed_amount_kobo := 5500000,
-        p_evidence := jsonb_build_array(jsonb_build_object(
-          'storage_path', $2::text,
-          'file_name', 'ac_leak.jpg',
-          'description', 'Pressure gauge reading zero'
-        ))
-      );
-    `, [disputeBookingId, testEvidencePath]);
+    const res = await withAuth(testCustomerId, (tx) =>
+      tx.query(`
+        SELECT * FROM public.submit_booking_dispute(
+          p_booking_id := $1,
+          p_category := 'poor_workmanship',
+          p_description := 'The technician charged 55,000 NGN for compressor gas, but the unit blew hot air 2 hours later. Refused to return.',
+          p_disputed_amount_kobo := 5500000,
+          p_evidence := jsonb_build_array(jsonb_build_object(
+            'storage_path', $2::text,
+            'file_name', 'ac_leak.jpg',
+            'description', 'Pressure gauge reading zero'
+          ))
+        );
+      `, [disputeBookingId, testEvidencePath])
+    );
 
     testDisputeId = res.rows[0].id;
     assert.strictEqual(res.rows[0].status, "open");
@@ -687,15 +631,15 @@ async function runLiveDbChecks() {
 
   // 5.2 CRUCIAL RULE: Disputed booking CANNOT be completed automatically
   await asyncTest("Live DB Rule: Disputed booking CANNOT be confirmed as completed -> REJECTED", async () => {
-    await setAuth(testCustomerId);
-
     let rejected = false;
     try {
-      await client.query(`
-        SELECT * FROM public.confirm_booking_completion(
-          p_booking_id := $1
-        );
-      `, [disputeBookingId]);
+      await withAuth(testCustomerId, (tx) =>
+        tx.query(`
+          SELECT * FROM public.confirm_booking_completion(
+            p_booking_id := $1
+          );
+        `, [disputeBookingId])
+      );
     } catch (err) {
       rejected = true;
       assert.ok(err.message.includes("disputed") || err.message.includes("cannot be completed"), err.message);
@@ -705,26 +649,25 @@ async function runLiveDbChecks() {
 
   // 5.3 Admin dispute investigation and resolution
   await asyncTest("Live DB: Admin investigates, adds internal notes, and formally resolves dispute", async () => {
-    await setAuth(adminId);
+    // Add private internal note and update dispute status to resolved
+    const resolveRes = await withAuth(adminId, async (tx) => {
+      await tx.query(`
+        INSERT INTO public.dispute_internal_notes (dispute_id, admin_user_id, note)
+        VALUES ($1, $2, 'Contacted technician. Technician admitted manifold hose ruptured during filling. Rework not feasible; issuing customer refund.');
+      `, [testDisputeId, adminId]);
 
-    // Add private internal note
-    await client.query(`
-      INSERT INTO public.dispute_internal_notes (dispute_id, admin_user_id, note)
-      VALUES ($1, $2, 'Contacted technician. Technician admitted manifold hose ruptured during filling. Rework not feasible; issuing customer refund.');
-    `, [testDisputeId, adminId]);
-
-    // Update dispute status to under_review then resolve
-    const resolveRes = await client.query(`
-      SELECT * FROM public.admin_update_dispute(
-        p_dispute_id := $1,
-        p_status := 'resolved'::public.dispute_status,
-        p_assigned_admin_id := $2,
-        p_internal_note := 'Case finalized in customer favor.',
-        p_resolution_type := 'full_refund',
-        p_resolution_summary := 'Full refund of 55,000 NGN granted to customer due to acknowledged technician installation defect.',
-        p_refund_amount_kobo := 5500000
-      );
-    `, [testDisputeId, adminId]);
+      return tx.query(`
+        SELECT * FROM public.admin_update_dispute(
+          p_dispute_id := $1,
+          p_status := 'resolved'::public.dispute_status,
+          p_assigned_admin_id := $2,
+          p_internal_note := 'Case finalized in customer favor.',
+          p_resolution_type := 'full_refund',
+          p_resolution_summary := 'Full refund of 55,000 NGN granted to customer due to acknowledged technician installation defect.',
+          p_refund_amount_kobo := 5500000
+        );
+      `, [testDisputeId, adminId]);
+    });
 
     assert.strictEqual(resolveRes.rows[0].status, "resolved");
     assert.strictEqual(resolveRes.rows[0].resolution_type, "full_refund");
@@ -756,7 +699,6 @@ async function runLiveDbChecks() {
     await client.query(`UPDATE public.bookings SET deleted_at = now() WHERE id = ANY($1);`, [testIds]);
   }
   console.log("Cleanup complete.");
-  await setAuth(null);
 
   await client.end();
 }

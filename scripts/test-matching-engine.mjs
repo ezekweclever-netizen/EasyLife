@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectClientWithRetry } from './_env.mjs';
 /**
  * EasyLife Prompt 10 — Service Discovery & Location-Based Matching Test Suite
  *
@@ -261,9 +261,8 @@ console.log("\n6. Live Supabase PostgreSQL & PostGIS Verification:");
 const dbConnStr = getDatabaseUrl();
 
 async function runLiveDbChecks() {
-  const client = new pg.Client({ connectionString: dbConnStr });
+  const client = await connectClientWithRetry(pg.Client, dbConnStr);
   try {
-    await client.connect();
 
     await asyncTest("Live DB: PostGIS extension is installed and active", async () => {
       const res = await client.query("SELECT postgis_version();");
@@ -321,7 +320,9 @@ async function runLiveDbChecks() {
 
     await client.end();
   } catch (err) {
-    console.warn(`  [WARN] Live DB check skipped or connection failed: ${err.message}`);
+    try { await client.end(); } catch {}
+    failedCount++;
+    console.error(`  [FAIL] Live DB check connection or query failed: ${err.message}`);
   }
 }
 

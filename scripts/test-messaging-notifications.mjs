@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectPoolWithRetry, queryPoolWithRetry, runWithAuth } from './_env.mjs';
 /**
  * EasyLife Messaging and Notification System Test Suite (Prompt 13)
  * Tests:
@@ -124,27 +124,15 @@ test("Pages exist: /messages, /pro/messages, and /notifications", () => {
 // ============================================================================
 console.log("\n2. Connecting to Live Remote Supabase Database:");
 
-const connectionString =
-  getDatabaseUrl();
+const connectionString = getDatabaseUrl();
+const pool = await connectPoolWithRetry(pg.Pool, connectionString);
+const client = {
+  query: (text, params) => queryPoolWithRetry(pool, text, params),
+  end: () => pool.end(),
+};
 
-let client;
-let connected = false;
-for (let attempt = 1; attempt <= 4; attempt++) {
-  try {
-    client = new pg.Client({
-      connectionString,
-      ssl: { rejectUnauthorized: false },
-    });
-    await client.connect();
-    connected = true;
-    break;
-  } catch (err) {
-    console.log(`Connection attempt ${attempt} failed (${err.message}). Retrying in 2s...`);
-    await new Promise((r) => setTimeout(r, 2000));
-  }
-}
-if (!connected) {
-  throw new Error("Could not connect to Supabase PostgreSQL database after multiple attempts.");
+function withAuth(userId, fn) {
+  return runWithAuth(pool, userId, fn);
 }
 
 await asyncTest("Live DB: public.notification_deliveries table exists with RLS enabled", async () => {
@@ -208,33 +196,40 @@ await asyncTest("Live DB: All 6 Prompt 13 stored procedures exist in public sche
 // ============================================================================
 console.log("\n3. Testing Messaging & Notification Lifecycle on Live DB:");
 
-// Fetch active customer, professional, and category
-const custRes = await client.query(`
-  SELECT id, email, full_name FROM public.profiles WHERE primary_role = 'customer' LIMIT 1;
-`);
+// Fetch active professional first, then distinct customer without a professional profile
 const proRes = await client.query(`
   SELECT pp.id as professional_id, pp.user_id, p.email, pp.business_name
   FROM public.professional_profiles pp
   JOIN public.profiles p ON p.id = pp.user_id
-  WHERE pp.verification_status = 'approved'
+  WHERE pp.verification_status = 'approved' AND p.is_active = true
   LIMIT 1;
 `);
+assert.ok(proRes.rows.length > 0, "Test requires at least 1 professional profile in DB");
+const testPro = proRes.rows[0];
+
+let custRes = await client.query(`
+  SELECT p.id, p.email, p.full_name
+  FROM public.profiles p
+  WHERE p.primary_role = 'customer'
+    AND p.id <> $1
+    AND NOT EXISTS (SELECT 1 FROM public.professional_profiles pp2 WHERE pp2.user_id = p.id)
+  LIMIT 1;
+`, [testPro.user_id]);
+if (custRes.rows.length === 0) {
+  custRes = await client.query(
+    `SELECT id, email, full_name FROM public.profiles WHERE primary_role = 'customer' AND id <> $1 LIMIT 1;`,
+    [testPro.user_id]
+  );
+}
 const catRes = await client.query(`
   SELECT id, name FROM public.service_categories WHERE is_active = true LIMIT 1;
 `);
 
 const testCustomer = custRes.rows[0];
-const testPro = proRes.rows[0];
 const testCat = catRes.rows[0];
 
-assert.ok(testCustomer, "Test requires at least 1 customer profile in DB");
-assert.ok(testPro, "Test requires at least 1 professional profile in DB");
+assert.ok(testCustomer, "Test requires at least 1 distinct customer profile in DB");
 assert.ok(testCat, "Test requires at least 1 active service category in DB");
-
-// Clear any stale pooled JWT claims from previous test runs before creating fixture
-await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
-await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
-await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
 
 // Setup isolated synthetic booking
 const testBookingRef = `EL-MSG-${Date.now().toString().slice(-6)}`;
@@ -265,8 +260,9 @@ let testMsgId = null;
 
 // Test 1: Conversation creation
 await asyncTest("Live DB: create_or_get_booking_conversation creates thread and adds customer member", async () => {
-  await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testCustomer.id]);
-  const res = await client.query("SELECT public.create_or_get_booking_conversation($1) AS res;", [testBookingId]);
+  const res = await withAuth(testCustomer.id, (tx) =>
+    tx.query("SELECT public.create_or_get_booking_conversation($1) AS res;", [testBookingId])
+  );
   const data = res.rows[0].res;
   assert.strictEqual(data.success, true);
   assert.ok(data.conversation_id, "Missing conversation_id");
@@ -282,14 +278,10 @@ await asyncTest("Live DB: create_or_get_booking_conversation creates thread and 
 
 // Test 2: Unrelated user attempting to send message -> REJECTED
 await asyncTest("Live DB Security: Unrelated user cannot send message in conversation (returns FORBIDDEN)", async () => {
-  // Use a random UUID not in conversation
   const fakeUserId = "00000000-0000-0000-0000-000000000099";
-  await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [fakeUserId]);
-
   try {
-    await client.query(
-      "SELECT public.send_conversation_message($1, 'Unauthorized intrusion test');",
-      [testConvId]
+    await withAuth(fakeUserId, (tx) =>
+      tx.query("SELECT public.send_conversation_message($1, 'Unauthorized intrusion test');", [testConvId])
     );
     assert.fail("Should have rejected unauthorized sender");
   } catch (err) {
@@ -299,16 +291,16 @@ await asyncTest("Live DB Security: Unrelated user cannot send message in convers
 
 // Test 3: Add professional as member and send text message
 await asyncTest("Live DB: send_conversation_message records message with delivery_status 'delivered'", async () => {
-  // Add pro as member
   await client.query(
     "INSERT INTO public.conversation_members (conversation_id, user_id, role_in_conversation) VALUES ($1, $2, 'professional') ON CONFLICT DO NOTHING;",
     [testConvId, testPro.user_id]
   );
 
-  await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testCustomer.id]);
-  const res = await client.query(
-    "SELECT public.send_conversation_message($1, 'Hello, I have a leakage under the kitchen sink.') AS res;",
-    [testConvId]
+  const res = await withAuth(testCustomer.id, (tx) =>
+    tx.query(
+      "SELECT public.send_conversation_message($1, 'Hello, I have a leakage under the kitchen sink.') AS res;",
+      [testConvId]
+    )
   );
   const data = res.rows[0].res;
   assert.strictEqual(data.success, true);
@@ -348,19 +340,20 @@ await asyncTest("Live DB: send_conversation_message automatically dispatches 'ne
 
 // Test 5: Attachment validation (rejection of oversized attachment)
 await asyncTest("Live DB: send_conversation_message rejects attachment exceeding 8MB limit", async () => {
-  await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testCustomer.id]);
   try {
-    await client.query(
-      `SELECT public.send_conversation_message(
-        $1,
-        'Oversized file test',
-        'attachment',
-        'messages/fake.pdf',
-        'fake.pdf',
-        'application/pdf',
-        10485760
-      );`,
-      [testConvId]
+    await withAuth(testCustomer.id, (tx) =>
+      tx.query(
+        `SELECT public.send_conversation_message(
+          $1,
+          'Oversized file test',
+          'attachment',
+          'messages/fake.pdf',
+          'fake.pdf',
+          'application/pdf',
+          10485760
+        );`,
+        [testConvId]
+      )
     );
     assert.fail("Should have rejected attachment > 8MB");
   } catch (err) {
@@ -370,18 +363,19 @@ await asyncTest("Live DB: send_conversation_message rejects attachment exceeding
 
 // Test 6: Valid attachment metadata saved
 await asyncTest("Live DB: send_conversation_message stores valid attachment metadata (name, mime, size)", async () => {
-  await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testCustomer.id]);
-  const res = await client.query(
-    `SELECT public.send_conversation_message(
-      $1::uuid,
-      'Here is the fault photograph'::text,
-      'attachment'::text,
-      ('messages/' || $1::text || '/leak_photo.jpg')::text,
-      'leak_photo.jpg'::text,
-      'image/jpeg'::text,
-      1024500::bigint
-    ) AS res;`,
-    [testConvId]
+  const res = await withAuth(testCustomer.id, (tx) =>
+    tx.query(
+      `SELECT public.send_conversation_message(
+        $1::uuid,
+        'Here is the fault photograph'::text,
+        'attachment'::text,
+        ('messages/' || $1::text || '/leak_photo.jpg')::text,
+        'leak_photo.jpg'::text,
+        'image/jpeg'::text,
+        1024500::bigint
+      ) AS res;`,
+      [testConvId]
+    )
   );
   const data = res.rows[0].res;
   assert.strictEqual(data.success, true);
@@ -398,9 +392,9 @@ await asyncTest("Live DB: send_conversation_message stores valid attachment meta
 
 // Test 7: Mark conversation as read
 await asyncTest("Live DB: mark_conversation_as_read updates messages to 'read' and resets unread count", async () => {
-  // Pro marks conversation as read
-  await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testPro.user_id]);
-  const res = await client.query("SELECT public.mark_conversation_as_read($1) AS res;", [testConvId]);
+  const res = await withAuth(testPro.user_id, (tx) =>
+    tx.query("SELECT public.mark_conversation_as_read($1) AS res;", [testConvId])
+  );
   const data = res.rows[0].res;
   assert.strictEqual(data.success, true);
   assert.ok(data.messages_marked_read >= 1, "Expected at least 1 message marked read");
@@ -513,31 +507,23 @@ await asyncTest("Live DB Lifecycle: Booking status change to in_progress trigger
 });
 
 await asyncTest("Live DB Lifecycle: Verification status update triggers 'verification_status_change' notification", async () => {
-  // Clear caller JWT and set admin context
-  await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
-  await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
-  await client.query("SELECT set_config('easylife.trusted_admin_rpc', 'true', false);");
-
-  // Toggle to pending first to guarantee distinct status change
-  await client.query(
-    "UPDATE public.professional_profiles SET verification_status = 'pending' WHERE id = $1;",
-    [testPro.professional_id]
-  );
-
-  // Update pro's verification status to approved (admin action)
-  await client.query(
-    "UPDATE public.professional_profiles SET verification_status = 'approved' WHERE id = $1;",
-    [testPro.professional_id]
-  );
+  await withAuth(null, async (tx) => {
+    await tx.query("SELECT set_config('easylife.trusted_admin_rpc', 'true', true);");
+    await tx.query(
+      "UPDATE public.professional_profiles SET verification_status = 'pending' WHERE id = $1;",
+      [testPro.professional_id]
+    );
+    await tx.query(
+      "UPDATE public.professional_profiles SET verification_status = 'approved' WHERE id = $1;",
+      [testPro.professional_id]
+    );
+  });
 
   const notifRes = await client.query(
     "SELECT id, notification_type, title FROM public.notifications WHERE user_id = $1 AND notification_type = 'verification_status_change';",
     [testPro.user_id]
   );
   assert.ok(notifRes.rows.length >= 1, "Professional should receive verification update notification");
-
-  // Reset trusted admin RPC flag
-  await client.query("SELECT set_config('easylife.trusted_admin_rpc', 'false', false);");
 });
 
 // Cleanup test fixtures
@@ -550,9 +536,6 @@ if (testConvId) {
 await client.query("DELETE FROM public.quotations WHERE booking_id = $1;", [testBookingId]);
 await client.query("DELETE FROM public.notifications WHERE entity_id = $1 OR user_id IN ($2, $3);", [testBookingId, testCustomer.id, testPro.user_id]);
 await client.query("UPDATE public.bookings SET status = 'cancelled' WHERE id = $1;", [testBookingId]);
-await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
-await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
-await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
 console.log("Cleanup complete.");
 
 await client.end();

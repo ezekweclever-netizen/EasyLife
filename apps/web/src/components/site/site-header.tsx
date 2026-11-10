@@ -2,12 +2,27 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { PUBLIC_PRIMARY_NAV_LINKS } from "@/lib/public-catalog";
 import { logoutAction } from "@/app/actions/profile";
 import { Icon } from "./icons";
+
+const DESKTOP_DIRECTORY_HREFS = new Set([
+  "/dispatch",
+  "/businesses",
+  "/healthcare",
+  "/property-services",
+]);
+
+const DESKTOP_PRIMARY_LINKS = PUBLIC_PRIMARY_NAV_LINKS.filter(
+  (l) => !DESKTOP_DIRECTORY_HREFS.has(l.href)
+);
+
+const DESKTOP_DIRECTORY_LINKS = PUBLIC_PRIMARY_NAV_LINKS.filter((l) =>
+  DESKTOP_DIRECTORY_HREFS.has(l.href)
+);
 
 export interface SiteHeaderAuthState {
   isLoggedIn: boolean;
@@ -21,6 +36,8 @@ export function SiteHeader({
 } = {}) {
   const pathname = usePathname() ?? "/";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDirOpen, setIsDirOpen] = useState(false);
+  const dirMenuRef = useRef<HTMLLIElement | null>(null);
   const [authState, setAuthState] = useState<SiteHeaderAuthState>(
     initialAuth ?? { isLoggedIn: false, dashboardHref: "/dashboard" }
   );
@@ -51,10 +68,30 @@ export function SiteHeader({
     };
   }, [pathname]);
 
-  // Close the mobile menu after navigation.
+  // Close menus after navigation.
   useEffect(() => {
     setIsMenuOpen(false);
+    setIsDirOpen(false);
   }, [pathname]);
+
+  // Close desktop Directories dropdown on outside click or Escape.
+  useEffect(() => {
+    if (!isDirOpen) return;
+    const onPointerDown = (event: MouseEvent) => {
+      if (dirMenuRef.current && !dirMenuRef.current.contains(event.target as Node)) {
+        setIsDirOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsDirOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isDirOpen]);
 
   // Prevent background page scrolling when the mobile menu is open.
   useEffect(() => {
@@ -105,15 +142,81 @@ export function SiteHeader({
           </Link>
 
           <nav aria-label="Primary" className="hidden xl:block">
-            <ul className="flex items-center gap-1">
-              {PUBLIC_PRIMARY_NAV_LINKS.map((link) => {
+            <ul className="flex items-center gap-1.5">
+              {DESKTOP_PRIMARY_LINKS.slice(0, 1).map((link) => {
                 const active = isActive(link.href);
                 return (
                   <li key={link.href} className="shrink-0">
                     <Link
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={`inline-flex items-center whitespace-nowrap px-3 py-2 rounded-lg text-[15px] font-medium transition-colors ${
+                      className={`inline-flex items-center whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors ${
+                        active
+                          ? "bg-[#F3F8F8] text-[#154752] font-semibold border-b-2 border-[#24989A]"
+                          : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                );
+              })}
+
+              <li ref={dirMenuRef} className="relative shrink-0">
+                <button
+                  type="button"
+                  aria-expanded={isDirOpen}
+                  aria-haspopup="true"
+                  onClick={() => setIsDirOpen((open) => !open)}
+                  className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors cursor-pointer ${
+                    DESKTOP_DIRECTORY_LINKS.some((l) => isActive(l.href))
+                      ? "bg-[#F3F8F8] text-[#154752] font-semibold border-b-2 border-[#24989A]"
+                      : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
+                  }`}
+                >
+                  <span>Directories</span>
+                  <svg
+                    className={`h-4 w-4 transition-transform ${isDirOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {isDirOpen && (
+                  <div className="absolute left-0 mt-2 w-60 rounded-xl border border-[#DAE7E7] bg-white py-2 shadow-lg z-50">
+                    {DESKTOP_DIRECTORY_LINKS.map((dirLink) => {
+                      const active = isActive(dirLink.href);
+                      return (
+                        <Link
+                          key={dirLink.href}
+                          href={dirLink.href}
+                          onClick={() => setIsDirOpen(false)}
+                          className={`block px-4 py-2.5 text-[15px] font-medium transition-colors ${
+                            active
+                              ? "bg-[#F3F8F8] text-[#154752] font-semibold"
+                              : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
+                          }`}
+                        >
+                          {dirLink.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                )}
+              </li>
+
+              {DESKTOP_PRIMARY_LINKS.slice(1).map((link) => {
+                const active = isActive(link.href);
+                return (
+                  <li key={link.href} className="shrink-0">
+                    <Link
+                      href={link.href}
+                      aria-current={active ? "page" : undefined}
+                      className={`inline-flex items-center whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors ${
                         active
                           ? "bg-[#F3F8F8] text-[#154752] font-semibold border-b-2 border-[#24989A]"
                           : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"

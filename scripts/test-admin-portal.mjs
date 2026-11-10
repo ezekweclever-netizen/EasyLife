@@ -1,4 +1,4 @@
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectClientWithRetry } from './_env.mjs';
 import pg from 'pg';
 const { Client } = pg;
 
@@ -9,12 +9,7 @@ async function runAdminPortalTests() {
   console.log("   EASYLIFE PROMPT 16: ADMIN DASHBOARD & GOVERNANCE TEST SUITE    ");
   console.log("==================================================================");
 
-  const client = new Client({
-    connectionString: CONNECTION_STRING,
-    ssl: { rejectUnauthorized: false }
-  });
-
-  await client.connect();
+  const client = await connectClientWithRetry(Client, CONNECTION_STRING);
   console.log("✓ Connected to live PostgreSQL database.");
 
   let passedTests = 0;

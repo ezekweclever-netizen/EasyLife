@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectClientWithRetry } from './_env.mjs';
 /**
  * EasyLife Expanded Pilot Categories & Everyday Services Test Suite
  *
@@ -402,12 +402,11 @@ const dbConnStr =
   getDatabaseUrl();
 
 async function runLiveDbChecks() {
-  const client = new pg.Client({ connectionString: dbConnStr, ssl: { rejectUnauthorized: false } });
+  const client = await connectClientWithRetry(pg.Client, dbConnStr);
   client.on("error", (err) => {
     console.warn(`  [WARN] DB client error ignored: ${err.message}`);
   });
   try {
-    await client.connect();
 
     // Check categories count & preserved slugs
     await asyncTest("Live DB: All 8 preserved pilot categories exist with exact slugs", async () => {
@@ -515,7 +514,9 @@ async function runLiveDbChecks() {
 
     await client.end();
   } catch (err) {
-    console.warn(`  [WARN] Live DB check connection or query failed: ${err.message}`);
+    try { await client.end(); } catch {}
+    failedCount++;
+    console.error(`  [FAIL] Live DB check connection or query failed: ${err.message}`);
   }
 }
 

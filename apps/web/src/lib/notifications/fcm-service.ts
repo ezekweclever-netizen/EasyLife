@@ -3,8 +3,59 @@
  * Supports Push Notifications for Flutter Android & iOS applications.
  */
 
+import crypto from "node:crypto";
 import { PushNotificationPayload, PushNotificationResult } from "./types";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
+
+function base64UrlEncode(input: Buffer | string): string {
+  return Buffer.from(input)
+    .toString("base64")
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/g, "");
+}
+
+async function fetchGoogleFcmAccessToken(
+  clientEmail: string,
+  privateKeyPem: string
+): Promise<string> {
+  const now = Math.floor(Date.now() / 1000);
+  const header = base64UrlEncode(JSON.stringify({ alg: "RS256", typ: "JWT" }));
+  const claim = base64UrlEncode(
+    JSON.stringify({
+      iss: clientEmail,
+      scope: "https://www.googleapis.com/auth/firebase.messaging",
+      aud: "https://oauth2.googleapis.com/token",
+      iat: now,
+      exp: now + 3600,
+    })
+  );
+  const signingInput = `${header}.${claim}`;
+  const normalizedKey = privateKeyPem.replace(/\\n/g, "\n");
+  const signer = crypto.createSign("RSA-SHA256");
+  signer.update(signingInput);
+  signer.end();
+  const signature = base64UrlEncode(signer.sign(normalizedKey));
+  const assertion = `${signingInput}.${signature}`;
+
+  const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion,
+    }).toString(),
+  });
+
+  if (!tokenRes.ok) {
+    throw new Error(`OAuth2 token exchange failed (${tokenRes.status})`);
+  }
+  const tokenJson = (await tokenRes.json()) as { access_token?: string };
+  if (!tokenJson.access_token) {
+    throw new Error("Google OAuth2 response missing access_token");
+  }
+  return tokenJson.access_token;
+}
 
 export function buildFcmMessagePayload(payload: PushNotificationPayload) {
   const timestamp = new Date().toISOString();
@@ -77,24 +128,57 @@ export class FcmPushNotificationService {
     // 2. Prepare Flutter Mobile App compliant FCM payload
     const fcmMessage = buildFcmMessagePayload(payload);
 
-    // 3. Live FCM Dispatch if credentials present
+    // 3. Live FCM HTTP v1 Dispatch if Firebase Admin credentials and device tokens exist
+    let dispatchedCount = 0;
+    let lastLiveMessageId: string | null = null;
     if (this.projectId && this.clientEmail && this.privateKey && tokens.length > 0) {
       try {
-        // In full live mode, exchange JWT for Google OAuth2 Bearer token and POST to FCM HTTP v1:
-        // https://fcm.googleapis.com/v1/projects/{projectId}/messages:send
-        console.log(`[FCM Service] Dispatching live push to ${tokens.length} device(s) for user ${payload.recipientUserId}`);
-        return {
-          success: true,
-          messageId: `fcm-${Date.now()}`,
-          provider: "fcm",
-          status: "dispatched",
-          recipientCount: tokens.length,
-          timestamp,
-        };
+        const accessToken = await fetchGoogleFcmAccessToken(
+          this.clientEmail,
+          this.privateKey
+        );
+        const endpoint = `https://fcm.googleapis.com/v1/projects/${encodeURIComponent(
+          this.projectId
+        )}/messages:send`;
+
+        const stringData: Record<string, string> = {};
+        for (const [k, v] of Object.entries(fcmMessage.data)) {
+          stringData[k] = String(v);
+        }
+
+        for (const token of tokens) {
+          const fcmRes = await fetch(endpoint, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: {
+                token,
+                notification: fcmMessage.notification,
+                data: stringData,
+                android: {
+                  priority: "HIGH",
+                  notification: fcmMessage.android.notification,
+                },
+                apns: fcmMessage.apns,
+              },
+            }),
+          });
+
+          if (fcmRes.ok) {
+            const fcmJson = (await fcmRes.json().catch(() => null)) as { name?: string } | null;
+            dispatchedCount += 1;
+            lastLiveMessageId = fcmJson?.name || `fcm-${Date.now()}`;
+          }
+        }
       } catch (err: any) {
         console.warn("FCM live dispatch failed, logging offline:", err.message);
       }
     }
+
+    const liveSuccess = dispatchedCount > 0;
 
     // 4. Record in-app notification in public.notifications table
     try {
@@ -105,13 +189,26 @@ export class FcmPushNotificationService {
           title: payload.title,
           body: payload.body,
           notification_type: payload.type,
-          data: payload.data || {},
+          metadata: payload.data || {},
+          delivery_status: liveSuccess ? "delivered" : "logged_offline",
+          push_sent_at: liveSuccess ? timestamp : null,
           is_read: false,
           created_at: timestamp,
         },
       });
     } catch (err) {
       console.warn("Failed to record in-app notification:", err);
+    }
+
+    if (liveSuccess) {
+      return {
+        success: true,
+        messageId: lastLiveMessageId || `fcm-${Date.now()}`,
+        provider: "fcm",
+        status: "dispatched",
+        recipientCount: dispatchedCount,
+        timestamp,
+      };
     }
 
     const mockId = `mock-fcm-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;

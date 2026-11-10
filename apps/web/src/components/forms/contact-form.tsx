@@ -111,7 +111,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#0F172A] mb-1.5"
           >
             Phone Number (Optional)
           </label>
@@ -121,11 +121,11 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             type="tel"
             autoComplete="tel"
             defaultValue={state.values?.phone ?? ""}
-            className="w-full h-11 px-3.5 rounded-lg border border-[#CBD5E1] text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
             placeholder="e.g. 0802 000 0000"
           />
           {state.fieldErrors?.phone && (
-            <p className="mt-1.5 text-xs text-red-600 font-medium">
+            <p className="mt-1.5 text-sm text-red-600 font-medium">
               {state.fieldErrors.phone}
             </p>
           )}
@@ -134,7 +134,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="inquiryType"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#0F172A] mb-1.5"
           >
             Topic / Category
           </label>
@@ -148,7 +148,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             }
             required
             aria-invalid={Boolean(state.fieldErrors?.inquiryType)}
-            className="w-full h-11 px-3.5 rounded-lg border border-[#CBD5E1] text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
           >
             {CONTACT_INQUIRY_TYPES.map((type) => (
               <option key={type} value={type}>
@@ -157,7 +157,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             ))}
           </select>
           {state.fieldErrors?.inquiryType && (
-            <p className="mt-1.5 text-xs text-red-600 font-medium">
+            <p className="mt-1.5 text-sm text-red-600 font-medium">
               {state.fieldErrors.inquiryType}
             </p>
           )}
@@ -169,7 +169,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="city"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#0F172A] mb-1.5"
           >
             Your Location / City (Optional)
           </label>
@@ -177,7 +177,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             id="city"
             name="city"
             defaultValue={state.values?.city ?? ""}
-            className="w-full h-11 px-3.5 rounded-lg border border-[#CBD5E1] text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
           >
             <option value="">Select a city (or nationwide)</option>
             {PILOT_CITIES.map((city) => (
@@ -191,7 +191,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="subject"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#0F172A] mb-1.5"
           >
             Subject
           </label>
@@ -202,7 +202,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.subject ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.subject)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.subject
                 ? "border-red-500 bg-red-50/20"
                 : "border-[#CBD5E1] hover:border-slate-400"
@@ -210,7 +210,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             placeholder="Brief description of your query"
           />
           {state.fieldErrors?.subject && (
-            <p className="mt-1.5 text-xs text-red-600 font-medium">
+            <p className="mt-1.5 text-sm text-red-600 font-medium">
               {state.fieldErrors.subject}
             </p>
           )}
@@ -221,7 +221,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+          className="block text-base font-semibold text-[#0F172A] mb-1.5"
         >
           Message Details
         </label>
@@ -232,7 +232,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
           defaultValue={state.values?.message ?? ""}
           required
           aria-invalid={Boolean(state.fieldErrors?.message)}
-          className={`w-full p-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+          className={`w-full p-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
             state.fieldErrors?.message
               ? "border-red-500 bg-red-50/20"
               : "border-[#CBD5E1] hover:border-slate-400"
@@ -240,7 +240,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
           placeholder="Please explain how we can assist you..."
         />
         {state.fieldErrors?.message && (
-          <p className="mt-1.5 text-xs text-red-600 font-medium">
+          <p className="mt-1.5 text-sm text-red-600 font-medium">
             {state.fieldErrors.message}
           </p>
         )}
@@ -250,7 +250,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full sm:w-auto px-8 h-11 text-base font-semibold"
+        className="w-full sm:w-auto px-8 h-12 text-base font-semibold"
       >
         {isPending ? "Sending message..." : "Send Inquiry"}
       </Button>

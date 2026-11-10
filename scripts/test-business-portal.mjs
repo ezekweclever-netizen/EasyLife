@@ -5,15 +5,12 @@
  */
 
 import pg from 'pg';
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectPoolWithRetry } from './_env.mjs';
 const { Pool } = pg;
 
 const CONNECTION_STRING = getDatabaseUrl();
 
-const pool = new Pool({
-  connectionString: CONNECTION_STRING,
-  ssl: { rejectUnauthorized: false },
-});
+const pool = await connectPoolWithRetry(Pool, CONNECTION_STRING);
 
 let testUserId;
 let testBusinessId;

@@ -34,10 +34,27 @@ export async function submitAccountDeletionAction(
   }
 
   try {
-    // Check if there is an active dispute or escrow
+    const uid = encodeURIComponent(auth.user.id);
+
+    // Check if THIS user has an active dispute under review before queueing erasure
     const disputeRes = await supabaseAdminFetch<Array<{ id: string }>>(
-      `/rest/v1/disputes?status=in.(opened,under_review)&limit=1&select=id`
+      `/rest/v1/disputes?or=(opened_by_user_id.eq.${uid},against_user_id.eq.${uid})&status=in.(open,under_review,awaiting_information)&limit=1&select=id`
     );
+    if (disputeRes.ok && Array.isArray(disputeRes.data) && disputeRes.data.length > 0) {
+      return {
+        status: "error",
+        message:
+          "You currently have an active dispute under review. Please allow dispute arbitration to conclude before requesting account erasure.",
+      };
+    }
+
+    const profileRes = await supabaseAdminFetch<Array<{ primary_role?: string }>>(
+      `/rest/v1/profiles?id=eq.${uid}&limit=1&select=primary_role`
+    );
+    const actorRole =
+      profileRes.ok && profileRes.data?.[0]?.primary_role
+        ? profileRes.data[0].primary_role
+        : "customer";
 
     // Record the deletion request
     const insertRes = await supabaseAdminFetch<Array<{ id: string }>>(
@@ -73,7 +90,7 @@ export async function submitAccountDeletionAction(
       method: "POST",
       body: {
         actor_user_id: auth.user.id,
-        actor_role: "customer",
+        actor_role: actorRole,
         action: "privacy.account_deletion_requested",
         entity_type: "account_deletion_request",
         entity_id: requestId,

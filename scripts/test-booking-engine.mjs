@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectPoolWithRetry, queryPoolWithRetry, runWithAuth } from './_env.mjs';
 /**
  * EasyLife Booking and Appointment Management Engine Test Suite (Prompt 11)
  *
@@ -133,32 +133,16 @@ const dbConnStr =
   getDatabaseUrl();
 
 async function runLiveDbChecks() {
-  const pool = new pg.Pool({
-    connectionString: dbConnStr,
-    ssl: { rejectUnauthorized: false },
-    max: 5,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 15000,
-  });
-
-  pool.on("error", (err) => {
-    // Absorbs idle socket resets by remote load balancer
-  });
-
-  let testClient = null;
-  try {
-    testClient = await pool.connect();
-    testClient.release();
-  } catch (connErr) {
-    console.warn(`  [WARN] Live database connection skipped: ${connErr.message}`);
-    await pool.end();
-    return;
-  }
+  const pool = await connectPoolWithRetry(pg.Pool, dbConnStr);
 
   const client = {
-    query: (text, params) => pool.query(text, params),
+    query: (text, params) => queryPoolWithRetry(pool, text, params),
     end: () => pool.end(),
   };
+
+  function withAuth(userId, fn) {
+    return runWithAuth(pool, userId, fn);
+  }
 
   try {
     // 1. Verify 10 statuses in public.booking_status
@@ -279,29 +263,6 @@ async function runLiveDbChecks() {
       assert.ok(catRes.rows.length > 0, "Plumbing category not found");
       testCategoryId = catRes.rows[0].id;
 
-      // Check if existing test profiles exist, otherwise create in auth.users + profiles
-      let custRes = await client.query(`
-        SELECT id FROM public.profiles WHERE primary_role = 'customer' LIMIT 1;
-      `);
-      if (custRes.rows.length > 0) {
-        testUserId = custRes.rows[0].id;
-      } else {
-        const newUid = (await client.query(`SELECT gen_random_uuid() AS id`)).rows[0].id;
-        await client.query(`
-          INSERT INTO auth.users (id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
-          VALUES ($1, 'authenticated', 'authenticated', 'test-p11-cust-' || floor(random()*10000) || '@easylife.ng', 'hashed', now(), '{"provider":"email","providers":["email"]}', '{"full_name":"Test Customer"}', now(), now())
-          ON CONFLICT DO NOTHING;
-        `, [newUid]);
-        await client.query(`
-          INSERT INTO public.profiles (id, full_name, email, phone, primary_role)
-          VALUES ($1, 'Prompt 11 Test Customer', 'test-p11-cust-' || floor(random()*10000) || '@easylife.ng', '+2348011112222', 'customer')
-          ON CONFLICT (id) DO UPDATE
-          SET full_name = EXCLUDED.full_name, primary_role = EXCLUDED.primary_role;
-        `, [newUid]);
-        createdCustomerUid = newUid;
-        testUserId = newUid;
-      }
-
       let proRes = await client.query(`
         SELECT pp.id AS pro_id, pp.user_id
         FROM public.professional_profiles pp
@@ -336,6 +297,39 @@ async function runLiveDbChecks() {
           ) RETURNING id;
         `, [testProUserId]);
         testProId = ppRes.rows[0].id;
+      }
+
+      // Pick a customer distinct from testProUserId and without a professional profile
+      let custRes = await client.query(`
+        SELECT p.id
+        FROM public.profiles p
+        WHERE p.primary_role = 'customer'
+          AND p.id <> $1
+          AND NOT EXISTS (SELECT 1 FROM public.professional_profiles pp2 WHERE pp2.user_id = p.id)
+        LIMIT 1;
+      `, [testProUserId]);
+      if (custRes.rows.length === 0) {
+        custRes = await client.query(`
+          SELECT id FROM public.profiles WHERE primary_role = 'customer' AND id <> $1 LIMIT 1;
+        `, [testProUserId]);
+      }
+      if (custRes.rows.length > 0) {
+        testUserId = custRes.rows[0].id;
+      } else {
+        const newUid = (await client.query(`SELECT gen_random_uuid() AS id`)).rows[0].id;
+        await client.query(`
+          INSERT INTO auth.users (id, aud, role, email, encrypted_password, email_confirmed_at, raw_app_meta_data, raw_user_meta_data, created_at, updated_at)
+          VALUES ($1, 'authenticated', 'authenticated', 'test-p11-cust-' || floor(random()*10000) || '@easylife.ng', 'hashed', now(), '{"provider":"email","providers":["email"]}', '{"full_name":"Test Customer"}', now(), now())
+          ON CONFLICT DO NOTHING;
+        `, [newUid]);
+        await client.query(`
+          INSERT INTO public.profiles (id, full_name, email, phone, primary_role)
+          VALUES ($1, 'Prompt 11 Test Customer', 'test-p11-cust-' || floor(random()*10000) || '@easylife.ng', '+2348011112222', 'customer')
+          ON CONFLICT (id) DO UPDATE
+          SET full_name = EXCLUDED.full_name, primary_role = EXCLUDED.primary_role;
+        `, [newUid]);
+        createdCustomerUid = newUid;
+        testUserId = newUid;
       }
 
       // 5. Test Step: Create booking request with status 'submitted'
@@ -445,12 +439,12 @@ async function runLiveDbChecks() {
         const start = new Date(Date.now() + 86400000).toISOString();
         const end = new Date(Date.now() + 90000000).toISOString();
 
-        await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testUserId]);
-
         // Call confirm_booking_appointment while accepted_quotation_id is null
-        const confRes = await client.query(`
-          SELECT public.confirm_booking_appointment($1, $2, $3, 'Initial confirmation attempt') AS res;
-        `, [testBookingId, start, end]);
+        const confRes = await withAuth(testUserId, (tx) =>
+          tx.query(`
+            SELECT public.confirm_booking_appointment($1, $2, $3, 'Initial confirmation attempt') AS res;
+          `, [testBookingId, start, end])
+        );
 
         const resObj = confRes.rows[0].res;
         assert.strictEqual(resObj.success, false);
@@ -463,11 +457,11 @@ async function runLiveDbChecks() {
       const appointmentEnd = new Date(Date.now() + 172800000 + 7200000).toISOString(); // +2 hours
 
       await asyncTest("Business Logic: accept_booking_quotation atomically accepts, declines competitor & schedules", async () => {
-        await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testUserId]);
-
-        const acceptRes = await client.query(`
-          SELECT public.accept_booking_quotation($1, $2, $3, $4) AS res;
-        `, [testBookingId, testQuote1Id, appointmentStart, appointmentEnd]);
+        const acceptRes = await withAuth(testUserId, (tx) =>
+          tx.query(`
+            SELECT public.accept_booking_quotation($1, $2, $3, $4) AS res;
+          `, [testBookingId, testQuote1Id, appointmentStart, appointmentEnd])
+        );
 
         const resObj = acceptRes.rows[0].res;
         assert.strictEqual(resObj.success, true, `Accept quotation failed: ${JSON.stringify(resObj)}`);
@@ -516,11 +510,11 @@ async function runLiveDbChecks() {
 
       // 11. Test Step: Job Execution: Begin Job -> in_progress
       await asyncTest("Workflow: Professional begins confirmed job -> transitions to 'in_progress'", async () => {
-        await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testProUserId]);
-
-        const startRes = await client.query(`
-          SELECT public.update_booking_job_execution($1, 'begin_job') AS res;
-        `, [testBookingId]);
+        const startRes = await withAuth(testProUserId, (tx) =>
+          tx.query(`
+            SELECT public.update_booking_job_execution($1, 'begin_job') AS res;
+          `, [testBookingId])
+        );
         const resObj = startRes.rows[0].res;
         assert.strictEqual(resObj.success, true);
         assert.strictEqual(resObj.status, "in_progress");
@@ -532,11 +526,11 @@ async function runLiveDbChecks() {
 
       // 12. Test Step: Cancellation Policy: Block cancellation while in_progress
       await asyncTest("Business Logic: cancel_booking_with_policy blocks cancellation while job is in_progress", async () => {
-        await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testUserId]);
-
-        const cancelRes = await client.query(`
-          SELECT public.cancel_booking_with_policy($1, 'Customer attempted mid-repair cancellation') AS res;
-        `, [testBookingId]);
+        const cancelRes = await withAuth(testUserId, (tx) =>
+          tx.query(`
+            SELECT public.cancel_booking_with_policy($1, 'Customer attempted mid-repair cancellation') AS res;
+          `, [testBookingId])
+        );
         const resObj = cancelRes.rows[0].res;
         assert.strictEqual(resObj.success, false);
         assert.strictEqual(resObj.error, "JOB_IN_PROGRESS");
@@ -545,12 +539,12 @@ async function runLiveDbChecks() {
 
       // 13. Test Step: Job Execution: Submit Completion Request -> completed
       await asyncTest("Workflow: Professional submits completion request -> transitions to 'completed'", async () => {
-        await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testProUserId]);
-
         const notes = "Completed pipe sealing and replaced 2-inch PVC pressure valve. System tested with zero leaks.";
-        const compRes = await client.query(`
-          SELECT public.update_booking_job_execution($1, 'submit_completion', $2) AS res;
-        `, [testBookingId, notes]);
+        const compRes = await withAuth(testProUserId, (tx) =>
+          tx.query(`
+            SELECT public.update_booking_job_execution($1, 'submit_completion', $2) AS res;
+          `, [testBookingId, notes])
+        );
         const resObj = compRes.rows[0].res;
         assert.strictEqual(resObj.success, true);
         assert.strictEqual(resObj.status, "completed");
@@ -598,11 +592,11 @@ async function runLiveDbChecks() {
         `, [testUserId, testCategoryId]);
         const b2Id = b2Res.rows[0].id;
 
-        await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [testUserId]);
-
-        const cancelRes = await client.query(`
-          SELECT public.cancel_booking_with_policy($1, 'Customer no longer requires service') AS res;
-        `, [b2Id]);
+        const cancelRes = await withAuth(testUserId, (tx) =>
+          tx.query(`
+            SELECT public.cancel_booking_with_policy($1, 'Customer no longer requires service') AS res;
+          `, [b2Id])
+        );
         const resObj = cancelRes.rows[0].res;
         assert.strictEqual(resObj.success, true);
         assert.strictEqual(resObj.status, "cancelled");

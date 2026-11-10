@@ -266,11 +266,11 @@ export default async function HomePage({
                   key={b.title}
                   className="rounded-2xl bg-[#0D282E] border border-[#24989A]/30 p-5 shadow-xs"
                 >
-                  <div className="h-9 w-9 rounded-lg bg-[#24989A]/20 border border-[#24989A]/40 text-[#24989A] flex items-center justify-center mb-3">
-                    <Icon name={b.icon} className="h-4 w-4" />
+                  <div className="h-10 w-10 rounded-lg bg-[#24989A]/20 border border-[#24989A]/40 text-[#24989A] flex items-center justify-center mb-3.5">
+                    <Icon name={b.icon} className="h-5 w-5" />
                   </div>
-                  <h4 className="text-sm font-bold text-white">{b.title}</h4>
-                  <p className="mt-1.5 text-xs text-[#DAE7E7] leading-relaxed">
+                  <h4 className="text-base sm:text-lg font-bold text-white">{b.title}</h4>
+                  <p className="mt-2 text-sm sm:text-base text-[#DAE7E7] leading-relaxed">
                     {b.description}
                   </p>
                 </div>
@@ -284,14 +284,14 @@ export default async function HomePage({
           </div>
 
           <div className="lg:max-w-md w-full bg-[#0D282E] border border-[#24989A]/30 rounded-3xl p-7 sm:p-9 shadow-lg">
-            <h3 className="text-lg font-bold text-white">
+            <h3 className="text-xl font-bold text-white">
               Vetting Requirements
             </h3>
-            <p className="mt-2 text-xs text-[#DAE7E7]">
+            <p className="mt-2.5 text-sm sm:text-base text-[#DAE7E7] leading-relaxed">
               To protect both customers and great technicians, every applicant
               must provide:
             </p>
-            <ul className="mt-4 space-y-3 text-xs text-[#DAE7E7]">
+            <ul className="mt-5 space-y-3.5 text-sm sm:text-base text-[#DAE7E7]">
               <li className="flex items-start gap-2.5">
                 <span className="text-[#24989A] font-bold">✓</span>
                 <span>Valid Government ID (NIN, Driver’s Licence, or Voter’s Card)</span>
@@ -312,7 +312,7 @@ export default async function HomePage({
             <div className="mt-6 pt-5 border-t border-[#24989A]/20">
               <Link
                 href="/verification-policy"
-                className="text-xs font-semibold text-[#24989A] hover:text-white underline underline-offset-4 transition-colors"
+                className="text-sm font-semibold text-[#24989A] hover:text-white underline underline-offset-4 transition-colors"
               >
                 Read our complete Professional Verification Policy →
               </Link>
@@ -331,48 +331,48 @@ export default async function HomePage({
               title="Keep Your Operations Running Smoothly"
               description="Whether you run a clinic, restaurant, school, or manage residential estates, EasyLife gives your team complete visibility over assets and maintenance."
             />
-            <div className="mt-6 space-y-4">
-              <div className="flex items-start gap-3.5">
-                <div className="h-9 w-9 rounded-xl bg-[#F3F8F8] border border-[#DAE7E7] text-[#154752] flex items-center justify-center shrink-0 mt-0.5">
-                  <Icon name="building" className="h-4 w-4" />
+            <div className="mt-7 space-y-5">
+              <div className="flex items-start gap-4">
+                <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] border border-[#DAE7E7] text-[#154752] flex items-center justify-center shrink-0 mt-0.5">
+                  <Icon name="building" className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#154752]">
+                  <h4 className="text-base sm:text-lg font-bold text-[#154752]">
                     Multi-Property Asset Tracking
                   </h4>
-                  <p className="text-xs text-[#68797C] mt-0.5 leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#68797C] mt-1 leading-relaxed">
                     Track generators, commercial ACs, cold rooms, and borehole pumps across multiple branches from one central dashboard.
                   </p>
                 </div>
               </div>
-              <div className="flex items-start gap-3.5">
-                <div className="h-9 w-9 rounded-xl bg-[#F3F8F8] border border-[#DAE7E7] text-[#154752] flex items-center justify-center shrink-0 mt-0.5">
-                  <Icon name="calendar" className="h-4 w-4" />
+              <div className="flex items-start gap-4">
+                <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] border border-[#DAE7E7] text-[#154752] flex items-center justify-center shrink-0 mt-0.5">
+                  <Icon name="calendar" className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#154752]">
+                  <h4 className="text-base sm:text-lg font-bold text-[#154752]">
                     Preventive Maintenance Schedules
                   </h4>
-                  <p className="text-xs text-[#68797C] mt-0.5 leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#68797C] mt-1 leading-relaxed">
                     Avoid expensive emergency breakdowns with automated servicing reminders and contracted routine visits.
                   </p>
                 </div>
               </div>
-              <div className="flex items-start gap-3.5">
-                <div className="h-9 w-9 rounded-xl bg-[#F3F8F8] border border-[#DAE7E7] text-[#154752] flex items-center justify-center shrink-0 mt-0.5">
-                  <Icon name="file-text" className="h-4 w-4" />
+              <div className="flex items-start gap-4">
+                <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] border border-[#DAE7E7] text-[#154752] flex items-center justify-center shrink-0 mt-0.5">
+                  <Icon name="file-text" className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#154752]">
+                  <h4 className="text-base sm:text-lg font-bold text-[#154752]">
                     Consolidated Monthly Invoicing
                   </h4>
-                  <p className="text-xs text-[#68797C] mt-0.5 leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#68797C] mt-1 leading-relaxed">
                     Eliminate chaotic paper receipts. Receive clear VAT-compliant statements with full audit trails.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="mt-8 flex gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/business-solutions">
                 Explore Business Features
               </ButtonLink>
@@ -383,10 +383,10 @@ export default async function HomePage({
           </div>
 
           <div className="bg-[#F3F8F8] border border-[#DAE7E7] rounded-3xl p-7 sm:p-9">
-            <h4 className="text-xs font-bold text-[#154752] uppercase tracking-wider mb-4">
+            <h4 className="text-sm font-bold text-[#154752] uppercase tracking-wider mb-4">
               Typical Business Equipment Managed
             </h4>
-            <div className="space-y-3">
+            <div className="space-y-3.5">
               {[
                 { name: "Heavy Duty Diesel Generators (20kVA - 500kVA)", cycle: "Every 250 runtime hours" },
                 { name: "Commercial Cassette & VRF Air Conditioners", cycle: "Monthly coil & filter checks" },
@@ -395,13 +395,13 @@ export default async function HomePage({
               ].map((item) => (
                 <div
                   key={item.name}
-                  className="bg-white rounded-xl p-4 border border-[#DAE7E7] flex items-center justify-between gap-4 shadow-xs"
+                  className="bg-white rounded-xl p-4 sm:p-5 border border-[#DAE7E7] flex items-center justify-between gap-4 shadow-xs"
                 >
                   <div>
-                    <p className="text-xs font-semibold text-[#1F2F34]">{item.name}</p>
-                    <p className="text-[11px] text-[#68797C] mt-0.5">Routine schedule: {item.cycle}</p>
+                    <p className="text-sm sm:text-base font-semibold text-[#1F2F34]">{item.name}</p>
+                    <p className="text-xs sm:text-sm text-[#68797C] mt-0.5">Routine schedule: {item.cycle}</p>
                   </div>
-                  <span className="shrink-0 text-[10px] font-bold uppercase tracking-wider bg-[#F3F8F8] text-[#154752] px-2.5 py-0.5 rounded-full border border-[#24989A]/30">
+                  <span className="shrink-0 text-xs font-bold uppercase tracking-wider bg-[#F3F8F8] text-[#154752] px-3 py-1 rounded-full border border-[#24989A]/30">
                     Covered
                   </span>
                 </div>
@@ -421,38 +421,38 @@ export default async function HomePage({
           align="center"
         />
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-2xl border border-[#DAE7E7] p-7 shadow-xs">
-            <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] text-[#154752] flex items-center justify-center font-bold text-sm border border-[#DAE7E7]">
+          <div className="bg-white rounded-2xl border border-[#DAE7E7] p-7 sm:p-8 shadow-xs">
+            <div className="h-12 w-12 rounded-xl bg-[#F3F8F8] text-[#154752] flex items-center justify-center font-bold text-base border border-[#DAE7E7]">
               01
             </div>
-            <h3 className="mt-4 text-base font-bold text-[#154752]">
+            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#154752]">
               Three-Tier Identity Verification
             </h3>
-            <p className="mt-2 text-xs text-[#68797C] leading-relaxed">
+            <p className="mt-2.5 text-sm sm:text-base text-[#68797C] leading-relaxed">
               We physically verify identity, NIN, address, and artisan apprenticeship credentials before any technician can accept jobs on our platform.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-[#DAE7E7] p-7 shadow-xs">
-            <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] text-[#154752] flex items-center justify-center font-bold text-sm border border-[#DAE7E7]">
+          <div className="bg-white rounded-2xl border border-[#DAE7E7] p-7 sm:p-8 shadow-xs">
+            <div className="h-12 w-12 rounded-xl bg-[#F3F8F8] text-[#154752] flex items-center justify-center font-bold text-base border border-[#DAE7E7]">
               02
             </div>
-            <h3 className="mt-4 text-base font-bold text-[#154752]">
+            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#154752]">
               Escrow-Locked Milestone Payments
             </h3>
-            <p className="mt-2 text-xs text-[#68797C] leading-relaxed">
+            <p className="mt-2.5 text-sm sm:text-base text-[#68797C] leading-relaxed">
               Your money is never sent directly to a technician upfront. It stays secure in escrow until you verify the work is completely done.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-[#DAE7E7] p-7 shadow-xs">
-            <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] text-[#154752] flex items-center justify-center font-bold text-sm border border-[#DAE7E7]">
+          <div className="bg-white rounded-2xl border border-[#DAE7E7] p-7 sm:p-8 shadow-xs">
+            <div className="h-12 w-12 rounded-xl bg-[#F3F8F8] text-[#154752] flex items-center justify-center font-bold text-base border border-[#DAE7E7]">
               03
             </div>
-            <h3 className="mt-4 text-base font-bold text-[#154752]">
+            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#154752]">
               Local Ground Operations Support
             </h3>
-            <p className="mt-2 text-xs text-[#68797C] leading-relaxed">
+            <p className="mt-2.5 text-sm sm:text-base text-[#68797C] leading-relaxed">
               Our regional operations teams in Port Harcourt, Lagos, and Abuja actively monitor disputes, service quality, and rapid response.
             </p>
           </div>
@@ -470,8 +470,8 @@ export default async function HomePage({
         />
         <div className="mt-10 max-w-3xl mx-auto">
           <FaqList items={homepageFaqs} />
-          <div className="mt-6 text-center">
-            <p className="text-xs text-[#68797C]">
+          <div className="mt-7 text-center">
+            <p className="text-base text-[#68797C]">
               Have another question? Visit our{" "}
               <Link
                 href="/help"

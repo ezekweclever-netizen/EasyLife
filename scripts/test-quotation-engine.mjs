@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { getDatabaseUrl } from './_env.mjs';
+import { getDatabaseUrl, connectPoolWithRetry, queryPoolWithRetry, runWithAuth } from './_env.mjs';
 /**
  * EasyLife Quotation Management System Test Suite (Prompt 12)
  *
@@ -159,25 +159,13 @@ const dbConnStr =
   getDatabaseUrl();
 
 async function runLiveDbChecks() {
-  const pool = new pg.Pool({
-    connectionString: dbConnStr,
-    ssl: { rejectUnauthorized: false },
-    max: 5,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 45000,
-  });
+  const pool = await connectPoolWithRetry(pg.Pool, dbConnStr);
+  const client = {
+    query: (text, params) => queryPoolWithRetry(pool, text, params),
+  };
 
-  pool.on("error", (err) => {
-    // Absorbs idle socket resets
-  });
-
-  let client = null;
-  try {
-    client = await pool.connect();
-  } catch (connErr) {
-    console.warn(`  [WARN] Live database connection skipped: ${connErr.message}`);
-    await pool.end();
-    return;
+  function withAuth(userId, fn, asAuthenticated = true) {
+    return runWithAuth(pool, userId, fn, { asAuthenticated });
   }
 
   try {
@@ -273,18 +261,7 @@ async function runLiveDbChecks() {
     // 5. Setup live fixtures for business rule test lifecycle
     console.log("\n3. Testing Business Rules & Quotation Lifecycle on Live DB:");
 
-    // Fetch test customer, professional, and category
-    let custRes = await client.query(`
-      SELECT id FROM public.profiles
-      WHERE primary_role = 'customer'
-      LIMIT 1;
-    `);
-    if (custRes.rows.length === 0) {
-      custRes = await client.query(`SELECT id FROM public.profiles LIMIT 1;`);
-    }
-    assert.ok(custRes.rows.length > 0, "No customer profile found for testing");
-    const testCustomerId = custRes.rows[0].id;
-
+    // Fetch test professional first, then distinct non-pro customer
     const proRes = await client.query(`
       SELECT pp.id, pp.user_id
       FROM public.professional_profiles pp
@@ -296,14 +273,23 @@ async function runLiveDbChecks() {
     const testProId = proRes.rows[0].id;
     const testProUserId = proRes.rows[0].user_id;
 
+    let custRes = await client.query(`
+      SELECT p.id FROM public.profiles p
+      WHERE p.primary_role = 'customer'
+        AND p.id <> $1
+        AND NOT EXISTS (SELECT 1 FROM public.professional_profiles pp2 WHERE pp2.user_id = p.id)
+      LIMIT 1;
+    `, [testProUserId]);
+    if (custRes.rows.length === 0) {
+      custRes = await client.query(`SELECT id FROM public.profiles WHERE id <> $1 LIMIT 1;`, [testProUserId]);
+    }
+    assert.ok(custRes.rows.length > 0, "No customer profile found for testing");
+    const testCustomerId = custRes.rows[0].id;
+
     const catRes = await client.query(`
       SELECT id FROM public.service_categories LIMIT 1;
     `);
     const testCategoryId = catRes.rows[0].id;
-
-    await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
-    await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
-    await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
 
     // Create a dedicated test booking
     const bkRes = await client.query(`
@@ -320,31 +306,6 @@ async function runLiveDbChecks() {
     `, [testCustomerId, testCategoryId]);
     const testBookingId = bkRes.rows[0].id;
 
-    // Helper to set session auth context
-    async function setAuthContext(userId, role = "authenticated") {
-      if (!userId) {
-        await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
-        await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
-        await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
-        await client.query("RESET ROLE;");
-        return;
-      }
-      await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [userId]);
-      await client.query("SELECT set_config('request.jwt.claims', $1, false);", [
-        JSON.stringify({ sub: userId, role }),
-      ]);
-      await client.query("SELECT set_config('request.jwt.claim.role', $1, false);", [role]);
-      await client.query("SELECT set_config('role', $1, false);", [role]);
-      if (role === "authenticated") {
-        await client.query("SET ROLE authenticated;");
-      } else {
-        await client.query("RESET ROLE;");
-      }
-    }
-
-    // Set auth context as the professional for pro operations
-    await setAuthContext(testProUserId);
-
     let createdQuoteId = null;
 
     // Test A: Business Rule 1, 2, 3: Trusted Backend Total Calculation in Minor Units (kobo)
@@ -355,29 +316,26 @@ async function runLiveDbChecks() {
         { item_type: "callout", description: "Diagnostic Callout Fee", quantity: 1, unit_price_kobo: 300000 }, // 1 * 3,000 = 3,000 NGN = 300,000 kobo
       ];
 
-      const rpcRes = await client.query(`
-        SELECT public.submit_or_revise_quotation(
-          p_booking_id => $1,
-          p_professional_id => $2,
-          p_work_description => 'Full replacement of main circuit breaker and load test',
-          p_estimated_duration_minutes => 90,
-          p_valid_until => now() + interval '7 days',
-          p_proposed_start_at => now() + interval '1 day',
-          p_notes => 'Includes 30-day warranty',
-          p_is_draft => true,
-          p_items => $3::jsonb
-        ) AS result;
-      `, [testBookingId, testProId, JSON.stringify(items)]);
+      const rpcRes = await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT public.submit_or_revise_quotation(
+            p_booking_id => $1,
+            p_professional_id => $2,
+            p_work_description => 'Full replacement of main circuit breaker and load test',
+            p_estimated_duration_minutes => 90,
+            p_valid_until => now() + interval '7 days',
+            p_proposed_start_at => now() + interval '1 day',
+            p_notes => 'Includes 30-day warranty',
+            p_is_draft => true,
+            p_items => $3::jsonb
+          ) AS result;
+        `, [testBookingId, testProId, JSON.stringify(items)])
+      );
 
       const result = rpcRes.rows[0].result;
       assert.strictEqual(result.success, true, `submit_or_revise_quotation failed: ${JSON.stringify(result)}`);
       assert.strictEqual(result.status, "draft", "Quotation status should be 'draft'");
 
-      // Verify exact kobo calculations:
-      // Labour: 1,000,000 kobo (₦10,000)
-      // Materials: 2,400,000 kobo (₦24,000)
-      // Additional: 300,000 kobo (₦3,000)
-      // Total: 3,700,000 kobo (₦37,000)
       assert.strictEqual(Number(result.labour_charges_kobo), 1000000, "Labour charges incorrect");
       assert.strictEqual(Number(result.materials_costs_kobo), 2400000, "Materials costs incorrect");
       assert.strictEqual(Number(result.additional_expenses_kobo), 300000, "Additional expenses incorrect");
@@ -395,25 +353,26 @@ async function runLiveDbChecks() {
         { item_type: "material", description: "100A Schneider Breaker", quantity: 1, unit_price_kobo: 1500000 }, // 15,000 NGN = 1,500,000 kobo
       ];
 
-      const rpcRes = await client.query(`
-        SELECT public.submit_or_revise_quotation(
-          p_booking_id => $1,
-          p_professional_id => $2,
-          p_work_description => 'Updated scope: Schneider breaker',
-          p_estimated_duration_minutes => 120,
-          p_valid_until => now() + interval '7 days',
-          p_proposed_start_at => now() + interval '1 day',
-          p_notes => 'Updated draft',
-          p_is_draft => true,
-          p_items => $3::jsonb,
-          p_quotation_id => $4
-        ) AS result;
-      `, [testBookingId, testProId, JSON.stringify(updatedItems), createdQuoteId]);
+      const rpcRes = await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT public.submit_or_revise_quotation(
+            p_booking_id => $1,
+            p_professional_id => $2,
+            p_work_description => 'Updated scope: Schneider breaker',
+            p_estimated_duration_minutes => 120,
+            p_valid_until => now() + interval '7 days',
+            p_proposed_start_at => now() + interval '1 day',
+            p_notes => 'Updated draft',
+            p_is_draft => true,
+            p_items => $3::jsonb,
+            p_quotation_id => $4
+          ) AS result;
+        `, [testBookingId, testProId, JSON.stringify(updatedItems), createdQuoteId])
+      );
 
       const result = rpcRes.rows[0].result;
       assert.strictEqual(result.success, true);
       assert.strictEqual(result.status, "draft");
-      // Total: 1,200,000 + 1,500,000 = 2,700,000 kobo (₦27,000)
       assert.strictEqual(Number(result.total_amount_kobo), 2700000, "Updated draft total incorrect");
       console.log(`         Draft updated in place: new total ₦${result.total_amount_kobo / 100}`);
     });
@@ -425,26 +384,27 @@ async function runLiveDbChecks() {
         { item_type: "material", description: "100A Schneider Breaker", quantity: 1, unit_price_kobo: 1500000 },
       ];
 
-      const rpcRes = await client.query(`
-        SELECT public.submit_or_revise_quotation(
-          p_booking_id => $1,
-          p_professional_id => $2,
-          p_work_description => 'Final proposal: Schneider breaker and load test',
-          p_estimated_duration_minutes => 120,
-          p_valid_until => now() + interval '7 days',
-          p_proposed_start_at => now() + interval '1 day',
-          p_notes => 'Final submission',
-          p_is_draft => false,
-          p_items => $3::jsonb,
-          p_quotation_id => $4
-        ) AS result;
-      `, [testBookingId, testProId, JSON.stringify(items), createdQuoteId]);
+      const rpcRes = await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT public.submit_or_revise_quotation(
+            p_booking_id => $1,
+            p_professional_id => $2,
+            p_work_description => 'Final proposal: Schneider breaker and load test',
+            p_estimated_duration_minutes => 120,
+            p_valid_until => now() + interval '7 days',
+            p_proposed_start_at => now() + interval '1 day',
+            p_notes => 'Final submission',
+            p_is_draft => false,
+            p_items => $3::jsonb,
+            p_quotation_id => $4
+          ) AS result;
+        `, [testBookingId, testProId, JSON.stringify(items), createdQuoteId])
+      );
 
       const result = rpcRes.rows[0].result;
       assert.strictEqual(result.success, true);
       assert.strictEqual(result.status, "pending");
 
-      // Verify booking status advanced to 'quoted'
       const bkCheck = await client.query(`SELECT status FROM public.bookings WHERE id = $1`, [testBookingId]);
       assert.strictEqual(bkCheck.rows[0].status, "quoted", "Booking status should advance to 'quoted'");
       console.log(`         Quotation submitted: status is 'pending', booking status is 'quoted'.`);
@@ -470,20 +430,18 @@ async function runLiveDbChecks() {
 
     // Test E: Customer Requests Clarification
     await asyncTest("Live DB: Customer can request quotation clarification and timestamp is recorded", async () => {
-      // Set auth context as the customer
-      await setAuthContext(testCustomerId);
-
-      const clarifyRes = await client.query(`
-        SELECT public.request_quotation_clarification(
-          p_quotation_id => $1,
-          p_notes => 'Does the price include VAT and is the Schneider breaker an original EU model?'
-        ) AS result;
-      `, [createdQuoteId]);
+      const clarifyRes = await withAuth(testCustomerId, (tx) =>
+        tx.query(`
+          SELECT public.request_quotation_clarification(
+            p_quotation_id => $1,
+            p_notes => 'Does the price include VAT and is the Schneider breaker an original EU model?'
+          ) AS result;
+        `, [createdQuoteId])
+      );
 
       const result = clarifyRes.rows[0].result;
       assert.strictEqual(result.success, true);
 
-      // Verify columns on quotation
       const qCheck = await client.query(`
         SELECT clarification_requested_at, clarification_notes
         FROM public.quotations
@@ -496,15 +454,14 @@ async function runLiveDbChecks() {
 
     // Test F: Professional Withdraws Quotation
     await asyncTest("Live DB: Professional can withdraw a pending quotation with reason", async () => {
-      // Set auth context as the professional
-      await setAuthContext(testProUserId);
-
-      const withdrawRes = await client.query(`
-        SELECT public.withdraw_quotation(
-          p_quotation_id => $1,
-          p_reason => 'Supplier parts temporarily out of stock'
-        ) AS result;
-      `, [createdQuoteId]);
+      const withdrawRes = await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT public.withdraw_quotation(
+            p_quotation_id => $1,
+            p_reason => 'Supplier parts temporarily out of stock'
+          ) AS result;
+        `, [createdQuoteId])
+      );
 
       const result = withdrawRes.rows[0].result;
       assert.strictEqual(result.success, true);
@@ -523,30 +480,30 @@ async function runLiveDbChecks() {
 
     // Test G: Customer Declines a Quotation
     await asyncTest("Live DB: Customer can decline a quotation with decline reason recorded", async () => {
-      // Create another quote to decline
-      await setAuthContext(testProUserId);
       const items = [{ item_type: "labor", description: "Inspection", quantity: 1, unit_price_kobo: 400000 }];
-      const subRes = await client.query(`
-        SELECT public.submit_or_revise_quotation(
-          p_booking_id => $1,
-          p_professional_id => $2,
-          p_work_description => 'Inspection quote to decline',
-          p_estimated_duration_minutes => 60,
-          p_valid_until => now() + interval '7 days',
-          p_is_draft => false,
-          p_items => $3::jsonb
-        ) AS result;
-      `, [testBookingId, testProId, JSON.stringify(items)]);
+      const subRes = await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT public.submit_or_revise_quotation(
+            p_booking_id => $1,
+            p_professional_id => $2,
+            p_work_description => 'Inspection quote to decline',
+            p_estimated_duration_minutes => 60,
+            p_valid_until => now() + interval '7 days',
+            p_is_draft => false,
+            p_items => $3::jsonb
+          ) AS result;
+        `, [testBookingId, testProId, JSON.stringify(items)])
+      );
       const quoteToDeclineId = subRes.rows[0].result.quotation_id;
 
-      // Customer declines
-      await setAuthContext(testCustomerId);
-      const decRes = await client.query(`
-        SELECT public.decline_booking_quotation(
-          p_quotation_id => $1,
-          p_decline_reason => 'Price is higher than budget'
-        ) AS result;
-      `, [quoteToDeclineId]);
+      const decRes = await withAuth(testCustomerId, (tx) =>
+        tx.query(`
+          SELECT public.decline_booking_quotation(
+            p_quotation_id => $1,
+            p_decline_reason => 'Price is higher than budget'
+          ) AS result;
+        `, [quoteToDeclineId])
+      );
 
       const result = decRes.rows[0].result;
       assert.strictEqual(result.success, true);
@@ -565,11 +522,6 @@ async function runLiveDbChecks() {
 
     // Test H: Rule 6: Expired Quotations Cannot Be Accepted
     await asyncTest("Live DB Rule 6: Expired quotations cannot be accepted (returns QUOTATION_EXPIRED)", async () => {
-      // Create an expired quotation
-      await setAuthContext(testProUserId);
-      const items = [{ item_type: "labor", description: "Immediate repair", quantity: 1, unit_price_kobo: 500000 }];
-
-      // Insert directly with past valid_until to test expiration gate
       const qRes = await client.query(`
         INSERT INTO public.quotations (
           booking_id, professional_id, status, subtotal_kobo, total_amount_kobo,
@@ -581,14 +533,14 @@ async function runLiveDbChecks() {
       `, [testBookingId, testProId]);
       const expiredQuoteId = qRes.rows[0].id;
 
-      // Customer attempts to accept expired quote
-      await setAuthContext(testCustomerId);
-      const acceptRes = await client.query(`
-        SELECT public.accept_booking_quotation(
-          p_booking_id => $1,
-          p_quotation_id => $2
-        ) AS result;
-      `, [testBookingId, expiredQuoteId]);
+      const acceptRes = await withAuth(testCustomerId, (tx) =>
+        tx.query(`
+          SELECT public.accept_booking_quotation(
+            p_booking_id => $1,
+            p_quotation_id => $2
+          ) AS result;
+        `, [testBookingId, expiredQuoteId])
+      );
 
       const result = acceptRes.rows[0].result;
       assert.strictEqual(result.success, false, "Expired quotation acceptance should fail");
@@ -599,35 +551,35 @@ async function runLiveDbChecks() {
     // Test I: Rule 7: Accept Quotation & Record Acceptance Timestamp
     let validAcceptedQuoteId = null;
     await asyncTest("Live DB Rule 7: Quotation acceptance records accepted_at timestamp and locks booking", async () => {
-      // Create a valid active quote
-      await setAuthContext(testProUserId);
       const items = [
         { item_type: "labor", description: "Complete Installation", quantity: 1, unit_price_kobo: 800000 },
         { item_type: "material", description: "Premium Parts", quantity: 1, unit_price_kobo: 1200000 },
       ];
-      const subRes = await client.query(`
-        SELECT public.submit_or_revise_quotation(
-          p_booking_id => $1,
-          p_professional_id => $2,
-          p_work_description => 'Valid quote to accept',
-          p_estimated_duration_minutes => 120,
-          p_valid_until => now() + interval '7 days',
-          p_is_draft => false,
-          p_items => $3::jsonb
-        ) AS result;
-      `, [testBookingId, testProId, JSON.stringify(items)]);
+      const subRes = await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT public.submit_or_revise_quotation(
+            p_booking_id => $1,
+            p_professional_id => $2,
+            p_work_description => 'Valid quote to accept',
+            p_estimated_duration_minutes => 120,
+            p_valid_until => now() + interval '7 days',
+            p_is_draft => false,
+            p_items => $3::jsonb
+          ) AS result;
+        `, [testBookingId, testProId, JSON.stringify(items)])
+      );
       validAcceptedQuoteId = subRes.rows[0].result.quotation_id;
 
-      // Customer accepts
-      await setAuthContext(testCustomerId);
-      const acceptRes = await client.query(`
-        SELECT public.accept_booking_quotation(
-          p_booking_id => $1,
-          p_quotation_id => $2,
-          p_scheduled_start => now() + interval '2 days',
-          p_scheduled_end => now() + interval '2 days' + interval '2 hours'
-        ) AS result;
-      `, [testBookingId, validAcceptedQuoteId]);
+      const acceptRes = await withAuth(testCustomerId, (tx) =>
+        tx.query(`
+          SELECT public.accept_booking_quotation(
+            p_booking_id => $1,
+            p_quotation_id => $2,
+            p_scheduled_start => now() + interval '2 days',
+            p_scheduled_end => now() + interval '2 days' + interval '2 hours'
+          ) AS result;
+        `, [testBookingId, validAcceptedQuoteId])
+      );
 
       const result = acceptRes.rows[0].result;
       assert.strictEqual(result.success, true, `Acceptance failed: ${JSON.stringify(result)}`);
@@ -645,25 +597,25 @@ async function runLiveDbChecks() {
 
     // Test J: Rule 5: Require Customer Approval for Changes to an Accepted Quotation
     await asyncTest("Live DB Rule 5: Modifying an accepted quote creates a new version proposal requiring customer approval", async () => {
-      // Pro proposes revision to already accepted quote
-      await setAuthContext(testProUserId);
       const revisedItems = [
         { item_type: "labor", description: "Complete Installation + Extra Wiring", quantity: 1, unit_price_kobo: 1000000 },
         { item_type: "material", description: "Premium Parts + Surge Protector", quantity: 1, unit_price_kobo: 1500000 },
       ];
 
-      const revRes = await client.query(`
-        SELECT public.submit_or_revise_quotation(
-          p_booking_id => $1,
-          p_professional_id => $2,
-          p_work_description => 'Revised scope: added surge protector',
-          p_estimated_duration_minutes => 150,
-          p_valid_until => now() + interval '7 days',
-          p_is_draft => false,
-          p_items => $3::jsonb,
-          p_quotation_id => $4
-        ) AS result;
-      `, [testBookingId, testProId, JSON.stringify(revisedItems), validAcceptedQuoteId]);
+      const revRes = await withAuth(testProUserId, (tx) =>
+        tx.query(`
+          SELECT public.submit_or_revise_quotation(
+            p_booking_id => $1,
+            p_professional_id => $2,
+            p_work_description => 'Revised scope: added surge protector',
+            p_estimated_duration_minutes => 150,
+            p_valid_until => now() + interval '7 days',
+            p_is_draft => false,
+            p_items => $3::jsonb,
+            p_quotation_id => $4
+          ) AS result;
+        `, [testBookingId, testProId, JSON.stringify(revisedItems), validAcceptedQuoteId])
+      );
 
       const result = revRes.rows[0].result;
       assert.strictEqual(result.success, true);
@@ -671,7 +623,6 @@ async function runLiveDbChecks() {
       assert.strictEqual(result.version, 2, "Version should be bumped to 2");
       assert.strictEqual(result.status, "pending", "Revision proposal must be in pending status for customer review");
 
-      // Verify accepted quote v1 is preserved in quotation_versions
       const verRes = await client.query(`
         SELECT version_number, status, total_amount_kobo
         FROM public.quotation_versions
@@ -688,22 +639,21 @@ async function runLiveDbChecks() {
 
     // Test K: Rule 8: Prevent Unauthorised Quotation Modification
     await asyncTest("Live DB Rule 8: Prevent unauthorised quotation modification by unrelated users", async () => {
-      // Impersonate unrelated user
-      await setAuthContext("00000000-0000-0000-0000-000000000999");
-
       const dummyItems = [{ item_type: "labor", description: "Hacker labor", quantity: 1, unit_price_kobo: 999999 }];
-      const failRes = await client.query(`
-        SELECT public.submit_or_revise_quotation(
-          p_booking_id => $1,
-          p_professional_id => $2,
-          p_work_description => 'Hacker edit',
-          p_estimated_duration_minutes => 60,
-          p_valid_until => now() + interval '7 days',
-          p_is_draft => false,
-          p_items => $4::jsonb,
-          p_quotation_id => $3
-        ) AS result;
-      `, [testBookingId, testProId, validAcceptedQuoteId, JSON.stringify(dummyItems)]);
+      const failRes = await withAuth("00000000-0000-0000-0000-000000000999", (tx) =>
+        tx.query(`
+          SELECT public.submit_or_revise_quotation(
+            p_booking_id => $1,
+            p_professional_id => $2,
+            p_work_description => 'Hacker edit',
+            p_estimated_duration_minutes => 60,
+            p_valid_until => now() + interval '7 days',
+            p_is_draft => false,
+            p_items => $4::jsonb,
+            p_quotation_id => $3
+          ) AS result;
+        `, [testBookingId, testProId, validAcceptedQuoteId, JSON.stringify(dummyItems)])
+      );
 
       assert.strictEqual(failRes.rows[0].result.success, false);
       assert.strictEqual(failRes.rows[0].result.error, "FORBIDDEN");
@@ -712,7 +662,6 @@ async function runLiveDbChecks() {
 
     // Clean up test booking and quotations (safe cleanup without mutating immutable tables)
     try {
-      await client.query("RESET ROLE;");
       await client.query(`DELETE FROM public.appointments WHERE booking_id = $1;`, [testBookingId]);
       await client.query(`DELETE FROM public.quotation_versions WHERE booking_id = $1;`, [testBookingId]);
       await client.query(`DELETE FROM public.quotation_items WHERE quotation_id IN (SELECT id FROM public.quotations WHERE booking_id = $1);`, [testBookingId]);
@@ -722,15 +671,6 @@ async function runLiveDbChecks() {
     }
     console.log(`         Cleaned up temporary test quotation fixtures.`);
   } finally {
-    if (client) {
-      try {
-        await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
-        await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
-        await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
-        await client.query("RESET ROLE;");
-        client.release();
-      } catch (_) {}
-    }
     await pool.end();
   }
 }

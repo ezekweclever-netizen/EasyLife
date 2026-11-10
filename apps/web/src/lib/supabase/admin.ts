@@ -45,23 +45,32 @@ export async function supabaseAdminFetch<T = unknown>(
       body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
     });
 
+    const text = await res.text();
+    let parsed: unknown = null;
+    if (text) {
+      try {
+        parsed = JSON.parse(text);
+      } catch {
+        parsed = text;
+      }
+    }
+
     if (!res.ok) {
       let errText = "admin_request_failed";
-      try {
-        const json = await res.json();
-        errText = json.message || json.error_description || json.error || errText;
-      } catch {
-        errText = await res.text();
+      if (parsed && typeof parsed === "object") {
+        const j = parsed as Record<string, unknown>;
+        errText =
+          (typeof j.message === "string" && j.message) ||
+          (typeof j.error_description === "string" && j.error_description) ||
+          (typeof j.error === "string" && j.error) ||
+          errText;
+      } else if (typeof parsed === "string" && parsed.trim()) {
+        errText = parsed.trim().slice(0, 300);
       }
       return { ok: false, status: res.status, message: errText };
     }
 
-    if (res.status === 204) {
-      return { ok: true, status: 204, data: null as T };
-    }
-
-    const data = (await res.json()) as T;
-    return { ok: true, status: res.status, data };
+    return { ok: true, status: res.status, data: (parsed ?? null) as T };
   } catch (err) {
     return {
       ok: false,
