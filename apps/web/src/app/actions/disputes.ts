@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 import type { DisputeStatus, DisputeCategory, DisputeResolutionType } from "@easylife/shared-types";
 
@@ -107,9 +108,9 @@ export async function submitDisputeAction(
 export async function adminUpdateDisputeAction(
   formData: FormData
 ): Promise<DisputeActionResult> {
-  const auth = await getAuthenticatedUser();
-  if (!auth) {
-    return { ok: false, message: "Administrator authentication required." };
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
   }
 
   const config = getSupabasePublicConfig();
@@ -140,7 +141,7 @@ export async function adminUpdateDisputeAction(
     "/rest/v1/rpc/admin_update_dispute",
     {
       method: "POST",
-      accessToken: auth.accessToken,
+      accessToken: adminCheck.accessToken,
       body: {
         p_dispute_id: disputeId,
         p_status: status,
@@ -174,9 +175,9 @@ export async function adminAddDisputeNoteAction(
   disputeId: string,
   note: string
 ): Promise<DisputeActionResult> {
-  const auth = await getAuthenticatedUser();
-  if (!auth) {
-    return { ok: false, message: "Administrator authentication required." };
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
   }
 
   const config = getSupabasePublicConfig();
@@ -193,10 +194,10 @@ export async function adminAddDisputeNoteAction(
     "/rest/v1/dispute_internal_notes",
     {
       method: "POST",
-      accessToken: auth.accessToken,
+      accessToken: adminCheck.accessToken,
       body: {
         dispute_id: disputeId,
-        admin_user_id: auth.user.id,
+        admin_user_id: adminCheck.user.id,
         note: note.trim(),
       },
     }

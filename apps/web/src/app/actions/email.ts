@@ -1,5 +1,6 @@
 "use server";
 
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { emailService } from "@/lib/email/email-service";
 import {
   renderAccountVerificationEmail,
@@ -12,12 +13,28 @@ import {
 } from "@/lib/email/templates";
 import { EmailDeliveryResult } from "@/lib/email/types";
 
+async function requireAdminEmailAccess(): Promise<EmailDeliveryResult | null> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return {
+      success: false,
+      provider: "logged_offline",
+      status: "failed",
+      timestamp: new Date().toISOString(),
+      error: "Unauthorized: Administrator privileges required.",
+    };
+  }
+  return null;
+}
+
 export async function sendAccountVerificationEmailAction(params: {
   toEmail: string;
   userName: string;
   verificationUrl: string;
   otpCode: string;
 }): Promise<EmailDeliveryResult> {
+  const denied = await requireAdminEmailAccess();
+  if (denied) return denied;
   const tpl = renderAccountVerificationEmail(params);
   return emailService.sendEmail({
     to: params.toEmail,
@@ -33,6 +50,8 @@ export async function sendPasswordRecoveryEmailAction(params: {
   userName: string;
   resetUrl: string;
 }): Promise<EmailDeliveryResult> {
+  const denied = await requireAdminEmailAccess();
+  if (denied) return denied;
   const tpl = renderPasswordRecoveryEmail(params);
   return emailService.sendEmail({
     to: params.toEmail,
@@ -53,6 +72,8 @@ export async function sendBookingConfirmationEmailAction(params: {
   address: string;
   totalNaira: number;
 }): Promise<EmailDeliveryResult> {
+  const denied = await requireAdminEmailAccess();
+  if (denied) return denied;
   const tpl = renderBookingConfirmationEmail(params);
   return emailService.sendEmail({
     to: params.toEmail,
@@ -71,6 +92,8 @@ export async function sendNewQuotationEmailAction(params: {
   totalNaira: number;
   quotationUrl: string;
 }): Promise<EmailDeliveryResult> {
+  const denied = await requireAdminEmailAccess();
+  if (denied) return denied;
   const tpl = renderNewQuotationEmail(params);
   return emailService.sendEmail({
     to: params.toEmail,
@@ -90,6 +113,8 @@ export async function sendAppointmentConfirmationEmailAction(params: {
   partnerName: string;
   isProfessional: boolean;
 }): Promise<EmailDeliveryResult> {
+  const denied = await requireAdminEmailAccess();
+  if (denied) return denied;
   const tpl = renderAppointmentConfirmationEmail(params);
   return emailService.sendEmail({
     to: params.toEmail,
@@ -106,6 +131,8 @@ export async function sendVerificationUpdateEmailAction(params: {
   status: "verified" | "rejected" | "info_required";
   adminNotes?: string;
 }): Promise<EmailDeliveryResult> {
+  const denied = await requireAdminEmailAccess();
+  if (denied) return denied;
   const tpl = renderVerificationUpdateEmail(params);
   return emailService.sendEmail({
     to: params.toEmail,
@@ -124,6 +151,8 @@ export async function sendDisputeUpdateEmailAction(params: {
   disputeStatus: string;
   resolutionSummary?: string;
 }): Promise<EmailDeliveryResult> {
+  const denied = await requireAdminEmailAccess();
+  if (denied) return denied;
   const tpl = renderDisputeUpdateEmail(params);
   return emailService.sendEmail({
     to: params.toEmail,

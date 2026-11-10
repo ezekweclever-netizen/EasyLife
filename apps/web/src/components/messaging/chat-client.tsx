@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { ConversationSummary, ConversationDetail, MessageItem } from "@/lib/supabase/messages";
 import { sendMessageAction, markConversationReadAction } from "@/app/actions/messages";
-import { uploadFileAction } from "@/app/actions/storage";
+import { getFileAccessUrlAction, uploadFileAction } from "@/app/actions/storage";
 
 interface ChatClientProps {
   currentUserId: string;
@@ -178,6 +178,20 @@ export function ChatClient({
         router.refresh();
       }
     });
+  };
+
+  const handleViewAttachment = async (storagePath: string) => {
+    setErrorMsg(null);
+    if (storagePath.startsWith("blob:") || storagePath.startsWith("http://") || storagePath.startsWith("https://")) {
+      window.open(storagePath, "_blank", "noopener,noreferrer");
+      return;
+    }
+    const res = await getFileAccessUrlAction("message-attachments", storagePath);
+    if (!res.success || !res.url) {
+      setErrorMsg(res.error || "Unable to open attachment right now.");
+      return;
+    }
+    window.open(res.url, "_blank", "noopener,noreferrer");
   };
 
   const formatMessageTime = (isoString: string) => {
@@ -425,9 +439,13 @@ export function ChatClient({
                                 </p>
                               )}
                             </div>
-                            <span className="text-[10px] font-bold underline cursor-pointer">
-                              View
-                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleViewAttachment(m.attachment_storage_path!)}
+                              className="text-[10px] font-bold underline cursor-pointer shrink-0 hover:opacity-80"
+                            >
+                              View ↗
+                            </button>
                           </div>
                         )}
                       </div>

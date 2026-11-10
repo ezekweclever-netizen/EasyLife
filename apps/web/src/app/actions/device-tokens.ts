@@ -2,6 +2,8 @@
 
 import { fcmService } from "@/lib/notifications/fcm-service";
 import { PushNotificationResult } from "@/lib/notifications/types";
+import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 
 export async function registerDeviceTokenAction(params: {
   userId: string;
@@ -10,11 +12,19 @@ export async function registerDeviceTokenAction(params: {
   deviceName?: string;
 }): Promise<{ success: boolean; error?: string }> {
   try {
-    if (!params.userId || !params.deviceToken) {
-      return { success: false, error: "User ID and Device Token are required." };
+    const auth = await getAuthenticatedUser();
+    if (!auth?.user) {
+      return { success: false, error: "Authentication required." };
     }
 
-    const ok = await fcmService.registerDeviceToken(params);
+    if (!params.deviceToken || (params.userId && params.userId !== auth.user.id)) {
+      return { success: false, error: "Invalid user or device token." };
+    }
+
+    const ok = await fcmService.registerDeviceToken({
+      ...params,
+      userId: auth.user.id,
+    });
     return { success: ok };
   } catch (err: any) {
     console.error("registerDeviceTokenAction error:", err);
@@ -28,6 +38,17 @@ export async function sendNewMessagePushAction(params: {
   messagePreview: string;
   conversationId: string;
 }): Promise<PushNotificationResult> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return {
+      success: false,
+      provider: "logged_offline",
+      status: "failed",
+      recipientCount: 0,
+      timestamp: new Date().toISOString(),
+      error: "Unauthorized: Administrator privileges required.",
+    };
+  }
   return fcmService.sendPushNotification({
     recipientUserId: params.recipientUserId,
     title: `New message from ${params.senderName}`,
@@ -46,6 +67,17 @@ export async function sendBookingUpdatePushAction(params: {
   statusText: string;
   bookingId: string;
 }): Promise<PushNotificationResult> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return {
+      success: false,
+      provider: "logged_offline",
+      status: "failed",
+      recipientCount: 0,
+      timestamp: new Date().toISOString(),
+      error: "Unauthorized: Administrator privileges required.",
+    };
+  }
   return fcmService.sendPushNotification({
     recipientUserId: params.recipientUserId,
     title: `Booking Update: ${params.bookingRef}`,
@@ -66,6 +98,17 @@ export async function sendAppointmentReminderPushAction(params: {
   appointmentTime: string;
   bookingId: string;
 }): Promise<PushNotificationResult> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return {
+      success: false,
+      provider: "logged_offline",
+      status: "failed",
+      recipientCount: 0,
+      timestamp: new Date().toISOString(),
+      error: "Unauthorized: Administrator privileges required.",
+    };
+  }
   return fcmService.sendPushNotification({
     recipientUserId: params.recipientUserId,
     title: `Reminder: Upcoming Appointment`,
@@ -85,6 +128,17 @@ export async function sendQuotationUpdatePushAction(params: {
   quotationAmountNaira: number;
   quotationId: string;
 }): Promise<PushNotificationResult> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return {
+      success: false,
+      provider: "logged_offline",
+      status: "failed",
+      recipientCount: 0,
+      timestamp: new Date().toISOString(),
+      error: "Unauthorized: Administrator privileges required.",
+    };
+  }
   return fcmService.sendPushNotification({
     recipientUserId: params.recipientUserId,
     title: `New Quotation: ${params.bookingRef}`,

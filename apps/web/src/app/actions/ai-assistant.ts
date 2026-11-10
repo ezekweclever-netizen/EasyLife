@@ -1,6 +1,7 @@
 "use server";
 
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
 import { executeAIAssistant } from "@/lib/ai/assistant-engine";
 import { fetchActiveCategories } from "@/lib/ai/categories";
@@ -130,6 +131,11 @@ export async function getAIAssistantCategories() {
  * 3. Fetch Admin Metrics on AI Usage & Estimated Costs
  */
 export async function getAIAssistantMetricsAction() {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return null;
+  }
+
   const res = await supabaseAdminFetch<Record<string, unknown>>(
     "/rest/v1/rpc/get_ai_assistant_metrics",
     { method: "POST" }

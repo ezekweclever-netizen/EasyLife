@@ -2,12 +2,58 @@
 
 import { StorageBucketId } from "@easylife/shared-types";
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
+import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 import { storageService } from "@/lib/storage/storage-service";
+
+/**
+ * Checks whether an authenticated non-owner user has participant access
+ * to a private bucket object via Supabase RLS policies.
+ */
+async function hasPrivateObjectAccess(
+  bucketId: StorageBucketId,
+  cleanPath: string,
+  userId: string,
+  accessToken: string
+): Promise<boolean> {
+  const pathOwner = cleanPath.split("/")[0];
+  if (pathOwner === userId) {
+    return true;
+  }
+
+  const adminCheck = await verifyAdminSession();
+  if (adminCheck.ok) {
+    return true;
+  }
+
+  const config = getSupabasePublicConfig();
+  if (!config) return false;
+
+  if (bucketId === "message-attachments") {
+    const res = await supabaseFetch<Array<{ id: string }>>(
+      config,
+      `/rest/v1/messages?select=id&attachment_storage_path=eq.${encodeURIComponent(cleanPath)}&limit=1`,
+      { accessToken }
+    );
+    return res.ok && Array.isArray(res.data) && res.data.length > 0;
+  }
+
+  if (bucketId === "booking-attachments") {
+    const res = await supabaseFetch<Array<{ id: string }>>(
+      config,
+      `/rest/v1/booking_attachments?select=id&storage_path=eq.${encodeURIComponent(cleanPath)}&limit=1`,
+      { accessToken }
+    );
+    return res.ok && Array.isArray(res.data) && res.data.length > 0;
+  }
+
+  return false;
+}
 
 /**
  * Retrieves access URL for a storage object.
  * - Public buckets return direct public URL.
- * - Private buckets enforce authentication and ownership/admin permission before generating a signed URL.
+ * - Private buckets enforce authentication and ownership/participant/admin permission before generating a signed URL.
  */
 export async function getFileAccessUrlAction(
   bucketId: StorageBucketId,
@@ -36,11 +82,15 @@ export async function getFileAccessUrlAction(
       };
     }
 
-    // Verify folder ownership: first path component should equal auth.user.id
     const cleanPath = path.startsWith("/") ? path.slice(1) : path;
-    const pathOwner = cleanPath.split("/")[0];
+    const allowed = await hasPrivateObjectAccess(
+      bucketId,
+      cleanPath,
+      auth.user.id,
+      auth.accessToken
+    );
 
-    if (pathOwner !== auth.user.id) {
+    if (!allowed) {
       return {
         success: false,
         url: null,

@@ -1,6 +1,8 @@
 "use server";
 
 import { executeSupportEngine, SupportEngineResult } from "@/lib/ai/support-engine";
+import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
 
 export interface SendSupportMessageInput {
@@ -27,13 +29,14 @@ export async function sendCustomerSupportMessageAction(
       };
     }
 
+    const auth = await getAuthenticatedUser();
     const sessionId = input.sessionId || `sup-sess-${Date.now()}`;
 
     const result = await executeSupportEngine({
       userMessage: input.userMessage.trim(),
       conversationHistory: input.conversationHistory,
       sessionId,
-      userId: input.userId,
+      userId: auth?.user?.id || null,
     });
 
     return {
@@ -51,11 +54,19 @@ export async function sendCustomerSupportMessageAction(
 
 export async function fetchUserSupportTicketsAction(userId?: string) {
   try {
-    let path =
-      "/rest/v1/support_tickets?select=id,ticket_ref,subject,category,priority,status,user_message,ai_summary,created_at,updated_at&order=created_at.desc&limit=20";
-    if (userId) {
-      path += `&user_id=eq.${encodeURIComponent(userId)}`;
+    const auth = await getAuthenticatedUser();
+    if (!auth?.user) {
+      return { success: false, tickets: [], error: "Authentication required." };
     }
+
+    const adminCheck = await verifyAdminSession();
+    const scopedUserId =
+      adminCheck.ok && userId ? userId : auth.user.id;
+
+    const path =
+      "/rest/v1/support_tickets?select=id,ticket_ref,subject,category,priority,status,user_message,ai_summary,created_at,updated_at&user_id=eq." +
+      encodeURIComponent(scopedUserId) +
+      "&order=created_at.desc&limit=20";
 
     const res = await supabaseAdminFetch<any[]>(path);
     if (!res.ok) throw new Error(res.message);

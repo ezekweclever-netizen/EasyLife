@@ -1,6 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
+import { storageService } from "@/lib/storage/storage-service";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
 import { AdminDisputeManager, AdminDisputeItem } from "@/components/admin/admin-dispute-manager";
 
@@ -10,6 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminDisputesPage() {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    redirect("/admin/login?next=%2Fadmin%2Fdisputes");
+  }
+
   const [disputesRes, evidenceRes, notesRes] = await Promise.all([
     supabaseAdminFetch<any[]>(
       "/rest/v1/disputes?select=*,bookings(reference_code,title,status,city,agreed_amount_kobo)&order=created_at.desc&limit=100"
@@ -26,10 +34,24 @@ export default async function AdminDisputesPage() {
   const rawEvidence = evidenceRes.ok && Array.isArray(evidenceRes.data) ? evidenceRes.data : [];
   const rawNotes = notesRes.ok && Array.isArray(notesRes.data) ? notesRes.data : [];
 
+  const signedEvidence = await Promise.all(
+    rawEvidence.map(async (ev) => {
+      const sp = typeof ev.storage_path === "string" ? ev.storage_path : "";
+      if (!sp || sp.startsWith("http://") || sp.startsWith("https://")) {
+        return ev;
+      }
+      const signed = await storageService.createSignedUrl("dispute-evidence", sp, 3600);
+      return {
+        ...ev,
+        storage_path: signed.signedUrl || sp,
+      };
+    })
+  );
+
   const disputes: AdminDisputeItem[] = rawDisputes.map((d) => ({
     ...d,
     booking: d.bookings || null,
-    evidence: rawEvidence.filter((ev) => ev.dispute_id === d.id),
+    evidence: signedEvidence.filter((ev) => ev.dispute_id === d.id),
     internal_notes_list: rawNotes.filter((n) => n.dispute_id === d.id),
   }));
 

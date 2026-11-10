@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
 
 export interface CategoryFormState {
@@ -16,6 +17,14 @@ export async function createCategoryAction(
   _prevState: CategoryFormState,
   formData: FormData
 ): Promise<CategoryFormState> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return {
+      status: "error",
+      message: "Unauthorized: Administrator privileges required.",
+    };
+  }
+
   const name = String(formData.get("name") || "").trim();
   const rawSlug = String(formData.get("slug") || "").trim();
   const description = String(formData.get("description") || "").trim();
@@ -89,6 +98,14 @@ export async function updateCategoryAction(
   _prevState: CategoryFormState,
   formData: FormData
 ): Promise<CategoryFormState> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return {
+      status: "error",
+      message: "Unauthorized: Administrator privileges required.",
+    };
+  }
+
   const id = String(formData.get("id") || "").trim();
   const name = String(formData.get("name") || "").trim();
   const slug = String(formData.get("slug") || "").trim();
@@ -152,6 +169,11 @@ export async function toggleCategoryActiveAction(
   categoryId: string,
   isActive: boolean
 ): Promise<{ ok: boolean; message: string }> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
+  }
+
   if (!categoryId) {
     return { ok: false, message: "Category ID required." };
   }
@@ -185,6 +207,11 @@ export async function toggleCategoryActiveAction(
 export async function reorderCategoriesAction(
   categoryOrders: Array<{ id: string; display_order: number }>
 ): Promise<{ ok: boolean; message: string }> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
+  }
+
   if (!Array.isArray(categoryOrders) || categoryOrders.length === 0) {
     return { ok: false, message: "No category ordering provided." };
   }

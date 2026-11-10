@@ -11,7 +11,7 @@ import {
   RiskSeverity,
   RiskEntityType,
 } from "@/lib/risk/risk-engine";
-import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 
 export async function fetchAdminRiskFlagsAction(params: {
   status?: RiskFlagStatus;
@@ -22,6 +22,11 @@ export async function fetchAdminRiskFlagsAction(params: {
   limit?: number;
 }) {
   try {
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return { success: false, error: "Unauthorized: Administrator privileges required." };
+    }
+
     const data = await fetchRiskFlags(params);
     const summary = await getRiskFlagsSummary();
     return { success: true, data, summary };
@@ -37,8 +42,10 @@ export async function adminReviewRiskFlagAction(params: {
   adminNotes: string;
 }) {
   try {
-    const auth = await getAuthenticatedUser();
-    const adminId = auth?.user?.id;
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return { success: false, error: "Unauthorized: Administrator privileges required." };
+    }
 
     if (!params.adminNotes || !params.adminNotes.trim()) {
       return { success: false, error: "Administrative notes are required for this action." };
@@ -48,7 +55,7 @@ export async function adminReviewRiskFlagAction(params: {
       flagId: params.flagId,
       status: params.status,
       adminNotes: params.adminNotes.trim(),
-      adminId,
+      adminId: adminCheck.user.id,
     });
 
     return { success: true, data: updated };
@@ -60,6 +67,11 @@ export async function adminReviewRiskFlagAction(params: {
 
 export async function triggerAccountRiskAuditAction(userId: string) {
   try {
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return { success: false, error: "Unauthorized: Administrator privileges required." };
+    }
+
     const res = await evaluateAccountRisk(userId);
     return { success: true, result: res };
   } catch (err: any) {
@@ -70,6 +82,11 @@ export async function triggerAccountRiskAuditAction(userId: string) {
 
 export async function triggerReviewRiskAuditAction(reviewId: string) {
   try {
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return { success: false, error: "Unauthorized: Administrator privileges required." };
+    }
+
     const res = await evaluateReviewRisk(reviewId);
     return { success: true, result: res };
   } catch (err: any) {

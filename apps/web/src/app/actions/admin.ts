@@ -5,6 +5,7 @@ import { getAuthenticatedUser } from "@/lib/auth/session";
 import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
+import { storageService } from "@/lib/storage/storage-service";
 import type {
   AdminDashboardMetrics,
   VerificationStatus,
@@ -279,7 +280,32 @@ export async function fetchAdminDocuments(status?: string) {
     accessToken: auth?.accessToken,
   });
 
-  return res.ok && Array.isArray(res.data) ? res.data : [];
+  if (!res.ok || !Array.isArray(res.data)) {
+    return [];
+  }
+
+  return Promise.all(
+    res.data.map(async (doc) => {
+      const existingUrl = typeof doc.document_url === "string" ? doc.document_url : "";
+      const storagePath = typeof doc.storage_path === "string" ? doc.storage_path : "";
+      const storageBucket = (
+        typeof doc.storage_bucket === "string" && doc.storage_bucket
+          ? doc.storage_bucket
+          : "verification-documents"
+      ) as any;
+
+      let signedDocumentUrl: string | null = existingUrl || null;
+      if (!signedDocumentUrl && storagePath) {
+        const signed = await storageService.createSignedUrl(storageBucket, storagePath, 3600);
+        signedDocumentUrl = signed.signedUrl;
+      }
+
+      return {
+        ...doc,
+        document_url: signedDocumentUrl,
+      };
+    })
+  );
 }
 
 /**

@@ -10,7 +10,9 @@ interface VerificationDocItem {
   id: string;
   professional_id: string;
   document_type: string;
-  document_url: string;
+  document_url?: string | null;
+  file_name?: string | null;
+  storage_path?: string | null;
   verification_status: string;
   rejection_reason: string | null;
   created_at: string;
@@ -165,14 +167,20 @@ export function VerificationQueueClient({
                       <div className="font-semibold text-slate-800 capitalize">
                         {doc.document_type.replace(/_/g, " ")}
                       </div>
-                      <a
-                        href={doc.document_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-2xs text-teal-600 hover:underline flex items-center gap-1 mt-0.5"
-                      >
-                        <span>📎 View File Evidence ↗</span>
-                      </a>
+                      {doc.document_url ? (
+                        <a
+                          href={doc.document_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-2xs text-teal-600 hover:underline flex items-center gap-1 mt-0.5"
+                        >
+                          <span>📎 View File Evidence ({doc.file_name || "Document"}) ↗</span>
+                        </a>
+                      ) : (
+                        <span className="text-2xs text-slate-400 mt-0.5 block">
+                          📎 {doc.file_name || doc.storage_path || "Submitted metadata record (no stored binary preview)"}
+                        </span>
+                      )}
                     </td>
                     <td className="py-3.5 px-4">
                       {doc.verification_status === "approved" ? (

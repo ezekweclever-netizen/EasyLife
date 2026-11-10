@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
 
 export async function setBusinessVerificationStatusAction(
@@ -8,6 +9,11 @@ export async function setBusinessVerificationStatusAction(
   status: "approved" | "rejected" | "suspended" | "pending"
 ) {
   try {
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return { success: false, error: "Unauthorized: Administrator privileges required." };
+    }
+
     const res = await supabaseAdminFetch(
       `/rest/v1/businesses?id=eq.${businessId}`,
       {
@@ -36,6 +42,11 @@ export async function setHealthcareFacilityStatusAction(
   status?: "approved" | "suspended"
 ) {
   try {
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return { success: false, error: "Unauthorized: Administrator privileges required." };
+    }
+
     const payload: Record<string, unknown> = {
       is_active: isActive,
       updated_at: new Date().toISOString(),
@@ -67,6 +78,11 @@ export async function resolveReportAction(
   adminNotes?: string
 ) {
   try {
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return { success: false, error: "Unauthorized: Administrator privileges required." };
+    }
+
     const res = await supabaseAdminFetch(
       `/rest/v1/directory_reports?id=eq.${reportId}`,
       {

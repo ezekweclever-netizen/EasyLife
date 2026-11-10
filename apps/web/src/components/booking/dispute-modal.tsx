@@ -3,6 +3,7 @@
 import React, { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { submitDisputeAction } from "@/app/actions/disputes";
+import { uploadFileAction } from "@/app/actions/storage";
 
 interface DisputeModalProps {
   bookingId: string;
@@ -37,6 +38,7 @@ export function DisputeModal({
   const [disputedAmount, setDisputedAmount] = useState<number>(agreedAmountNaira);
   const [evidenceInput, setEvidenceInput] = useState("");
   const [evidenceDescription, setEvidenceDescription] = useState("");
+  const [isUploadingEvidence, setIsUploadingEvidence] = useState(false);
   const [evidenceList, setEvidenceList] = useState<
     Array<{
       storage_path: string;
@@ -46,6 +48,36 @@ export function DisputeModal({
     }>
   >([]);
   const [error, setError] = useState<string | null>(null);
+
+  const handleEvidenceFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setError(null);
+    setIsUploadingEvidence(true);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("bucketId", "dispute-evidence");
+      const res = await uploadFileAction(fd);
+      if (!res.success || !res.path) {
+        setError(res.error || "Failed to upload evidence file.");
+        return;
+      }
+      setEvidenceList((prev) => [
+        ...prev,
+        {
+          storage_path: res.path!,
+          file_name: file.name,
+          mime_type: file.type || "application/octet-stream",
+          description: evidenceDescription.trim() || undefined,
+        },
+      ]);
+      setEvidenceDescription("");
+    } finally {
+      setIsUploadingEvidence(false);
+      e.target.value = "";
+    }
+  };
 
   const handleAddEvidence = () => {
     if (!evidenceInput.trim()) return;
@@ -210,11 +242,20 @@ export function DisputeModal({
               Supporting Evidence (Photographs / Documents / Receipts)
             </label>
             <div className="space-y-2">
+              <div className="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="file"
+                  accept=".pdf,.jpg,.jpeg,.png,.webp"
+                  onChange={handleEvidenceFileUpload}
+                  disabled={isUploadingEvidence}
+                  className="flex-1 p-2 rounded-xl border border-slate-300 text-xs bg-white file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white"
+                />
+              </div>
               <input
                 type="text"
                 value={evidenceInput}
                 onChange={(e) => setEvidenceInput(e.target.value)}
-                placeholder="Evidence URL or storage path (e.g. https://... or /evidence/...)"
+                placeholder="Or paste existing evidence URL / storage path (optional)"
                 className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
               />
               <div className="flex gap-2">
@@ -228,9 +269,10 @@ export function DisputeModal({
                 <button
                   type="button"
                   onClick={handleAddEvidence}
-                  className="px-4 py-2 bg-slate-800 text-white rounded-xl text-xs font-bold shrink-0"
+                  disabled={isUploadingEvidence}
+                  className="px-4 py-2 bg-slate-800 text-white rounded-xl text-xs font-bold shrink-0 disabled:opacity-50"
                 >
-                  Attach File
+                  {isUploadingEvidence ? "Uploading..." : "Attach Reference"}
                 </button>
               </div>
             </div>

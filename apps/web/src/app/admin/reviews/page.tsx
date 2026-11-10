@@ -1,6 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
 import { AdminReviewModerator, AdminReviewItem } from "@/components/admin/admin-review-moderator";
 
@@ -10,6 +12,11 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminReviewsPage() {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    redirect("/admin/login?next=%2Fadmin%2Freviews");
+  }
+
   const reviewsRes = await supabaseAdminFetch<any[]>(
     "/rest/v1/reviews?select=*,bookings(reference_code,title),professional_profiles(business_name,headline)&order=created_at.desc&limit=100"
   );
