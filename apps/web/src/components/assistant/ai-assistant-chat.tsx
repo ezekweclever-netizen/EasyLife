@@ -41,7 +41,7 @@ export function AIAssistantChat({
       role: "assistant",
       content:
         "Hello! I am your EasyLife AI Problem Assistant. Describe whatever is broken, leaking, beeping, or not working in your home or facility. I will help analyze the symptoms, recommend the accredited trade category, and format a service request for you to review.",
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      timestamp: "",
     },
   ]);
   const [inputMessage, setInputMessage] = useState("");
@@ -58,6 +58,13 @@ export function AIAssistantChat({
   const [editUrgency, setEditUrgency] = useState<"normal" | "high" | "emergency">("normal");
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const nowLabel = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    setMessages((prev) =>
+      prev.map((m, idx) => (idx === 0 && !m.timestamp ? { ...m, timestamp: nowLabel } : m))
+    );
+  }, []);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -222,8 +229,12 @@ export function AIAssistantChat({
                 <span className="font-bold">
                   {msg.role === "user" ? userName || "You" : "EasyLife AI"}
                 </span>
-                <span>•</span>
-                <span>{msg.timestamp}</span>
+                {msg.timestamp && (
+                  <>
+                    <span>•</span>
+                    <span>{msg.timestamp}</span>
+                  </>
+                )}
               </div>
 
               {/* Message Bubble */}

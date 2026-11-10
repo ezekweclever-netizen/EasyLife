@@ -277,7 +277,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
               </span>
             </div>
             <span className="text-[10px] text-slate-400 font-mono">
-              {new Date(booking.review.created_at).toLocaleDateString("en-NG", { month: "short", day: "numeric", year: "numeric" })}
+              {new Date(booking.review.created_at).toLocaleDateString("en-NG", { month: "short", day: "numeric", year: "numeric", timeZone: "Africa/Lagos" })}
             </span>
           </div>
 
@@ -309,7 +309,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
               <p className="text-teal-900 italic">"{booking.review.professional_response}"</p>
               {booking.review.responded_at && (
                 <span className="text-[10px] text-teal-700 font-mono block pt-1">
-                  Responded on {new Date(booking.review.responded_at).toLocaleDateString("en-NG")}
+                  Responded on {new Date(booking.review.responded_at).toLocaleDateString("en-NG", { timeZone: "Africa/Lagos" })}
                 </span>
               )}
             </div>
@@ -326,11 +326,11 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                 ✓ Confirmed Appointment
               </span>
               <h2 className="text-lg font-bold text-teal-950">
-                Scheduled for {new Date(booking.scheduled_start_at).toLocaleDateString("en-NG", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}
+                Scheduled for {new Date(booking.scheduled_start_at).toLocaleDateString("en-NG", { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "Africa/Lagos" })}
               </h2>
               <p className="text-xs text-teal-800">
-                Time Window: {new Date(booking.scheduled_start_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" })}
-                {booking.scheduled_end_at && ` – ${new Date(booking.scheduled_end_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" })}`}
+                Time Window: {new Date(booking.scheduled_start_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })}
+                {booking.scheduled_end_at && ` – ${new Date(booking.scheduled_end_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })}`}
               </p>
             </div>
 
@@ -427,7 +427,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                       )}
                     </div>
                     <span className="text-[10px] text-slate-400 font-mono shrink-0">
-                      {new Date(hist.created_at).toLocaleString("en-NG")}
+                      {new Date(hist.created_at).toLocaleString("en-NG", { timeZone: "Africa/Lagos" })}
                     </span>
                   </div>
                 ))}

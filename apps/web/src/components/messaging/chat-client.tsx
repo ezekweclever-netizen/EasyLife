@@ -29,6 +29,11 @@ export function ChatClient({
   const [messageText, setMessageText] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   // File upload state
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -197,7 +202,11 @@ export function ChatClient({
   const formatMessageTime = (isoString: string) => {
     try {
       const date = new Date(isoString);
-      return date.toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" });
+      return date.toLocaleTimeString("en-NG", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Africa/Lagos",
+      });
     } catch {
       return "";
     }
@@ -207,12 +216,22 @@ export function ChatClient({
     if (!isoString) return "";
     try {
       const date = new Date(isoString);
-      const now = new Date();
-      const isToday = date.toDateString() === now.toDateString();
-      if (isToday) {
-        return date.toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" });
+      if (hasMounted) {
+        const now = new Date();
+        const isToday = date.toDateString() === now.toDateString();
+        if (isToday) {
+          return date.toLocaleTimeString("en-NG", {
+            hour: "2-digit",
+            minute: "2-digit",
+            timeZone: "Africa/Lagos",
+          });
+        }
       }
-      return date.toLocaleDateString("en-NG", { month: "short", day: "numeric" });
+      return date.toLocaleDateString("en-NG", {
+        month: "short",
+        day: "numeric",
+        timeZone: "Africa/Lagos",
+      });
     } catch {
       return "";
     }

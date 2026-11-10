@@ -3,6 +3,9 @@
 import { revalidatePath } from "next/cache";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
 import { verifyAdminSession } from "@/lib/auth/admin-guard";
+import { getAuthenticatedUser } from "@/lib/auth/session";
+
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export interface CreateReportInput {
   entityType: "professional" | "business" | "healthcare_facility" | "general_listing";
@@ -19,13 +22,16 @@ export async function submitDirectoryReportAction(input: CreateReportInput) {
       return { success: false, error: "Please provide a detailed reason (at least 10 characters)." };
     }
 
+    const auth = await getAuthenticatedUser();
+    const verifiedReporterId = auth?.user.id || null;
+
     const res = await supabaseAdminFetch<Array<{ id: string }>>(
       "/rest/v1/directory_reports",
       {
         method: "POST",
         headers: { Prefer: "return=representation" },
         body: {
-          reporter_id: input.reporterId || null,
+          reporter_id: verifiedReporterId,
           entity_type: input.entityType,
           entity_id: input.entityId,
           entity_name: input.entityName,
@@ -53,12 +59,16 @@ export async function submitDirectoryReportAction(input: CreateReportInput) {
 export async function resolveDirectoryReportAction(reportId: string, status: "resolved" | "dismissed", adminNotes?: string) {
   try {
     const adminSession = await verifyAdminSession();
-    if (!adminSession) {
+    if (!adminSession.ok) {
       return { success: false, error: "Administrator authentication is required." };
     }
 
+    if (!UUID_REGEX.test(reportId)) {
+      return { success: false, error: "Invalid directory report ID." };
+    }
+
     const res = await supabaseAdminFetch(
-      `/rest/v1/directory_reports?id=eq.${reportId}`,
+      `/rest/v1/directory_reports?id=eq.${encodeURIComponent(reportId)}`,
       {
         method: "PATCH",
         body: {

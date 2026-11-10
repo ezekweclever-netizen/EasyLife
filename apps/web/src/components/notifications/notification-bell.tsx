@@ -23,7 +23,12 @@ export function NotificationBell({
   const [isPending, startTransition] = useTransition();
   const [notifications, setNotifications] = useState<NotificationItem[]>(initialNotifications);
   const [unreadCount, setUnreadCount] = useState(initialUnreadCount);
+  const [hasMounted, setHasMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   useEffect(() => {
     setNotifications(initialNotifications);
@@ -96,7 +101,15 @@ export function NotificationBell({
 
   const formatRelativeTime = (isoString: string) => {
     try {
-      const diffMs = Date.now() - new Date(isoString).getTime();
+      const date = new Date(isoString);
+      if (!hasMounted) {
+        return date.toLocaleDateString("en-NG", {
+          month: "short",
+          day: "numeric",
+          timeZone: "Africa/Lagos",
+        });
+      }
+      const diffMs = Date.now() - date.getTime();
       const mins = Math.floor(diffMs / 60000);
       if (mins < 1) return "Just now";
       if (mins < 60) return `${mins}m ago`;

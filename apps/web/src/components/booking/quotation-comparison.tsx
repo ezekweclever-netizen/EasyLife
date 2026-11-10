@@ -389,6 +389,7 @@ export function QuotationComparison({
                         month: "short",
                         day: "numeric",
                         year: "numeric",
+                        timeZone: "Africa/Lagos",
                       })}
                     </span>
                   </div>

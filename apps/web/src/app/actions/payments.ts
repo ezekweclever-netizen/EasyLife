@@ -105,7 +105,7 @@ export async function recordRefundAction(
   input: RecordRefundInput
 ): Promise<{ success: boolean; message: string }> {
   const adminSession = await verifyAdminSession();
-  if (!adminSession) {
+  if (!adminSession.ok) {
     return {
       success: false,
       message: "Administrative privileges required to record a refund.",

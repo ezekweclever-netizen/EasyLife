@@ -114,8 +114,8 @@ export function JobCompletionCard({
           </div>
           {proMarkedCompleteAt && (
             <div className="text-xs text-amber-800 font-medium sm:text-right shrink-0">
-              Submitted: {new Date(proMarkedCompleteAt).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" })},{" "}
-              {new Date(proMarkedCompleteAt).toLocaleDateString("en-NG", { month: "short", day: "numeric" })}
+              Submitted: {new Date(proMarkedCompleteAt).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })},{" "}
+              {new Date(proMarkedCompleteAt).toLocaleDateString("en-NG", { month: "short", day: "numeric", timeZone: "Africa/Lagos" })}
             </div>
           )}
         </div>

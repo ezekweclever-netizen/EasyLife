@@ -30,13 +30,20 @@ export function CustomerSupportChat() {
       role: "assistant",
       content:
         "Hello! I am the EasyLife AI Customer Support Specialist. I can answer questions about registration, booking procedures, professional verification, quotation acceptance, appointment management, dispute reporting, and account security. How can I assist you today?",
-      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+      timestamp: "",
     },
   ]);
   const [inputText, setInputText] = useState("");
   const [isPending, startTransition] = useTransition();
   const [sessionId] = useState(() => `sup-sess-${Math.random().toString(36).substring(2, 9)}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const nowLabel = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    setMessages((prev) =>
+      prev.map((m) => (m.id === "initial" && !m.timestamp ? { ...m, timestamp: nowLabel } : m))
+    );
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -192,13 +199,15 @@ export function CustomerSupportChat() {
                   </div>
                 )}
 
-                <div
-                  className={`mt-1.5 text-[10px] text-right ${
-                    isUser ? "text-teal-100" : "text-slate-400"
-                  }`}
-                >
-                  {msg.timestamp}
-                </div>
+                {msg.timestamp && (
+                  <div
+                    className={`mt-1.5 text-[10px] text-right ${
+                      isUser ? "text-teal-100" : "text-slate-400"
+                    }`}
+                  >
+                    {msg.timestamp}
+                  </div>
+                )}
               </div>
             </div>
           );

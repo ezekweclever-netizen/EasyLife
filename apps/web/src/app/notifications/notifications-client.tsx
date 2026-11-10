@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { NotificationItem } from "@/lib/supabase/notifications";
@@ -24,6 +24,11 @@ export function NotificationsClient({
   const [unreadCount, setUnreadCount] = useState(initialUnreadCount);
   const [selectedChannel, setSelectedChannel] = useState<string>("all");
   const [expandedDeliveryId, setExpandedDeliveryId] = useState<string | null>(null);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const filtered = notifications.filter((n) => {
     if (selectedChannel === "all") return true;
@@ -80,7 +85,15 @@ export function NotificationsClient({
 
   const formatRelativeTime = (isoString: string) => {
     try {
-      const diffMs = Date.now() - new Date(isoString).getTime();
+      const date = new Date(isoString);
+      if (!hasMounted) {
+        return date.toLocaleDateString("en-NG", {
+          month: "short",
+          day: "numeric",
+          timeZone: "Africa/Lagos",
+        });
+      }
+      const diffMs = Date.now() - date.getTime();
       const mins = Math.floor(diffMs / 60000);
       if (mins < 1) return "Just now";
       if (mins < 60) return `${mins}m ago`;
