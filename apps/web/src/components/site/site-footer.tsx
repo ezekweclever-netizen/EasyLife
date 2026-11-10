@@ -16,11 +16,11 @@ export function SiteFooter() {
       <h2 id="site-footer-heading" className="sr-only">
         Site footer
       </h2>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid gap-10 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.35fr_repeat(4,1fr)]">
           <div className="max-w-sm">
-            <EasyLifeLogo theme="dark" size="md" showSlogan />
-            <p className="mt-5 text-sm leading-relaxed text-[#DAE7E7]/80">
+            <EasyLifeLogo theme="dark" size="md" />
+            <p className="mt-5 text-base leading-relaxed text-[#DAE7E7]/85">
               EasyLife helps people and businesses find reliable everyday services
               and manage essential maintenance with less effort — operating across{" "}
               {EASYLIFE_BRAND.pilotCities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}.
@@ -29,15 +29,15 @@ export function SiteFooter() {
 
           {FOOTER_COLUMNS.map((column) => (
             <nav key={column.heading} aria-label={column.heading}>
-              <h3 className="text-xs font-bold uppercase tracking-[0.14em] text-white">
+              <h3 className="text-sm font-bold uppercase tracking-[0.12em] text-white">
                 {column.heading}
               </h3>
-              <ul className="mt-4 space-y-2.5">
+              <ul className="mt-4 space-y-3">
                 {column.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[#DAE7E7]/70 hover:text-[#24989A] transition-colors"
+                      className="text-base text-[#DAE7E7]/75 hover:text-[#24989A] transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -48,7 +48,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-[#DAE7E7]/60">
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-sm text-[#DAE7E7]/70">
           <p>
             © {new Date().getFullYear()} {EASYLIFE_BRAND.name}. All rights reserved.
           </p>

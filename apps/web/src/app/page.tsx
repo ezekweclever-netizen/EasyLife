@@ -1,8 +1,9 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { EASYLIFE_BRAND } from "@easylife/shared-config";
-import { PUBLIC_SERVICE_CATEGORIES } from "@/lib/public-catalog";
 import { PublicShell } from "@/components/site/public-shell";
 import { ServiceSearchForm } from "@/components/site/service-search-form";
+import { StackedCategoriesSection } from "@/components/site/stacked-categories-section";
 import {
   Section,
   SectionHeading,
@@ -14,7 +15,19 @@ import {
 import { ButtonLink } from "@/components/ui/button";
 import { Icon } from "@/components/site/icons";
 
-export default function HomePage() {
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const resolvedParams = await searchParams;
+  if (resolvedParams && (resolvedParams.code || resolvedParams.error)) {
+    const qs = new URLSearchParams();
+    for (const [key, val] of Object.entries(resolvedParams)) {
+      if (typeof val === "string") qs.set(key, val);
+    }
+    redirect(`/auth/callback?${qs.toString()}`);
+  }
   const customerSteps = [
     {
       title: "Tell Us What Needs Fixing",
@@ -127,26 +140,26 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             {/* Pilot Cities Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0D282E]/80 border border-[#24989A]/40 text-[#DAE7E7] text-xs font-semibold mb-6 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0D282E]/80 border border-[#24989A]/40 text-[#DAE7E7] text-sm font-semibold mb-6 shadow-xs">
               <span className="h-2 w-2 rounded-full bg-[#EE9277] animate-pulse" />
               <span>Operating in Port Harcourt • Lagos • Abuja</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.15]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] font-bold tracking-tight text-white leading-[1.12]">
               Everyday Problems. <br />
               <span className="text-[#24989A]">Smarter Solutions.</span>
             </h1>
 
             {/* Prompt 6 Required Landing Page Description */}
-            <p className="mt-5 text-base sm:text-lg text-[#DAE7E7] max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-5 text-lg sm:text-xl text-[#DAE7E7] max-w-2xl mx-auto leading-relaxed">
               EasyLife helps people and businesses find reliable everyday services and manage essential maintenance with less effort.
             </p>
 
             {/* 2. Main Service Search */}
             <div className="mt-8 max-w-2xl mx-auto">
               <ServiceSearchForm id="hero-search" tone="dark" />
-              <div className="mt-3 flex flex-wrap items-center justify-center gap-2 text-xs text-[#DAE7E7]/80">
-                <span className="text-[#DAE7E7]/70">Popular searches:</span>
+              <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2.5 text-sm text-[#DAE7E7]/85">
+                <span className="text-[#DAE7E7]/75">Popular searches:</span>
                 <Link
                   href="/explore-services?q=generator"
                   className="text-[#24989A] hover:text-white underline underline-offset-2 transition-colors"
@@ -194,47 +207,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Popular Service Categories */}
-      <Section id="popular-categories" tone="white">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-          <SectionHeading
-            id="categories-heading"
-            eyebrow="Marketplace Catalog"
-            title="Popular Service Categories"
-            description="From urgent plumbing repairs to commercial facility upkeep, connect with verified Nigerian specialists."
-          />
-          <Link
-            href="/explore-services"
-            className="text-sm font-semibold text-[#24989A] hover:text-[#1D7E80] inline-flex items-center gap-1 shrink-0 transition-colors"
-          >
-            <span>View all 8 categories</span>
-            <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {PUBLIC_SERVICE_CATEGORIES.map((cat) => (
-            <Link
-              key={cat.id}
-              href={`/explore-services?cat=${cat.slug}`}
-              className="group block rounded-2xl border border-[#DAE7E7] bg-white p-6 hover:border-[#24989A] hover:shadow-lg transition-all"
-            >
-              <div className="h-12 w-12 rounded-xl bg-[#F3F8F8] border border-[#DAE7E7] flex items-center justify-center text-[#154752] group-hover:bg-[#24989A] group-hover:text-white transition-colors">
-                <Icon name={cat.icon} className="h-6 w-6" />
-              </div>
-              <h3 className="mt-4 text-base font-bold text-[#154752] group-hover:text-[#24989A] transition-colors">
-                {cat.name}
-              </h3>
-              <p className="mt-1.5 text-xs text-[#68797C] leading-relaxed line-clamp-2">
-                {cat.shortDescription}
-              </p>
-              <span className="mt-4 inline-flex items-center text-xs font-semibold text-[#24989A]">
-                Explore tasks &amp; quotes →
-              </span>
-            </Link>
-          ))}
-        </div>
-      </Section>
+      {/* 3. Premium Stacked Service Categories */}
+      <StackedCategoriesSection />
 
       {/* 4. How EasyLife Works */}
       <Section id="how-it-works" tone="grey">

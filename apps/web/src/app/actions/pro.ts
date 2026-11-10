@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
+import { storageService } from "@/lib/storage/storage-service";
 import type { DocumentType } from "@/lib/supabase/pro";
 
 export interface ProFormState {
@@ -264,7 +265,12 @@ export async function uploadVerificationDocumentAction(
   const professionalId = String(formData.get("professionalId") || "").trim();
   const documentType = String(formData.get("documentType") || "") as DocumentType;
   const rawDocumentNumber = String(formData.get("documentNumber") || "").trim();
-  const fileName = String(formData.get("fileName") || "document_upload.pdf").trim();
+  const uploadedFile = formData.get("file");
+  const hasRealFile =
+    typeof File !== "undefined" && uploadedFile instanceof File && uploadedFile.size > 0;
+  const fileName = (
+    hasRealFile ? uploadedFile.name : String(formData.get("fileName") || "document_upload.pdf")
+  ).trim();
 
   const validDocTypes: DocumentType[] = [
     "national_id_nin",
@@ -290,7 +296,32 @@ export async function uploadVerificationDocumentAction(
     ? `•••• •••• ${rawDocumentNumber.slice(-4)}`
     : rawDocumentNumber || null;
 
-  const storagePath = `pro_${professionalId}/${Date.now()}_${fileName.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
+  const sanitizedName = fileName.replace(/[^a-zA-Z0-9._-]/g, "_");
+  let storagePath = `${auth.user.id}/${Date.now()}_${sanitizedName}`;
+  let mimeType = "application/pdf";
+  let fileSizeBytes = 1024 * 512;
+
+  if (hasRealFile) {
+    const buffer = Buffer.from(await uploadedFile.arrayBuffer());
+    mimeType = uploadedFile.type || "application/octet-stream";
+    fileSizeBytes = uploadedFile.size;
+    const uploadRes = await storageService.uploadFile({
+      bucketId: "verification-documents",
+      path: storagePath,
+      data: buffer,
+      mimeType,
+      userId: auth.user.id,
+    });
+    if (!uploadRes.success) {
+      return {
+        status: "error",
+        message: uploadRes.error || "Failed to upload verification document to secure storage.",
+      };
+    }
+    if (uploadRes.path) {
+      storagePath = uploadRes.path;
+    }
+  }
 
   // 1. Insert record into professional_documents with status 'pending'
   const insertDocRes = await supabaseFetch<Array<{ id: string }>>(
@@ -306,8 +337,8 @@ export async function uploadVerificationDocumentAction(
         storage_bucket: "verification-documents",
         storage_path: storagePath,
         file_name: fileName,
-        mime_type: "application/pdf",
-        file_size_bytes: 1024 * 512, // Standard representation
+        mime_type: mimeType,
+        file_size_bytes: fileSizeBytes,
         document_number_masked: maskedNumber,
         verification_status: "pending",
       },

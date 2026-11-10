@@ -268,6 +268,10 @@ async function runLiveDbChecks() {
     let createdProUid = null;
 
     try {
+      await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+      await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+      await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
+
       // Setup test category
       const catRes = await client.query(`
         SELECT id FROM public.service_categories WHERE slug = 'plumbing-water-systems' LIMIT 1;
@@ -614,6 +618,11 @@ async function runLiveDbChecks() {
     }
 
   } finally {
+    try {
+      await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+      await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+      await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
+    } catch {}
     await client.end();
   }
 }

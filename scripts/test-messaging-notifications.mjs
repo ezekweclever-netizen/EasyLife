@@ -231,6 +231,11 @@ assert.ok(testCustomer, "Test requires at least 1 customer profile in DB");
 assert.ok(testPro, "Test requires at least 1 professional profile in DB");
 assert.ok(testCat, "Test requires at least 1 active service category in DB");
 
+// Clear any stale pooled JWT claims from previous test runs before creating fixture
+await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
+
 // Setup isolated synthetic booking
 const testBookingRef = `EL-MSG-${Date.now().toString().slice(-6)}`;
 const bookingInsert = await client.query(
@@ -509,7 +514,8 @@ await asyncTest("Live DB Lifecycle: Booking status change to in_progress trigger
 
 await asyncTest("Live DB Lifecycle: Verification status update triggers 'verification_status_change' notification", async () => {
   // Clear caller JWT and set admin context
-  await client.query("SELECT set_config('request.jwt.claim.sub', '', false);");
+  await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+  await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
   await client.query("SELECT set_config('easylife.trusted_admin_rpc', 'true', false);");
 
   // Toggle to pending first to guarantee distinct status change
@@ -544,6 +550,9 @@ if (testConvId) {
 await client.query("DELETE FROM public.quotations WHERE booking_id = $1;", [testBookingId]);
 await client.query("DELETE FROM public.notifications WHERE entity_id = $1 OR user_id IN ($2, $3);", [testBookingId, testCustomer.id, testPro.user_id]);
 await client.query("UPDATE public.bookings SET status = 'cancelled' WHERE id = $1;", [testBookingId]);
+await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
 console.log("Cleanup complete.");
 
 await client.end();

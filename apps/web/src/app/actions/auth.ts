@@ -26,6 +26,7 @@ import {
 } from "@/lib/auth/session";
 import { resolveUserDashboardPath } from "@/lib/auth/admin-guard";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
+import { emailService } from "@/lib/email/email-service";
 
 async function getClientIp(): Promise<string> {
   const headerList = await headers();
@@ -403,10 +404,199 @@ export async function contactAction(
     };
   }
 
+  const ticketRef = `TKT-WEB-${Date.now().toString(36).toUpperCase()}`;
+  const formattedBody = [
+    `Sender: ${validation.data.fullName} <${validation.data.email}>`,
+    validation.data.phone ? `Phone: ${validation.data.phone}` : null,
+    `Inquiry Type: ${validation.data.inquiryType}`,
+    validation.data.city ? `City Hub: ${validation.data.city}` : null,
+    "",
+    validation.data.message,
+  ]
+    .filter((line): line is string => line !== null)
+    .join("\n");
+
+  const ticketRes = await supabaseAdminFetch("/rest/v1/support_tickets", {
+    method: "POST",
+    body: {
+      ticket_ref: ticketRef,
+      session_id: `web-contact-${clientIp}`,
+      subject: `[${validation.data.inquiryType}] ${validation.data.subject}`,
+      category: "general",
+      priority: "medium",
+      status: "open",
+      user_message: formattedBody,
+      ai_summary: `Web contact inquiry from ${validation.data.fullName} (${validation.data.email}) — ${validation.data.city || "Nigeria"}`,
+    },
+  });
+
+  if (!ticketRes.ok) {
+    return {
+      status: "error",
+      message: "We could not record your inquiry right now. Please try again shortly.",
+      fieldErrors: {},
+      values: {
+        fullName: validation.data.fullName,
+        email: validation.data.email,
+        phone: validation.data.phone ?? "",
+        inquiryType: validation.data.inquiryType,
+        city: validation.data.city ?? "",
+        subject: validation.data.subject,
+        message: validation.data.message,
+      },
+    };
+  }
+
+  const escapeHtml = (input: string) =>
+    input
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+
+  await emailService.sendEmail({
+    to: "support@easylife.ng",
+    type: "booking_confirmation",
+    subject: `[EasyLife Support ${ticketRef}] ${validation.data.subject}`,
+    text: formattedBody,
+    html: `<p><strong>Ticket Reference:</strong> ${escapeHtml(ticketRef)}</p><pre style="font-family:sans-serif;white-space:pre-wrap;">${escapeHtml(formattedBody)}</pre>`,
+  });
+
+  return {
+    status: "success",
+    message: `Thank you for contacting EasyLife. Your inquiry (Reference: ${ticketRef}) has been logged with our Nigerian operations desk (Port Harcourt, Lagos, and Abuja), and a support specialist will respond within one business day.`,
+    values: {},
+  };
+}
+
+export interface PasswordRecoveryState {
+  status: "idle" | "success" | "error";
+  message: string;
+}
+
+export async function requestPasswordResetAction(
+  _prevState: PasswordRecoveryState,
+  formData: FormData
+): Promise<PasswordRecoveryState> {
+  const email = String(formData.get("email") || "").trim().toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return {
+      status: "error",
+      message: "Please enter a valid registered email address.",
+    };
+  }
+
+  const clientIp = await getClientIp();
+  const rateLimitResult = checkRateLimit(
+    RATE_LIMIT_POLICIES.AUTH_ATTEMPT,
+    `recover:${clientIp}:${email}`
+  );
+  if (!rateLimitResult.allowed) {
+    return {
+      status: "error",
+      message: `Too many password reset requests. Please wait ${rateLimitResult.retryAfterSeconds} seconds.`,
+    };
+  }
+
+  const config = getSupabasePublicConfig();
+  if (!config) {
+    return {
+      status: "error",
+      message: "Authentication service is not configured.",
+    };
+  }
+
+  const appUrl = (
+    process.env.NEXT_PUBLIC_APP_URL?.trim() || "https://easylife-blue.vercel.app"
+  ).replace(/\/+$/, "");
+
+  const res = await supabaseFetch<unknown>(
+    config,
+    `/auth/v1/recover?redirect_to=${encodeURIComponent(`${appUrl}/forgot-password?mode=reset`)}`,
+    {
+      method: "POST",
+      body: { email },
+    }
+  );
+
+  if (!res.ok && res.status >= 500) {
+    return {
+      status: "error",
+      message: "Unable to send password recovery email right now. Please try again.",
+    };
+  }
+
   return {
     status: "success",
     message:
-      "Thank you for contacting EasyLife. Your message has been received by our Nigerian operations desk (Port Harcourt, Lagos, and Abuja). A member of our support team will respond to your email within one business day.",
-    values: {},
+      "If an account exists for that email address, a password reset link has been sent. Please check your inbox and spam folder.",
+  };
+}
+
+export async function updatePasswordAction(
+  _prevState: PasswordRecoveryState,
+  formData: FormData
+): Promise<PasswordRecoveryState> {
+  const accessToken = String(formData.get("accessToken") || "").trim();
+  const newPassword = String(formData.get("newPassword") || "");
+  const confirmPassword = String(formData.get("confirmPassword") || "");
+
+  if (!accessToken) {
+    return {
+      status: "error",
+      message: "Recovery token is missing or expired. Please request a new password reset link.",
+    };
+  }
+
+  if (newPassword.length < 8) {
+    return {
+      status: "error",
+      message: "Your new password must be at least 8 characters long.",
+    };
+  }
+
+  if (newPassword !== confirmPassword) {
+    return {
+      status: "error",
+      message: "Passwords do not match. Please confirm your new password.",
+    };
+  }
+
+  const config = getSupabasePublicConfig();
+  if (!config) {
+    return {
+      status: "error",
+      message: "Authentication service is not configured.",
+    };
+  }
+
+  const res = await fetch(`${config.url}/auth/v1/user`, {
+    method: "PUT",
+    headers: {
+      apikey: config.anonKey,
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password: newPassword }),
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    let errMsg = "Could not update password. Your reset link may have expired.";
+    try {
+      const errJson = (await res.json()) as { message?: string; msg?: string };
+      errMsg = errJson.message || errJson.msg || errMsg;
+    } catch {
+      // keep default
+    }
+    return {
+      status: "error",
+      message: errMsg,
+    };
+  }
+
+  return {
+    status: "success",
+    message: "Your password has been updated successfully. You can now sign in with your new password.",
   };
 }

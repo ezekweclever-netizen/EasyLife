@@ -79,23 +79,23 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
 
       {/* Account Type Selection */}
       <fieldset>
-        <legend className="block text-sm font-semibold text-[#0F172A] mb-2">
+        <legend className="block text-base font-semibold text-[#0F172A] mb-2.5">
           Select Your Account Type
         </legend>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
           {ROLE_OPTIONS.map((opt) => {
             const isChecked = selectedRole === opt.value;
             return (
               <label
                 key={opt.value}
-                className={`relative flex flex-col p-3.5 rounded-xl border cursor-pointer transition-all ${
+                className={`relative flex flex-col p-4 rounded-xl border cursor-pointer transition-all ${
                   isChecked
                     ? "border-[#0D9488] bg-teal-50/40 ring-1 ring-[#0D9488]"
                     : "border-[#CBD5E1] bg-white hover:border-slate-400"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold text-[#0F172A]">
+                  <span className="text-base font-semibold text-[#0F172A]">
                     {opt.label}
                   </span>
                   <input
@@ -107,7 +107,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
                     className="h-4 w-4 text-[#0D9488] focus:ring-[#0D9488] border-slate-300"
                   />
                 </div>
-                <p className="mt-1 text-xs text-slate-500 leading-snug">
+                <p className="mt-1.5 text-sm text-slate-600 leading-snug">
                   {opt.description}
                 </p>
               </label>

@@ -51,6 +51,11 @@
   --easylife-border: #DAE7E7;
   --easylife-border-strong: #c2d4d4;
 
+  /* Responsive Typography Scale Tokens */
+  --easylife-font-body: 1rem;
+  --easylife-font-lead: 1.125rem;
+  --easylife-font-label: 0.9375rem;
+
   /* Legacy / Compatibility Token Mappings */
   --easylife-navy-950: #0d282e;
   --easylife-navy-900: #154752;
@@ -74,7 +79,6 @@
   --easylife-surface-light: #F3F8F8;
   --easylife-surface-muted: #e7f0f0;
   --easylife-border-grey: #DAE7E7;
-  --easylife-border-strong: #c2d4d4;
 
   /* Semantic Status Colors (WCAG AAA / AA Accessible) */
   --easylife-status-success-text: #127a5b;
@@ -95,6 +99,23 @@
   --color-canvas: #F3F8F8;
 }
 
+/* Responsive Root Typography Scale for Desktop, Tablet & Mobile Readability */
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16.5px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 17px;
+  }
+}
+
 /* Smooth Scrolling for existing in-page navigation (respects reduced-motion) */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -112,6 +133,8 @@ body {
   background-color: var(--easylife-background);
   color: var(--easylife-text);
   font-family: "General Sans", ui-sans-serif, sans-serif;
+  font-size: var(--easylife-font-body);
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

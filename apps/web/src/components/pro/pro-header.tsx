@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ProfessionalVerificationStatus } from "@/lib/supabase/pro";
 import { NotificationBell } from "@/components/notifications/notification-bell";
+import { EasyLifeLogo } from "@/components/ui/logo";
+import { logoutAction } from "@/app/actions/profile";
 
 interface ProHeaderProps {
   businessName?: string;
@@ -59,27 +61,25 @@ export function ProHeader({
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-18">
           {/* Left: Brand & Pro Badge */}
-          <div className="flex items-center gap-6">
-            <Link href="/pro/dashboard" className="flex items-center gap-2">
-              <span className="font-extrabold text-xl tracking-tight text-[#0F172A]">
-                Easy<span className="text-[#0D9488]">Life</span>
-              </span>
+          <div className="flex items-center gap-5">
+            <Link href="/pro/dashboard" className="flex items-center gap-2.5 shrink-0">
+              <EasyLifeLogo theme="light" size="sm" />
               <span className="px-2 py-0.5 text-xs font-bold uppercase tracking-wider bg-[#0F172A] text-teal-300 rounded">
                 PRO
               </span>
             </Link>
 
-            {/* Desktop Navigation (All 6 Required Items) */}
-            <nav className="hidden md:flex items-center gap-1">
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => {
                 const isActive = pathname === item.href || (item.href !== "/pro/dashboard" && pathname?.startsWith(item.href));
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`relative px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`relative px-3 py-2 rounded-lg text-[15px] font-medium transition-colors ${
                       isActive
                         ? "text-[#0D9488] bg-teal-50/70 font-semibold"
                         : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -104,18 +104,18 @@ export function ProHeader({
 
             {/* Verification Status Pill */}
             <div
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${badgeClass}`}
+              className={`hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border ${badgeClass}`}
             >
               <span className={`w-2 h-2 rounded-full ${badgeDotClass}`} />
               <span>{badgeText}</span>
             </div>
 
             {/* Business info snippet */}
-            <div className="hidden sm:flex flex-col text-right">
-              <span className="text-xs font-bold text-slate-900 truncate max-w-[140px]">
+            <div className="hidden xl:flex flex-col text-right">
+              <span className="text-sm font-bold text-slate-900 truncate max-w-[140px]">
                 {businessName}
               </span>
-              <span className="text-[11px] text-slate-500">{primaryCity}</span>
+              <span className="text-xs text-slate-500">{primaryCity}</span>
             </div>
 
             {/* Avatar / Profile quick link */}
@@ -136,17 +136,27 @@ export function ProHeader({
             {/* Customer Switch */}
             <Link
               href="/dashboard"
-              className="hidden lg:inline-flex text-xs text-slate-500 hover:text-slate-800 font-medium px-2 py-1 rounded border border-slate-200 hover:bg-slate-50"
+              className="hidden md:inline-flex text-xs text-slate-600 hover:text-slate-900 font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50"
               title="Switch to Customer Mode"
             >
               Customer View
             </Link>
 
+            {/* Sign Out */}
+            <form action={logoutAction} className="hidden md:block">
+              <button
+                type="submit"
+                className="text-xs text-red-700 hover:bg-red-50 font-semibold px-2.5 py-1.5 rounded-lg border border-red-200 transition cursor-pointer"
+              >
+                Sign Out
+              </button>
+            </form>
+
             {/* Mobile menu toggle button */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+              className="lg:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100"
               aria-label="Toggle navigation menu"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -163,7 +173,7 @@ export function ProHeader({
 
       {/* Mobile navigation drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
+        <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/pro/dashboard" && pathname?.startsWith(item.href));
             return (
@@ -171,7 +181,7 @@ export function ProHeader({
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium ${
+                className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-medium ${
                   isActive
                     ? "text-[#0D9488] bg-teal-50 font-semibold"
                     : "text-slate-700 hover:bg-slate-50"
@@ -186,14 +196,21 @@ export function ProHeader({
               </Link>
             );
           })}
-          <div className="pt-2 border-t border-slate-100 mt-2 flex items-center justify-between">
-            <span className="text-xs text-slate-500">Mode:</span>
+          <div className="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between gap-3">
             <Link
               href="/dashboard"
-              className="text-xs font-semibold text-[#0D9488] hover:underline"
+              className="text-sm font-semibold text-[#0D9488] hover:underline"
             >
               Switch to Customer Mode →
             </Link>
+            <form action={logoutAction}>
+              <button
+                type="submit"
+                className="text-sm font-semibold text-red-700 hover:underline cursor-pointer"
+              >
+                Sign Out
+              </button>
+            </form>
           </div>
         </div>
       )}

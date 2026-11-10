@@ -1,6 +1,7 @@
 "use server";
 
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { paystackService } from "@/lib/payments/paystack-service";
 import {
   InitializePaymentInput,
@@ -103,8 +104,8 @@ export async function fetchUserTransactionsAction(): Promise<{
 export async function recordRefundAction(
   input: RecordRefundInput
 ): Promise<{ success: boolean; message: string }> {
-  const auth = await getAuthenticatedUser();
-  if (!auth?.user) {
+  const adminSession = await verifyAdminSession();
+  if (!adminSession) {
     return {
       success: false,
       message: "Administrative privileges required to record a refund.",

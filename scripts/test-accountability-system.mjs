@@ -334,14 +334,21 @@ async function runLiveDbChecks() {
   const adminId = adminRes.rows[0]?.user_id || testCustomerId;
 
   async function setAuth(userId) {
-    currentAuthUserId = userId;
-    await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [userId || ""]);
-    await client.query("SELECT set_config('request.jwt.claims', $1, false);", [
-      JSON.stringify({ sub: userId, role: "authenticated" }),
-    ]);
+    currentAuthUserId = userId || null;
+    if (!userId) {
+      await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+      await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+      await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
+    } else {
+      await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [userId]);
+      await client.query("SELECT set_config('request.jwt.claims', $1, false);", [
+        JSON.stringify({ sub: userId, role: "authenticated" }),
+      ]);
+    }
   }
 
   // Create a clean test booking in 'in_progress' status
+  await setAuth(null);
   const bookingRes = await client.query(`
     INSERT INTO public.bookings (
       reference_code,
@@ -559,6 +566,7 @@ async function runLiveDbChecks() {
 
   // 4.5 Admin review moderation (flag / reject / approve)
   await asyncTest("Live DB: Admin moderates review -> unpublishing immediately updates pro rating summary", async () => {
+    await setAuth(null);
     await client.query(`
       INSERT INTO public.user_roles (user_id, role, is_active)
       VALUES ($1, 'admin', true)
@@ -748,6 +756,7 @@ async function runLiveDbChecks() {
     await client.query(`UPDATE public.bookings SET deleted_at = now() WHERE id = ANY($1);`, [testIds]);
   }
   console.log("Cleanup complete.");
+  await setAuth(null);
 
   await client.end();
 }

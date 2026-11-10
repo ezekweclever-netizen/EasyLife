@@ -49,6 +49,15 @@ export interface PublicProfessionalItem {
     lga_or_district: string;
     service_radius_km: number;
   }>;
+  reviews?: Array<{
+    id: string;
+    rating: number;
+    title: string | null;
+    comment: string;
+    professional_response: string | null;
+    responded_at: string | null;
+    created_at: string;
+  }>;
 }
 
 export interface CustomerBookingItem {
@@ -291,7 +300,7 @@ export async function getProfessionalById(
   if (res.ok && Array.isArray(res.data) && res.data.length > 0 && res.data[0]) {
     const pro = res.data[0];
 
-    const [servicesRes, areasRes] = await Promise.all([
+    const [servicesRes, areasRes, reviewsRes] = await Promise.all([
       supabaseFetch<any[]>(
         config,
         `/rest/v1/professional_services?professional_id=eq.${pro.professional_id}&is_active=eq.true&select=id,service_title,min_price_kobo,max_price_kobo,description,is_primary_skill,service_categories(name,slug)`
@@ -299,6 +308,10 @@ export async function getProfessionalById(
       supabaseFetch<any[]>(
         config,
         `/rest/v1/professional_service_areas?professional_id=eq.${pro.professional_id}&is_active=eq.true&select=id,city,state,lga_or_district,service_radius_km`
+      ),
+      supabaseFetch<any[]>(
+        config,
+        `/rest/v1/reviews?professional_id=eq.${pro.professional_id}&is_published=eq.true&moderation_status=eq.approved&select=id,rating,title,comment,professional_response,responded_at,created_at&order=created_at.desc&limit=10`
       ),
     ]);
 
@@ -311,6 +324,8 @@ export async function getProfessionalById(
         : [];
     pro.service_areas =
       areasRes.ok && Array.isArray(areasRes.data) ? areasRes.data : [];
+    pro.reviews =
+      reviewsRes.ok && Array.isArray(reviewsRes.data) ? reviewsRes.data : [];
 
     return pro;
   }

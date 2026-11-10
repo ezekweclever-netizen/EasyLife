@@ -20,15 +20,41 @@ export async function ensureOAuthUserProfile(
       ? intendedRoleRaw
       : "customer";
 
-  const profileCheck = await supabaseAdminFetch<Array<{ id: string; primary_role: string | null }>>(
-    `/rest/v1/profiles?id=eq.${user.id}&limit=1&select=id,primary_role`
+  const profileCheck = await supabaseAdminFetch<
+    Array<{ id: string; primary_role: string | null; created_at?: string | null }>
+  >(
+    `/rest/v1/profiles?id=eq.${user.id}&limit=1&select=id,primary_role,created_at`
   );
 
-  if (
-    profileCheck.ok &&
-    Array.isArray(profileCheck.data) &&
-    profileCheck.data.length > 0
-  ) {
+  const existingProfile =
+    profileCheck.ok && Array.isArray(profileCheck.data) ? profileCheck.data[0] : undefined;
+
+  if (existingProfile) {
+    // Handle race where Postgres on_auth_user_created trigger already created a default
+    // 'customer' profile moments before /auth/callback ran with a chosen registration role.
+    const createdAtMs = existingProfile.created_at ? Date.parse(existingProfile.created_at) : NaN;
+    const isFreshAccount = Number.isFinite(createdAtMs) && Date.now() - createdAtMs < 15 * 60 * 1000;
+
+    if (
+      isFreshAccount &&
+      safeRole !== "customer" &&
+      existingProfile.primary_role === "customer"
+    ) {
+      await supabaseAdminFetch(`/rest/v1/profiles?id=eq.${user.id}`, {
+        method: "PATCH",
+        body: { primary_role: safeRole },
+      });
+
+      await supabaseAdminFetch("/rest/v1/user_roles", {
+        method: "POST",
+        headers: { Prefer: "resolution=ignore-duplicates" },
+        body: {
+          user_id: user.id,
+          role: safeRole,
+          is_active: true,
+        },
+      });
+    }
     return;
   }
 
@@ -104,20 +130,27 @@ export async function GET(request: NextRequest) {
     ? decodeURIComponent(cookieStore.get("el_oauth_next")!.value)
     : null;
 
+  if (!verifier) {
+    cookieStore.delete("el_oauth_role");
+    cookieStore.delete("el_oauth_next");
+    return NextResponse.redirect(
+      new URL(
+        `/login?error=${encodeURIComponent(
+          "Your Google sign-in session expired or browser cookies were interrupted. Please click Continue with Google again."
+        )}`,
+        request.url
+      )
+    );
+  }
+
   // Exchange authorization code with Supabase Auth PKCE endpoint
-  const tokenEndpoint = verifier
-    ? `${config.url}/auth/v1/token?grant_type=pkce`
-    : `${config.url}/auth/v1/token?grant_type=authorization_code`;
-
-  const payload = verifier ? { auth_code: code, code_verifier: verifier } : { code };
-
-  const tokenRes = await fetch(tokenEndpoint, {
+  const tokenRes = await fetch(`${config.url}/auth/v1/token?grant_type=pkce`, {
     method: "POST",
     headers: {
       apikey: config.anonKey,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ auth_code: code, code_verifier: verifier }),
     cache: "no-store",
   });
 

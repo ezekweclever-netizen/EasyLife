@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { ConversationSummary, ConversationDetail, MessageItem } from "@/lib/supabase/messages";
 import { sendMessageAction, markConversationReadAction } from "@/app/actions/messages";
+import { uploadFileAction } from "@/app/actions/storage";
 
 interface ChatClientProps {
   currentUserId: string;
@@ -132,18 +133,35 @@ export function ChatClient({
         : null
     );
 
-    const formData = new FormData();
-    formData.append("conversationId", selectedConv.id);
-    formData.append("body", textToSend);
-    if (fileToSend) {
-      formData.append("messageType", "attachment");
-      formData.append("attachmentName", fileToSend.name);
-      formData.append("attachmentMimeType", fileToSend.type);
-      formData.append("attachmentSizeBytes", String(fileToSend.size));
-      formData.append("attachmentPath", `messages/${selectedConv.id}/${Date.now()}_${fileToSend.name}`);
-    }
-
     startTransition(async () => {
+      const formData = new FormData();
+      formData.append("conversationId", selectedConv.id);
+      formData.append("body", textToSend);
+
+      if (fileToSend) {
+        const uploadData = new FormData();
+        uploadData.append("file", fileToSend);
+        uploadData.append("bucketId", "message-attachments");
+        const uploaded = await uploadFileAction(uploadData);
+        if (!uploaded.success || !uploaded.path) {
+          setErrorMsg(uploaded.error || "Failed to upload attachment.");
+          setSelectedConv((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  messages: prev.messages.filter((m) => m.id !== tempId),
+                }
+              : null
+          );
+          return;
+        }
+        formData.append("messageType", "attachment");
+        formData.append("attachmentName", fileToSend.name);
+        formData.append("attachmentMimeType", fileToSend.type);
+        formData.append("attachmentSizeBytes", String(fileToSend.size));
+        formData.append("attachmentPath", uploaded.path);
+      }
+
       const res = await sendMessageAction({ status: "idle", message: "" }, formData);
       if (res.status === "error") {
         setErrorMsg(res.message);

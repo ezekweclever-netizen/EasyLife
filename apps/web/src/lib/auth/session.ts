@@ -1,16 +1,3 @@
-/**
- * Interim server-side session handling for Supabase Auth.
- *
- * Tokens are stored in HTTP-only, SameSite=Lax cookies (Secure in production)
- * and are never readable from browser JavaScript. Every protected read
- * re-verifies the access token with Supabase Auth (`/auth/v1/user`) rather
- * than trusting the cookie contents.
- *
- * ARCHITECTURE NOTE: This will be superseded by `@supabase/ssr` middleware
- * (automatic token refresh + role-based route guards) in the authentication
- * stage. See ARCHITECTURE_DECISIONS.md (ADR-009).
- */
-
 import { cookies } from "next/headers";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 
@@ -69,30 +56,86 @@ export async function readAccessToken(): Promise<string | null> {
   return cookieStore.get(ACCESS_TOKEN_COOKIE)?.value ?? null;
 }
 
+export async function readRefreshToken(): Promise<string | null> {
+  const cookieStore = await cookies();
+  return cookieStore.get(REFRESH_TOKEN_COOKIE)?.value ?? null;
+}
+
 export interface AuthenticatedUser {
   id: string;
   email: string | null;
 }
 
-/** Verifies the cookie token against Supabase Auth. Returns null if invalid/expired. */
+/** Exchanges an unexpired refresh token for a fresh Supabase Auth session. */
+export async function refreshSessionWithToken(
+  refreshToken: string
+): Promise<SupabaseSessionPayload | null> {
+  const config = getSupabasePublicConfig();
+  if (!config || !refreshToken) return null;
+
+  const res = await supabaseFetch<unknown>(
+    config,
+    "/auth/v1/token?grant_type=refresh_token",
+    {
+      method: "POST",
+      body: { refresh_token: refreshToken },
+    }
+  );
+
+  if (!res.ok || !isSessionPayload(res.data)) {
+    return null;
+  }
+
+  return res.data;
+}
+
+/**
+ * Verifies the cookie token against Supabase Auth.
+ * Automatically falls back to refreshing via `el_refresh_token` if the short-lived
+ * access token expired, persisting new cookies when called in a mutable context.
+ */
 export async function getAuthenticatedUser(): Promise<{
   user: AuthenticatedUser;
   accessToken: string;
 } | null> {
   const config = getSupabasePublicConfig();
-  const accessToken = await readAccessToken();
-  if (!config || !accessToken) return null;
+  if (!config) return null;
 
-  const result = await supabaseFetch<{ id?: unknown; email?: unknown }>(config, "/auth/v1/user", {
-    accessToken,
-  });
-  if (!result.ok || typeof result.data?.id !== "string") return null;
+  const accessToken = await readAccessToken();
+  if (accessToken) {
+    const result = await supabaseFetch<{ id?: unknown; email?: unknown }>(
+      config,
+      "/auth/v1/user",
+      { accessToken }
+    );
+    if (result.ok && typeof result.data?.id === "string") {
+      return {
+        user: {
+          id: result.data.id,
+          email: typeof result.data.email === "string" ? result.data.email : null,
+        },
+        accessToken,
+      };
+    }
+  }
+
+  const refreshToken = await readRefreshToken();
+  if (!refreshToken) return null;
+
+  const refreshed = await refreshSessionWithToken(refreshToken);
+  if (!refreshed || typeof refreshed.user?.id !== "string") return null;
+
+  try {
+    await persistSession(refreshed);
+  } catch {
+    // Read-only Server Component render context; refreshed token remains valid for this request.
+  }
 
   return {
     user: {
-      id: result.data.id,
-      email: typeof result.data.email === "string" ? result.data.email : null,
+      id: refreshed.user.id,
+      email: typeof refreshed.user.email === "string" ? refreshed.user.email : null,
     },
-    accessToken,
+    accessToken: refreshed.access_token,
   };
 }

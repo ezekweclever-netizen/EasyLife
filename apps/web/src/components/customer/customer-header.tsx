@@ -117,7 +117,7 @@ export function CustomerHeader({
     <>
       {/* Top Header */}
       <header className="sticky top-0 z-40 border-b border-[#E2E8F0] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
           
           {/* Logo & City Selector */}
           <div className="flex items-center gap-4">
@@ -184,7 +184,7 @@ export function CustomerHeader({
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                      className={`px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors flex items-center gap-1.5 ${
                         active
                           ? "bg-[#F0FDFA] text-[#0F766E] font-semibold"
                           : "text-[#334155] hover:bg-[#F1F5F9] hover:text-[#0F172A]"

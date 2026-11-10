@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { getAuthenticatedUser, clearSession } from "@/lib/auth/session";
+import { getAuthenticatedUser, clearSession, readAccessToken } from "@/lib/auth/session";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 
 export interface ProfileFormState {
@@ -67,6 +67,22 @@ export async function updateCustomerProfileAction(
 }
 
 export async function logoutAction(): Promise<void> {
+  try {
+    const config = getSupabasePublicConfig();
+    const accessToken = await readAccessToken();
+    if (config && accessToken) {
+      await fetch(`${config.url}/auth/v1/logout`, {
+        method: "POST",
+        headers: {
+          apikey: config.anonKey,
+          Authorization: `Bearer ${accessToken}`,
+        },
+        cache: "no-store",
+      });
+    }
+  } catch {
+    // Best-effort upstream session revocation; always clear local cookies below.
+  }
   await clearSession();
   redirect("/login");
 }

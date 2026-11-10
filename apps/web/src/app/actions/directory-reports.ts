@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { supabaseAdminFetch } from "@/lib/supabase/admin";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 
 export interface CreateReportInput {
   entityType: "professional" | "business" | "healthcare_facility" | "general_listing";
@@ -51,6 +52,11 @@ export async function submitDirectoryReportAction(input: CreateReportInput) {
 
 export async function resolveDirectoryReportAction(reportId: string, status: "resolved" | "dismissed", adminNotes?: string) {
   try {
+    const adminSession = await verifyAdminSession();
+    if (!adminSession) {
+      return { success: false, error: "Administrator authentication is required." };
+    }
+
     const res = await supabaseAdminFetch(
       `/rest/v1/directory_reports?id=eq.${reportId}`,
       {

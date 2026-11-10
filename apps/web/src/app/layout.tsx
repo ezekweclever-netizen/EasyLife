@@ -5,6 +5,13 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: `${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`,
   description: EASYLIFE_BRAND.description,
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/brand/easylife-official-mark.png", type: "image/png", sizes: "180x180" },
+    ],
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
+  },
 };
 
 export default function RootLayout({

@@ -50,7 +50,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="fullName"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#0F172A] mb-1.5"
           >
             Your Full Name
           </label>
@@ -62,7 +62,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.fullName ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.fullName)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.fullName
                 ? "border-red-500 bg-red-50/20"
                 : "border-[#CBD5E1] hover:border-slate-400"
@@ -70,7 +70,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             placeholder="e.g. Amaka Danladi"
           />
           {state.fieldErrors?.fullName && (
-            <p className="mt-1.5 text-xs text-red-600 font-medium">
+            <p className="mt-1.5 text-sm text-red-600 font-medium">
               {state.fieldErrors.fullName}
             </p>
           )}
@@ -79,7 +79,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#0F172A] mb-1.5"
           >
             Email Address
           </label>
@@ -91,7 +91,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.email ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.email)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.email
                 ? "border-red-500 bg-red-50/20"
                 : "border-[#CBD5E1] hover:border-slate-400"
@@ -99,7 +99,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             placeholder="e.g. amaka@example.com"
           />
           {state.fieldErrors?.email && (
-            <p className="mt-1.5 text-xs text-red-600 font-medium">
+            <p className="mt-1.5 text-sm text-red-600 font-medium">
               {state.fieldErrors.email}
             </p>
           )}

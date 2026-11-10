@@ -242,7 +242,7 @@ export default async function ProfessionalProfilePage({
 
             {/* Portfolio Samples */}
             <section className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
-              <h2 className="text-lg font-bold text-[#0F172A]">Work Portfolio &amp; Standards</h2>
+              <h2 className="text-lg font-bold text-[#0F172A]">Work Portfolio & Past Installations</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="border border-[#E2E8F0] rounded-xl overflow-hidden bg-[#F8FAFC]">
                   <div className="h-32 bg-[#E2E8F0] flex items-center justify-center text-3xl">
@@ -278,9 +278,38 @@ export default async function ProfessionalProfilePage({
                 </div>
               </div>
 
-              {pro.review_count && pro.review_count > 0 ? (
+              {pro.reviews && pro.reviews.length > 0 ? (
                 <div className="space-y-4">
-                  {/* Real reviews listed here */}
+                  {pro.reviews.map((rev) => (
+                    <article
+                      key={rev.id}
+                      className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-sm font-bold text-amber-500">
+                          {"★".repeat(Math.max(1, Math.min(5, rev.rating)))}
+                          {"☆".repeat(Math.max(0, 5 - rev.rating))}
+                        </span>
+                        <span className="text-[11px] text-[#64748B]">
+                          {new Date(rev.created_at).toLocaleDateString("en-NG", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </span>
+                      </div>
+                      {rev.title && (
+                        <h3 className="text-sm font-bold text-[#0F172A]">{rev.title}</h3>
+                      )}
+                      <p className="text-sm text-[#334155] leading-relaxed">{rev.comment}</p>
+                      {rev.professional_response && (
+                        <div className="mt-2 p-3 rounded-lg bg-white border border-[#E2E8F0] text-xs text-[#475569]">
+                          <span className="font-bold text-[#0F766E]">Response from {displayName}: </span>
+                          {rev.professional_response}
+                        </div>
+                      )}
+                    </article>
+                  ))}
                 </div>
               ) : (
                 <div className="p-6 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] text-center space-y-2">

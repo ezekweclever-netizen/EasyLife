@@ -64,7 +64,7 @@ export function LoginForm({
       <div>
         <label
           htmlFor="email"
-          className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+          className="block text-base font-semibold text-[#0F172A] mb-1.5"
         >
           Email Address
         </label>
@@ -77,7 +77,7 @@ export function LoginForm({
           required
           aria-invalid={Boolean(state.fieldErrors?.email)}
           aria-describedby={state.fieldErrors?.email ? "email-error" : undefined}
-          className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+          className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
             state.fieldErrors?.email
               ? "border-red-500 bg-red-50/20"
               : "border-[#CBD5E1] hover:border-slate-400"
@@ -85,7 +85,7 @@ export function LoginForm({
           placeholder="e.g. name@example.com"
         />
         {state.fieldErrors?.email && (
-          <p id="email-error" className="mt-1.5 text-xs text-red-600 font-medium">
+          <p id="email-error" className="mt-1.5 text-sm text-red-600 font-medium">
             {state.fieldErrors.email}
           </p>
         )}
@@ -96,13 +96,13 @@ export function LoginForm({
         <div className="flex items-center justify-between mb-1.5">
           <label
             htmlFor="password"
-            className="block text-sm font-semibold text-[#0F172A]"
+            className="block text-base font-semibold text-[#0F172A]"
           >
             Password
           </label>
           <Link
-            href="/help"
-            className="text-xs text-[#0F766E] hover:underline font-medium"
+            href="/forgot-password"
+            className="text-sm text-[#0F766E] hover:underline font-medium"
           >
             Forgot password?
           </Link>
@@ -116,7 +116,7 @@ export function LoginForm({
             required
             aria-invalid={Boolean(state.fieldErrors?.password)}
             aria-describedby={state.fieldErrors?.password ? "password-error" : undefined}
-            className={`w-full h-11 px-3.5 pr-12 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 pr-12 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.password
                 ? "border-red-500 bg-red-50/20"
                 : "border-[#CBD5E1] hover:border-slate-400"

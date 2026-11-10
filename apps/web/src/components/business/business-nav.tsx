@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { EasyLifeLogo } from "@/components/ui/logo";
+import { logoutAction } from "@/app/actions/profile";
 
 interface BusinessNavProps {
   businessName: string;
@@ -23,40 +25,52 @@ export function BusinessNav({ businessName, businessCity = "Port Harcourt" }: Bu
   return (
     <header className="border-b border-slate-200 bg-white sticky top-0 z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-3">
-            <Link href="/business" className="flex items-center gap-2">
-              <span className="w-9 h-9 rounded-lg bg-teal-600 text-white font-bold flex items-center justify-center text-lg shadow-sm">
-                EL
-              </span>
-              <div>
-                <span className="font-extrabold text-slate-900 text-lg leading-tight block">
-                  EasyLife <span className="text-teal-700 font-semibold text-sm">Business</span>
+        <div className="flex items-center justify-between h-18 gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <Link href="/business" className="flex items-center gap-3 min-w-0">
+              <EasyLifeLogo theme="light" size="sm" />
+              <div className="hidden sm:block border-l border-slate-200 pl-3 min-w-0">
+                <span className="font-bold text-teal-800 text-xs uppercase tracking-wider block">
+                  Business Portal
                 </span>
-                <span className="text-xs text-slate-500 font-medium">
+                <span className="text-sm text-slate-600 font-medium truncate block">
                   {businessName} • {businessCity}
                 </span>
               </div>
             </Link>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+          <div className="flex items-center gap-2.5 shrink-0">
+            <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Facility Portal Active
             </span>
+            <Link
+              href="/dashboard"
+              className="text-xs font-semibold text-slate-600 hover:text-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50"
+            >
+              Customer View
+            </Link>
+            <form action={logoutAction}>
+              <button
+                type="submit"
+                className="text-xs font-semibold text-red-700 hover:bg-red-50 px-2.5 py-1.5 rounded-lg border border-red-200 transition cursor-pointer"
+              >
+                Sign Out
+              </button>
+            </form>
           </div>
         </div>
 
         {/* Tab Navigation */}
-        <nav className="flex space-x-1 sm:space-x-4 overflow-x-auto py-2 -mb-px border-t border-slate-100">
+        <nav className="flex space-x-1 sm:space-x-3 overflow-x-auto py-2.5 -mb-px border-t border-slate-100">
           {links.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`flex items-center gap-1.5 px-3 py-2 text-sm font-semibold rounded-md whitespace-nowrap transition-colors ${
+                className={`flex items-center gap-1.5 px-3.5 py-2 text-[15px] font-semibold rounded-md whitespace-nowrap transition-colors ${
                   isActive
                     ? "bg-teal-50 text-teal-800 border border-teal-200 shadow-xs"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"

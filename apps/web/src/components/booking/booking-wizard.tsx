@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createBookingAction } from "@/app/actions/booking";
+import { uploadFileAction } from "@/app/actions/storage";
 import type { ServiceCategoryItem, PublicProfessionalItem } from "@/lib/supabase/customer";
 
 export interface BookingWizardProps {
@@ -55,7 +56,7 @@ export function BookingWizard({
   const [urgency, setUrgency] = useState<"normal" | "high" | "emergency">(initialUrgency || "normal");
 
   // Attachments State
-  const [attachments, setAttachments] = useState<Array<{ name: string; size: number; type: string }>>([]);
+  const [attachments, setAttachments] = useState<Array<{ name: string; size: number; type: string; file: File }>>([]);
 
   // Location & Schedule State
   const [city, setCity] = useState(defaultCity);
@@ -88,6 +89,7 @@ export function BookingWizard({
       name: f.name,
       size: f.size,
       type: f.type,
+      file: f,
     }));
     setAttachments((prev) => [...prev, ...valid].slice(0, 5));
   };
@@ -137,6 +139,29 @@ export function BookingWizard({
     setIsSubmitting(true);
     setSubmissionError(null);
 
+    const uploadedAttachmentLines: string[] = [];
+    for (const item of attachments) {
+      const uploadForm = new FormData();
+      uploadForm.append("file", item.file);
+      uploadForm.append("bucketId", "booking-attachments");
+      const upRes = await uploadFileAction(uploadForm);
+      if (!upRes.success || !upRes.path) {
+        setSubmissionError(upRes.error || `Failed to upload attachment "${item.name}".`);
+        setIsSubmitting(false);
+        return;
+      }
+      uploadedAttachmentLines.push(`${item.name} (${upRes.path})`);
+    }
+
+    const combinedInstructions = [
+      additionalInstructions.trim(),
+      uploadedAttachmentLines.length > 0
+        ? `Uploaded Attachments: ${uploadedAttachmentLines.join(", ")}`
+        : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
     const formData = new FormData();
     formData.append("categoryId", categoryId || "");
     formData.append("title", title || "");
@@ -147,7 +172,7 @@ export function BookingWizard({
     formData.append("serviceAddress", serviceAddress || "");
     formData.append("preferredDate", preferredDate || "");
     formData.append("preferredTimeSlot", preferredTimeSlot || "");
-    formData.append("additionalInstructions", additionalInstructions || "");
+    formData.append("additionalInstructions", combinedInstructions);
 
     if (preSelectedPro?.professional_id) {
       formData.append("professionalId", preSelectedPro.professional_id);

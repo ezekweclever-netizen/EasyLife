@@ -22,6 +22,7 @@ export function DocumentUploadCard({
   const [documentType, setDocumentType] = useState<DocumentType>("national_id_nin");
   const [documentNumber, setDocumentNumber] = useState("");
   const [fileName, setFileName] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const docTypeLabels: Record<DocumentType, string> = {
     national_id_nin: "National Identification Number (NIN)",
@@ -48,7 +49,10 @@ export function DocumentUploadCard({
     formData.append("professionalId", professionalId);
     formData.append("documentType", documentType);
     formData.append("documentNumber", documentNumber);
-    formData.append("fileName", fileName || `${documentType}_upload.pdf`);
+    formData.append("fileName", selectedFile?.name || fileName || `${documentType}_upload.pdf`);
+    if (selectedFile) {
+      formData.append("file", selectedFile);
+    }
 
     startTransition(async () => {
       const res = await uploadVerificationDocumentAction(
@@ -62,6 +66,7 @@ export function DocumentUploadCard({
         setSuccessMessage(res.message);
         setDocumentNumber("");
         setFileName("");
+        setSelectedFile(null);
         onUploadSuccess?.();
       }
     });
@@ -140,9 +145,9 @@ export function DocumentUploadCard({
             type="file"
             accept=".pdf,.jpg,.jpeg,.png"
             onChange={(e) => {
-              if (e.target.files && e.target.files[0]) {
-                setFileName(e.target.files[0].name);
-              }
+              const f = e.target.files?.[0] ?? null;
+              setSelectedFile(f);
+              setFileName(f ? f.name : "");
             }}
             className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-[#0D9488] hover:file:bg-teal-100"
           />

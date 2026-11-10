@@ -301,6 +301,10 @@ async function runLiveDbChecks() {
     `);
     const testCategoryId = catRes.rows[0].id;
 
+    await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+    await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+    await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
+
     // Create a dedicated test booking
     const bkRes = await client.query(`
       INSERT INTO public.bookings (
@@ -318,7 +322,14 @@ async function runLiveDbChecks() {
 
     // Helper to set session auth context
     async function setAuthContext(userId, role = "authenticated") {
-      await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [userId || ""]);
+      if (!userId) {
+        await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+        await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+        await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
+        await client.query("RESET ROLE;");
+        return;
+      }
+      await client.query("SELECT set_config('request.jwt.claim.sub', $1, false);", [userId]);
       await client.query("SELECT set_config('request.jwt.claims', $1, false);", [
         JSON.stringify({ sub: userId, role }),
       ]);
@@ -713,6 +724,9 @@ async function runLiveDbChecks() {
   } finally {
     if (client) {
       try {
+        await client.query("SELECT set_config('request.jwt.claim.sub', NULL, false);");
+        await client.query("SELECT set_config('request.jwt.claims', NULL, false);");
+        await client.query("SELECT set_config('request.jwt.claim.role', NULL, false);");
         await client.query("RESET ROLE;");
         client.release();
       } catch (_) {}
