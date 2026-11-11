@@ -56,7 +56,7 @@ export function VerificationBanner({
             </p>
             {submittedAt && (
               <p className="mt-1 text-[11px] text-amber-700 font-medium">
-                Submitted on {new Date(submittedAt).toLocaleDateString("en-NG", { dateStyle: "medium" })}
+                Submitted on {new Date(submittedAt).toLocaleDateString("en-NG", { dateStyle: "medium", timeZone: "Africa/Lagos" })}
               </p>
             )}
           </div>

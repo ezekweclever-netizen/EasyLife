@@ -15,6 +15,7 @@ export async function supabaseAdminFetch<T = unknown>(
     method?: "GET" | "POST" | "PATCH" | "DELETE";
     body?: unknown;
     headers?: Record<string, string>;
+    timeoutMs?: number;
   } = {}
 ): Promise<SupabaseRestResult<T>> {
   const config = getSupabasePublicConfig();
@@ -43,6 +44,8 @@ export async function supabaseAdminFetch<T = unknown>(
       method: options.method || "GET",
       headers,
       body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
+      cache: "no-store",
+      signal: AbortSignal.timeout(options.timeoutMs ?? 10_000),
     });
 
     const text = await res.text();

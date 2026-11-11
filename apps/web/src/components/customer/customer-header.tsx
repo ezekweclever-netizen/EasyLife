@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
 import { NotificationBell } from "@/components/notifications/notification-bell";
@@ -21,6 +21,7 @@ export interface CustomerHeaderProps {
 const CUSTOMER_NAV = [
   {
     label: "Home",
+    mobileLabel: "Home",
     href: "/dashboard",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,6 +31,7 @@ const CUSTOMER_NAV = [
   },
   {
     label: "Explore Services",
+    mobileLabel: "Explore",
     href: "/explore-services",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,7 +40,8 @@ const CUSTOMER_NAV = [
     ),
   },
   {
-    label: "AI Problem Assistant",
+    label: "AI Assistant",
+    mobileLabel: "AI Help",
     href: "/assistant",
     icon: (
       <svg className="w-5 h-5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -48,6 +51,7 @@ const CUSTOMER_NAV = [
   },
   {
     label: "My Bookings",
+    mobileLabel: "Bookings",
     href: "/bookings",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -57,6 +61,7 @@ const CUSTOMER_NAV = [
   },
   {
     label: "Messages",
+    mobileLabel: "Messages",
     href: "/messages",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -66,6 +71,7 @@ const CUSTOMER_NAV = [
   },
   {
     label: "Profile",
+    mobileLabel: "Profile",
     href: "/profile",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -83,29 +89,109 @@ const PILOT_CITIES = [
 
 export function CustomerHeader({
   user,
-  unreadNotificationsCount = 0,
+  unreadNotificationsCount,
   selectedCity = "Port Harcourt",
   onCityChange,
 }: CustomerHeaderProps) {
   const pathname = usePathname() ?? "/";
+  const router = useRouter();
   const [city, setCity] = useState(selectedCity);
   const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
+
+  const cityDropdownRef = useRef<HTMLDivElement>(null);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+  const tabletDrawerRef = useRef<HTMLElement>(null);
+  const tabletToggleRef = useRef<HTMLButtonElement>(null);
+  const onCityChangeRef = useRef(onCityChange);
+  onCityChangeRef.current = onCityChange;
 
   useEffect(() => {
-    // Read persisted city choice if available
-    const saved = localStorage.getItem("easylife_city");
-    if (saved && ["Port Harcourt", "Lagos", "Abuja"].includes(saved)) {
-      setCity(saved);
-      if (onCityChange) onCityChange(saved);
+    if (selectedCity) {
+      setCity(selectedCity);
     }
-  }, [onCityChange]);
+  }, [selectedCity]);
 
-  const handleSelectCity = (c: string) => {
-    setCity(c);
-    localStorage.setItem("easylife_city", c);
+  // Close menus on route transitions
+  useEffect(() => {
     setIsCityDropdownOpen(false);
-    if (onCityChange) onCityChange(c);
+    setIsProfileMenuOpen(false);
+    setIsTabletMenuOpen(false);
+  }, [pathname]);
+
+  // Close open dropdowns / tablet drawer on outside click or Escape
+  useEffect(() => {
+    if (!isCityDropdownOpen && !isProfileMenuOpen && !isTabletMenuOpen) return;
+
+    const handlePointerDown = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        isCityDropdownOpen &&
+        cityDropdownRef.current &&
+        !cityDropdownRef.current.contains(target)
+      ) {
+        setIsCityDropdownOpen(false);
+      }
+      if (
+        isProfileMenuOpen &&
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(target)
+      ) {
+        setIsProfileMenuOpen(false);
+      }
+      if (
+        isTabletMenuOpen &&
+        tabletDrawerRef.current &&
+        !tabletDrawerRef.current.contains(target) &&
+        tabletToggleRef.current &&
+        !tabletToggleRef.current.contains(target)
+      ) {
+        setIsTabletMenuOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsCityDropdownOpen(false);
+        setIsProfileMenuOpen(false);
+        setIsTabletMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isCityDropdownOpen, isProfileMenuOpen, isTabletMenuOpen]);
+
+  const handleSelectCity = (nextCity: string) => {
+    setCity(nextCity);
+    try {
+      localStorage.setItem("easylife_city", nextCity);
+    } catch {
+      // Ignore storage failures in restricted contexts
+    }
+    setIsCityDropdownOpen(false);
+
+    if (onCityChangeRef.current) {
+      onCityChangeRef.current(nextCity);
+      return;
+    }
+
+    if (
+      pathname === "/dashboard" ||
+      pathname === "/explore-services" ||
+      pathname === "/book"
+    ) {
+      const params = new URLSearchParams(
+        typeof window !== "undefined" ? window.location.search : ""
+      );
+      params.set("city", nextCity);
+      router.push(`${pathname}?${params.toString()}`);
+    }
   };
 
   const isActive = (href: string) => {
@@ -113,39 +199,49 @@ export function CustomerHeader({
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
+  const bookHref = `/book?city=${encodeURIComponent(city)}`;
+
   return (
     <>
       {/* Top Header */}
       <header className="sticky top-0 z-40 border-b border-[#E2E8F0] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
-          
+        <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-2 sm:gap-3">
           {/* Logo & City Selector */}
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard" aria-label="EasyLife Customer Home" className="shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-3 min-w-0 shrink-0">
+            <Link
+              href="/dashboard"
+              aria-label="EasyLife Customer Home"
+              className="shrink-0 max-sm:[&_img]:h-6.5"
+            >
               <EasyLifeLogo theme="light" size="sm" />
             </Link>
 
             {/* City Selector Pill */}
-            <div className="relative">
+            <div className="relative shrink-0" ref={cityDropdownRef}>
               <button
                 type="button"
-                onClick={() => setIsCityDropdownOpen((o) => !o)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#F0FDFA] text-[#0F766E] border border-[#CCFBF1] hover:bg-[#CCFBF1] transition-colors"
+                onClick={() => {
+                  setIsCityDropdownOpen((o) => !o);
+                  setIsProfileMenuOpen(false);
+                  setIsTabletMenuOpen(false);
+                }}
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-[#F0FDFA] text-[#0F766E] border border-[#CCFBF1] hover:bg-[#CCFBF1] transition-colors whitespace-nowrap shrink-0 cursor-pointer"
                 aria-expanded={isCityDropdownOpen}
+                aria-haspopup="true"
                 aria-label="Select service location"
               >
-                <svg className="w-3.5 h-3.5 text-[#0F766E]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#0F766E] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>{city}</span>
-                <svg className="w-3 h-3 text-[#0F766E]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <span className="max-w-[84px] sm:max-w-none truncate">{city}</span>
+                <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#0F766E] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {isCityDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-[#E2E8F0] py-2 z-50">
+                <div className="absolute left-0 mt-2 w-60 sm:w-64 bg-white rounded-xl shadow-lg border border-[#E2E8F0] py-2 z-50">
                   <div className="px-3 py-1.5 text-xs font-medium text-[#64748B] border-b border-[#F1F5F9]">
                     Select Your City
                   </div>
@@ -154,7 +250,7 @@ export function CustomerHeader({
                       key={c.name}
                       type="button"
                       onClick={() => handleSelectCity(c.name)}
-                      className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between hover:bg-[#F8FAFC] transition-colors ${
+                      className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between hover:bg-[#F8FAFC] transition-colors cursor-pointer ${
                         city === c.name ? "bg-[#F0FDFA] text-[#0F766E] font-semibold" : "text-[#1E293B]"
                       }`}
                     >
@@ -174,17 +270,17 @@ export function CustomerHeader({
             </div>
           </div>
 
-          {/* Desktop Navigation Links (5 Required Items) */}
-          <nav aria-label="Customer Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
+          {/* Desktop Navigation Links (>= 1280px only — prevents mid-width wrapping/overlap) */}
+          <nav aria-label="Customer Primary" className="hidden xl:block">
+            <ul className="flex items-center gap-0.5 2xl:gap-1">
               {CUSTOMER_NAV.map((item) => {
                 const active = isActive(item.href);
                 return (
-                  <li key={item.href}>
+                  <li key={item.href} className="shrink-0">
                     <Link
                       href={item.href}
                       aria-current={active ? "page" : undefined}
-                      className={`px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors flex items-center gap-1.5 ${
+                      className={`px-2.5 2xl:px-3.5 py-2 rounded-lg text-[13.5px] 2xl:text-[15px] font-medium transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${
                         active
                           ? "bg-[#F0FDFA] text-[#0F766E] font-semibold"
                           : "text-[#334155] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
@@ -198,13 +294,13 @@ export function CustomerHeader({
             </ul>
           </nav>
 
-          {/* Action CTAs: Book a Service & User Profile */}
-          <div className="flex items-center gap-3">
+          {/* Action CTAs: Book a Service, Notifications, User Profile, Tablet Drawer Toggle */}
+          <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
             <Link
-              href="/book"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-[#0F766E] text-white hover:bg-[#0D655E] shadow-sm transition-colors"
+              href={bookHref}
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-[#0F766E] text-white hover:bg-[#0D655E] shadow-sm transition-colors whitespace-nowrap shrink-0"
             >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
               </svg>
               <span className="hidden sm:inline">Request Service</span>
@@ -215,15 +311,20 @@ export function CustomerHeader({
             <NotificationBell initialUnreadCount={unreadNotificationsCount} />
 
             {/* User Profile Menu */}
-            <div className="relative">
+            <div className="relative shrink-0" ref={profileMenuRef}>
               <button
                 type="button"
-                onClick={() => setIsProfileMenuOpen((o) => !o)}
-                className="flex items-center gap-2 p-1.5 rounded-full hover:bg-[#F1F5F9] transition-colors"
+                onClick={() => {
+                  setIsProfileMenuOpen((o) => !o);
+                  setIsCityDropdownOpen(false);
+                  setIsTabletMenuOpen(false);
+                }}
+                className="flex items-center gap-2 p-1 rounded-full hover:bg-[#F1F5F9] transition-colors cursor-pointer"
                 aria-label="User account menu"
                 aria-expanded={isProfileMenuOpen}
+                aria-haspopup="true"
               >
-                <div className="w-8 h-8 rounded-full bg-[#0F766E] text-white flex items-center justify-center font-semibold text-xs uppercase shadow-sm">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0F766E] text-white flex items-center justify-center font-semibold text-xs uppercase shadow-sm">
                   {user?.fullName ? user.fullName[0] : (user?.email ? user.email[0] : "C")}
                 </div>
               </button>
@@ -255,6 +356,13 @@ export function CustomerHeader({
                     My Bookings
                   </Link>
                   <Link
+                    href="/notifications"
+                    onClick={() => setIsProfileMenuOpen(false)}
+                    className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
+                  >
+                    Notifications
+                  </Link>
+                  <Link
                     href="/profile"
                     onClick={() => setIsProfileMenuOpen(false)}
                     className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
@@ -266,14 +374,14 @@ export function CustomerHeader({
                     onClick={() => setIsProfileMenuOpen(false)}
                     className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
                   >
-                    Help & Support
+                    Help &amp; Support
                   </Link>
 
                   <div className="border-t border-[#F1F5F9] mt-1 pt-1">
                     <form action={logoutAction}>
                       <button
                         type="submit"
-                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium"
+                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium cursor-pointer"
                       >
                         Sign out
                       </button>
@@ -282,20 +390,75 @@ export function CustomerHeader({
                 </div>
               )}
             </div>
+
+            {/* Tablet & Small-Laptop Navigation Toggle (768px - 1279px) */}
+            <button
+              ref={tabletToggleRef}
+              type="button"
+              onClick={() => {
+                setIsTabletMenuOpen((o) => !o);
+                setIsCityDropdownOpen(false);
+                setIsProfileMenuOpen(false);
+              }}
+              aria-expanded={isTabletMenuOpen}
+              aria-controls="customer-tablet-navigation"
+              aria-label={isTabletMenuOpen ? "Close customer menu" : "Open customer menu"}
+              className="hidden md:inline-flex xl:hidden items-center justify-center h-9 w-9 rounded-lg border border-[#E2E8F0] text-[#334155] hover:bg-[#F1F5F9] transition-colors shrink-0 cursor-pointer"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {isTabletMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
           </div>
         </div>
+
+        {/* Tablet & Small-Laptop Slide-Down Navigation (768px - 1279px) */}
+        {isTabletMenuOpen && (
+          <nav
+            ref={tabletDrawerRef}
+            id="customer-tablet-navigation"
+            aria-label="Customer Tablet Navigation"
+            className="hidden md:block xl:hidden border-t border-[#E2E8F0] bg-white shadow-lg"
+          >
+            <div className="max-w-[1440px] mx-auto px-6 py-3 grid grid-cols-3 gap-2">
+              {CUSTOMER_NAV.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    onClick={() => setIsTabletMenuOpen(false)}
+                    className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors whitespace-nowrap ${
+                      active
+                        ? "bg-[#F0FDFA] text-[#0F766E] font-semibold border border-[#CCFBF1]"
+                        : "text-[#334155] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
+                    }`}
+                  >
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </nav>
+        )}
       </header>
 
-      {/* Mobile Bottom Navigation Bar (App-like thumb reachability) */}
+      {/* Mobile Bottom Navigation Bar (< 768px thumb reachability) */}
       <nav
         aria-label="Mobile Navigation"
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[#E2E8F0] shadow-lg pb-safe"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-[#E2E8F0] shadow-lg pb-safe"
       >
-        <ul className="flex items-center justify-around h-16 max-w-md mx-auto px-2">
+        <ul className="flex items-center justify-around h-16 max-w-md mx-auto px-1">
           {CUSTOMER_NAV.map((item) => {
             const active = isActive(item.href);
             return (
-              <li key={item.href} className="flex-1">
+              <li key={item.href} className="flex-1 min-w-0">
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
@@ -306,7 +469,9 @@ export function CustomerHeader({
                   <div className={`p-1 rounded-full ${active ? "bg-[#F0FDFA]" : ""}`}>
                     {item.icon}
                   </div>
-                  <span className="text-[10px] mt-0.5 leading-tight">{item.label}</span>
+                  <span className="text-[11px] mt-0.5 leading-tight whitespace-nowrap truncate max-w-full px-0.5">
+                    {item.mobileLabel}
+                  </span>
                 </Link>
               </li>
             );

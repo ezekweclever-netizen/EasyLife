@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createBookingAction } from "@/app/actions/booking";
 import { uploadFileAction } from "@/app/actions/storage";
@@ -79,6 +79,11 @@ export function BookingWizard({
 
   // Field validation errors
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    setCity(defaultCity);
+    setLgaOrDistrict("");
+  }, [defaultCity]);
 
   const currentCityConfig = NIGERIAN_CITIES.find((c) => c.name === city) || NIGERIAN_CITIES[0]!;
 

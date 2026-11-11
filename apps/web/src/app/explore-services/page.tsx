@@ -1,12 +1,14 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getServiceCategories } from "@/lib/supabase/customer";
+import { getAuthenticatedUser } from "@/lib/auth/session";
+import { getCustomerProfile, getServiceCategories } from "@/lib/supabase/customer";
 import {
   getOperatingNeighbourhoods,
   getNeighbourhoodCoordinates,
   searchAndMatchProfessionals,
 } from "@/lib/supabase/matching";
+import { CustomerHeader } from "@/components/customer/customer-header";
 import { PublicShell } from "@/components/site/public-shell";
 import { PageHero } from "@/components/site/sections";
 import { ServiceDiscoveryClient } from "@/components/discovery/service-discovery-client";
@@ -110,8 +112,9 @@ export default async function ExploreServicesPage({
   const activeGroup = group && CATEGORY_GROUPS[group] ? CATEGORY_GROUPS[group] : null;
   const effectiveCategorySlug = cat || (activeGroup && activeGroup.slugs.length === 1 ? activeGroup.slugs[0]! : "");
 
-  // Fetch real Supabase categories, ALL hub neighbourhoods, and matched professionals
-  const [categories, neighbourhoods, matchedPros] = await Promise.all([
+  // Fetch auth status (optional), Supabase categories, ALL hub neighbourhoods, and matched professionals
+  const [auth, categories, neighbourhoods, matchedPros] = await Promise.all([
+    getAuthenticatedUser(),
     getServiceCategories(),
     getOperatingNeighbourhoods(),
     searchAndMatchProfessionals({
@@ -131,6 +134,10 @@ export default async function ExploreServicesPage({
     }),
   ]);
 
+  const profile = auth
+    ? await getCustomerProfile(auth.user.id, auth.accessToken)
+    : null;
+
   const filteredMatchedPros =
     activeGroup && !cat
       ? matchedPros.filter((pro) =>
@@ -138,8 +145,11 @@ export default async function ExploreServicesPage({
         )
       : matchedPros;
 
-  return (
-    <PublicShell>
+  const headerCity =
+    city && city !== "All Cities" ? city : profile?.city || "Port Harcourt";
+
+  const pageContent = (
+    <>
       {/* Hero */}
       <PageHero
         eyebrow="Multi-City Service Discovery"
@@ -276,6 +286,24 @@ export default async function ExploreServicesPage({
           </div>
         </section>
       </div>
-    </PublicShell>
+    </>
   );
+
+  if (auth) {
+    return (
+      <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+        <CustomerHeader
+          user={{
+            id: auth.user.id,
+            email: auth.user.email,
+            fullName: profile?.full_name,
+          }}
+          selectedCity={headerCity}
+        />
+        <main>{pageContent}</main>
+      </div>
+    );
+  }
+
+  return <PublicShell>{pageContent}</PublicShell>;
 }

@@ -52,6 +52,7 @@ export function AIAssistantChat({
 
   // Edit Structured Request Modal State
   const [editingRequest, setEditingRequest] = useState<AIAssistantStructuredRequest | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editTitle, setEditTitle] = useState("");
   const [editDesc, setEditDesc] = useState("");
   const [editCategorySlug, setEditCategorySlug] = useState("");
@@ -65,6 +66,17 @@ export function AIAssistantChat({
       prev.map((m, idx) => (idx === 0 && !m.timestamp ? { ...m, timestamp: nowLabel } : m))
     );
   }, []);
+
+  useEffect(() => {
+    if (!isEditModalOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsEditModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isEditModalOpen]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -140,18 +152,17 @@ export function AIAssistantChat({
     router.push(`/book?${query.toString()}`);
   };
 
-  const handleSaveEdit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!editingRequest) return;
+  const buildUpdatedRequest = (): AIAssistantStructuredRequest | null => {
+    if (!editingRequest) return null;
 
     const matchedCat = initialCategories.find((c) => c.slug === editCategorySlug);
     const updated: AIAssistantStructuredRequest = {
-      suggestedTitle: editTitle,
+      suggestedTitle: editTitle.trim() || editingRequest.suggestedTitle,
       categoryId: matchedCat?.id || editingRequest.categoryId,
       categoryName: matchedCat?.name || editingRequest.categoryName,
       categorySlug: editCategorySlug,
       urgency: editUrgency,
-      recommendedDescription: editDesc,
+      recommendedDescription: editDesc.trim() || editingRequest.recommendedDescription,
     };
 
     setEditingRequest(updated);
@@ -160,6 +171,15 @@ export function AIAssistantChat({
         ...latestResponse,
         structuredRequest: updated,
       });
+    }
+    return updated;
+  };
+
+  const handleSaveEdit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const updated = buildUpdatedRequest();
+    if (updated) {
+      setIsEditModalOpen(false);
     }
   };
 
@@ -381,15 +401,17 @@ export function AIAssistantChat({
                         <button
                           type="button"
                           onClick={() => {
-                            if (msg.structuredData?.structuredRequest) {
-                              setEditingRequest(msg.structuredData.structuredRequest);
-                              setEditTitle(msg.structuredData.structuredRequest.suggestedTitle);
-                              setEditDesc(msg.structuredData.structuredRequest.recommendedDescription);
-                              setEditCategorySlug(msg.structuredData.structuredRequest.categorySlug);
-                              setEditUrgency(msg.structuredData.structuredRequest.urgency);
+                            const sourceReq = editingRequest || msg.structuredData?.structuredRequest;
+                            if (sourceReq) {
+                              setEditingRequest(sourceReq);
+                              setEditTitle(sourceReq.suggestedTitle);
+                              setEditDesc(sourceReq.recommendedDescription);
+                              setEditCategorySlug(sourceReq.categorySlug);
+                              setEditUrgency(sourceReq.urgency);
+                              setIsEditModalOpen(true);
                             }
                           }}
-                          className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition shadow-2xs"
+                          className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 transition shadow-2xs cursor-pointer"
                         >
                           ✏️ Edit Request Details
                         </button>
@@ -467,11 +489,16 @@ export function AIAssistantChat({
       </div>
 
       {/* Edit Request Modal */}
-      {editingRequest && (
-        <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+      {isEditModalOpen && editingRequest && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Customise Service Request Details"
+          className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50"
+        >
           <form
             onSubmit={handleSaveEdit}
-            className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200"
+            className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="font-extrabold text-sm text-slate-900 flex items-center gap-1.5">
@@ -479,8 +506,9 @@ export function AIAssistantChat({
               </div>
               <button
                 type="button"
-                onClick={() => setEditingRequest(null)}
-                className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 text-xs font-bold"
+                aria-label="Close modal"
+                onClick={() => setIsEditModalOpen(false)}
+                className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 text-xs font-bold hover:bg-slate-200 cursor-pointer"
               >
                 ✕
               </button>
@@ -546,11 +574,11 @@ export function AIAssistantChat({
               />
             </div>
 
-            <div className="flex items-center justify-between pt-2">
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2">
               <button
                 type="button"
-                onClick={() => setEditingRequest(null)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                onClick={() => setIsEditModalOpen(false)}
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 cursor-pointer"
               >
                 Close Without Saving
               </button>
@@ -558,17 +586,20 @@ export function AIAssistantChat({
               <div className="flex items-center gap-2">
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition"
+                  className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition cursor-pointer"
                 >
                   Save Changes
                 </button>
                 <button
                   type="button"
                   onClick={() => {
-                    handleSaveEdit({ preventDefault: () => {} } as any);
-                    handleContinueToBooking();
+                    const updated = buildUpdatedRequest();
+                    setIsEditModalOpen(false);
+                    if (updated) {
+                      handleContinueToBooking(updated);
+                    }
                   }}
-                  className="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-md transition"
+                  className="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs shadow-md transition cursor-pointer"
                 >
                   Save &amp; Continue to Booking →
                 </button>

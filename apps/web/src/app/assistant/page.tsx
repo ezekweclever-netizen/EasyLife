@@ -39,14 +39,14 @@ export default async function AIAssistantPage() {
 
   if (auth) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] pb-20 lg:pb-12 text-[#0F172A]">
+      <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
         <CustomerHeader
           user={{
             id: auth.user.id,
             email: auth.user.email,
             fullName: profile?.full_name,
           }}
-          selectedCity="Port Harcourt"
+          selectedCity={profile?.city || "Port Harcourt"}
         />
         <main className="max-w-5xl mx-auto">{content}</main>
       </div>

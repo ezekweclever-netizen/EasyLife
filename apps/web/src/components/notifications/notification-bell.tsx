@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useTransition } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { NotificationItem } from "@/lib/supabase/notifications";
@@ -14,64 +14,160 @@ interface NotificationBellProps {
   initialUnreadCount?: number;
 }
 
+const EMPTY_NOTIFICATIONS: NotificationItem[] = [];
+
 export function NotificationBell({
-  initialNotifications = [],
-  initialUnreadCount = 0,
+  initialNotifications,
+  initialUnreadCount,
 }: NotificationBellProps) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [isPending, startTransition] = useTransition();
-  const [notifications, setNotifications] = useState<NotificationItem[]>(initialNotifications);
-  const [unreadCount, setUnreadCount] = useState(initialUnreadCount);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isLoadingList, setIsLoadingList] = useState(false);
+  const [notifications, setNotifications] = useState<NotificationItem[]>(
+    initialNotifications ?? EMPTY_NOTIFICATIONS
+  );
+  const [unreadCount, setUnreadCount] = useState<number>(initialUnreadCount ?? 0);
   const [hasMounted, setHasMounted] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const activeFetchControllerRef = useRef<AbortController | null>(null);
+  const mutationEpochRef = useRef(0);
+  const hasExplicitInitialList = initialNotifications !== undefined;
 
-  useEffect(() => {
-    setHasMounted(true);
+  const fetchNotifications = useCallback(async (externalSignal?: AbortSignal) => {
+    activeFetchControllerRef.current?.abort();
+    const controller = new AbortController();
+    activeFetchControllerRef.current = controller;
+
+    if (externalSignal) {
+      if (externalSignal.aborted) {
+        controller.abort();
+        return;
+      }
+      externalSignal.addEventListener("abort", () => controller.abort(), { once: true });
+    }
+
+    const epochAtStart = mutationEpochRef.current;
+    setIsLoadingList(true);
+    try {
+      const res = await fetch("/api/notifications", {
+        cache: "no-store",
+        signal: controller.signal,
+      });
+      if (!res.ok) return;
+      const data = (await res.json()) as {
+        notifications?: NotificationItem[];
+        unreadCount?: number;
+      };
+      if (controller.signal.aborted || epochAtStart !== mutationEpochRef.current) {
+        return;
+      }
+      if (Array.isArray(data.notifications)) {
+        setNotifications(data.notifications);
+      }
+      if (typeof data.unreadCount === "number") {
+        setUnreadCount(data.unreadCount);
+      }
+    } catch {
+      // Ignore abort / transient network failure
+    } finally {
+      if (activeFetchControllerRef.current === controller) {
+        setIsLoadingList(false);
+      }
+    }
   }, []);
 
   useEffect(() => {
-    setNotifications(initialNotifications);
-    setUnreadCount(initialUnreadCount);
-  }, [initialNotifications, initialUnreadCount]);
+    setHasMounted(true);
+    return () => {
+      activeFetchControllerRef.current?.abort();
+    };
+  }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
+    if (initialNotifications !== undefined) {
+      setNotifications(initialNotifications);
+    }
+  }, [initialNotifications]);
+
+  useEffect(() => {
+    if (typeof initialUnreadCount === "number") {
+      setUnreadCount(initialUnreadCount);
+    }
+  }, [initialUnreadCount]);
+
+  useEffect(() => {
+    if (hasExplicitInitialList) return;
+    const controller = new AbortController();
+    void fetchNotifications(controller.signal);
+    return () => controller.abort();
+  }, [hasExplicitInitialList, fetchNotifications]);
+
+  // Close dropdown when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isOpen) return;
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     }
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
-  const handleMarkAsRead = (notification: NotificationItem) => {
+  const handleToggle = () => {
+    const nextOpen = !isOpen;
+    setIsOpen(nextOpen);
+    if (nextOpen) {
+      void fetchNotifications();
+    }
+  };
+
+  const handleMarkAsRead = async (notification: NotificationItem) => {
+    setIsOpen(false);
     if (!notification.is_read) {
-      // Optimistic update
+      mutationEpochRef.current += 1;
+      activeFetchControllerRef.current?.abort();
       setNotifications((prev) =>
         prev.map((n) => (n.id === notification.id ? { ...n, is_read: true } : n))
       );
       setUnreadCount((prev) => Math.max(0, prev - 1));
 
-      startTransition(async () => {
-        await markNotificationReadAction(notification.id);
-      });
+      const result = await markNotificationReadAction(notification.id);
+      if (!result?.success) {
+        void fetchNotifications();
+      }
     }
 
-    setIsOpen(false);
     if (notification.action_url) {
       router.push(notification.action_url);
     }
   };
 
-  const handleMarkAllRead = () => {
+  const handleMarkAllRead = async () => {
+    if (isSaving) return;
+    mutationEpochRef.current += 1;
+    activeFetchControllerRef.current?.abort();
     setNotifications((prev) => prev.map((n) => ({ ...n, is_read: true })));
     setUnreadCount(0);
-
-    startTransition(async () => {
-      await markAllNotificationsReadAction();
-    });
+    setIsSaving(true);
+    try {
+      const result = await markAllNotificationsReadAction();
+      if (!result?.success) {
+        await fetchNotifications();
+      }
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const getEventIcon = (type: string) => {
@@ -123,13 +219,15 @@ export function NotificationBell({
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative shrink-0" ref={dropdownRef}>
       {/* Bell Trigger Button */}
       <button
         type="button"
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         aria-label="View notifications"
-        className="relative p-2 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 transition"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        className="relative p-1.5 sm:p-2 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 transition cursor-pointer"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -141,7 +239,7 @@ export function NotificationBell({
         </svg>
 
         {unreadCount > 0 && (
-          <span className="absolute top-1 right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white font-extrabold text-[10px] flex items-center justify-center ring-2 ring-white">
+          <span className="absolute top-0.5 right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white font-extrabold text-[10px] flex items-center justify-center ring-2 ring-white">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -149,7 +247,11 @@ export function NotificationBell({
 
       {/* Notifications Dropdown Panel */}
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl border border-[#E2E8F0] shadow-xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150">
+        <div
+          role="region"
+          aria-label="Notifications panel"
+          className="fixed sm:absolute left-3 right-3 sm:left-auto sm:right-0 top-[74px] sm:top-auto sm:mt-2 sm:w-96 bg-white rounded-2xl border border-[#E2E8F0] shadow-xl z-50 overflow-hidden"
+        >
           {/* Header */}
           <div className="p-3.5 border-b border-[#E2E8F0] flex items-center justify-between bg-[#F8FAFC]">
             <div className="flex items-center gap-2">
@@ -164,9 +266,9 @@ export function NotificationBell({
             {unreadCount > 0 && (
               <button
                 type="button"
-                onClick={handleMarkAllRead}
-                disabled={isPending}
-                className="text-[11px] font-bold text-[#0F766E] hover:underline disabled:opacity-50"
+                onClick={() => void handleMarkAllRead()}
+                disabled={isSaving}
+                className="text-[11px] font-bold text-[#0F766E] hover:underline disabled:opacity-50 cursor-pointer"
               >
                 Mark all as read
               </button>
@@ -175,7 +277,11 @@ export function NotificationBell({
 
           {/* List */}
           <div className="max-h-[360px] overflow-y-auto divide-y divide-[#F1F5F9]">
-            {notifications.length === 0 ? (
+            {isLoadingList && notifications.length === 0 ? (
+              <div className="p-6 text-center text-xs text-[#64748B]">
+                Loading notifications...
+              </div>
+            ) : notifications.length === 0 ? (
               <div className="p-8 text-center space-y-1">
                 <span className="text-2xl">🔔</span>
                 <p className="text-xs font-bold text-[#0F172A]">No notifications</p>
@@ -186,12 +292,14 @@ export function NotificationBell({
             ) : (
               notifications.slice(0, 8).map((n) => {
                 const isRejected = n.delivery_status === "rejected";
+                const channels = Array.isArray(n.channels) ? n.channels : [];
 
                 return (
-                  <div
+                  <button
                     key={n.id}
+                    type="button"
                     onClick={() => handleMarkAsRead(n)}
-                    className={`p-3.5 cursor-pointer transition-colors space-y-1.5 ${
+                    className={`w-full text-left p-3.5 cursor-pointer transition-colors space-y-1.5 block ${
                       !n.is_read ? "bg-teal-50/40 hover:bg-teal-50/70" : "hover:bg-slate-50"
                     }`}
                   >
@@ -219,7 +327,7 @@ export function NotificationBell({
 
                         {/* Delivery channels & status tags */}
                         <div className="flex items-center gap-1.5 flex-wrap pt-0.5">
-                          {n.channels.map((ch) => (
+                          {channels.map((ch) => (
                             <span
                               key={ch}
                               className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
@@ -239,7 +347,7 @@ export function NotificationBell({
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 );
               })
             )}

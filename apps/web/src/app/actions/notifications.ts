@@ -43,6 +43,11 @@ export async function markNotificationReadAction(
   revalidatePath("/pro/messages");
   revalidatePath("/dashboard");
   revalidatePath("/pro/dashboard");
+  revalidatePath("/notifications");
+  revalidatePath("/bookings");
+  revalidatePath("/book");
+  revalidatePath("/profile");
+  revalidatePath("/assistant");
 
   return { success: true };
 }
@@ -87,6 +92,11 @@ export async function markAllNotificationsReadAction(): Promise<{
   revalidatePath("/pro/messages");
   revalidatePath("/dashboard");
   revalidatePath("/pro/dashboard");
+  revalidatePath("/notifications");
+  revalidatePath("/bookings");
+  revalidatePath("/book");
+  revalidatePath("/profile");
+  revalidatePath("/assistant");
 
   return { success: true };
 }

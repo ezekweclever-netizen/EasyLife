@@ -36,7 +36,7 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
   const {
     category,
     pro,
-    city = "Port Harcourt",
+    city,
     title,
     description,
     urgency,
@@ -48,15 +48,17 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
     getCustomerProfile(auth.user.id, auth.accessToken),
   ]);
 
+  const activeCity = city?.trim() || profile?.city || "Port Harcourt";
+
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 lg:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
       <CustomerHeader
         user={{
           id: auth.user.id,
           email: auth.user.email,
           fullName: profile?.full_name,
         }}
-        selectedCity={city}
+        selectedCity={activeCity}
       />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
@@ -65,7 +67,7 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
             <span>✓ Verified Technician Guarantee</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
-            Request Service in {city}
+            Request Service in {activeCity}
           </h1>
           <p className="text-xs sm:text-sm text-[#64748B]">
             Describe your repair or maintenance need. Nearby accredited trade specialists will review your fault and submit transparent quotations.
@@ -76,7 +78,7 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
           categories={categories}
           preSelectedCategory={category}
           preSelectedPro={preSelectedPro}
-          defaultCity={city}
+          defaultCity={activeCity}
           initialTitle={title}
           initialDescription={description}
           initialUrgency={urgency}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface GoogleSignInButtonProps {
   label?: string;
@@ -24,6 +24,15 @@ export function GoogleSignInButton({
   const [isLoading, setIsLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
+  // Reset pending spinner if user returns via browser back button (bfcache restore)
+  useEffect(() => {
+    const handlePageShow = () => {
+      setIsLoading(false);
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
   const handleGoogleSignIn = async () => {
     setStatusMessage(null);
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
@@ -40,9 +49,10 @@ export function GoogleSignInButton({
     try {
       const cleanUrl = supabaseUrl.replace(/\/+$/, "");
 
-      // Verify Google provider status in Supabase before redirecting
+      // Verify Google provider status in Supabase before redirecting (bounded timeout)
       const settingsRes = await fetch(`${cleanUrl}/auth/v1/settings`, {
         headers: { apikey: supabaseAnonKey },
+        signal: AbortSignal.timeout(10000),
       });
 
       if (settingsRes.ok) {
@@ -70,7 +80,12 @@ export function GoogleSignInButton({
       const secureFlag = window.location.protocol === "https:" ? "; Secure" : "";
       document.cookie = `el_pkce_verifier=${encodeURIComponent(codeVerifier)}; path=/; max-age=600; SameSite=Lax${secureFlag}`;
       document.cookie = `el_oauth_role=${encodeURIComponent(intendedRole)}; path=/; max-age=600; SameSite=Lax${secureFlag}`;
-      if (nextPath && nextPath.startsWith("/")) {
+      if (
+        nextPath &&
+        nextPath.startsWith("/") &&
+        !nextPath.startsWith("//") &&
+        !nextPath.startsWith("/\\")
+      ) {
         document.cookie = `el_oauth_next=${encodeURIComponent(nextPath)}; path=/; max-age=600; SameSite=Lax${secureFlag}`;
       }
 
@@ -91,12 +106,12 @@ export function GoogleSignInButton({
   };
 
   return (
-    <div className="space-y-2.5">
+    <div className="space-y-2">
       <button
         type="button"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
-        className="w-full h-11 px-4 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 text-sm font-semibold flex items-center justify-center gap-3 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
+        className="w-full h-10.5 px-4 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 text-sm font-semibold flex items-center justify-center gap-3 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
       >
         <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
           <path

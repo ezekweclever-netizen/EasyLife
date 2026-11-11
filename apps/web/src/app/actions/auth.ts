@@ -115,7 +115,14 @@ export async function loginAction(
   if (isSessionPayload(res.data)) {
     await persistSession(res.data);
 
-    const nextPath = typeof raw.next === "string" && raw.next.startsWith("/") ? raw.next : null;
+    const rawNext = typeof raw.next === "string" ? raw.next : null;
+    const nextPath =
+      rawNext &&
+      rawNext.startsWith("/") &&
+      !rawNext.startsWith("//") &&
+      !rawNext.startsWith("/\\")
+        ? rawNext
+        : null;
     if (nextPath && !nextPath.startsWith("/login") && !nextPath.startsWith("/admin/login")) {
       redirect(nextPath);
     }

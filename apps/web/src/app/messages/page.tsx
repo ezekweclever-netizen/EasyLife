@@ -39,7 +39,7 @@ export default async function CustomerMessagesPage({ searchParams }: CustomerMes
     : null;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 lg:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -47,6 +47,7 @@ export default async function CustomerMessagesPage({ searchParams }: CustomerMes
           fullName: profile?.full_name,
         }}
         unreadNotificationsCount={unreadNotifs}
+        selectedCity={profile?.city || "Port Harcourt"}
       />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">

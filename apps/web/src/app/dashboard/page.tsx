@@ -32,16 +32,22 @@ export default async function CustomerDashboardPage({
   }
 
   const resolvedParams = await searchParams;
-  const currentCity = resolvedParams.city || "Port Harcourt";
+  const requestedCity = resolvedParams.city?.trim() || "";
 
-  // Concurrently fetch real data from Supabase
-  const [profile, categories, bookings, recommendedPros, notifications] = await Promise.all([
+  // Concurrently fetch profile, categories, bookings, notifications, and (when city param known) pros
+  const [profile, categories, bookings, notifications, preloadedPros] = await Promise.all([
     getCustomerProfile(auth.user.id, auth.accessToken),
     getServiceCategories(),
     getCustomerBookings(auth.user.id, auth.accessToken),
-    getDiscoverableProfessionals({ city: currentCity, limit: 6 }),
     getCustomerNotifications(auth.user.id, auth.accessToken),
+    requestedCity
+      ? getDiscoverableProfessionals({ city: requestedCity, limit: 6 })
+      : Promise.resolve(null),
   ]);
+
+  const currentCity = requestedCity || profile?.city || "Port Harcourt";
+  const recommendedPros =
+    preloadedPros ?? (await getDiscoverableProfessionals({ city: currentCity, limit: 6 }));
 
   const activeBookings = bookings.filter((b) =>
     ["open", "matched", "quoted", "accepted", "scheduled", "in_progress"].includes(b.status)
@@ -53,7 +59,7 @@ export default async function CustomerDashboardPage({
   const districts = NIGERIAN_DISTRICTS[currentCity] || NIGERIAN_DISTRICTS["Port Harcourt"] || [];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 lg:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -82,7 +88,7 @@ export default async function CustomerDashboardPage({
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <Link
-                href="/book"
+                href={`/book?city=${encodeURIComponent(currentCity)}`}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm bg-white text-[#0F766E] hover:bg-[#F0FDFA] transition-colors shadow-sm"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -91,7 +97,7 @@ export default async function CustomerDashboardPage({
                 Request a Service
               </Link>
               <Link
-                href="/explore-services"
+                href={`/explore-services?city=${encodeURIComponent(currentCity)}`}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm bg-white/10 text-white hover:bg-white/20 transition-colors"
               >
                 Explore All Services

@@ -62,6 +62,11 @@ export async function updateCustomerProfileAction(
 
   revalidatePath("/profile");
   revalidatePath("/dashboard");
+  revalidatePath("/bookings");
+  revalidatePath("/messages");
+  revalidatePath("/notifications");
+  revalidatePath("/assistant");
+  revalidatePath("/book");
 
   return { status: "success", message: "Your profile has been saved successfully." };
 }

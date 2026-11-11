@@ -79,16 +79,21 @@ export async function resolveUserDashboardPath(
 ): Promise<string> {
   const config = getSupabasePublicConfig();
 
-  // Check authoritative profile & user_roles
-  const profileRes = config && accessToken
-    ? await supabaseFetch<Array<{ primary_role: string | null }>>(
-        config,
-        `/rest/v1/profiles?id=eq.${userId}&limit=1&select=primary_role`,
-        { accessToken }
-      )
-    : await supabaseAdminFetch<Array<{ primary_role: string | null }>>(
-        `/rest/v1/profiles?id=eq.${userId}&limit=1&select=primary_role`
-      );
+  // Check authoritative profile & user_roles concurrently
+  const [profileRes, rolesRes] = await Promise.all([
+    config && accessToken
+      ? supabaseFetch<Array<{ primary_role: string | null }>>(
+          config,
+          `/rest/v1/profiles?id=eq.${userId}&limit=1&select=primary_role`,
+          { accessToken }
+        )
+      : supabaseAdminFetch<Array<{ primary_role: string | null }>>(
+          `/rest/v1/profiles?id=eq.${userId}&limit=1&select=primary_role`
+        ),
+    supabaseAdminFetch<Array<{ role: string }>>(
+      `/rest/v1/user_roles?user_id=eq.${userId}&is_active=eq.true&select=role`
+    ),
+  ]);
 
   const primaryRole =
     profileRes.ok && Array.isArray(profileRes.data) && profileRes.data[0]?.primary_role
@@ -99,10 +104,7 @@ export async function resolveUserDashboardPath(
   if (primaryRole === "professional") return "/pro/dashboard";
   if (primaryRole === "business" || primaryRole === "property_manager") return "/business";
 
-  // Secondary check in user_roles in case admin role was added alongside customer
-  const rolesRes = await supabaseAdminFetch<Array<{ role: string }>>(
-    `/rest/v1/user_roles?user_id=eq.${userId}&is_active=eq.true&select=role`
-  );
+  // Secondary check in user_roles in case elevated role was added alongside customer
   if (rolesRes.ok && Array.isArray(rolesRes.data)) {
     const roles = rolesRes.data.map((r) => r.role);
     if (roles.includes("admin")) return "/admin";

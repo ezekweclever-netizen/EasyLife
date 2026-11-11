@@ -8,7 +8,6 @@ import {
   type PasswordRecoveryState,
 } from "@/app/actions/auth";
 import { PublicShell } from "@/components/site/public-shell";
-import { EasyLifeLogo } from "@/components/ui/logo";
 import { Button } from "@/components/ui/button";
 
 const initialState: PasswordRecoveryState = {
@@ -39,16 +38,13 @@ export default function ForgotPasswordPage() {
 
   return (
     <PublicShell>
-      <div className="py-12 sm:py-20 bg-[#F8FAFC]">
-        <div className="max-w-md mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8">
-            <div className="flex justify-center mb-5">
-              <EasyLifeLogo theme="light" size="md" />
-            </div>
+      <div className="py-6 sm:py-10 bg-[#F8FAFC] min-h-[calc(100vh-5.5rem)] flex flex-col justify-center">
+        <div className="w-full max-w-md mx-auto px-4 sm:px-6">
+          <div className="text-center mb-5">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A]">
               {recoveryToken ? "Set a New Password" : "Reset Your Password"}
             </h1>
-            <p className="mt-2.5 text-base text-slate-600">
+            <p className="mt-1.5 text-sm sm:text-base text-slate-600">
               {recoveryToken
                 ? "Choose a strong new password (minimum 8 characters) for your EasyLife account."
                 : "Enter the email address associated with your EasyLife account and we will send you a password reset link."}

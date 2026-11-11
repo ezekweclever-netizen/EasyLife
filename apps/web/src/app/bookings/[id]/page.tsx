@@ -40,13 +40,14 @@ export default async function BookingDetailPage({
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 lg:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
       <CustomerHeader
         user={{
           id: auth.user.id,
           email: auth.user.email,
           fullName: profile?.full_name ?? undefined,
         }}
+        selectedCity={profile?.city || "Port Harcourt"}
       />
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

@@ -95,7 +95,8 @@ export async function getUnreadNotificationCount(
     }
   );
 
-  if (!res.ok) return 0;
-  // If count header is parsed, or data contains array
-  return Array.isArray(res.data) && res.data.length > 0 ? (res.data[0] as any).count || res.data.length : 0;
+  if (!res.ok || !Array.isArray(res.data) || res.data.length === 0) return 0;
+  const rawCount = (res.data[0] as { count?: number | string } | undefined)?.count;
+  const parsed = typeof rawCount === "number" ? rawCount : Number(rawCount);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
 }

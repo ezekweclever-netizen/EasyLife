@@ -43,6 +43,7 @@ export async function sendAssistantMessageAction(
       "/rest/v1/rpc/check_ai_rate_limit",
       {
         method: "POST",
+        timeoutMs: 4000,
         body: {
           p_session_id: sessionId,
           p_user_id: userId,
@@ -96,6 +97,7 @@ export async function sendAssistantMessageAction(
   try {
     await supabaseAdminFetch("/rest/v1/rpc/record_ai_assistant_log", {
       method: "POST",
+      timeoutMs: 4000,
       body: {
         p_session_id: sessionId,
         p_customer_message: userMessage.trim(),

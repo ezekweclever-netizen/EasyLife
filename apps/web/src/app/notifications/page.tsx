@@ -26,7 +26,7 @@ export default async function NotificationsPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 lg:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -34,6 +34,7 @@ export default async function NotificationsPage() {
           fullName: profile?.full_name,
         }}
         unreadNotificationsCount={unreadCount}
+        selectedCity={profile?.city || "Port Harcourt"}
       />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">

@@ -100,6 +100,7 @@ async function callOpenAIChatCompletion(params: {
       temperature: 0.2,
       max_tokens: 1000,
     }),
+    signal: AbortSignal.timeout(8_000),
   });
 
   if (!response.ok) {
