@@ -25,11 +25,15 @@ interface UserManagerClientProps {
   initialCount: number;
 }
 
+const ADMIN_USERS_PAGE_SIZE = 25;
+
 export function UserManagerClient({
   initialUsers,
   initialCount,
 }: UserManagerClientProps) {
   const [users, setUsers] = useState<UserProfile[]>(initialUsers);
+  const [totalCount, setTotalCount] = useState<number>(initialCount);
+  const [page, setPage] = useState<number>(1);
   const [search, setSearch] = useState("");
   const [suspendedFilter, setSuspendedFilter] = useState<string>("all");
   const [isPending, startTransition] = useTransition();
@@ -41,23 +45,33 @@ export function UserManagerClient({
   const [actionError, setActionError] = useState<string | null>(null);
   const [actionSuccess, setActionSuccess] = useState<string | null>(null);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const loadPage = (targetPage: number, nextSearch = search, nextFilter = suspendedFilter) => {
     startTransition(async () => {
       const isSuspended =
-        suspendedFilter === "suspended"
+        nextFilter === "suspended"
           ? true
-          : suspendedFilter === "active"
+          : nextFilter === "active"
           ? false
           : undefined;
 
       const result = await fetchAdminUsers({
-        search,
+        search: nextSearch,
         isSuspended,
+        page: targetPage,
+        limit: ADMIN_USERS_PAGE_SIZE,
       });
       setUsers((result.users as unknown as UserProfile[]) || []);
+      setTotalCount(result.totalCount ?? 0);
+      setPage(targetPage);
     });
   };
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    loadPage(1);
+  };
+
+  const totalPages = Math.max(1, Math.ceil(totalCount / ADMIN_USERS_PAGE_SIZE));
 
   const handleSuspendSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -125,7 +139,7 @@ export function UserManagerClient({
     <div className="space-y-6">
       {/* Search and Filters Toolbar */}
       <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <form onSubmit={handleSearch} className="flex flex-1 items-center gap-2">
+        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row flex-1 sm:items-center gap-2">
           <input
             type="text"
             value={search}
@@ -152,7 +166,8 @@ export function UserManagerClient({
         </form>
 
         <div className="text-xs text-slate-500">
-          Showing <strong className="text-slate-800">{users.length}</strong> matching user accounts
+          Showing <strong className="text-slate-800">{users.length}</strong> of{" "}
+          <strong className="text-slate-800">{totalCount}</strong> accounts
         </div>
       </div>
 
@@ -279,6 +294,33 @@ export function UserManagerClient({
             </tbody>
           </table>
         </div>
+
+        {totalPages > 1 && (
+          <div className="px-4 py-3 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600">
+            <span>
+              Page <strong className="text-slate-900">{page}</strong> of{" "}
+              <strong className="text-slate-900">{totalPages}</strong> ({totalCount} total accounts)
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                disabled={isPending || page <= 1}
+                onClick={() => loadPage(page - 1)}
+                className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-semibold hover:bg-slate-50 disabled:opacity-40"
+              >
+                ← Previous
+              </button>
+              <button
+                type="button"
+                disabled={isPending || page >= totalPages}
+                onClick={() => loadPage(page + 1)}
+                className="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 disabled:opacity-40"
+              >
+                Next →
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Suspend Confirmation Modal */}

@@ -157,7 +157,15 @@ export function ProHeader({
               title="Manage Profile"
             >
               {avatarUrl ? (
-                <img src={avatarUrl} alt={businessName} className="w-full h-full object-cover" />
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={avatarUrl}
+                  alt={businessName}
+                  width={36}
+                  height={36}
+                  decoding="async"
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <span className="text-xs font-bold text-[#0D9488]">
                   {businessName.slice(0, 2).toUpperCase()}

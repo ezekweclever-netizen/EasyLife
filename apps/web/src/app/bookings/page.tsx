@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getAuthenticatedUser } from "@/lib/auth/session";
-import { getCustomerBookings, getCustomerProfile } from "@/lib/supabase/customer";
+import { getCustomerBookingsPaginated, getCustomerProfile } from "@/lib/supabase/customer";
 import { CustomerHeader } from "@/components/customer/customer-header";
 
 export const metadata: Metadata = {
@@ -11,9 +11,12 @@ export const metadata: Metadata = {
   description: "View and manage all your past and active service requests, quotations, and appointments.",
 };
 
+const BOOKINGS_PAGE_SIZE = 15;
+
 interface BookingsPageProps {
   searchParams: Promise<{
     tab?: "all" | "active" | "completed" | "cancelled";
+    page?: string;
   }>;
 }
 
@@ -23,12 +26,22 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
     redirect("/login?next=/bookings");
   }
 
-  const { tab = "all" } = await searchParams;
+  const { tab = "all", page = "1" } = await searchParams;
+  const currentPage = Math.max(1, Number.parseInt(page, 10) || 1);
+  const offset = (currentPage - 1) * BOOKINGS_PAGE_SIZE;
 
-  const [bookings, profile] = await Promise.all([
-    getCustomerBookings(auth.user.id, auth.accessToken, tab),
+  const [bookingsResult, profile] = await Promise.all([
+    getCustomerBookingsPaginated(auth.user.id, auth.accessToken, {
+      statusFilter: tab,
+      limit: BOOKINGS_PAGE_SIZE,
+      offset,
+    }),
     getCustomerProfile(auth.user.id, auth.accessToken),
   ]);
+
+  const bookings = bookingsResult.items;
+  const totalCount = bookingsResult.totalCount;
+  const totalPages = Math.max(1, Math.ceil(totalCount / BOOKINGS_PAGE_SIZE));
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
@@ -155,6 +168,42 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
                 </div>
               );
             })}
+
+            {totalPages > 1 && (
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white rounded-2xl border border-[#E2E8F0] px-5 py-3.5 text-xs text-[#64748B]">
+                <span>
+                  Showing <strong className="text-[#0F172A]">{offset + 1}</strong>–
+                  <strong className="text-[#0F172A]">{Math.min(offset + bookings.length, totalCount)}</strong> of{" "}
+                  <strong className="text-[#0F172A]">{totalCount}</strong> bookings (Page {currentPage} of {totalPages})
+                </span>
+                <div className="flex items-center gap-2">
+                  {currentPage > 1 ? (
+                    <Link
+                      href={`/bookings?tab=${encodeURIComponent(tab)}&page=${currentPage - 1}`}
+                      className="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] font-semibold text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
+                    >
+                      ← Previous
+                    </Link>
+                  ) : (
+                    <span className="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-[#94A3B8]">
+                      ← Previous
+                    </span>
+                  )}
+                  {currentPage < totalPages ? (
+                    <Link
+                      href={`/bookings?tab=${encodeURIComponent(tab)}&page=${currentPage + 1}`}
+                      className="px-3.5 py-1.5 rounded-lg bg-[#0F766E] font-semibold text-white hover:bg-[#0D655E] transition-colors"
+                    >
+                      Next →
+                    </Link>
+                  ) : (
+                    <span className="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-[#94A3B8]">
+                      Next →
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="bg-white rounded-3xl border border-[#E2E8F0] p-12 text-center space-y-4 max-w-lg mx-auto shadow-xs">

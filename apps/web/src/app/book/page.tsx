@@ -3,10 +3,12 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 import {
-  getServiceCategories,
-  getProfessionalById,
+  getCatalogueServiceBySlugOrId,
   getCustomerProfile,
+  getProfessionalById,
+  getServiceCategories,
 } from "@/lib/supabase/customer";
+import { checkCatalogueServiceAvailability } from "@/lib/supabase/catalogue-availability";
 import { CustomerHeader } from "@/components/customer/customer-header";
 import { BookingWizard } from "@/components/booking/booking-wizard";
 
@@ -19,6 +21,7 @@ export const metadata: Metadata = {
 interface BookPageProps {
   searchParams: Promise<{
     category?: string;
+    service?: string;
     pro?: string;
     city?: string;
     title?: string;
@@ -28,13 +31,9 @@ interface BookPageProps {
 }
 
 export default async function BookServicePage({ searchParams }: BookPageProps) {
-  const auth = await getAuthenticatedUser();
-  if (!auth) {
-    redirect("/login?next=/book");
-  }
-
   const {
     category,
+    service,
     pro,
     city,
     title,
@@ -42,12 +41,71 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
     urgency,
   } = await searchParams;
 
-  const [categories, preSelectedPro, profile] = await Promise.all([
+  const auth = await getAuthenticatedUser();
+  if (!auth) {
+    const nextQs = new URLSearchParams();
+    if (category) nextQs.set("category", category);
+    if (service) nextQs.set("service", service);
+    if (pro) nextQs.set("pro", pro);
+    if (city) nextQs.set("city", city);
+    if (title) nextQs.set("title", title);
+    if (description) nextQs.set("description", description);
+    if (urgency) nextQs.set("urgency", urgency);
+    const nextPath = nextQs.toString() ? `/book?${nextQs.toString()}` : "/book";
+    redirect(`/login?next=${encodeURIComponent(nextPath)}`);
+  }
+
+  const [allCategories, preSelectedPro, preSelectedService, profile] = await Promise.all([
     getServiceCategories(),
     pro ? getProfessionalById(pro) : Promise.resolve(null),
+    service ? getCatalogueServiceBySlugOrId(service) : Promise.resolve(null),
     getCustomerProfile(auth.user.id, auth.accessToken),
   ]);
 
+  let unavailableServiceNotice:
+    | { name: string; reason: string; categorySlug?: string }
+    | null = null;
+  let fallbackUnavailableCategoryId: string | undefined;
+
+  if (service && !preSelectedService) {
+    const availability = await checkCatalogueServiceAvailability(service);
+    if (availability.status === "unavailable") {
+      unavailableServiceNotice = {
+        name: availability.name || service,
+        reason:
+          availability.reason ||
+          "This service is currently paused for standard booking. You can still submit a custom request in the parent trade category below.",
+        categorySlug: availability.categorySlug,
+      };
+      if (
+        availability.categoryId &&
+        allCategories.some((c) => c.id === availability.categoryId && !c.parent_id)
+      ) {
+        fallbackUnavailableCategoryId = availability.categoryId;
+      }
+    }
+  }
+
+  const topCategories = allCategories.filter((c) => !c.parent_id);
+  const categories = topCategories.length > 0 ? topCategories : allCategories;
+
+  const matchedCategory = category
+    ? allCategories.find((c) => c.id === category || c.slug === category) || null
+    : null;
+
+  const resolvedCategoryId =
+    preSelectedService?.category_id ||
+    matchedCategory?.parent_id ||
+    matchedCategory?.id ||
+    fallbackUnavailableCategoryId ||
+    undefined;
+
+  const resolvedSubcategoryId =
+    preSelectedService?.subcategory_id ||
+    (matchedCategory?.parent_id ? matchedCategory.id : undefined);
+
+  const resolvedTitle =
+    title || preSelectedService?.name || unavailableServiceNotice?.name || undefined;
   const activeCity = city?.trim() || profile?.city || "Port Harcourt";
 
   return (
@@ -76,10 +134,13 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
 
         <BookingWizard
           categories={categories}
-          preSelectedCategory={category}
+          preSelectedCategory={resolvedCategoryId}
+          preSelectedSubcategoryId={resolvedSubcategoryId}
+          preSelectedService={preSelectedService}
+          unavailableServiceNotice={unavailableServiceNotice}
           preSelectedPro={preSelectedPro}
           defaultCity={activeCity}
-          initialTitle={title}
+          initialTitle={resolvedTitle}
           initialDescription={description}
           initialUrgency={urgency}
           userEmail={auth.user.email || undefined}

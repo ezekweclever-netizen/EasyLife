@@ -1,15 +1,34 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { fetchAdminBookings } from "@/app/actions/admin";
+import { fetchAdminBookingsPaginated } from "@/app/actions/admin";
 
 export const metadata: Metadata = {
   title: "Service Bookings Oversight — EasyLife Administration",
   description: "Monitor real-time customer service orders, fulfillment milestones, and financial totals.",
 };
 
-export default async function AdminBookingsPage() {
-  const bookings = await fetchAdminBookings({ limit: 50 });
+const ADMIN_BOOKINGS_PAGE_SIZE = 25;
+
+interface AdminBookingsPageProps {
+  searchParams: Promise<{
+    status?: string;
+    page?: string;
+  }>;
+}
+
+export default async function AdminBookingsPage({ searchParams }: AdminBookingsPageProps) {
+  const { status = "all", page = "1" } = await searchParams;
+  const currentPage = Math.max(1, Number.parseInt(page, 10) || 1);
+
+  const { bookings, totalCount } = await fetchAdminBookingsPaginated({
+    status,
+    page: currentPage,
+    limit: ADMIN_BOOKINGS_PAGE_SIZE,
+  });
+
+  const totalPages = Math.max(1, Math.ceil(totalCount / ADMIN_BOOKINGS_PAGE_SIZE));
+  const offset = (currentPage - 1) * ADMIN_BOOKINGS_PAGE_SIZE;
 
   const formatNaira = (kobo: number) => {
     return new Intl.NumberFormat("en-NG", {
@@ -64,13 +83,38 @@ export default async function AdminBookingsPage() {
         </Link>
       </div>
 
+      <div className="flex flex-wrap items-center gap-2">
+        {[
+          { id: "all", label: "All Orders" },
+          { id: "active", label: "Active Pipeline" },
+          { id: "completed", label: "Completed" },
+          { id: "disputed", label: "Disputed" },
+          { id: "cancelled", label: "Cancelled" },
+        ].map((tab) => {
+          const isActive = status === tab.id;
+          return (
+            <Link
+              key={tab.id}
+              href={`/admin/bookings?status=${encodeURIComponent(tab.id)}`}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
+                isActive
+                  ? "bg-slate-900 text-white"
+                  : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
+              }`}
+            >
+              {tab.label}
+            </Link>
+          );
+        })}
+      </div>
+
       <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
         <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
           <div className="text-xs font-bold text-slate-800">
-            Recent Service Bookings ({bookings.length})
+            Service Bookings ({totalCount})
           </div>
           <span className="text-2xs text-slate-400">
-            Ordered by newest first
+            Ordered by newest first • Page {currentPage} of {totalPages}
           </span>
         </div>
 
@@ -143,6 +187,42 @@ export default async function AdminBookingsPage() {
             </tbody>
           </table>
         </div>
+
+        {totalPages > 1 && (
+          <div className="px-4 py-3 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600">
+            <span>
+              Showing <strong className="text-slate-900">{offset + 1}</strong>–
+              <strong className="text-slate-900">{Math.min(offset + bookings.length, totalCount)}</strong> of{" "}
+              <strong className="text-slate-900">{totalCount}</strong> bookings
+            </span>
+            <div className="flex items-center gap-2">
+              {currentPage > 1 ? (
+                <Link
+                  href={`/admin/bookings?status=${encodeURIComponent(status)}&page=${currentPage - 1}`}
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-semibold hover:bg-slate-50"
+                >
+                  ← Previous
+                </Link>
+              ) : (
+                <span className="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-400">
+                  ← Previous
+                </span>
+              )}
+              {currentPage < totalPages ? (
+                <Link
+                  href={`/admin/bookings?status=${encodeURIComponent(status)}&page=${currentPage + 1}`}
+                  className="px-3 py-1.5 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800"
+                >
+                  Next →
+                </Link>
+              ) : (
+                <span className="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-400">
+                  Next →
+                </span>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

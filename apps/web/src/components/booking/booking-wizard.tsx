@@ -5,10 +5,19 @@ import Link from "next/link";
 import { createBookingAction } from "@/app/actions/booking";
 import { uploadFileAction } from "@/app/actions/storage";
 import type { ServiceCategoryItem, PublicProfessionalItem } from "@/lib/supabase/customer";
+import type { CatalogueServiceItem } from "@easylife/shared-types";
+import { formatServicePriceRange } from "@/lib/catalogue-display";
 
 export interface BookingWizardProps {
   categories: ServiceCategoryItem[];
   preSelectedCategory?: string;
+  preSelectedSubcategoryId?: string;
+  preSelectedService?: CatalogueServiceItem | null;
+  unavailableServiceNotice?: {
+    name: string;
+    reason: string;
+    categorySlug?: string;
+  } | null;
   preSelectedPro?: PublicProfessionalItem | null;
   defaultCity?: string;
   initialTitle?: string;
@@ -39,6 +48,9 @@ const NIGERIAN_CITIES = [
 export function BookingWizard({
   categories,
   preSelectedCategory,
+  preSelectedSubcategoryId,
+  preSelectedService,
+  unavailableServiceNotice = null,
   preSelectedPro,
   defaultCity = "Port Harcourt",
   initialTitle,
@@ -89,14 +101,38 @@ export function BookingWizard({
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
+    setSubmissionError(null);
+    const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp", "application/pdf"]);
+    const maxBytes = 8 * 1024 * 1024;
     const files = Array.from(e.target.files);
-    const valid = files.slice(0, 5).map((f) => ({
-      name: f.name,
-      size: f.size,
-      type: f.type,
-      file: f,
-    }));
+    const rejected: string[] = [];
+    const valid = files
+      .filter((f) => {
+        const mime = (f.type || "").toLowerCase();
+        const ext = f.name.toLowerCase().split(".").pop() || "";
+        const validExt = ["jpg", "jpeg", "png", "webp", "pdf"].includes(ext);
+        if ((!allowedTypes.has(mime) && !validExt) || f.size <= 0 || f.size > maxBytes) {
+          rejected.push(f.name);
+          return false;
+        }
+        return true;
+      })
+      .slice(0, 5)
+      .map((f) => ({
+        name: f.name,
+        size: f.size,
+        type: f.type,
+        file: f,
+      }));
+
+    if (rejected.length > 0) {
+      setSubmissionError(
+        `Skipped invalid or oversized file(s): ${rejected.join(", ")}. Only JPEG, PNG, WebP, or PDF up to 8MB are supported.`
+      );
+    }
+
     setAttachments((prev) => [...prev, ...valid].slice(0, 5));
+    e.target.value = "";
   };
 
   const removeAttachment = (index: number) => {
@@ -144,7 +180,13 @@ export function BookingWizard({
     setIsSubmitting(true);
     setSubmissionError(null);
 
-    const uploadedAttachmentLines: string[] = [];
+    const uploadedAttachments: Array<{
+      storage_bucket: string;
+      storage_path: string;
+      file_name: string;
+      mime_type: string;
+      file_size_bytes: number;
+    }> = [];
     for (const item of attachments) {
       const uploadForm = new FormData();
       uploadForm.append("file", item.file);
@@ -155,20 +197,31 @@ export function BookingWizard({
         setIsSubmitting(false);
         return;
       }
-      uploadedAttachmentLines.push(`${item.name} (${upRes.path})`);
+      uploadedAttachments.push({
+        storage_bucket: "booking-attachments",
+        storage_path: upRes.path,
+        file_name: item.name,
+        mime_type: item.type || "application/octet-stream",
+        file_size_bytes: item.size,
+      });
     }
-
-    const combinedInstructions = [
-      additionalInstructions.trim(),
-      uploadedAttachmentLines.length > 0
-        ? `Uploaded Attachments: ${uploadedAttachmentLines.join(", ")}`
-        : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
 
     const formData = new FormData();
     formData.append("categoryId", categoryId || "");
+    if (
+      preSelectedService?.id &&
+      (!preSelectedService.category_id || preSelectedService.category_id === categoryId)
+    ) {
+      formData.append("serviceId", preSelectedService.id);
+      if (preSelectedService.subcategory_id || preSelectedSubcategoryId) {
+        formData.append(
+          "subcategoryId",
+          preSelectedService.subcategory_id || preSelectedSubcategoryId || ""
+        );
+      }
+    } else if (preSelectedSubcategoryId && preSelectedCategory === categoryId) {
+      formData.append("subcategoryId", preSelectedSubcategoryId);
+    }
     formData.append("title", title || "");
     formData.append("description", description || "");
     formData.append("urgency", urgency || "normal");
@@ -177,7 +230,10 @@ export function BookingWizard({
     formData.append("serviceAddress", serviceAddress || "");
     formData.append("preferredDate", preferredDate || "");
     formData.append("preferredTimeSlot", preferredTimeSlot || "");
-    formData.append("additionalInstructions", combinedInstructions);
+    formData.append("additionalInstructions", additionalInstructions.trim());
+    if (uploadedAttachments.length > 0) {
+      formData.append("attachmentsJson", JSON.stringify(uploadedAttachments));
+    }
 
     if (preSelectedPro?.professional_id) {
       formData.append("professionalId", preSelectedPro.professional_id);
@@ -349,6 +405,86 @@ export function BookingWizard({
           </div>
         )}
 
+        {/* Temporarily Unavailable Catalogue Service Notice */}
+        {unavailableServiceNotice && (
+          <div
+            role="status"
+            className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 space-y-2 text-xs"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="font-bold text-sm">
+                &ldquo;{unavailableServiceNotice.name}&rdquo; is Currently Unavailable
+              </span>
+              <div className="flex items-center gap-2">
+                {unavailableServiceNotice.categorySlug && (
+                  <Link
+                    href={`/explore-services?cat=${encodeURIComponent(unavailableServiceNotice.categorySlug)}`}
+                    className="font-bold text-[#0F766E] hover:underline"
+                  >
+                    View Active Alternatives →
+                  </Link>
+                )}
+                <Link
+                  href="/services"
+                  className="font-semibold text-amber-900 hover:underline"
+                >
+                  Catalogue
+                </Link>
+              </div>
+            </div>
+            <p className="text-amber-900 leading-relaxed">
+              {unavailableServiceNotice.reason} You can continue below to submit a custom request under the matching parent category so verified specialists can review and quote your scope.
+            </p>
+          </div>
+        )}
+
+        {/* Pre-Selected Catalogue Service Notice */}
+        {preSelectedService && (
+          <div className="p-4 rounded-xl bg-[#EEF9F9] border border-[#24989A]/30 space-y-2 text-xs text-[#154752]">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded-md bg-[#154752] text-white font-mono font-bold text-[10px]">
+                  {preSelectedService.service_code}
+                </span>
+                <p className="font-bold text-sm text-[#154752]">
+                  {preSelectedService.name}
+                </p>
+              </div>
+              <span className="font-bold text-[#0F766E]">
+                {formatServicePriceRange(
+                  preSelectedService.base_price_min_kobo,
+                  preSelectedService.base_price_max_kobo
+                )}
+              </span>
+            </div>
+            {preSelectedService.short_description && (
+              <p className="text-[#4E6065] leading-relaxed">
+                {preSelectedService.short_description}
+              </p>
+            )}
+            {(preSelectedService.requirements || []).filter(
+              (r) => r.applies_to === "customer" || r.applies_to === "both"
+            ).length > 0 && (
+              <div className="pt-2 border-t border-[#24989A]/20 space-y-1">
+                <p className="font-bold text-[11px] uppercase tracking-wider text-[#0F766E]">
+                  Helpful Details to Include:
+                </p>
+                <ul className="list-disc list-inside space-y-0.5 text-[#334155]">
+                  {(preSelectedService.requirements || [])
+                    .filter((r) => r.applies_to === "customer" || r.applies_to === "both")
+                    .slice(0, 3)
+                    .map((req) => (
+                      <li key={req.id}>
+                        <span className="font-semibold">{req.title}</span>
+                        {req.description ? ` — ${req.description}` : ""}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Pre-Selected Professional Notice */}
         {preSelectedPro && (
           <div className="p-4 rounded-xl bg-[#F0FDFA] border border-[#CCFBF1] flex items-center justify-between text-xs text-[#0F766E]">
@@ -479,8 +615,8 @@ export function BookingWizard({
         {step === 2 && (
           <div className="space-y-5">
             <div>
-              <h2 className="text-xl font-bold text-[#0F172A]">2. Photos & Video Attachments</h2>
-              <p className="text-xs text-[#64748B]">Attaching clear photos helps technicians provide faster, accurate quotations</p>
+              <h2 className="text-xl font-bold text-[#0F172A]">2. Fault Photos &amp; Document Attachments</h2>
+              <p className="text-xs text-[#64748B]">Attaching clear photos or PDFs helps technicians provide faster, accurate quotations</p>
             </div>
 
             {/* Drag & Drop Upload Area */}
@@ -489,15 +625,15 @@ export function BookingWizard({
                 📷
               </div>
               <div>
-                <p className="text-sm font-bold text-[#0F172A]">Upload fault photographs or video clips</p>
-                <p className="text-xs text-[#64748B]">Supports JPEG, PNG, WebP, MP4 (Max 5 files, 10MB each)</p>
+                <p className="text-sm font-bold text-[#0F172A]">Upload fault photographs or supporting PDFs</p>
+                <p className="text-xs text-[#64748B]">Supports JPEG, PNG, WebP, and PDF (Max 5 files, 8MB each)</p>
               </div>
               <label className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] cursor-pointer transition-colors shadow-xs">
                 <span>Select Files from Device</span>
                 <input
                   type="file"
                   multiple
-                  accept="image/png,image/jpeg,image/webp,video/mp4,video/quicktime"
+                  accept="image/png,image/jpeg,image/webp,application/pdf"
                   onChange={handleFileUpload}
                   className="hidden"
                 />

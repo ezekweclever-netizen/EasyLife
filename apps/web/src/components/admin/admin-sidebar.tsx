@@ -27,6 +27,7 @@ const NAV_GROUPS = [
       { href: "/admin/verifications", label: "KYC & Verifications", icon: "🛡️" },
       { href: "/admin/businesses", label: "Businesses & Facilities", icon: "🏢" },
       { href: "/admin/categories", label: "Service Categories", icon: "📁" },
+      { href: "/admin/services", label: "Services & Rules", icon: "🛠️" },
     ],
   },
   {

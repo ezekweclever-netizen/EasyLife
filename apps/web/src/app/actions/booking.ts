@@ -37,6 +37,8 @@ export async function createBookingAction(
   }
 
   const categoryId = String(formData.get("categoryId") || "").trim();
+  const serviceId = String(formData.get("serviceId") || "").trim();
+  const subcategoryId = String(formData.get("subcategoryId") || "").trim();
   const title = String(formData.get("title") || "").trim();
   const description = String(formData.get("description") || "").trim();
   const city = String(formData.get("city") || "Port Harcourt").trim();
@@ -47,6 +49,26 @@ export async function createBookingAction(
   const urgency = String(formData.get("urgency") || "normal").trim();
   const additionalInstructions = String(formData.get("additionalInstructions") || "").trim();
   const professionalId = String(formData.get("professionalId") || "").trim();
+  const attachmentsJsonRaw = String(formData.get("attachmentsJson") || "[]").trim();
+
+  type UploadedAttachmentMeta = {
+    storage_bucket?: string;
+    storage_path?: string;
+    file_name?: string;
+    mime_type?: string;
+    file_size_bytes?: number;
+  };
+  let parsedAttachments: UploadedAttachmentMeta[] = [];
+  if (attachmentsJsonRaw) {
+    try {
+      const candidate = JSON.parse(attachmentsJsonRaw);
+      if (Array.isArray(candidate)) {
+        parsedAttachments = candidate.slice(0, 5);
+      }
+    } catch {
+      parsedAttachments = [];
+    }
+  }
 
   // Field Validations
   const fieldErrors: Record<string, string> = {};
@@ -140,6 +162,27 @@ export async function createBookingAction(
     payload.professional_id = professionalId;
   }
 
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (serviceId && uuidRegex.test(serviceId)) {
+    const srvCheck = await supabaseFetch<
+      Array<{ id: string; category_id: string; subcategory_id: string | null }>
+    >(
+      config,
+      `/rest/v1/services?id=eq.${serviceId}&is_active=eq.true&deleted_at=is.null&limit=1&select=id,category_id,subcategory_id`,
+      { accessToken: auth.accessToken }
+    );
+    const verifiedService =
+      srvCheck.ok && Array.isArray(srvCheck.data) ? srvCheck.data[0] : null;
+    if (verifiedService && verifiedService.category_id === categoryId) {
+      payload.service_id = verifiedService.id;
+      if (verifiedService.subcategory_id) {
+        payload.subcategory_id = verifiedService.subcategory_id;
+      }
+    }
+  } else if (subcategoryId && uuidRegex.test(subcategoryId)) {
+    payload.subcategory_id = subcategoryId;
+  }
+
   // Call Supabase PostgREST with user's access token to enforce RLS
   const res = await supabaseFetch<Array<{ id: string; reference_code: string }>>(
     config,
@@ -169,6 +212,45 @@ export async function createBookingAction(
   }
 
   const created = res.data[0];
+
+  // Register structured attachment rows in public.booking_attachments under the user's RLS session
+  const validAttachments = parsedAttachments.filter(
+    (item) =>
+      typeof item.storage_path === "string" &&
+      item.storage_path.startsWith(`${auth.user.id}/`) &&
+      !item.storage_path.includes("..") &&
+      typeof item.file_name === "string" &&
+      item.file_name.trim().length > 0 &&
+      typeof item.file_size_bytes === "number" &&
+      item.file_size_bytes > 0 &&
+      item.file_size_bytes <= 8 * 1024 * 1024
+  );
+
+  if (validAttachments.length > 0) {
+    const attachmentRows = validAttachments.map((item) => ({
+      booking_id: created.id,
+      uploaded_by: auth.user.id,
+      storage_bucket: "booking-attachments",
+      storage_path: item.storage_path!,
+      file_name: item.file_name!.trim(),
+      mime_type:
+        typeof item.mime_type === "string" && item.mime_type.trim()
+          ? item.mime_type.trim()
+          : "application/octet-stream",
+      file_size_bytes: Math.round(item.file_size_bytes!),
+      attachment_stage: "request",
+    }));
+
+    const attachRes = await supabaseFetch(config, "/rest/v1/booking_attachments", {
+      method: "POST",
+      accessToken: auth.accessToken,
+      body: attachmentRows,
+    });
+
+    if (!attachRes.ok) {
+      console.warn("booking_attachments registration failed:", attachRes.message);
+    }
+  }
 
   revalidatePath("/dashboard");
   revalidatePath("/bookings");

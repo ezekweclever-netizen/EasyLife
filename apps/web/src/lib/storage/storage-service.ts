@@ -9,7 +9,7 @@
  * - Input validation against file types and size quotas
  */
 
-import { StorageBucketId } from "@easylife/shared-types";
+import { StorageBucketId, UserRole } from "@easylife/shared-types";
 import { getSupabasePublicConfig } from "@/lib/supabase/rest";
 import { getSupabaseAdminKey } from "@/lib/supabase/admin";
 import {
@@ -23,6 +23,7 @@ export interface StorageUploadOptions {
   data: Buffer | Uint8Array;
   mimeType: string;
   userId: string;
+  uploaderRole?: UserRole;
   upsert?: boolean;
 }
 
@@ -113,7 +114,15 @@ export class StorageService {
    * Uploads file binary to specified bucket with ownership and validation check
    */
   async uploadFile(options: StorageUploadOptions): Promise<StorageUploadResult> {
-    const { bucketId, path, data, mimeType, userId, upsert = true } = options;
+    const {
+      bucketId,
+      path,
+      data,
+      mimeType,
+      userId,
+      uploaderRole,
+      upsert = true,
+    } = options;
 
     // 1. Validation check
     const fileName = path.split("/").pop() || "file";
@@ -124,6 +133,7 @@ export class StorageService {
       mimeType,
       sizeBytes: data.byteLength,
       uploaderUserId: userId,
+      uploaderRole,
     });
 
     if (!validation.valid) {

@@ -1,27 +1,72 @@
 "use client";
 
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import type { ServiceCategoryItem } from "@/lib/supabase/customer";
+import type {
+  CatalogueCategoryNode,
+  ProfessionalDiscoverySort,
+} from "@easylife/shared-types";
 import type { OperatingNeighbourhood, MatchedProfessionalItem } from "@/lib/supabase/matching";
 
+export interface DiscoveryUnavailableNotice {
+  kind: "service" | "category" | "subcategory";
+  name: string;
+  reason: string;
+  alternatives: Array<{
+    label: string;
+    href: string;
+  }>;
+}
+
 interface ServiceDiscoveryClientProps {
-  categories: ServiceCategoryItem[];
+  catalogueTree: CatalogueCategoryNode[];
   neighbourhoods: OperatingNeighbourhood[];
   initialResults: MatchedProfessionalItem[];
+  totalCount?: number;
+  currentPage?: number;
+  pageSize?: number;
   defaultCity?: string;
   defaultCategorySlug?: string;
+  defaultSubcategorySlug?: string;
+  defaultServiceSlug?: string;
   defaultKeyword?: string;
+  defaultArea?: string;
+  defaultDistance?: string;
+  defaultDate?: string;
+  defaultTime?: string;
+  defaultRating?: string;
+  defaultVerified?: boolean;
+  defaultAvailable?: boolean;
+  defaultProviderType?: string;
+  defaultSort?: ProfessionalDiscoverySort;
+  unavailableNotice?: DiscoveryUnavailableNotice | null;
+  activeServiceBookingHref?: string;
 }
 
 export function ServiceDiscoveryClient({
-  categories,
+  catalogueTree,
   neighbourhoods,
   initialResults,
+  totalCount,
+  currentPage = 1,
+  pageSize = 9,
   defaultCity = "All Cities",
   defaultCategorySlug = "",
+  defaultSubcategorySlug = "",
+  defaultServiceSlug = "",
   defaultKeyword = "",
+  defaultArea = "",
+  defaultDistance = "all",
+  defaultDate = "",
+  defaultTime = "",
+  defaultRating = "0",
+  defaultVerified = false,
+  defaultAvailable = false,
+  defaultProviderType = "",
+  defaultSort = "relevance",
+  unavailableNotice = null,
+  activeServiceBookingHref,
 }: ServiceDiscoveryClientProps) {
   const router = useRouter();
   const [results, setResults] = useState<MatchedProfessionalItem[]>(initialResults);
@@ -30,14 +75,18 @@ export function ServiceDiscoveryClient({
   // Search filter states
   const [keyword, setKeyword] = useState(defaultKeyword);
   const [categorySlug, setCategorySlug] = useState(defaultCategorySlug);
+  const [subcategorySlug, setSubcategorySlug] = useState(defaultSubcategorySlug);
+  const [serviceSlug, setServiceSlug] = useState(defaultServiceSlug);
   const [city, setCity] = useState(defaultCity);
-  const [selectedNeighbourhood, setSelectedNeighbourhood] = useState("");
-  const [maxDistanceKm, setMaxDistanceKm] = useState<string>("all");
-  const [targetDate, setTargetDate] = useState("");
-  const [targetTime, setTargetTime] = useState("");
-  const [minRating, setMinRating] = useState<string>("0");
-  const [verifiedOnly, setVerifiedOnly] = useState(false);
-  const [availableOnly, setAvailableOnly] = useState(false);
+  const [selectedNeighbourhood, setSelectedNeighbourhood] = useState(defaultArea);
+  const [maxDistanceKm, setMaxDistanceKm] = useState<string>(defaultDistance);
+  const [targetDate, setTargetDate] = useState(defaultDate);
+  const [targetTime, setTargetTime] = useState(defaultTime);
+  const [minRating, setMinRating] = useState<string>(defaultRating);
+  const [verifiedOnly, setVerifiedOnly] = useState(defaultVerified);
+  const [availableOnly, setAvailableOnly] = useState(defaultAvailable);
+  const [providerType, setProviderType] = useState(defaultProviderType);
+  const [sortBy, setSortBy] = useState<ProfessionalDiscoverySort>(defaultSort);
 
   // Sync client state when server-side search results or URL-driven defaults update
   useEffect(() => {
@@ -53,8 +102,83 @@ export function ServiceDiscoveryClient({
   }, [defaultCategorySlug]);
 
   useEffect(() => {
+    setSubcategorySlug(defaultSubcategorySlug);
+  }, [defaultSubcategorySlug]);
+
+  useEffect(() => {
+    setServiceSlug(defaultServiceSlug);
+  }, [defaultServiceSlug]);
+
+  useEffect(() => {
     setKeyword(defaultKeyword);
   }, [defaultKeyword]);
+
+  useEffect(() => {
+    setSelectedNeighbourhood(defaultArea);
+  }, [defaultArea]);
+
+  useEffect(() => {
+    setMaxDistanceKm(defaultDistance);
+  }, [defaultDistance]);
+
+  useEffect(() => {
+    setTargetDate(defaultDate);
+  }, [defaultDate]);
+
+  useEffect(() => {
+    setTargetTime(defaultTime);
+  }, [defaultTime]);
+
+  useEffect(() => {
+    setMinRating(defaultRating);
+  }, [defaultRating]);
+
+  useEffect(() => {
+    setVerifiedOnly(defaultVerified);
+  }, [defaultVerified]);
+
+  useEffect(() => {
+    setAvailableOnly(defaultAvailable);
+  }, [defaultAvailable]);
+
+  useEffect(() => {
+    setProviderType(defaultProviderType);
+  }, [defaultProviderType]);
+
+  useEffect(() => {
+    setSortBy(defaultSort);
+  }, [defaultSort]);
+
+  const selectedCategoryNode = useMemo(
+    () => catalogueTree.find((c) => c.slug === categorySlug) || null,
+    [catalogueTree, categorySlug]
+  );
+
+  const availableSubcategories = useMemo(
+    () => selectedCategoryNode?.subcategories || [],
+    [selectedCategoryNode]
+  );
+
+  const selectedSubcategoryNode = useMemo(
+    () => availableSubcategories.find((s) => s.slug === subcategorySlug) || null,
+    [availableSubcategories, subcategorySlug]
+  );
+
+  const availableServices = useMemo(() => {
+    if (selectedSubcategoryNode) {
+      return selectedSubcategoryNode.services || [];
+    }
+    if (selectedCategoryNode) {
+      return [
+        ...(selectedCategoryNode.direct_services || []),
+        ...selectedCategoryNode.subcategories.flatMap((s) => s.services || []),
+      ];
+    }
+    return catalogueTree.flatMap((c) => [
+      ...(c.direct_services || []),
+      ...c.subcategories.flatMap((s) => s.services || []),
+    ]);
+  }, [catalogueTree, selectedCategoryNode, selectedSubcategoryNode]);
 
   // Filter neighbourhoods matching current selected city
   const cityNeighbourhoods = neighbourhoods.filter(
@@ -69,20 +193,32 @@ export function ServiceDiscoveryClient({
     }).format(kobo / 100);
   };
 
-  const applyFilters = (overrides?: {
+  const buildQueryParams = (overrides?: {
     city?: string;
     neighbourhood?: string;
     categorySlug?: string;
+    subcategorySlug?: string;
+    serviceSlug?: string;
     keyword?: string;
+    sortBy?: ProfessionalDiscoverySort;
+    providerType?: string;
+    page?: number;
   }) => {
     const activeCity = overrides?.city ?? city;
     const activeArea = overrides?.neighbourhood ?? selectedNeighbourhood;
     const activeCat = overrides?.categorySlug ?? categorySlug;
+    const activeSub = overrides?.subcategorySlug ?? subcategorySlug;
+    const activeSrv = overrides?.serviceSlug ?? serviceSlug;
     const activeKeyword = overrides?.keyword ?? keyword;
+    const activeSort = overrides?.sortBy ?? sortBy;
+    const activeType = overrides?.providerType ?? providerType;
+    const activePage = overrides?.page ?? 1;
 
     const queryParams = new URLSearchParams();
     if (activeKeyword.trim()) queryParams.set("q", activeKeyword.trim());
     if (activeCat) queryParams.set("cat", activeCat);
+    if (activeSub) queryParams.set("sub", activeSub);
+    if (activeSrv) queryParams.set("service", activeSrv);
     if (activeCity && activeCity !== "All Cities") queryParams.set("city", activeCity);
     if (activeArea) queryParams.set("area", activeArea);
     if (maxDistanceKm && maxDistanceKm !== "all") queryParams.set("distance", maxDistanceKm);
@@ -91,11 +227,32 @@ export function ServiceDiscoveryClient({
     if (minRating !== "0") queryParams.set("rating", minRating);
     if (verifiedOnly) queryParams.set("verified", "true");
     if (availableOnly) queryParams.set("available", "true");
+    if (activeType) queryParams.set("type", activeType);
+    if (activeSort && activeSort !== "relevance") queryParams.set("sort", activeSort);
+    if (activePage > 1) queryParams.set("page", String(activePage));
+    return queryParams;
+  };
 
-    const qs = queryParams.toString();
+  const applyFilters = (overrides?: {
+    city?: string;
+    neighbourhood?: string;
+    categorySlug?: string;
+    subcategorySlug?: string;
+    serviceSlug?: string;
+    keyword?: string;
+    sortBy?: ProfessionalDiscoverySort;
+    providerType?: string;
+    page?: number;
+  }) => {
+    const qs = buildQueryParams({ ...overrides, page: overrides?.page ?? 1 }).toString();
     startTransition(() => {
       router.push(qs ? `/explore-services?${qs}` : "/explore-services", { scroll: false });
     });
+  };
+
+  const buildPageHref = (targetPage: number) => {
+    const qs = buildQueryParams({ page: targetPage }).toString();
+    return qs ? `/explore-services?${qs}` : "/explore-services";
   };
 
   const handleSearch = (e?: React.FormEvent) => {
@@ -106,6 +263,8 @@ export function ServiceDiscoveryClient({
   const handleReset = () => {
     setKeyword("");
     setCategorySlug("");
+    setSubcategorySlug("");
+    setServiceSlug("");
     setCity("All Cities");
     setSelectedNeighbourhood("");
     setMaxDistanceKm("all");
@@ -114,10 +273,28 @@ export function ServiceDiscoveryClient({
     setMinRating("0");
     setVerifiedOnly(false);
     setAvailableOnly(false);
+    setProviderType("");
+    setSortBy("relevance");
     startTransition(() => {
       router.push("/explore-services", { scroll: false });
     });
   };
+
+  const resolvedTotalCount =
+    typeof totalCount === "number" ? totalCount : results.length;
+  const totalPages = Math.max(1, Math.ceil(resolvedTotalCount / pageSize));
+  const clampedPage = Math.min(currentPage, totalPages);
+  const showingFrom =
+    resolvedTotalCount === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+  const showingTo = Math.min(resolvedTotalCount, (currentPage - 1) * pageSize + results.length);
+  const pageNumbers: number[] = [];
+  for (
+    let p = Math.max(1, clampedPage - 2);
+    p <= Math.min(totalPages, clampedPage + 2);
+    p += 1
+  ) {
+    pageNumbers.push(p);
+  }
 
   return (
     <div className="space-y-8">
@@ -128,6 +305,12 @@ export function ServiceDiscoveryClient({
           className="px-3.5 py-2 rounded-xl bg-white text-[#0A2540] shadow-xs whitespace-nowrap"
         >
           🔧 Trades &amp; Technicians
+        </Link>
+        <Link
+          href="/services"
+          className="px-3.5 py-2 rounded-xl hover:bg-white/80 hover:text-[#0A2540] transition whitespace-nowrap"
+        >
+          📚 Full Service Catalogue
         </Link>
         <Link
           href="/dispatch"
@@ -200,7 +383,7 @@ export function ServiceDiscoveryClient({
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSearch();
             }}
-            placeholder="Search by fault, trade, or specialist name (e.g. Inverter technician, borehole pump, AC repair, Chukwuma)..."
+            placeholder="Search by fault, individual service, or specialist name (e.g. Inverter technician, borehole pump, AC repair)..."
             className="w-full pl-10 pr-28 py-3 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
           />
           <span className="absolute left-3 text-slate-400 text-base">🔍</span>
@@ -209,40 +392,123 @@ export function ServiceDiscoveryClient({
             onClick={() => handleSearch()}
             className="absolute right-1.5 px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
           >
-            Search
+            {isPending ? "Matching..." : "Search"}
           </button>
         </div>
 
-        {/* 6 Prompt 10 Filters: Category, Location, Distance, Availability, Rating, Verification */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {/* 1. Category Filter */}
+        {/* 3-Tier Catalogue + Location/Radius/Rating/Availability Filters */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {/* 1. Main Category */}
           <div>
-            <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
-              Service Category
+            <label
+              htmlFor="discovery-cat"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
+              Major Category
             </label>
             <select
+              id="discovery-cat"
               name="cat"
               value={categorySlug}
               onChange={(e) => {
-                setCategorySlug(e.target.value);
+                const nextCat = e.target.value;
+                setCategorySlug(nextCat);
+                setSubcategorySlug("");
+                setServiceSlug("");
+                applyFilters({
+                  categorySlug: nextCat,
+                  subcategorySlug: "",
+                  serviceSlug: "",
+                });
               }}
               className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
             >
-              <option value="">All Services &amp; Categories</option>
-              {categories.map((c) => (
+              <option value="">All Major Categories</option>
+              {catalogueTree.map((c) => (
                 <option key={c.id} value={c.slug}>
-                  {c.parent_id ? `↳ ${c.name}` : c.name}
+                  {c.name}
                 </option>
               ))}
             </select>
           </div>
 
-          {/* 2. Location (City) */}
+          {/* 2. Subcategory */}
           <div>
-            <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+            <label
+              htmlFor="discovery-sub"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
+              Subcategory
+            </label>
+            <select
+              id="discovery-sub"
+              name="sub"
+              value={subcategorySlug}
+              disabled={!categorySlug || availableSubcategories.length === 0}
+              onChange={(e) => {
+                const nextSub = e.target.value;
+                setSubcategorySlug(nextSub);
+                setServiceSlug("");
+                applyFilters({
+                  subcategorySlug: nextSub,
+                  serviceSlug: "",
+                });
+              }}
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900 disabled:opacity-55"
+            >
+              <option value="">
+                {categorySlug
+                  ? `All Subcategories (${availableSubcategories.length})`
+                  : "Select a Category first"}
+              </option>
+              {availableSubcategories.map((sub) => (
+                <option key={sub.id} value={sub.slug}>
+                  {sub.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* 3. Individual Service */}
+          <div>
+            <label
+              htmlFor="discovery-service"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
+              Specific Service
+            </label>
+            <select
+              id="discovery-service"
+              name="service"
+              value={serviceSlug}
+              onChange={(e) => {
+                const nextSrv = e.target.value;
+                setServiceSlug(nextSrv);
+                applyFilters({ serviceSlug: nextSrv });
+              }}
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+            >
+              <option value="">
+                All Services ({availableServices.length})
+              </option>
+              {availableServices.map((srv) => (
+                <option key={srv.id} value={srv.slug}>
+                  {srv.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* 4. Location (City) */}
+          <div>
+            <label
+              htmlFor="discovery-city"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
               Operating City
             </label>
             <select
+              id="discovery-city"
               name="city"
               value={city}
               onChange={(e) => {
@@ -260,12 +526,16 @@ export function ServiceDiscoveryClient({
             </select>
           </div>
 
-          {/* 3. Neighbourhood / LGA (Port Harcourt & Surrounding) */}
+          {/* 5. Neighbourhood / LGA */}
           <div>
-            <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+            <label
+              htmlFor="discovery-area"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
               Neighbourhood / LGA
             </label>
             <select
+              id="discovery-area"
               value={selectedNeighbourhood}
               onChange={(e) => setSelectedNeighbourhood(e.target.value)}
               className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
@@ -279,12 +549,16 @@ export function ServiceDiscoveryClient({
             </select>
           </div>
 
-          {/* 4. Distance / Radius Filter (PostGIS Proximity) */}
+          {/* 6. Distance / Radius Filter (PostGIS Proximity) */}
           <div>
-            <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+            <label
+              htmlFor="discovery-distance"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
               Geographic Radius
             </label>
             <select
+              id="discovery-distance"
               name="distance"
               value={maxDistanceKm}
               onChange={(e) => setMaxDistanceKm(e.target.value)}
@@ -299,12 +573,16 @@ export function ServiceDiscoveryClient({
             </select>
           </div>
 
-          {/* 5. Rating Filter */}
+          {/* 7. Rating Filter */}
           <div>
-            <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+            <label
+              htmlFor="discovery-rating"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
               Min. Customer Rating
             </label>
             <select
+              id="discovery-rating"
               name="rating"
               value={minRating}
               onChange={(e) => setMinRating(e.target.value)}
@@ -317,12 +595,16 @@ export function ServiceDiscoveryClient({
             </select>
           </div>
 
-          {/* 6. Availability & Date */}
+          {/* 8. Availability & Date */}
           <div>
-            <label className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1">
+            <label
+              htmlFor="discovery-date"
+              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+            >
               Target Appointment
             </label>
             <input
+              id="discovery-date"
               type="date"
               name="availability"
               value={targetDate}
@@ -332,9 +614,60 @@ export function ServiceDiscoveryClient({
           </div>
         </div>
 
-        {/* Checkbox Toggles & Actions */}
-        <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-4">
+        {/* Sort By + Provider Type + Checkbox Toggles & Actions */}
+        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-1.5">
+              <label
+                htmlFor="discovery-sort"
+                className="font-bold text-slate-600 uppercase tracking-wider text-[11px]"
+              >
+                Sort:
+              </label>
+              <select
+                id="discovery-sort"
+                name="sort"
+                value={sortBy}
+                onChange={(e) => {
+                  const nextSort = e.target.value as ProfessionalDiscoverySort;
+                  setSortBy(nextSort);
+                  applyFilters({ sortBy: nextSort });
+                }}
+                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              >
+                <option value="relevance">Best Match</option>
+                <option value="rating">Highest Rated</option>
+                <option value="distance">Nearest Distance</option>
+                <option value="experience">Most Experienced</option>
+                <option value="jobs">Most Completed Jobs</option>
+                <option value="price_asc">Lowest Call-out Fee</option>
+              </select>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <label
+                htmlFor="discovery-type"
+                className="font-bold text-slate-600 uppercase tracking-wider text-[11px]"
+              >
+                Provider:
+              </label>
+              <select
+                id="discovery-type"
+                name="type"
+                value={providerType}
+                onChange={(e) => {
+                  const nextType = e.target.value;
+                  setProviderType(nextType);
+                  applyFilters({ providerType: nextType });
+                }}
+                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              >
+                <option value="">All Providers</option>
+                <option value="individual">Independent Specialists</option>
+                <option value="company">Technical Firms</option>
+              </select>
+            </div>
+
             <label className="flex items-center gap-1.5 cursor-pointer">
               <input
                 type="checkbox"
@@ -369,28 +702,80 @@ export function ServiceDiscoveryClient({
             <button
               type="button"
               onClick={() => handleSearch()}
-              className="px-4 py-1.5 rounded-lg bg-[#0D9488] text-white font-bold hover:bg-[#0F766E] transition shadow-xs"
+              disabled={isPending}
+              className="px-4 py-1.5 rounded-lg bg-[#0D9488] text-white font-bold hover:bg-[#0F766E] transition shadow-xs disabled:opacity-60"
             >
-              Apply Matching
+              {isPending ? "Updating..." : "Apply Matching"}
             </button>
           </div>
         </div>
       </div>
 
+      {/* Unavailable Service / Category Graceful Notice */}
+      {unavailableNotice && (
+        <div
+          role="status"
+          className="rounded-2xl border border-amber-200 bg-amber-50 p-5 space-y-3"
+        >
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <span className="inline-block rounded-full bg-amber-200/70 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-950">
+                Temporarily Unavailable {unavailableNotice.kind}
+              </span>
+              <h3 className="text-base font-bold text-amber-950 mt-1">
+                &ldquo;{unavailableNotice.name}&rdquo; is currently paused
+              </h3>
+              <p className="text-xs sm:text-sm text-amber-900 mt-0.5">
+                {unavailableNotice.reason}
+              </p>
+            </div>
+            <Link
+              href={
+                activeServiceBookingHref ||
+                `/book?title=${encodeURIComponent(unavailableNotice.name)}${
+                  city !== "All Cities" ? `&city=${encodeURIComponent(city)}` : ""
+                }`
+              }
+              className="px-4 py-2 rounded-xl bg-[#154752] text-white text-xs font-bold hover:bg-[#0D282E] shrink-0 self-start sm:self-center"
+            >
+              Submit Custom Request →
+            </Link>
+          </div>
+
+          {unavailableNotice.alternatives.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <span className="text-xs font-bold text-amber-950">Active Alternatives:</span>
+              {unavailableNotice.alternatives.map((alt) => (
+                <Link
+                  key={alt.href}
+                  href={alt.href}
+                  className="rounded-full bg-white border border-amber-300 px-3 py-1 text-xs font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors"
+                >
+                  {alt.label} →
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Results Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 className="text-xl font-bold text-slate-900">
-            Matched Professionals ({results.length})
+            Matched Professionals ({resolvedTotalCount})
           </h2>
           <p className="text-xs text-slate-500 mt-0.5">
-            Ranked by Category Match, Proximity ({city}), Verified Availability, Experience, and Ratings.
+            {resolvedTotalCount > 0 && totalPages > 1
+              ? `Showing ${showingFrom}–${showingTo} of ${resolvedTotalCount} verified professionals • `
+              : ""}
+            Ranked by Service &amp; Category Match, Proximity ({city}), Verified Availability, Experience, and Ratings.
           </p>
         </div>
 
         <Link
-          href="/book"
-          className="px-4 py-2 rounded-lg bg-[#0F172A] text-teal-300 text-xs font-bold hover:bg-slate-800 transition"
+          href={activeServiceBookingHref || `/book${city !== "All Cities" ? `?city=${encodeURIComponent(city)}` : ""}`}
+          className="px-4 py-2 rounded-lg bg-[#0F172A] text-teal-300 text-xs font-bold hover:bg-slate-800 transition self-start sm:self-auto"
         >
           Post a Service Request →
         </Link>
@@ -412,7 +797,7 @@ export function ServiceDiscoveryClient({
           </div>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
-              href={`/book?city=${encodeURIComponent(city)}`}
+              href={activeServiceBookingHref || `/book?city=${encodeURIComponent(city)}`}
               className="px-5 py-2.5 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
             >
               Submit Service Request
@@ -448,7 +833,16 @@ export function ServiceDiscoveryClient({
                 <div className="flex items-start gap-3.5">
                   <div className="w-13 h-13 rounded-full bg-[#0D9488] text-white font-black text-lg flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
                     {pro.avatar_url ? (
-                      <img src={pro.avatar_url} alt={pro.business_name} className="w-full h-full object-cover" />
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={pro.avatar_url}
+                        alt={pro.business_name}
+                        width={52}
+                        height={52}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
                       pro.business_name.slice(0, 2).toUpperCase()
                     )}
@@ -534,7 +928,11 @@ export function ServiceDiscoveryClient({
                     Profile
                   </Link>
                   <Link
-                    href={`/book?pro=${pro.professional_id}`}
+                    href={
+                      activeServiceBookingHref
+                        ? `${activeServiceBookingHref}&pro=${encodeURIComponent(pro.professional_id)}`
+                        : `/book?pro=${pro.professional_id}`
+                    }
                     className="px-4 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
                   >
                     Book
@@ -544,6 +942,64 @@ export function ServiceDiscoveryClient({
             </div>
           ))}
         </div>
+      )}
+
+      {/* Server-Backed Pagination Bar */}
+      {totalPages > 1 && (
+        <nav
+          aria-label="Professional directory pagination"
+          className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200"
+        >
+          <p className="text-xs font-medium text-slate-600">
+            Showing {showingFrom}–{showingTo} of {resolvedTotalCount} verified professionals (Page{" "}
+            {currentPage} of {totalPages})
+          </p>
+          <div className="flex items-center gap-1.5">
+            {currentPage > 1 ? (
+              <Link
+                href={buildPageHref(currentPage - 1)}
+                scroll={false}
+                className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-[#154752] hover:bg-slate-50"
+              >
+                ← Previous
+              </Link>
+            ) : (
+              <span className="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-400">
+                ← Previous
+              </span>
+            )}
+
+            {pageNumbers.map((p) => (
+              <Link
+                key={p}
+                href={buildPageHref(p)}
+                scroll={false}
+                aria-current={p === currentPage ? "page" : undefined}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors ${
+                  p === currentPage
+                    ? "bg-[#154752] text-white border-[#154752]"
+                    : "bg-white text-[#154752] border-slate-200 hover:bg-slate-50"
+                }`}
+              >
+                {p}
+              </Link>
+            ))}
+
+            {currentPage < totalPages ? (
+              <Link
+                href={buildPageHref(currentPage + 1)}
+                scroll={false}
+                className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-[#154752] hover:bg-slate-50"
+              >
+                Next →
+              </Link>
+            ) : (
+              <span className="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-400">
+                Next →
+              </span>
+            )}
+          </div>
+        </nav>
       )}
     </div>
   );

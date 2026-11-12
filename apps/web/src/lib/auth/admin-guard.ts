@@ -33,11 +33,20 @@ export async function verifyAdminSession(): Promise<AdminCheckResult | AdminChec
 
   // Query profiles & user_roles using server-side admin client for authoritative check
   const [profileRes, roleRes] = await Promise.all([
-    supabaseAdminFetch<Array<{ id: string; full_name: string | null; primary_role: string | null; is_suspended: boolean }>>(
-      `/rest/v1/profiles?id=eq.${auth.user.id}&limit=1&select=id,full_name,primary_role,is_suspended`
+    supabaseAdminFetch<
+      Array<{
+        id: string;
+        full_name: string | null;
+        primary_role: string | null;
+        is_active: boolean | null;
+        is_suspended: boolean;
+        deleted_at: string | null;
+      }>
+    >(
+      `/rest/v1/profiles?id=eq.${auth.user.id}&limit=1&select=id,full_name,primary_role,is_active,is_suspended,deleted_at`
     ),
-    supabaseAdminFetch<Array<{ role: string; is_active: boolean }>>(
-      `/rest/v1/user_roles?user_id=eq.${auth.user.id}&role=eq.admin&is_active=eq.true&limit=1&select=role,is_active`
+    supabaseAdminFetch<Array<{ role: string; is_active: boolean; revoked_at: string | null }>>(
+      `/rest/v1/user_roles?user_id=eq.${auth.user.id}&role=eq.admin&is_active=eq.true&revoked_at=is.null&limit=1&select=role,is_active,revoked_at`
     ),
   ]);
 
@@ -47,12 +56,20 @@ export async function verifyAdminSession(): Promise<AdminCheckResult | AdminChec
       : null;
 
   const hasAdminRoleRecord =
-    roleRes.ok && Array.isArray(roleRes.data) && roleRes.data.length > 0;
+    roleRes.ok &&
+    Array.isArray(roleRes.data) &&
+    roleRes.data.some((r) => r.role === "admin" && r.is_active === true && r.revoked_at === null);
 
+  const isActive = profile?.is_active === true;
   const isSuspended = Boolean(profile?.is_suspended);
+  const isDeleted = Boolean(profile?.deleted_at);
   const isAdmin =
+    Boolean(profile) &&
+    isActive &&
     !isSuspended &&
-    (profile?.primary_role === "admin" || hasAdminRoleRecord);
+    !isDeleted &&
+    hasAdminRoleRecord &&
+    profile?.primary_role === "admin";
 
   if (!isAdmin) {
     return {
@@ -91,7 +108,7 @@ export async function resolveUserDashboardPath(
           `/rest/v1/profiles?id=eq.${userId}&limit=1&select=primary_role`
         ),
     supabaseAdminFetch<Array<{ role: string }>>(
-      `/rest/v1/user_roles?user_id=eq.${userId}&is_active=eq.true&select=role`
+      `/rest/v1/user_roles?user_id=eq.${userId}&is_active=eq.true&revoked_at=is.null&select=role`
     ),
   ]);
 

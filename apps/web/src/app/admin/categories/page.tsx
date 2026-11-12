@@ -1,16 +1,19 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getAllCategoriesAdmin } from "@/lib/supabase/matching";
+import { fetchAdminCatalogueData } from "@/lib/supabase/admin-catalogue";
 import { AdminCategoryManager } from "@/components/admin/admin-category-manager";
 
 export const metadata: Metadata = {
-  title: "Service Category Management — EasyLife Administration",
-  description: "Configure system service categories, icons, descriptions, and display ordering.",
+  title: "Service Categories & Subcategories — EasyLife Administration",
+  description:
+    "Manage main service categories, subcategories, images, keywords, homepage visibility, and display ordering.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminCategoriesPage() {
-  const categories = await getAllCategoriesAdmin();
+  const snapshot = await fetchAdminCatalogueData();
 
   return (
     <div className="space-y-6">
@@ -21,27 +24,36 @@ export default async function AdminCategoriesPage() {
               Taxonomy Management
             </span>
             <span className="text-xs text-slate-500 font-medium">
-              Marketplace Categories
+              Tier 1 &amp; Tier 2 Catalogue Hierarchy
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Service Category Configuration
+            Service Categories &amp; Subcategories
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Manage the accredited trade categories offered across Port Harcourt, Lagos, and Abuja.
+            Organize main categories, nested subcategories, catalogue images, search keywords,
+            homepage visibility, and commission defaults.
           </p>
         </div>
 
-        <Link
-          href="/explore-services"
-          target="_blank"
-          className="text-xs font-semibold text-teal-600 hover:text-teal-700 hover:underline self-start sm:self-auto"
-        >
-          View Public Customer Catalog ↗
-        </Link>
+        <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
+          <Link
+            href="/admin/services"
+            className="px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-bold hover:bg-slate-800 transition shadow-xs"
+          >
+            Manage Individual Services →
+          </Link>
+          <Link
+            href="/explore-services"
+            target="_blank"
+            className="px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-teal-700 hover:bg-teal-50 transition"
+          >
+            Public Catalog ↗
+          </Link>
+        </div>
       </div>
 
-      <AdminCategoryManager initialCategories={categories} />
+      <AdminCategoryManager initialCategories={snapshot.categories} />
     </div>
   );
 }

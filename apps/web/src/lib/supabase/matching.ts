@@ -1,5 +1,7 @@
+import { unstable_cache } from "next/cache";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 import type { ServiceCategoryItem } from "@/lib/supabase/customer";
+import type { ProfessionalDiscoverySort } from "@easylife/shared-types";
 
 export interface OperatingNeighbourhood {
   id: string;
@@ -40,11 +42,15 @@ export interface MatchedProfessionalItem {
   service_title?: string | null;
   provider_type?: string;
   match_score: number;
+  matched_service_id?: string | null;
+  matched_service_name?: string | null;
+  total_count?: number;
 }
 
 export interface MatchSearchParams {
   categoryId?: string;
   categorySlug?: string;
+  serviceId?: string;
   keyword?: string;
   city?: string;
   lga?: string;
@@ -58,25 +64,54 @@ export interface MatchSearchParams {
   verifiedOnly?: boolean;
   availableOnly?: boolean;
   providerType?: string;
+  sortBy?: ProfessionalDiscoverySort;
   limit?: number;
   offset?: number;
 }
 
+export interface PaginatedProfessionalMatchResult {
+  items: MatchedProfessionalItem[];
+  totalCount: number;
+  limit: number;
+  offset: number;
+  hasError: boolean;
+}
+
+const fetchOperatingNeighbourhoodsCached = unstable_cache(
+  async (): Promise<OperatingNeighbourhood[]> => {
+    const config = getSupabasePublicConfig();
+    if (!config) {
+      throw new Error("SUPABASE_CONFIG_MISSING");
+    }
+
+    const res = await supabaseFetch<OperatingNeighbourhood[]>(
+      config,
+      "/rest/v1/operating_neighbourhoods?is_active=eq.true&order=city.asc,display_order.asc&select=*"
+    );
+    if (!res.ok || !Array.isArray(res.data)) {
+      throw new Error("NEIGHBOURHOODS_FETCH_FAILED");
+    }
+    return res.data;
+  },
+  ["operating-neighbourhoods-active-v1"],
+  { revalidate: 300, tags: ["catalogue", "neighbourhoods"] }
+);
+
 /**
  * Fetch active operating neighbourhoods with GPS coordinates across EasyLife hubs
- * (Port Harcourt, Lagos, and Abuja).
+ * (Port Harcourt, Lagos, and Abuja). Cached cleanly across SSR & discovery routes.
  */
 export async function getOperatingNeighbourhoods(city?: string): Promise<OperatingNeighbourhood[]> {
-  const config = getSupabasePublicConfig();
-  if (!config) return [];
-
-  let path = "/rest/v1/operating_neighbourhoods?is_active=eq.true&order=city.asc,display_order.asc&select=*";
-  if (city && city !== "All Cities") {
-    path += `&city=ilike.*${encodeURIComponent(city)}*`;
+  try {
+    const all = await fetchOperatingNeighbourhoodsCached();
+    if (city && city !== "All Cities") {
+      const needle = city.trim().toLowerCase();
+      return all.filter((n) => n.city.toLowerCase().includes(needle));
+    }
+    return all;
+  } catch {
+    return [];
   }
-
-  const res = await supabaseFetch<OperatingNeighbourhood[]>(config, path);
-  return res.ok && Array.isArray(res.data) ? res.data : [];
 }
 
 /**
@@ -112,11 +147,15 @@ export async function getNeighbourhoodCoordinates(
  * 5. Customer rating
  * 6. Verification status (trust tier without automatically conflating with competence)
  */
-export async function searchAndMatchProfessionals(
+export async function searchAndMatchProfessionalsPaginated(
   params: MatchSearchParams = {}
-): Promise<MatchedProfessionalItem[]> {
+): Promise<PaginatedProfessionalMatchResult> {
+  const limit = Math.max(1, Math.min(params.limit ?? 12, 100));
+  const offset = Math.max(0, params.offset ?? 0);
   const config = getSupabasePublicConfig();
-  if (!config) return [];
+  if (!config) {
+    return { items: [], totalCount: 0, limit, offset, hasError: true };
+  }
 
   const rpcPayload: Record<string, unknown> = {
     p_category_id: params.categoryId || null,
@@ -134,20 +173,49 @@ export async function searchAndMatchProfessionals(
     p_verified_only: params.verifiedOnly ?? false,
     p_available_only: params.availableOnly ?? false,
     p_provider_type: params.providerType || null,
-    p_limit: params.limit ?? 30,
-    p_offset: params.offset ?? 0,
+    p_limit: limit,
+    p_offset: offset,
+    p_service_id: params.serviceId || null,
+    p_sort_by: params.sortBy || "relevance",
   };
 
   const res = await supabaseFetch<MatchedProfessionalItem[]>(
     config,
-    "/rest/v1/rpc/match_service_professionals",
+    "/rest/v1/rpc/search_professionals_paginated",
     {
       method: "POST",
       body: rpcPayload,
+      retryOnNetworkError: true,
     }
   );
 
-  return res.ok && Array.isArray(res.data) ? res.data : [];
+  if (!res.ok || !Array.isArray(res.data)) {
+    return { items: [], totalCount: 0, limit, offset, hasError: !res.ok };
+  }
+
+  const totalCount =
+    res.data.length > 0 && res.data[0]?.total_count !== undefined
+      ? Number(res.data[0].total_count)
+      : 0;
+
+  return {
+    items: res.data,
+    totalCount: Number.isFinite(totalCount) ? totalCount : res.data.length,
+    limit,
+    offset,
+    hasError: false,
+  };
+}
+
+export async function searchAndMatchProfessionals(
+  params: MatchSearchParams = {}
+): Promise<MatchedProfessionalItem[]> {
+  const result = await searchAndMatchProfessionalsPaginated({
+    ...params,
+    limit: params.limit ?? 30,
+    offset: params.offset ?? 0,
+  });
+  return result.items;
 }
 
 /**
@@ -159,7 +227,7 @@ export async function getAllCategoriesAdmin(): Promise<ServiceCategoryItem[]> {
 
   const res = await supabaseFetch<ServiceCategoryItem[]>(
     config,
-    "/rest/v1/service_categories?order=display_order.asc&select=*"
+    "/rest/v1/service_categories?deleted_at=is.null&order=display_order.asc&select=*"
   );
 
   return res.ok && Array.isArray(res.data) ? res.data : [];

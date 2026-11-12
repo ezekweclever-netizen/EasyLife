@@ -2,7 +2,11 @@
 
 import React, { useState, useTransition } from "react";
 import Link from "next/link";
-import { fetchAdminProfessionals } from "@/app/actions/admin";
+import { useRouter } from "next/navigation";
+import {
+  adminReviewVerificationAction,
+  fetchAdminProfessionals,
+} from "@/app/actions/admin";
 
 interface ProfessionalItem {
   id: string;
@@ -10,11 +14,16 @@ interface ProfessionalItem {
   business_name: string;
   slug: string;
   headline: string | null;
-  callout_fee_kobo: number;
+  bio?: string | null;
+  provider_type?: string | null;
+  years_of_experience?: number | null;
+  primary_city?: string | null;
+  base_callout_fee_kobo: number;
   verification_status: string;
+  rejection_reason?: string | null;
   is_available: boolean;
-  rating_average: number;
-  rating_count: number;
+  average_rating: number;
+  review_count: number;
   created_at: string;
   profiles?: {
     id: string;
@@ -25,19 +34,53 @@ interface ProfessionalItem {
     state: string | null;
     is_suspended: boolean;
   } | null;
+  professional_services?: Array<{
+    id: string;
+    service_title?: string | null;
+    min_price_kobo: number;
+    max_price_kobo?: number | null;
+    qualification_notes?: string | null;
+    certification_reference?: string | null;
+    years_experience_in_service?: number | null;
+    is_active: boolean;
+    service_categories?: { name: string } | null;
+    services?: { name: string; service_code: string } | null;
+  }>;
+  professional_service_areas?: Array<{
+    id: string;
+    city: string;
+    lga_or_district: string;
+    neighbourhood?: string | null;
+    service_radius_km: number;
+    is_primary: boolean;
+    is_active: boolean;
+  }>;
+  professional_documents?: Array<{
+    id: string;
+    document_type: string;
+    file_name: string;
+    verification_status: string;
+    review_notes?: string | null;
+    created_at: string;
+  }>;
 }
 
 interface ProfessionalManagerClientProps {
   initialPros: ProfessionalItem[];
+  initialStatus?: string;
 }
 
 export function ProfessionalManagerClient({
   initialPros,
+  initialStatus = "all",
 }: ProfessionalManagerClientProps) {
+  const router = useRouter();
   const [pros, setPros] = useState<ProfessionalItem[]>(initialPros);
   const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState(initialStatus);
   const [selectedPro, setSelectedPro] = useState<ProfessionalItem | null>(null);
+  const [decisionReason, setDecisionReason] = useState("");
+  const [modalFeedback, setModalFeedback] = useState<{ ok: boolean; msg: string } | null>(null);
   const [isPending, startTransition] = useTransition();
 
   const handleFilter = (e: React.FormEvent) => {
@@ -51,19 +94,65 @@ export function ProfessionalManagerClient({
     });
   };
 
+  const handleVerificationDecision = (
+    pro: ProfessionalItem,
+    decision: "approved" | "rejected" | "suspended"
+  ) => {
+    setModalFeedback(null);
+    const fd = new FormData();
+    fd.append("professionalId", pro.id);
+    fd.append("decision", decision);
+    if (decisionReason.trim()) fd.append("reason", decisionReason.trim());
+
+    startTransition(async () => {
+      const res = await adminReviewVerificationAction(fd);
+      setModalFeedback({ ok: res.ok, msg: res.message });
+      if (res.ok) {
+        setPros((prev) =>
+          prev.map((item) =>
+            item.id === pro.id
+              ? {
+                  ...item,
+                  verification_status: decision,
+                  rejection_reason:
+                    decision === "rejected" || decision === "suspended"
+                      ? decisionReason.trim()
+                      : null,
+                }
+              : item
+          )
+        );
+        setSelectedPro((prev) =>
+          prev && prev.id === pro.id
+            ? {
+                ...prev,
+                verification_status: decision,
+                rejection_reason:
+                  decision === "rejected" || decision === "suspended"
+                    ? decisionReason.trim()
+                    : null,
+              }
+            : prev
+        );
+        setDecisionReason("");
+        router.refresh();
+      }
+    });
+  };
+
   const formatNaira = (kobo: number) => {
     return new Intl.NumberFormat("en-NG", {
       style: "currency",
       currency: "NGN",
       maximumFractionDigits: 0,
-    }).format(Math.round(kobo / 100));
+    }).format(Math.round((kobo || 0) / 100));
   };
 
   return (
     <div className="space-y-6">
       {/* Toolbar */}
       <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <form onSubmit={handleFilter} className="flex flex-1 items-center gap-2">
+        <form onSubmit={handleFilter} className="flex flex-col sm:flex-row flex-1 sm:items-center gap-2">
           <input
             type="text"
             value={search}
@@ -81,6 +170,7 @@ export function ProfessionalManagerClient({
             <option value="pending">Pending KYC Review</option>
             <option value="unsubmitted">Unsubmitted</option>
             <option value="rejected">Rejected</option>
+            <option value="suspended">Suspended</option>
           </select>
           <button
             type="submit"
@@ -131,6 +221,11 @@ export function ProfessionalManagerClient({
                       <div className="text-2xs text-slate-500 truncate max-w-xs">
                         {p.headline || "Accredited Service Professional"}
                       </div>
+                      <div className="text-[10px] text-slate-400 mt-0.5">
+                        {p.primary_city || "Port Harcourt"} •{" "}
+                        {(p.professional_services || []).length} services •{" "}
+                        {p.is_available ? "Available" : "Paused"}
+                      </div>
                     </td>
                     <td className="py-3.5 px-4">
                       <div className="text-slate-800 font-semibold">
@@ -141,7 +236,7 @@ export function ProfessionalManagerClient({
                       </div>
                     </td>
                     <td className="py-3.5 px-4 font-mono font-bold text-slate-800">
-                      {formatNaira(p.callout_fee_kobo || 0)}
+                      {formatNaira(p.base_callout_fee_kobo || 0)}
                     </td>
                     <td className="py-3.5 px-4">
                       {p.verification_status === "approved" ? (
@@ -156,6 +251,10 @@ export function ProfessionalManagerClient({
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-rose-100 text-rose-800 border border-rose-200">
                           ✕ Rejected
                         </span>
+                      ) : p.verification_status === "suspended" ? (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-slate-800 text-white">
+                          Suspended
+                        </span>
                       ) : (
                         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-slate-100 text-slate-700">
                           Unsubmitted
@@ -165,15 +264,23 @@ export function ProfessionalManagerClient({
                     <td className="py-3.5 px-4">
                       <div className="flex items-center gap-1 font-bold text-slate-800">
                         <span>⭐</span>
-                        <span>{p.rating_average ? Number(p.rating_average).toFixed(1) : "5.0"}</span>
+                        <span>
+                          {p.review_count > 0 && p.average_rating
+                            ? Number(p.average_rating).toFixed(1)
+                            : "New"}
+                        </span>
                         <span className="text-2xs font-normal text-slate-400">
-                          ({p.rating_count || 0})
+                          ({p.review_count || 0})
                         </span>
                       </div>
                     </td>
                     <td className="py-3.5 px-4 text-right space-x-1.5 whitespace-nowrap">
                       <button
-                        onClick={() => setSelectedPro(p)}
+                        onClick={() => {
+                          setSelectedPro(p);
+                          setDecisionReason("");
+                          setModalFeedback(null);
+                        }}
                         className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition"
                       >
                         Inspect
@@ -196,7 +303,7 @@ export function ProfessionalManagerClient({
       {/* Pro Detail Modal */}
       {selectedPro && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200">
+          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
               <div className="font-extrabold text-sm text-slate-900">
                 Professional Trade Dossier
@@ -209,46 +316,163 @@ export function ProfessionalManagerClient({
               </button>
             </div>
 
-            <div className="space-y-3 text-xs">
-              <div className="bg-slate-50 p-4 rounded-2xl space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Business Name:</span>
+            <div className="space-y-4 text-xs">
+              <div className="bg-slate-50 p-4 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <span className="text-slate-500 block text-[11px]">Business Name</span>
                   <span className="font-bold text-slate-900">{selectedPro.business_name}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Slug:</span>
-                  <span className="font-mono text-2xs text-slate-700">{selectedPro.slug}</span>
+                <div>
+                  <span className="text-slate-500 block text-[11px]">Owner &amp; Contact</span>
+                  <span className="font-semibold text-slate-800">
+                    {selectedPro.profiles?.full_name || "—"} ({selectedPro.profiles?.email || "—"})
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Owner Name:</span>
-                  <span className="font-semibold text-slate-800">{selectedPro.profiles?.full_name || "—"}</span>
+                <div>
+                  <span className="text-slate-500 block text-[11px]">Provider Type &amp; Experience</span>
+                  <span className="font-semibold text-slate-800">
+                    {selectedPro.provider_type || "trade_technician"} • {selectedPro.years_of_experience ?? 0} yrs
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Email:</span>
-                  <span className="text-slate-800">{selectedPro.profiles?.email || "—"}</span>
+                <div>
+                  <span className="text-slate-500 block text-[11px]">Callout Benchmark</span>
+                  <span className="font-bold text-slate-900">
+                    {formatNaira(selectedPro.base_callout_fee_kobo)}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Phone:</span>
-                  <span className="text-slate-800">{selectedPro.profiles?.phone || "—"}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Callout Benchmark:</span>
-                  <span className="font-bold text-slate-900">{formatNaira(selectedPro.callout_fee_kobo)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Verification Status:</span>
+                <div>
+                  <span className="text-slate-500 block text-[11px]">Verification Status</span>
                   <span className="font-bold uppercase text-2xs">{selectedPro.verification_status}</span>
                 </div>
+                <div>
+                  <span className="text-slate-500 block text-[11px]">Primary Hub &amp; Availability</span>
+                  <span className="font-semibold text-slate-800">
+                    {selectedPro.primary_city || "Port Harcourt"} •{" "}
+                    {selectedPro.is_available ? "Available" : "Unavailable"}
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <div className="flex justify-end gap-2 pt-2">
-              <button
-                onClick={() => setSelectedPro(null)}
-                className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs"
-              >
-                Close
-              </button>
+              {/* Services & Qualifications */}
+              <div className="space-y-2">
+                <h4 className="font-bold text-slate-800">
+                  Service Offerings ({(selectedPro.professional_services || []).length})
+                </h4>
+                {(selectedPro.professional_services || []).length === 0 ? (
+                  <p className="text-slate-400">No service offerings added.</p>
+                ) : (
+                  <div className="space-y-1.5">
+                    {(selectedPro.professional_services || []).map((ps) => (
+                      <div key={ps.id} className="p-2.5 rounded-xl border border-slate-200 bg-white">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold text-slate-900">
+                            {ps.service_title || ps.services?.name || ps.service_categories?.name || "Service"}
+                          </span>
+                          <span className="font-mono text-[#0D9488] font-bold">
+                            {formatNaira(ps.min_price_kobo)}
+                          </span>
+                        </div>
+                        {(ps.certification_reference || ps.qualification_notes) && (
+                          <div className="text-[11px] text-slate-500 mt-0.5">
+                            {ps.certification_reference && `Cert: ${ps.certification_reference} `}
+                            {ps.qualification_notes && `• ${ps.qualification_notes}`}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Service Areas & KYC Docs Summary */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1.5">
+                  <h4 className="font-bold text-slate-800">
+                    Operating Locations ({(selectedPro.professional_service_areas || []).length})
+                  </h4>
+                  {(selectedPro.professional_service_areas || []).map((area) => (
+                    <div key={area.id} className="p-2 rounded-lg bg-slate-50 border border-slate-200 text-[11px]">
+                      {area.neighbourhood ? `${area.neighbourhood}, ` : ""}
+                      {area.lga_or_district} ({area.city}) • {area.service_radius_km}km
+                    </div>
+                  ))}
+                </div>
+
+                <div className="space-y-1.5">
+                  <h4 className="font-bold text-slate-800">
+                    Submitted KYC Docs ({(selectedPro.professional_documents || []).length})
+                  </h4>
+                  {(selectedPro.professional_documents || []).map((doc) => (
+                    <div key={doc.id} className="p-2 rounded-lg bg-slate-50 border border-slate-200 text-[11px] flex justify-between">
+                      <span className="capitalize">{doc.document_type.replace(/_/g, " ")}</span>
+                      <span className="font-bold uppercase">{doc.verification_status}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Admin Governance Controls */}
+              <div className="pt-3 border-t border-slate-100 space-y-2.5">
+                <label className="block text-[11px] font-bold text-slate-700">
+                  Admin Review / Governance Note (required min 5 chars to Reject or Suspend)
+                </label>
+                <input
+                  type="text"
+                  value={decisionReason}
+                  onChange={(e) => setDecisionReason(e.target.value)}
+                  placeholder="Enter reason for rejection, suspension, or verification note..."
+                  className="w-full h-9 px-3 rounded-xl border border-slate-300 text-xs"
+                />
+
+                {modalFeedback && (
+                  <div
+                    className={`p-2.5 rounded-xl text-[11px] font-semibold ${
+                      modalFeedback.ok
+                        ? "bg-emerald-50 text-emerald-800"
+                        : "bg-rose-50 text-rose-700"
+                    }`}
+                  >
+                    {modalFeedback.msg}
+                  </div>
+                )}
+
+                <div className="flex flex-wrap justify-between items-center gap-2 pt-1">
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => handleVerificationDecision(selectedPro, "approved")}
+                      className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold text-xs"
+                    >
+                      Approve Pro
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => handleVerificationDecision(selectedPro, "rejected")}
+                      className="px-3 py-1.5 rounded-xl bg-rose-700 hover:bg-rose-800 disabled:opacity-50 text-white font-bold text-xs"
+                    >
+                      Reject Pro
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isPending}
+                      onClick={() => handleVerificationDecision(selectedPro, "suspended")}
+                      className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-900 disabled:opacity-50 text-white font-bold text-xs"
+                    >
+                      Suspend Pro
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setSelectedPro(null)}
+                    className="px-4 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

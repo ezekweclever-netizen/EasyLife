@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 
 export interface ReviewActionResult {
@@ -148,9 +149,9 @@ export async function replyToReviewAction(
 export async function adminModerateReviewAction(
   formData: FormData
 ): Promise<ReviewActionResult> {
-  const auth = await getAuthenticatedUser();
-  if (!auth) {
-    return { ok: false, message: "Administrator authentication required." };
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
   }
 
   const config = getSupabasePublicConfig();
@@ -171,7 +172,7 @@ export async function adminModerateReviewAction(
     "/rest/v1/rpc/admin_moderate_review",
     {
       method: "POST",
-      accessToken: auth.accessToken,
+      accessToken: adminCheck.accessToken,
       body: {
         p_review_id: reviewId,
         p_action: action,

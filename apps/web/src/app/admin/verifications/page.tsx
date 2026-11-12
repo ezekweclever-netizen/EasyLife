@@ -8,7 +8,12 @@ export const metadata: Metadata = {
   description: "Audit artisan credentials, CAC licenses, and identity documents with binding administrative accreditation.",
 };
 
-export default async function AdminVerificationsPage() {
+export default async function AdminVerificationsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ search?: string }>;
+}) {
+  const sp = searchParams ? await searchParams : {};
   const docs = await fetchAdminDocuments("all");
 
   return (
@@ -32,7 +37,7 @@ export default async function AdminVerificationsPage() {
         </div>
       </div>
 
-      <VerificationQueueClient initialDocs={docs as any} />
+      <VerificationQueueClient initialDocs={docs as any} initialSearch={sp.search || ""} />
     </div>
   );
 }

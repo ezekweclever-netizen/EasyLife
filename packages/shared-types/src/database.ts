@@ -148,11 +148,84 @@ export interface ServiceCategoryRow {
   slug: string;
   description: string | null;
   icon_name: string | null;
+  image_url?: string | null;
+  keywords?: string[];
   default_commission_bps: number;
   is_active: boolean;
+  is_featured?: boolean;
+  is_popular?: boolean;
+  show_on_homepage?: boolean;
+  metadata?: Record<string, unknown>;
   display_order: number;
+  updated_by?: string | null;
+  deleted_at?: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export type ServiceRequirementType =
+  | "customer_input"
+  | "photo_evidence"
+  | "site_access"
+  | "provider_credential"
+  | "safety_compliance"
+  | "equipment_or_tools"
+  | "inspection";
+
+export type ServiceRequirementAppliesTo = "customer" | "professional" | "both";
+
+export interface ServiceRow {
+  id: string;
+  category_id: string;
+  subcategory_id: string | null;
+  service_code: string;
+  name: string;
+  slug: string;
+  short_description: string | null;
+  description: string | null;
+  image_url: string | null;
+  icon_name: string | null;
+  keywords: string[];
+  display_order: number;
+  is_active: boolean;
+  is_featured: boolean;
+  is_popular: boolean;
+  show_on_homepage: boolean;
+  base_price_min_kobo: number;
+  base_price_max_kobo: number | null;
+  estimated_duration_minutes: number | null;
+  currency_code: string;
+  default_commission_bps: number | null;
+  requires_verified_identity: boolean;
+  requires_trade_certification: boolean;
+  requires_business_registration: boolean;
+  requires_site_inspection: boolean;
+  min_years_experience: number;
+  eligible_provider_types: ProviderType[];
+  required_document_types: DocumentType[];
+  metadata: Record<string, unknown>;
+  created_by: string | null;
+  updated_by: string | null;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface ServiceRequirementRow {
+  id: string;
+  service_id: string;
+  requirement_key: string;
+  requirement_type: ServiceRequirementType;
+  title: string;
+  description: string | null;
+  is_required: boolean;
+  applies_to: ServiceRequirementAppliesTo;
+  config: Record<string, unknown>;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
 }
 
 export interface ProfessionalProfileRow {
@@ -190,12 +263,19 @@ export interface ProfessionalServiceRow {
   id: string;
   professional_id: string;
   category_id: string;
+  service_id?: string | null;
+  service_title?: string | null;
   min_price_kobo: number;
   max_price_kobo: number | null;
   currency_code: string;
   description: string | null;
+  qualification_notes?: string | null;
+  certification_reference?: string | null;
+  years_experience_in_service?: number | null;
+  qualifications?: Record<string, unknown>;
   is_primary_skill: boolean;
   is_active: boolean;
+  deleted_at?: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -206,6 +286,9 @@ export interface ProfessionalServiceAreaRow {
   city: string;
   state: string;
   lga_or_district: string;
+  neighbourhood?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
   service_radius_km: number;
   is_primary: boolean;
   is_active: boolean;
@@ -389,6 +472,7 @@ export interface MaintenanceRequestRow {
   property_id: string;
   asset_id: string | null;
   category_id: string | null;
+  service_id?: string | null;
   requested_by: string;
   assigned_professional_id: string | null;
   booking_id: string | null;
@@ -420,6 +504,8 @@ export interface BookingRow {
   asset_id: string | null;
   maintenance_schedule_id: string | null;
   category_id: string;
+  subcategory_id?: string | null;
+  service_id?: string | null;
   ai_suggested_category_id: string | null;
   ai_urgency: UrgencyLevel | null;
   ai_categorization_meta: Record<string, unknown>;
@@ -859,6 +945,7 @@ export interface PlatformSettingRow {
 export interface CommissionSettingRow {
   id: string;
   category_id: string | null;
+  service_id?: string | null;
   city: string | null;
   commission_bps: number;
   flat_fee_kobo: number;

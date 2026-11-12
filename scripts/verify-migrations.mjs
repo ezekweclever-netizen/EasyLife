@@ -34,6 +34,8 @@ const REQUIRED_TABLES = [
   "assets",
   // Group D: Marketplace
   "service_categories",
+  "services",
+  "service_requirements",
   "bookings",
   "booking_attachments",
   "quotations",

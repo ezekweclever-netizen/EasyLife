@@ -696,10 +696,23 @@ export function executeRuleBasedQuotationEngine(
     .trim()
     .replace(/\s+/g, "-");
 
-  // Find best matching template
-  let matchedKey = Object.keys(CATEGORY_BENCHMARK_TEMPLATES).find(
-    (key) => normalizedCategory.includes(key) || key.includes(normalizedCategory)
-  );
+  const slugTemplateAliases: Record<string, string> = {
+    "hvac-air-conditioning": "air-conditioning",
+    "generator-maintenance": "generator-repairs",
+    "electrical-power-backup": "electrical",
+    "solar-installation": "solar-systems",
+    "plumbing-water-systems": "plumbing",
+    "appliance-repair": "refrigeration",
+    "cleaning-fumigation": "cleaning",
+    "inverters-backup-surge-protection": "inverter-repairs",
+  };
+
+  // Find best matching template (alias-aware for live DB slugs + legacy keys)
+  let matchedKey =
+    slugTemplateAliases[normalizedCategory] ||
+    Object.keys(CATEGORY_BENCHMARK_TEMPLATES).find(
+      (key) => normalizedCategory.includes(key) || key.includes(normalizedCategory)
+    );
 
   // Fallback to general maintenance
   if (!matchedKey || !CATEGORY_BENCHMARK_TEMPLATES[matchedKey]) {

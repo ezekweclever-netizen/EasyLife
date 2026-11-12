@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { EASYLIFE_BRAND } from "@easylife/shared-config";
 
 export interface EasyLifeLogoProps {
@@ -6,6 +7,7 @@ export interface EasyLifeLogoProps {
   size?: "sm" | "md" | "lg";
   showSlogan?: boolean;
   markOnly?: boolean;
+  priority?: boolean;
   className?: string;
 }
 
@@ -46,6 +48,7 @@ export function EasyLifeLogo({
   theme = "light",
   size = "md",
   markOnly = false,
+  priority = true,
   className = "",
 }: EasyLifeLogoProps) {
   const isDark = theme === "dark";
@@ -54,12 +57,14 @@ export function EasyLifeLogo({
     const dim = MARK_DIMENSIONS[size];
     return (
       <span className={`inline-flex items-center select-none shrink-0 ${className}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src="/brand/easylife-official-mark.png"
           alt={`${EASYLIFE_BRAND.name} emblem`}
           width={dim.px}
           height={dim.px}
+          sizes={`${dim.px}px`}
+          priority={priority}
+          quality={90}
           className={`${dim.imgClass} object-contain shrink-0`}
         />
       </span>
@@ -73,12 +78,14 @@ export function EasyLifeLogo({
 
   return (
     <span className={`inline-flex items-center select-none shrink-0 ${className}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={src}
         alt={`${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`}
         width={dim.width}
         height={dim.height}
+        sizes={`${dim.width}px`}
+        priority={priority}
+        quality={90}
         className={`${dim.imgClass} object-contain shrink-0`}
       />
     </span>

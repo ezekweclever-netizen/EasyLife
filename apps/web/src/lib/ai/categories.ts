@@ -8,9 +8,11 @@ import type { AIAssistantCategoryRecommendation } from "@easylife/shared-types";
 
 export interface ServiceCategoryRecord {
   id: string;
+  parent_id?: string | null;
   name: string;
   slug: string;
   description: string | null;
+  keywords?: string[];
   is_active: boolean;
 }
 
@@ -114,14 +116,29 @@ const SYNONYM_MAP: Record<string, string> = {
   maintenance: "everyday-tasks",
   errand: "everyday-tasks",
   general: "everyday-tasks",
+
+  // Personal Care, Auto, Relocation, Tiling & Events
+  barber: "beauty-personal-care",
+  haircut: "beauty-personal-care",
+  makeup: "beauty-personal-care",
+  auto: "auto-electrical-services",
+  car: "auto-electrical-services",
+  obd: "auto-electrical-services",
+  moving: "moving-relocation-services",
+  relocation: "moving-relocation-services",
+  laundry: "laundry-dry-cleaning",
+  "dry cleaning": "laundry-dry-cleaning",
+  tile: "tiling-floor-installation",
+  tiling: "tiling-floor-installation",
+  event: "event-planning-services",
 };
 
 /**
- * Fetch all active categories from Supabase
+ * Fetch all active categories from Supabase (with DB keywords for zero-drift resolution)
  */
 export async function fetchActiveCategories(): Promise<ServiceCategoryRecord[]> {
   const res = await supabaseAdminFetch<ServiceCategoryRecord[]>(
-    "/rest/v1/service_categories?select=id,name,slug,description,is_active&is_active=eq.true&order=display_order.asc"
+    "/rest/v1/service_categories?select=id,parent_id,name,slug,description,keywords,is_active&is_active=eq.true&deleted_at=is.null&order=display_order.asc"
   );
   if (res.ok && Array.isArray(res.data)) {
     return res.data;
@@ -175,7 +192,22 @@ export async function validateAndResolveCategory(
     };
   }
 
-  // 3. Synonym / Keyword Resolution
+  // 3. Database keywords match
+  const dbKeywordMatch = categories.find((c) =>
+    Array.isArray(c.keywords) &&
+    c.keywords.some((kw) => kw.trim().length > 0 && candidateStr.includes(kw.toLowerCase()))
+  );
+  if (dbKeywordMatch) {
+    return {
+      categoryId: dbKeywordMatch.id,
+      categoryName: dbKeywordMatch.name,
+      categorySlug: dbKeywordMatch.slug,
+      confidence: "high",
+      reasoning: `Matched database catalogue keywords for accredited trade category "${dbKeywordMatch.name}".`,
+    };
+  }
+
+  // 4. Synonym / Keyword Resolution
   for (const [keyword, targetSlug] of Object.entries(SYNONYM_MAP)) {
     if (candidateStr.includes(keyword)) {
       const match = categories.find((c) => c.slug === targetSlug);
@@ -191,7 +223,7 @@ export async function validateAndResolveCategory(
     }
   }
 
-  // 4. Fuzzy Substring Match
+  // 5. Fuzzy Substring Match
   const partialMatch = categories.find((c) => {
     const firstWord = c.name.toLowerCase().split(" ")[0] || "";
     return (firstWord.length > 2 && candidateStr.includes(firstWord)) || c.slug.includes(candidateStr);

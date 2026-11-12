@@ -2,7 +2,17 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Icon, type IconName } from "./icons";
+import type {
+  EnrichedCatalogueService,
+  HomepageCategorySummary,
+} from "@/lib/supabase/customer";
+import {
+  formatDurationLabel,
+  formatServicePriceRange,
+  resolveCatalogueIcon,
+} from "@/lib/catalogue-display";
 
 export interface StackedCategoryItem {
   id: string;
@@ -169,7 +179,21 @@ export const STACKED_SERVICE_CATEGORIES: readonly StackedCategoryItem[] = [
   },
 ];
 
-export function StackedCategoriesSection() {
+export interface StackedCategoriesSectionProps {
+  mainCategories?: HomepageCategorySummary[];
+  featuredServices?: EnrichedCatalogueService[];
+  popularServices?: EnrichedCatalogueService[];
+  totalServicesCount?: number;
+  catalogueLoadError?: boolean;
+}
+
+export function StackedCategoriesSection({
+  mainCategories = [],
+  featuredServices = [],
+  popularServices = [],
+  totalServicesCount = 0,
+  catalogueLoadError = false,
+}: StackedCategoriesSectionProps) {
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const [cardTransforms, setCardTransforms] = useState<Array<{ scale: number; dim: number }>>(() =>
     STACKED_SERVICE_CATEGORIES.map(() => ({ scale: 1, dim: 0 }))
@@ -396,12 +420,15 @@ export function StackedCategoriesSection() {
                       </div>
 
                       {/* 3D Stylized Character Illustration */}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={category.illustrationSrc}
                         alt={category.illustrationAlt}
-                        loading="eager"
-                        decoding="async"
+                        width={420}
+                        height={360}
+                        sizes="(max-width: 640px) 260px, (max-width: 1024px) 320px, 360px"
+                        quality={82}
+                        priority={index === 0}
+                        loading={index === 0 ? "eager" : "lazy"}
                         className="relative z-10 h-[250px] sm:h-[305px] lg:h-[335px] w-auto object-contain object-bottom drop-shadow-[0_16px_28px_rgba(0,0,0,0.32)] select-none"
                       />
                     </div>
@@ -410,6 +437,269 @@ export function StackedCategoriesSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* Dynamic Live Catalogue Extension: 12–15 Major Categories & Featured/Popular Services */}
+        <div
+          id="live-catalogue-discovery"
+          className="mt-16 sm:mt-20 pt-14 border-t border-[#DAE7E7] space-y-14"
+        >
+          {/* Major Categories Dynamic Showcase (~12-15 categories) */}
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#24989A]">
+                  Live Marketplace Catalogue
+                </p>
+                <h3 className="mt-1.5 text-2xl sm:text-3xl font-bold text-[#154752] tracking-tight">
+                  Browse All {mainCategories.length > 0 ? mainCategories.length : "15"} Major Service Categories
+                </h3>
+                <p className="mt-1.5 text-sm sm:text-base text-[#4E6065]">
+                  Select any category or subcategory below to inspect individual service specifications, pricing benchmarks, and verified specialists.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                <Link
+                  href="/services"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white border border-[#DAE7E7] px-4 py-2.5 text-sm font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors shadow-xs"
+                >
+                  <span>Full 3-Tier Catalogue ({totalServicesCount > 0 ? totalServicesCount : "30+"})</span>
+                </Link>
+                <Link
+                  href="/explore-services"
+                  className="inline-flex items-center gap-2 rounded-xl bg-[#24989A] px-4 py-2.5 text-sm font-bold text-white hover:bg-[#1D7E80] transition-colors shadow-xs"
+                >
+                  <span>Explore All Services →</span>
+                </Link>
+              </div>
+            </div>
+
+            {catalogueLoadError ? (
+              <div
+                role="alert"
+                className="rounded-2xl border border-amber-200 bg-amber-50/90 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              >
+                <div>
+                  <p className="text-sm font-bold text-amber-900">
+                    Live service catalogue temporarily unavailable
+                  </p>
+                  <p className="text-xs sm:text-sm text-amber-800 mt-1">
+                    We could not load live database categories right now. You can still browse the directory or submit a direct service request.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <Link
+                    href="/explore-services"
+                    className="rounded-xl bg-[#154752] px-4 py-2 text-xs sm:text-sm font-bold text-white hover:bg-[#0D282E]"
+                  >
+                    Open Service Directory
+                  </Link>
+                  <Link
+                    href="/book"
+                    className="rounded-xl bg-white border border-amber-300 px-4 py-2 text-xs sm:text-sm font-semibold text-amber-900 hover:bg-amber-100/60"
+                  >
+                    Submit Request
+                  </Link>
+                </div>
+              </div>
+            ) : mainCategories.length === 0 ? (
+              <div className="rounded-2xl border border-dashed border-[#CBD5E1] bg-white p-8 text-center space-y-3">
+                <p className="text-base font-bold text-[#154752]">
+                  No active categories published yet
+                </p>
+                <p className="text-sm text-[#4E6065]">
+                  Check back shortly or submit a custom request for immediate dispatch support.
+                </p>
+                <Link
+                  href="/book"
+                  className="inline-flex items-center rounded-xl bg-[#24989A] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#1D7E80]"
+                >
+                  Post Custom Service Request →
+                </Link>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                {mainCategories.slice(0, 15).map((cat) => (
+                  <div
+                    key={cat.id}
+                    className="group rounded-2xl bg-white border border-[#DAE7E7] p-5 flex flex-col justify-between shadow-xs hover:border-[#24989A] hover:shadow-md transition-all"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-3">
+                        <Link
+                          href={`/explore-services?cat=${encodeURIComponent(cat.slug)}`}
+                          className="flex items-center gap-3 min-w-0"
+                        >
+                          <span className="h-10 w-10 rounded-xl bg-[#EEF6F7] border border-[#DAE7E7] text-[#154752] group-hover:bg-[#24989A] group-hover:text-white group-hover:border-[#24989A] flex items-center justify-center shrink-0 transition-colors">
+                            <Icon
+                              name={resolveCatalogueIcon(cat.icon_name, cat.slug)}
+                              className="h-5 w-5"
+                            />
+                          </span>
+                          <div className="min-w-0">
+                            <h4 className="text-base font-bold text-[#154752] group-hover:text-[#24989A] truncate transition-colors">
+                              {cat.name}
+                            </h4>
+                            <p className="text-xs text-[#68797C]">
+                              {cat.subcategory_count} subcategor{cat.subcategory_count === 1 ? "y" : "ies"} • {cat.service_count} service{cat.service_count === 1 ? "" : "s"}
+                            </p>
+                          </div>
+                        </Link>
+
+                        {cat.is_featured && (
+                          <span className="shrink-0 rounded-full bg-[#EEF6F7] border border-[#24989A]/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#24989A]">
+                            Featured
+                          </span>
+                        )}
+                      </div>
+
+                      {cat.description && (
+                        <p className="mt-3 text-xs sm:text-sm text-[#4E6065] line-clamp-2 leading-relaxed">
+                          {cat.description}
+                        </p>
+                      )}
+
+                      {cat.subcategories.length > 0 && (
+                        <div className="mt-3.5 flex flex-wrap gap-1.5">
+                          {cat.subcategories.slice(0, 3).map((sub) => (
+                            <Link
+                              key={sub.id}
+                              href={`/explore-services?cat=${encodeURIComponent(cat.slug)}&sub=${encodeURIComponent(sub.slug)}`}
+                              className="inline-flex items-center gap-1 rounded-full bg-[#F3F8F8] border border-[#DAE7E7] px-2.5 py-1 text-[11px] font-medium text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors"
+                            >
+                              <span className="truncate max-w-[160px]">{sub.name}</span>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-[#EEF6F7] flex items-center justify-between text-xs font-semibold">
+                      <Link
+                        href={`/explore-services?cat=${encodeURIComponent(cat.slug)}`}
+                        className="text-[#24989A] hover:underline"
+                      >
+                        Explore Subcategories &amp; Pros →
+                      </Link>
+                      <Link
+                        href={`/book?category=${encodeURIComponent(cat.id)}`}
+                        className="text-[#154752] hover:text-[#24989A]"
+                      >
+                        Book
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Featured & Popular Individual Services Showcase */}
+          {!catalogueLoadError && (featuredServices.length > 0 || popularServices.length > 0) && (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#24989A]">
+                    In-Demand Specialisations
+                  </p>
+                  <h3 className="mt-1.5 text-2xl sm:text-3xl font-bold text-[#154752] tracking-tight">
+                    Featured &amp; Popular Services
+                  </h3>
+                  <p className="mt-1.5 text-sm sm:text-base text-[#4E6065]">
+                    Inspect transparent Naira benchmarks, technician qualification requirements, and instant booking links.
+                  </p>
+                </div>
+                <Link
+                  href="/services"
+                  className="text-sm font-bold text-[#154752] hover:text-[#24989A] underline underline-offset-4 shrink-0"
+                >
+                  Browse All {totalServicesCount} Individual Services →
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                {(featuredServices.length > 0 ? featuredServices : popularServices)
+                  .slice(0, 8)
+                  .map((srv) => {
+                    const durationText = formatDurationLabel(srv.estimated_duration_minutes);
+                    return (
+                      <article
+                        key={srv.id}
+                        className="rounded-2xl bg-white border border-[#DAE7E7] p-5 flex flex-col justify-between shadow-xs hover:border-[#24989A] hover:shadow-md transition-all"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between gap-2 text-[11px] font-bold">
+                            <span className="text-[#24989A] uppercase tracking-wider truncate">
+                              {srv.category_name}
+                            </span>
+                            {srv.is_popular && (
+                              <span className="shrink-0 rounded-full bg-amber-50 border border-amber-200 px-2 py-0.5 text-[10px] font-bold text-amber-800">
+                                Popular
+                              </span>
+                            )}
+                          </div>
+
+                          <Link
+                            href={`/services/${srv.slug}`}
+                            className="mt-2 block text-base font-bold text-[#154752] hover:text-[#24989A] leading-snug transition-colors"
+                          >
+                            {srv.name}
+                          </Link>
+
+                          {srv.subcategory_name && (
+                            <p className="mt-1 text-xs font-medium text-[#68797C] truncate">
+                              {srv.subcategory_name}
+                            </p>
+                          )}
+
+                          {srv.short_description && (
+                            <p className="mt-2.5 text-xs sm:text-sm text-[#4E6065] line-clamp-2 leading-relaxed">
+                              {srv.short_description}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="mt-4 pt-3 border-t border-[#EEF6F7] space-y-3">
+                          <div className="flex items-center justify-between gap-2 text-xs">
+                            <div>
+                              <span className="block text-[10px] uppercase tracking-wider text-[#68797C] font-semibold">
+                                Benchmark Guide
+                              </span>
+                              <span className="font-extrabold text-[#154752]">
+                                {formatServicePriceRange(
+                                  srv.base_price_min_kobo,
+                                  srv.base_price_max_kobo
+                                )}
+                              </span>
+                            </div>
+                            {durationText && (
+                              <span className="rounded-lg bg-[#F3F8F8] px-2.5 py-1 text-[11px] font-semibold text-[#4E6065]">
+                                ~{durationText}
+                              </span>
+                            )}
+                          </div>
+
+                          <div className="flex items-center justify-between gap-2 text-xs font-bold">
+                            <Link
+                              href={`/services/${srv.slug}`}
+                              className="flex-1 text-center rounded-xl border border-[#DAE7E7] py-2 text-[#154752] hover:bg-[#F3F8F8] transition-colors"
+                            >
+                              Details
+                            </Link>
+                            <Link
+                              href={`/book?category=${encodeURIComponent(srv.category_id)}&service=${encodeURIComponent(srv.id)}&title=${encodeURIComponent(srv.name)}`}
+                              className="flex-1 text-center rounded-xl bg-[#154752] py-2 text-white hover:bg-[#0D282E] transition-colors"
+                            >
+                              Book
+                            </Link>
+                          </div>
+                        </div>
+                      </article>
+                    );
+                  })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

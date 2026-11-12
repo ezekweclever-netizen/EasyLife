@@ -1,13 +1,20 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { registerProfessionalAction } from "@/app/actions/pro";
 import { PILOT_CITIES } from "@/lib/validation/forms";
 import type { ServiceCategoryItem } from "@/lib/supabase/customer";
+import type { OperatingNeighbourhood } from "@/lib/supabase/matching";
+import type {
+  CatalogueCategoryNode,
+  CatalogueServiceItem,
+} from "@easylife/shared-types";
 
 interface ProRegisterWizardProps {
   categories: ServiceCategoryItem[];
+  catalogueTree?: CatalogueCategoryNode[];
+  neighbourhoods?: OperatingNeighbourhood[];
   defaultUser?: {
     fullName?: string;
     email?: string;
@@ -15,8 +22,26 @@ interface ProRegisterWizardProps {
   } | null;
 }
 
+interface ServiceQualificationDraft {
+  qualificationNotes: string;
+  certificationReference: string;
+  yearsExperienceInService: string;
+}
+
+const WEEKDAYS = [
+  { day: 1, short: "Mon" },
+  { day: 2, short: "Tue" },
+  { day: 3, short: "Wed" },
+  { day: 4, short: "Thu" },
+  { day: 5, short: "Fri" },
+  { day: 6, short: "Sat" },
+  { day: 0, short: "Sun" },
+];
+
 export function ProRegisterWizard({
   categories,
+  catalogueTree = [],
+  neighbourhoods = [],
   defaultUser,
 }: ProRegisterWizardProps) {
   const router = useRouter();
@@ -24,23 +49,125 @@ export function ProRegisterWizard({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  // Form step state (1: Business & Identity, 2: Location & Categories, 3: Experience & Hours)
   const [currentStep, setCurrentStep] = useState(1);
 
-  // Form fields
-  const [providerType, setProviderType] = useState<"trade_technician" | "dispatch_rider" | "property_agent" | "general_artisan">("trade_technician");
+  // Step 1 fields
+  const [providerType, setProviderType] = useState<
+    "trade_technician" | "dispatch_rider" | "property_agent" | "general_artisan"
+  >("trade_technician");
   const [agentDisclaimerAccepted, setAgentDisclaimerAccepted] = useState(false);
   const [vehicleType, setVehicleType] = useState("Motorcycle");
   const [businessName, setBusinessName] = useState("");
   const [headline, setHeadline] = useState("");
   const [bio, setBio] = useState("");
   const [yearsExperience, setYearsExperience] = useState(3);
-  const [city, setCity] = useState("Port Harcourt");
-  const [lgaOrDistrict, setLgaOrDistrict] = useState("");
-  const [baseCalloutFee, setBaseCalloutFee] = useState(5000);
+
+  // Step 2: 3-tier catalogue & qualification state
+  const [activeMainCatId, setActiveMainCatId] = useState<string>(
+    catalogueTree[0]?.id || categories[0]?.id || ""
+  );
+  const [activeSubcatId, setActiveSubcatId] = useState<string>("all");
+  const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [serviceQualifications, setServiceQualifications] = useState<
+    Record<string, ServiceQualificationDraft>
+  >({});
+
+  // Step 2: Location & neighbourhoods
+  const [city, setCity] = useState("Port Harcourt");
+  const [selectedNeighbourhoodIds, setSelectedNeighbourhoodIds] = useState<string[]>([]);
+  const [lgaOrDistrict, setLgaOrDistrict] = useState("");
+
+  // Step 3: Schedule & fee
+  const [workingDays, setWorkingDays] = useState<number[]>([1, 2, 3, 4, 5, 6]);
   const [startTime, setStartTime] = useState("08:00");
   const [endTime, setEndTime] = useState("18:00");
+  const [baseCalloutFee, setBaseCalloutFee] = useState(5000);
+
+  // Lookup map of all catalogue services
+  const allCatalogueServicesMap = useMemo(() => {
+    const map = new Map<string, CatalogueServiceItem>();
+    for (const main of catalogueTree) {
+      for (const ds of main.direct_services || []) {
+        map.set(ds.id, ds);
+      }
+      for (const sub of main.subcategories || []) {
+        for (const s of sub.services || []) {
+          map.set(s.id, s);
+        }
+      }
+    }
+    return map;
+  }, [catalogueTree]);
+
+  const activeMainCategory = useMemo(
+    () => catalogueTree.find((c) => c.id === activeMainCatId) || catalogueTree[0] || null,
+    [catalogueTree, activeMainCatId]
+  );
+
+  const visibleServices = useMemo(() => {
+    if (!activeMainCategory) return [] as CatalogueServiceItem[];
+    if (activeSubcatId === "all") {
+      const items: CatalogueServiceItem[] = [...(activeMainCategory.direct_services || [])];
+      for (const sub of activeMainCategory.subcategories || []) {
+        items.push(...(sub.services || []));
+      }
+      return items;
+    }
+    if (activeSubcatId === "direct") {
+      return activeMainCategory.direct_services || [];
+    }
+    const sub = activeMainCategory.subcategories.find((s) => s.id === activeSubcatId);
+    return sub?.services || [];
+  }, [activeMainCategory, activeSubcatId]);
+
+  const cityNeighbourhoods = useMemo(
+    () => neighbourhoods.filter((n) => n.city.toLowerCase() === city.toLowerCase()),
+    [neighbourhoods, city]
+  );
+
+  const selectedServicesList = useMemo(
+    () =>
+      selectedServiceIds
+        .map((id) => allCatalogueServicesMap.get(id))
+        .filter((s): s is CatalogueServiceItem => Boolean(s)),
+    [selectedServiceIds, allCatalogueServicesMap]
+  );
+
+  const requiredCredentialSummary = useMemo(() => {
+    const needsTradeCert = selectedServicesList.some((s) => s.requires_trade_certification);
+    const needsCac = selectedServicesList.some((s) => s.requires_business_registration);
+    const maxMinYears = selectedServicesList.reduce(
+      (max, s) => Math.max(max, s.min_years_experience || 0),
+      0
+    );
+    const mismatchedTypes = selectedServicesList.filter(
+      (s) =>
+        Array.isArray(s.eligible_provider_types) &&
+        s.eligible_provider_types.length > 0 &&
+        !s.eligible_provider_types.includes(providerType)
+    );
+    return { needsTradeCert, needsCac, maxMinYears, mismatchedTypes };
+  }, [selectedServicesList, providerType]);
+
+  const toggleService = (srv: CatalogueServiceItem) => {
+    if (selectedServiceIds.includes(srv.id)) {
+      setSelectedServiceIds((prev) => prev.filter((id) => id !== srv.id));
+    } else {
+      setSelectedServiceIds((prev) => [...prev, srv.id]);
+      setServiceQualifications((prev) => {
+        if (prev[srv.id]) return prev;
+        return {
+          ...prev,
+          [srv.id]: {
+            qualificationNotes: "",
+            certificationReference: "",
+            yearsExperienceInService: String(yearsExperience),
+          },
+        };
+      });
+    }
+  };
 
   const toggleCategory = (catId: string) => {
     if (selectedCategories.includes(catId)) {
@@ -48,6 +175,39 @@ export function ProRegisterWizard({
     } else {
       setSelectedCategories([...selectedCategories, catId]);
     }
+  };
+
+  const toggleNeighbourhood = (id: string) => {
+    setSelectedNeighbourhoodIds((prev) =>
+      prev.includes(id) ? prev.filter((n) => n !== id) : [...prev, id]
+    );
+  };
+
+  const toggleWorkingDay = (day: number) => {
+    setWorkingDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  };
+
+  const updateQualificationField = (
+    serviceId: string,
+    field: keyof ServiceQualificationDraft,
+    value: string
+  ) => {
+    setServiceQualifications((prev) => ({
+      ...prev,
+      [serviceId]: {
+        qualificationNotes: prev[serviceId]?.qualificationNotes || "",
+        certificationReference: prev[serviceId]?.certificationReference || "",
+        yearsExperienceInService: prev[serviceId]?.yearsExperienceInService || String(yearsExperience),
+        [field]: value,
+      },
+    }));
+  };
+
+  const handleCityChange = (newCity: string) => {
+    setCity(newCity);
+    setSelectedNeighbourhoodIds([]);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -73,10 +233,43 @@ export function ProRegisterWizard({
       return;
     }
 
-    if (selectedCategories.length === 0) {
-      setErrorMessage("Please select at least one trade category.");
+    if (selectedServiceIds.length === 0 && selectedCategories.length === 0) {
+      setErrorMessage("Please select at least one specific service or trade category.");
       setCurrentStep(2);
       return;
+    }
+
+    if (workingDays.length === 0) {
+      setErrorMessage("Please select at least one active working day.");
+      setCurrentStep(3);
+      return;
+    }
+
+    if (startTime >= endTime) {
+      setErrorMessage("Closing time must be later than opening time.");
+      setCurrentStep(3);
+      return;
+    }
+
+    const qualPayload: Record<
+      string,
+      {
+        qualificationNotes: string;
+        certificationReference: string;
+        yearsExperienceInService: number | null;
+      }
+    > = {};
+
+    for (const sId of selectedServiceIds) {
+      const draft = serviceQualifications[sId];
+      if (draft) {
+        const parsedYears = parseInt(draft.yearsExperienceInService, 10);
+        qualPayload[sId] = {
+          qualificationNotes: draft.qualificationNotes.trim(),
+          certificationReference: draft.certificationReference.trim(),
+          yearsExperienceInService: Number.isNaN(parsedYears) ? null : parsedYears,
+        };
+      }
     }
 
     const formData = new FormData();
@@ -94,9 +287,19 @@ export function ProRegisterWizard({
     formData.append("baseCalloutFee", baseCalloutFee.toString());
     formData.append("startTime", startTime);
     formData.append("endTime", endTime);
+    formData.append("serviceQualificationsJson", JSON.stringify(qualPayload));
 
+    for (const srvId of selectedServiceIds) {
+      formData.append("serviceIds", srvId);
+    }
     for (const catId of selectedCategories) {
       formData.append("categoryIds", catId);
+    }
+    for (const nbId of selectedNeighbourhoodIds) {
+      formData.append("neighbourhoodIds", nbId);
+    }
+    for (const day of workingDays) {
+      formData.append("workingDays", String(day));
     }
 
     startTransition(async () => {
@@ -110,11 +313,13 @@ export function ProRegisterWizard({
       } else {
         setSuccessMessage(res.message);
         setTimeout(() => {
-          router.push("/pro/dashboard");
-        }, 1500);
+          router.push("/pro/profile#documents");
+        }, 1200);
       }
     });
   };
+
+  const hasCatalogueServices = catalogueTree.length > 0 && allCatalogueServicesMap.size > 0;
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10">
@@ -123,8 +328,8 @@ export function ProRegisterWizard({
         <div className="flex items-center justify-between max-w-lg mx-auto">
           {[
             { num: 1, label: "Identity & Trade" },
-            { num: 2, label: "Services & Area" },
-            { num: 3, label: "Hours & Pricing" },
+            { num: 2, label: "Services & Hubs" },
+            { num: 3, label: "Schedule & KYC" },
           ].map((st) => (
             <div key={st.num} className="flex flex-col items-center">
               <div
@@ -167,11 +372,10 @@ export function ProRegisterWizard({
                 1. Provider Role &amp; Trade Details
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Select your service provider type, trading identity and technical background.
+                Select your service provider classification, trading identity, and practical background.
               </p>
             </div>
 
-            {/* Provider Type Selector */}
             <div>
               <label className="block text-xs font-semibold text-slate-800 mb-2">
                 Provider Type *
@@ -231,7 +435,6 @@ export function ProRegisterWizard({
               </div>
             </div>
 
-            {/* Dispatch Rider Vehicle Type Option */}
             {providerType === "dispatch_rider" && (
               <div className="p-3.5 rounded-xl bg-teal-50/60 border border-teal-200 text-xs">
                 <label className="block font-semibold text-teal-950 mb-1.5">
@@ -247,21 +450,16 @@ export function ProRegisterWizard({
                   <option value="Minivan / Car">Minivan / Car (Parcel Delivery)</option>
                   <option value="Truck / Haulage">Truck / Cargo Haulage (Heavy Delivery)</option>
                 </select>
-                <p className="mt-1.5 text-[11px] text-teal-800">
-                  Customers in your operating area can book on-demand deliveries matched to your vehicle capacity.
-                </p>
               </div>
             )}
 
-            {/* Property Agent Strict Anti-Listing Disclaimer */}
             {providerType === "property_agent" && (
               <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 text-xs text-amber-950 space-y-2">
                 <div className="font-bold flex items-center gap-1.5 text-amber-900">
                   <span>⚠️</span> Strict Anti-Listing Platform Policy
                 </div>
                 <p className="text-[11px] leading-relaxed text-amber-900">
-                  EasyLife is a service platform, <strong>NOT a property listing website</strong>. Estate agents, letting agents, and property managers register strictly to offer professional services (such as rental assistance, tenancy consulting, inspection, and property management).
-                  <strong> You are strictly prohibited from posting, advertising, or listing apartments, houses, or land for rent or sale.</strong>
+                  EasyLife is a service platform, <strong>NOT a property listing website</strong>. You may offer rental assistance, tenancy consulting, and inspection services, and <strong>you are strictly prohibited from listing properties for rent or sale</strong>.
                 </p>
                 <label className="flex items-start gap-2 pt-1 cursor-pointer">
                   <input
@@ -271,7 +469,7 @@ export function ProRegisterWizard({
                     className="mt-0.5 h-4 w-4 rounded border-amber-400 text-[#0D9488] focus:ring-[#0D9488]"
                   />
                   <span className="text-[11px] font-semibold text-amber-950">
-                    I acknowledge that EasyLife does not provide property listings and agree never to upload or advertise property inventories. *
+                    I acknowledge EasyLife does not provide property listings and agree never to upload property advertisements. *
                   </span>
                 </label>
               </div>
@@ -280,7 +478,7 @@ export function ProRegisterWizard({
             {defaultUser && (
               <div className="p-3.5 rounded-xl bg-teal-50/50 border border-teal-200 text-xs text-slate-700 flex items-center justify-between">
                 <div>
-                  <span className="font-bold text-slate-900">Registered User: </span>
+                  <span className="font-bold text-slate-900">Account Owner: </span>
                   <span>{defaultUser.fullName || defaultUser.email}</span>
                 </div>
                 {defaultUser.phone && (
@@ -298,12 +496,9 @@ export function ProRegisterWizard({
                 required
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                placeholder="e.g. Chukwuma Electricals &amp; AC Services"
+                placeholder="e.g. Chukwuma Electricals & AC Services"
                 className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
               />
-              <p className="mt-1 text-[11px] text-slate-500">
-                If operating independently, you may use your name or your workshop brand.
-              </p>
             </div>
 
             <div>
@@ -314,7 +509,7 @@ export function ProRegisterWizard({
                 type="text"
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
-                placeholder="e.g. Certified Generator Technician &amp; Industrial Electrician"
+                placeholder="e.g. Certified Generator Technician & Industrial Electrician"
                 className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
               />
             </div>
@@ -328,7 +523,7 @@ export function ProRegisterWizard({
                 required
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
-                placeholder="Describe your background, years in apprenticeship, brands you service (e.g. Perkins, Mikano, Daikin, LG), and standard of workmanship..."
+                placeholder="Describe your training, equipment brands you service, and workmanship guarantees..."
                 className="w-full p-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
               />
               <span className="text-[11px] text-slate-400">Minimum 20 characters.</span>
@@ -341,7 +536,7 @@ export function ProRegisterWizard({
               <input
                 type="number"
                 min="0"
-                max="50"
+                max="70"
                 required
                 value={yearsExperience}
                 onChange={(e) => setYearsExperience(parseInt(e.target.value, 10) || 0)}
@@ -357,8 +552,8 @@ export function ProRegisterWizard({
                     setErrorMessage("You must accept the EasyLife property advisory policy prohibiting property listings.");
                     return;
                   }
-                  if (!businessName || bio.length < 20) {
-                    setErrorMessage("Please complete all required fields on this step.");
+                  if (!businessName || businessName.trim().length < 3 || bio.trim().length < 20) {
+                    setErrorMessage("Please complete your business name (min 3 chars) and bio (min 20 chars).");
                     return;
                   }
                   setErrorMessage(null);
@@ -366,94 +561,359 @@ export function ProRegisterWizard({
                 }}
                 className="px-6 py-2.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
               >
-                Continue to Services &amp; Location →
+                Continue to Services &amp; Hubs →
               </button>
             </div>
           </div>
         )}
 
-        {/* STEP 2: Categories & Service Areas */}
+        {/* STEP 2: 3-Tier Catalogue Services, Qualifications & Operating Hubs */}
         {currentStep === 2 && (
-          <div className="space-y-5 animate-in fade-in duration-200">
+          <div className="space-y-6 animate-in fade-in duration-200">
             <div>
               <h3 className="text-base font-bold text-slate-900">
-                2. Service Categories &amp; Operating Area
+                2. Service Catalogue, Qualifications &amp; Approved Locations
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Select the trades you are qualified to perform and the city where you can take on-site jobs.
+                Browse categories and subcategories to select eligible services, declare trade credentials, and pick approved neighbourhoods.
               </p>
             </div>
 
-            {/* Service Categories Checkbox Grid */}
-            <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-2">
-                Select Your Service Specialties *
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {categories.map((cat) => {
-                  const isChecked = selectedCategories.includes(cat.id);
-                  return (
-                    <label
-                      key={cat.id}
-                      className={`p-3 rounded-xl border cursor-pointer flex items-center justify-between transition-colors ${
-                        isChecked
-                          ? "bg-teal-50/60 border-[#0D9488] ring-1 ring-[#0D9488]"
-                          : "bg-white border-slate-200 hover:border-slate-300"
-                      }`}
-                    >
-                      <div>
-                        <span className="text-xs font-bold text-slate-900 block">
-                          {cat.name}
-                        </span>
-                        {cat.description && (
-                          <span className="text-[11px] text-slate-500 block truncate max-w-[200px]">
-                            {cat.description}
+            {hasCatalogueServices ? (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-bold text-slate-800">
+                    Main Categories * ({selectedServiceIds.length} individual services selected)
+                  </label>
+                </div>
+
+                {/* Main Category Tabs */}
+                <div className="flex flex-wrap gap-2">
+                  {catalogueTree.map((main) => {
+                    const countInMain =
+                      (main.direct_services || []).filter((s) => selectedServiceIds.includes(s.id)).length +
+                      (main.subcategories || []).reduce(
+                        (sum, sub) =>
+                          sum + (sub.services || []).filter((s) => selectedServiceIds.includes(s.id)).length,
+                        0
+                      );
+                    const isActive = activeMainCategory?.id === main.id;
+                    return (
+                      <button
+                        key={main.id}
+                        type="button"
+                        onClick={() => {
+                          setActiveMainCatId(main.id);
+                          setActiveSubcatId("all");
+                        }}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
+                          isActive
+                            ? "bg-slate-900 text-white border-slate-900"
+                            : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        {main.name}
+                        {countInMain > 0 && (
+                          <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] bg-teal-500 text-white">
+                            {countInMain}
                           </span>
                         )}
-                      </div>
-                      <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={() => toggleCategory(cat.id)}
-                        className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300"
-                      />
-                    </label>
-                  );
-                })}
-              </div>
-            </div>
+                      </button>
+                    );
+                  })}
+                </div>
 
-            {/* Operating City */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Subcategory Filter Pills */}
+                {activeMainCategory &&
+                  (activeMainCategory.subcategories.length > 0 ||
+                    activeMainCategory.direct_services.length > 0) && (
+                    <div className="flex flex-wrap items-center gap-1.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                      <span className="text-[11px] font-semibold text-slate-500 mr-1">
+                        Subcategory:
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setActiveSubcatId("all")}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition ${
+                          activeSubcatId === "all"
+                            ? "bg-[#0D9488] text-white"
+                            : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                        }`}
+                      >
+                        All in {activeMainCategory.name}
+                      </button>
+                      {activeMainCategory.subcategories.map((sub) => (
+                        <button
+                          key={sub.id}
+                          type="button"
+                          onClick={() => setActiveSubcatId(sub.id)}
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition ${
+                            activeSubcatId === sub.id
+                              ? "bg-[#0D9488] text-white"
+                              : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                          }`}
+                        >
+                          {sub.name} ({sub.services.length})
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                {/* Services List + Inline Qualification Inputs */}
+                <div className="grid grid-cols-1 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
+                  {visibleServices.length === 0 ? (
+                    <div className="p-4 rounded-xl border border-dashed border-slate-200 text-xs text-slate-500 text-center">
+                      No active catalogue services inside this subcategory yet.
+                    </div>
+                  ) : (
+                    visibleServices.map((srv) => {
+                      const isSelected = selectedServiceIds.includes(srv.id);
+                      const typeEligible =
+                        !srv.eligible_provider_types?.length ||
+                        srv.eligible_provider_types.includes(providerType);
+                      const expShortfall = (srv.min_years_experience || 0) > yearsExperience;
+                      const draft = serviceQualifications[srv.id] || {
+                        qualificationNotes: "",
+                        certificationReference: "",
+                        yearsExperienceInService: String(yearsExperience),
+                      };
+
+                      return (
+                        <div
+                          key={srv.id}
+                          className={`rounded-xl border transition ${
+                            isSelected
+                              ? "bg-teal-50/40 border-[#0D9488] ring-1 ring-[#0D9488]/40"
+                              : "bg-white border-slate-200 hover:border-slate-300"
+                          }`}
+                        >
+                          <label className="p-3.5 flex items-start justify-between gap-3 cursor-pointer">
+                            <div className="space-y-1">
+                              <div className="flex flex-wrap items-center gap-1.5">
+                                <span className="text-xs font-bold text-slate-900">
+                                  {srv.name}
+                                </span>
+                                {srv.base_price_min_kobo > 0 && (
+                                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-semibold">
+                                    From ₦{Math.round(srv.base_price_min_kobo / 100).toLocaleString("en-NG")}
+                                  </span>
+                                )}
+                                {srv.requires_trade_certification && (
+                                  <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-semibold">
+                                    Trade Cert Required
+                                  </span>
+                                )}
+                                {srv.requires_business_registration && (
+                                  <span className="px-2 py-0.5 rounded bg-purple-50 text-purple-800 border border-purple-200 text-[10px] font-semibold">
+                                    CAC Cert Required
+                                  </span>
+                                )}
+                                {srv.min_years_experience > 0 && (
+                                  <span
+                                    className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${
+                                      expShortfall
+                                        ? "bg-rose-50 text-rose-700 border-rose-200"
+                                        : "bg-slate-50 text-slate-600 border-slate-200"
+                                    }`}
+                                  >
+                                    Min {srv.min_years_experience} yrs exp
+                                  </span>
+                                )}
+                                {!typeEligible && (
+                                  <span className="px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-semibold">
+                                    Requires: {srv.eligible_provider_types.join(", ")}
+                                  </span>
+                                )}
+                              </div>
+                              {srv.short_description && (
+                                <p className="text-[11px] text-slate-500">
+                                  {srv.short_description}
+                                </p>
+                              )}
+                            </div>
+
+                            <input
+                              type="checkbox"
+                              checked={isSelected}
+                              onChange={() => toggleService(srv)}
+                              className="mt-1 h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 shrink-0"
+                            />
+                          </label>
+
+                          {isSelected && (
+                            <div className="px-3.5 pb-3.5 pt-2 border-t border-teal-200/70 grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-white/70 rounded-b-xl">
+                              <div>
+                                <label className="block text-[10px] font-bold uppercase text-slate-600 mb-1">
+                                  Years in This Service
+                                </label>
+                                <input
+                                  type="number"
+                                  min="0"
+                                  max="70"
+                                  value={draft.yearsExperienceInService}
+                                  onChange={(e) =>
+                                    updateQualificationField(
+                                      srv.id,
+                                      "yearsExperienceInService",
+                                      e.target.value
+                                    )
+                                  }
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[10px] font-bold uppercase text-slate-600 mb-1">
+                                  Cert / Licence No. (Optional)
+                                </label>
+                                <input
+                                  type="text"
+                                  value={draft.certificationReference}
+                                  onChange={(e) =>
+                                    updateQualificationField(
+                                      srv.id,
+                                      "certificationReference",
+                                      e.target.value
+                                    )
+                                  }
+                                  placeholder="e.g. NABTEB / NEMSA / COREN"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-[10px] font-bold uppercase text-slate-600 mb-1">
+                                  Qualification / Equipment Notes
+                                </label>
+                                <input
+                                  type="text"
+                                  value={draft.qualificationNotes}
+                                  onChange={(e) =>
+                                    updateQualificationField(
+                                      srv.id,
+                                      "qualificationNotes",
+                                      e.target.value
+                                    )
+                                  }
+                                  placeholder="e.g. Daikin/LG Inverter specialist"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                                />
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+            ) : (
               <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
-                  Primary Pilot City *
+                <label className="block text-xs font-semibold text-slate-800 mb-2">
+                  Select Your Service Specialties *
                 </label>
-                <select
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className="w-full h-11 px-3 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
-                >
-                  {PILOT_CITIES.map((c) => (
-                    <option key={c} value={c}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {categories.map((cat) => {
+                    const isChecked = selectedCategories.includes(cat.id);
+                    return (
+                      <label
+                        key={cat.id}
+                        className={`p-3 rounded-xl border cursor-pointer flex items-center justify-between transition-colors ${
+                          isChecked
+                            ? "bg-teal-50/60 border-[#0D9488] ring-1 ring-[#0D9488]"
+                            : "bg-white border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        <div>
+                          <span className="text-xs font-bold text-slate-900 block">
+                            {cat.name}
+                          </span>
+                          {cat.description && (
+                            <span className="text-[11px] text-slate-500 block truncate max-w-[200px]">
+                              {cat.description}
+                            </span>
+                          )}
+                        </div>
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => toggleCategory(cat.id)}
+                          className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300"
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Approved Pilot City & Operating Neighbourhoods */}
+            <div className="pt-4 border-t border-slate-200 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    Primary Approved Pilot City *
+                  </label>
+                  <select
+                    value={city}
+                    onChange={(e) => handleCityChange(e.target.value)}
+                    className="w-full h-11 px-3 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                  >
+                    {PILOT_CITIES.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                    Custom LGA / Workshop Landmark (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={lgaOrDistrict}
+                    onChange={(e) => setLgaOrDistrict(e.target.value)}
+                    placeholder="e.g. Trans-Amadi, Ikeja, or Wuse II"
+                    className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
-                  Primary LGA / District / Workshop Area
-                </label>
-                <input
-                  type="text"
-                  value={lgaOrDistrict}
-                  onChange={(e) => setLgaOrDistrict(e.target.value)}
-                  placeholder="e.g. Trans-Amadi, Ikeja, or Wuse II"
-                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
-                />
-              </div>
+              {cityNeighbourhoods.length > 0 && (
+                <div>
+                  <label className="block text-xs font-semibold text-slate-800 mb-2">
+                    Approved Neighbourhoods Covered in {city} ({selectedNeighbourhoodIds.length} selected)
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto p-2.5 rounded-xl border border-slate-200 bg-slate-50/70">
+                    {cityNeighbourhoods.map((nb) => {
+                      const active = selectedNeighbourhoodIds.includes(nb.id);
+                      return (
+                        <label
+                          key={nb.id}
+                          className={`px-2.5 py-2 rounded-lg border text-xs flex items-center gap-2 cursor-pointer transition ${
+                            active
+                              ? "bg-teal-50 border-[#0D9488] text-teal-950 font-semibold"
+                              : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={active}
+                            onChange={() => toggleNeighbourhood(nb.id)}
+                            className="h-3.5 w-3.5 rounded text-[#0D9488] border-slate-300"
+                          />
+                          <div className="min-w-0">
+                            <span className="block truncate">{nb.name}</span>
+                            <span className="block text-[10px] text-slate-400 truncate">
+                              {nb.lga}
+                            </span>
+                          </div>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="pt-4 flex items-center justify-between">
@@ -467,8 +927,8 @@ export function ProRegisterWizard({
               <button
                 type="button"
                 onClick={() => {
-                  if (selectedCategories.length === 0) {
-                    setErrorMessage("Please select at least one trade category.");
+                  if (selectedServiceIds.length === 0 && selectedCategories.length === 0) {
+                    setErrorMessage("Please select at least one individual service or trade category.");
                     return;
                   }
                   setErrorMessage(null);
@@ -476,28 +936,53 @@ export function ProRegisterWizard({
                 }}
                 className="px-6 py-2.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
               >
-                Continue to Hours &amp; Rates →
+                Continue to Schedule &amp; KYC →
               </button>
             </div>
           </div>
         )}
 
-        {/* STEP 3: Working Hours & Rates */}
+        {/* STEP 3: Working Days, Hours, Rates & KYC Preview */}
         {currentStep === 3 && (
           <div className="space-y-5 animate-in fade-in duration-200">
             <div>
               <h3 className="text-base font-bold text-slate-900">
-                3. Working Hours &amp; Base Inspection Fee
+                3. Working Schedule, Inspection Fee &amp; Verification Preview
               </h3>
               <p className="text-xs text-slate-500 mt-0.5">
-                Define when you are available to accept jobs and your initial call-out diagnosis rate.
+                Configure your weekly operating days and verify the documents you&apos;ll submit right after creating your profile.
               </p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-800 mb-2">
+                Active Working Days *
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {WEEKDAYS.map((wd) => {
+                  const active = workingDays.includes(wd.day);
+                  return (
+                    <button
+                      key={wd.day}
+                      type="button"
+                      onClick={() => toggleWorkingDay(wd.day)}
+                      className={`px-3.5 py-2 rounded-xl border text-xs font-bold transition ${
+                        active
+                          ? "bg-[#0D9488] text-white border-[#0D9488]"
+                          : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300"
+                      }`}
+                    >
+                      {wd.short}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-800 mb-1.5">
-                  Available From (Daily)
+                  Available From
                 </label>
                 <input
                   type="time"
@@ -509,7 +994,7 @@ export function ProRegisterWizard({
 
               <div>
                 <label className="block text-xs font-semibold text-slate-800 mb-1.5">
-                  Available Until (Daily)
+                  Available Until
                 </label>
                 <input
                   type="time"
@@ -533,16 +1018,38 @@ export function ProRegisterWizard({
                 placeholder="5000"
                 className="w-48 h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
               />
-              <p className="mt-1 text-[11px] text-slate-500">
-                Covers your on-site physical diagnosis if full repair is not commissioned immediately.
-              </p>
             </div>
 
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600">
-              <span className="font-bold text-slate-900 block mb-1">
-                Next Step: Verification Vetting
+            {/* Required Credentials Summary */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-2">
+              <span className="font-bold text-slate-900 block">
+                Required Verification Checklist After Registration:
               </span>
-              After registration, you will be directed to your dashboard where you can upload your National ID (NIN) or trade certificate to unlock live customer job requests.
+              <ul className="list-disc pl-5 space-y-1 text-[11px]">
+                <li>
+                  <strong>Mandatory Government ID:</strong> NIN, Voter&apos;s Card, Driver&apos;s Licence, or International Passport
+                </li>
+                {requiredCredentialSummary.needsTradeCert && (
+                  <li className="text-amber-900">
+                    <strong>Trade Certification Required:</strong> Selected service(s) require Trade Test / NABTEB / guild certification upload
+                  </li>
+                )}
+                {requiredCredentialSummary.needsCac && (
+                  <li className="text-purple-900">
+                    <strong>CAC Business Certificate Required:</strong> Selected service(s) require RC/BN corporate registration proof
+                  </li>
+                )}
+                {requiredCredentialSummary.maxMinYears > yearsExperience && (
+                  <li className="text-rose-800">
+                    <strong>Experience Threshold Advisory:</strong> Selected service(s) require up to {requiredCredentialSummary.maxMinYears} years of experience.
+                  </li>
+                )}
+                {requiredCredentialSummary.mismatchedTypes.length > 0 && (
+                  <li className="text-rose-800">
+                    <strong>Provider Type Notice:</strong> {requiredCredentialSummary.mismatchedTypes.length} selected service(s) typically target another provider type.
+                  </li>
+                )}
+              </ul>
             </div>
 
             <div className="pt-4 flex items-center justify-between">
@@ -558,7 +1065,7 @@ export function ProRegisterWizard({
                 disabled={isPending}
                 className="px-8 py-3 rounded-lg bg-[#0D9488] text-white text-sm font-bold hover:bg-[#0F766E] disabled:opacity-50 transition shadow-xs"
               >
-                {isPending ? "Submitting Registration..." : "Complete Professional Registration"}
+                {isPending ? "Saving Onboarding Profile..." : "Complete Registration & Upload KYC →"}
               </button>
             </div>
           </div>

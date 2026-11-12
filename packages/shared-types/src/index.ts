@@ -189,6 +189,7 @@ export type UrgencyLevel = "low" | "normal" | "high" | "emergency";
 export type StorageBucketId =
   | "avatars"
   | "portfolio-media"
+  | "catalogue-assets"
   | "verification-documents"
   | "service-request-media"
   | "message-attachments"
@@ -384,3 +385,339 @@ export interface AIAssistantResponseData {
     estimatedCostUsd: number;
   };
 }
+
+// ============================================================================
+// Service Catalogue Architecture Types (Phase 2)
+// ============================================================================
+
+export interface CatalogueServiceRequirementItem {
+  id: string;
+  requirement_key: string;
+  requirement_type: string;
+  title: string;
+  description: string | null;
+  is_required: boolean;
+  applies_to: "customer" | "professional" | "both";
+  config: Record<string, unknown>;
+}
+
+export interface CatalogueServiceItem {
+  id: string;
+  category_id?: string;
+  subcategory_id?: string | null;
+  service_code: string;
+  name: string;
+  slug: string;
+  short_description: string | null;
+  description?: string | null;
+  image_url: string | null;
+  icon_name: string | null;
+  keywords: string[];
+  base_price_min_kobo: number;
+  base_price_max_kobo: number | null;
+  estimated_duration_minutes: number | null;
+  is_active: boolean;
+  is_featured: boolean;
+  is_popular: boolean;
+  show_on_homepage?: boolean;
+  display_order?: number;
+  requires_verified_identity: boolean;
+  requires_trade_certification: boolean;
+  requires_business_registration: boolean;
+  requires_site_inspection: boolean;
+  min_years_experience: number;
+  eligible_provider_types: string[];
+  required_document_types: string[];
+  requirements?: CatalogueServiceRequirementItem[];
+}
+
+export interface CatalogueSubcategoryNode {
+  id: string;
+  parent_id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  icon_name: string | null;
+  image_url: string | null;
+  keywords: string[];
+  display_order: number;
+  is_active: boolean;
+  is_featured: boolean;
+  is_popular: boolean;
+  services: CatalogueServiceItem[];
+}
+
+export interface CatalogueCategoryNode {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  icon_name: string | null;
+  image_url: string | null;
+  keywords: string[];
+  default_commission_bps: number;
+  display_order: number;
+  is_active: boolean;
+  is_featured: boolean;
+  is_popular: boolean;
+  show_on_homepage: boolean;
+  direct_services: CatalogueServiceItem[];
+  subcategories: CatalogueSubcategoryNode[];
+}
+
+export interface ProfessionalServiceEligibilityResult {
+  eligible: boolean;
+  professional_id: string;
+  service_id: string;
+  service_name?: string;
+  missing_requirements: string[];
+  checks?: {
+    identity_verified: boolean;
+    provider_type_eligible: boolean;
+    experience_sufficient: boolean;
+    trade_certification_present: boolean;
+    business_registration_present: boolean;
+    approved_document_types: string[];
+  };
+  error?: string;
+}
+
+// ============================================================================
+// Phase 6 — Search, Filtering & Pagination Types
+// ============================================================================
+
+export type ProfessionalDiscoverySort =
+  | "relevance"
+  | "rating"
+  | "distance"
+  | "experience"
+  | "jobs"
+  | "price_asc";
+
+export interface CatalogueSearchResultItem {
+  id: string;
+  service_code: string;
+  name: string;
+  slug: string;
+  short_description: string | null;
+  description: string | null;
+  image_url: string | null;
+  icon_name: string | null;
+  keywords: string[];
+  base_price_min_kobo: number;
+  base_price_max_kobo: number | null;
+  estimated_duration_minutes: number | null;
+  is_active: boolean;
+  is_featured: boolean;
+  is_popular: boolean;
+  show_on_homepage: boolean;
+  requires_trade_certification: boolean;
+  requires_business_registration: boolean;
+  requires_site_inspection: boolean;
+  min_years_experience: number;
+  category_id: string;
+  category_name: string;
+  category_slug: string;
+  category_icon: string | null;
+  category_is_active: boolean;
+  subcategory_id: string | null;
+  subcategory_name: string | null;
+  subcategory_slug: string | null;
+  subcategory_is_active: boolean;
+  is_currently_available: boolean;
+  available_provider_count: number;
+  relevance_score: number;
+  total_count: number;
+}
+
+// ============================================================================
+// Phase 7 — Analytics & Demand Management Types
+// ============================================================================
+
+export type SupplyGapSeverity =
+  | "critical_no_providers"
+  | "high_none_available"
+  | "high_unmet_demand"
+  | "moderate_thin_supply"
+  | "healthy";
+
+export interface AdminDemandAnalyticsSummary {
+  total_searches: number;
+  zero_result_searches: number;
+  zero_result_rate_pct: number;
+  active_services_count: number;
+  services_with_zero_providers_count: number;
+  services_none_available_count: number;
+  insufficient_provider_services_count: number;
+  total_bookings_in_window: number;
+  direct_service_bookings_count: number;
+  custom_task_requests_count: number;
+  maintenance_requests_count: number;
+  ai_queries_in_window: number;
+  approved_available_pros_count: number;
+  approved_total_pros_count: number;
+}
+
+export interface AdminSearchedServiceMetric {
+  service_id: string;
+  service_code: string;
+  name: string;
+  slug: string;
+  category_name: string;
+  subcategory_name: string | null;
+  search_count: number;
+  zero_result_hits: number;
+  direct_bookings: number;
+  available_pros: number;
+  total_eligible_pros: number;
+  gap_severity: SupplyGapSeverity;
+}
+
+export interface AdminSearchQueryMetric {
+  normalized_query: string;
+  search_surface: "suggest" | "catalogue" | "explore";
+  city_filter: string;
+  search_count: number;
+  zero_result_count: number;
+  last_result_count: number;
+  resolved_service_name: string | null;
+  resolved_service_slug: string | null;
+  resolved_category_name: string | null;
+  last_searched_at: string;
+}
+
+export interface AdminRequestedServiceMetric {
+  service_id: string;
+  service_code: string;
+  name: string;
+  slug: string;
+  category_name: string;
+  subcategory_name: string | null;
+  direct_bookings: number;
+  open_unmatched_bookings: number;
+  custom_task_bookings: number;
+  maintenance_requests_count: number;
+  search_count: number;
+  category_bookings_context: number;
+  combined_demand_signals: number;
+  available_pros: number;
+  gap_severity: SupplyGapSeverity;
+}
+
+export interface AdminFrequentlyBookedServiceMetric {
+  service_id: string;
+  service_code: string;
+  name: string;
+  slug: string;
+  category_name: string;
+  subcategory_name: string | null;
+  total_bookings: number;
+  completed_bookings: number;
+  active_bookings: number;
+  cancelled_bookings: number;
+  disputed_bookings: number;
+  custom_task_bookings: number;
+  gross_agreed_kobo: number;
+  avg_agreed_kobo: number;
+  completion_rate_pct: number;
+  available_pros: number;
+}
+
+export interface AdminPopularCategoryMetric {
+  category_id: string;
+  parent_id: string | null;
+  parent_name: string | null;
+  name: string;
+  slug: string;
+  tier: "main" | "subcategory";
+  total_bookings: number;
+  completed_bookings: number;
+  active_bookings: number;
+  custom_task_bookings: number;
+  gross_agreed_kobo: number;
+  search_count: number;
+  ai_assistant_hits: number;
+  maintenance_requests_count: number;
+  active_services_count: number;
+  available_pros_count: number;
+}
+
+export interface AdminServiceSupplyGapMetric {
+  service_id: string;
+  service_code: string;
+  name: string;
+  slug: string;
+  category_id?: string;
+  category_name: string;
+  subcategory_name: string | null;
+  requires_trade_certification: boolean;
+  direct_service_pros: number;
+  total_eligible_pros: number;
+  available_pros: number;
+  offline_pros: number;
+  ph_pros: number;
+  lagos_pros: number;
+  abuja_pros: number;
+  missing_cities: string[];
+  booking_demand: number;
+  open_unmatched_bookings?: number;
+  search_count: number;
+  category_bookings_context?: number;
+  gap_severity: SupplyGapSeverity;
+}
+
+export interface AdminZeroResultSearchMetric {
+  normalized_query: string;
+  search_surface: "suggest" | "catalogue" | "explore";
+  city_filter: string;
+  zero_result_count: number;
+  search_count: number;
+  last_result_count: number;
+  last_searched_at: string;
+}
+
+export interface AdminCityDemandMetric {
+  city: string;
+  total_bookings: number;
+  open_unmatched_bookings: number;
+  completed_bookings: number;
+  gross_agreed_kobo: number;
+  search_count: number;
+  approved_pros_count: number;
+  available_pros_count: number;
+  bookings_per_available_pro: number | null;
+}
+
+export interface AdminLocationDemandMetric {
+  city: string;
+  lga_or_district: string;
+  total_bookings: number;
+  open_unmatched_bookings: number;
+  active_bookings: number;
+  completed_bookings: number;
+  custom_task_bookings: number;
+  gross_agreed_kobo: number;
+  city_search_count: number;
+  approved_pros_count: number;
+  available_pros_count: number;
+  bookings_per_available_pro: number | null;
+}
+
+export interface AdminDemandAnalytics {
+  window_days: number;
+  generated_at: string;
+  summary: AdminDemandAnalyticsSummary;
+  most_searched_services: AdminSearchedServiceMetric[];
+  top_search_queries: AdminSearchQueryMetric[];
+  most_requested_services: AdminRequestedServiceMetric[];
+  most_frequently_booked_services: AdminFrequentlyBookedServiceMetric[];
+  popular_categories: AdminPopularCategoryMetric[];
+  insufficient_provider_services: AdminServiceSupplyGapMetric[];
+  zero_result_searches: AdminZeroResultSearchMetric[];
+  demand_by_city: AdminCityDemandMetric[];
+  demand_by_location: AdminLocationDemandMetric[];
+  provider_availability_by_service: AdminServiceSupplyGapMetric[];
+}
+
+
+

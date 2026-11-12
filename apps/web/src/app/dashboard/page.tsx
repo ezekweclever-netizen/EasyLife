@@ -34,10 +34,10 @@ export default async function CustomerDashboardPage({
   const resolvedParams = await searchParams;
   const requestedCity = resolvedParams.city?.trim() || "";
 
-  // Concurrently fetch profile, categories, bookings, notifications, and (when city param known) pros
+  // Concurrently fetch profile, top-level categories, bookings, notifications, and (when city param known) pros
   const [profile, categories, bookings, notifications, preloadedPros] = await Promise.all([
     getCustomerProfile(auth.user.id, auth.accessToken),
-    getServiceCategories(),
+    getServiceCategories({ topLevelOnly: true }),
     getCustomerBookings(auth.user.id, auth.accessToken),
     getCustomerNotifications(auth.user.id, auth.accessToken),
     requestedCity

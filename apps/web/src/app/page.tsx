@@ -4,6 +4,7 @@ import { EASYLIFE_BRAND } from "@easylife/shared-config";
 import { PublicShell } from "@/components/site/public-shell";
 import { ServiceSearchForm } from "@/components/site/service-search-form";
 import { StackedCategoriesSection } from "@/components/site/stacked-categories-section";
+import { getHomepageCatalogueData } from "@/lib/supabase/customer";
 import {
   Section,
   SectionHeading,
@@ -28,6 +29,21 @@ export default async function HomePage({
     }
     redirect(`/auth/callback?${qs.toString()}`);
   }
+
+  const catalogueData = await getHomepageCatalogueData();
+  const heroPopularLinks =
+    catalogueData.popularServices.length > 0
+      ? catalogueData.popularServices.slice(0, 4).map((srv) => ({
+          label: srv.name,
+          href: `/services/${srv.slug}`,
+        }))
+      : [
+          { label: "Generator Servicing", href: "/explore-services?q=generator" },
+          { label: "AC Gas Refill", href: "/explore-services?q=ac" },
+          { label: "Borehole Pump", href: "/explore-services?q=borehole" },
+          { label: "Inverter Repair", href: "/explore-services?q=solar" },
+        ];
+
   const customerSteps = [
     {
       title: "Tell Us What Needs Fixing",
@@ -159,34 +175,18 @@ export default async function HomePage({
             <div className="mt-8 max-w-2xl mx-auto">
               <ServiceSearchForm id="hero-search" tone="dark" />
               <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2.5 text-sm text-[#DAE7E7]/85">
-                <span className="text-[#DAE7E7]/75">Popular searches:</span>
-                <Link
-                  href="/explore-services?q=generator"
-                  className="text-[#24989A] hover:text-white underline underline-offset-2 transition-colors"
-                >
-                  Generator Servicing
-                </Link>
-                <span>•</span>
-                <Link
-                  href="/explore-services?q=ac"
-                  className="text-[#24989A] hover:text-white underline underline-offset-2 transition-colors"
-                >
-                  AC Gas Refill
-                </Link>
-                <span>•</span>
-                <Link
-                  href="/explore-services?q=borehole"
-                  className="text-[#24989A] hover:text-white underline underline-offset-2 transition-colors"
-                >
-                  Borehole Pump
-                </Link>
-                <span>•</span>
-                <Link
-                  href="/explore-services?q=solar"
-                  className="text-[#24989A] hover:text-white underline underline-offset-2 transition-colors"
-                >
-                  Inverter Repair
-                </Link>
+                <span className="text-[#DAE7E7]/75">Popular services:</span>
+                {heroPopularLinks.map((item, idx) => (
+                  <span key={item.href} className="inline-flex items-center gap-2.5">
+                    {idx > 0 && <span aria-hidden="true">•</span>}
+                    <Link
+                      href={item.href}
+                      className="text-[#24989A] hover:text-white underline underline-offset-2 transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -207,8 +207,14 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* 3. Premium Stacked Service Categories */}
-      <StackedCategoriesSection />
+      {/* 3. Premium Stacked Service Categories + Live Dynamic Catalogue Showcase */}
+      <StackedCategoriesSection
+        mainCategories={catalogueData.mainCategories}
+        featuredServices={catalogueData.featuredServices}
+        popularServices={catalogueData.popularServices}
+        totalServicesCount={catalogueData.totalServicesCount}
+        catalogueLoadError={catalogueData.hasError}
+      />
 
       {/* 4. How EasyLife Works */}
       <Section id="how-it-works" tone="grey">

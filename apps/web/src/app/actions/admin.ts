@@ -4,10 +4,10 @@ import { revalidatePath } from "next/cache";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 import { verifyAdminSession } from "@/lib/auth/admin-guard";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
-import { supabaseAdminFetch } from "@/lib/supabase/admin";
 import { storageService } from "@/lib/storage/storage-service";
 import type {
   AdminDashboardMetrics,
+  AdminDemandAnalytics,
   VerificationStatus,
   UserRole,
 } from "@easylife/shared-types";
@@ -43,19 +43,19 @@ async function runAdminQuery<T>(
 
   const config = getSupabasePublicConfig();
   const token = options.accessToken || adminCheck.accessToken;
-  if (token && config) {
-    const res = await supabaseFetch<T>(config, path, {
-      method: options.method,
-      body: options.body,
-      headers: options.headers,
-      accessToken: token,
-    });
-    if (res.ok) return res;
+  if (!config || !token) {
+    return {
+      ok: false as const,
+      status: 500,
+      message: "Missing authenticated administrator Supabase context.",
+    };
   }
-  return supabaseAdminFetch<T>(path, {
+
+  return supabaseFetch<T>(config, path, {
     method: options.method,
     body: options.body,
     headers: options.headers,
+    accessToken: token,
   });
 }
 
@@ -111,7 +111,12 @@ export async function fetchAdminUsers(params: {
 
   return {
     users: res.ok && Array.isArray(res.data) ? res.data : [],
-    totalCount: res.ok && Array.isArray(res.data) ? res.data.length : 0,
+    totalCount:
+      res.ok && typeof res.totalCount === "number"
+        ? res.totalCount
+        : res.ok && Array.isArray(res.data)
+          ? res.data.length
+          : 0,
   };
 }
 
@@ -192,7 +197,7 @@ export async function adminReinstateUserAction(
 }
 
 /**
- * 5. Fetch Professionals with Profile, Verification & Categories
+ * 5. Fetch Professionals with Profile, Verification, Services, Areas & KYC Docs
  */
 export async function fetchAdminProfessionals(params: {
   search?: string;
@@ -205,7 +210,7 @@ export async function fetchAdminProfessionals(params: {
   const limit = params.limit || 25;
   const offset = (page - 1) * limit;
 
-  let query = `/rest/v1/professional_profiles?select=*,profiles:user_id(id,email,full_name,phone,city,state,is_suspended)&order=created_at.desc&limit=${limit}&offset=${offset}`;
+  let query = `/rest/v1/professional_profiles?deleted_at=is.null&select=*,profiles:user_id(id,email,full_name,phone,city,state,is_suspended),professional_services(id,category_id,service_id,service_title,min_price_kobo,max_price_kobo,qualification_notes,certification_reference,years_experience_in_service,is_primary_skill,is_active,deleted_at,service_categories(name),services(id,name,service_code,requires_trade_certification,requires_business_registration,min_years_experience)),professional_service_areas(id,city,state,lga_or_district,neighbourhood,service_radius_km,is_primary,is_active),professional_documents(id,document_type,file_name,document_number_masked,verification_status,review_notes,created_at,deleted_at)&order=created_at.desc&limit=${limit}&offset=${offset}`;
 
   if (params.search && params.search.trim()) {
     const s = encodeURIComponent(params.search.trim());
@@ -220,7 +225,19 @@ export async function fetchAdminProfessionals(params: {
     accessToken: auth?.accessToken,
   });
 
-  return res.ok && Array.isArray(res.data) ? res.data : [];
+  if (!res.ok || !Array.isArray(res.data)) {
+    return [];
+  }
+
+  return res.data.map((pro) => ({
+    ...pro,
+    professional_services: Array.isArray(pro.professional_services)
+      ? pro.professional_services.filter((s: any) => !s.deleted_at)
+      : [],
+    professional_documents: Array.isArray(pro.professional_documents)
+      ? pro.professional_documents.filter((d: any) => !d.deleted_at)
+      : [],
+  }));
 }
 
 /**
@@ -238,8 +255,12 @@ export async function adminReviewVerificationAction(
     return { ok: false, message: "Professional ID is required." };
   }
 
-  if (decision === "rejected" && (!reason || reason.length < 5)) {
-    return { ok: false, message: "A documented rejection reason (min 5 chars) is required." };
+  if (!["approved", "rejected", "suspended"].includes(decision)) {
+    return { ok: false, message: "Invalid verification decision." };
+  }
+
+  if ((decision === "rejected" || decision === "suspended") && (!reason || reason.length < 5)) {
+    return { ok: false, message: "A documented reason (min 5 chars) is required when rejecting or suspending." };
   }
 
   const res = await runAdminQuery<Record<string, unknown>>(
@@ -262,27 +283,65 @@ export async function adminReviewVerificationAction(
   revalidatePath("/admin/verifications");
   revalidatePath("/admin/professionals");
   revalidatePath("/admin");
+  revalidatePath("/pro/dashboard");
+  revalidatePath("/pro/profile");
+  revalidatePath("/explore-services");
+  revalidatePath(`/professionals/${professionalId}`);
   return { ok: true, message: `Professional verification ${decision}!`, data: res.data ?? undefined };
 }
 
 /**
- * 7. Fetch Verification Documents Queue
+ * 7. Fetch Verification Documents Queue with Service Qualifications & Eligibility Diagnostics
  */
 export async function fetchAdminDocuments(status?: string) {
   const auth = await getAuthenticatedUser();
-  let query = `/rest/v1/professional_documents?select=*,professional_profiles:professional_id(id,business_name,slug,user_id,profiles:user_id(full_name,email))&order=created_at.desc&limit=50`;
+  let query = `/rest/v1/professional_documents?deleted_at=is.null&select=*,professional_profiles:professional_id(id,business_name,slug,user_id,provider_type,years_of_experience,verification_status,rejection_reason,primary_city,profiles:user_id(full_name,email,phone),professional_services(id,category_id,service_id,service_title,qualification_notes,certification_reference,years_experience_in_service,is_active,deleted_at,service_categories(name),services(id,name,service_code,requires_trade_certification,requires_business_registration,min_years_experience)),professional_service_areas(id,city,lga_or_district,neighbourhood,is_active))&order=created_at.desc&limit=50`;
 
   if (status && status !== "all") {
     query += `&verification_status=eq.${status}`;
   }
 
-  const res = await runAdminQuery<Array<Record<string, unknown>>>(query, {
+  const res = await runAdminQuery<Array<Record<string, any>>>(query, {
     accessToken: auth?.accessToken,
   });
 
   if (!res.ok || !Array.isArray(res.data)) {
     return [];
   }
+
+  // Evaluate deduplicated per-(professional_id, service_id) eligibility diagnostics
+  const pairMap = new Map<string, { professionalId: string; serviceId: string }>();
+  for (const doc of res.data) {
+    const pro = doc.professional_profiles;
+    if (!pro?.id || !Array.isArray(pro.professional_services)) continue;
+    for (const ps of pro.professional_services) {
+      if (ps.deleted_at || !ps.service_id) continue;
+      const key = `${pro.id}:${ps.service_id}`;
+      if (!pairMap.has(key)) {
+        pairMap.set(key, { professionalId: pro.id, serviceId: ps.service_id });
+      }
+    }
+  }
+
+  const eligibilityCache = new Map<string, Record<string, unknown>>();
+  await Promise.all(
+    Array.from(pairMap.entries()).map(async ([key, pair]) => {
+      const eligRes = await runAdminQuery<Record<string, unknown>>(
+        "/rest/v1/rpc/check_professional_service_eligibility",
+        {
+          method: "POST",
+          accessToken: auth?.accessToken,
+          body: {
+            p_professional_id: pair.professionalId,
+            p_service_id: pair.serviceId,
+          },
+        }
+      );
+      if (eligRes.ok && eligRes.data) {
+        eligibilityCache.set(key, eligRes.data);
+      }
+    })
+  );
 
   return Promise.all(
     res.data.map(async (doc) => {
@@ -300,8 +359,29 @@ export async function fetchAdminDocuments(status?: string) {
         signedDocumentUrl = signed.signedUrl;
       }
 
+      const pro = doc.professional_profiles;
+      let enrichedPro = pro;
+      if (pro) {
+        const activeServices = Array.isArray(pro.professional_services)
+          ? pro.professional_services.filter((s: any) => !s.deleted_at)
+          : [];
+        const serviceEligibilities: Record<string, Record<string, unknown>> = {};
+        for (const ps of activeServices) {
+          if (ps.service_id) {
+            const cached = eligibilityCache.get(`${pro.id}:${ps.service_id}`);
+            if (cached) serviceEligibilities[ps.service_id] = cached;
+          }
+        }
+        enrichedPro = {
+          ...pro,
+          professional_services: activeServices,
+          service_eligibilities: serviceEligibilities,
+        };
+      }
+
       return {
         ...doc,
+        professional_profiles: enrichedPro,
         document_url: signedDocumentUrl,
       };
     })
@@ -341,6 +421,9 @@ export async function adminReviewDocumentAction(
   }
 
   revalidatePath("/admin/verifications");
+  revalidatePath("/admin/professionals");
+  revalidatePath("/pro/dashboard");
+  revalidatePath("/pro/profile");
   return { ok: true, message: `Document marked as ${status}.`, data: res.data ?? undefined };
 }
 
@@ -366,33 +449,53 @@ export async function fetchAdminBusinesses(search?: string) {
 /**
  * 10. Fetch Bookings for Monitoring
  */
-export async function fetchAdminBookings(params: {
+export async function fetchAdminBookingsPaginated(params: {
   search?: string;
   status?: string;
   page?: number;
   limit?: number;
 }) {
   const auth = await getAuthenticatedUser();
-  const page = params.page || 1;
-  const limit = params.limit || 30;
+  const page = Math.max(1, params.page || 1);
+  const limit = Math.max(1, Math.min(params.limit || 25, 100));
   const offset = (page - 1) * limit;
 
-  let query = `/rest/v1/bookings?select=*,profiles:customer_id(full_name,email,phone),professional_profiles:professional_id(business_name,slug)&order=created_at.desc&limit=${limit}&offset=${offset}`;
+  let query = `/rest/v1/bookings?deleted_at=is.null&select=*,profiles:customer_id(full_name,email,phone),professional_profiles:professional_id(business_name,slug)&order=created_at.desc&limit=${limit}&offset=${offset}`;
 
   if (params.search && params.search.trim()) {
     const s = encodeURIComponent(params.search.trim());
     query += `&or=(reference_code.ilike.*${s}*,title.ilike.*${s}*)`;
   }
 
-  if (params.status && params.status !== "all") {
-    query += `&status=eq.${params.status}`;
+  if (params.status === "active") {
+    query += `&status=in.(open,matched,quoted,accepted,scheduled,in_progress,pro_marked_complete)`;
+  } else if (params.status && params.status !== "all") {
+    query += `&status=eq.${encodeURIComponent(params.status)}`;
   }
 
   const res = await runAdminQuery<Array<Record<string, unknown>>>(query, {
     accessToken: auth?.accessToken,
+    headers: { Prefer: "count=exact" },
   });
 
-  return res.ok && Array.isArray(res.data) ? res.data : [];
+  const bookings = res.ok && Array.isArray(res.data) ? res.data : [];
+  return {
+    bookings,
+    totalCount:
+      res.ok && typeof res.totalCount === "number"
+        ? res.totalCount
+        : bookings.length,
+  };
+}
+
+export async function fetchAdminBookings(params: {
+  search?: string;
+  status?: string;
+  page?: number;
+  limit?: number;
+}) {
+  const result = await fetchAdminBookingsPaginated(params);
+  return result.bookings;
 }
 
 /**
@@ -622,32 +725,58 @@ export async function fetchAdminNotificationLogs() {
 }
 
 /**
- * 20. Fetch Platform Analytics
+ * 20. Fetch Platform Analytics & Phase 7 Demand/Supply Insights
  */
-export async function fetchAdminAnalytics() {
+export async function fetchAdminAnalytics(days: number = 90) {
   const auth = await getAuthenticatedUser();
-  const [metricsRes, categoriesRes, bookingsRes, disputesRes] = await Promise.all([
-    runAdminQuery<AdminDashboardMetrics>("/rest/v1/rpc/get_admin_dashboard_metrics", {
-      method: "POST",
-      accessToken: auth?.accessToken,
-    }),
-    runAdminQuery<Array<{ id: string; name: string }>>("/rest/v1/service_categories?select=id,name", {
-      accessToken: auth?.accessToken,
-    }),
-    runAdminQuery<Array<{ status: string; city: string; agreed_amount_kobo: number }>>(
-      "/rest/v1/bookings?select=status,city,agreed_amount_kobo&limit=200",
-      { accessToken: auth?.accessToken }
-    ),
-    runAdminQuery<Array<{ status: string; category: string }>>(
-      "/rest/v1/disputes?select=status,category&limit=100",
-      { accessToken: auth?.accessToken }
-    ),
-  ]);
+  const safeDays =
+    Number.isFinite(days) && days > 0 ? Math.min(Math.floor(days), 3650) : 0;
+
+  const [metricsRes, demandRes, categoriesRes, bookingsRes, disputesRes] =
+    await Promise.all([
+      runAdminQuery<AdminDashboardMetrics>(
+        "/rest/v1/rpc/get_admin_dashboard_metrics",
+        {
+          method: "POST",
+          accessToken: auth?.accessToken,
+        }
+      ),
+      runAdminQuery<AdminDemandAnalytics>(
+        "/rest/v1/rpc/get_admin_demand_analytics",
+        {
+          method: "POST",
+          body: { p_days: safeDays },
+          accessToken: auth?.accessToken,
+        }
+      ),
+      runAdminQuery<Array<{ id: string; name: string }>>(
+        "/rest/v1/service_categories?select=id,name&deleted_at=is.null",
+        {
+          accessToken: auth?.accessToken,
+        }
+      ),
+      runAdminQuery<
+        Array<{ status: string; city: string; agreed_amount_kobo: number }>
+      >(
+        "/rest/v1/bookings?select=status,city,agreed_amount_kobo&deleted_at=is.null&limit=200",
+        { accessToken: auth?.accessToken }
+      ),
+      runAdminQuery<Array<{ status: string; category: string }>>(
+        "/rest/v1/disputes?select=status,category&limit=100",
+        { accessToken: auth?.accessToken }
+      ),
+    ]);
 
   return {
     metrics: metricsRes.ok ? metricsRes.data : null,
-    categoriesCount: categoriesRes.ok && Array.isArray(categoriesRes.data) ? categoriesRes.data.length : 0,
-    bookingsSample: bookingsRes.ok && Array.isArray(bookingsRes.data) ? bookingsRes.data : [],
-    disputesSample: disputesRes.ok && Array.isArray(disputesRes.data) ? disputesRes.data : [],
+    demandAnalytics: demandRes.ok ? demandRes.data : null,
+    categoriesCount:
+      categoriesRes.ok && Array.isArray(categoriesRes.data)
+        ? categoriesRes.data.length
+        : 0,
+    bookingsSample:
+      bookingsRes.ok && Array.isArray(bookingsRes.data) ? bookingsRes.data : [],
+    disputesSample:
+      disputesRes.ok && Array.isArray(disputesRes.data) ? disputesRes.data : [],
   };
 }

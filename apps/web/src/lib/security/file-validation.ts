@@ -26,6 +26,13 @@ export const STORAGE_BUCKET_RULES: Record<
     allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
     allowedExtensions: ["jpg", "jpeg", "png", "webp"],
   },
+  "catalogue-assets": {
+    bucketId: "catalogue-assets",
+    isPublic: true,
+    maxSizeBytes: 5 * 1024 * 1024, // 5 MB
+    allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+    allowedExtensions: ["jpg", "jpeg", "png", "webp"],
+  },
   "verification-documents": {
     bucketId: "verification-documents",
     isPublic: false,
@@ -211,6 +218,14 @@ export function validateStorageUpload(
         valid: false,
         reason:
           "FORBIDDEN: Path must follow '{entity_id}/{uploader_user_id}/{filename}' convention.",
+      };
+    }
+  } else if (input.bucketId === "catalogue-assets") {
+    if (input.uploaderRole !== "admin") {
+      return {
+        valid: false,
+        reason:
+          "FORBIDDEN: Only verified administrators may upload catalogue assets.",
       };
     }
   }

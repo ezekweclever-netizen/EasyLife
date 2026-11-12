@@ -136,6 +136,18 @@ export async function uploadFileAction(formData: FormData): Promise<{
     return { success: false, error: "Missing file or bucketId in upload request." };
   }
 
+  let uploaderRole: "admin" | undefined;
+  if (bucketId === "catalogue-assets") {
+    const adminCheck = await verifyAdminSession();
+    if (!adminCheck.ok) {
+      return {
+        success: false,
+        error: "Forbidden: Only administrators may upload catalogue assets.",
+      };
+    }
+    uploaderRole = "admin";
+  }
+
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
   const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
@@ -148,6 +160,7 @@ export async function uploadFileAction(formData: FormData): Promise<{
     data: buffer,
     mimeType: file.type || "application/octet-stream",
     userId: auth.user.id,
+    uploaderRole,
   });
 
   if (!result.success) {

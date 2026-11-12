@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminUsersPage() {
-  const result = await fetchAdminUsers({ limit: 50 });
+  const result = await fetchAdminUsers({ page: 1, limit: 25 });
 
   return (
     <div className="space-y-6">

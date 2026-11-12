@@ -8,8 +8,23 @@ export const metadata: Metadata = {
   description: "Manage accredited artisans, technicians, and trade professionals across regional markets.",
 };
 
-export default async function AdminProfessionalsPage() {
-  const pros = await fetchAdminProfessionals({ limit: 50 });
+interface AdminProfessionalsPageProps {
+  searchParams: Promise<{
+    status?: string;
+  }>;
+}
+
+export default async function AdminProfessionalsPage({
+  searchParams,
+}: AdminProfessionalsPageProps) {
+  const { status = "all" } = await searchParams;
+  const normalizedStatus =
+    status === "verified" ? "approved" : status || "all";
+
+  const pros = await fetchAdminProfessionals({
+    verificationStatus: normalizedStatus,
+    limit: 50,
+  });
 
   return (
     <div className="space-y-6">
@@ -32,7 +47,10 @@ export default async function AdminProfessionalsPage() {
         </div>
       </div>
 
-      <ProfessionalManagerClient initialPros={pros as any} />
+      <ProfessionalManagerClient
+        initialPros={pros as any}
+        initialStatus={normalizedStatus}
+      />
     </div>
   );
 }

@@ -449,6 +449,23 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
               </div>
             </div>
           </Link>
+
+          <Link
+            href="/admin/analytics"
+            className="p-4 rounded-2xl border border-slate-200 hover:border-teal-500 hover:bg-slate-50/80 transition flex items-start gap-3 group"
+          >
+            <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-lg group-hover:bg-teal-50 group-hover:text-teal-600 shrink-0">
+              📊
+            </div>
+            <div>
+              <div className="text-xs font-bold text-slate-900 group-hover:text-teal-700">
+                Analytics &amp; Demand Management
+              </div>
+              <div className="text-2xs text-slate-500 mt-0.5 leading-snug">
+                Inspect top searched &amp; booked services, zero-result searches, location demand, and provider supply gaps.
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
 

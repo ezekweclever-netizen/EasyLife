@@ -1,5 +1,9 @@
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 import { ServiceCategoryItem } from "@/lib/supabase/customer";
+import type {
+  CatalogueServiceItem,
+  ProfessionalServiceEligibilityResult,
+} from "@easylife/shared-types";
 
 export type ProfessionalVerificationStatus =
   | "unsubmitted"
@@ -40,6 +44,10 @@ export interface ProfessionalProfile {
   is_available: boolean;
   primary_city: string;
   primary_state: string;
+  provider_type?: string;
+  agent_services?: string[] | null;
+  agent_disclaimer_accepted?: boolean;
+  dispatch_details?: Record<string, unknown> | null;
   created_at: string;
   updated_at: string;
   // Associated data
@@ -51,20 +59,28 @@ export interface ProfessionalProfile {
   service_areas?: ProfessionalAreaItem[];
   availability?: ProfessionalAvailabilityItem[];
   documents?: ProfessionalDocumentItem[];
+  serviceEligibilities?: Record<string, ProfessionalServiceEligibilityResult>;
 }
 
 export interface ProfessionalServiceItem {
   id: string;
   professional_id: string;
   category_id: string;
+  service_id?: string | null;
   service_title?: string | null;
   min_price_kobo: number;
   max_price_kobo: number | null;
   currency_code: string;
   description: string | null;
+  qualification_notes?: string | null;
+  certification_reference?: string | null;
+  years_experience_in_service?: number | null;
+  qualifications?: Record<string, unknown> | null;
   is_primary_skill: boolean;
   is_active: boolean;
+  deleted_at?: string | null;
   category?: ServiceCategoryItem;
+  service?: CatalogueServiceItem | null;
 }
 
 export interface ProfessionalAreaItem {
@@ -73,6 +89,9 @@ export interface ProfessionalAreaItem {
   city: string;
   state: string;
   lga_or_district: string;
+  neighbourhood?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
   service_radius_km: number;
   is_primary: boolean;
   is_active: boolean;
@@ -227,7 +246,7 @@ export async function getProfessionalProfile(
   // 1. Fetch pro profile
   const proRes = await supabaseFetch<ProfessionalProfile[]>(
     config,
-    `/rest/v1/professional_profiles?user_id=eq.${userId}&limit=1&select=*`,
+    `/rest/v1/professional_profiles?user_id=eq.${userId}&deleted_at=is.null&limit=1&select=*`,
     { accessToken }
   );
 
@@ -250,23 +269,31 @@ export async function getProfessionalProfile(
     profile.avatar_url = userRes.data[0].avatar_url;
   }
 
-  // 3. Fetch services with category joined
+  // 3. Fetch active non-archived services with category and catalogue service joined
   const servicesRes = await supabaseFetch<any[]>(
     config,
-    `/rest/v1/professional_services?professional_id=eq.${profile.id}&select=*,service_categories(*)`,
+    `/rest/v1/professional_services?professional_id=eq.${profile.id}&deleted_at=is.null&order=is_primary_skill.desc,created_at.asc&select=*,service_categories(*),services(*,service_requirements(*))`,
     { accessToken }
   );
   if (servicesRes.ok && Array.isArray(servicesRes.data)) {
     profile.services = servicesRes.data.map((s) => ({
       ...s,
       category: s.service_categories,
+      service: s.services
+        ? {
+            ...s.services,
+            requirements: Array.isArray(s.services.service_requirements)
+              ? s.services.service_requirements
+              : [],
+          }
+        : null,
     }));
   }
 
   // 4. Fetch service areas
   const areasRes = await supabaseFetch<ProfessionalAreaItem[]>(
     config,
-    `/rest/v1/professional_service_areas?professional_id=eq.${profile.id}&select=*`,
+    `/rest/v1/professional_service_areas?professional_id=eq.${profile.id}&order=is_primary.desc,city.asc&select=*`,
     { accessToken }
   );
   if (areasRes.ok && Array.isArray(areasRes.data)) {
@@ -286,7 +313,7 @@ export async function getProfessionalProfile(
   // 6. Fetch verification documents
   const docsRes = await supabaseFetch<ProfessionalDocumentItem[]>(
     config,
-    `/rest/v1/professional_documents?professional_id=eq.${profile.id}&order=created_at.desc&select=*`,
+    `/rest/v1/professional_documents?professional_id=eq.${profile.id}&deleted_at=is.null&order=created_at.desc&select=*`,
     { accessToken }
   );
   if (docsRes.ok && Array.isArray(docsRes.data)) {
@@ -294,6 +321,156 @@ export async function getProfessionalProfile(
   }
 
   return profile;
+}
+
+/**
+ * Evaluate live backend eligibility for a set of catalogue service IDs on a professional profile.
+ */
+export async function getProfessionalServiceEligibilities(
+  profileId: string,
+  serviceIds: string[],
+  accessToken: string
+): Promise<Record<string, ProfessionalServiceEligibilityResult>> {
+  const config = getSupabasePublicConfig();
+  if (!config) return {};
+
+  const uniqueServiceIds = Array.from(new Set(serviceIds.filter(Boolean)));
+  if (uniqueServiceIds.length === 0) return {};
+
+  const entries = await Promise.all(
+    uniqueServiceIds.map(async (serviceId) => {
+      const res = await supabaseFetch<ProfessionalServiceEligibilityResult>(
+        config,
+        "/rest/v1/rpc/check_professional_service_eligibility",
+        {
+          method: "POST",
+          accessToken,
+          body: {
+            p_professional_id: profileId,
+            p_service_id: serviceId,
+          },
+        }
+      );
+
+      if (res.ok && res.data) {
+        return [serviceId, res.data] as const;
+      }
+      return null;
+    })
+  );
+
+  const map: Record<string, ProfessionalServiceEligibilityResult> = {};
+  for (const entry of entries) {
+    if (entry) {
+      map[entry[0]] = entry[1];
+    }
+  }
+  return map;
+}
+
+export interface ProviderDocumentChecklistItem {
+  key: string;
+  documentType: DocumentType | "government_id";
+  label: string;
+  reason: string;
+  requiredByServices: string[];
+  status: "approved" | "pending" | "rejected" | "missing";
+}
+
+const GOV_ID_TYPES: DocumentType[] = [
+  "national_id_nin",
+  "voters_card",
+  "drivers_license",
+  "international_passport",
+];
+
+const DOC_LABELS: Record<DocumentType, string> = {
+  national_id_nin: "National Identification Number (NIN)",
+  voters_card: "INEC Voter's Card",
+  drivers_license: "FRSC Driver's Licence",
+  international_passport: "Nigerian International Passport",
+  trade_certificate: "Trade Test / NABTEB / Guild Certificate",
+  cac_certificate: "CAC Business Registration (RC / BN Certificate)",
+  utility_bill: "Proof of Address / Utility Bill",
+  other: "Supporting Trade / Compliance Document",
+};
+
+function resolveChecklistStatus(
+  docs: ProfessionalDocumentItem[],
+  matchingTypes: DocumentType[]
+): "approved" | "pending" | "rejected" | "missing" {
+  const matches = docs.filter((d) => matchingTypes.includes(d.document_type));
+  if (matches.length === 0) return "missing";
+  if (matches.some((d) => d.verification_status === "approved" || d.verification_status === "verified")) {
+    return "approved";
+  }
+  if (matches.some((d) => d.verification_status === "pending")) {
+    return "pending";
+  }
+  return "rejected";
+}
+
+/**
+ * Derive a dynamic KYC & credential checklist from the provider's active catalogue services.
+ */
+export function buildProviderRequiredDocumentChecklist(
+  profile: Pick<ProfessionalProfile, "services" | "documents">
+): ProviderDocumentChecklistItem[] {
+  const docs = profile.documents || [];
+  const activeServices = (profile.services || []).filter((s) => s.is_active);
+
+  const checklist: ProviderDocumentChecklistItem[] = [
+    {
+      key: "government_id",
+      documentType: "government_id",
+      label: "Government-Issued Photo ID (NIN, Voter's Card, Driver's Licence, or Passport)",
+      reason: "Mandatory identity check required for all verified EasyLife providers.",
+      requiredByServices: [],
+      status: resolveChecklistStatus(docs, GOV_ID_TYPES),
+    },
+  ];
+
+  const extraDocMap = new Map<DocumentType, Set<string>>();
+
+  for (const ps of activeServices) {
+    const srv = ps.service;
+    if (!srv) continue;
+    const srvLabel = srv.name || ps.service_title || "Selected service";
+
+    if (srv.requires_trade_certification) {
+      if (!extraDocMap.has("trade_certificate")) extraDocMap.set("trade_certificate", new Set());
+      extraDocMap.get("trade_certificate")!.add(srvLabel);
+    }
+
+    if (srv.requires_business_registration) {
+      if (!extraDocMap.has("cac_certificate")) extraDocMap.set("cac_certificate", new Set());
+      extraDocMap.get("cac_certificate")!.add(srvLabel);
+    }
+
+    for (const rawType of srv.required_document_types || []) {
+      const docType = rawType as DocumentType;
+      if (GOV_ID_TYPES.includes(docType)) continue;
+      if (!extraDocMap.has(docType)) extraDocMap.set(docType, new Set());
+      extraDocMap.get(docType)!.add(srvLabel);
+    }
+  }
+
+  for (const [docType, srvSet] of extraDocMap.entries()) {
+    const requiredByServices = Array.from(srvSet);
+    checklist.push({
+      key: docType,
+      documentType: docType,
+      label: DOC_LABELS[docType] || docType,
+      reason:
+        requiredByServices.length > 0
+          ? `Required by ${requiredByServices.join(", ")}`
+          : "Required for your selected trade offerings.",
+      requiredByServices,
+      status: resolveChecklistStatus(docs, [docType]),
+    });
+  }
+
+  return checklist;
 }
 
 /**
@@ -600,11 +777,11 @@ export function calculateProfileCompletion(profile: ProfessionalProfile | null):
     };
   }
 
-  const hasBasic = Boolean(profile.business_name && profile.bio && profile.years_of_experience > 0);
-  const hasServices = Boolean(profile.services && profile.services.length > 0);
-  const hasAreas = Boolean(profile.service_areas && profile.service_areas.length > 0);
-  const hasAvailability = Boolean(profile.availability && profile.availability.length > 0);
-  const hasDocs = Boolean(profile.documents && profile.documents.length > 0);
+  const hasBasic = Boolean(profile.business_name && profile.bio && profile.years_of_experience >= 0);
+  const hasServices = Boolean(profile.services && profile.services.some((s) => s.is_active));
+  const hasAreas = Boolean(profile.service_areas && profile.service_areas.some((a) => a.is_active));
+  const hasAvailability = Boolean(profile.availability && profile.availability.some((a) => a.is_available));
+  const hasDocs = Boolean(profile.documents && profile.documents.some((d) => d.verification_status !== "rejected"));
 
   const steps = [
     { name: "Basic Business Info", completed: hasBasic, hint: "Business name, bio & experience" },
