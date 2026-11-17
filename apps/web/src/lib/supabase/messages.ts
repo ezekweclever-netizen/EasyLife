@@ -87,7 +87,7 @@ export async function getUserConversations(
     }>
   >(
     config,
-    "/rest/v1/conversation_members?select=conversation_id,unread_count,last_read_at,role_in_conversation,conversations(id,booking_id,subject,status,last_message_at,created_at,bookings(id,reference_code,status,service_categories(name)))&user_id=eq." +
+    "/rest/v1/conversation_members?select=conversation_id,unread_count,last_read_at,role_in_conversation,conversations(id,booking_id,subject,status,last_message_at,created_at,bookings(id,reference_code,status,service_categories!bookings_category_id_fkey(name)))&user_id=eq." +
       encodeURIComponent(userId) +
       "&order=joined_at.desc",
     {
@@ -254,7 +254,7 @@ export async function getConversationWithMessages(
     }>
   >(
     config,
-    `/rest/v1/conversations?select=id,booking_id,subject,status,last_message_at,created_at,bookings(id,reference_code,status,service_categories(name))&id=eq.${encodeURIComponent(
+    `/rest/v1/conversations?select=id,booking_id,subject,status,last_message_at,created_at,bookings(id,reference_code,status,service_categories!bookings_category_id_fkey(name))&id=eq.${encodeURIComponent(
       conversationId
     )}&limit=1`,
     {

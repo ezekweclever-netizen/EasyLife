@@ -1042,14 +1042,14 @@ export async function getCustomerBookingsPaginated(
   const queryParts = [
     `customer_id=eq.${userId}`,
     "deleted_at=is.null",
-    "select=id,reference_code,customer_id,professional_id,category_id,title,description,urgency,status,city,state,lga_or_district,service_address,preferred_date,preferred_time_slot,scheduled_start_at,scheduled_end_at,accepted_quotation_id,agreed_amount_kobo,currency_code,pro_completion_notes,cancellation_reason,created_at,updated_at,service_categories(name,slug,icon_name)",
+    "select=id,reference_code,customer_id,professional_id,category_id,title,description,urgency,status,city,state,lga_or_district,service_address,preferred_date,preferred_time_slot,scheduled_start_at,scheduled_end_at,accepted_quotation_id,agreed_amount_kobo,currency_code,pro_completion_notes,cancellation_reason,created_at,updated_at,service_categories!bookings_category_id_fkey(name,slug,icon_name)",
     "order=created_at.desc",
     `limit=${limit}`,
     `offset=${offset}`,
   ];
 
   if (options.statusFilter === "active") {
-    queryParts.push("status=in.(open,matched,quoted,accepted,scheduled,in_progress,pro_marked_complete)");
+    queryParts.push("status=in.(submitted,open,pending_pro_response,matched,quoted,accepted,confirmed,scheduled,in_progress,pro_marked_complete)");
   } else if (options.statusFilter === "completed") {
     queryParts.push("status=eq.completed");
   } else if (options.statusFilter === "cancelled") {
@@ -1114,7 +1114,7 @@ export async function getCustomerBookingById(
   const [bookingRes, quotesRes, appointmentsRes, historyRes, reviewRes, disputeRes] = await Promise.all([
     supabaseFetch<any[]>(
       config,
-      `/rest/v1/bookings?id=eq.${bookingId}&customer_id=eq.${userId}&select=*,service_categories(name,slug,icon_name),booking_attachments(*),professional_profiles(id,business_name,headline,verification_status)&limit=1`,
+      `/rest/v1/bookings?id=eq.${bookingId}&customer_id=eq.${userId}&select=*,service_categories!bookings_category_id_fkey(name,slug,icon_name),booking_attachments(*),professional_profiles(id,business_name,headline,verification_status)&limit=1`,
       { accessToken }
     ),
     supabaseFetch<any[]>(

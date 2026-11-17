@@ -512,7 +512,7 @@ export async function getEligibleJobRequests(
   if (!config) return [];
 
   const queryParts = [
-    "select=*,service_categories(name,slug,icon_name)",
+    "select=*,service_categories!bookings_category_id_fkey(name,slug,icon_name)",
     "order=created_at.desc",
   ];
 
@@ -588,7 +588,7 @@ export async function getProJobById(
   const config = getSupabasePublicConfig();
   if (!config) return null;
 
-  const path = `/rest/v1/bookings?id=eq.${bookingId}&select=*,service_categories(name,slug,icon_name)&limit=1`;
+  const path = `/rest/v1/bookings?id=eq.${bookingId}&select=*,service_categories!bookings_category_id_fkey(name,slug,icon_name)&limit=1`;
   const res = await supabaseFetch<any[]>(config, path, { accessToken });
 
   if (!res.ok || !Array.isArray(res.data) || res.data.length === 0 || !res.data[0]) {

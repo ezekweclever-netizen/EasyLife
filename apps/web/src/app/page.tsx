@@ -207,14 +207,8 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* 3. Premium Stacked Service Categories + Live Dynamic Catalogue Showcase */}
-      <StackedCategoriesSection
-        mainCategories={catalogueData.mainCategories}
-        featuredServices={catalogueData.featuredServices}
-        popularServices={catalogueData.popularServices}
-        totalServicesCount={catalogueData.totalServicesCount}
-        catalogueLoadError={catalogueData.hasError}
-      />
+      {/* 3. 3-Step Sticky Purpose Card Stack (Find Solutions, Discover Opportunities, Achieve Goals) */}
+      <StackedCategoriesSection />
 
       {/* 4. How EasyLife Works */}
       <Section id="how-it-works" tone="grey">
@@ -229,7 +223,11 @@ export default async function HomePage({
           <StepList steps={customerSteps} />
         </div>
         <div className="mt-10 text-center">
-          <ButtonLink href="/how-it-works" variant="outline">
+          <ButtonLink
+            href="/how-it-works"
+            variant="outline"
+            className="whitespace-normal! h-auto! py-3 text-center max-w-full"
+          >
             See the Complete Process for Pros &amp; Businesses →
           </ButtonLink>
         </div>
