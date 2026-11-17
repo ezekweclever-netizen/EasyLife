@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 import {
@@ -63,26 +64,28 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
   ]);
 
   let unavailableServiceNotice:
-    | { name: string; reason: string; categorySlug?: string }
+    | { name: string; reason: string; categorySlug?: string; status: "paused" | "inactive" | "unavailable" }
     | null = null;
-  let fallbackUnavailableCategoryId: string | undefined;
+  let blockedForBooking = false;
 
   if (service && !preSelectedService) {
     const availability = await checkCatalogueServiceAvailability(service);
-    if (availability.status === "unavailable") {
+    if (
+      availability.status === "paused" ||
+      availability.status === "inactive" ||
+      availability.status === "unavailable"
+    ) {
+      blockedForBooking = true;
       unavailableServiceNotice = {
         name: availability.name || service,
+        status: availability.status,
         reason:
           availability.reason ||
-          "This service is currently paused for standard booking. You can still submit a custom request in the parent trade category below.",
+          (availability.status === "paused"
+            ? "This service is temporarily paused and not accepting new bookings or quotation requests."
+            : "This service is currently inactive and unavailable for booking."),
         categorySlug: availability.categorySlug,
       };
-      if (
-        availability.categoryId &&
-        allCategories.some((c) => c.id === availability.categoryId && !c.parent_id)
-      ) {
-        fallbackUnavailableCategoryId = availability.categoryId;
-      }
     }
   }
 
@@ -97,15 +100,13 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
     preSelectedService?.category_id ||
     matchedCategory?.parent_id ||
     matchedCategory?.id ||
-    fallbackUnavailableCategoryId ||
     undefined;
 
   const resolvedSubcategoryId =
     preSelectedService?.subcategory_id ||
     (matchedCategory?.parent_id ? matchedCategory.id : undefined);
 
-  const resolvedTitle =
-    title || preSelectedService?.name || unavailableServiceNotice?.name || undefined;
+  const resolvedTitle = title || preSelectedService?.name || undefined;
   const activeCity = city?.trim() || profile?.city || "Port Harcourt";
 
   return (
@@ -120,32 +121,64 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
       />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F0FDFA] text-[#0F766E] border border-[#CCFBF1]">
-            <span>✓ Verified Technician Guarantee</span>
+        {blockedForBooking && unavailableServiceNotice ? (
+          <div className="bg-white rounded-3xl border border-amber-200 shadow-xs p-8 text-center max-w-2xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+              {unavailableServiceNotice.status === "paused"
+                ? "Service Temporarily Paused"
+                : "Service Unavailable"}
+            </div>
+            <h1 className="text-2xl font-extrabold text-slate-900">
+              {unavailableServiceNotice.name} Cannot Be Booked Right Now
+            </h1>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              {unavailableServiceNotice.reason}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
+              <Link
+                href="/explore-services"
+                className="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold transition"
+              >
+                Browse Active Services
+              </Link>
+              <Link
+                href="/dashboard"
+                className="px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-bold transition"
+              >
+                Return to Dashboard
+              </Link>
+            </div>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
-            Request Service in {activeCity}
-          </h1>
-          <p className="text-xs sm:text-sm text-[#64748B]">
-            Describe your repair or maintenance need. Nearby accredited trade specialists will review your fault and submit transparent quotations.
-          </p>
-        </div>
+        ) : (
+          <>
+            <div className="text-center space-y-2 max-w-xl mx-auto">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#F0FDFA] text-[#0F766E] border border-[#CCFBF1]">
+                <span>✓ Verified Technician Guarantee</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
+                Request Service in {activeCity}
+              </h1>
+              <p className="text-xs sm:text-sm text-[#64748B]">
+                Describe your repair or maintenance need. Nearby accredited trade specialists will review your fault and submit transparent quotations.
+              </p>
+            </div>
 
-        <BookingWizard
-          categories={categories}
-          preSelectedCategory={resolvedCategoryId}
-          preSelectedSubcategoryId={resolvedSubcategoryId}
-          preSelectedService={preSelectedService}
-          unavailableServiceNotice={unavailableServiceNotice}
-          preSelectedPro={preSelectedPro}
-          defaultCity={activeCity}
-          initialTitle={resolvedTitle}
-          initialDescription={description}
-          initialUrgency={urgency}
-          userEmail={auth.user.email || undefined}
-          userName={profile?.full_name}
-        />
+            <BookingWizard
+              categories={categories}
+              preSelectedCategory={resolvedCategoryId}
+              preSelectedSubcategoryId={resolvedSubcategoryId}
+              preSelectedService={preSelectedService}
+              unavailableServiceNotice={null}
+              preSelectedPro={preSelectedPro}
+              defaultCity={activeCity}
+              initialTitle={resolvedTitle}
+              initialDescription={description}
+              initialUrgency={urgency}
+              userEmail={auth.user.email || undefined}
+              userName={profile?.full_name}
+            />
+          </>
+        )}
       </main>
     </div>
   );

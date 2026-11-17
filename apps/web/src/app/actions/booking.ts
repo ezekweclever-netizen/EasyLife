@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { getAuthenticatedUser } from "@/lib/auth/session";
+import { checkCatalogueServiceAvailability } from "@/lib/supabase/catalogue-availability";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
 
 export interface BookingFormState {
@@ -164,19 +165,27 @@ export async function createBookingAction(
 
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if (serviceId && uuidRegex.test(serviceId)) {
-    const srvCheck = await supabaseFetch<
-      Array<{ id: string; category_id: string; subcategory_id: string | null }>
-    >(
-      config,
-      `/rest/v1/services?id=eq.${serviceId}&is_active=eq.true&deleted_at=is.null&limit=1&select=id,category_id,subcategory_id`,
-      { accessToken: auth.accessToken }
-    );
-    const verifiedService =
-      srvCheck.ok && Array.isArray(srvCheck.data) ? srvCheck.data[0] : null;
-    if (verifiedService && verifiedService.category_id === categoryId) {
-      payload.service_id = verifiedService.id;
-      if (verifiedService.subcategory_id) {
-        payload.subcategory_id = verifiedService.subcategory_id;
+    const availability = await checkCatalogueServiceAvailability(serviceId);
+    if (availability.status === "paused") {
+      return {
+        status: "error",
+        message:
+          availability.reason ||
+          "This service is temporarily paused and not accepting new bookings or quotation requests.",
+      };
+    }
+    if (availability.status !== "active") {
+      return {
+        status: "error",
+        message:
+          availability.reason ||
+          "This service is currently inactive and unavailable for booking.",
+      };
+    }
+    if (availability.id && availability.categoryId === categoryId) {
+      payload.service_id = availability.id;
+      if (availability.subcategoryId) {
+        payload.subcategory_id = availability.subcategoryId;
       }
     }
   } else if (subcategoryId && uuidRegex.test(subcategoryId)) {
@@ -198,9 +207,17 @@ export async function createBookingAction(
   );
 
   if (!res.ok) {
+    const rawMsg = res.message || "";
+    const cleanedMsg = rawMsg
+      .replace(/^SERVICE_PAUSED:\s*/i, "")
+      .replace(/^SERVICE_INACTIVE:\s*/i, "")
+      .replace(/^BOOKINGS_DISABLED:\s*/i, "")
+      .replace(/^SERVICE_NOT_FOUND:\s*/i, "");
     return {
       status: "error",
-      message: res.message || "Failed to submit booking to database. Please check your network and try again.",
+      message:
+        cleanedMsg ||
+        "Failed to submit booking to database. Please check your network and try again.",
     };
   }
 

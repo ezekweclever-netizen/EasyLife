@@ -102,13 +102,21 @@ export default async function ProfessionalProfilePage({
 
                 <div className="flex flex-wrap items-center gap-3 text-xs text-[#64748B] pt-0.5">
                   <span className="flex items-center gap-1">
-                    <span className="font-bold text-amber-500">★ {pro.average_rating || "5.0"}</span>
+                    <span className="font-bold text-amber-500">
+                      {Number(pro.review_count) > 0 && Number(pro.average_rating) > 0
+                        ? `★ ${Number(pro.average_rating).toFixed(1)}`
+                        : "No reviews yet"}
+                    </span>
                     <span>({pro.review_count || 0} reviews)</span>
                   </span>
                   <span>•</span>
                   <span>📍 {city}, {pro.primary_state || "Nigeria"}</span>
-                  <span>•</span>
-                  <span className="text-emerald-700 font-semibold">⚡ {pro.response_rate_pct || 100}% response rate</span>
+                  {typeof pro.response_rate_pct === "number" && pro.response_rate_pct > 0 && (
+                    <>
+                      <span>•</span>
+                      <span className="text-emerald-700 font-semibold">⚡ {pro.response_rate_pct}% response rate</span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -116,11 +124,11 @@ export default async function ProfessionalProfilePage({
             {/* Quick Booking CTA Card */}
             <div className="bg-white rounded-xl border border-[#E2E8F0] p-4 flex sm:flex-col items-center justify-between gap-4 shadow-xs shrink-0 md:w-64">
               <div>
-                <span className="text-xs text-[#64748B] block">Starting Callout Fee</span>
-                <span className="text-xl font-extrabold text-[#0F172A]">
-                  {pro.base_callout_fee_kobo
+                <span className="text-xs text-[#64748B] block">Callout Fee</span>
+                <span className="text-lg font-extrabold text-[#0F172A]">
+                  {pro.base_callout_fee_kobo && pro.base_callout_fee_kobo > 0
                     ? `₦${(pro.base_callout_fee_kobo / 100).toLocaleString()}`
-                    : "Standard Pilot Rate"}
+                    : "Price available on request"}
                 </span>
               </div>
               <Link
@@ -273,7 +281,11 @@ export default async function ProfessionalProfilePage({
                   <p className="text-xs text-[#64748B]">Verified feedback from completed platform bookings</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-sm font-bold text-amber-500">
-                  <span>★ {pro.average_rating || "5.0"}</span>
+                  <span>
+                    {Number(pro.review_count) > 0 && Number(pro.average_rating) > 0
+                      ? `★ ${Number(pro.average_rating).toFixed(1)}`
+                      : "No reviews yet"}
+                  </span>
                   <span className="text-xs text-[#64748B]">({pro.review_count || 0} reviews)</span>
                 </div>
               </div>

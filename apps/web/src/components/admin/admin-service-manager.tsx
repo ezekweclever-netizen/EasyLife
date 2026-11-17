@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type {
   DocumentType,
   ProviderType,
+  ServiceLifecycleStatus,
   ServiceRequirementAppliesTo,
   ServiceRequirementRow,
   ServiceRequirementType,
@@ -17,11 +18,14 @@ import {
   archiveServiceAction,
   archiveServiceRequirementAction,
   createServiceAction,
+  deleteServiceAction,
   reorderServicesAction,
   restoreServiceAction,
   toggleServiceFlagAction,
+  toggleServiceHomepageVisibilityAction,
   toggleServiceRequirementAction,
   updateServiceAction,
+  updateServiceStatusAction,
   upsertServiceRequirementAction,
 } from "@/app/actions/admin-services";
 
@@ -86,15 +90,51 @@ const SERVICE_ICONS = [
 type ServiceFilterStatus =
   | "non_archived"
   | "active"
-  | "disabled"
+  | "paused"
+  | "inactive"
+  | "homepage"
+  | "hidden_homepage"
   | "featured"
   | "popular"
-  | "homepage"
   | "trade_certified"
   | "archived";
 
+type PendingConfirmAction =
+  | { type: "pause"; service: AdminServiceRecord }
+  | { type: "deactivate"; service: AdminServiceRecord }
+  | { type: "delete"; service: AdminServiceRecord }
+  | null;
+
+function resolveServiceStatus(srv: AdminServiceRecord): ServiceLifecycleStatus {
+  if (srv.status === "active" || srv.status === "paused" || srv.status === "inactive") {
+    return srv.status;
+  }
+  return srv.is_active ? "active" : "inactive";
+}
+
 function formatNairaFromKobo(kobo: number): string {
   return `₦${Math.round(kobo / 100).toLocaleString("en-NG")}`;
+}
+
+function formatAdminPriceDisplay(minKobo: number, maxKobo: number | null): string {
+  if ((!minKobo || minKobo <= 0) && (!maxKobo || maxKobo <= 0)) {
+    return "Price available on request";
+  }
+  if (maxKobo && maxKobo > minKobo) {
+    return `${formatNairaFromKobo(minKobo)} – ${formatNairaFromKobo(maxKobo)}`;
+  }
+  return `From ${formatNairaFromKobo(minKobo)}`;
+}
+
+function formatShortDate(iso?: string | null): string {
+  if (!iso) return "—";
+  const dt = new Date(iso);
+  if (Number.isNaN(dt.getTime())) return "—";
+  return dt.toLocaleDateString("en-NG", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 
 export function AdminServiceManager({
@@ -141,7 +181,7 @@ export function AdminServiceManager({
   const [srvIcon, setSrvIcon] = useState("tool");
   const [srvKeywords, setSrvKeywords] = useState("");
   const [srvDisplayOrder, setSrvDisplayOrder] = useState(1);
-  const [srvMinPriceNaira, setSrvMinPriceNaira] = useState("5000");
+  const [srvMinPriceNaira, setSrvMinPriceNaira] = useState("0");
   const [srvMaxPriceNaira, setSrvMaxPriceNaira] = useState("");
   const [srvDurationMins, setSrvDurationMins] = useState("90");
   const [srvCommissionPct, setSrvCommissionPct] = useState("");
@@ -149,6 +189,7 @@ export function AdminServiceManager({
   const [srvIsFeatured, setSrvIsFeatured] = useState(false);
   const [srvIsPopular, setSrvIsPopular] = useState(false);
   const [srvShowOnHomepage, setSrvShowOnHomepage] = useState(false);
+  const [pendingConfirm, setPendingConfirm] = useState<PendingConfirmAction>(null);
   const [srvReqVerifiedId, setSrvReqVerifiedId] = useState(true);
   const [srvReqTradeCert, setSrvReqTradeCert] = useState(false);
   const [srvReqBusinessReg, setSrvReqBusinessReg] = useState(false);
@@ -226,9 +267,11 @@ export function AdminServiceManager({
 
   const kpis = useMemo(() => {
     const nonArchived = services.filter((s) => !s.deleted_at);
-    const active = nonArchived.filter((s) => s.is_active).length;
-    const featured = nonArchived.filter((s) => s.is_featured).length;
-    const popular = nonArchived.filter((s) => s.is_popular).length;
+    const active = nonArchived.filter((s) => resolveServiceStatus(s) === "active").length;
+    const paused = nonArchived.filter((s) => resolveServiceStatus(s) === "paused").length;
+    const inactive = nonArchived.filter((s) => resolveServiceStatus(s) === "inactive").length;
+    const onHomepage = nonArchived.filter((s) => s.show_on_homepage).length;
+    const hiddenHomepage = nonArchived.length - onHomepage;
     const regulated = nonArchived.filter(
       (s) => s.requires_trade_certification || s.requires_business_registration
     ).length;
@@ -240,8 +283,10 @@ export function AdminServiceManager({
     return {
       total: nonArchived.length,
       active,
-      featured,
-      popular,
+      paused,
+      inactive,
+      onHomepage,
+      hiddenHomepage,
       regulated,
       reqCount,
     };
@@ -251,15 +296,18 @@ export function AdminServiceManager({
     const q = searchQuery.trim().toLowerCase();
     return services
       .filter((srv) => {
+        const lifecycle = resolveServiceStatus(srv);
         if (statusFilter === "archived") {
           if (!srv.deleted_at) return false;
         } else {
           if (srv.deleted_at) return false;
-          if (statusFilter === "active" && !srv.is_active) return false;
-          if (statusFilter === "disabled" && srv.is_active) return false;
+          if (statusFilter === "active" && lifecycle !== "active") return false;
+          if (statusFilter === "paused" && lifecycle !== "paused") return false;
+          if (statusFilter === "inactive" && lifecycle !== "inactive") return false;
           if (statusFilter === "featured" && !srv.is_featured) return false;
           if (statusFilter === "popular" && !srv.is_popular) return false;
           if (statusFilter === "homepage" && !srv.show_on_homepage) return false;
+          if (statusFilter === "hidden_homepage" && srv.show_on_homepage) return false;
           if (
             statusFilter === "trade_certified" &&
             !srv.requires_trade_certification
@@ -330,7 +378,7 @@ export function AdminServiceManager({
         (s) => !s.deleted_at && (!defaultCatId || s.category_id === defaultCatId)
       ).length + 1
     );
-    setSrvMinPriceNaira("5000");
+    setSrvMinPriceNaira("0");
     setSrvMaxPriceNaira("");
     setSrvDurationMins("90");
     setSrvCommissionPct("");
@@ -532,6 +580,105 @@ export function AdminServiceManager({
         setFeedback({ type: "error", text: res.message });
       }
     });
+  };
+
+  const handleChangeServiceStatus = (
+    srv: AdminServiceRecord,
+    nextStatus: ServiceLifecycleStatus
+  ) => {
+    setFeedback(null);
+    startTransition(async () => {
+      const res = await updateServiceStatusAction(srv.id, nextStatus);
+      if (res.ok && res.data) {
+        const updated = res.data;
+        setServices((prev) =>
+          prev.map((s) =>
+            s.id === srv.id
+              ? {
+                  ...s,
+                  status: updated.status,
+                  is_active: updated.is_active,
+                  paused_at: updated.paused_at,
+                  deactivated_at: updated.deactivated_at,
+                  updated_at: updated.updated_at,
+                }
+              : s
+          )
+        );
+        setFeedback({ type: "success", text: res.message });
+        router.refresh();
+      } else {
+        setFeedback({ type: "error", text: res.message });
+      }
+    });
+  };
+
+  const handleToggleHomepage = (srv: AdminServiceRecord) => {
+    const nextVal = !srv.show_on_homepage;
+    setFeedback(null);
+    startTransition(async () => {
+      const res = await toggleServiceHomepageVisibilityAction(srv.id, nextVal);
+      if (res.ok && res.data) {
+        setServices((prev) =>
+          prev.map((s) =>
+            s.id === srv.id
+              ? {
+                  ...s,
+                  show_on_homepage: res.data!.show_on_homepage,
+                  updated_at: res.data!.updated_at,
+                }
+              : s
+          )
+        );
+        setFeedback({ type: "success", text: res.message });
+        router.refresh();
+      } else {
+        setFeedback({ type: "error", text: res.message });
+      }
+    });
+  };
+
+  const handleDeleteService = (srv: AdminServiceRecord) => {
+    setFeedback(null);
+    startTransition(async () => {
+      const res = await deleteServiceAction(srv.id, true);
+      if (res.ok) {
+        if (res.mode === "hard_deleted") {
+          setServices((prev) => prev.filter((s) => s.id !== srv.id));
+        } else {
+          setServices((prev) =>
+            prev.map((s) =>
+              s.id === srv.id
+                ? {
+                    ...s,
+                    status: "inactive",
+                    is_active: false,
+                    show_on_homepage: false,
+                    deleted_at: new Date().toISOString(),
+                  }
+                : s
+            )
+          );
+        }
+        setFeedback({ type: "success", text: res.message });
+        router.refresh();
+      } else {
+        setFeedback({ type: "error", text: res.message });
+      }
+    });
+  };
+
+  const executePendingConfirm = () => {
+    if (!pendingConfirm) return;
+    const action = pendingConfirm;
+    setPendingConfirm(null);
+    if (action.type === "pause") {
+      handleChangeServiceStatus(action.service, "paused");
+    } else if (action.type === "deactivate") {
+      handleChangeServiceStatus(action.service, "inactive");
+    } else if (action.type === "delete") {
+      handleDeleteService(action.service);
+    }
   };
 
   const handleReorderFiltered = (indexInFiltered: number, direction: "up" | "down") => {
@@ -759,26 +906,36 @@ export function AdminServiceManager({
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Catalogue Services
           </div>
-          <div className="mt-1.5 flex items-baseline gap-2">
+          <div className="mt-1.5 flex items-baseline gap-2 flex-wrap">
             <span className="text-2xl font-extrabold text-slate-900">
               {kpis.total}
             </span>
             <span className="text-xs font-semibold text-emerald-700">
               {kpis.active} active
             </span>
+            {kpis.paused > 0 && (
+              <span className="text-xs font-semibold text-amber-700">
+                • {kpis.paused} paused
+              </span>
+            )}
+            {kpis.inactive > 0 && (
+              <span className="text-xs font-semibold text-slate-500">
+                • {kpis.inactive} inactive
+              </span>
+            )}
           </div>
         </div>
 
         <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
-            Featured &amp; Popular
+            Homepage Visibility
           </div>
           <div className="mt-1.5 flex items-baseline gap-2">
             <span className="text-2xl font-extrabold text-slate-900">
-              {kpis.featured}
+              {kpis.onHomepage}
             </span>
             <span className="text-xs font-medium text-slate-500">
-              featured • {kpis.popular} popular
+              shown • {kpis.hiddenHomepage} hidden
             </span>
           </div>
         </div>
@@ -882,12 +1039,13 @@ export function AdminServiceManager({
           <div className="flex flex-wrap items-center gap-2">
             {(
               [
-                ["non_archived", "All Active & Disabled"],
-                ["active", "Active Only"],
-                ["disabled", "Disabled"],
+                ["non_archived", `All Services (${kpis.total})`],
+                ["active", `Active (${kpis.active})`],
+                ["paused", `Paused (${kpis.paused})`],
+                ["inactive", `Inactive (${kpis.inactive})`],
+                ["homepage", `On Homepage (${kpis.onHomepage})`],
+                ["hidden_homepage", `Hidden from Homepage (${kpis.hiddenHomepage})`],
                 ["featured", "Featured"],
-                ["popular", "Popular"],
-                ["homepage", "Homepage"],
                 ["trade_certified", "Trade Cert Required"],
                 [
                   "archived",
@@ -955,14 +1113,16 @@ export function AdminServiceManager({
                 <th className="py-3 px-4 min-w-[260px]">
                   Service &amp; Classification
                 </th>
-                <th className="py-3 px-4 min-w-[160px]">Pricing &amp; Time</th>
-                <th className="py-3 px-4 min-w-[220px]">
-                  Provider Eligibility Rules
+                <th className="py-3 px-4 min-w-[175px]">Pricing &amp; Dates</th>
+                <th className="py-3 px-4 min-w-[200px]">
+                  Eligibility Rules
                 </th>
-                <th className="py-3 px-4 text-center min-w-[210px]">
-                  Visibility Flags
+                <th className="py-3 px-4 min-w-[190px]">
+                  Status &amp; Homepage
                 </th>
-                <th className="py-3 px-4 text-right min-w-[220px]">Actions</th>
+                <th className="py-3 px-4 text-right min-w-[290px]">
+                  Administrative Actions
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-slate-800">
@@ -986,6 +1146,7 @@ export function AdminServiceManager({
                   const activeReqsCount = (srv.requirements || []).filter(
                     (r) => !r.deleted_at
                   ).length;
+                  const lifecycle = resolveServiceStatus(srv);
 
                   return (
                     <tr key={srv.id} className="hover:bg-slate-50/70 transition">
@@ -1061,6 +1222,11 @@ export function AdminServiceManager({
                               {mainCat?.name || "Category"}
                               {subCat ? ` → ${subCat.name}` : ""}
                             </div>
+                            {srv.short_description && (
+                              <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">
+                                {srv.short_description}
+                              </p>
+                            )}
                             <div className="text-[11px] text-slate-400 mt-0.5">
                               {srv.professional_service_count} linked pros •{" "}
                               {srv.booking_count} bookings
@@ -1070,11 +1236,11 @@ export function AdminServiceManager({
                       </td>
 
                       <td className="py-3.5 px-4">
-                        <div className="font-bold text-slate-900 font-mono">
-                          {formatNairaFromKobo(srv.base_price_min_kobo)}
-                          {srv.base_price_max_kobo
-                            ? ` – ${formatNairaFromKobo(srv.base_price_max_kobo)}`
-                            : "+"}
+                        <div className="font-bold text-slate-900">
+                          {formatAdminPriceDisplay(
+                            srv.base_price_min_kobo,
+                            srv.base_price_max_kobo
+                          )}
                         </div>
                         <div className="text-[11px] text-slate-500 mt-0.5">
                           {srv.estimated_duration_minutes
@@ -1082,11 +1248,15 @@ export function AdminServiceManager({
                             : "Flexible duration"}
                         </div>
                         {srv.default_commission_bps !== null && (
-                          <div className="text-[11px] font-mono text-indigo-700 font-semibold mt-0.5">
+                          <div className="text-[11px] text-indigo-700 font-semibold mt-0.5">
                             Fee override:{" "}
                             {(srv.default_commission_bps / 100).toFixed(1)}%
                           </div>
                         )}
+                        <div className="text-[10px] text-slate-400 mt-1.5 space-y-0.5">
+                          <div>Created: {formatShortDate(srv.created_at)}</div>
+                          <div>Updated: {formatShortDate(srv.updated_at)}</div>
+                        </div>
                       </td>
 
                       <td className="py-3.5 px-4">
@@ -1127,80 +1297,83 @@ export function AdminServiceManager({
 
                       <td className="py-3.5 px-4">
                         {srv.deleted_at ? (
-                          <div className="text-center text-xs text-slate-400">
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-[11px] font-bold">
                             Archived
                           </div>
                         ) : (
-                          <div className="flex flex-wrap items-center justify-center gap-1.5">
-                            <button
-                              type="button"
-                              disabled={isPending}
-                              onClick={() =>
-                                handleToggleServiceFlag(srv, "is_active")
-                              }
-                              className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${
-                                srv.is_active
-                                  ? "bg-emerald-50 text-emerald-800 border-emerald-200"
-                                  : "bg-slate-100 text-slate-500 border-slate-200"
-                              }`}
-                            >
-                              {srv.is_active ? "Active" : "Disabled"}
-                            </button>
-                            <button
-                              type="button"
-                              disabled={isPending}
-                              onClick={() =>
-                                handleToggleServiceFlag(srv, "is_featured")
-                              }
-                              className={`px-2 py-1 rounded-full text-[10px] font-bold border ${
-                                srv.is_featured
-                                  ? "bg-amber-50 text-amber-800 border-amber-200"
-                                  : "bg-white text-slate-400 border-slate-200"
-                              }`}
-                            >
-                              Featured
-                            </button>
-                            <button
-                              type="button"
-                              disabled={isPending}
-                              onClick={() =>
-                                handleToggleServiceFlag(srv, "is_popular")
-                              }
-                              className={`px-2 py-1 rounded-full text-[10px] font-bold border ${
-                                srv.is_popular
-                                  ? "bg-indigo-50 text-indigo-800 border-indigo-200"
-                                  : "bg-white text-slate-400 border-slate-200"
-                              }`}
-                            >
-                              Popular
-                            </button>
-                            <button
-                              type="button"
-                              disabled={isPending}
-                              onClick={() =>
-                                handleToggleServiceFlag(srv, "show_on_homepage")
-                              }
-                              className={`px-2 py-1 rounded-full text-[10px] font-bold border ${
-                                srv.show_on_homepage
-                                  ? "bg-teal-50 text-teal-800 border-teal-200"
-                                  : "bg-white text-slate-400 border-slate-200"
-                              }`}
-                            >
-                              Homepage
-                            </button>
+                          <div className="space-y-2">
+                            {/* Service Operational Status Badge */}
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              {lifecycle === "active" && (
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-bold">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                                  Active
+                                </span>
+                              )}
+                              {lifecycle === "paused" && (
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-[11px] font-bold">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                                  Paused
+                                </span>
+                              )}
+                              {lifecycle === "inactive" && (
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 border border-slate-300 text-[11px] font-bold">
+                                  <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                                  Inactive
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Independent Homepage Visibility Indicator */}
+                            <div className="flex items-center gap-1.5 flex-wrap">
+                              {srv.show_on_homepage ? (
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-teal-50 text-teal-800 border border-teal-200 text-[10px] font-bold">
+                                  Shown on Homepage
+                                </span>
+                              ) : (
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-50 text-slate-500 border border-slate-200 text-[10px] font-semibold">
+                                  Hidden from Homepage
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Featured / Popular quick flags */}
+                            <div className="flex items-center gap-1 flex-wrap pt-0.5">
+                              <button
+                                type="button"
+                                disabled={isPending}
+                                onClick={() =>
+                                  handleToggleServiceFlag(srv, "is_featured")
+                                }
+                                className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
+                                  srv.is_featured
+                                    ? "bg-amber-50 text-amber-800 border-amber-200"
+                                    : "bg-white text-slate-400 border-slate-200 hover:text-slate-600"
+                                }`}
+                              >
+                                Featured
+                              </button>
+                              <button
+                                type="button"
+                                disabled={isPending}
+                                onClick={() =>
+                                  handleToggleServiceFlag(srv, "is_popular")
+                                }
+                                className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
+                                  srv.is_popular
+                                    ? "bg-indigo-50 text-indigo-800 border-indigo-200"
+                                    : "bg-white text-slate-400 border-slate-200 hover:text-slate-600"
+                                }`}
+                              >
+                                Popular
+                              </button>
+                            </div>
                           </div>
                         )}
                       </td>
 
                       <td className="py-3.5 px-4 text-right">
                         <div className="inline-flex items-center justify-end gap-1.5 flex-wrap">
-                          <button
-                            type="button"
-                            onClick={() => openRequirementsModal(srv)}
-                            className="px-2.5 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-[11px] font-bold text-slate-800 hover:bg-slate-200"
-                          >
-                            Rules ({activeReqsCount})
-                          </button>
                           {srv.deleted_at ? (
                             <button
                               type="button"
@@ -1212,6 +1385,95 @@ export function AdminServiceManager({
                             </button>
                           ) : (
                             <>
+                              {/* Status-aware Lifecycle Actions */}
+                              {lifecycle === "active" && (
+                                <>
+                                  <button
+                                    type="button"
+                                    disabled={isPending}
+                                    onClick={() =>
+                                      setPendingConfirm({
+                                        type: "pause",
+                                        service: srv,
+                                      })
+                                    }
+                                    className="px-2.5 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-[11px] font-bold text-amber-800 hover:bg-amber-100 disabled:opacity-40"
+                                  >
+                                    Pause
+                                  </button>
+                                  <button
+                                    type="button"
+                                    disabled={isPending}
+                                    onClick={() =>
+                                      setPendingConfirm({
+                                        type: "deactivate",
+                                        service: srv,
+                                      })
+                                    }
+                                    className="px-2.5 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-[11px] font-bold text-slate-700 hover:bg-slate-200 disabled:opacity-40"
+                                  >
+                                    Deactivate
+                                  </button>
+                                </>
+                              )}
+
+                              {lifecycle === "paused" && (
+                                <>
+                                  <button
+                                    type="button"
+                                    disabled={isPending}
+                                    onClick={() =>
+                                      handleChangeServiceStatus(srv, "active")
+                                    }
+                                    className="px-2.5 py-1.5 rounded-lg bg-emerald-600 text-[11px] font-bold text-white hover:bg-emerald-700 disabled:opacity-40"
+                                  >
+                                    Resume
+                                  </button>
+                                  <button
+                                    type="button"
+                                    disabled={isPending}
+                                    onClick={() =>
+                                      setPendingConfirm({
+                                        type: "deactivate",
+                                        service: srv,
+                                      })
+                                    }
+                                    className="px-2.5 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-[11px] font-bold text-slate-700 hover:bg-slate-200 disabled:opacity-40"
+                                  >
+                                    Deactivate
+                                  </button>
+                                </>
+                              )}
+
+                              {lifecycle === "inactive" && (
+                                <button
+                                  type="button"
+                                  disabled={isPending}
+                                  onClick={() =>
+                                    handleChangeServiceStatus(srv, "active")
+                                  }
+                                  className="px-2.5 py-1.5 rounded-lg bg-emerald-600 text-[11px] font-bold text-white hover:bg-emerald-700 disabled:opacity-40"
+                                >
+                                  Activate
+                                </button>
+                              )}
+
+                              {/* Independent Homepage Visibility Control */}
+                              <button
+                                type="button"
+                                disabled={isPending}
+                                onClick={() => handleToggleHomepage(srv)}
+                                className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-bold transition disabled:opacity-40 ${
+                                  srv.show_on_homepage
+                                    ? "bg-white border-slate-300 text-slate-700 hover:bg-slate-100"
+                                    : "bg-teal-50 border-teal-200 text-teal-800 hover:bg-teal-100"
+                                }`}
+                              >
+                                {srv.show_on_homepage
+                                  ? "Hide from Homepage"
+                                  : "Show on Homepage"}
+                              </button>
+
                               <button
                                 type="button"
                                 onClick={() => openEditServiceModal(srv)}
@@ -1219,13 +1481,27 @@ export function AdminServiceManager({
                               >
                                 Edit
                               </button>
+
+                              <button
+                                type="button"
+                                onClick={() => openRequirementsModal(srv)}
+                                className="px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-[11px] font-semibold text-slate-700 hover:bg-slate-100"
+                              >
+                                Rules ({activeReqsCount})
+                              </button>
+
                               <button
                                 type="button"
                                 disabled={isPending}
-                                onClick={() => handleArchiveService(srv)}
+                                onClick={() =>
+                                  setPendingConfirm({
+                                    type: "delete",
+                                    service: srv,
+                                  })
+                                }
                                 className="px-2.5 py-1.5 rounded-lg border border-red-200 text-[11px] font-semibold text-red-700 hover:bg-red-50 disabled:opacity-40"
                               >
-                                Archive
+                                Delete
                               </button>
                             </>
                           )}
@@ -2047,6 +2323,80 @@ export function AdminServiceManager({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Confirmation Dialog for Pause, Deactivate, and Delete */}
+      {pendingConfirm && (
+        <div
+          className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+            <div>
+              <h3 className="text-base font-extrabold text-slate-900">
+                {pendingConfirm.type === "pause" && "Pause Service?"}
+                {pendingConfirm.type === "deactivate" && "Deactivate Service?"}
+                {pendingConfirm.type === "delete" && "Delete Service?"}
+              </h3>
+              <p className="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                {pendingConfirm.type === "pause" && (
+                  <>
+                    Pausing{" "}
+                    <strong className="text-slate-900">
+                      {pendingConfirm.service.name}
+                    </strong>{" "}
+                    will temporarily disable new booking and quotation requests while keeping the service saved in the database. You can resume it at any time.
+                  </>
+                )}
+                {pendingConfirm.type === "deactivate" && (
+                  <>
+                    Deactivating{" "}
+                    <strong className="text-slate-900">
+                      {pendingConfirm.service.name}
+                    </strong>{" "}
+                    makes it unavailable to customers while keeping all service records stored safely in the database. You can reactivate it at any time.
+                  </>
+                )}
+                {pendingConfirm.type === "delete" && (
+                  <>
+                    Are you sure you want to delete{" "}
+                    <strong className="text-slate-900">
+                      {pendingConfirm.service.name}
+                    </strong>
+                    ? Services without linked bookings or providers are permanently removed; services with historical records are safely archived to preserve data integrity.
+                  </>
+                )}
+              </p>
+            </div>
+
+            <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-slate-100">
+              <button
+                type="button"
+                onClick={() => setPendingConfirm(null)}
+                className="px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-700"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={isPending}
+                onClick={executePendingConfirm}
+                className={`px-4 py-2 rounded-xl text-xs font-bold text-white transition disabled:opacity-50 ${
+                  pendingConfirm.type === "delete"
+                    ? "bg-red-600 hover:bg-red-700"
+                    : pendingConfirm.type === "pause"
+                    ? "bg-amber-600 hover:bg-amber-700"
+                    : "bg-slate-900 hover:bg-slate-800"
+                }`}
+              >
+                {pendingConfirm.type === "pause" && "Confirm Pause"}
+                {pendingConfirm.type === "deactivate" && "Confirm Deactivate"}
+                {pendingConfirm.type === "delete" && "Confirm Delete"}
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -54,12 +54,14 @@ export async function generateMetadata({
   const service = await getCatalogueServiceBySlugOrId(slug);
   if (!service) {
     const availability = await checkCatalogueServiceAvailability(slug);
-    if (availability.status === "unavailable") {
+    if (availability.status === "paused" || availability.status === "unavailable") {
       return {
-        title: `${availability.name || "Service"} — Temporarily Unavailable | EasyLife Nigeria`,
+        title: `${availability.name || "Service"} — ${
+          availability.status === "paused" ? "Temporarily Paused" : "Temporarily Unavailable"
+        } | EasyLife Nigeria`,
         description:
           availability.reason ||
-          "This EasyLife service is temporarily unavailable. Browse active alternative services or submit a custom service request.",
+          "This EasyLife service is temporarily unavailable for booking. Browse active alternative services below.",
         robots: { index: false, follow: true },
       };
     }
@@ -92,10 +94,11 @@ export default async function ServiceDetailPage({
 
   if (!service) {
     const availability = await checkCatalogueServiceAvailability(slug);
-    if (availability.status !== "unavailable") {
+    if (availability.status !== "paused" && availability.status !== "unavailable") {
       notFound();
     }
 
+    const isPaused = availability.status === "paused";
     const profile = auth
       ? await getCustomerProfile(auth.user.id, auth.accessToken)
       : null;
@@ -126,12 +129,6 @@ export default async function ServiceDetailPage({
             .filter((s) => s.is_active)
             .slice(0, 6);
 
-    const customBookHref = `/book?${
-      parentCategory ? `category=${encodeURIComponent(parentCategory.id)}&` : ""
-    }title=${encodeURIComponent(availability.name || "Custom Service Request")}${
-      normalizedCity !== "All Cities" ? `&city=${encodeURIComponent(normalizedCity)}` : ""
-    }`;
-
     const unavailableContent = (
       <>
         <section className="bg-[#154752] text-white border-b border-[#24989A]/25">
@@ -143,33 +140,35 @@ export default async function ServiceDetailPage({
                 </span>
               )}
               <span className="rounded-full bg-amber-400/20 border border-amber-300/40 px-3 py-1 text-xs font-bold text-amber-100">
-                Service Temporarily Unavailable
+                {isPaused ? "Temporarily Paused" : "Service Temporarily Unavailable"}
               </span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
-              {availability.name || "Requested Service"} is Currently Paused
+              {availability.name || "Requested Service"} is{" "}
+              {isPaused ? "Temporarily Paused" : "Currently Unavailable"}
             </h1>
 
             <p className="text-base text-[#DAE7E7] max-w-2xl leading-relaxed">
               {availability.reason ||
-                "This service is temporarily unavailable for direct booking while operations update scheduling or provider coverage."}{" "}
-              You can choose an active alternative below or submit a custom request for review.
+                "This service is temporarily paused and not accepting new bookings or quotation requests right now."}{" "}
+              Please explore active services below or check back once EasyLife administration resumes this service.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <Link
-                href={customBookHref}
-                className="rounded-xl bg-[#24989A] hover:bg-[#1D7E80] px-5 py-3 text-sm font-bold text-white transition-colors"
+              <button
+                type="button"
+                disabled
+                className="rounded-xl bg-white/15 border border-white/25 px-5 py-3 text-sm font-bold text-white/70 cursor-not-allowed"
               >
-                Submit Custom Request →
-              </Link>
+                Booking &amp; Quotation Requests Disabled
+              </button>
               {parentCategory && (
                 <Link
                   href={`/explore-services?cat=${encodeURIComponent(parentCategory.slug)}`}
-                  className="rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 text-sm font-semibold text-white transition-colors"
+                  className="rounded-xl bg-[#24989A] hover:bg-[#1D7E80] px-4 py-3 text-sm font-semibold text-white transition-colors"
                 >
-                  Browse {parentCategory.name}
+                  Browse Active {parentCategory.name}
                 </Link>
               )}
               <Link
@@ -857,7 +856,9 @@ async function MatchedSpecialistsSection({
                       {pro.headline || `${pro.years_of_experience} years experience`}
                     </p>
                     <p className="text-xs font-semibold text-amber-600 mt-0.5">
-                      ★ {Number(pro.average_rating) > 0 ? Number(pro.average_rating).toFixed(1) : "5.0"}{" "}
+                      {Number(pro.review_count) > 0 && Number(pro.average_rating) > 0
+                        ? `★ ${Number(pro.average_rating).toFixed(1)}`
+                        : "No reviews yet"}{" "}
                       <span className="text-[#68797C] font-normal">
                         ({pro.review_count} reviews • {pro.completed_jobs_count} jobs)
                       </span>
@@ -885,7 +886,7 @@ async function MatchedSpecialistsSection({
                   <span className="text-sm font-extrabold text-[#154752]">
                     {pro.base_callout_fee_kobo > 0
                       ? formatNairaFromKobo(pro.base_callout_fee_kobo)
-                      : "Standard Rate"}
+                      : "Price available on request"}
                   </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-bold">

@@ -2,7 +2,8 @@ import { supabaseAdminFetch } from "@/lib/supabase/admin";
 import { CANONICAL_SLUG_ALIASES } from "@/lib/supabase/customer";
 
 export interface CatalogueItemAvailabilityInfo {
-  status: "active" | "unavailable" | "not_found";
+  status: "active" | "paused" | "inactive" | "unavailable" | "not_found";
+  lifecycleStatus?: "active" | "paused" | "inactive";
   kind: "category" | "subcategory" | "service";
   requestedValue: string;
   resolvedAliasSlug?: string;
@@ -22,9 +23,8 @@ export interface CatalogueItemAvailabilityInfo {
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 /**
- * Exact lookup (server-only) to distinguish between a service/category that is
- * temporarily paused (`is_active = false` or parent paused) vs genuinely missing.
- * Never lists or searches inactive drafts — operates strictly on exact slug/UUID.
+ * Exact lookup (server-only) to distinguish between an active, temporarily paused,
+ * deactivated (inactive), or missing service/category.
  */
 export async function checkCatalogueServiceAvailability(
   slugOrId: string
@@ -44,13 +44,14 @@ export async function checkCatalogueServiceAvailability(
       name: string;
       slug: string;
       service_code: string;
+      status: "active" | "paused" | "inactive" | null;
       is_active: boolean;
       deleted_at: string | null;
       category_id: string;
       subcategory_id: string | null;
     }>
   >(
-    `/rest/v1/services?${filter}&deleted_at=is.null&limit=1&select=id,name,slug,service_code,is_active,deleted_at,category_id,subcategory_id`
+    `/rest/v1/services?${filter}&deleted_at=is.null&limit=1&select=id,name,slug,service_code,status,is_active,deleted_at,category_id,subcategory_id`
   );
 
   if (!res.ok || !Array.isArray(res.data) || res.data.length === 0 || !res.data[0]) {
@@ -58,6 +59,13 @@ export async function checkCatalogueServiceAvailability(
   }
 
   const srv = res.data[0];
+  const lifecycle: "active" | "paused" | "inactive" =
+    srv.status === "active" || srv.status === "paused" || srv.status === "inactive"
+      ? srv.status
+      : srv.is_active
+      ? "active"
+      : "inactive";
+
   const catIds = [srv.category_id, srv.subcategory_id].filter((x): x is string => Boolean(x));
   const catsRes =
     catIds.length > 0
@@ -74,21 +82,33 @@ export async function checkCatalogueServiceAvailability(
 
   const mainOk = Boolean(mainCat && mainCat.is_active && !mainCat.deleted_at);
   const subOk = !srv.subcategory_id || Boolean(subCat && subCat.is_active && !subCat.deleted_at);
-  const serviceOk = Boolean(srv.is_active && !srv.deleted_at);
+  const serviceOk = Boolean(lifecycle === "active" && srv.is_active && !srv.deleted_at);
 
   const isAllActive = serviceOk && mainOk && subOk;
 
+  let resolvedStatus: CatalogueItemAvailabilityInfo["status"] = "active";
   let reason: string | undefined;
-  if (!serviceOk) {
-    reason = "This service is temporarily paused by EasyLife operations.";
+  if (lifecycle === "paused") {
+    resolvedStatus = "paused";
+    reason =
+      "This service is temporarily paused by EasyLife administration. New booking and quotation requests are disabled until the service resumes.";
+  } else if (lifecycle === "inactive") {
+    resolvedStatus = "inactive";
+    reason = "This service is currently deactivated and unavailable to customers.";
   } else if (!mainOk && mainCat) {
-    reason = `The parent category "${mainCat.name}" is currently paused.`;
+    resolvedStatus = "unavailable";
+    reason = `The parent category "${mainCat.name}" is currently unavailable.`;
   } else if (!subOk && subCat) {
-    reason = `The subcategory "${subCat.name}" is currently paused.`;
+    resolvedStatus = "unavailable";
+    reason = `The subcategory "${subCat.name}" is currently unavailable.`;
+  } else if (!isAllActive) {
+    resolvedStatus = "unavailable";
+    reason = "This service is currently unavailable.";
   }
 
   return {
-    status: isAllActive ? "active" : "unavailable",
+    status: resolvedStatus,
+    lifecycleStatus: lifecycle,
     kind: "service",
     requestedValue: cleaned,
     id: srv.id,

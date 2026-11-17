@@ -136,8 +136,8 @@ export function CommissionConfigClient({
             <tbody className="divide-y divide-slate-100">
               {settings.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-slate-400">
-                    No custom overrides. Using global default rate (10%).
+                  <td colSpan={6} className="py-12 text-center text-slate-500">
+                    No commission rules configured yet. Configure default commission policies in Platform Settings or add a regional rule above.
                   </td>
                 </tr>
               ) : (

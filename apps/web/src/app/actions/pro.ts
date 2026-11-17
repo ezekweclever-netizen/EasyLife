@@ -194,7 +194,7 @@ export async function registerProfessionalAction(
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
   const slug = `${cleanSlug}-${Math.random().toString(36).substring(2, 6)}`;
-  const calloutFeeKobo = Math.max(0, Math.round((Number.isNaN(baseCalloutFeeNaira) ? 5000 : baseCalloutFeeNaira) * 100));
+  const calloutFeeKobo = Math.max(0, Math.round((Number.isNaN(baseCalloutFeeNaira) ? 0 : baseCalloutFeeNaira) * 100));
 
   // 1. Check if professional profile already exists
   const existingRes = await supabaseFetch<Array<{ id: string }>>(

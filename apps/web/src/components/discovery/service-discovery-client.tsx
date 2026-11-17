@@ -868,7 +868,9 @@ export function ServiceDiscoveryClient({
 
                     <div className="flex items-center gap-2 text-xs mt-1">
                       <span className="font-bold text-amber-500">
-                        ★ {Number(pro.average_rating) > 0 ? Number(pro.average_rating).toFixed(1) : "5.0"}
+                        {Number(pro.review_count) > 0 && Number(pro.average_rating) > 0
+                          ? `★ ${Number(pro.average_rating).toFixed(1)}`
+                          : "No reviews yet"}
                       </span>
                       <span className="text-slate-400">({pro.review_count} reviews)</span>
                       <span className="text-slate-300">•</span>
@@ -916,7 +918,7 @@ export function ServiceDiscoveryClient({
                   <span className="text-sm font-black text-slate-900">
                     {pro.base_callout_fee_kobo > 0
                       ? formatNaira(pro.base_callout_fee_kobo)
-                      : "Standard Rate"}
+                      : "Price available on request"}
                   </span>
                 </div>
 

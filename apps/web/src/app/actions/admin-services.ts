@@ -3,6 +3,7 @@
 import type {
   DocumentType,
   ProviderType,
+  ServiceLifecycleStatus,
   ServiceRequirementAppliesTo,
   ServiceRequirementRow,
   ServiceRequirementType,
@@ -663,6 +664,268 @@ export async function toggleServiceFlagAction(
   return {
     ok: true,
     message: `Service "${existing.name}" updated (${field.replace(/_/g, " ")}: ${value ? "enabled" : "disabled"}).`,
+  };
+}
+
+/**
+ * Admin: Explicit lifecycle status management ('active' | 'paused' | 'inactive').
+ * Preserves independent homepage visibility (show_on_homepage) and records an audit log entry.
+ */
+export async function updateServiceStatusAction(
+  serviceId: string,
+  nextStatus: ServiceLifecycleStatus,
+  reason?: string
+): Promise<{
+  ok: boolean;
+  message: string;
+  data?: {
+    id: string;
+    status: ServiceLifecycleStatus;
+    is_active: boolean;
+    show_on_homepage: boolean;
+    paused_at: string | null;
+    deactivated_at: string | null;
+    updated_at: string;
+  };
+}> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
+  }
+
+  if (!serviceId || !UUID_REGEX.test(serviceId)) {
+    return { ok: false, message: "Valid Service ID required." };
+  }
+
+  if (!["active", "paused", "inactive"].includes(nextStatus)) {
+    return { ok: false, message: "Invalid service lifecycle status." };
+  }
+
+  const existingRes = await supabaseAdminFetch<ServiceRow[]>(
+    `/rest/v1/services?id=eq.${serviceId}&limit=1&select=id,name,status,is_active,show_on_homepage,deleted_at`
+  );
+  const existing =
+    existingRes.ok && Array.isArray(existingRes.data) ? existingRes.data[0] : null;
+  if (!existing) {
+    return { ok: false, message: "Service not found." };
+  }
+  if (existing.deleted_at) {
+    return {
+      ok: false,
+      message: "Archived services must be restored before changing lifecycle status.",
+    };
+  }
+
+  const nowIso = new Date().toISOString();
+  const patchBody = {
+    status: nextStatus,
+    is_active: nextStatus === "active",
+    paused_at: nextStatus === "paused" ? nowIso : null,
+    deactivated_at: nextStatus === "inactive" ? nowIso : null,
+    updated_by: adminCheck.user.id,
+    updated_at: nowIso,
+  };
+
+  const res = await supabaseAdminFetch<ServiceRow[]>(
+    `/rest/v1/services?id=eq.${serviceId}`,
+    {
+      method: "PATCH",
+      headers: { Prefer: "return=representation" },
+      body: patchBody,
+    }
+  );
+
+  if (!res.ok || !Array.isArray(res.data) || !res.data[0]) {
+    return {
+      ok: false,
+      message: res.ok
+        ? "Failed to update service status."
+        : res.message || "Failed to update service status.",
+    };
+  }
+
+  const updated = res.data[0];
+
+  await recordCatalogueAuditLog({
+    actorUserId: adminCheck.user.id,
+    action: "service.status_changed",
+    entityType: "service",
+    entityId: serviceId,
+    oldValues: {
+      status: existing.status,
+      is_active: existing.is_active,
+      show_on_homepage: existing.show_on_homepage,
+    },
+    newValues: {
+      status: updated.status,
+      is_active: updated.is_active,
+      show_on_homepage: updated.show_on_homepage,
+      paused_at: updated.paused_at,
+      deactivated_at: updated.deactivated_at,
+      reason: reason?.trim() || null,
+    },
+  });
+
+  revalidateCataloguePaths();
+
+  const verbMap: Record<ServiceLifecycleStatus, string> = {
+    active:
+      existing.status === "paused"
+        ? "resumed and is now active"
+        : "activated and is now available to customers",
+    paused:
+      "paused. New booking and quotation requests for this service are temporarily disabled",
+    inactive: "deactivated and hidden from customer discovery",
+  };
+
+  return {
+    ok: true,
+    message: `Service "${updated.name}" has been ${verbMap[nextStatus]}.`,
+    data: {
+      id: updated.id,
+      status: updated.status,
+      is_active: updated.is_active,
+      show_on_homepage: updated.show_on_homepage,
+      paused_at: updated.paused_at,
+      deactivated_at: updated.deactivated_at,
+      updated_at: updated.updated_at,
+    },
+  };
+}
+
+/**
+ * Admin: Independent homepage visibility control (Show on Homepage / Hide from Homepage).
+ * Does NOT deactivate, pause, or delete the service.
+ */
+export async function toggleServiceHomepageVisibilityAction(
+  serviceId: string,
+  showOnHomepage: boolean
+): Promise<{
+  ok: boolean;
+  message: string;
+  data?: { id: string; show_on_homepage: boolean; updated_at: string };
+}> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
+  }
+
+  if (!serviceId || !UUID_REGEX.test(serviceId)) {
+    return { ok: false, message: "Valid Service ID required." };
+  }
+
+  const existingRes = await supabaseAdminFetch<ServiceRow[]>(
+    `/rest/v1/services?id=eq.${serviceId}&limit=1&select=id,name,status,show_on_homepage,deleted_at`
+  );
+  const existing =
+    existingRes.ok && Array.isArray(existingRes.data) ? existingRes.data[0] : null;
+  if (!existing) {
+    return { ok: false, message: "Service not found." };
+  }
+  if (existing.deleted_at) {
+    return {
+      ok: false,
+      message: "Archived services must be restored before changing homepage visibility.",
+    };
+  }
+
+  const nowIso = new Date().toISOString();
+  const res = await supabaseAdminFetch<ServiceRow[]>(
+    `/rest/v1/services?id=eq.${serviceId}`,
+    {
+      method: "PATCH",
+      headers: { Prefer: "return=representation" },
+      body: {
+        show_on_homepage: Boolean(showOnHomepage),
+        updated_by: adminCheck.user.id,
+        updated_at: nowIso,
+      },
+    }
+  );
+
+  if (!res.ok || !Array.isArray(res.data) || !res.data[0]) {
+    return {
+      ok: false,
+      message: res.ok
+        ? "Failed to update homepage visibility."
+        : res.message || "Failed to update homepage visibility.",
+    };
+  }
+
+  const updated = res.data[0];
+
+  await recordCatalogueAuditLog({
+    actorUserId: adminCheck.user.id,
+    action: "service.homepage_visibility_changed",
+    entityType: "service",
+    entityId: serviceId,
+    oldValues: { show_on_homepage: existing.show_on_homepage, status: existing.status },
+    newValues: { show_on_homepage: updated.show_on_homepage, status: updated.status },
+  });
+
+  revalidateCataloguePaths();
+
+  return {
+    ok: true,
+    message: showOnHomepage
+      ? `Service "${updated.name}" is now visible on the homepage.`
+      : `Service "${updated.name}" has been hidden from the homepage (its ${updated.status} status remains unchanged).`,
+    data: {
+      id: updated.id,
+      show_on_homepage: updated.show_on_homepage,
+      updated_at: updated.updated_at,
+    },
+  };
+}
+
+/**
+ * Admin: Delete a service (permanently removes unreferenced services when hardDelete=true,
+ * otherwise soft-archives to preserve historical bookings and referential integrity).
+ */
+export async function deleteServiceAction(
+  serviceId: string,
+  hardDelete = true
+): Promise<{ ok: boolean; message: string; mode?: "hard_deleted" | "soft_archived" }> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized: Administrator privileges required." };
+  }
+
+  if (!serviceId || !UUID_REGEX.test(serviceId)) {
+    return { ok: false, message: "Valid Service ID required." };
+  }
+
+  const res = await supabaseAdminFetch<{
+    id: string;
+    name: string;
+    mode: "hard_deleted" | "soft_archived";
+    booking_refs: number;
+    provider_refs: number;
+  }>("/rest/v1/rpc/admin_delete_service", {
+    method: "POST",
+    body: {
+      p_service_id: serviceId,
+      p_hard_delete: hardDelete,
+    },
+  });
+
+  if (!res.ok || !res.data) {
+    return {
+      ok: false,
+      message: res.ok ? "Failed to delete service." : res.message || "Failed to delete service.",
+    };
+  }
+
+  revalidateCataloguePaths();
+
+  const { name, mode } = res.data;
+  return {
+    ok: true,
+    mode,
+    message:
+      mode === "hard_deleted"
+        ? `Service "${name}" has been permanently deleted.`
+        : `Service "${name}" was safely archived because it is linked to historical bookings or provider records.`,
   };
 }
 

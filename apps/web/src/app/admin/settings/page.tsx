@@ -1,15 +1,16 @@
 import React from "react";
 import type { Metadata } from "next";
-import { fetchAdminPlatformSettings } from "@/app/actions/admin";
+import { fetchStructuredPlatformSettings } from "@/app/actions/admin";
 import { PlatformSettingsClient } from "@/components/admin/platform-settings-client";
 
 export const metadata: Metadata = {
-  title: "Platform Operational Settings — EasyLife Administration",
-  description: "Configure runtime parameters, maintenance flags, pilot cities, and marketplace switches.",
+  title: "Platform Settings — EasyLife Administration",
+  description:
+    "Manage EasyLife general configuration, registration policies, service marketplace rules, financial settings, notifications, and security controls.",
 };
 
 export default async function AdminSettingsPage() {
-  const settings = await fetchAdminPlatformSettings();
+  const initialBundle = await fetchStructuredPlatformSettings();
 
   return (
     <div className="space-y-6">
@@ -17,22 +18,22 @@ export default async function AdminSettingsPage() {
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-teal-300">
-              System Control
+              Platform Administration
             </span>
             <span className="text-xs text-slate-500 font-medium">
-              Operational Switches &amp; Flags
+              Configuration &amp; Policies
             </span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
-            Platform Settings &amp; Parameters
+            Platform Settings
           </h1>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Tune runtime behaviors, city launch lists, maintenance triggers, and global financial configurations.
+            Configure EasyLife&apos;s general identity, user registration rules, marketplace controls, financial policies, notifications, and security standards.
           </p>
         </div>
       </div>
 
-      <PlatformSettingsClient initialSettings={settings as any} />
+      <PlatformSettingsClient initialBundle={initialBundle} />
     </div>
   );
 }

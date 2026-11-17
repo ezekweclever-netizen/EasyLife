@@ -87,7 +87,7 @@ export function formatServicePriceRange(
   const min = Number(minKobo || 0);
   const max = maxKobo != null ? Number(maxKobo) : null;
   if (min <= 0 && (!max || max <= 0)) {
-    return "Custom Quote";
+    return "Price available on request";
   }
   if (max && max > min) {
     return `${formatNairaFromKobo(min)} – ${formatNairaFromKobo(max)}`;

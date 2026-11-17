@@ -350,6 +350,9 @@ export async function fetchAdminCatalogueData(): Promise<AdminCatalogueSnapshot>
 
   const services: AdminServiceRecord[] = rawServices.map((srv) => ({
     ...srv,
+    status: srv.status || (srv.is_active ? "active" : "inactive"),
+    paused_at: srv.paused_at ?? null,
+    deactivated_at: srv.deactivated_at ?? null,
     keywords: Array.isArray(srv.keywords) ? srv.keywords : [],
     eligible_provider_types: Array.isArray(srv.eligible_provider_types)
       ? srv.eligible_provider_types

@@ -359,10 +359,14 @@ export default async function CustomerDashboardPage({
                         )}
                       </div>
                       <p className="text-xs text-[#64748B] line-clamp-1">
-                        {pro.headline || `${pro.years_of_experience || 3}+ years of verified field service`}
+                        {pro.headline || (pro.years_of_experience ? `${pro.years_of_experience}+ years of verified field service` : "Verified EasyLife Service Professional")}
                       </p>
                       <div className="flex items-center gap-2 text-xs text-[#64748B]">
-                        <span className="font-semibold text-amber-500">★ {pro.average_rating || "5.0"}</span>
+                        <span className="font-semibold text-amber-500">
+                          {Number(pro.review_count) > 0 && Number(pro.average_rating) > 0
+                            ? `★ ${Number(pro.average_rating).toFixed(1)}`
+                            : "No ratings yet"}
+                        </span>
                         <span>({pro.review_count || 0} reviews)</span>
                         <span>•</span>
                         <span>{pro.completed_jobs_count || 0} jobs</span>
@@ -372,11 +376,11 @@ export default async function CustomerDashboardPage({
 
                   <div className="pt-3 border-t border-[#F1F5F9] flex items-center justify-between text-xs">
                     <div>
-                      <span className="text-[#64748B] block">Starting from</span>
+                      <span className="text-[#64748B] block">Callout Fee</span>
                       <span className="font-bold text-sm text-[#0F172A]">
-                        {pro.base_callout_fee_kobo
+                        {pro.base_callout_fee_kobo && pro.base_callout_fee_kobo > 0
                           ? `₦${(pro.base_callout_fee_kobo / 100).toLocaleString()}`
-                          : "Standard Rate"}
+                          : "Price available on request"}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -400,7 +404,7 @@ export default async function CustomerDashboardPage({
           ) : (
             <div className="bg-white rounded-xl border border-[#E2E8F0] p-6 text-center space-y-2">
               <p className="text-sm font-semibold text-[#0F172A]">
-                No pre-listed directory entries in {currentCity} right now.
+                No registered professionals in {currentCity} yet.
               </p>
               <p className="text-xs text-[#64748B] max-w-lg mx-auto">
                 EasyLife guarantees direct assignment. When you post a service request, our city operations desk in {currentCity} dispatches an accredited technician directly to your address.

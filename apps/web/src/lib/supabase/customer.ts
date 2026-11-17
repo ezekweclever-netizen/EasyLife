@@ -503,16 +503,15 @@ export async function getHomepageCatalogueData(): Promise<HomepageCatalogueData>
   });
 
   const featuredServices = [...allServices]
-    .filter((s) => s.show_on_homepage || s.is_featured)
+    .filter((s) => Boolean(s.show_on_homepage) && (s.status ? s.status === "active" : s.is_active))
     .sort((a, b) => {
-      if (a.show_on_homepage !== b.show_on_homepage) return a.show_on_homepage ? -1 : 1;
       if (a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
       if (a.is_popular !== b.is_popular) return a.is_popular ? -1 : 1;
       return (a.display_order ?? 999) - (b.display_order ?? 999) || a.name.localeCompare(b.name);
     });
 
   const popularServices = [...allServices]
-    .filter((s) => s.is_popular)
+    .filter((s) => s.is_popular && Boolean(s.show_on_homepage) && (s.status ? s.status === "active" : s.is_active))
     .sort((a, b) => {
       if (a.is_featured !== b.is_featured) return a.is_featured ? -1 : 1;
       return (a.display_order ?? 999) - (b.display_order ?? 999) || a.name.localeCompare(b.name);

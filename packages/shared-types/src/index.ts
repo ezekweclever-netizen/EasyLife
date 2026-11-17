@@ -401,6 +401,8 @@ export interface CatalogueServiceRequirementItem {
   config: Record<string, unknown>;
 }
 
+export type ServiceLifecycleStatus = "active" | "paused" | "inactive";
+
 export interface CatalogueServiceItem {
   id: string;
   category_id?: string;
@@ -416,6 +418,11 @@ export interface CatalogueServiceItem {
   base_price_min_kobo: number;
   base_price_max_kobo: number | null;
   estimated_duration_minutes: number | null;
+  status?: ServiceLifecycleStatus;
+  paused_at?: string | null;
+  deactivated_at?: string | null;
+  created_at?: string;
+  updated_at?: string;
   is_active: boolean;
   is_featured: boolean;
   is_popular: boolean;
@@ -507,6 +514,7 @@ export interface CatalogueSearchResultItem {
   base_price_min_kobo: number;
   base_price_max_kobo: number | null;
   estimated_duration_minutes: number | null;
+  service_status?: ServiceLifecycleStatus;
   is_active: boolean;
   is_featured: boolean;
   is_popular: boolean;
@@ -718,6 +726,108 @@ export interface AdminDemandAnalytics {
   demand_by_location: AdminLocationDemandMetric[];
   provider_availability_by_service: AdminServiceSupplyGapMetric[];
 }
+
+// ============================================================================
+// Structured Platform Settings Types (Admin Control Panel)
+// ============================================================================
+
+export type PlatformSettingsSectionKey =
+  | "general"
+  | "registration"
+  | "marketplace"
+  | "financial"
+  | "notifications"
+  | "security";
+
+export interface GeneralPlatformSettings {
+  platform_name: string;
+  platform_description: string;
+  platform_logo_url: string;
+  contact_email: string;
+  contact_phone: string;
+  website_url: string;
+  business_address: string;
+  default_currency: string;
+  default_country: string;
+  default_timezone: string;
+  supported_cities: string[];
+}
+
+export interface RegistrationPlatformSettings {
+  enable_customer_registration: boolean;
+  enable_professional_registration: boolean;
+  enable_business_registration: boolean;
+  require_email_verification: boolean;
+  require_phone_verification: boolean;
+  require_professional_approval: boolean;
+  require_business_approval: boolean;
+  min_password_length: number;
+  require_strong_password: boolean;
+}
+
+export interface MarketplacePlatformSettings {
+  enable_service_bookings: boolean;
+  enable_quotation_requests: boolean;
+  enable_provider_applications: boolean;
+  require_service_approval: boolean;
+  show_paused_services_in_catalogue: boolean;
+  default_quotation_expiry_hours: number;
+  dispute_auto_escalate_hours: number;
+  maintenance_mode_enabled: boolean;
+  maintenance_mode_message: string;
+}
+
+export interface FinancialPlatformSettings {
+  commission_enabled: boolean;
+  default_commission_percent: number;
+  minimum_callout_fee_naira: number;
+  supported_currencies: string[];
+  tax_enabled: boolean;
+  tax_rate_percent: number;
+  tax_label: string;
+  payment_provider_enabled: boolean;
+  payment_provider_name: string;
+}
+
+export interface NotificationPlatformSettings {
+  email_notifications_enabled: boolean;
+  push_notifications_enabled: boolean;
+  sms_notifications_enabled: boolean;
+  booking_notifications_enabled: boolean;
+  account_verification_notifications_enabled: boolean;
+  admin_alert_notifications_enabled: boolean;
+  admin_alert_email: string;
+}
+
+export interface SecurityPlatformSettings {
+  enforce_admin_mfa: boolean;
+  session_timeout_minutes: number;
+  max_login_attempts: number;
+  lockout_duration_minutes: number;
+  audit_logging_enabled: boolean;
+  require_reason_for_suspension: boolean;
+  restrict_admin_registration: boolean;
+}
+
+export interface PlatformIntegrationHealth {
+  paystackConfigured: boolean;
+  paystackKeyHint: string | null;
+  emailProviderConfigured: boolean;
+  pushProviderConfigured: boolean;
+  smsProviderConfigured: boolean;
+}
+
+export interface StructuredPlatformSettingsBundle {
+  general: GeneralPlatformSettings;
+  registration: RegistrationPlatformSettings;
+  marketplace: MarketplacePlatformSettings;
+  financial: FinancialPlatformSettings;
+  notifications: NotificationPlatformSettings;
+  security: SecurityPlatformSettings;
+  updatedAt: Partial<Record<PlatformSettingsSectionKey, string>>;
+  integrations: PlatformIntegrationHealth;
+}
+
 
 
 

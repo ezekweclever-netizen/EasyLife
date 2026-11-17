@@ -8,9 +8,22 @@ import { storageService } from "@/lib/storage/storage-service";
 import type {
   AdminDashboardMetrics,
   AdminDemandAnalytics,
+  FinancialPlatformSettings,
+  GeneralPlatformSettings,
+  MarketplacePlatformSettings,
+  NotificationPlatformSettings,
+  PlatformSettingsSectionKey,
+  RegistrationPlatformSettings,
+  SecurityPlatformSettings,
+  StructuredPlatformSettingsBundle,
   VerificationStatus,
   UserRole,
 } from "@easylife/shared-types";
+import {
+  buildStructuredPlatformSettings,
+  detectIntegrationHealthServer,
+  PLATFORM_SETTING_SECTION_META,
+} from "@/lib/platform-settings";
 
 export interface AdminActionResult {
   ok: boolean;
@@ -517,7 +530,7 @@ export async function fetchAdminQuotations(status?: string) {
 }
 
 /**
- * 12. Fetch Platform Operational Settings
+ * 12. Fetch Platform Operational Settings (Raw legacy helper preserved for compatibility)
  */
 export async function fetchAdminPlatformSettings() {
   const auth = await getAuthenticatedUser();
@@ -527,6 +540,370 @@ export async function fetchAdminPlatformSettings() {
   );
 
   return res.ok && Array.isArray(res.data) ? res.data : [];
+}
+
+/**
+ * 12b. Fetch Structured Platform Settings (6 Organized Sections + Masked Integration Health)
+ */
+export async function fetchStructuredPlatformSettings(): Promise<StructuredPlatformSettingsBundle> {
+  const rows = await fetchAdminPlatformSettings();
+  const normalized = rows.map((row) => ({
+    key: String(row.key || ""),
+    value: row.value,
+    updated_at: typeof row.updated_at === "string" ? row.updated_at : undefined,
+  }));
+  return buildStructuredPlatformSettings(normalized);
+}
+
+type PlatformSettingsSectionPayloadMap = {
+  general: GeneralPlatformSettings;
+  registration: RegistrationPlatformSettings;
+  marketplace: MarketplacePlatformSettings;
+  financial: FinancialPlatformSettings;
+  notifications: NotificationPlatformSettings;
+  security: SecurityPlatformSettings;
+};
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validateSectionPayload<K extends PlatformSettingsSectionKey>(
+  section: K,
+  raw: PlatformSettingsSectionPayloadMap[K]
+): { ok: true; clean: Record<string, unknown> } | { ok: false; message: string } {
+  if (section === "general") {
+    const g = raw as GeneralPlatformSettings;
+    const platformName = String(g.platform_name || "").trim();
+    const contactEmail = String(g.contact_email || "").trim();
+    const websiteUrl = String(g.website_url || "").trim();
+    const logoUrl = String(g.platform_logo_url || "").trim();
+    if (platformName.length < 2 || platformName.length > 80) {
+      return { ok: false, message: "Platform name must be between 2 and 80 characters." };
+    }
+    if (contactEmail && !EMAIL_RE.test(contactEmail)) {
+      return { ok: false, message: "Please enter a valid contact email address." };
+    }
+    if (websiteUrl && !/^https?:\/\/.+/i.test(websiteUrl)) {
+      return { ok: false, message: "Website URL must start with http:// or https://." };
+    }
+    if (logoUrl && !(logoUrl.startsWith("/") || /^https?:\/\/.+/i.test(logoUrl))) {
+      return { ok: false, message: "Logo URL must be a relative path (/...) or valid http(s) URL." };
+    }
+    const cities = Array.isArray(g.supported_cities)
+      ? Array.from(new Set(g.supported_cities.map((c) => String(c || "").trim()).filter(Boolean)))
+      : [];
+    if (cities.length === 0) {
+      return { ok: false, message: "At least one supported city must be configured." };
+    }
+    return {
+      ok: true,
+      clean: {
+        platform_name: platformName,
+        platform_description: String(g.platform_description || "").trim().slice(0, 500),
+        platform_logo_url: logoUrl || "/images/easylife-logo.png",
+        contact_email: contactEmail,
+        contact_phone: String(g.contact_phone || "").trim().slice(0, 40),
+        website_url: websiteUrl,
+        business_address: String(g.business_address || "").trim().slice(0, 300),
+        default_currency: String(g.default_currency || "NGN").trim().toUpperCase().slice(0, 3),
+        default_country: String(g.default_country || "Nigeria").trim().slice(0, 80),
+        default_timezone: String(g.default_timezone || "Africa/Lagos").trim().slice(0, 80),
+        supported_cities: cities,
+      },
+    };
+  }
+
+  if (section === "registration") {
+    const r = raw as RegistrationPlatformSettings;
+    const minLen = Math.round(Number(r.min_password_length));
+    if (!Number.isFinite(minLen) || minLen < 8 || minLen > 64) {
+      return { ok: false, message: "Minimum password length must be between 8 and 64 characters." };
+    }
+    return {
+      ok: true,
+      clean: {
+        enable_customer_registration: Boolean(r.enable_customer_registration),
+        enable_professional_registration: Boolean(r.enable_professional_registration),
+        enable_business_registration: Boolean(r.enable_business_registration),
+        require_email_verification: Boolean(r.require_email_verification),
+        require_phone_verification: Boolean(r.require_phone_verification),
+        require_professional_approval: Boolean(r.require_professional_approval),
+        require_business_approval: Boolean(r.require_business_approval),
+        min_password_length: minLen,
+        require_strong_password: Boolean(r.require_strong_password),
+      },
+    };
+  }
+
+  if (section === "marketplace") {
+    const m = raw as MarketplacePlatformSettings;
+    const quoteHours = Math.round(Number(m.default_quotation_expiry_hours));
+    const disputeHours = Math.round(Number(m.dispute_auto_escalate_hours));
+    if (!Number.isFinite(quoteHours) || quoteHours < 1 || quoteHours > 720) {
+      return { ok: false, message: "Quotation validity window must be between 1 and 720 hours." };
+    }
+    if (!Number.isFinite(disputeHours) || disputeHours < 1 || disputeHours > 720) {
+      return { ok: false, message: "Dispute escalation window must be between 1 and 720 hours." };
+    }
+    return {
+      ok: true,
+      clean: {
+        enable_service_bookings: Boolean(m.enable_service_bookings),
+        enable_quotation_requests: Boolean(m.enable_quotation_requests),
+        enable_provider_applications: Boolean(m.enable_provider_applications),
+        require_service_approval: Boolean(m.require_service_approval),
+        show_paused_services_in_catalogue: Boolean(m.show_paused_services_in_catalogue),
+        default_quotation_expiry_hours: quoteHours,
+        dispute_auto_escalate_hours: disputeHours,
+        maintenance_mode_enabled: Boolean(m.maintenance_mode_enabled),
+        maintenance_mode_message: String(m.maintenance_mode_message || "").trim().slice(0, 300),
+      },
+    };
+  }
+
+  if (section === "financial") {
+    const f = raw as FinancialPlatformSettings;
+    const commPct = Number(f.default_commission_percent);
+    const calloutNaira = Number(f.minimum_callout_fee_naira);
+    const taxPct = Number(f.tax_rate_percent);
+    if (!Number.isFinite(commPct) || commPct < 0 || commPct > 50) {
+      return { ok: false, message: "Platform commission percentage must be between 0% and 50%." };
+    }
+    if (!Number.isFinite(calloutNaira) || calloutNaira < 0 || calloutNaira > 10000000) {
+      return { ok: false, message: "Minimum callout fee must be 0 or a valid non-negative amount." };
+    }
+    if (!Number.isFinite(taxPct) || taxPct < 0 || taxPct > 100) {
+      return { ok: false, message: "Tax rate percentage must be between 0% and 100%." };
+    }
+    const health = detectIntegrationHealthServer();
+    if (Boolean(f.payment_provider_enabled) && !health.paystackConfigured) {
+      return {
+        ok: false,
+        message:
+          "Cannot activate payment gateway because valid Paystack API credentials are not configured in server environment variables.",
+      };
+    }
+    const currencies = Array.isArray(f.supported_currencies)
+      ? Array.from(
+          new Set(
+            f.supported_currencies
+              .map((c) => String(c || "").trim().toUpperCase())
+              .filter((c) => /^[A-Z]{3}$/.test(c))
+          )
+        )
+      : ["NGN"];
+    if (currencies.length === 0) {
+      return { ok: false, message: "Select at least one valid 3-letter currency code (e.g. NGN)." };
+    }
+    return {
+      ok: true,
+      clean: {
+        commission_enabled: Boolean(f.commission_enabled),
+        default_commission_percent: Math.round(commPct * 100) / 100,
+        minimum_callout_fee_naira: Math.round(calloutNaira),
+        supported_currencies: currencies,
+        tax_enabled: Boolean(f.tax_enabled),
+        tax_rate_percent: Math.round(taxPct * 100) / 100,
+        tax_label: String(f.tax_label || "VAT").trim().slice(0, 30) || "VAT",
+        payment_provider_enabled: Boolean(f.payment_provider_enabled) && health.paystackConfigured,
+        payment_provider_name: String(f.payment_provider_name || "Paystack").trim().slice(0, 60),
+      },
+    };
+  }
+
+  if (section === "notifications") {
+    const n = raw as NotificationPlatformSettings;
+    const alertEmail = String(n.admin_alert_email || "").trim();
+    if (alertEmail && !EMAIL_RE.test(alertEmail)) {
+      return { ok: false, message: "Please enter a valid administrative alert email address." };
+    }
+    return {
+      ok: true,
+      clean: {
+        email_notifications_enabled: Boolean(n.email_notifications_enabled),
+        push_notifications_enabled: Boolean(n.push_notifications_enabled),
+        sms_notifications_enabled: Boolean(n.sms_notifications_enabled),
+        booking_notifications_enabled: Boolean(n.booking_notifications_enabled),
+        account_verification_notifications_enabled: Boolean(
+          n.account_verification_notifications_enabled
+        ),
+        admin_alert_notifications_enabled: Boolean(n.admin_alert_notifications_enabled),
+        admin_alert_email: alertEmail,
+      },
+    };
+  }
+
+  // security
+  const s = raw as SecurityPlatformSettings;
+  const sessionMins = Math.round(Number(s.session_timeout_minutes));
+  const maxAttempts = Math.round(Number(s.max_login_attempts));
+  const lockoutMins = Math.round(Number(s.lockout_duration_minutes));
+  if (!Number.isFinite(sessionMins) || sessionMins < 15 || sessionMins > 1440) {
+    return { ok: false, message: "Session timeout must be between 15 and 1,440 minutes." };
+  }
+  if (!Number.isFinite(maxAttempts) || maxAttempts < 3 || maxAttempts > 20) {
+    return { ok: false, message: "Maximum login attempts must be between 3 and 20." };
+  }
+  if (!Number.isFinite(lockoutMins) || lockoutMins < 1 || lockoutMins > 1440) {
+    return { ok: false, message: "Lockout duration must be between 1 and 1,440 minutes." };
+  }
+  return {
+    ok: true,
+    clean: {
+      enforce_admin_mfa: Boolean(s.enforce_admin_mfa),
+      session_timeout_minutes: sessionMins,
+      max_login_attempts: maxAttempts,
+      lockout_duration_minutes: lockoutMins,
+      audit_logging_enabled: Boolean(s.audit_logging_enabled),
+      require_reason_for_suspension: Boolean(s.require_reason_for_suspension),
+      restrict_admin_registration: Boolean(s.restrict_admin_registration),
+    },
+  };
+}
+
+/**
+ * 13b. Save Structured Platform Settings Section (Validated + Audited + Legacy Sync)
+ */
+export async function adminSavePlatformSettingsSectionAction<
+  K extends PlatformSettingsSectionKey,
+>(
+  section: K,
+  values: PlatformSettingsSectionPayloadMap[K]
+): Promise<AdminActionResult> {
+  const auth = await getAuthenticatedUser();
+  const meta = PLATFORM_SETTING_SECTION_META[section];
+  if (!meta) {
+    return { ok: false, message: "Invalid settings section." };
+  }
+
+  const validated = validateSectionPayload(section, values);
+  if (!validated.ok) {
+    return { ok: false, message: validated.message };
+  }
+
+  const res = await runAdminQuery<Record<string, unknown>>(
+    "/rest/v1/rpc/admin_set_platform_setting",
+    {
+      method: "POST",
+      accessToken: auth?.accessToken,
+      body: {
+        p_key: meta.dbKey,
+        p_value: validated.clean,
+        p_description: meta.description,
+        p_is_public: meta.isPublic,
+      },
+    }
+  );
+
+  if (!res.ok) {
+    return {
+      ok: false,
+      message: res.message || `Failed to save ${meta.label}.`,
+    };
+  }
+
+  // Synchronize corresponding legacy runtime keys so existing platform consumers stay consistent
+  const syncTasks: Array<{ key: string; value: unknown; description: string; isPublic: boolean }> = [];
+  if (section === "general") {
+    const clean = validated.clean;
+    syncTasks.push(
+      {
+        key: "pilot_cities",
+        value: clean.supported_cities,
+        description: "Active cities supported by EasyLife.",
+        isPublic: true,
+      },
+      {
+        key: "system.support_email",
+        value: clean.contact_email,
+        description: "Official Customer Operations Support Email",
+        isPublic: true,
+      },
+      {
+        key: "system.support_phone",
+        value: clean.contact_phone,
+        description: "Official Operations Support Phone",
+        isPublic: true,
+      }
+    );
+  } else if (section === "marketplace") {
+    const clean = validated.clean;
+    syncTasks.push(
+      {
+        key: "booking_quotation_expiry_hours",
+        value: clean.default_quotation_expiry_hours,
+        description: "Default validity window in hours for submitted quotations.",
+        isPublic: true,
+      },
+      {
+        key: "marketplace.dispute_auto_escalate_hours",
+        value: clean.dispute_auto_escalate_hours,
+        description: "Hours after submission before an unreviewed dispute alerts supervisor",
+        isPublic: false,
+      },
+      {
+        key: "maintenance_mode",
+        value: {
+          enabled: clean.maintenance_mode_enabled,
+          message: clean.maintenance_mode_message,
+        },
+        description: "Global maintenance banner toggle.",
+        isPublic: true,
+      },
+      {
+        key: "marketplace.maintenance_mode",
+        value: clean.maintenance_mode_enabled,
+        description: "Platform-wide maintenance mode lock",
+        isPublic: true,
+      }
+    );
+  } else if (section === "financial") {
+    const clean = validated.clean;
+    const commissionBps = clean.commission_enabled
+      ? Math.round(Number(clean.default_commission_percent) * 100)
+      : 0;
+    const calloutKobo = Math.round(Number(clean.minimum_callout_fee_naira) * 100);
+    syncTasks.push(
+      {
+        key: "marketplace.default_commission_bps",
+        value: commissionBps,
+        description: "Platform commission rate in basis points.",
+        isPublic: true,
+      },
+      {
+        key: "marketplace.callout_fee_minimum_kobo",
+        value: calloutKobo,
+        description: "Minimum callout fee in kobo.",
+        isPublic: true,
+      }
+    );
+  }
+
+  for (const task of syncTasks) {
+    await runAdminQuery<Record<string, unknown>>("/rest/v1/rpc/admin_set_platform_setting", {
+      method: "POST",
+      accessToken: auth?.accessToken,
+      body: {
+        p_key: task.key,
+        p_value: task.value,
+        p_description: task.description,
+        p_is_public: task.isPublic,
+      },
+    });
+  }
+
+  revalidatePath("/admin/settings");
+  revalidatePath("/admin");
+  revalidatePath("/");
+
+  return {
+    ok: true,
+    message: `${meta.label} saved successfully.`,
+    data: {
+      section,
+      updated_at: new Date().toISOString(),
+      values: validated.clean,
+    },
+  };
 }
 
 /**

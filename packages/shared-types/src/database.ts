@@ -187,6 +187,9 @@ export interface ServiceRow {
   icon_name: string | null;
   keywords: string[];
   display_order: number;
+  status: "active" | "paused" | "inactive";
+  paused_at: string | null;
+  deactivated_at: string | null;
   is_active: boolean;
   is_featured: boolean;
   is_popular: boolean;
