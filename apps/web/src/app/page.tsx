@@ -2,9 +2,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { EASYLIFE_BRAND } from "@easylife/shared-config";
 import { PublicShell } from "@/components/site/public-shell";
-import { ServiceSearchForm } from "@/components/site/service-search-form";
+import { ScrollHeroSection } from "@/components/site/scroll-hero-section";
 import { StackedCategoriesSection } from "@/components/site/stacked-categories-section";
-import { getHomepageCatalogueData } from "@/lib/supabase/customer";
 import {
   Section,
   SectionHeading,
@@ -29,20 +28,6 @@ export default async function HomePage({
     }
     redirect(`/auth/callback?${qs.toString()}`);
   }
-
-  const catalogueData = await getHomepageCatalogueData();
-  const heroPopularLinks =
-    catalogueData.popularServices.length > 0
-      ? catalogueData.popularServices.slice(0, 4).map((srv) => ({
-          label: srv.name,
-          href: `/services/${srv.slug}`,
-        }))
-      : [
-          { label: "Generator Servicing", href: "/explore-services?q=generator" },
-          { label: "AC Gas Refill", href: "/explore-services?q=ac" },
-          { label: "Borehole Pump", href: "/explore-services?q=borehole" },
-          { label: "Inverter Repair", href: "/explore-services?q=solar" },
-        ];
 
   const customerSteps = [
     {
@@ -151,61 +136,8 @@ export default async function HomePage({
 
   return (
     <PublicShell>
-      {/* 1. Hero Section & Main Service Search */}
-      <section className="bg-[#154752] text-white pt-14 pb-18 sm:pt-20 sm:pb-26 border-b border-[#24989A]/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Pilot Cities Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#0D282E]/80 border border-[#24989A]/40 text-[#DAE7E7] text-sm font-semibold mb-6 shadow-xs">
-              <span className="h-2 w-2 rounded-full bg-[#EE9277] animate-pulse" />
-              <span>Operating in Port Harcourt • Lagos • Abuja</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.75rem] font-bold tracking-tight text-white leading-[1.12]">
-              Everyday Problems. <br />
-              <span className="text-[#24989A]">Smarter Solutions.</span>
-            </h1>
-
-            {/* Prompt 6 Required Landing Page Description */}
-            <p className="mt-5 text-lg sm:text-xl text-[#DAE7E7] max-w-2xl mx-auto leading-relaxed">
-              EasyLife helps people and businesses find reliable everyday services and manage essential maintenance with less effort.
-            </p>
-
-            {/* 2. Main Service Search */}
-            <div className="mt-8 max-w-2xl mx-auto">
-              <ServiceSearchForm id="hero-search" tone="dark" />
-              <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2.5 text-sm text-[#DAE7E7]/85">
-                <span className="text-[#DAE7E7]/75">Popular services:</span>
-                {heroPopularLinks.map((item, idx) => (
-                  <span key={item.href} className="inline-flex items-center gap-2.5">
-                    {idx > 0 && <span aria-hidden="true">•</span>}
-                    <Link
-                      href={item.href}
-                      className="text-[#24989A] hover:text-white underline underline-offset-2 transition-colors"
-                    >
-                      {item.label}
-                    </Link>
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Direct Action Links */}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <ButtonLink href="/explore-services" size="lg">
-                Explore All Services
-              </ButtonLink>
-              <ButtonLink
-                href="/become-a-professional"
-                size="lg"
-                variant="outline-inverse"
-              >
-                Join as a Professional
-              </ButtonLink>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 1. Full-Bleed Hero Section & Main Service Search */}
+      <ScrollHeroSection />
 
       {/* 3. 3-Step Sticky Purpose Card Stack (Find Solutions, Discover Opportunities, Achieve Goals) */}
       <StackedCategoriesSection />

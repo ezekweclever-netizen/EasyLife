@@ -63,10 +63,12 @@ export function ServiceSearchForm({
   id = "service-search",
   defaultQuery = "",
   tone = "dark",
+  placeholder = "e.g. generator, AC repair, plumbing...",
 }: {
   id?: string;
   defaultQuery?: string;
   tone?: "dark" | "light";
+  placeholder?: string;
 }) {
   const router = useRouter();
   const listboxId = useId();
@@ -212,13 +214,13 @@ export function ServiceSearchForm({
             aria-expanded={isOpen}
             aria-controls={listboxId}
             aria-autocomplete="list"
-            placeholder="e.g. generator not starting, AC leaking water, borehole pump"
+            placeholder={placeholder}
             className="h-12 w-full rounded-xl bg-transparent pl-11 pr-3 text-base text-[#1F2F34] placeholder:text-[#68797C] focus:outline-none"
           />
         </div>
         <button
           type="submit"
-          className="h-12 px-7 rounded-xl bg-[#24989A] hover:bg-[#1D7E80] text-white text-base font-bold transition-all shadow-xs cursor-pointer"
+          className="h-12 px-5 sm:px-7 rounded-xl bg-[#24989A] hover:bg-[#1D7E80] text-white text-sm sm:text-base font-bold transition-all shadow-xs cursor-pointer shrink-0"
         >
           Search services
         </button>
