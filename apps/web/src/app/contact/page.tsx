@@ -95,6 +95,18 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   <span className="text-slate-400">Emergency Escalations</span>
                   <span className="font-semibold text-teal-400">24/7 In-App Ticketing</span>
                 </div>
+                <div className="flex justify-between pt-2 border-t border-slate-800 items-center">
+                  <span className="text-slate-400">Direct WhatsApp</span>
+                  <a
+                    href="https://wa.me/2347049948582"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-[#25D366] hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>07049948582</span>
+                    <span className="text-xs">↗</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

@@ -101,6 +101,20 @@ export async function loginAction(
   });
 
   if (!res.ok) {
+    const errorMsg = res.message || "";
+    if (
+      errorMsg.toLowerCase().includes("email not confirmed") ||
+      errorMsg.toLowerCase().includes("not confirmed")
+    ) {
+      return {
+        status: "error",
+        message:
+          "Your email address has not been verified. Please check your inbox and verify your email before logging in.",
+        fieldErrors: {},
+        values: { email },
+      };
+    }
+
     return {
       status: "error",
       message:
@@ -113,6 +127,28 @@ export async function loginAction(
   }
 
   if (isSessionPayload(res.data)) {
+    // Enforce email verification for password sign-ins
+    const user = res.data.user as {
+      id: string;
+      email?: string;
+      email_confirmed_at?: string | null;
+      confirmed_at?: string | null;
+      app_metadata?: { provider?: string; providers?: string[] };
+    };
+
+    const isConfirmed = Boolean(user.email_confirmed_at || user.confirmed_at);
+    const isGoogle = user.app_metadata?.provider === "google" || user.app_metadata?.providers?.includes("google");
+
+    if (!isConfirmed && !isGoogle) {
+      return {
+        status: "error",
+        message:
+          "Your email address has not been verified. Please check your inbox and verify your email before logging in.",
+        fieldErrors: {},
+        values: { email },
+      };
+    }
+
     await persistSession(res.data);
 
     const rawNext = typeof raw.next === "string" ? raw.next : null;
@@ -606,4 +642,73 @@ export async function updatePasswordAction(
     status: "success",
     message: "Your password has been updated successfully. You can now sign in with your new password.",
   };
+}
+
+export async function resendVerificationEmailAction(
+  email: string
+): Promise<{ ok: boolean; message: string }> {
+  const trimmed = email.trim().toLowerCase();
+  if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+    return { ok: false, message: "Please enter a valid registered email address." };
+  }
+
+  const clientIp = await getClientIp();
+  const rateLimitResult = checkRateLimit(
+    RATE_LIMIT_POLICIES.AUTH_ATTEMPT,
+    `resend_verify:${clientIp}:${trimmed}`
+  );
+  if (!rateLimitResult.allowed) {
+    return {
+      ok: false,
+      message: `Too many resend attempts. Please wait ${rateLimitResult.retryAfterSeconds} seconds.`,
+    };
+  }
+
+  const config = getSupabasePublicConfig();
+  if (!config) {
+    return { ok: false, message: "Authentication service is not configured." };
+  }
+
+  const appUrl = (
+    process.env.NEXT_PUBLIC_APP_URL?.trim() || "https://easylife-blue.vercel.app"
+  ).replace(/\/+$/, "");
+
+  try {
+    const res = await fetch(`${config.url}/auth/v1/resend`, {
+      method: "POST",
+      headers: {
+        apikey: config.anonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        type: "signup",
+        email: trimmed,
+        options: {
+          emailRedirectTo: `${appUrl}/auth/callback`,
+        },
+      }),
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      let errMsg = "Could not resend verification email. Please verify the email address or try again later.";
+      try {
+        const errJson = (await res.json()) as { message?: string; msg?: string; error_description?: string };
+        errMsg = errJson.error_description || errJson.message || errJson.msg || errMsg;
+      } catch {
+        // keep default
+      }
+      return { ok: false, message: errMsg };
+    }
+
+    return {
+      ok: true,
+      message: "A fresh verification link has been sent to your email. Please check your inbox and spam folder.",
+    };
+  } catch {
+    return {
+      ok: false,
+      message: "An unexpected network error occurred while requesting verification email.",
+    };
+  }
 }

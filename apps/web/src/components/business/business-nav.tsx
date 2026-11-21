@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface BusinessNavProps {
   businessName: string;
@@ -47,10 +48,12 @@ export function BusinessNav({ businessName, businessCity = "Port Harcourt" }: Bu
             </span>
             <Link
               href="/dashboard"
-              className="text-xs font-semibold text-slate-600 hover:text-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50"
+              className="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+              title="Switch to Customer Mode"
             >
               Customer View
             </Link>
+            <ThemeToggle compact />
             <form action={logoutAction}>
               <button
                 type="submit"

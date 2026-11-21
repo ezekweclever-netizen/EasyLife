@@ -6,12 +6,16 @@ import { useState, useEffect, useRef } from "react";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
 import { NotificationBell } from "@/components/notifications/notification-bell";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 export interface CustomerHeaderProps {
   user?: {
     id: string;
     email: string | null;
     fullName?: string;
+    avatarUrl?: string | null;
+    primaryRole?: string | null;
+    roles?: string[];
   } | null;
   unreadNotificationsCount?: number;
   selectedCity?: string;
@@ -99,6 +103,33 @@ export function CustomerHeader({
   const [isCityDropdownOpen, setIsCityDropdownOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isTabletMenuOpen, setIsTabletMenuOpen] = useState(false);
+  const [sessionMeta, setSessionMeta] = useState<{
+    hasProRole: boolean;
+    hasBusinessRole: boolean;
+    avatarUrl: string | null;
+  }>({
+    hasProRole: Boolean(user?.primaryRole === "professional" || user?.roles?.includes("professional")),
+    hasBusinessRole: Boolean(user?.primaryRole === "business" || user?.roles?.includes("business")),
+    avatarUrl: user?.avatarUrl || null,
+  });
+
+  useEffect(() => {
+    let mounted = true;
+    fetch("/api/auth/session-status")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (!mounted || !data?.authenticated) return;
+        setSessionMeta((prev) => ({
+          hasProRole: Boolean(data.hasProRole || prev.hasProRole),
+          hasBusinessRole: Boolean(data.hasBusinessRole || prev.hasBusinessRole),
+          avatarUrl: data.avatarUrl || prev.avatarUrl,
+        }));
+      })
+      .catch(() => {});
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const cityDropdownRef = useRef<HTMLDivElement>(null);
   const profileMenuRef = useRef<HTMLDivElement>(null);
@@ -294,8 +325,31 @@ export function CustomerHeader({
             </ul>
           </nav>
 
-          {/* Action CTAs: Book a Service, Notifications, User Profile, Tablet Drawer Toggle */}
+          {/* Action CTAs: Mode Switch, Book a Service, Notifications, Theme Toggle, User Profile, Tablet Drawer Toggle */}
           <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
+            {/* Mode Switches for Pro & Business in Customer View */}
+            {sessionMeta.hasProRole && (
+              <Link
+                href="/pro/dashboard"
+                className="hidden lg:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition whitespace-nowrap shrink-0"
+                title="Switch back to Professional Dashboard"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Pro Mode
+              </Link>
+            )}
+
+            {sessionMeta.hasBusinessRole && (
+              <Link
+                href="/business"
+                className="hidden lg:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition whitespace-nowrap shrink-0"
+                title="Switch back to Business Portal"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                Business Mode
+              </Link>
+            )}
+
             <Link
               href={bookHref}
               className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-[#0F766E] text-white hover:bg-[#0D655E] shadow-sm transition-colors whitespace-nowrap shrink-0"
@@ -310,6 +364,9 @@ export function CustomerHeader({
             {/* Notification Bell */}
             <NotificationBell initialUnreadCount={unreadNotificationsCount} />
 
+            {/* Theme Toggle */}
+            <ThemeToggle compact />
+
             {/* User Profile Menu */}
             <div className="relative shrink-0" ref={profileMenuRef}>
               <button
@@ -319,21 +376,29 @@ export function CustomerHeader({
                   setIsCityDropdownOpen(false);
                   setIsTabletMenuOpen(false);
                 }}
-                className="flex items-center gap-2 p-1 rounded-full hover:bg-[#F1F5F9] transition-colors cursor-pointer"
+                className="flex items-center gap-2 p-1 rounded-full hover:bg-[#F1F5F9] dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 aria-label="User account menu"
                 aria-expanded={isProfileMenuOpen}
                 aria-haspopup="true"
               >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0F766E] text-white flex items-center justify-center font-semibold text-xs uppercase shadow-sm">
-                  {user?.fullName ? user.fullName[0] : (user?.email ? user.email[0] : "C")}
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0F766E] text-white flex items-center justify-center font-semibold text-xs uppercase shadow-sm overflow-hidden">
+                  {sessionMeta.avatarUrl ? (
+                    <img
+                      src={sessionMeta.avatarUrl}
+                      alt={user?.fullName || "User Avatar"}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    user?.fullName ? user.fullName[0] : (user?.email ? user.email[0] : "C")
+                  )}
                 </div>
               </button>
 
               {isProfileMenuOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-lg border border-[#E2E8F0] py-2 z-50">
-                  <div className="px-4 py-2 border-b border-[#F1F5F9]">
-                    <p className="text-xs text-[#64748B]">Signed in as</p>
-                    <p className="text-sm font-semibold text-[#0F172A] truncate">
+                <div className="absolute right-0 mt-2 w-60 bg-white dark:bg-[#0E2238] rounded-xl shadow-lg border border-[#E2E8F0] dark:border-[#163654] py-2 z-50">
+                  <div className="px-4 py-2 border-b border-[#F1F5F9] dark:border-slate-800">
+                    <p className="text-xs text-[#64748B] dark:text-slate-400">Signed in as</p>
+                    <p className="text-sm font-semibold text-[#0F172A] dark:text-white truncate">
                       {user?.fullName || user?.email || "Customer"}
                     </p>
                     {user?.email && (
@@ -341,47 +406,69 @@ export function CustomerHeader({
                     )}
                   </div>
 
+                  {/* Mode Switching Options inside Profile Menu */}
+                  {sessionMeta.hasProRole && (
+                    <Link
+                      href="/pro/dashboard"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                      className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 transition border-b border-emerald-100 dark:border-emerald-900/40"
+                    >
+                      <span>Switch to Pro Mode</span>
+                      <span className="text-[10px] bg-emerald-600 text-white px-1.5 py-0.5 rounded-full font-bold">PRO</span>
+                    </Link>
+                  )}
+                  {sessionMeta.hasBusinessRole && (
+                    <Link
+                      href="/business"
+                      onClick={() => setIsProfileMenuOpen(false)}
+                      className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 transition border-b border-indigo-100 dark:border-indigo-900/40"
+                    >
+                      <span>Switch to Business Mode</span>
+                      <span className="text-[10px] bg-indigo-600 text-white px-1.5 py-0.5 rounded-full font-bold">BIZ</span>
+                    </Link>
+                  )}
+
                   <Link
                     href="/dashboard"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
+                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/bookings"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
+                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
                   >
                     My Bookings
                   </Link>
                   <Link
                     href="/notifications"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
+                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
                   >
                     Notifications
                   </Link>
                   <Link
                     href="/profile"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
+                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
                   >
                     Profile Settings
                   </Link>
                   <Link
                     href="/help"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] hover:bg-[#F8FAFC]"
+                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
                   >
                     Help &amp; Support
                   </Link>
 
-                  <div className="border-t border-[#F1F5F9] mt-1 pt-1">
+                  <div className="border-t border-[#F1F5F9] dark:border-slate-800 mt-1 pt-1">
                     <form action={logoutAction}>
                       <button
                         type="submit"
-                        className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 font-medium cursor-pointer"
+                        className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 font-medium cursor-pointer"
                       >
                         Sign out
                       </button>

@@ -9,6 +9,7 @@ import {
   getCustomerNotifications,
 } from "@/lib/supabase/customer";
 import { CustomerHeader } from "@/components/customer/customer-header";
+import { WhatsAppFloatingButton } from "@/components/ui/whatsapp-floating-button";
 
 export const metadata = {
   title: "Customer Dashboard — EasyLife",
@@ -436,7 +437,7 @@ export default async function CustomerDashboardPage({
 
           <div className="flex flex-wrap items-center gap-3">
             <a
-              href="https://wa.me/2348000000000?text=Hello%20EasyLife%20Support%2C%20I%20need%20assistance%20with%20a%20service"
+              href="https://wa.me/2347049948582"
               target="_blank"
               rel="noopener noreferrer"
               className="px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#25D366] text-white hover:bg-[#20BD5A] transition-colors flex items-center gap-2 shadow-sm"
@@ -458,6 +459,7 @@ export default async function CustomerDashboardPage({
           </div>
         </section>
       </main>
+      <WhatsAppFloatingButton />
     </div>
   );
 }

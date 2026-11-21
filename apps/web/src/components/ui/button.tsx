@@ -30,11 +30,11 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   navy:
     "bg-[#154752] text-white hover:bg-[#0D282E] active:bg-[#081B1F] border border-transparent shadow-xs font-semibold",
   secondary:
-    "bg-[#F3F8F8] text-[#154752] hover:bg-[#DAE7E7] border border-[#DAE7E7] font-semibold",
+    "bg-[#F3F8F8] dark:bg-slate-800 text-[#154752] dark:text-[#5CD3D5] hover:bg-[#DAE7E7] dark:hover:bg-slate-700 border border-[#DAE7E7] dark:border-slate-700 font-semibold",
   outline:
-    "bg-white text-[#1F2F34] hover:bg-[#F3F8F8] border border-[#DAE7E7] font-semibold",
+    "bg-white dark:bg-slate-800 text-[#1F2F34] dark:text-white hover:bg-[#F3F8F8] dark:hover:bg-slate-700 border border-[#DAE7E7] dark:border-slate-700 font-semibold",
   ghost:
-    "bg-transparent text-[#1F2F34] hover:bg-[#F3F8F8] border border-transparent font-medium",
+    "bg-transparent text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 border border-transparent font-medium",
   danger:
     "bg-[#C53030] text-white hover:bg-[#991B1B] border border-transparent shadow-xs font-semibold",
   inverse:

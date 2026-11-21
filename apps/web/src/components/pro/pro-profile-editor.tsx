@@ -9,6 +9,7 @@ import {
 import { PILOT_CITIES } from "@/lib/validation/forms";
 import type { ProfessionalProfile } from "@/lib/supabase/pro";
 import type { ProviderType } from "@easylife/shared-types";
+import { ProfilePhotoUploader } from "@/components/ui/profile-photo-uploader";
 
 interface ProProfileEditorProps {
   profile: ProfessionalProfile;
@@ -119,6 +120,18 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
             {isEditing ? "Cancel Edit" : "Edit Business Details"}
           </button>
         </div>
+      </div>
+
+      {/* Profile Photo Uploader */}
+      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+        <h3 className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+          Professional Avatar / Badge Photo
+        </h3>
+        <ProfilePhotoUploader
+          currentAvatarUrl={profile.avatar_url}
+          fallbackInitial={profile.business_name.slice(0, 2).toUpperCase()}
+          size="md"
+        />
       </div>
 
       {feedback && (

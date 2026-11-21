@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useState, useTransition } from "react";
 import Link from "next/link";
-import { loginAction } from "@/app/actions/auth";
+import { loginAction, resendVerificationEmailAction } from "@/app/actions/auth";
 import type { FormActionState, LoginField } from "@/lib/validation/forms";
 import { Button } from "@/components/ui/button";
 import { GoogleSignInButton } from "@/components/auth/google-sign-in-button";
@@ -22,6 +22,21 @@ export function LoginForm({
 } = {}) {
   const [state, formAction, isPending] = useActionState(loginAction, initialState);
   const [showPassword, setShowPassword] = useState(false);
+  const [resendStatus, setResendStatus] = useState<{ ok: boolean; message: string } | null>(null);
+  const [isResending, startResendTransition] = useTransition();
+
+  const isUnverified =
+    state.status === "error" &&
+    state.message?.toLowerCase().includes("not been verified");
+
+  const handleResend = () => {
+    const emailToResend = state.values?.email;
+    if (!emailToResend) return;
+    startResendTransition(async () => {
+      const res = await resendVerificationEmailAction(emailToResend);
+      setResendStatus(res);
+    });
+  };
 
   return (
     <div className="space-y-3.5">
@@ -53,10 +68,40 @@ export function LoginForm({
         {state.status === "error" && state.message && (
           <div
             role="alert"
-            className="rounded-lg bg-red-50 border border-red-200 p-3 text-xs sm:text-sm text-red-800 flex items-start gap-2.5"
+            className="rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 p-3 text-xs sm:text-sm text-red-800 dark:text-red-300 space-y-2"
           >
-            <span className="font-bold text-red-600 mt-0.5">!</span>
-            <span>{state.message}</span>
+            <div className="flex items-start gap-2.5">
+              <span className="font-bold text-red-600 mt-0.5">!</span>
+              <span className="flex-1">{state.message}</span>
+            </div>
+            {isUnverified && (
+              <div className="pt-2 border-t border-red-200 dark:border-red-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+                <span className="text-xs text-red-700 dark:text-red-400">
+                  Didn&apos;t receive the link or it expired?
+                </span>
+                <button
+                  type="button"
+                  onClick={handleResend}
+                  disabled={isResending}
+                  className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] hover:underline cursor-pointer disabled:opacity-50"
+                >
+                  {isResending ? "Sending..." : "Resend Verification Email"}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {resendStatus && (
+          <div
+            role="status"
+            className={`p-3 rounded-lg text-xs font-medium ${
+              resendStatus.ok
+                ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                : "bg-red-50 dark:bg-red-950/40 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
+            }`}
+          >
+            {resendStatus.message}
           </div>
         )}
 

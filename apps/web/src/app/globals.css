@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
 /* Local General Sans Font Faces */
 @font-face {
   font-family: "General Sans";
@@ -88,6 +90,36 @@
   --easylife-status-error-bg: #fdf0f0;
   --easylife-status-info-text: #1a6e84;
   --easylife-status-info-bg: #ebf6f9;
+}
+
+html.dark, [data-theme="dark"] {
+  --easylife-primary: #5CD3D5;
+  --easylife-primary-dark: #071526;
+  --easylife-secondary: #24989A;
+  --easylife-secondary-hover: #2dc0c2;
+  --easylife-accent: #EE9277;
+  --easylife-accent-hover: #f3aa94;
+  --easylife-background: #071526;
+  --easylife-surface: #0E2238;
+  --easylife-text: #F1F5F9;
+  --easylife-muted: #94A3B8;
+  --easylife-border: #163654;
+  --easylife-border-strong: #244B74;
+
+  --easylife-charcoal-900: #F8FAFC;
+  --easylife-charcoal-800: #F1F5F9;
+  --easylife-charcoal-700: #CBD5E1;
+  --easylife-charcoal-600: #94A3B8;
+  --easylife-charcoal-500: #64748B;
+  --easylife-surface-white: #0E2238;
+  --easylife-surface-light: #071526;
+  --easylife-surface-muted: #142E4B;
+  --easylife-border-grey: #163654;
+
+  --easylife-teal-800: #5CD3D5;
+  --easylife-teal-700: #38bdf8;
+  --easylife-teal-600: #24989A;
+  --easylife-teal-50: #0E2238;
 }
 
 @theme {

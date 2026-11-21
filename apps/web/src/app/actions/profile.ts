@@ -4,6 +4,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getAuthenticatedUser, clearSession, readAccessToken } from "@/lib/auth/session";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
+import { supabaseAdminFetch } from "@/lib/supabase/admin";
+import { storageService } from "@/lib/storage/storage-service";
 
 export interface ProfileFormState {
   status: "idle" | "success" | "error";
@@ -69,6 +71,109 @@ export async function updateCustomerProfileAction(
   revalidatePath("/book");
 
   return { status: "success", message: "Your profile has been saved successfully." };
+}
+
+export async function uploadAvatarAction(
+  formData: FormData
+): Promise<{ ok: boolean; avatarUrl?: string; error?: string }> {
+  const auth = await getAuthenticatedUser();
+  if (!auth) {
+    return { ok: false, error: "You must be signed in to upload a profile photo." };
+  }
+
+  const file = formData.get("file") as File | null;
+  if (!file || typeof file === "string" || file.size === 0) {
+    return { ok: false, error: "Please select an image file to upload." };
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    return { ok: false, error: "Image file size exceeds the 2 MB limit." };
+  }
+
+  const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+  if (!allowedTypes.includes(file.type)) {
+    return { ok: false, error: "Only JPG, PNG, and WebP images are allowed." };
+  }
+
+  const extension = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : "jpg";
+  const path = `${auth.user.id}/avatar-${Date.now()}.${extension}`;
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  const uploadResult = await storageService.uploadFile({
+    bucketId: "avatars",
+    path,
+    data: buffer,
+    mimeType: file.type,
+    userId: auth.user.id,
+    upsert: true,
+  });
+
+  if (!uploadResult.success || !uploadResult.url) {
+    return { ok: false, error: uploadResult.error || "Failed to upload image." };
+  }
+
+  const avatarUrl = uploadResult.url;
+
+  const config = getSupabasePublicConfig();
+  if (config) {
+    await supabaseFetch(config, `/rest/v1/profiles?id=eq.${auth.user.id}`, {
+      method: "PATCH",
+      accessToken: auth.accessToken,
+      body: {
+        avatar_url: avatarUrl,
+        updated_at: new Date().toISOString(),
+      },
+    });
+
+    await supabaseAdminFetch(`/rest/v1/professional_profiles?user_id=eq.${auth.user.id}`, {
+      method: "PATCH",
+      body: {
+        avatar_url: avatarUrl,
+        updated_at: new Date().toISOString(),
+      },
+    });
+  }
+
+  revalidatePath("/profile");
+  revalidatePath("/dashboard");
+  revalidatePath("/pro/profile");
+  revalidatePath("/pro/dashboard");
+
+  return { ok: true, avatarUrl };
+}
+
+export async function removeAvatarAction(): Promise<{ ok: boolean; error?: string }> {
+  const auth = await getAuthenticatedUser();
+  if (!auth) {
+    return { ok: false, error: "You must be signed in to remove your profile photo." };
+  }
+
+  const config = getSupabasePublicConfig();
+  if (config) {
+    await supabaseFetch(config, `/rest/v1/profiles?id=eq.${auth.user.id}`, {
+      method: "PATCH",
+      accessToken: auth.accessToken,
+      body: {
+        avatar_url: null,
+        updated_at: new Date().toISOString(),
+      },
+    });
+
+    await supabaseAdminFetch(`/rest/v1/professional_profiles?user_id=eq.${auth.user.id}`, {
+      method: "PATCH",
+      body: {
+        avatar_url: null,
+        updated_at: new Date().toISOString(),
+      },
+    });
+  }
+
+  revalidatePath("/profile");
+  revalidatePath("/dashboard");
+  revalidatePath("/pro/profile");
+  revalidatePath("/pro/dashboard");
+
+  return { ok: true };
 }
 
 export async function logoutAction(): Promise<void> {

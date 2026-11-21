@@ -72,21 +72,47 @@ export function EasyLifeLogo({
   }
 
   const dim = LOCKUP_DIMENSIONS[size];
-  const src = isDark
-    ? "/brand/easylife-official-logo-dark.png"
-    : "/brand/easylife-official-logo.png";
 
+  // If theme is explicitly passed as "dark", render dark logo only
+  if (theme === "dark") {
+    return (
+      <span className={`inline-flex items-center select-none shrink-0 ${className}`}>
+        <Image
+          src="/brand/easylife-official-logo-dark.png"
+          alt={`${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`}
+          width={dim.width}
+          height={dim.height}
+          sizes={`${dim.width}px`}
+          priority={priority}
+          quality={90}
+          className={`${dim.imgClass} object-contain shrink-0`}
+        />
+      </span>
+    );
+  }
+
+  // By default, render both light and dark logos and toggle via CSS dark variant
   return (
     <span className={`inline-flex items-center select-none shrink-0 ${className}`}>
       <Image
-        src={src}
+        src="/brand/easylife-official-logo.png"
         alt={`${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`}
         width={dim.width}
         height={dim.height}
         sizes={`${dim.width}px`}
         priority={priority}
         quality={90}
-        className={`${dim.imgClass} object-contain shrink-0`}
+        className={`${dim.imgClass} object-contain shrink-0 dark:hidden`}
+      />
+      <Image
+        src="/brand/easylife-official-logo-dark.png"
+        alt={`${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`}
+        width={dim.width}
+        height={dim.height}
+        sizes={`${dim.width}px`}
+        priority={priority}
+        quality={90}
+        className={`${dim.imgClass} object-contain shrink-0 hidden dark:inline-block`}
       />
     </span>
   );

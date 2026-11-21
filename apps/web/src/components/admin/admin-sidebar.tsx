@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface AdminSidebarProps {
   adminEmail?: string | null;
@@ -153,16 +154,10 @@ export function AdminSidebar({
           <div className="pt-2 flex items-center justify-between text-xs">
             <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Role: Admin
+              Admin
             </span>
-            <div className="flex items-center gap-3">
-              <Link
-                href="/dashboard"
-                className="text-slate-300 hover:text-teal-400 transition"
-                title="Return to Customer App"
-              >
-                Customer App
-              </Link>
+            <div className="flex items-center gap-2">
+              <ThemeToggle compact />
               <form action={logoutAction}>
                 <button
                   type="submit"

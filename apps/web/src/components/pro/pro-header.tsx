@@ -7,6 +7,7 @@ import { ProfessionalVerificationStatus } from "@/lib/supabase/pro";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface ProHeaderProps {
   businessName?: string;
@@ -176,11 +177,14 @@ export function ProHeader({
             {/* Customer Switch */}
             <Link
               href="/dashboard"
-              className="hidden md:inline-flex text-xs text-slate-600 hover:text-slate-900 font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 whitespace-nowrap shrink-0"
+              className="hidden md:inline-flex text-xs text-slate-700 dark:text-slate-200 hover:text-slate-900 font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 whitespace-nowrap shrink-0 transition"
               title="Switch to Customer Mode"
             >
               Customer View
             </Link>
+
+            {/* Theme Toggle */}
+            <ThemeToggle compact />
 
             {/* Sign Out */}
             <form action={logoutAction} className="hidden md:block shrink-0">

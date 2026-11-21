@@ -504,6 +504,50 @@ export function VerificationQueueClient({
               <span className="capitalize">{activeDoc.document_type.replace(/_/g, " ")}</span>
             </p>
 
+            {/* Identity & Account Match Cross-Check Card */}
+            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-800 uppercase text-[11px] tracking-wider">
+                  Identity &amp; Registration Cross-Check
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-teal-100 text-teal-800">
+                  Audited
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-[11px]">
+                <div>
+                  <span className="text-slate-500 block">Registered Full Name:</span>
+                  <span className="font-semibold text-slate-900 block truncate">
+                    {activeDoc.professional_profiles?.profiles?.full_name || "⚠️ Name not set"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block">Registered Business:</span>
+                  <span className="font-semibold text-slate-900 block truncate">
+                    {activeDoc.professional_profiles?.business_name || "N/A"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block">Document ID (Masked):</span>
+                  <span className="font-mono text-slate-700 block">
+                    {activeDoc.document_number_masked || "On document image"}
+                  </span>
+                </div>
+                <div>
+                  <span className="text-slate-500 block">Document Type:</span>
+                  <span className="font-medium text-slate-900 capitalize block">
+                    {activeDoc.document_type.replace(/_/g, " ")}
+                  </span>
+                </div>
+              </div>
+
+              {!activeDoc.professional_profiles?.profiles?.full_name && (
+                <div className="p-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 text-[11px] font-semibold flex items-center gap-1.5">
+                  <span>⚠️ Critical: Account full name missing. Review document names carefully before approving.</span>
+                </div>
+              )}
+            </div>
+
             {modalMode === "overall_approve" &&
               activeDoc.professional_profiles?.service_eligibilities &&
               Object.values(activeDoc.professional_profiles.service_eligibilities).some(

@@ -238,11 +238,15 @@ export function ChatClient({
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-sm overflow-hidden min-h-[600px] flex flex-col md:flex-row">
+    <div className="bg-white dark:bg-[#0E2238] rounded-3xl border border-[#E2E8F0] dark:border-[#163654] shadow-sm overflow-hidden h-[calc(100vh-14rem)] min-h-[540px] max-h-[850px] flex flex-col md:flex-row">
       {/* Thread List Sidebar */}
-      <div className="w-full md:w-80 border-b md:border-b-0 md:border-r border-[#E2E8F0] bg-[#F8FAFC] flex flex-col">
+      <div
+        className={`w-full md:w-80 border-b md:border-b-0 md:border-r border-[#E2E8F0] dark:border-[#163654] bg-[#F8FAFC] dark:bg-[#071526] flex-col ${
+          selectedConv ? "hidden md:flex" : "flex"
+        }`}
+      >
         {/* Search header */}
-        <div className="p-4 border-b border-[#E2E8F0] space-y-2">
+        <div className="p-4 border-b border-[#E2E8F0] dark:border-[#163654] space-y-2">
           <div className="flex items-center justify-between text-xs font-bold text-[#64748B] uppercase tracking-wider">
             <span>Conversations</span>
             <span>{filteredConversations.length} Active</span>
@@ -253,7 +257,7 @@ export function ChatClient({
               placeholder="Search chats, reference, pro..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3 py-2 pl-8 rounded-xl border border-[#CBD5E1] bg-white text-xs text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+              className="w-full px-3 py-2 pl-8 rounded-xl border border-[#CBD5E1] dark:border-slate-700 bg-white dark:bg-slate-900 text-xs text-[#0F172A] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
             />
             <svg
               className="w-3.5 h-3.5 text-[#94A3B8] absolute left-2.5 top-2.5"
@@ -272,14 +276,14 @@ export function ChatClient({
         </div>
 
         {/* Conversation list */}
-        <div className="flex-1 overflow-y-auto divide-y divide-[#F1F5F9] max-h-[520px]">
+        <div className="flex-1 overflow-y-auto divide-y divide-[#F1F5F9] dark:divide-slate-800">
           {filteredConversations.length === 0 ? (
             <div className="p-8 text-center space-y-2">
               <div className="w-10 h-10 rounded-full bg-[#E2E8F0] text-[#64748B] mx-auto flex items-center justify-center text-sm font-bold">
                 💬
               </div>
-              <p className="text-xs font-bold text-[#0F172A]">No conversations yet</p>
-              <p className="text-[11px] text-[#64748B]">
+              <p className="text-xs font-bold text-[#0F172A] dark:text-white">No conversations yet</p>
+              <p className="text-[11px] text-[#64748B] dark:text-slate-400">
                 Messages related to your bookings and quotes will appear here.
               </p>
             </div>
@@ -295,12 +299,12 @@ export function ChatClient({
                   onClick={() => handleSelectConversation(c.id)}
                   className={`p-3.5 cursor-pointer transition-colors space-y-1.5 ${
                     isSelected
-                      ? "bg-teal-50/70 border-l-4 border-l-[#0F766E]"
-                      : "hover:bg-slate-100/60"
+                      ? "bg-teal-50/70 dark:bg-teal-950/40 border-l-4 border-l-[#0F766E]"
+                      : "hover:bg-slate-100/60 dark:hover:bg-slate-800/40"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-bold text-xs text-[#0F172A] truncate flex items-center gap-1.5">
+                    <span className="font-bold text-xs text-[#0F172A] dark:text-white truncate flex items-center gap-1.5">
                       {c.other_party?.is_verified && (
                         <span className="text-teal-600 font-extrabold text-[11px]" title="Verified Specialist">
                           ✓
@@ -315,11 +319,11 @@ export function ChatClient({
 
                   {c.booking_reference && (
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E2E8F0] text-[#475569]">
+                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E2E8F0] dark:bg-slate-800 text-[#475569] dark:text-slate-300">
                         #{c.booking_reference}
                       </span>
                       {c.category_name && (
-                        <span className="text-[10px] text-[#64748B] font-medium truncate">
+                        <span className="text-[10px] text-[#64748B] dark:text-slate-400 font-medium truncate">
                           {c.category_name}
                         </span>
                       )}
@@ -327,7 +331,7 @@ export function ChatClient({
                   )}
 
                   <div className="flex items-center justify-between gap-2 pt-0.5">
-                    <p className="text-xs text-[#64748B] line-clamp-1 flex-1">
+                    <p className="text-xs text-[#64748B] dark:text-slate-400 line-clamp-1 flex-1">
                       {c.last_message ? (
                         <>
                           {c.last_message.sender_id === currentUserId && (
@@ -354,13 +358,30 @@ export function ChatClient({
       </div>
 
       {/* Chat Window */}
-      <div className="flex-1 flex flex-col justify-between min-h-[500px]">
+      <div
+        className={`flex-1 flex-col justify-between min-h-[480px] ${
+          selectedConv ? "flex" : "hidden md:flex"
+        }`}
+      >
         {selectedConv ? (
           <>
             {/* Thread Header */}
-            <div className="p-4 border-b border-[#E2E8F0] flex items-center justify-between gap-4 bg-white">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#0F766E] to-teal-400 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+            <div className="p-3.5 sm:p-4 border-b border-[#E2E8F0] dark:border-[#163654] flex items-center justify-between gap-3 bg-white dark:bg-[#0E2238]">
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                {/* Mobile Back Button */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedConv(null);
+                    router.push(basePath);
+                  }}
+                  className="md:hidden p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold shrink-0"
+                  aria-label="Back to conversations list"
+                >
+                  ←
+                </button>
+
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#0F766E] to-teal-400 text-white flex items-center justify-center font-bold text-xs sm:text-sm shrink-0 shadow-xs">
                   {(
                     selectedConv.other_party?.business_name ||
                     selectedConv.other_party?.full_name ||
@@ -368,19 +389,19 @@ export function ChatClient({
                   ).charAt(0).toUpperCase()}
                 </div>
                 <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h2 className="text-sm font-bold text-[#0F172A] truncate">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <h2 className="text-xs sm:text-sm font-bold text-[#0F172A] dark:text-white truncate">
                       {selectedConv.other_party?.business_name ||
                         selectedConv.other_party?.full_name ||
                         "EasyLife Support"}
                     </h2>
                     {selectedConv.other_party?.is_verified && (
-                      <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-teal-50 text-teal-700 border border-teal-200">
+                      <span className="px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 shrink-0">
                         Verified
                       </span>
                     )}
                   </div>
-                  <p className="text-[11px] text-[#64748B] truncate">
+                  <p className="text-[10px] sm:text-[11px] text-[#64748B] dark:text-slate-400 truncate">
                     {selectedConv.booking_reference
                       ? `Booking #${selectedConv.booking_reference} • ${selectedConv.category_name || "Service"}`
                       : selectedConv.subject || "Direct Conversation"}
@@ -396,9 +417,9 @@ export function ChatClient({
                         ? `/pro/jobs/${selectedConv.booking_id}`
                         : `/bookings/${selectedConv.booking_id}`
                     }
-                    className="px-3 py-1.5 rounded-xl border border-[#CBD5E1] hover:bg-slate-50 text-[11px] font-bold text-[#0F766E] transition"
+                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-[#CBD5E1] dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-[#0F766E] dark:text-[#5CD3D5] transition"
                   >
-                    View Booking Details →
+                    View Booking →
                   </Link>
                 </div>
               )}
@@ -429,10 +450,10 @@ export function ChatClient({
                       className={`flex flex-col ${isMine ? "items-end" : "items-start"} space-y-1`}
                     >
                       <div
-                        className={`max-w-md sm:max-w-lg p-3.5 rounded-2xl text-xs sm:text-sm space-y-2 shadow-xs ${
+                        className={`max-w-[85%] sm:max-w-[75%] p-3.5 rounded-2xl text-xs sm:text-sm space-y-2 shadow-xs break-words [overflow-wrap:anywhere] min-w-0 ${
                           isMine
                             ? "bg-[#0F766E] text-white rounded-br-none"
-                            : "bg-white text-[#0F172A] border border-[#E2E8F0] rounded-bl-none"
+                            : "bg-white dark:bg-slate-800 text-[#0F172A] dark:text-white border border-[#E2E8F0] dark:border-slate-700 rounded-bl-none"
                         }`}
                       >
                         {/* Body */}

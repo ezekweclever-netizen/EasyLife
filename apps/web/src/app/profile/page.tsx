@@ -5,6 +5,7 @@ import { getAuthenticatedUser } from "@/lib/auth/session";
 import { getCustomerProfile } from "@/lib/supabase/customer";
 import { CustomerHeader } from "@/components/customer/customer-header";
 import { ProfileFormClient } from "@/components/customer/profile-form-client";
+import { ProfilePhotoUploader } from "@/components/ui/profile-photo-uploader";
 import { logoutAction } from "@/app/actions/profile";
 
 export const metadata: Metadata = {
@@ -27,33 +28,28 @@ export default async function CustomerProfilePage() {
           id: auth.user.id,
           email: auth.user.email,
           fullName: profile?.full_name,
+          avatarUrl: profile?.avatar_url,
+          primaryRole: profile?.primary_role,
         }}
         selectedCity={profile?.city || "Port Harcourt"}
       />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Profile Settings</h1>
-          <p className="text-xs sm:text-sm text-[#64748B]">
-            Manage your personal details, primary service city, and address
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-white">Profile Settings</h1>
+          <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
+            Manage your personal details, profile photo, primary service city, and address
           </p>
         </div>
 
         {/* Profile Card Form */}
-        <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-6">
-          <div className="flex items-center gap-4 pb-6 border-b border-[#F1F5F9]">
-            <div className="w-16 h-16 rounded-2xl bg-[#0F766E] text-white flex items-center justify-center font-black text-2xl shadow-sm uppercase">
-              {profile?.full_name ? profile.full_name[0] : (auth.user.email ? auth.user.email[0] : "C")}
-            </div>
-            <div>
-              <h2 className="text-lg font-bold text-[#0F172A]">
-                {profile?.full_name || "EasyLife Customer"}
-              </h2>
-              <p className="text-xs text-[#64748B]">{auth.user.email}</p>
-              <span className="inline-block mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#F0FDFA] text-[#0F766E] border border-[#CCFBF1]">
-                Customer Account
-              </span>
-            </div>
+        <div className="bg-white dark:bg-[#0E2238] rounded-3xl border border-[#E2E8F0] dark:border-[#163654] p-6 sm:p-8 shadow-xs space-y-6">
+          <div className="pb-6 border-b border-[#F1F5F9] dark:border-slate-800">
+            <ProfilePhotoUploader
+              currentAvatarUrl={profile?.avatar_url}
+              fallbackInitial={profile?.full_name ? profile.full_name[0] : (auth.user.email ? auth.user.email[0] : "C")}
+              size="lg"
+            />
           </div>
 
           <ProfileFormClient

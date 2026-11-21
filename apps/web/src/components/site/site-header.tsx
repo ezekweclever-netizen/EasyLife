@@ -7,6 +7,7 @@ import { EasyLifeLogo } from "@/components/ui/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { PUBLIC_PRIMARY_NAV_LINKS } from "@/lib/public-catalog";
 import { logoutAction } from "@/app/actions/profile";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Icon } from "./icons";
 
 const DESKTOP_DIRECTORY_HREFS = new Set([
@@ -115,6 +116,42 @@ export function SiteHeader({
     }
   }, [isMenuOpen]);
 
+  // Scroll sensitivity: hide floating navbar on scroll down, reveal on scroll up
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollYRef = useRef(0);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      window.requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        if (isMenuOpen) {
+          setIsVisible(true);
+          lastScrollYRef.current = currentY;
+          ticking = false;
+          return;
+        }
+
+        if (currentY < 40) {
+          setIsVisible(true);
+        } else if (currentY > lastScrollYRef.current && currentY > 80) {
+          setIsVisible(false);
+        } else if (currentY < lastScrollYRef.current) {
+          setIsVisible(true);
+        }
+
+        lastScrollYRef.current = currentY;
+        ticking = false;
+      });
+      ticking = true;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isMenuOpen]);
+
   // Allow Escape to close the mobile menu.
   useEffect(() => {
     if (!isMenuOpen) return;
@@ -130,192 +167,123 @@ export function SiteHeader({
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-[#DAE7E7] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-22 flex items-center justify-between gap-4">
-          <Link
-            href="/"
-            aria-label="EasyLife — Everyday Problems. Smarter Solutions."
-            className="rounded-lg shrink-0 focus-visible:outline-2 focus-visible:outline-[#24989A]"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <EasyLifeLogo theme="light" size="md" showSlogan={true} />
-          </Link>
+      <header
+        className={`fixed top-0 inset-x-0 z-40 transition-transform duration-300 ease-in-out px-2.5 sm:px-6 lg:px-8 pt-2 sm:pt-3 pointer-events-none ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="max-w-[1440px] mx-auto rounded-2xl border border-slate-200/90 dark:border-[#163654] bg-white/95 dark:bg-[#0E2238]/95 backdrop-blur-md shadow-md sm:shadow-lg pointer-events-auto transition-colors">
+          <div className="px-3.5 sm:px-6 h-18 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
+            <Link
+              href="/"
+              aria-label="EasyLife — Everyday Problems. Smarter Solutions."
+              className="rounded-lg shrink-0 focus-visible:outline-2 focus-visible:outline-[#24989A]"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <EasyLifeLogo theme="light" size="md" showSlogan={true} />
+            </Link>
 
-          <nav aria-label="Primary" className="hidden xl:block">
-            <ul className="flex items-center gap-1.5">
-              {DESKTOP_PRIMARY_LINKS.slice(0, 1).map((link) => {
-                const active = isActive(link.href);
-                return (
-                  <li key={link.href} className="shrink-0">
-                    <Link
-                      href={link.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`inline-flex items-center whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors ${
-                        active
-                          ? "bg-[#F3F8F8] text-[#154752] font-semibold border-b-2 border-[#24989A]"
-                          : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
+            <nav aria-label="Primary" className="hidden xl:block">
+              <ul className="flex items-center gap-1.5">
+                {DESKTOP_PRIMARY_LINKS.slice(0, 1).map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <li key={link.href} className="shrink-0">
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        className={`inline-flex items-center whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors ${
+                          active
+                            ? "bg-[#F3F8F8] dark:bg-slate-800 text-[#154752] dark:text-[#5CD3D5] font-semibold border-b-2 border-[#24989A]"
+                            : "text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 hover:text-[#154752] dark:hover:text-[#5CD3D5]"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
 
-              <li ref={dirMenuRef} className="relative shrink-0">
-                <button
-                  type="button"
-                  aria-expanded={isDirOpen}
-                  aria-haspopup="true"
-                  onClick={() => setIsDirOpen((open) => !open)}
-                  className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors cursor-pointer ${
-                    DESKTOP_DIRECTORY_LINKS.some((l) => isActive(l.href))
-                      ? "bg-[#F3F8F8] text-[#154752] font-semibold border-b-2 border-[#24989A]"
-                      : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
-                  }`}
-                >
-                  <span>Directories</span>
-                  <svg
-                    className={`h-4 w-4 transition-transform ${isDirOpen ? "rotate-180" : ""}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-
-                {isDirOpen && (
-                  <div className="absolute left-0 mt-2 w-60 rounded-xl border border-[#DAE7E7] bg-white py-2 shadow-lg z-50">
-                    {DESKTOP_DIRECTORY_LINKS.map((dirLink) => {
-                      const active = isActive(dirLink.href);
-                      return (
-                        <Link
-                          key={dirLink.href}
-                          href={dirLink.href}
-                          onClick={() => setIsDirOpen(false)}
-                          className={`block px-4 py-2.5 text-[15px] font-medium transition-colors ${
-                            active
-                              ? "bg-[#F3F8F8] text-[#154752] font-semibold"
-                              : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
-                          }`}
-                        >
-                          {dirLink.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                )}
-              </li>
-
-              {DESKTOP_PRIMARY_LINKS.slice(1).map((link) => {
-                const active = isActive(link.href);
-                return (
-                  <li key={link.href} className="shrink-0">
-                    <Link
-                      href={link.href}
-                      aria-current={active ? "page" : undefined}
-                      className={`inline-flex items-center whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors ${
-                        active
-                          ? "bg-[#F3F8F8] text-[#154752] font-semibold border-b-2 border-[#24989A]"
-                          : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
-                      }`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-
-          <div className="hidden xl:flex items-center gap-2.5 shrink-0">
-            {authState.isLoggedIn ? (
-              <>
-                <ButtonLink href={authState.dashboardHref} size="sm">
-                  My Dashboard
-                </ButtonLink>
-                <form action={logoutAction}>
+                <li ref={dirMenuRef} className="relative shrink-0">
                   <button
-                    type="submit"
-                    className="inline-flex items-center justify-center rounded-xl border border-[#DAE7E7] bg-white px-4 py-2.5 text-[15px] font-semibold text-[#1F2F34] hover:bg-[#F3F8F8] transition-colors cursor-pointer"
+                    type="button"
+                    aria-expanded={isDirOpen}
+                    aria-haspopup="true"
+                    onClick={() => setIsDirOpen((open) => !open)}
+                    className={`inline-flex items-center gap-1.5 whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors cursor-pointer ${
+                      DESKTOP_DIRECTORY_LINKS.some((l) => isActive(l.href))
+                        ? "bg-[#F3F8F8] dark:bg-slate-800 text-[#154752] dark:text-[#5CD3D5] font-semibold border-b-2 border-[#24989A]"
+                        : "text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 hover:text-[#154752] dark:hover:text-[#5CD3D5]"
+                    }`}
                   >
-                    Sign Out
-                  </button>
-                </form>
-              </>
-            ) : (
-              <>
-                <ButtonLink href="/login" variant="ghost" size="sm">
-                  Log in
-                </ButtonLink>
-                <ButtonLink href="/register" size="sm">
-                  Create account
-                </ButtonLink>
-              </>
-            )}
-          </div>
-
-          <button
-            type="button"
-            className="xl:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg border border-[#DAE7E7] text-[#1F2F34] hover:bg-[#F3F8F8] transition-colors"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            onClick={() => setIsMenuOpen((open) => !open)}
-          >
-            <span className="sr-only">
-              {isMenuOpen ? "Close menu" : "Open menu"}
-            </span>
-            <Icon name={isMenuOpen ? "close" : "menu"} className="h-5 w-5" />
-          </button>
-        </div>
-
-        {isMenuOpen && (
-          <nav
-            id="mobile-navigation"
-            aria-label="Mobile Navigation"
-            className="xl:hidden border-t border-[#DAE7E7] bg-white shadow-2xl transition-all max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain relative z-40"
-          >
-            <ul className="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-1">
-              {[
-                ...PUBLIC_PRIMARY_NAV_LINKS,
-                { label: "Contact", href: "/contact" },
-              ].map((link) => {
-                const active = isActive(link.href);
-                return (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      aria-current={active ? "page" : undefined}
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`block px-3.5 py-3 rounded-lg text-base font-medium transition-colors ${
-                        active
-                          ? "bg-[#F3F8F8] text-[#154752] font-semibold"
-                          : "text-[#1F2F34] hover:bg-[#F3F8F8] hover:text-[#154752]"
-                      }`}
+                    <span>Directories</span>
+                    <svg
+                      className={`h-4 w-4 transition-transform ${isDirOpen ? "rotate-180" : ""}`}
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
                     >
-                      {link.label}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 border-t border-[#DAE7E7] grid grid-cols-2 gap-3 bg-neutral-50/50">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+
+                  {isDirOpen && (
+                    <div className="absolute left-0 mt-2 w-60 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 py-2 shadow-lg z-50">
+                      {DESKTOP_DIRECTORY_LINKS.map((dirLink) => {
+                        const active = isActive(dirLink.href);
+                        return (
+                          <Link
+                            key={dirLink.href}
+                            href={dirLink.href}
+                            onClick={() => setIsDirOpen(false)}
+                            className={`block px-4 py-2.5 text-[15px] font-medium transition-colors ${
+                              active
+                                ? "bg-[#F3F8F8] dark:bg-slate-800 text-[#154752] dark:text-[#5CD3D5] font-semibold"
+                                : "text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 hover:text-[#154752] dark:hover:text-[#5CD3D5]"
+                            }`}
+                          >
+                            {dirLink.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </li>
+
+                {DESKTOP_PRIMARY_LINKS.slice(1).map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <li key={link.href} className="shrink-0">
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        className={`inline-flex items-center whitespace-nowrap px-3.5 py-2 rounded-lg text-[15px] font-medium transition-colors ${
+                          active
+                            ? "bg-[#F3F8F8] dark:bg-slate-800 text-[#154752] dark:text-[#5CD3D5] font-semibold border-b-2 border-[#24989A]"
+                            : "text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 hover:text-[#154752] dark:hover:text-[#5CD3D5]"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <div className="hidden xl:flex items-center gap-2.5 shrink-0">
+              <ThemeToggle />
+
               {authState.isLoggedIn ? (
                 <>
-                  <ButtonLink
-                    href={authState.dashboardHref}
-                    fullWidth
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+                  <ButtonLink href={authState.dashboardHref} size="sm">
                     My Dashboard
                   </ButtonLink>
-                  <form action={logoutAction} className="w-full">
+                  <form action={logoutAction}>
                     <button
                       type="submit"
-                      className="w-full h-full inline-flex items-center justify-center rounded-xl border border-[#DAE7E7] bg-white px-4 py-2.5 text-base font-semibold text-[#1F2F34] hover:bg-[#F3F8F8] transition-colors cursor-pointer"
+                      className="inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-[15px] font-semibold text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-700 transition-colors cursor-pointer"
                     >
                       Sign Out
                     </button>
@@ -323,27 +291,119 @@ export function SiteHeader({
                 </>
               ) : (
                 <>
-                  <ButtonLink
-                    href="/login"
-                    variant="outline"
-                    fullWidth
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+                  <ButtonLink href="/login" variant="ghost" size="sm">
                     Log in
                   </ButtonLink>
-                  <ButtonLink
-                    href="/register"
-                    fullWidth
-                    onClick={() => setIsMenuOpen(false)}
-                  >
+                  <ButtonLink href="/register" size="sm">
                     Create account
                   </ButtonLink>
                 </>
               )}
             </div>
-          </nav>
-        )}
+
+            <div className="xl:hidden flex items-center gap-1.5 shrink-0">
+              <ThemeToggle compact />
+
+              <button
+                type="button"
+                className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 text-[#1F2F34] dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-navigation"
+                aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                onClick={() => setIsMenuOpen((open) => !open)}
+              >
+                <span className="sr-only">
+                  {isMenuOpen ? "Close menu" : "Open menu"}
+                </span>
+                <Icon name={isMenuOpen ? "close" : "menu"} className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          {isMenuOpen && (
+            <nav
+              id="mobile-navigation"
+              aria-label="Mobile Navigation"
+              className="xl:hidden border-t border-slate-200 dark:border-slate-700 bg-white/95 dark:bg-[#0E2238]/95 backdrop-blur-md rounded-b-2xl shadow-2xl transition-all max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain relative z-40"
+            >
+              <ul className="px-4 py-3 space-y-1">
+                {[
+                  ...PUBLIC_PRIMARY_NAV_LINKS,
+                  { label: "Contact", href: "/contact" },
+                ].map((link) => {
+                  const active = isActive(link.href);
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        aria-current={active ? "page" : undefined}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block px-3.5 py-3 rounded-lg text-base font-medium transition-colors ${
+                          active
+                            ? "bg-[#F3F8F8] dark:bg-slate-800 text-[#154752] dark:text-[#5CD3D5] font-semibold"
+                            : "text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 hover:text-[#154752] dark:hover:text-[#5CD3D5]"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+                  Theme Appearance
+                </span>
+                <ThemeToggle />
+              </div>
+
+              <div className="px-4 py-4 border-t border-slate-200 dark:border-slate-700 grid grid-cols-2 gap-3 bg-neutral-50/50 dark:bg-slate-900/50 rounded-b-2xl">
+                {authState.isLoggedIn ? (
+                  <>
+                    <ButtonLink
+                      href={authState.dashboardHref}
+                      fullWidth
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      My Dashboard
+                    </ButtonLink>
+                    <form action={logoutAction} className="w-full">
+                      <button
+                        type="submit"
+                        className="w-full h-full inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-base font-semibold text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                      >
+                        Sign Out
+                      </button>
+                    </form>
+                  </>
+                ) : (
+                  <>
+                    <ButtonLink
+                      href="/login"
+                      variant="outline"
+                      fullWidth
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Log in
+                    </ButtonLink>
+                    <ButtonLink
+                      href="/register"
+                      fullWidth
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Create account
+                    </ButtonLink>
+                  </>
+                )}
+              </div>
+            </nav>
+          )}
+        </div>
       </header>
+
+      {/* Floating Header Spacer: Guarantees page content below is never covered or overlapping */}
+      <div className="h-22 sm:h-26 w-full shrink-0 pointer-events-none" aria-hidden="true" />
 
       {/* Dimmed backdrop when mobile drawer is open */}
       {isMenuOpen && (

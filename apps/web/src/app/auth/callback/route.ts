@@ -97,8 +97,30 @@ export async function ensureOAuthUserProfile(
 export async function GET(request: NextRequest) {
   const url = request.nextUrl;
   const code = url.searchParams.get("code");
+  const tokenHash = url.searchParams.get("token_hash");
+  const type = url.searchParams.get("type");
   const error = url.searchParams.get("error");
+  const errorCode = url.searchParams.get("error_code");
   const errorDescription = url.searchParams.get("error_description");
+
+  // Check if error is related to email verification link
+  if (
+    errorCode === "otp_expired" ||
+    (errorDescription &&
+      (errorDescription.toLowerCase().includes("email link") ||
+        errorDescription.toLowerCase().includes("otp") ||
+        errorDescription.toLowerCase().includes("expired") ||
+        errorDescription.toLowerCase().includes("token")))
+  ) {
+    return NextResponse.redirect(
+      new URL(
+        `/auth/verified?status=error&message=${encodeURIComponent(
+          errorDescription || "The verification link is invalid, expired, or has already been used."
+        )}`,
+        request.url
+      )
+    );
+  }
 
   if (error || errorDescription) {
     const msg = errorDescription || error || "Google authentication was cancelled or failed.";
@@ -107,16 +129,67 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // If no code query parameter was supplied, redirect to the client-side hash fragment catcher
-  if (!code) {
-    return NextResponse.redirect(new URL("/auth/callback/session", request.url));
-  }
-
   const config = getSupabasePublicConfig();
   if (!config) {
     return NextResponse.redirect(
       new URL("/login?error=Supabase%20configuration%20is%20missing", request.url)
     );
+  }
+
+  // Handle email verification token_hash (e.g. from signup confirmation email)
+  if (tokenHash && type) {
+    try {
+      const verifyRes = await fetch(`${config.url}/auth/v1/verify`, {
+        method: "POST",
+        headers: {
+          apikey: config.anonKey,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token_hash: tokenHash,
+          type: type,
+        }),
+        cache: "no-store",
+      });
+
+      if (!verifyRes.ok) {
+        let errMsg = "The verification link is invalid, expired, or has already been used.";
+        try {
+          const errJson = (await verifyRes.json()) as { message?: string; msg?: string; error_description?: string };
+          errMsg = errJson.error_description || errJson.message || errJson.msg || errMsg;
+        } catch {
+          // keep fallback
+        }
+        return NextResponse.redirect(
+          new URL(`/auth/verified?status=error&message=${encodeURIComponent(errMsg)}`, request.url)
+        );
+      }
+
+      const verifiedSession = await verifyRes.json();
+      if (isSessionPayload(verifiedSession)) {
+        await persistSession(verifiedSession);
+      }
+
+      if (type === "recovery") {
+        return NextResponse.redirect(new URL("/forgot-password?mode=reset", request.url));
+      }
+
+      return NextResponse.redirect(new URL("/auth/verified?status=success", request.url));
+    } catch {
+      return NextResponse.redirect(
+        new URL(
+          `/auth/verified?status=error&message=${encodeURIComponent(
+            "An error occurred while confirming your email. Please try again."
+          )}`,
+          request.url
+        )
+      );
+    }
+  }
+
+  // If no code query parameter was supplied, redirect to the client-side hash fragment catcher
+  if (!code) {
+    return NextResponse.redirect(new URL("/auth/callback/session", request.url));
   }
 
   const cookieStore = await cookies();

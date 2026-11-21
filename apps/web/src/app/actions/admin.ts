@@ -106,7 +106,7 @@ export async function fetchAdminUsers(params: {
   const limit = params.limit || 20;
   const offset = (page - 1) * limit;
 
-  let query = `/rest/v1/profiles?select=*,user_roles(role,is_active)&order=created_at.desc&limit=${limit}&offset=${offset}`;
+  let query = `/rest/v1/profiles?select=*,user_roles:user_roles!user_roles_user_id_fkey(role,is_active)&order=created_at.desc&limit=${limit}&offset=${offset}`;
 
   if (params.search && params.search.trim()) {
     const s = encodeURIComponent(params.search.trim());
@@ -891,9 +891,12 @@ export async function adminSavePlatformSettingsSectionAction<
     });
   }
 
+  revalidatePath("/", "layout");
   revalidatePath("/admin/settings");
   revalidatePath("/admin");
-  revalidatePath("/");
+  revalidatePath("/about");
+  revalidatePath("/contact");
+  revalidatePath("/dashboard");
 
   return {
     ok: true,

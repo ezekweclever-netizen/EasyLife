@@ -491,8 +491,8 @@ export function QuotationComparison({
 
       {/* MODAL 1: ACCEPT QUOTATION & CONFIRM APPOINTMENT */}
       {selectedQuoteForAccept && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl max-w-lg w-full border border-slate-200 shadow-2xl p-6 sm:p-8 space-y-6 animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div className="bg-white dark:bg-[#0E2238] rounded-3xl max-w-lg w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-4 sm:p-6 md:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto overscroll-contain">
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
                 Confirm Appointment &amp; Quotation
@@ -577,8 +577,8 @@ export function QuotationComparison({
 
       {/* MODAL 2: REQUEST CLARIFICATION */}
       {selectedQuoteForClarify && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl max-w-md w-full border border-slate-200 shadow-2xl p-6 sm:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div className="bg-white dark:bg-[#0E2238] rounded-3xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-4 sm:p-6 md:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto overscroll-contain">
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
                 Request Quotation Clarification
@@ -634,8 +634,8 @@ export function QuotationComparison({
 
       {/* MODAL 3: DECLINE QUOTATION */}
       {selectedQuoteForDecline && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-3xl max-w-md w-full border border-slate-200 shadow-2xl p-6 sm:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs">
+          <div className="bg-white dark:bg-[#0E2238] rounded-3xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-4 sm:p-6 md:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto overscroll-contain">
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-red-600">
                 Decline Quotation
