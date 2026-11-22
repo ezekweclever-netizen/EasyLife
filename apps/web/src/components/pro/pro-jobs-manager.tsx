@@ -49,16 +49,16 @@ export function ProJobsManager({
   return (
     <div className="space-y-6">
       {/* Tab Switcher & Filter Bar */}
-      <div className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         {/* Tabs */}
-        <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-lg shrink-0">
+        <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg shrink-0">
           <button
             type="button"
             onClick={() => setActiveTab("eligible")}
             className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-colors ${
               activeTab === "eligible"
-                ? "bg-white text-slate-900 shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white shadow-xs"
+                : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
             }`}
           >
             Eligible Requests ({initialOpenRequests.length})
@@ -68,8 +68,8 @@ export function ProJobsManager({
             onClick={() => setActiveTab("active")}
             className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-colors ${
               activeTab === "active"
-                ? "bg-white text-slate-900 shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white shadow-xs"
+                : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
             }`}
           >
             My Active Jobs ({initialActiveJobs.length})
@@ -79,8 +79,8 @@ export function ProJobsManager({
             onClick={() => setActiveTab("history")}
             className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-colors ${
               activeTab === "history"
-                ? "bg-white text-slate-900 shadow-xs"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white shadow-xs"
+                : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
             }`}
           >
             Job History ({initialCompletedJobs.length})
@@ -92,7 +92,7 @@ export function ProJobsManager({
           <select
             value={selectedCity}
             onChange={(e) => setSelectedCity(e.target.value)}
-            className="h-9 px-3 rounded-lg border border-slate-300 text-xs font-medium text-slate-800 bg-white"
+            className="h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#0D223A]"
           >
             <option value="All Cities">All Pilot Cities</option>
             <option value="Port Harcourt">Port Harcourt</option>
@@ -103,7 +103,7 @@ export function ProJobsManager({
           <select
             value={selectedUrgency}
             onChange={(e) => setSelectedUrgency(e.target.value)}
-            className="h-9 px-3 rounded-lg border border-slate-300 text-xs font-medium text-slate-800 bg-white"
+            className="h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#0D223A]"
           >
             <option value="all">All Urgencies</option>
             <option value="emergency">Emergency</option>
@@ -116,7 +116,7 @@ export function ProJobsManager({
 
       {/* Verification Notice if not verified */}
       {!isVerified && activeTab === "eligible" && (
-        <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center justify-between">
+        <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-xs text-amber-900 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span>🛡️</span>
             <span>
@@ -134,12 +134,12 @@ export function ProJobsManager({
 
       {/* Jobs Listing */}
       {displayedJobs.length === 0 ? (
-        <div className="p-12 text-center rounded-2xl border border-dashed border-slate-200 bg-white">
+        <div className="p-12 text-center rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
           <span className="text-3xl block mb-2">📋</span>
-          <h3 className="text-sm font-bold text-slate-900">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             No service requests found
           </h3>
-          <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
             {activeTab === "eligible"
               ? "There are currently no open service requests matching your filter criteria in this city."
               : activeTab === "active"
@@ -154,7 +154,7 @@ export function ProJobsManager({
             return (
               <div
                 key={job.id}
-                className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-slate-300 transition flex flex-col justify-between"
+                className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs hover:border-slate-300 dark:border-slate-700 transition flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">
@@ -164,26 +164,26 @@ export function ProJobsManager({
                     <span
                       className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
                         job.urgency === "emergency"
-                          ? "bg-red-100 text-red-800"
-                          : "bg-slate-100 text-slate-700"
+                          ? "bg-red-100 text-red-800 dark:text-red-300"
+                          : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
                       }`}
                     >
                       {job.urgency}
                     </span>
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-900">
+                  <h3 className="text-base font-bold text-slate-900 dark:text-white">
                     {job.title}
                   </h3>
 
-                  <p className="text-xs text-slate-600 mt-1.5 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 mt-1.5 line-clamp-3 leading-relaxed">
                     {job.description}
                   </p>
 
-                  <div className="mt-4 pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-600">
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                     <div className="flex items-start gap-1.5">
                       <span className="text-slate-400">📍</span>
-                      <span className="font-medium text-slate-800">
+                      <span className="font-medium text-slate-800 dark:text-slate-100">
                         {job.service_address}
                       </span>
                     </div>
@@ -205,7 +205,7 @@ export function ProJobsManager({
                 </div>
 
                 {/* Footer Actions */}
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+                <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                   <span className="text-[11px] font-mono text-slate-400">
                     {job.reference_code}
                   </span>
@@ -213,7 +213,7 @@ export function ProJobsManager({
                   <div className="flex items-center gap-2">
                     <Link
                       href={`/pro/jobs/${job.id}`}
-                      className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+                      className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
                     >
                       View Details
                     </Link>

@@ -40,38 +40,38 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               />
 
               <div className="mt-6 space-y-4">
-                <div className="rounded-xl border border-slate-200 p-5 bg-[#F8FAFC]">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-5 bg-[#F8FAFC]">
                   <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0D9488]">
                     Port Harcourt Hub (Rivers State)
                   </p>
                   <p className="text-base font-semibold text-[#0F172A] mt-1">
                     EasyLife Operations Desk
                   </p>
-                  <p className="text-sm text-slate-600 mt-0.5">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
                     Trans-Amadi Commercial Layout, Port Harcourt, Rivers State
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 p-5 bg-[#F8FAFC]">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-5 bg-[#F8FAFC]">
                   <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0D9488]">
                     Lagos Hub
                   </p>
                   <p className="text-base font-semibold text-[#0F172A] mt-1">
                     EasyLife Operations Desk
                   </p>
-                  <p className="text-sm text-slate-600 mt-0.5">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
                     Admiralty Way, Lekki Phase 1, Lagos State
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 p-5 bg-[#F8FAFC]">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-5 bg-[#F8FAFC]">
                   <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0D9488]">
                     Abuja Hub (FCT)
                   </p>
                   <p className="text-base font-semibold text-[#0F172A] mt-1">
                     EasyLife Operations Desk
                   </p>
-                  <p className="text-sm text-slate-600 mt-0.5">
+                  <p className="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
                     Central Business District, Abuja, Federal Capital Territory
                   </p>
                 </div>
@@ -112,11 +112,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           </div>
 
           {/* Interactive Form */}
-          <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 rounded-2xl p-6 sm:p-8">
+          <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 dark:border-[#163654] rounded-2xl p-6 sm:p-8">
             <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-1.5">
               Send Us a Message
             </h3>
-            <p className="text-sm sm:text-base text-slate-600 mb-6">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mb-6">
               Fill out the form below. If your message relates to an active booking, please mention your Booking Reference.
             </p>
             <ContactForm defaultTopic={topic} />

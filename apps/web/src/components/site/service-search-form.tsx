@@ -185,8 +185,8 @@ export function ServiceSearchForm({
         onSubmit={() => setIsOpen(false)}
         className={`flex flex-col sm:flex-row gap-2.5 rounded-2xl p-2.5 ${
           tone === "dark"
-            ? "bg-white shadow-xl shadow-black/15"
-            : "bg-white border border-[#DAE7E7] shadow-xs"
+            ? "bg-white dark:bg-[#0D223A] shadow-xl shadow-black/15"
+            : "bg-white dark:bg-[#0D223A] border border-[#DAE7E7] shadow-xs"
         }`}
       >
         <label htmlFor={id} className="sr-only">
@@ -231,7 +231,7 @@ export function ServiceSearchForm({
           id={listboxId}
           role="listbox"
           aria-label="Service catalogue suggestions"
-          className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-[#DAE7E7] bg-white shadow-2xl overflow-hidden text-[#1F2F34]"
+          className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] shadow-2xl overflow-hidden text-[#1F2F34]"
         >
           {isLoading && !suggestions ? (
             <div className="px-5 py-4 text-sm text-[#4E6065] flex items-center gap-2.5">

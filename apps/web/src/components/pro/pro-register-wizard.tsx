@@ -322,7 +322,7 @@ export function ProRegisterWizard({
   const hasCatalogueServices = catalogueTree.length > 0 && allCatalogueServicesMap.size > 0;
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-10">
+    <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-sm p-6 sm:p-10">
       {/* Wizard Step Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between max-w-lg mx-auto">
@@ -338,12 +338,12 @@ export function ProRegisterWizard({
                     ? "bg-[#0D9488] text-white ring-4 ring-teal-100"
                     : currentStep > st.num
                     ? "bg-emerald-500 text-white"
-                    : "bg-slate-100 text-slate-500"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
                 }`}
               >
                 {currentStep > st.num ? "✓" : st.num}
               </div>
-              <span className="text-[11px] font-semibold text-slate-600 mt-1.5">
+              <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 mt-1.5">
                 {st.label}
               </span>
             </div>
@@ -352,13 +352,13 @@ export function ProRegisterWizard({
       </div>
 
       {errorMessage && (
-        <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-800">
+        <div className="mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs font-semibold text-red-800 dark:text-red-300">
           {errorMessage}
         </div>
       )}
 
       {successMessage && (
-        <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-900">
+        <div className="mb-6 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold text-emerald-900">
           ✓ {successMessage}
         </div>
       )}
@@ -368,16 +368,16 @@ export function ProRegisterWizard({
         {currentStep === 1 && (
           <div className="space-y-5 animate-in fade-in duration-200">
             <div>
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">
                 1. Provider Role &amp; Trade Details
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Select your service provider classification, trading identity, and practical background.
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-2">
+              <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-2">
                 Provider Type *
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -413,37 +413,37 @@ export function ProRegisterWizard({
                     onClick={() => setProviderType(role.id as any)}
                     className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${
                       providerType === role.id
-                        ? "bg-teal-50/70 border-[#0D9488] ring-2 ring-[#0D9488]/30 shadow-xs"
-                        : "bg-white border-slate-200 hover:border-slate-300"
+                        ? "bg-teal-50 dark:bg-teal-950/60/70 border-[#0D9488] ring-2 ring-[#0D9488]/30 shadow-xs"
+                        : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-slate-900">{role.label}</span>
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">{role.label}</span>
                       <span
                         className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                           providerType === role.id
                             ? "bg-[#0D9488] text-white"
-                            : "bg-slate-100 text-slate-600"
+                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
                         }`}
                       >
                         {role.badge}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-500 line-clamp-2">{role.desc}</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2">{role.desc}</p>
                   </button>
                 ))}
               </div>
             </div>
 
             {providerType === "dispatch_rider" && (
-              <div className="p-3.5 rounded-xl bg-teal-50/60 border border-teal-200 text-xs">
+              <div className="p-3.5 rounded-xl bg-teal-50 dark:bg-teal-950/60/60 border border-teal-200 dark:border-teal-800 text-xs">
                 <label className="block font-semibold text-teal-950 mb-1.5">
                   Primary Delivery Vehicle *
                 </label>
                 <select
                   value={vehicleType}
                   onChange={(e) => setVehicleType(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-teal-300 text-xs text-slate-900 bg-white"
+                  className="w-full h-10 px-3 rounded-lg border border-teal-300 dark:border-teal-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                 >
                   <option value="Motorcycle">Motorcycle (Express Dispatch)</option>
                   <option value="Bicycle">Bicycle / E-Cargo Bike</option>
@@ -454,7 +454,7 @@ export function ProRegisterWizard({
             )}
 
             {providerType === "property_agent" && (
-              <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 text-xs text-amber-950 space-y-2">
+              <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-700 text-xs text-amber-950 space-y-2">
                 <div className="font-bold flex items-center gap-1.5 text-amber-900">
                   <span>⚠️</span> Strict Anti-Listing Platform Policy
                 </div>
@@ -476,19 +476,19 @@ export function ProRegisterWizard({
             )}
 
             {defaultUser && (
-              <div className="p-3.5 rounded-xl bg-teal-50/50 border border-teal-200 text-xs text-slate-700 flex items-center justify-between">
+              <div className="p-3.5 rounded-xl bg-teal-50 dark:bg-teal-950/60/50 border border-teal-200 dark:border-teal-800 text-xs text-slate-700 dark:text-slate-200 flex items-center justify-between">
                 <div>
-                  <span className="font-bold text-slate-900">Account Owner: </span>
+                  <span className="font-bold text-slate-900 dark:text-white">Account Owner: </span>
                   <span>{defaultUser.fullName || defaultUser.email}</span>
                 </div>
                 {defaultUser.phone && (
-                  <span className="text-slate-500 font-mono">{defaultUser.phone}</span>
+                  <span className="text-slate-500 dark:text-slate-400 font-mono">{defaultUser.phone}</span>
                 )}
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                 Business Name or Trade Brand Name *
               </label>
               <input
@@ -497,12 +497,12 @@ export function ProRegisterWizard({
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
                 placeholder="e.g. Chukwuma Electricals & AC Services"
-                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                 Professional Headline
               </label>
               <input
@@ -510,12 +510,12 @@ export function ProRegisterWizard({
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
                 placeholder="e.g. Certified Generator Technician & Industrial Electrician"
-                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                 Trade Bio &amp; Experience Overview *
               </label>
               <textarea
@@ -524,13 +524,13 @@ export function ProRegisterWizard({
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Describe your training, equipment brands you service, and workmanship guarantees..."
-                className="w-full p-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                className="w-full p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
               <span className="text-[11px] text-slate-400">Minimum 20 characters.</span>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                 Years of Practical Experience *
               </label>
               <input
@@ -540,7 +540,7 @@ export function ProRegisterWizard({
                 required
                 value={yearsExperience}
                 onChange={(e) => setYearsExperience(parseInt(e.target.value, 10) || 0)}
-                className="w-32 h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                className="w-32 h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
 
@@ -571,10 +571,10 @@ export function ProRegisterWizard({
         {currentStep === 2 && (
           <div className="space-y-6 animate-in fade-in duration-200">
             <div>
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">
                 2. Service Catalogue, Qualifications &amp; Approved Locations
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Browse categories and subcategories to select eligible services, declare trade credentials, and pick approved neighbourhoods.
               </p>
             </div>
@@ -582,7 +582,7 @@ export function ProRegisterWizard({
             {hasCatalogueServices ? (
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-slate-800">
+                  <label className="text-xs font-bold text-slate-800 dark:text-slate-100">
                     Main Categories * ({selectedServiceIds.length} individual services selected)
                   </label>
                 </div>
@@ -609,7 +609,7 @@ export function ProRegisterWizard({
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
                           isActive
                             ? "bg-slate-900 text-white border-slate-900"
-                            : "bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300"
+                            : "bg-slate-50 dark:bg-[#071526] text-slate-700 dark:text-slate-200 border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
                         }`}
                       >
                         {main.name}
@@ -627,8 +627,8 @@ export function ProRegisterWizard({
                 {activeMainCategory &&
                   (activeMainCategory.subcategories.length > 0 ||
                     activeMainCategory.direct_services.length > 0) && (
-                    <div className="flex flex-wrap items-center gap-1.5 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
-                      <span className="text-[11px] font-semibold text-slate-500 mr-1">
+                    <div className="flex flex-wrap items-center gap-1.5 bg-slate-50 dark:bg-[#071526] p-2.5 rounded-xl border border-slate-200 dark:border-[#163654]">
+                      <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mr-1">
                         Subcategory:
                       </span>
                       <button
@@ -637,7 +637,7 @@ export function ProRegisterWizard({
                         className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition ${
                           activeSubcatId === "all"
                             ? "bg-[#0D9488] text-white"
-                            : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                            : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654] hover:bg-slate-100 dark:bg-slate-800"
                         }`}
                       >
                         All in {activeMainCategory.name}
@@ -650,7 +650,7 @@ export function ProRegisterWizard({
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition ${
                             activeSubcatId === sub.id
                               ? "bg-[#0D9488] text-white"
-                              : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-100"
+                              : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654] hover:bg-slate-100 dark:bg-slate-800"
                           }`}
                         >
                           {sub.name} ({sub.services.length})
@@ -662,7 +662,7 @@ export function ProRegisterWizard({
                 {/* Services List + Inline Qualification Inputs */}
                 <div className="grid grid-cols-1 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
                   {visibleServices.length === 0 ? (
-                    <div className="p-4 rounded-xl border border-dashed border-slate-200 text-xs text-slate-500 text-center">
+                    <div className="p-4 rounded-xl border border-dashed border-slate-200 dark:border-[#163654] text-xs text-slate-500 dark:text-slate-400 text-center">
                       No active catalogue services inside this subcategory yet.
                     </div>
                   ) : (
@@ -683,23 +683,23 @@ export function ProRegisterWizard({
                           key={srv.id}
                           className={`rounded-xl border transition ${
                             isSelected
-                              ? "bg-teal-50/40 border-[#0D9488] ring-1 ring-[#0D9488]/40"
-                              : "bg-white border-slate-200 hover:border-slate-300"
+                              ? "bg-teal-50 dark:bg-teal-950/60/40 border-[#0D9488] ring-1 ring-[#0D9488]/40"
+                              : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
                           }`}
                         >
                           <label className="p-3.5 flex items-start justify-between gap-3 cursor-pointer">
                             <div className="space-y-1">
                               <div className="flex flex-wrap items-center gap-1.5">
-                                <span className="text-xs font-bold text-slate-900">
+                                <span className="text-xs font-bold text-slate-900 dark:text-white">
                                   {srv.name}
                                 </span>
                                 {srv.base_price_min_kobo > 0 && (
-                                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-semibold">
+                                  <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-[10px] font-semibold">
                                     From ₦{Math.round(srv.base_price_min_kobo / 100).toLocaleString("en-NG")}
                                   </span>
                                 )}
                                 {srv.requires_trade_certification && (
-                                  <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-semibold">
+                                  <span className="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-[10px] font-semibold">
                                     Trade Cert Required
                                   </span>
                                 )}
@@ -713,7 +713,7 @@ export function ProRegisterWizard({
                                     className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${
                                       expShortfall
                                         ? "bg-rose-50 text-rose-700 border-rose-200"
-                                        : "bg-slate-50 text-slate-600 border-slate-200"
+                                        : "bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#163654]"
                                     }`}
                                   >
                                     Min {srv.min_years_experience} yrs exp
@@ -726,7 +726,7 @@ export function ProRegisterWizard({
                                 )}
                               </div>
                               {srv.short_description && (
-                                <p className="text-[11px] text-slate-500">
+                                <p className="text-[11px] text-slate-500 dark:text-slate-400">
                                   {srv.short_description}
                                 </p>
                               )}
@@ -736,14 +736,14 @@ export function ProRegisterWizard({
                               type="checkbox"
                               checked={isSelected}
                               onChange={() => toggleService(srv)}
-                              className="mt-1 h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 shrink-0"
+                              className="mt-1 h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 dark:border-slate-700 shrink-0"
                             />
                           </label>
 
                           {isSelected && (
-                            <div className="px-3.5 pb-3.5 pt-2 border-t border-teal-200/70 grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-white/70 rounded-b-xl">
+                            <div className="px-3.5 pb-3.5 pt-2 border-t border-teal-200 dark:border-teal-800/70 grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-white dark:bg-[#0D223A]/70 rounded-b-xl">
                               <div>
-                                <label className="block text-[10px] font-bold uppercase text-slate-600 mb-1">
+                                <label className="block text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">
                                   Years in This Service
                                 </label>
                                 <input
@@ -758,11 +758,11 @@ export function ProRegisterWizard({
                                       e.target.value
                                     )
                                   }
-                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                                 />
                               </div>
                               <div>
-                                <label className="block text-[10px] font-bold uppercase text-slate-600 mb-1">
+                                <label className="block text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">
                                   Cert / Licence No. (Optional)
                                 </label>
                                 <input
@@ -776,11 +776,11 @@ export function ProRegisterWizard({
                                     )
                                   }
                                   placeholder="e.g. NABTEB / NEMSA / COREN"
-                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                                 />
                               </div>
                               <div>
-                                <label className="block text-[10px] font-bold uppercase text-slate-600 mb-1">
+                                <label className="block text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">
                                   Qualification / Equipment Notes
                                 </label>
                                 <input
@@ -794,7 +794,7 @@ export function ProRegisterWizard({
                                     )
                                   }
                                   placeholder="e.g. Daikin/LG Inverter specialist"
-                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                                 />
                               </div>
                             </div>
@@ -807,7 +807,7 @@ export function ProRegisterWizard({
               </div>
             ) : (
               <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-2">
+                <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-2">
                   Select Your Service Specialties *
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -818,16 +818,16 @@ export function ProRegisterWizard({
                         key={cat.id}
                         className={`p-3 rounded-xl border cursor-pointer flex items-center justify-between transition-colors ${
                           isChecked
-                            ? "bg-teal-50/60 border-[#0D9488] ring-1 ring-[#0D9488]"
-                            : "bg-white border-slate-200 hover:border-slate-300"
+                            ? "bg-teal-50 dark:bg-teal-950/60/60 border-[#0D9488] ring-1 ring-[#0D9488]"
+                            : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
                         }`}
                       >
                         <div>
-                          <span className="text-xs font-bold text-slate-900 block">
+                          <span className="text-xs font-bold text-slate-900 dark:text-white block">
                             {cat.name}
                           </span>
                           {cat.description && (
-                            <span className="text-[11px] text-slate-500 block truncate max-w-[200px]">
+                            <span className="text-[11px] text-slate-500 dark:text-slate-400 block truncate max-w-[200px]">
                               {cat.description}
                             </span>
                           )}
@@ -836,7 +836,7 @@ export function ProRegisterWizard({
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => toggleCategory(cat.id)}
-                          className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300"
+                          className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 dark:border-slate-700"
                         />
                       </label>
                     );
@@ -846,16 +846,16 @@ export function ProRegisterWizard({
             )}
 
             {/* Approved Pilot City & Operating Neighbourhoods */}
-            <div className="pt-4 border-t border-slate-200 space-y-4">
+            <div className="pt-4 border-t border-slate-200 dark:border-[#163654] space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                     Primary Approved Pilot City *
                   </label>
                   <select
                     value={city}
                     onChange={(e) => handleCityChange(e.target.value)}
-                    className="w-full h-11 px-3 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                    className="w-full h-11 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                   >
                     {PILOT_CITIES.map((c) => (
                       <option key={c} value={c}>
@@ -866,7 +866,7 @@ export function ProRegisterWizard({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                     Custom LGA / Workshop Landmark (Optional)
                   </label>
                   <input
@@ -874,17 +874,17 @@ export function ProRegisterWizard({
                     value={lgaOrDistrict}
                     onChange={(e) => setLgaOrDistrict(e.target.value)}
                     placeholder="e.g. Trans-Amadi, Ikeja, or Wuse II"
-                    className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                    className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                   />
                 </div>
               </div>
 
               {cityNeighbourhoods.length > 0 && (
                 <div>
-                  <label className="block text-xs font-semibold text-slate-800 mb-2">
+                  <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-2">
                     Approved Neighbourhoods Covered in {city} ({selectedNeighbourhoodIds.length} selected)
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto p-2.5 rounded-xl border border-slate-200 bg-slate-50/70">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70">
                     {cityNeighbourhoods.map((nb) => {
                       const active = selectedNeighbourhoodIds.includes(nb.id);
                       return (
@@ -892,15 +892,15 @@ export function ProRegisterWizard({
                           key={nb.id}
                           className={`px-2.5 py-2 rounded-lg border text-xs flex items-center gap-2 cursor-pointer transition ${
                             active
-                              ? "bg-teal-50 border-[#0D9488] text-teal-950 font-semibold"
-                              : "bg-white border-slate-200 text-slate-700 hover:border-slate-300"
+                              ? "bg-teal-50 dark:bg-teal-950/60 border-[#0D9488] text-teal-950 font-semibold"
+                              : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:border-slate-700"
                           }`}
                         >
                           <input
                             type="checkbox"
                             checked={active}
                             onChange={() => toggleNeighbourhood(nb.id)}
-                            className="h-3.5 w-3.5 rounded text-[#0D9488] border-slate-300"
+                            className="h-3.5 w-3.5 rounded text-[#0D9488] border-slate-300 dark:border-slate-700"
                           />
                           <div className="min-w-0">
                             <span className="block truncate">{nb.name}</span>
@@ -920,7 +920,7 @@ export function ProRegisterWizard({
               <button
                 type="button"
                 onClick={() => setCurrentStep(1)}
-                className="px-4 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
               >
                 ← Back
               </button>
@@ -946,16 +946,16 @@ export function ProRegisterWizard({
         {currentStep === 3 && (
           <div className="space-y-5 animate-in fade-in duration-200">
             <div>
-              <h3 className="text-base font-bold text-slate-900">
+              <h3 className="text-base font-bold text-slate-900 dark:text-white">
                 3. Working Schedule, Inspection Fee &amp; Verification Preview
               </h3>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Configure your weekly operating days and verify the documents you&apos;ll submit right after creating your profile.
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-2">
+              <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-2">
                 Active Working Days *
               </label>
               <div className="flex flex-wrap gap-2">
@@ -969,7 +969,7 @@ export function ProRegisterWizard({
                       className={`px-3.5 py-2 rounded-xl border text-xs font-bold transition ${
                         active
                           ? "bg-[#0D9488] text-white border-[#0D9488]"
-                          : "bg-slate-50 text-slate-600 border-slate-200 hover:border-slate-300"
+                          : "bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
                       }`}
                     >
                       {wd.short}
@@ -981,32 +981,32 @@ export function ProRegisterWizard({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                   Available From
                 </label>
                 <input
                   type="time"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
-                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                   Available Until
                 </label>
                 <input
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
-                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-800 mb-1.5">
+              <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
                 Base Call-out &amp; Diagnosis Fee (₦)
               </label>
               <input
@@ -1016,13 +1016,13 @@ export function ProRegisterWizard({
                 value={baseCalloutFee}
                 onChange={(e) => setBaseCalloutFee(parseFloat(e.target.value) || 0)}
                 placeholder="5000"
-                className="w-48 h-11 px-3.5 rounded-lg border border-slate-300 text-sm text-slate-900 bg-white"
+                className="w-48 h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
 
             {/* Required Credentials Summary */}
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 space-y-2">
-              <span className="font-bold text-slate-900 block">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs text-slate-700 dark:text-slate-200 space-y-2">
+              <span className="font-bold text-slate-900 dark:text-white block">
                 Required Verification Checklist After Registration:
               </span>
               <ul className="list-disc pl-5 space-y-1 text-[11px]">
@@ -1056,7 +1056,7 @@ export function ProRegisterWizard({
               <button
                 type="button"
                 onClick={() => setCurrentStep(2)}
-                className="px-4 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
               >
                 ← Back
               </button>

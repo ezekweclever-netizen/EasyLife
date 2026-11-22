@@ -49,7 +49,7 @@ export default async function AdminLoginPage({
           <AdminLoginForm nextPath={safeNext} />
         </div>
 
-        <p className="text-center text-[11px] text-slate-500">
+        <p className="text-center text-[11px] text-slate-500 dark:text-slate-400">
           All administrative sessions and mutations are recorded to immutable audit logs.
         </p>
       </div>

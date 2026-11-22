@@ -147,12 +147,12 @@ export default function HelpCentrePage() {
       </Section>
 
       {/* Still need help */}
-      <Section tone="grey" className="border-t border-slate-200">
+      <Section tone="grey" className="border-t border-slate-200 dark:border-[#163654]">
         <div className="text-center max-w-xl mx-auto">
           <h3 className="text-xl font-bold text-[#0F172A]">
             Still have an unanswered question?
           </h3>
-          <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
             Our customer and technical support teams in Port Harcourt, Lagos, and Abuja are available to assist you Monday through Saturday.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-4">

@@ -227,7 +227,7 @@ export function NotificationBell({
         aria-label="View notifications"
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className="relative p-1.5 sm:p-2 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 transition cursor-pointer"
+        className="relative p-1.5 sm:p-2 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 dark:bg-slate-800 transition cursor-pointer"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -250,7 +250,7 @@ export function NotificationBell({
         <div
           role="region"
           aria-label="Notifications panel"
-          className="fixed sm:absolute left-3 right-3 sm:left-auto sm:right-0 top-[74px] sm:top-auto sm:mt-2 sm:w-96 bg-white rounded-2xl border border-[#E2E8F0] shadow-xl z-50 overflow-hidden"
+          className="fixed sm:absolute left-3 right-3 sm:left-auto sm:right-0 top-[74px] sm:top-auto sm:mt-2 sm:w-96 bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] shadow-xl z-50 overflow-hidden"
         >
           {/* Header */}
           <div className="p-3.5 border-b border-[#E2E8F0] flex items-center justify-between bg-[#F8FAFC]">
@@ -300,7 +300,7 @@ export function NotificationBell({
                     type="button"
                     onClick={() => handleMarkAsRead(n)}
                     className={`w-full text-left p-3.5 cursor-pointer transition-colors space-y-1.5 block ${
-                      !n.is_read ? "bg-teal-50/40 hover:bg-teal-50/70" : "hover:bg-slate-50"
+                      !n.is_read ? "bg-teal-50 dark:bg-teal-950/60/40 hover:bg-teal-50 dark:bg-teal-950/60/70" : "hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                     }`}
                   >
                     <div className="flex items-start gap-2.5">
@@ -332,7 +332,7 @@ export function NotificationBell({
                               key={ch}
                               className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
                                 isRejected && ch === "email"
-                                  ? "bg-red-100 text-red-700"
+                                  ? "bg-red-100 text-red-700 dark:text-red-400"
                                   : "bg-[#F1F5F9] text-[#64748B]"
                               }`}
                             >

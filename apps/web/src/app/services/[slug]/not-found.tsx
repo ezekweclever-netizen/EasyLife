@@ -30,7 +30,7 @@ export default function ServiceNotFound() {
           </Link>
           <Link
             href="/explore-services"
-            className="rounded-xl border border-[#DAE7E7] bg-white px-5 py-3 text-sm font-semibold text-[#154752] hover:bg-[#F3F8F8]"
+            className="rounded-xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] px-5 py-3 text-sm font-semibold text-[#154752] hover:bg-[#F3F8F8]"
           >
             Explore Verified Specialists
           </Link>

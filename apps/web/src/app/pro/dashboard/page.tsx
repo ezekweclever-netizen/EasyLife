@@ -32,13 +32,13 @@ export default async function ProDashboardPage() {
   if (!profile) {
     return (
       <div className="max-w-2xl mx-auto py-12 text-center">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center text-2xl">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-2xl">
           🛠️
         </div>
-        <h1 className="text-2xl font-bold text-slate-900">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
           Complete Your Professional Profile
         </h1>
-        <p className="mt-2 text-sm text-slate-600 max-w-md mx-auto">
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
           You are signed in, but you haven&apos;t registered your business or technical trade on EasyLife yet.
         </p>
         <div className="mt-6">
@@ -83,10 +83,10 @@ export default async function ProDashboardPage() {
           <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
             Professional Portal • {profile.primary_city}
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
             Welcome, {profile.business_name}
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             {profile.headline || `${profile.years_of_experience} years experienced specialist`}
           </p>
         </div>
@@ -100,7 +100,7 @@ export default async function ProDashboardPage() {
           </Link>
           <Link
             href="/pro/profile"
-            className="px-3.5 py-2 rounded-lg border border-slate-300 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+            className="px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
           >
             Edit Profile
           </Link>
@@ -137,10 +137,10 @@ export default async function ProDashboardPage() {
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-slate-900">
+              <h2 className="text-base font-bold text-slate-900 dark:text-white">
                 New Service Requests
               </h2>
-              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-teal-50 text-[#0D9488] border border-teal-200">
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] border border-teal-200 dark:border-teal-800">
                 {openRequests.length} Available
               </span>
             </div>
@@ -153,12 +153,12 @@ export default async function ProDashboardPage() {
           </div>
 
           {openRequests.length === 0 ? (
-            <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-white">
+            <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
               <span className="text-2xl block mb-2">🔍</span>
-              <p className="text-xs font-semibold text-slate-700">
+              <p className="text-xs font-semibold text-slate-700 dark:text-slate-200">
                 No new open requests in {profile.primary_city} right now.
               </p>
-              <p className="text-[11px] text-slate-500 mt-1 max-w-sm mx-auto">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
                 As customers submit repair requests matching your trade categories, they will appear here instantly.
               </p>
             </div>
@@ -167,7 +167,7 @@ export default async function ProDashboardPage() {
               {openRequests.slice(0, 3).map((job) => (
                 <div
                   key={job.id}
-                  className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition shadow-xs flex flex-col justify-between"
+                  className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 hover:border-slate-300 dark:border-slate-700 transition shadow-xs flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-2">
@@ -177,23 +177,23 @@ export default async function ProDashboardPage() {
                       <span
                         className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
                           job.urgency === "emergency"
-                            ? "bg-red-100 text-red-800"
-                            : "bg-slate-100 text-slate-700"
+                            ? "bg-red-100 text-red-800 dark:text-red-300"
+                            : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
                         }`}
                       >
                         {job.urgency}
                       </span>
                     </div>
 
-                    <h3 className="text-sm font-bold text-slate-900 mt-1">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white mt-1">
                       {job.title}
                     </h3>
 
-                    <p className="text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 line-clamp-2 leading-relaxed">
                       {job.description}
                     </p>
 
-                    <div className="mt-3 flex flex-wrap items-center gap-3 text-[11px] text-slate-500">
+                    <div className="mt-3 flex flex-wrap items-center gap-3 text-[11px] text-slate-500 dark:text-slate-400">
                       <span>📍 {job.service_address}</span>
                       {job.preferred_date && (
                         <span>📅 Preferred: {job.preferred_date}</span>
@@ -201,7 +201,7 @@ export default async function ProDashboardPage() {
                     </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                  <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                     <span className="text-[11px] text-slate-400 font-mono">
                       Ref: {job.reference_code}
                     </span>
@@ -224,10 +224,10 @@ export default async function ProDashboardPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-slate-900">
+                <h2 className="text-base font-bold text-slate-900 dark:text-white">
                   Active Jobs
                 </h2>
-                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                   {activeJobs.length} Ongoing
                 </span>
               </div>
@@ -240,12 +240,12 @@ export default async function ProDashboardPage() {
             </div>
 
             {activeJobs.length === 0 ? (
-              <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 bg-white">
+              <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
                 <span className="text-2xl block mb-2">⚡</span>
-                <p className="text-xs font-semibold text-slate-700">
+                <p className="text-xs font-semibold text-slate-700 dark:text-slate-200">
                   No active jobs in progress.
                 </p>
-                <p className="text-[11px] text-slate-500 mt-1">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                   Send quotes to open requests to book confirmed appointments.
                 </p>
               </div>
@@ -254,16 +254,16 @@ export default async function ProDashboardPage() {
                 {activeJobs.slice(0, 3).map((job) => (
                   <div
                     key={job.id}
-                    className="bg-white rounded-xl border border-slate-200 p-4 shadow-xs"
+                    className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs"
                   >
                     <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-xs font-mono font-medium text-slate-500">
+                      <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
                         {job.reference_code}
                       </span>
                       <span
                         className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
                           job.status === "in_progress"
-                            ? "bg-emerald-100 text-emerald-800 animate-pulse"
+                            ? "bg-emerald-100 text-emerald-800 dark:text-emerald-300 animate-pulse"
                             : "bg-blue-100 text-blue-800"
                         }`}
                       >
@@ -271,21 +271,21 @@ export default async function ProDashboardPage() {
                       </span>
                     </div>
 
-                    <h4 className="text-sm font-bold text-slate-900">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">
                       {job.title}
                     </h4>
 
-                    <p className="text-xs text-slate-600 mt-1">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
                       📍 {job.service_address}
                     </p>
 
                     {job.agreed_amount_kobo && (
-                      <div className="mt-2 text-xs font-semibold text-emerald-700">
+                      <div className="mt-2 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
                         Escrow Value: ₦{(job.agreed_amount_kobo / 100).toLocaleString("en-NG")}
                       </div>
                     )}
 
-                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between">
+                    <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                       <Link
                         href={`/pro/jobs/${job.id}`}
                         className="text-xs font-semibold text-[#0D9488] hover:underline"
@@ -302,7 +302,7 @@ export default async function ProDashboardPage() {
           {/* Pending Quotations Summary */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-slate-900">
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white">
                 Pending Quotations ({pendingQuotations.length})
               </h2>
               <Link
@@ -314,18 +314,18 @@ export default async function ProDashboardPage() {
             </div>
 
             {pendingQuotations.length === 0 ? (
-              <div className="p-4 rounded-xl border border-slate-200 bg-white text-xs text-slate-500 text-center">
+              <div className="p-4 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs text-slate-500 dark:text-slate-400 text-center">
                 No quotations currently awaiting customer acceptance.
               </div>
             ) : (
-              <div className="bg-white rounded-xl border border-slate-200 divide-y divide-slate-100 overflow-hidden shadow-xs">
+              <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] divide-y divide-slate-100 overflow-hidden shadow-xs">
                 {pendingQuotations.slice(0, 3).map((q) => (
                   <div key={q.id} className="p-3.5 flex items-center justify-between">
                     <div>
-                      <span className="text-xs font-bold text-slate-900 block font-mono">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white block font-mono">
                         {q.reference_code}
                       </span>
-                      <span className="text-[11px] text-slate-500">
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400">
                         {q.booking?.title || "Quoted Repair Job"}
                       </span>
                     </div>
@@ -333,7 +333,7 @@ export default async function ProDashboardPage() {
                       <span className="text-xs font-extrabold text-[#0D9488] block">
                         ₦{(q.total_amount_kobo / 100).toLocaleString("en-NG")}
                       </span>
-                      <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-full">
                         Awaiting Client
                       </span>
                     </div>

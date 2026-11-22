@@ -112,15 +112,15 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
         <div
           className={`p-4 rounded-2xl border text-xs font-semibold flex items-center justify-between ${
             feedback.type === "success"
-              ? "bg-emerald-50 text-emerald-900 border-emerald-200"
-              : "bg-red-50 text-red-900 border-red-200"
+              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 border-emerald-200 dark:border-emerald-800"
+              : "bg-red-50 dark:bg-red-950/60 text-red-900 border-red-200 dark:border-red-800"
           }`}
         >
           <span>{feedback.text}</span>
           <button
             type="button"
             onClick={() => setFeedback(null)}
-            className="text-slate-500 hover:text-slate-800"
+            className="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100"
           >
             ✕
           </button>
@@ -142,18 +142,18 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
             <span
               className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${
                 booking.status === "completed"
-                  ? "bg-emerald-100 text-emerald-800"
+                  ? "bg-emerald-100 text-emerald-800 dark:text-emerald-300"
                   : booking.status === "in_progress"
                   ? "bg-blue-100 text-blue-800"
                   : booking.status === "confirmed"
-                  ? "bg-teal-100 text-teal-800"
+                  ? "bg-teal-100 text-teal-800 dark:text-[#5CD3D5]"
                   : booking.status === "accepted"
                   ? "bg-cyan-100 text-cyan-800"
                   : booking.status === "cancelled"
-                  ? "bg-red-100 text-red-800"
+                  ? "bg-red-100 text-red-800 dark:text-red-300"
                   : booking.status === "disputed"
                   ? "bg-purple-100 text-purple-800"
-                  : "bg-amber-100 text-amber-800"
+                  : "bg-amber-100 text-amber-800 dark:text-amber-300"
               }`}
             >
               {booking.status.replace(/_/g, " ")}
@@ -166,7 +166,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
             <button
               type="button"
               onClick={() => setShowCancelModal(true)}
-              className="px-4 py-2 rounded-xl text-xs font-semibold border border-red-200 text-red-600 hover:bg-red-50 transition shadow-xs self-start sm:self-auto"
+              className="px-4 py-2 rounded-xl text-xs font-semibold border border-red-200 dark:border-red-800 text-red-600 hover:bg-red-50 dark:bg-red-950/60 transition shadow-xs self-start sm:self-auto"
             >
               Cancel Request
             </button>
@@ -175,7 +175,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
             <button
               type="button"
               onClick={() => setShowDisputeModal(true)}
-              className="px-3 py-2 rounded-xl text-xs font-semibold border border-amber-300 text-amber-800 hover:bg-amber-50 transition shadow-xs self-start sm:self-auto"
+              className="px-3 py-2 rounded-xl text-xs font-semibold border border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300 hover:bg-amber-50 dark:bg-amber-950/60 transition shadow-xs self-start sm:self-auto"
             >
               Report Problem
             </button>
@@ -199,7 +199,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
             This booking is currently subject to formal arbitration. Automatic completion and escrow payout have been strictly halted. An EasyLife administrator is examining evidence from both parties to document a binding resolution.
           </p>
           {booking.active_dispute?.resolution_summary && (
-            <div className="p-3 bg-white/80 rounded-xl border border-purple-200 text-xs text-purple-900">
+            <div className="p-3 bg-white dark:bg-[#0D223A]/80 rounded-xl border border-purple-200 text-xs text-purple-900">
               <strong>Resolution Summary:</strong> {booking.active_dispute.resolution_summary}
             </div>
           )}
@@ -207,14 +207,14 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       )}
 
       {/* Status Progress Timeline */}
-      <section className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-6">
+      <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-6">
         <h2 className="text-base font-bold text-[#0F172A]">Service Lifecycle &amp; Appointment Progress</h2>
 
         {isCancelled ? (
-          <div className="p-4 rounded-xl bg-red-50/70 border border-red-200 text-xs text-red-900 space-y-1">
+          <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/60/70 border border-red-200 dark:border-red-800 text-xs text-red-900 space-y-1">
             <p className="font-bold">This booking has been cancelled.</p>
             {booking.cancellation_reason && (
-              <p className="text-xs text-red-700">Reason: {booking.cancellation_reason}</p>
+              <p className="text-xs text-red-700 dark:text-red-400">Reason: {booking.cancellation_reason}</p>
             )}
           </div>
         ) : (
@@ -263,16 +263,16 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
 
       {/* Verified Customer Review (if published) */}
       {booking.review && (
-        <section className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-4">
+        <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-amber-400 text-lg">
                 {"★".repeat(booking.review.rating)}{"☆".repeat(5 - booking.review.rating)}
               </span>
-              <span className="text-xs font-bold text-slate-800">
+              <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
                 {booking.review.rating}.0 / 5.0 Rating
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800 uppercase tracking-wider ml-1">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800 dark:text-[#5CD3D5] uppercase tracking-wider ml-1">
                 Verified Customer
               </span>
             </div>
@@ -282,20 +282,20 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
           </div>
 
           {booking.review.title && (
-            <h4 className="text-sm font-bold text-slate-900">{booking.review.title}</h4>
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">{booking.review.title}</h4>
           )}
-          <p className="text-xs sm:text-sm text-slate-700 whitespace-pre-line leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 whitespace-pre-line leading-relaxed">
             "{booking.review.comment}"
           </p>
 
           {booking.review.photos && booking.review.photos.length > 0 && (
             <div className="space-y-1 pt-2">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+              <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                 Customer Uploaded Photos ({booking.review.photos.length})
               </span>
               <div className="flex gap-2 flex-wrap">
                 {booking.review.photos.map((photo, pIdx) => (
-                  <div key={pIdx} className="px-3 py-1.5 rounded-xl border bg-slate-50 text-[11px] font-mono text-slate-600 truncate max-w-xs">
+                  <div key={pIdx} className="px-3 py-1.5 rounded-xl border bg-slate-50 dark:bg-[#071526] text-[11px] font-mono text-slate-600 dark:text-slate-300 truncate max-w-xs">
                     📷 {photo.split("/").pop()}
                   </div>
                 ))}
@@ -304,11 +304,11 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
           )}
 
           {booking.review.professional_response && (
-            <div className="p-4 bg-teal-50/70 rounded-2xl border border-teal-200 text-xs space-y-1 mt-3">
+            <div className="p-4 bg-teal-50 dark:bg-teal-950/60/70 rounded-2xl border border-teal-200 dark:border-teal-800 text-xs space-y-1 mt-3">
               <span className="font-bold text-teal-950 block">Response from {booking.assigned_pro?.business_name || "Specialist"}:</span>
               <p className="text-teal-900 italic">"{booking.review.professional_response}"</p>
               {booking.review.responded_at && (
-                <span className="text-[10px] text-teal-700 font-mono block pt-1">
+                <span className="text-[10px] text-teal-700 dark:text-teal-400 font-mono block pt-1">
                   Responded on {new Date(booking.review.responded_at).toLocaleDateString("en-NG", { timeZone: "Africa/Lagos" })}
                 </span>
               )}
@@ -319,7 +319,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
 
       {/* Confirmed Appointment Card (if confirmed or scheduled) */}
       {booking.scheduled_start_at && ["confirmed", "scheduled", "in_progress", "completed"].includes(booking.status) && (
-        <section className="bg-gradient-to-r from-teal-50 to-emerald-50 rounded-3xl border border-teal-200 p-6 sm:p-8 shadow-xs space-y-4">
+        <section className="bg-gradient-to-r from-teal-50 to-emerald-50 rounded-3xl border border-teal-200 dark:border-teal-800 p-6 sm:p-8 shadow-xs space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0D9488] text-white uppercase tracking-wider mb-1">
@@ -328,16 +328,16 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
               <h2 className="text-lg font-bold text-teal-950">
                 Scheduled for {new Date(booking.scheduled_start_at).toLocaleDateString("en-NG", { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "Africa/Lagos" })}
               </h2>
-              <p className="text-xs text-teal-800">
+              <p className="text-xs text-teal-800 dark:text-[#5CD3D5]">
                 Time Window: {new Date(booking.scheduled_start_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })}
                 {booking.scheduled_end_at && ` – ${new Date(booking.scheduled_end_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })}`}
               </p>
             </div>
 
             {booking.agreed_amount_kobo && (
-              <div className="text-right sm:border-l sm:border-teal-200 sm:pl-6 space-y-2">
+              <div className="text-right sm:border-l sm:border-teal-200 dark:border-teal-800 sm:pl-6 space-y-2">
                 <div>
-                  <span className="text-[11px] text-teal-700 block font-medium">Agreed Escrow Value</span>
+                  <span className="text-[11px] text-teal-700 dark:text-teal-400 block font-medium">Agreed Escrow Value</span>
                   <span className="text-xl font-extrabold text-[#0D9488]">
                     ₦{(booking.agreed_amount_kobo / 100).toLocaleString("en-NG")}
                   </span>
@@ -364,7 +364,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       )}
 
       {/* Quotations Review & Comparison Section */}
-      <section className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-6">
+      <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-6">
         <QuotationComparison
           bookingId={booking.id}
           preferredDate={booking.preferred_date}
@@ -379,7 +379,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       {/* Problem Details & Service Location */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <section className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-4">
+          <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-4">
             <h2 className="text-base font-bold text-[#0F172A]">Problem Details &amp; Diagnosis</h2>
             
             <div className="space-y-1">
@@ -413,17 +413,17 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
 
           {/* Historical Status Log */}
           {booking.status_history && booking.status_history.length > 0 && (
-            <section className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-3">
+            <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-3">
               <h2 className="text-sm font-bold text-[#0F172A]">Status History &amp; Audit Trail</h2>
               <div className="divide-y divide-slate-100 text-xs">
                 {booking.status_history.map((hist, idx) => (
                   <div key={idx} className="py-2.5 flex items-start justify-between gap-4">
                     <div>
-                      <span className="font-bold text-slate-800 capitalize">
+                      <span className="font-bold text-slate-800 dark:text-slate-100 capitalize">
                         {hist.to_status.replace(/_/g, " ")}
                       </span>
                       {hist.reason && (
-                        <p className="text-[11px] text-slate-500 mt-0.5">{hist.reason}</p>
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{hist.reason}</p>
                       )}
                     </div>
                     <span className="text-[10px] text-slate-400 font-mono shrink-0">
@@ -438,7 +438,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
 
         {/* Sidebar: Location & Cancellation Policy */}
         <div className="space-y-6">
-          <section className="bg-white rounded-3xl border border-[#E2E8F0] p-6 shadow-xs space-y-3 text-xs">
+          <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 shadow-xs space-y-3 text-xs">
             <h2 className="text-sm font-bold text-[#0F172A]">Service Location</h2>
             <div>
               <span className="text-[#64748B] block">City &amp; State</span>
@@ -455,8 +455,8 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
           </section>
 
           {/* Cancellation Policy Box */}
-          <div className="bg-slate-50 rounded-3xl border border-slate-200 p-6 space-y-2 text-xs text-slate-600">
-            <span className="font-bold text-slate-900 block">Cancellation Policy</span>
+          <div className="bg-slate-50 dark:bg-[#071526] rounded-3xl border border-slate-200 dark:border-[#163654] p-6 space-y-2 text-xs text-slate-600 dark:text-slate-300">
+            <span className="font-bold text-slate-900 dark:text-white block">Cancellation Policy</span>
             <p className="text-[11px] leading-relaxed">
               • Free cancellation while awaiting or reviewing quotations.
             </p>
@@ -473,23 +473,23 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       {/* Cancellation Modal */}
       {showCancelModal && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200 dark:border-[#163654]">
             <div>
-              <h3 className="text-lg font-bold text-slate-900">Cancel Service Request</h3>
-              <p className="text-xs text-slate-500 mt-1">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Cancel Service Request</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                 Please indicate your reason for cancelling this booking.
               </p>
             </div>
 
             {cancelError && (
-              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-800">
+              <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs font-semibold text-red-800 dark:text-red-300">
                 {cancelError}
               </div>
             )}
 
             <form onSubmit={handleCancelBooking} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Reason for Cancellation *
                 </label>
                 <textarea
@@ -498,7 +498,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                   value={cancelReason}
                   onChange={(e) => setCancelReason(e.target.value)}
                   placeholder="e.g. Issue resolved independently, emergency reschedule required..."
-                  className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900 bg-white"
+                  className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                 />
               </div>
 
@@ -506,7 +506,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                 <button
                   type="button"
                   onClick={() => setShowCancelModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800"
                 >
                   Keep Booking
                 </button>

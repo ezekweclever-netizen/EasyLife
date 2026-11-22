@@ -118,7 +118,7 @@ export default function HowItWorksPage() {
           <StepList steps={customerSteps} />
         </div>
 
-        <div className="mt-12 rounded-2xl bg-teal-50 border border-teal-200 p-6 sm:p-8">
+        <div className="mt-12 rounded-2xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 p-6 sm:p-8">
           <h3 className="text-base font-bold text-teal-950">
             Why Escrow Protection Matters in Nigeria
           </h3>
@@ -141,7 +141,7 @@ export default function HowItWorksPage() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs">
             <h4 className="text-base font-bold text-[#0F172A] mb-3">
               What We Provide Every Verified Technician
             </h4>
@@ -156,16 +156,16 @@ export default function HowItWorksPage() {
             />
           </div>
 
-          <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs flex flex-col justify-between">
+          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs flex flex-col justify-between">
             <div>
               <h4 className="text-base font-bold text-[#0F172A] mb-3">
                 Professional Conduct Standards
               </h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 EasyLife holds all technicians to strict professional conduct: punctuality, respectful communication, honest sourcing of genuine replacement parts, and maintaining safe working conditions in homes and offices.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-slate-100">
+            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
               <ButtonLink href="/become-a-professional" className="w-full text-center">
                 Apply to Join as a Professional
               </ButtonLink>

@@ -99,12 +99,12 @@ export function TeamManagerClient({
   return (
     <div className="space-y-6">
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-slate-200 dark:border-[#163654]">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Team Members & Access Roles
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Authorize facility managers, engineers, and accounting personnel to manage properties and approve maintenance.
           </p>
         </div>
@@ -120,9 +120,9 @@ export function TeamManagerClient({
       </div>
 
       {/* Active Team Members */}
-      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-        <div className="p-4 border-b border-slate-200 bg-slate-50/50 flex items-center justify-between">
-          <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
+        <div className="p-4 border-b border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/50 flex items-center justify-between">
+          <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider">
             Active Organization Members ({members.length})
           </h2>
         </div>
@@ -134,21 +134,21 @@ export function TeamManagerClient({
             const email = member.profiles?.email || "—";
 
             return (
-              <div key={member.id} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50/60 transition">
+              <div key={member.id} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-slate-200 text-slate-700 font-bold flex items-center justify-center text-sm">
+                  <div className="w-10 h-10 rounded-full bg-slate-200 text-slate-700 dark:text-slate-200 font-bold flex items-center justify-center text-sm">
                     {displayName.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <div className="font-bold text-slate-900 text-sm">{displayName}</div>
-                    <div className="text-xs text-slate-500">{email}</div>
+                    <div className="font-bold text-slate-900 dark:text-white text-sm">{displayName}</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400">{email}</div>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 sm:justify-end">
                   <span
                     className={`px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider border capitalize ${
-                      roleBadgeColors[member.role] || "bg-slate-100 text-slate-700"
+                      roleBadgeColors[member.role] || "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
                     }`}
                   >
                     {member.role.replace("_", " ")}
@@ -159,7 +159,7 @@ export function TeamManagerClient({
                       {member.permissions.map((p, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-2xs font-medium"
+                          className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-2xs font-medium"
                         >
                           {p}
                         </span>
@@ -175,9 +175,9 @@ export function TeamManagerClient({
 
       {/* Pending Invitations */}
       {invitations.length > 0 && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
-          <div className="p-4 border-b border-slate-200 bg-slate-50/50">
-            <h2 className="text-sm font-bold text-slate-800 uppercase tracking-wider">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
+          <div className="p-4 border-b border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/50">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider">
               Pending Invitations ({invitations.length})
             </h2>
           </div>
@@ -185,13 +185,13 @@ export function TeamManagerClient({
             {invitations.map((inv) => (
               <div key={inv.id} className="p-4 flex items-center justify-between">
                 <div>
-                  <div className="font-semibold text-slate-900 text-xs">✉️ {inv.email}</div>
-                  <div className="text-2xs text-slate-500 mt-0.5">
+                  <div className="font-semibold text-slate-900 dark:text-white text-xs">✉️ {inv.email}</div>
+                  <div className="text-2xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Invited as <span className="font-semibold capitalize">{inv.role.replace("_", " ")}</span> • Sent on{" "}
                     {new Date(inv.created_at).toLocaleDateString()}
                   </div>
                 </div>
-                <span className="px-2 py-0.5 rounded-full text-2xs font-semibold bg-amber-50 text-amber-800 border border-amber-200 uppercase">
+                <span className="px-2 py-0.5 rounded-full text-2xs font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 uppercase">
                   {inv.status}
                 </span>
               </div>
@@ -203,12 +203,12 @@ export function TeamManagerClient({
       {/* Modal: Invite Team Member */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 my-8">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-              <h2 className="text-lg font-bold text-slate-900">Invite Authorized Team Member</h2>
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Invite Authorized Team Member</h2>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 text-lg font-bold"
+                className="text-slate-400 hover:text-slate-600 dark:text-slate-300 text-lg font-bold"
               >
                 ✕
               </button>
@@ -218,8 +218,8 @@ export function TeamManagerClient({
               <div
                 className={`p-3 rounded-xl mb-4 text-xs font-medium ${
                   feedback.ok
-                    ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                    : "bg-red-50 text-red-800 border border-red-200"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                    : "bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
                 }`}
               >
                 {feedback.message}
@@ -228,7 +228,7 @@ export function TeamManagerClient({
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Team Member Email *
                 </label>
                 <input
@@ -236,18 +236,18 @@ export function TeamManagerClient({
                   name="email"
                   required
                   placeholder="facilities@easylife-corp.ng"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Assigned Role *
                 </label>
                 <select
                   value={selectedRole}
                   onChange={(e) => setSelectedRole(e.target.value as BusinessMemberRole)}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 >
                   <option value="admin">Admin (Full administrative & configuration access)</option>
                   <option value="facility_manager">Facility Manager (Manages assets, requests, & schedules)</option>
@@ -256,14 +256,14 @@ export function TeamManagerClient({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-2">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-2">
                   Granular Permissions
                 </label>
                 <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
                   {PERMISSION_OPTIONS.map((perm) => (
                     <label
                       key={perm.id}
-                      className="flex items-start gap-2.5 p-2 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer text-xs"
+                      className="flex items-start gap-2.5 p-2 rounded-lg border border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] cursor-pointer text-xs"
                     >
                       <input
                         type="checkbox"
@@ -272,19 +272,19 @@ export function TeamManagerClient({
                         className="mt-0.5 rounded text-teal-600 focus:ring-teal-500"
                       />
                       <div>
-                        <span className="font-bold text-slate-800 block">{perm.label}</span>
-                        <span className="text-2xs text-slate-500">{perm.desc}</span>
+                        <span className="font-bold text-slate-800 dark:text-slate-100 block">{perm.label}</span>
+                        <span className="text-2xs text-slate-500 dark:text-slate-400">{perm.desc}</span>
                       </div>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition"
+                  className="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 rounded-lg transition"
                 >
                   Cancel
                 </button>

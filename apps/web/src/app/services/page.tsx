@@ -179,7 +179,7 @@ export default async function ServicesCatalogueIndexPage({
           method="get"
           role="search"
           aria-label="Filter EasyLife service catalogue"
-          className="rounded-2xl bg-white border border-[#DAE7E7] p-5 shadow-xs space-y-4"
+          className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-5 shadow-xs space-y-4"
         >
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-sm sm:text-base font-bold text-[#154752]">
@@ -224,7 +224,7 @@ export default async function ServicesCatalogueIndexPage({
                 id="cat-filter"
                 name="cat"
                 defaultValue={normalizedCat}
-                className="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#1F2F34]"
+                className="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#1F2F34]"
               >
                 <option value="">All Categories ({tree.length})</option>
                 {tree.map((c) => (
@@ -246,7 +246,7 @@ export default async function ServicesCatalogueIndexPage({
                 id="sub-filter"
                 name="sub"
                 defaultValue={normalizedSub}
-                className="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#1F2F34]"
+                className="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#1F2F34]"
               >
                 <option value="">All Subcategories</option>
                 {availableSubcategoriesForFilter.map((s) => (
@@ -281,20 +281,20 @@ export default async function ServicesCatalogueIndexPage({
         {unavailableCategoryNotice && (
           <div
             role="status"
-            className="rounded-2xl border border-amber-200 bg-amber-50 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            className="rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/60 p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
           >
             <div>
               <h2 className="text-sm sm:text-base font-bold text-amber-950">
                 Requested Category Currently Unavailable
               </h2>
-              <p className="text-xs sm:text-sm text-amber-800 mt-1">
+              <p className="text-xs sm:text-sm text-amber-800 dark:text-amber-300 mt-1">
                 {unavailableCategoryNotice} You can browse active categories below or submit a custom request.
               </p>
             </div>
             <div className="flex items-center gap-2.5 shrink-0">
               <Link
                 href="/services"
-                className="px-4 py-2 rounded-xl bg-white border border-amber-300 text-xs font-bold text-amber-900"
+                className="px-4 py-2 rounded-xl bg-white dark:bg-[#0D223A] border border-amber-300 dark:border-amber-700 text-xs font-bold text-amber-900"
               >
                 View All Active Services
               </Link>
@@ -311,13 +311,13 @@ export default async function ServicesCatalogueIndexPage({
         {summary.hasError && (!isFilteredView || paginatedSearch?.hasError) ? (
           <div
             role="alert"
-            className="rounded-2xl border border-amber-200 bg-amber-50 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+            className="rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/60 p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
           >
             <div>
               <h2 className="text-base font-bold text-amber-950">
                 Unable to load live catalogue services
               </h2>
-              <p className="text-sm text-amber-800 mt-1">
+              <p className="text-sm text-amber-800 dark:text-amber-300 mt-1">
                 Our service database did not respond cleanly. Please try again or use our general request wizard.
               </p>
             </div>
@@ -330,7 +330,7 @@ export default async function ServicesCatalogueIndexPage({
               </Link>
               <Link
                 href="/book"
-                className="px-4 py-2 rounded-xl bg-white border border-amber-300 text-amber-900 text-xs font-semibold"
+                className="px-4 py-2 rounded-xl bg-white dark:bg-[#0D223A] border border-amber-300 dark:border-amber-700 text-amber-900 text-xs font-semibold"
               >
                 Submit Request
               </Link>
@@ -361,7 +361,7 @@ export default async function ServicesCatalogueIndexPage({
             </div>
 
             {paginatedSearch.items.length === 0 ? (
-              <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center max-w-xl mx-auto space-y-4">
+              <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] p-10 text-center max-w-xl mx-auto space-y-4">
                 <h3 className="text-base font-bold text-[#154752]">
                   No active services matched this criteria
                 </h3>
@@ -377,7 +377,7 @@ export default async function ServicesCatalogueIndexPage({
                   </Link>
                   <Link
                     href="/services"
-                    className="rounded-xl border border-[#DAE7E7] bg-white px-4 py-2.5 text-xs font-semibold text-[#154752]"
+                    className="rounded-xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] px-4 py-2.5 text-xs font-semibold text-[#154752]"
                   >
                     Clear All Filters
                   </Link>
@@ -391,7 +391,7 @@ export default async function ServicesCatalogueIndexPage({
                     return (
                       <article
                         key={srv.id}
-                        className="rounded-2xl border border-[#DAE7E7] bg-white p-5 flex flex-col justify-between hover:border-[#24989A] transition-colors shadow-xs"
+                        className="rounded-2xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] p-5 flex flex-col justify-between hover:border-[#24989A] transition-colors shadow-xs"
                       >
                         <div>
                           <div className="flex items-center justify-between gap-2 text-[11px]">
@@ -400,7 +400,7 @@ export default async function ServicesCatalogueIndexPage({
                             </span>
                             <div className="flex items-center gap-1">
                               {srv.requires_trade_certification && (
-                                <span className="rounded-full bg-teal-50 border border-teal-200 px-2 py-0.5 text-[10px] font-bold text-[#0F766E]">
+                                <span className="rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-2 py-0.5 text-[10px] font-bold text-[#0F766E]">
                                   Certified Trade
                                 </span>
                               )}
@@ -478,12 +478,12 @@ export default async function ServicesCatalogueIndexPage({
                       {currentPage > 1 ? (
                         <Link
                           href={buildCataloguePageHref(currentPage - 1)}
-                          className="px-3.5 py-2 rounded-xl border border-[#DAE7E7] bg-white text-xs font-bold text-[#154752] hover:bg-[#EEF6F7]"
+                          className="px-3.5 py-2 rounded-xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] hover:bg-[#EEF6F7]"
                         >
                           ← Previous
                         </Link>
                       ) : (
-                        <span className="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-400">
+                        <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
                           ← Previous
                         </span>
                       )}
@@ -496,7 +496,7 @@ export default async function ServicesCatalogueIndexPage({
                           className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors ${
                             p === currentPage
                               ? "bg-[#154752] text-white border-[#154752]"
-                              : "bg-white text-[#154752] border-[#DAE7E7] hover:bg-[#EEF6F7]"
+                              : "bg-white dark:bg-[#0D223A] text-[#154752] border-[#DAE7E7] hover:bg-[#EEF6F7]"
                           }`}
                         >
                           {p}
@@ -506,12 +506,12 @@ export default async function ServicesCatalogueIndexPage({
                       {currentPage < totalPages ? (
                         <Link
                           href={buildCataloguePageHref(currentPage + 1)}
-                          className="px-3.5 py-2 rounded-xl border border-[#DAE7E7] bg-white text-xs font-bold text-[#154752] hover:bg-[#EEF6F7]"
+                          className="px-3.5 py-2 rounded-xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] hover:bg-[#EEF6F7]"
                         >
                           Next →
                         </Link>
                       ) : (
-                        <span className="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-400">
+                        <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
                           Next →
                         </span>
                       )}
@@ -522,7 +522,7 @@ export default async function ServicesCatalogueIndexPage({
             )}
           </section>
         ) : tree.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center space-y-3">
+          <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] p-10 text-center space-y-3">
             <h2 className="text-lg font-bold text-[#154752]">
               No active catalogue services found
             </h2>
@@ -547,7 +547,7 @@ export default async function ServicesCatalogueIndexPage({
                 <a
                   key={catNode.id}
                   href={`#cat-${catNode.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-white border border-[#DAE7E7] px-3.5 py-1.5 text-xs font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors shadow-xs"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white dark:bg-[#0D223A] border border-[#DAE7E7] px-3.5 py-1.5 text-xs font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors shadow-xs"
                 >
                   <Icon
                     name={resolveCatalogueIcon(catNode.icon_name, catNode.slug)}
@@ -573,7 +573,7 @@ export default async function ServicesCatalogueIndexPage({
                   <section
                     key={cat.id}
                     id={`cat-${cat.slug}`}
-                    className="scroll-mt-24 rounded-3xl bg-white border border-[#DAE7E7] p-6 sm:p-8 shadow-xs space-y-6"
+                    className="scroll-mt-24 rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-6 sm:p-8 shadow-xs space-y-6"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#EEF6F7]">
                       <div className="flex items-start gap-3.5">
@@ -666,12 +666,12 @@ export default async function ServicesCatalogueIndexPage({
                                         </span>
                                         <div className="flex items-center gap-1">
                                           {srv.requires_trade_certification && (
-                                            <span className="rounded-full bg-teal-50 border border-teal-200 px-2 py-0.5 text-[10px] font-bold text-[#0F766E]">
+                                            <span className="rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-2 py-0.5 text-[10px] font-bold text-[#0F766E]">
                                               Certified Trade
                                             </span>
                                           )}
                                           {srv.is_popular && (
-                                            <span className="rounded-full bg-amber-50 border border-amber-200 px-2 py-0.5 text-[10px] font-bold text-amber-800">
+                                            <span className="rounded-full bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 px-2 py-0.5 text-[10px] font-bold text-amber-800 dark:text-amber-300">
                                               Popular
                                             </span>
                                           )}
@@ -710,7 +710,7 @@ export default async function ServicesCatalogueIndexPage({
                                       <div className="flex items-center gap-2 shrink-0">
                                         <Link
                                           href={`/services/${srv.slug}`}
-                                          className="rounded-lg border border-[#DAE7E7] bg-white px-2.5 py-1.5 font-semibold text-[#154752] hover:bg-[#EEF6F7]"
+                                          className="rounded-lg border border-[#DAE7E7] bg-white dark:bg-[#0D223A] px-2.5 py-1.5 font-semibold text-[#154752] hover:bg-[#EEF6F7]"
                                         >
                                           View
                                         </Link>

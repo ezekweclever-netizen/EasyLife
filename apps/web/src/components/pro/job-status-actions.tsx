@@ -90,8 +90,8 @@ export function JobStatusActions({
         <div
           className={`p-3 rounded-lg text-xs font-semibold ${
             message.type === "success"
-              ? "bg-emerald-50 text-emerald-900 border border-emerald-200"
-              : "bg-red-50 text-red-900 border border-red-200"
+              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 border border-emerald-200 dark:border-emerald-800"
+              : "bg-red-50 dark:bg-red-950/60 text-red-900 border border-red-200 dark:border-red-800"
           }`}
         >
           {message.text}
@@ -125,14 +125,14 @@ export function JobStatusActions({
 
         {/* If completion already requested */}
         {currentStatus === "pro_marked_complete" && (
-          <span className="px-3 py-1.5 rounded-lg bg-teal-50 border border-teal-200 text-teal-800 text-xs font-semibold">
+          <span className="px-3 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#5CD3D5] text-xs font-semibold">
             ⏳ Completion Submitted — Awaiting Customer Sign-off &amp; Escrow Release
           </span>
         )}
 
         {/* If completed */}
         {currentStatus === "completed" && (
-          <span className="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
+          <span className="px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">
             ✓ Job Completed &amp; Signed Off
           </span>
         )}
@@ -155,7 +155,7 @@ export function JobStatusActions({
           <button
             type="button"
             onClick={() => setShowScheduleModal(true)}
-            className="px-3 py-2 rounded-lg border border-slate-300 bg-white text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+            className="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
           >
             Update Appointment
           </button>
@@ -165,17 +165,17 @@ export function JobStatusActions({
       {/* Completion Modal */}
       {showCompletionModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl max-w-md w-full border border-slate-200 shadow-2xl p-6">
-            <h3 className="text-base font-bold text-slate-900">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-md w-full border border-slate-200 dark:border-[#163654] shadow-2xl p-6">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Submit Job Completion Request
             </h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               Provide brief notes on the work completed. Once submitted, the customer is invited to inspect the work and release escrow funds.
             </p>
 
             <form onSubmit={handleCompleteJob} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Completion Notes &amp; Handover Summary
                 </label>
                 <textarea
@@ -184,7 +184,7 @@ export function JobStatusActions({
                   value={completionNotes}
                   onChange={(e) => setCompletionNotes(e.target.value)}
                   placeholder="e.g. Diagnosed burnt coil, installed new 2.5HP compressor, tested cooling gas pressure at 65 PSI. System tested cold for 30 minutes with client present."
-                  className="w-full p-3 rounded-lg border border-slate-300 text-xs text-slate-900"
+                  className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -192,7 +192,7 @@ export function JobStatusActions({
                 <button
                   type="button"
                   onClick={() => setShowCompletionModal(false)}
-                  className="px-4 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                  className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                 >
                   Cancel
                 </button>
@@ -212,17 +212,17 @@ export function JobStatusActions({
       {/* Schedule Update Modal */}
       {showScheduleModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl max-w-sm w-full border border-slate-200 shadow-2xl p-6">
-            <h3 className="text-base font-bold text-slate-900">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-sm w-full border border-slate-200 dark:border-[#163654] shadow-2xl p-6">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Update Appointment Time
             </h3>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
               Select the revised arrival date and time agreed upon with the customer.
             </p>
 
             <form onSubmit={handleUpdateSchedule} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   New Arrival Time
                 </label>
                 <input
@@ -230,7 +230,7 @@ export function JobStatusActions({
                   required
                   value={newScheduleDate}
                   onChange={(e) => setNewScheduleDate(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -238,7 +238,7 @@ export function JobStatusActions({
                 <button
                   type="button"
                   onClick={() => setShowScheduleModal(false)}
-                  className="px-4 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                  className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                 >
                   Cancel
                 </button>

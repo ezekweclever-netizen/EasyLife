@@ -27,7 +27,7 @@ export default async function BusinessAssetsPage({ searchParams }: AssetsPagePro
 
   if (!business) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-[#071526]">
         <RegisterBusinessClient />
       </div>
     );
@@ -64,7 +64,7 @@ export default async function BusinessAssetsPage({ searchParams }: AssetsPagePro
   }));
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#071526]">
       <BusinessNav
         businessName={String(business.name || "Enterprise Operations")}
         businessCity={String(business.city || "Port Harcourt")}

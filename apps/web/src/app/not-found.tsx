@@ -6,7 +6,7 @@ export default function NotFoundPage() {
   return (
     <PublicShell>
       <section className="bg-[#EEF6F7] py-20 px-4 sm:px-6 lg:px-8 border-b border-[#DAE7E7]">
-        <div className="max-w-xl mx-auto rounded-3xl bg-white border border-[#DAE7E7] p-8 sm:p-10 text-center space-y-5 shadow-xs">
+        <div className="max-w-xl mx-auto rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-8 sm:p-10 text-center space-y-5 shadow-xs">
           <span className="inline-flex items-center rounded-full bg-[#EEF6F7] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#24989A]">
             404 — Page Not Found
           </span>

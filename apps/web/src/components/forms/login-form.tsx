@@ -43,9 +43,9 @@ export function LoginForm({
       {oauthError && (
         <div
           role="alert"
-          className="rounded-lg bg-amber-50 border border-amber-200 p-3 text-xs text-amber-900 flex items-start gap-2"
+          className="rounded-lg bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 p-3 text-xs text-amber-900 flex items-start gap-2"
         >
-          <span className="font-bold text-amber-700 mt-0.5">!</span>
+          <span className="font-bold text-amber-700 dark:text-amber-300 mt-0.5">!</span>
           <span>{oauthError}</span>
         </div>
       )}
@@ -54,10 +54,10 @@ export function LoginForm({
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center" aria-hidden="true">
-          <div className="w-full border-t border-slate-200" />
+          <div className="w-full border-t border-slate-200 dark:border-[#163654]" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-2.5 text-slate-400 font-semibold">
+          <span className="bg-white dark:bg-[#0D223A] px-2.5 text-slate-400 font-semibold">
             or sign in with email
           </span>
         </div>
@@ -68,14 +68,14 @@ export function LoginForm({
         {state.status === "error" && state.message && (
           <div
             role="alert"
-            className="rounded-lg bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 p-3 text-xs sm:text-sm text-red-800 dark:text-red-300 space-y-2"
+            className="rounded-lg bg-red-50 dark:bg-red-950/60 dark:bg-red-950/40 border border-red-200 dark:border-red-800 dark:border-red-900 p-3 text-xs sm:text-sm text-red-800 dark:text-red-300 space-y-2"
           >
             <div className="flex items-start gap-2.5">
               <span className="font-bold text-red-600 mt-0.5">!</span>
               <span className="flex-1">{state.message}</span>
             </div>
             {isUnverified && (
-              <div className="pt-2 border-t border-red-200 dark:border-red-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+              <div className="pt-2 border-t border-red-200 dark:border-red-800 dark:border-red-900/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                 <span className="text-xs text-red-700 dark:text-red-400">
                   Didn&apos;t receive the link or it expired?
                 </span>
@@ -97,8 +97,8 @@ export function LoginForm({
             role="status"
             className={`p-3 rounded-lg text-xs font-medium ${
               resendStatus.ok
-                ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
-                : "bg-red-50 dark:bg-red-950/40 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
+                ? "bg-emerald-50 dark:bg-emerald-950/60 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                : "bg-red-50 dark:bg-red-950/60 dark:bg-red-950/40 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
             }`}
           >
             {resendStatus.message}
@@ -109,7 +109,7 @@ export function LoginForm({
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-semibold text-[#0F172A] mb-1"
+            className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1"
           >
             Email Address
           </label>
@@ -122,10 +122,10 @@ export function LoginForm({
             required
             aria-invalid={Boolean(state.fieldErrors?.email)}
             aria-describedby={state.fieldErrors?.email ? "email-error" : undefined}
-            className={`w-full h-10.5 px-3.5 rounded-lg border text-sm sm:text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-10.5 px-3.5 rounded-lg border text-sm sm:text-base text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.email
-                ? "border-red-500 bg-red-50/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
             placeholder="e.g. name@example.com"
           />
@@ -141,13 +141,13 @@ export function LoginForm({
           <div className="flex items-center justify-between mb-1">
             <label
               htmlFor="password"
-              className="block text-sm font-semibold text-[#0F172A]"
+              className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200"
             >
               Password
             </label>
             <Link
               href="/forgot-password"
-              className="text-xs sm:text-sm text-[#0F766E] hover:underline font-medium"
+              className="text-xs sm:text-sm text-[#0F766E] dark:text-[#5CD3D5] hover:underline font-medium"
             >
               Forgot password?
             </Link>
@@ -161,10 +161,10 @@ export function LoginForm({
               required
               aria-invalid={Boolean(state.fieldErrors?.password)}
               aria-describedby={state.fieldErrors?.password ? "password-error" : undefined}
-              className={`w-full h-10.5 px-3.5 pr-12 rounded-lg border text-sm sm:text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+              className={`w-full h-10.5 px-3.5 pr-12 rounded-lg border text-sm sm:text-base text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
                 state.fieldErrors?.password
-                  ? "border-red-500 bg-red-50/20"
-                  : "border-[#CBD5E1] hover:border-slate-400"
+                  ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                  : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
               }`}
               placeholder="Enter your password"
             />
@@ -172,7 +172,7 @@ export function LoginForm({
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
               aria-label={showPassword ? "Hide password" : "Show password"}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500 hover:text-slate-800 p-1 cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100 p-1 cursor-pointer"
             >
               {showPassword ? "Hide" : "Show"}
             </button>
@@ -194,11 +194,11 @@ export function LoginForm({
         </Button>
 
         {/* Helpful links */}
-        <div className="pt-1 text-center text-xs text-slate-600">
+        <div className="pt-1 text-center text-xs text-slate-600 dark:text-slate-300">
           <span>Don&apos;t have an EasyLife account yet? </span>
           <Link
             href="/register"
-            className="font-semibold text-[#0D9488] hover:underline"
+            className="font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
           >
             Create an account
           </Link>

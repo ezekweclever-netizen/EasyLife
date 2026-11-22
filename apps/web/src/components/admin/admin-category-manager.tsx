@@ -519,54 +519,54 @@ export function AdminCategoryManager({
     <div className="space-y-6">
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Main Categories
           </div>
           <div className="mt-1.5 flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold text-slate-900">
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
               {kpis.mainTotal}
             </span>
-            <span className="text-xs font-semibold text-emerald-700">
+            <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-300">
               {kpis.mainActive} active
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Subcategories
           </div>
           <div className="mt-1.5 flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold text-slate-900">
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
               {kpis.subTotal}
             </span>
-            <span className="text-xs font-semibold text-teal-700">
+            <span className="text-xs font-semibold text-teal-700 dark:text-teal-400">
               {kpis.subActive} active
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Homepage Pinned
           </div>
           <div className="mt-1.5 flex items-baseline gap-2">
-            <span className="text-2xl font-extrabold text-slate-900">
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
               {kpis.homepageCount}
             </span>
-            <span className="text-xs font-medium text-slate-500">
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
               main categories
             </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Catalogue Services
           </div>
           <div className="mt-1.5 flex items-baseline justify-between gap-2">
-            <span className="text-2xl font-extrabold text-slate-900">
+            <span className="text-2xl font-extrabold text-slate-900 dark:text-white">
               {kpis.totalServices}
             </span>
             <Link
@@ -580,7 +580,7 @@ export function AdminCategoryManager({
       </div>
 
       {/* Controls Bar */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-4">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 flex-1">
             <input
@@ -588,7 +588,7 @@ export function AdminCategoryManager({
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search categories, subcategories, slugs, or keywords..."
-              className="w-full sm:max-w-sm h-10 px-3.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/30"
+              className="w-full sm:max-w-sm h-10 px-3.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500/30"
             />
             <select
               value={filterMode}
@@ -596,7 +596,7 @@ export function AdminCategoryManager({
                 setFilterMode(e.target.value as CategoryFilterMode)
               }
               aria-label="Filter categories"
-              className="h-10 px-3 rounded-xl border border-slate-300 bg-white text-xs sm:text-sm font-semibold text-slate-800"
+              className="h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-100"
             >
               <option value="all_non_archived">All Categories &amp; Subcategories</option>
               <option value="active_non_archived">Active Only</option>
@@ -616,14 +616,14 @@ export function AdminCategoryManager({
                 <button
                   type="button"
                   onClick={() => setAllExpanded(true)}
-                  className="px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                  className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                 >
                   Expand All
                 </button>
                 <button
                   type="button"
                   onClick={() => setAllExpanded(false)}
-                  className="px-3 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                  className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                 >
                   Collapse All
                 </button>
@@ -632,7 +632,7 @@ export function AdminCategoryManager({
             <button
               type="button"
               onClick={() => openAddModal(nonArchivedMain[0]?.id || "")}
-              className="px-3.5 py-2 rounded-xl border border-teal-600 text-teal-700 text-xs font-bold hover:bg-teal-50 transition"
+              className="px-3.5 py-2 rounded-xl border border-teal-600 text-teal-700 dark:text-teal-400 text-xs font-bold hover:bg-teal-50 dark:bg-teal-950/60 transition"
             >
               + Add Subcategory
             </button>
@@ -651,8 +651,8 @@ export function AdminCategoryManager({
         <div
           className={`p-4 rounded-xl text-xs sm:text-sm font-semibold flex items-center justify-between ${
             feedback.type === "success"
-              ? "bg-emerald-50 text-emerald-900 border border-emerald-200"
-              : "bg-red-50 text-red-900 border border-red-200"
+              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-900 border border-emerald-200 dark:border-emerald-800"
+              : "bg-red-50 dark:bg-red-950/60 text-red-900 border border-red-200 dark:border-red-800"
           }`}
         >
           <span>{feedback.text}</span>
@@ -668,17 +668,17 @@ export function AdminCategoryManager({
 
       {/* Archived Categories View */}
       {filterMode === "archived" ? (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-          <div className="px-5 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
-            <h2 className="text-sm font-bold text-slate-800">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] flex items-center justify-between">
+            <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100">
               Archived Categories &amp; Subcategories ({archivedCategories.length})
             </h2>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-slate-500 dark:text-slate-400">
               Historical bookings and pro links remain preserved.
             </span>
           </div>
           {archivedCategories.length === 0 ? (
-            <div className="p-10 text-center text-sm text-slate-500">
+            <div className="p-10 text-center text-sm text-slate-500 dark:text-slate-400">
               No archived categories found.
             </div>
           ) : (
@@ -690,16 +690,16 @@ export function AdminCategoryManager({
                 >
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 text-slate-600">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
                         {cat.parent_id
                           ? `Subcategory of ${parentLookup.get(cat.parent_id) || "Parent"}`
                           : "Main Category"}
                       </span>
-                      <span className="font-bold text-sm text-slate-900">
+                      <span className="font-bold text-sm text-slate-900 dark:text-white">
                         {cat.name}
                       </span>
                     </div>
-                    <div className="text-xs text-slate-500 mt-0.5 font-mono">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-mono">
                       /{cat.slug} • Bookings: {cat.booking_count}
                     </div>
                   </div>
@@ -707,7 +707,7 @@ export function AdminCategoryManager({
                     type="button"
                     disabled={isPending}
                     onClick={() => handleRestore(cat)}
-                    className="px-3.5 py-2 rounded-lg bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold hover:bg-teal-100 disabled:opacity-50"
+                    className="px-3.5 py-2 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#5CD3D5] text-xs font-bold hover:bg-teal-100 disabled:opacity-50"
                   >
                     Restore Category
                   </button>
@@ -718,10 +718,10 @@ export function AdminCategoryManager({
         </div>
       ) : (
         /* Hierarchical Main Category + Subcategory Table */
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider border-b border-slate-200">
+              <thead className="bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-[#163654]">
                 <tr>
                   <th className="py-3 px-4 w-24 text-center">Order</th>
                   <th className="py-3 px-4 min-w-[260px]">
@@ -737,12 +737,12 @@ export function AdminCategoryManager({
                   <th className="py-3 px-4 text-right min-w-[210px]">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-800">
+              <tbody className="divide-y divide-slate-100 text-slate-800 dark:text-slate-100">
                 {visibleMainTree.length === 0 ? (
                   <tr>
                     <td
                       colSpan={6}
-                      className="py-10 text-center text-sm text-slate-500"
+                      className="py-10 text-center text-sm text-slate-500 dark:text-slate-400"
                     >
                       No categories match the current search or filter.
                     </td>
@@ -757,9 +757,9 @@ export function AdminCategoryManager({
                     return (
                       <React.Fragment key={main.id}>
                         {/* MAIN CATEGORY ROW */}
-                        <tr className="bg-white hover:bg-slate-50/80 transition">
+                        <tr className="bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition">
                           <td className="py-3.5 px-4 text-center">
-                            <div className="flex items-center justify-center gap-1.5 font-mono font-bold text-slate-600">
+                            <div className="flex items-center justify-center gap-1.5 font-mono font-bold text-slate-600 dark:text-slate-300">
                               <span>#{main.display_order}</span>
                               <div className="flex flex-col">
                                 <button
@@ -772,7 +772,7 @@ export function AdminCategoryManager({
                                       "up"
                                     )
                                   }
-                                  className="text-[10px] leading-none p-0.5 text-slate-400 hover:text-slate-900 disabled:opacity-20"
+                                  className="text-[10px] leading-none p-0.5 text-slate-400 hover:text-slate-900 dark:hover:text-white dark:text-white disabled:opacity-20"
                                   title="Move Main Category Up"
                                 >
                                   ▲
@@ -791,7 +791,7 @@ export function AdminCategoryManager({
                                       "down"
                                     )
                                   }
-                                  className="text-[10px] leading-none p-0.5 text-slate-400 hover:text-slate-900 disabled:opacity-20"
+                                  className="text-[10px] leading-none p-0.5 text-slate-400 hover:text-slate-900 dark:hover:text-white dark:text-white disabled:opacity-20"
                                   title="Move Main Category Down"
                                 >
                                   ▼
@@ -805,7 +805,7 @@ export function AdminCategoryManager({
                               <button
                                 type="button"
                                 onClick={() => toggleExpand(main.id)}
-                                className="mt-1 w-6 h-6 rounded-md border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 flex items-center justify-center text-[10px] font-bold shrink-0"
+                                className="mt-1 w-6 h-6 rounded-md border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold shrink-0"
                                 title={
                                   isExpanded
                                     ? "Collapse subcategories"
@@ -819,27 +819,27 @@ export function AdminCategoryManager({
                                 <img
                                   src={main.image_url}
                                   alt={main.name}
-                                  className="w-11 h-11 rounded-xl object-cover border border-slate-200 bg-slate-100 shrink-0"
+                                  className="w-11 h-11 rounded-xl object-cover border border-slate-200 dark:border-[#163654] bg-slate-100 dark:bg-slate-800 shrink-0"
                                 />
                               ) : (
-                                <div className="w-11 h-11 rounded-xl bg-teal-50 border border-teal-200 text-[#0D9488] flex items-center justify-center font-mono text-[10px] font-bold shrink-0">
+                                <div className="w-11 h-11 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-[#0D9488] flex items-center justify-center font-mono text-[10px] font-bold shrink-0">
                                   {main.icon_name || "tool"}
                                 </div>
                               )}
 
                               <div className="min-w-0">
                                 <div className="flex items-center gap-2 flex-wrap">
-                                  <span className="font-bold text-sm text-slate-900">
+                                  <span className="font-bold text-sm text-slate-900 dark:text-white">
                                     {main.name}
                                   </span>
-                                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] font-bold uppercase">
+                                  <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-bold uppercase">
                                     Main
                                   </span>
                                 </div>
                                 <div className="text-[11px] font-mono text-slate-400">
                                   /{main.slug}
                                 </div>
-                                <p className="text-xs text-slate-600 line-clamp-1 mt-0.5">
+                                <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-1 mt-0.5">
                                   {main.description || "No description"}
                                 </p>
                               </div>
@@ -851,7 +851,7 @@ export function AdminCategoryManager({
                               {(main.keywords || []).slice(0, 4).map((kw) => (
                                 <span
                                   key={kw}
-                                  className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-medium"
+                                  className="px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-medium"
                                 >
                                   {kw}
                                 </span>
@@ -862,13 +862,13 @@ export function AdminCategoryManager({
                                 </span>
                               )}
                             </div>
-                            <div className="text-[11px] text-slate-500 font-medium">
+                            <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
                               {main.subcategory_count} subcats • {main.service_count} services •{" "}
                               {main.professional_service_count} pros
                             </div>
                           </td>
 
-                          <td className="py-3.5 px-4 text-center font-mono font-semibold text-slate-700">
+                          <td className="py-3.5 px-4 text-center font-mono font-semibold text-slate-700 dark:text-slate-200">
                             {(main.default_commission_bps / 100).toFixed(1)}%
                           </td>
 
@@ -880,8 +880,8 @@ export function AdminCategoryManager({
                                 onClick={() => handleToggleFlag(main, "is_active")}
                                 className={`px-2.5 py-1 rounded-full text-[10px] font-bold border transition ${
                                   main.is_active
-                                    ? "bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100"
-                                    : "bg-slate-100 text-slate-500 border-slate-200 hover:bg-slate-200"
+                                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100"
+                                    : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-[#163654] hover:bg-slate-200"
                                 }`}
                               >
                                 {main.is_active ? "Active" : "Disabled"}
@@ -892,8 +892,8 @@ export function AdminCategoryManager({
                                 onClick={() => handleToggleFlag(main, "is_featured")}
                                 className={`px-2 py-1 rounded-full text-[10px] font-bold border transition ${
                                   main.is_featured
-                                    ? "bg-amber-50 text-amber-800 border-amber-200"
-                                    : "bg-white text-slate-400 border-slate-200 hover:text-slate-700"
+                                    ? "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800"
+                                    : "bg-white dark:bg-[#0D223A] text-slate-400 border-slate-200 dark:border-[#163654] hover:text-slate-700 dark:text-slate-200"
                                 }`}
                               >
                                 Featured
@@ -905,7 +905,7 @@ export function AdminCategoryManager({
                                 className={`px-2 py-1 rounded-full text-[10px] font-bold border transition ${
                                   main.is_popular
                                     ? "bg-indigo-50 text-indigo-800 border-indigo-200"
-                                    : "bg-white text-slate-400 border-slate-200 hover:text-slate-700"
+                                    : "bg-white dark:bg-[#0D223A] text-slate-400 border-slate-200 dark:border-[#163654] hover:text-slate-700 dark:text-slate-200"
                                 }`}
                               >
                                 Popular
@@ -918,8 +918,8 @@ export function AdminCategoryManager({
                                 }
                                 className={`px-2 py-1 rounded-full text-[10px] font-bold border transition ${
                                   main.show_on_homepage
-                                    ? "bg-teal-50 text-teal-800 border-teal-200"
-                                    : "bg-white text-slate-400 border-slate-200 hover:text-slate-700"
+                                    ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border-teal-200 dark:border-teal-800"
+                                    : "bg-white dark:bg-[#0D223A] text-slate-400 border-slate-200 dark:border-[#163654] hover:text-slate-700 dark:text-slate-200"
                                 }`}
                               >
                                 Homepage
@@ -932,21 +932,21 @@ export function AdminCategoryManager({
                               <button
                                 type="button"
                                 onClick={() => openAddModal(main.id)}
-                                className="px-2.5 py-1.5 rounded-lg bg-teal-50 border border-teal-200 text-[11px] font-bold text-teal-800 hover:bg-teal-100"
+                                className="px-2.5 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-[11px] font-bold text-teal-800 dark:text-[#5CD3D5] hover:bg-teal-100"
                                 title="Add subcategory under this main category"
                               >
                                 + Sub
                               </button>
                               <Link
                                 href={`/admin/services?category=${main.id}`}
-                                className="px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px] font-semibold text-slate-700 hover:bg-slate-100"
+                                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
                               >
                                 Services
                               </Link>
                               <button
                                 type="button"
                                 onClick={() => openEditModal(main)}
-                                className="px-2.5 py-1.5 rounded-lg border border-slate-200 text-[11px] font-semibold text-slate-700 hover:bg-slate-100"
+                                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
                               >
                                 Edit
                               </button>
@@ -954,7 +954,7 @@ export function AdminCategoryManager({
                                 type="button"
                                 disabled={isPending}
                                 onClick={() => handleArchive(main)}
-                                className="px-2.5 py-1.5 rounded-lg border border-red-200 text-[11px] font-semibold text-red-700 hover:bg-red-50 disabled:opacity-40"
+                                className="px-2.5 py-1.5 rounded-lg border border-red-200 dark:border-red-800 text-[11px] font-semibold text-red-700 dark:text-red-400 hover:bg-red-50 dark:bg-red-950/60 disabled:opacity-40"
                               >
                                 Archive
                               </button>
@@ -976,10 +976,10 @@ export function AdminCategoryManager({
                             return (
                               <tr
                                 key={sub.id}
-                                className="bg-slate-50/65 hover:bg-teal-50/30 transition"
+                                className="bg-slate-50 dark:bg-[#071526]/65 hover:bg-teal-50 dark:bg-teal-950/60/30 transition"
                               >
                                 <td className="py-3 px-4 text-center">
-                                  <div className="flex items-center justify-center gap-1.5 font-mono text-[11px] text-slate-500">
+                                  <div className="flex items-center justify-center gap-1.5 font-mono text-[11px] text-slate-500 dark:text-slate-400">
                                     <span>#{sub.display_order}</span>
                                     <div className="flex flex-col">
                                       <button
@@ -992,7 +992,7 @@ export function AdminCategoryManager({
                                             "up"
                                           )
                                         }
-                                        className="text-[9px] leading-none p-0.5 text-slate-400 hover:text-slate-900 disabled:opacity-20"
+                                        className="text-[9px] leading-none p-0.5 text-slate-400 hover:text-slate-900 dark:hover:text-white dark:text-white disabled:opacity-20"
                                         title="Move Subcategory Up"
                                       >
                                         ▲
@@ -1011,7 +1011,7 @@ export function AdminCategoryManager({
                                             "down"
                                           )
                                         }
-                                        className="text-[9px] leading-none p-0.5 text-slate-400 hover:text-slate-900 disabled:opacity-20"
+                                        className="text-[9px] leading-none p-0.5 text-slate-400 hover:text-slate-900 dark:hover:text-white dark:text-white disabled:opacity-20"
                                         title="Move Subcategory Down"
                                       >
                                         ▼
@@ -1029,26 +1029,26 @@ export function AdminCategoryManager({
                                       <img
                                         src={sub.image_url}
                                         alt={sub.name}
-                                        className="w-9 h-9 rounded-lg object-cover border border-slate-200 bg-white shrink-0"
+                                        className="w-9 h-9 rounded-lg object-cover border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] shrink-0"
                                       />
                                     ) : (
-                                      <div className="w-9 h-9 rounded-lg bg-white border border-slate-200 text-slate-600 flex items-center justify-center font-mono text-[10px] font-bold shrink-0">
+                                      <div className="w-9 h-9 rounded-lg bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 flex items-center justify-center font-mono text-[10px] font-bold shrink-0">
                                         {sub.icon_name || "tool"}
                                       </div>
                                     )}
                                     <div className="min-w-0">
                                       <div className="flex items-center gap-1.5 flex-wrap">
-                                        <span className="font-semibold text-xs sm:text-sm text-slate-800">
+                                        <span className="font-semibold text-xs sm:text-sm text-slate-800 dark:text-slate-100">
                                           {sub.name}
                                         </span>
-                                        <span className="px-1.5 py-0.5 rounded bg-teal-50 text-teal-800 border border-teal-200 text-[10px] font-semibold">
+                                        <span className="px-1.5 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800 text-[10px] font-semibold">
                                           Subcategory
                                         </span>
                                       </div>
                                       <div className="text-[11px] font-mono text-slate-400">
                                         /{sub.slug}
                                       </div>
-                                      <p className="text-xs text-slate-500 line-clamp-1">
+                                      <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-1">
                                         {sub.description || "No description"}
                                       </p>
                                     </div>
@@ -1060,18 +1060,18 @@ export function AdminCategoryManager({
                                     {(sub.keywords || []).slice(0, 3).map((kw) => (
                                       <span
                                         key={kw}
-                                        className="px-2 py-0.5 rounded-full bg-white border border-slate-200 text-slate-600 text-[10px]"
+                                        className="px-2 py-0.5 rounded-full bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 text-[10px]"
                                       >
                                         {kw}
                                       </span>
                                     ))}
                                   </div>
-                                  <div className="text-[11px] text-slate-500">
+                                  <div className="text-[11px] text-slate-500 dark:text-slate-400">
                                     {sub.service_count} services
                                   </div>
                                 </td>
 
-                                <td className="py-3 px-4 text-center font-mono text-slate-600">
+                                <td className="py-3 px-4 text-center font-mono text-slate-600 dark:text-slate-300">
                                   {(sub.default_commission_bps / 100).toFixed(1)}%
                                 </td>
 
@@ -1085,8 +1085,8 @@ export function AdminCategoryManager({
                                       }
                                       className={`px-2.5 py-1 rounded-full text-[10px] font-bold border transition ${
                                         sub.is_active
-                                          ? "bg-emerald-50 text-emerald-800 border-emerald-200"
-                                          : "bg-slate-100 text-slate-500 border-slate-200"
+                                          ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
+                                          : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-[#163654]"
                                       }`}
                                     >
                                       {sub.is_active ? "Active" : "Disabled"}
@@ -1099,8 +1099,8 @@ export function AdminCategoryManager({
                                       }
                                       className={`px-2 py-1 rounded-full text-[10px] font-bold border transition ${
                                         sub.is_featured
-                                          ? "bg-amber-50 text-amber-800 border-amber-200"
-                                          : "bg-white text-slate-400 border-slate-200"
+                                          ? "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800"
+                                          : "bg-white dark:bg-[#0D223A] text-slate-400 border-slate-200 dark:border-[#163654]"
                                       }`}
                                     >
                                       Featured
@@ -1114,7 +1114,7 @@ export function AdminCategoryManager({
                                       className={`px-2 py-1 rounded-full text-[10px] font-bold border transition ${
                                         sub.is_popular
                                           ? "bg-indigo-50 text-indigo-800 border-indigo-200"
-                                          : "bg-white text-slate-400 border-slate-200"
+                                          : "bg-white dark:bg-[#0D223A] text-slate-400 border-slate-200 dark:border-[#163654]"
                                       }`}
                                     >
                                       Popular
@@ -1126,14 +1126,14 @@ export function AdminCategoryManager({
                                   <div className="inline-flex items-center justify-end gap-1.5">
                                     <Link
                                       href={`/admin/services?category=${main.id}&subcategory=${sub.id}`}
-                                      className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-[11px] font-semibold text-slate-700 hover:bg-slate-100"
+                                      className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
                                     >
                                       Services
                                     </Link>
                                     <button
                                       type="button"
                                       onClick={() => openEditModal(sub)}
-                                      className="px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-[11px] font-semibold text-slate-700 hover:bg-slate-100"
+                                      className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
                                     >
                                       Edit
                                     </button>
@@ -1141,7 +1141,7 @@ export function AdminCategoryManager({
                                       type="button"
                                       disabled={isPending}
                                       onClick={() => handleArchive(sub)}
-                                      className="px-2.5 py-1.5 rounded-lg border border-red-200 bg-white text-[11px] font-semibold text-red-700 hover:bg-red-50 disabled:opacity-40"
+                                      className="px-2.5 py-1.5 rounded-lg border border-red-200 dark:border-red-800 bg-white dark:bg-[#0D223A] text-[11px] font-semibold text-red-700 dark:text-red-400 hover:bg-red-50 dark:bg-red-950/60 disabled:opacity-40"
                                     >
                                       Archive
                                     </button>
@@ -1163,24 +1163,24 @@ export function AdminCategoryManager({
       {/* Add / Edit Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 shadow-2xl p-6 sm:p-8">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-200 dark:border-[#163654] shadow-2xl p-6 sm:p-8">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-5">
               <div>
-                <h3 className="text-lg font-extrabold text-slate-900">
+                <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">
                   {editingCategory
                     ? `Edit ${editingCategory.parent_id ? "Subcategory" : "Main Category"}: ${editingCategory.name}`
                     : formParentId
                       ? "Create New Subcategory"
                       : "Create New Main Category"}
                 </h3>
-                <p className="text-xs text-slate-500 mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   Configure hierarchy, image asset, search keywords, and homepage visibility.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="text-slate-400 hover:text-slate-700 p-1.5 text-base font-bold"
+                className="text-slate-400 hover:text-slate-700 dark:text-slate-200 p-1.5 text-base font-bold"
               >
                 ✕
               </button>
@@ -1189,7 +1189,7 @@ export function AdminCategoryManager({
             <form onSubmit={handleSaveCategory} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Name *
                   </label>
                   <input
@@ -1198,12 +1198,12 @@ export function AdminCategoryManager({
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
                     placeholder="e.g. Solar & Inverter Systems"
-                    className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs sm:text-sm text-slate-900"
+                    className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     URL Slug (auto-derived if empty)
                   </label>
                   <input
@@ -1211,20 +1211,20 @@ export function AdminCategoryManager({
                     value={formSlug}
                     onChange={(e) => setFormSlug(e.target.value)}
                     placeholder="e.g. solar-inverter-systems"
-                    className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs sm:text-sm text-slate-900 font-mono"
+                    className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white font-mono"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Parent Main Category
                 </label>
                 <select
                   value={formParentId}
                   disabled={editingHasActiveSubcategories}
                   onChange={(e) => setFormParentId(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs sm:text-sm text-slate-900 bg-white disabled:bg-slate-100 disabled:text-slate-500"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] disabled:bg-slate-100 dark:bg-slate-800 disabled:text-slate-500 dark:text-slate-400"
                 >
                   <option value="">None (Top-Level Main Category)</option>
                   {nonArchivedMain
@@ -1236,14 +1236,14 @@ export function AdminCategoryManager({
                     ))}
                 </select>
                 {editingHasActiveSubcategories && (
-                  <p className="text-[11px] text-amber-700 mt-1">
+                  <p className="text-[11px] text-amber-700 dark:text-amber-300 mt-1">
                     This main category owns active subcategories, so it must stay at top level.
                   </p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Description *
                 </label>
                 <textarea
@@ -1252,14 +1252,14 @@ export function AdminCategoryManager({
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
                   placeholder="Describe the services covered by this category..."
-                  className="w-full p-3 rounded-lg border border-slate-300 text-xs sm:text-sm text-slate-900"
+                  className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white"
                 />
               </div>
 
               {/* Image Upload & URL */}
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] space-y-3">
                 <div className="flex items-center justify-between">
-                  <label className="block text-xs font-bold text-slate-800">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-100">
                     Category Image (PNG / JPG / WEBP, max 5 MB)
                   </label>
                   {formImagePreview && (
@@ -1278,10 +1278,10 @@ export function AdminCategoryManager({
                     <img
                       src={formImagePreview}
                       alt="Category preview"
-                      className="w-16 h-16 rounded-xl object-cover border border-slate-200 bg-white shrink-0"
+                      className="w-16 h-16 rounded-xl object-cover border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] shrink-0"
                     />
                   ) : (
-                    <div className="w-16 h-16 rounded-xl border border-dashed border-slate-300 bg-white flex items-center justify-center text-[11px] text-slate-400 shrink-0">
+                    <div className="w-16 h-16 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] flex items-center justify-center text-[11px] text-slate-400 shrink-0">
                       No image
                     </div>
                   )}
@@ -1291,7 +1291,7 @@ export function AdminCategoryManager({
                       type="file"
                       accept="image/png,image/jpeg,image/webp"
                       onChange={handleImageFileChange}
-                      className="block w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-teal-50 file:text-teal-800 hover:file:bg-teal-100"
+                      className="block w-full text-xs text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-teal-50 dark:bg-teal-950/60 file:text-teal-800 dark:text-[#5CD3D5] hover:file:bg-teal-100"
                     />
                     <input
                       type="text"
@@ -1304,7 +1304,7 @@ export function AdminCategoryManager({
                         }
                       }}
                       placeholder="Or paste existing URL / /categories/... path"
-                      className="w-full h-9 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-800 font-mono"
+                      className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-800 dark:text-slate-100 font-mono"
                     />
                   </div>
                 </div>
@@ -1312,7 +1312,7 @@ export function AdminCategoryManager({
 
               {/* Keywords */}
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Search Keywords (comma-separated)
                 </label>
                 <input
@@ -1320,14 +1320,14 @@ export function AdminCategoryManager({
                   value={formKeywords}
                   onChange={(e) => setFormKeywords(e.target.value)}
                   placeholder="e.g. borehole, submersible pump, plumbing, pipe leak"
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs sm:text-sm text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white"
                 />
                 {parsedKeywordTags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {parsedKeywordTags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-medium"
+                        className="px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#5CD3D5] text-[11px] font-medium"
                       >
                         {tag}
                       </span>
@@ -1338,13 +1338,13 @@ export function AdminCategoryManager({
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Category Icon
                   </label>
                   <select
                     value={formIcon}
                     onChange={(e) => setFormIcon(e.target.value)}
-                    className="w-full h-10 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                    className="w-full h-10 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                   >
                     {AVAILABLE_ICONS.map((ic) => (
                       <option key={ic.name} value={ic.name}>
@@ -1355,7 +1355,7 @@ export function AdminCategoryManager({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Default Commission (%)
                   </label>
                   <input
@@ -1365,12 +1365,12 @@ export function AdminCategoryManager({
                     max="50"
                     value={formCommissionPct}
                     onChange={(e) => setFormCommissionPct(e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs sm:text-sm text-slate-900"
+                    className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Display Order
                   </label>
                   <input
@@ -1381,48 +1381,48 @@ export function AdminCategoryManager({
                     onChange={(e) =>
                       setFormDisplayOrder(parseInt(e.target.value, 10) || 0)
                     }
-                    className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs sm:text-sm text-slate-900"
+                    className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
 
               {/* Visibility Toggles */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-                <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 cursor-pointer">
+                <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formIsActive}
                     onChange={(e) => setFormIsActive(e.target.checked)}
-                    className="rounded border-slate-300 text-teal-600"
+                    className="rounded border-slate-300 dark:border-slate-700 text-teal-600"
                   />
                   <span>Active</span>
                 </label>
 
-                <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 cursor-pointer">
+                <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formIsFeatured}
                     onChange={(e) => setFormIsFeatured(e.target.checked)}
-                    className="rounded border-slate-300 text-teal-600"
+                    className="rounded border-slate-300 dark:border-slate-700 text-teal-600"
                   />
                   <span>Featured</span>
                 </label>
 
-                <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-800 cursor-pointer">
+                <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formIsPopular}
                     onChange={(e) => setFormIsPopular(e.target.checked)}
-                    className="rounded border-slate-300 text-teal-600"
+                    className="rounded border-slate-300 dark:border-slate-700 text-teal-600"
                   />
                   <span>Popular</span>
                 </label>
 
                 <label
-                  className={`flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 text-xs font-semibold cursor-pointer ${
+                  className={`flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold cursor-pointer ${
                     formParentId
-                      ? "bg-slate-50 text-slate-400 cursor-not-allowed"
-                      : "text-slate-800"
+                      ? "bg-slate-50 dark:bg-[#071526] text-slate-400 cursor-not-allowed"
+                      : "text-slate-800 dark:text-slate-100"
                   }`}
                 >
                   <input
@@ -1430,17 +1430,17 @@ export function AdminCategoryManager({
                     disabled={Boolean(formParentId)}
                     checked={!formParentId && formShowOnHomepage}
                     onChange={(e) => setFormShowOnHomepage(e.target.checked)}
-                    className="rounded border-slate-300 text-teal-600"
+                    className="rounded border-slate-300 dark:border-slate-700 text-teal-600"
                   />
                   <span>Homepage</span>
                 </label>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                  className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                 >
                   Cancel
                 </button>

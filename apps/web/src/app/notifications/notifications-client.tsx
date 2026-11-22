@@ -109,7 +109,7 @@ export function NotificationsClient({
   return (
     <div className="space-y-4">
       {/* Controls & Filter Bar */}
-      <div className="bg-white rounded-2xl border border-[#E2E8F0] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
           {[
             { id: "all", label: "All Alerts" },
@@ -124,7 +124,7 @@ export function NotificationsClient({
               className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition ${
                 selectedChannel === tab.id
                   ? "bg-[#0F766E] text-white shadow-xs"
-                  : "bg-slate-100 text-[#64748B] hover:bg-slate-200/70"
+                  : "bg-slate-100 dark:bg-slate-800 text-[#64748B] hover:bg-slate-200/70"
               }`}
             >
               {tab.label}
@@ -145,7 +145,7 @@ export function NotificationsClient({
       </div>
 
       {/* Notifications List */}
-      <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-sm overflow-hidden divide-y divide-[#F1F5F9]">
+      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] shadow-sm overflow-hidden divide-y divide-[#F1F5F9]">
         {filtered.length === 0 ? (
           <div className="p-12 text-center space-y-2">
             <span className="text-3xl">🔔</span>
@@ -163,12 +163,12 @@ export function NotificationsClient({
               <div
                 key={n.id}
                 className={`p-4 sm:p-5 transition-colors space-y-3 ${
-                  !n.is_read ? "bg-teal-50/30" : "hover:bg-slate-50/50"
+                  !n.is_read ? "bg-teal-50 dark:bg-teal-950/60/30" : "hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/50"
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-2xl bg-white border border-[#E2E8F0] shadow-2xs flex items-center justify-center text-lg shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#0D223A] border border-[#E2E8F0] shadow-2xs flex items-center justify-center text-lg shrink-0">
                       {getEventIcon(n.notification_type)}
                     </div>
                     <div className="space-y-1 min-w-0">
@@ -212,10 +212,10 @@ export function NotificationsClient({
                           key={ch}
                           className={`px-2 py-0.5 rounded-lg text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 ${
                             isChannelRejected
-                              ? "bg-red-100 text-red-700 border border-red-200"
+                              ? "bg-red-100 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800"
                               : isDelivered
-                              ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                              : "bg-slate-100 text-slate-700"
+                              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
                           }`}
                         >
                           <span>{ch === "in_app" ? "In-App" : ch.toUpperCase()}</span>
@@ -265,7 +265,7 @@ export function NotificationsClient({
 
                 {/* Expandable Delivery Audit Panel */}
                 {isDeliveriesExpanded && n.deliveries && (
-                  <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2 mt-2">
+                  <div className="p-3 bg-slate-50 dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-[#163654] text-xs space-y-2 mt-2">
                     <p className="font-bold text-[#0F172A] text-[11px] uppercase tracking-wider">
                       Multi-Channel Delivery Audit Record
                     </p>
@@ -273,10 +273,10 @@ export function NotificationsClient({
                       {n.deliveries.map((del) => (
                         <div key={del.id} className="py-2 flex items-center justify-between gap-4">
                           <div>
-                            <span className="font-bold uppercase text-slate-900 mr-2">
+                            <span className="font-bold uppercase text-slate-900 dark:text-white mr-2">
                               {del.channel}
                             </span>
-                            <span className="text-slate-500 font-mono text-[10px]">
+                            <span className="text-slate-500 dark:text-slate-400 font-mono text-[10px]">
                               To: {del.recipient_destination} • Provider: {del.provider}
                             </span>
                           </div>
@@ -284,10 +284,10 @@ export function NotificationsClient({
                             <span
                               className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                 del.status === "delivered"
-                                  ? "bg-emerald-100 text-emerald-800"
+                                  ? "bg-emerald-100 text-emerald-800 dark:text-emerald-300"
                                   : del.status === "rejected"
-                                  ? "bg-red-100 text-red-800"
-                                  : "bg-amber-100 text-amber-800"
+                                  ? "bg-red-100 text-red-800 dark:text-red-300"
+                                  : "bg-amber-100 text-amber-800 dark:text-amber-300"
                               }`}
                             >
                               {del.status.toUpperCase()}

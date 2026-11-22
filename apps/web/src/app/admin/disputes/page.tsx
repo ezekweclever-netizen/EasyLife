@@ -59,21 +59,21 @@ export default async function AdminDisputesPage() {
     <div className="min-h-screen bg-[#F8FAFC] py-10 px-4 sm:px-6 lg:px-8 text-[#0F172A]">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
           <div>
-            <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
-              <Link href="/dashboard" className="hover:text-slate-800">
+            <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1">
+              <Link href="/dashboard" className="hover:text-slate-800 dark:text-slate-100">
                 Dashboard
               </Link>
               <span>/</span>
-              <span className="text-slate-800 font-semibold">Service Accountability</span>
+              <span className="text-slate-800 dark:text-slate-100 font-semibold">Service Accountability</span>
               <span>/</span>
               <span className="text-purple-700 font-bold">Dispute Management</span>
             </div>
-            <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
+            <h1 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
               Service Dispute Arbitration Console
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
               Arbitrate complaints, evaluate evidence, assign administrators, and ensure disputed bookings are never automatically completed without rigorous oversight.
             </p>
           </div>
@@ -81,13 +81,13 @@ export default async function AdminDisputesPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/admin/reviews"
-              className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition shadow-xs"
+              className="px-4 py-2.5 rounded-xl bg-white dark:bg-[#0D223A] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition shadow-xs"
             >
               ★ Review Moderation
             </Link>
             <Link
               href="/admin/categories"
-              className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition shadow-xs"
+              className="px-4 py-2.5 rounded-xl bg-white dark:bg-[#0D223A] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition shadow-xs"
             >
               Categories
             </Link>

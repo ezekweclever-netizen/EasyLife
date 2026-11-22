@@ -132,7 +132,7 @@ export function ProfilePhotoUploader({
                 type="button"
                 disabled={isPending}
                 onClick={handleRemove}
-                className="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-red-200 dark:border-red-900/60 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer disabled:opacity-50"
+                className="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-red-200 dark:border-red-800 dark:border-red-900/60 text-red-600 dark:text-red-400 hover:bg-red-50 dark:bg-red-950/60 dark:hover:bg-red-950/40 transition-colors cursor-pointer disabled:opacity-50"
               >
                 Remove
               </button>
@@ -148,7 +148,7 @@ export function ProfilePhotoUploader({
       {errorMsg && (
         <div
           role="alert"
-          className="p-2.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-xs text-red-700 dark:text-red-300 font-medium"
+          className="p-2.5 rounded-xl bg-red-50 dark:bg-red-950/60 dark:bg-red-950/40 border border-red-200 dark:border-red-800 dark:border-red-900 text-xs text-red-700 dark:text-red-400 dark:text-red-300 font-medium"
         >
           {errorMsg}
         </div>
@@ -157,7 +157,7 @@ export function ProfilePhotoUploader({
       {successMsg && (
         <div
           role="status"
-          className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900 text-xs text-emerald-700 dark:text-emerald-300 font-medium"
+          className="p-2.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 dark:border-emerald-900 text-xs text-emerald-700 dark:text-emerald-300 font-medium"
         >
           {successMsg}
         </div>

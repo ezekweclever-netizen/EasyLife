@@ -122,16 +122,16 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {blockedForBooking && unavailableServiceNotice ? (
-          <div className="bg-white rounded-3xl border border-amber-200 shadow-xs p-8 text-center max-w-2xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-amber-200 dark:border-amber-800 shadow-xs p-8 text-center max-w-2xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
               {unavailableServiceNotice.status === "paused"
                 ? "Service Temporarily Paused"
                 : "Service Unavailable"}
             </div>
-            <h1 className="text-2xl font-extrabold text-slate-900">
+            <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">
               {unavailableServiceNotice.name} Cannot Be Booked Right Now
             </h1>
-            <p className="text-sm text-slate-600 leading-relaxed">
+            <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               {unavailableServiceNotice.reason}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 pt-3">
@@ -143,7 +143,7 @@ export default async function BookServicePage({ searchParams }: BookPageProps) {
               </Link>
               <Link
                 href="/dashboard"
-                className="px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 text-sm font-bold transition"
+                className="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-slate-700 dark:text-slate-200 text-sm font-bold transition"
               >
                 Return to Dashboard
               </Link>

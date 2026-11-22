@@ -74,14 +74,14 @@ export default function AboutPage() {
               title="Solving the Urban Maintenance Paradox"
               description="Across Nigeria's vibrant urban centres, households and business owners face constant friction with essential services."
             />
-            <div className="mt-6 space-y-4 text-sm text-slate-600 leading-relaxed">
+            <div className="mt-6 space-y-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               <p>
                 From sudden generator failures during power grid outages to leaking borehole pumps, failing air conditioners in intense heat, and unreliable electrical wiring — finding a skilled, honest, and punctual technician has historically been an exercise in frustration.
               </p>
               <p>
                 At the same time, skilled Nigerian artisans face their own persistent hurdles: inconsistent work, unfair client bargaining, and frequent payment delays after delivering quality craftsmanship.
               </p>
-              <p className="font-semibold text-[#0F172A]">
+              <p className="font-semibold text-[#0F172A] dark:text-white">
                 EasyLife bridges this trust deficit. We connect households and businesses with thoroughly vetted trade professionals through an escrow-backed platform where both parties are completely protected.
               </p>
             </div>
@@ -151,38 +151,38 @@ export default function AboutPage() {
           description="We believe in deep local presence rather than distant algorithmic promises. Our field teams operate actively on the ground."
         />
         <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-xl border border-slate-200 p-6 bg-white shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-white dark:bg-[#0D223A] shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488] dark:text-[#5CD3D5]">
               Pilot City 1
             </span>
-            <h3 className="text-lg font-bold text-[#0F172A] mt-1">
+            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mt-1">
               Port Harcourt, Rivers State
             </h3>
-            <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Serving the oil and gas commercial hub, industrial corridors, and residential estates from Old GRA to Peter Odili and Woji.
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-200 p-6 bg-white shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-white dark:bg-[#0D223A] shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488] dark:text-[#5CD3D5]">
               Pilot City 2
             </span>
-            <h3 className="text-lg font-bold text-[#0F172A] mt-1">
+            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mt-1">
               Lagos State
             </h3>
-            <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Covering high-density residential and commercial clusters across the Island and Mainland: Lekki, VI, Ikoyi, Ikeja, and Surulere.
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-200 p-6 bg-white shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-white dark:bg-[#0D223A] shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488] dark:text-[#5CD3D5]">
               Pilot City 3
             </span>
-            <h3 className="text-lg font-bold text-[#0F172A] mt-1">
+            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mt-1">
               Abuja, Federal Capital Territory
             </h3>
-            <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Providing dependable maintenance for government quarters, corporate offices, and private residential estates in Maitama, Wuse II, and Gwarinpa.
             </p>
           </div>

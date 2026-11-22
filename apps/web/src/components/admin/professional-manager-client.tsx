@@ -151,19 +151,19 @@ export function ProfessionalManagerClient({
   return (
     <div className="space-y-6">
       {/* Toolbar */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <form onSubmit={handleFilter} className="flex flex-col sm:flex-row flex-1 sm:items-center gap-2">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by business name or trade..."
-            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
           />
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
           >
             <option value="all">All Verification Statuses</option>
             <option value="approved">Approved / Verified</option>
@@ -191,10 +191,10 @@ export function ProfessionalManagerClient({
       </div>
 
       {/* Professionals Table */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50/80 border-b border-slate-200 text-2xs font-extrabold uppercase text-slate-500 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Business / Trade</th>
                 <th className="py-3.5 px-4">Owner Profile</th>
@@ -213,12 +213,12 @@ export function ProfessionalManagerClient({
                 </tr>
               ) : (
                 pros.map((p) => (
-                  <tr key={p.id} className="hover:bg-slate-50/60 transition">
+                  <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-900">
+                      <div className="font-bold text-slate-900 dark:text-white">
                         {p.business_name}
                       </div>
-                      <div className="text-2xs text-slate-500 truncate max-w-xs">
+                      <div className="text-2xs text-slate-500 dark:text-slate-400 truncate max-w-xs">
                         {p.headline || "Accredited Service Professional"}
                       </div>
                       <div className="text-[10px] text-slate-400 mt-0.5">
@@ -228,23 +228,23 @@ export function ProfessionalManagerClient({
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="text-slate-800 font-semibold">
+                      <div className="text-slate-800 dark:text-slate-100 font-semibold">
                         {p.profiles?.full_name || "—"}
                       </div>
                       <div className="text-2xs text-slate-400 font-mono">
                         {p.profiles?.email || "—"}
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 font-mono font-bold text-slate-800">
+                    <td className="py-3.5 px-4 font-mono font-bold text-slate-800 dark:text-slate-100">
                       {formatNaira(p.base_callout_fee_kobo || 0)}
                     </td>
                     <td className="py-3.5 px-4">
                       {p.verification_status === "approved" ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-emerald-100 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                           ✓ Verified
                         </span>
                       ) : p.verification_status === "pending" ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-amber-100 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
                           ⏳ Pending KYC
                         </span>
                       ) : p.verification_status === "rejected" ? (
@@ -256,13 +256,13 @@ export function ProfessionalManagerClient({
                           Suspended
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-slate-100 text-slate-700">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
                           Unsubmitted
                         </span>
                       )}
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="flex items-center gap-1 font-bold text-slate-800">
+                      <div className="flex items-center gap-1 font-bold text-slate-800 dark:text-slate-100">
                         <span>⭐</span>
                         <span>
                           {p.review_count > 0 && p.average_rating
@@ -281,13 +281,13 @@ export function ProfessionalManagerClient({
                           setDecisionReason("");
                           setModalFeedback(null);
                         }}
-                        className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition"
+                        className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 transition"
                       >
                         Inspect
                       </button>
                       <Link
                         href={`/admin/verifications?search=${encodeURIComponent(p.business_name)}`}
-                        className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-teal-50 text-teal-700 border border-teal-200 hover:bg-teal-100 transition inline-block"
+                        className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 transition inline-block"
                       >
                         KYC Docs →
                       </Link>
@@ -303,50 +303,50 @@ export function ProfessionalManagerClient({
       {/* Pro Detail Modal */}
       {selectedPro && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="font-extrabold text-sm text-slate-900">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654] max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="font-extrabold text-sm text-slate-900 dark:text-white">
                 Professional Trade Dossier
               </div>
               <button
                 onClick={() => setSelectedPro(null)}
-                className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 text-xs font-bold"
+                className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold"
               >
                 ✕
               </button>
             </div>
 
             <div className="space-y-4 text-xs">
-              <div className="bg-slate-50 p-4 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Business Name</span>
-                  <span className="font-bold text-slate-900">{selectedPro.business_name}</span>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Business Name</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{selectedPro.business_name}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Owner &amp; Contact</span>
-                  <span className="font-semibold text-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Owner &amp; Contact</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-100">
                     {selectedPro.profiles?.full_name || "—"} ({selectedPro.profiles?.email || "—"})
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Provider Type &amp; Experience</span>
-                  <span className="font-semibold text-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Provider Type &amp; Experience</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-100">
                     {selectedPro.provider_type || "trade_technician"} • {selectedPro.years_of_experience ?? 0} yrs
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Callout Benchmark</span>
-                  <span className="font-bold text-slate-900">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Callout Benchmark</span>
+                  <span className="font-bold text-slate-900 dark:text-white">
                     {formatNaira(selectedPro.base_callout_fee_kobo)}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Verification Status</span>
+                  <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Verification Status</span>
                   <span className="font-bold uppercase text-2xs">{selectedPro.verification_status}</span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block text-[11px]">Primary Hub &amp; Availability</span>
-                  <span className="font-semibold text-slate-800">
+                  <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Primary Hub &amp; Availability</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-100">
                     {selectedPro.primary_city || "Port Harcourt"} •{" "}
                     {selectedPro.is_available ? "Available" : "Unavailable"}
                   </span>
@@ -355,7 +355,7 @@ export function ProfessionalManagerClient({
 
               {/* Services & Qualifications */}
               <div className="space-y-2">
-                <h4 className="font-bold text-slate-800">
+                <h4 className="font-bold text-slate-800 dark:text-slate-100">
                   Service Offerings ({(selectedPro.professional_services || []).length})
                 </h4>
                 {(selectedPro.professional_services || []).length === 0 ? (
@@ -363,9 +363,9 @@ export function ProfessionalManagerClient({
                 ) : (
                   <div className="space-y-1.5">
                     {(selectedPro.professional_services || []).map((ps) => (
-                      <div key={ps.id} className="p-2.5 rounded-xl border border-slate-200 bg-white">
+                      <div key={ps.id} className="p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-slate-900">
+                          <span className="font-bold text-slate-900 dark:text-white">
                             {ps.service_title || ps.services?.name || ps.service_categories?.name || "Service"}
                           </span>
                           <span className="font-mono text-[#0D9488] font-bold">
@@ -373,7 +373,7 @@ export function ProfessionalManagerClient({
                           </span>
                         </div>
                         {(ps.certification_reference || ps.qualification_notes) && (
-                          <div className="text-[11px] text-slate-500 mt-0.5">
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
                             {ps.certification_reference && `Cert: ${ps.certification_reference} `}
                             {ps.qualification_notes && `• ${ps.qualification_notes}`}
                           </div>
@@ -387,11 +387,11 @@ export function ProfessionalManagerClient({
               {/* Service Areas & KYC Docs Summary */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <h4 className="font-bold text-slate-800">
+                  <h4 className="font-bold text-slate-800 dark:text-slate-100">
                     Operating Locations ({(selectedPro.professional_service_areas || []).length})
                   </h4>
                   {(selectedPro.professional_service_areas || []).map((area) => (
-                    <div key={area.id} className="p-2 rounded-lg bg-slate-50 border border-slate-200 text-[11px]">
+                    <div key={area.id} className="p-2 rounded-lg bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-[11px]">
                       {area.neighbourhood ? `${area.neighbourhood}, ` : ""}
                       {area.lga_or_district} ({area.city}) • {area.service_radius_km}km
                     </div>
@@ -399,11 +399,11 @@ export function ProfessionalManagerClient({
                 </div>
 
                 <div className="space-y-1.5">
-                  <h4 className="font-bold text-slate-800">
+                  <h4 className="font-bold text-slate-800 dark:text-slate-100">
                     Submitted KYC Docs ({(selectedPro.professional_documents || []).length})
                   </h4>
                   {(selectedPro.professional_documents || []).map((doc) => (
-                    <div key={doc.id} className="p-2 rounded-lg bg-slate-50 border border-slate-200 text-[11px] flex justify-between">
+                    <div key={doc.id} className="p-2 rounded-lg bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-[11px] flex justify-between">
                       <span className="capitalize">{doc.document_type.replace(/_/g, " ")}</span>
                       <span className="font-bold uppercase">{doc.verification_status}</span>
                     </div>
@@ -412,8 +412,8 @@ export function ProfessionalManagerClient({
               </div>
 
               {/* Admin Governance Controls */}
-              <div className="pt-3 border-t border-slate-100 space-y-2.5">
-                <label className="block text-[11px] font-bold text-slate-700">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 space-y-2.5">
+                <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200">
                   Admin Review / Governance Note (required min 5 chars to Reject or Suspend)
                 </label>
                 <input
@@ -421,14 +421,14 @@ export function ProfessionalManagerClient({
                   value={decisionReason}
                   onChange={(e) => setDecisionReason(e.target.value)}
                   placeholder="Enter reason for rejection, suspension, or verification note..."
-                  className="w-full h-9 px-3 rounded-xl border border-slate-300 text-xs"
+                  className="w-full h-9 px-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs"
                 />
 
                 {modalFeedback && (
                   <div
                     className={`p-2.5 rounded-xl text-[11px] font-semibold ${
                       modalFeedback.ok
-                        ? "bg-emerald-50 text-emerald-800"
+                        ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300"
                         : "bg-rose-50 text-rose-700"
                     }`}
                   >
@@ -467,7 +467,7 @@ export function ProfessionalManagerClient({
                   <button
                     type="button"
                     onClick={() => setSelectedPro(null)}
-                    className="px-4 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200"
+                    className="px-4 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-bold text-xs hover:bg-slate-200"
                   >
                     Close
                   </button>

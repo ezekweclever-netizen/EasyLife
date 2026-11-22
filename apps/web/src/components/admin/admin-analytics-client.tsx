@@ -155,11 +155,11 @@ export function AdminAnalyticsClient({
     <div className="space-y-8">
       {/* Financial & Marketplace Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-1">
           <div className="text-2xs font-bold uppercase tracking-wider text-slate-400">
             Platform Net Commission
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-teal-700">
+          <div className="text-2xl sm:text-3xl font-black text-teal-700 dark:text-teal-400">
             {formatNaira(metrics.platform_revenue_naira)}
           </div>
           <div className="text-2xs text-teal-600 font-medium">
@@ -167,35 +167,35 @@ export function AdminAnalyticsClient({
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-1">
           <div className="text-2xs font-bold uppercase tracking-wider text-slate-400">
             Estimated Gross Marketplace Volume
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-slate-900">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
             {formatNaira(metrics.platform_revenue_naira * 10)}
           </div>
-          <div className="text-2xs text-slate-500 font-medium">
+          <div className="text-2xs text-slate-500 dark:text-slate-400 font-medium">
             Settled transacted volume
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-1">
           <div className="text-2xs font-bold uppercase tracking-wider text-slate-400">
             Average Booking Ticket
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-slate-900">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
             {formatNaira(avgOrderValueNaira)}
           </div>
-          <div className="text-2xs text-slate-500 font-medium">
+          <div className="text-2xs text-slate-500 dark:text-slate-400 font-medium">
             Across fulfilled jobs
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-1">
           <div className="text-2xs font-bold uppercase tracking-wider text-slate-400">
             Fulfillment Ratio
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-emerald-700">
+          <div className="text-2xl sm:text-3xl font-black text-emerald-700 dark:text-emerald-300">
             {metrics.total_bookings > 0
               ? `${Math.round((metrics.completed_bookings / metrics.total_bookings) * 100)}%`
               : "0%"}
@@ -209,28 +209,28 @@ export function AdminAnalyticsClient({
       {/* Phase 7 Demand, Search & Supply-Gap Summary KPI Strip */}
       {summary && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs space-y-1">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-1">
             <div className="flex items-center justify-between text-2xs font-bold uppercase tracking-wider text-slate-400">
               <span>Catalogue Searches</span>
-              <span className="text-slate-500">{windowLabel}</span>
+              <span className="text-slate-500 dark:text-slate-400">{windowLabel}</span>
             </div>
-            <div className="text-2xl font-black text-slate-900">
+            <div className="text-2xl font-black text-slate-900 dark:text-white">
               {summary.total_searches}
             </div>
-            <div className="text-2xs font-medium text-slate-600">
+            <div className="text-2xs font-medium text-slate-600 dark:text-slate-300">
               {summary.zero_result_searches} zero-result ({summary.zero_result_rate_pct}%)
             </div>
           </div>
 
-          <div className="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs space-y-1">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-1">
             <div className="flex items-center justify-between text-2xs font-bold uppercase tracking-wider text-slate-400">
               <span>Service Orders &amp; Requests</span>
-              <span className="text-slate-500">{windowLabel}</span>
+              <span className="text-slate-500 dark:text-slate-400">{windowLabel}</span>
             </div>
-            <div className="text-2xl font-black text-slate-900">
+            <div className="text-2xl font-black text-slate-900 dark:text-white">
               {summary.total_bookings_in_window + summary.maintenance_requests_count}
             </div>
-            <div className="text-2xs font-medium text-slate-600">
+            <div className="text-2xs font-medium text-slate-600 dark:text-slate-300">
               {summary.total_bookings_in_window} bookings • {summary.maintenance_requests_count} B2B • {summary.ai_queries_in_window} AI
             </div>
           </div>
@@ -238,35 +238,35 @@ export function AdminAnalyticsClient({
           <div
             className={`rounded-3xl p-5 border shadow-xs space-y-1 ${
               summary.insufficient_provider_services_count > 0
-                ? "bg-amber-50/40 border-amber-200"
-                : "bg-white border-slate-200/80"
+                ? "bg-amber-50 dark:bg-amber-950/60/40 border-amber-200 dark:border-amber-800"
+                : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654]/80"
             }`}
           >
-            <div className="text-2xs font-bold uppercase tracking-wider text-amber-800">
+            <div className="text-2xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300">
               Services With Supply Gaps
             </div>
             <div className="text-2xl font-black text-amber-900">
               {summary.insufficient_provider_services_count}
-              <span className="text-sm font-semibold text-amber-700 ml-1">
+              <span className="text-sm font-semibold text-amber-700 dark:text-amber-300 ml-1">
                 / {summary.active_services_count} active
               </span>
             </div>
-            <div className="text-2xs font-medium text-amber-800">
+            <div className="text-2xs font-medium text-amber-800 dark:text-amber-300">
               {summary.services_with_zero_providers_count} zero-pro • {summary.services_none_available_count} offline-only
             </div>
           </div>
 
-          <div className="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-xs space-y-1">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-1">
             <div className="text-2xs font-bold uppercase tracking-wider text-slate-400">
               Available Verified Pros
             </div>
-            <div className="text-2xl font-black text-teal-700">
+            <div className="text-2xl font-black text-teal-700 dark:text-teal-400">
               {summary.approved_available_pros_count}
-              <span className="text-sm font-semibold text-slate-500 ml-1">
+              <span className="text-sm font-semibold text-slate-500 dark:text-slate-400 ml-1">
                 / {summary.approved_total_pros_count} approved
               </span>
             </div>
-            <div className="text-2xs font-medium text-slate-600">
+            <div className="text-2xs font-medium text-slate-600 dark:text-slate-300">
               Across {categoriesCount} active categories &amp; subcategories
             </div>
           </div>
@@ -274,7 +274,7 @@ export function AdminAnalyticsClient({
       )}
 
       {/* Focus Navigation Strip */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-white rounded-2xl p-3 border border-slate-200/80 shadow-xs">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#0D223A] rounded-2xl p-3 border border-slate-200 dark:border-[#163654]/80 shadow-xs">
         <div className="flex flex-wrap items-center gap-1.5" role="tablist" aria-label="Analytics sections">
           {(
             [
@@ -294,7 +294,7 @@ export function AdminAnalyticsClient({
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
                 sectionFocus === tab.id
                   ? "bg-slate-900 text-white"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
               }`}
             >
               {tab.label}
@@ -313,30 +313,30 @@ export function AdminAnalyticsClient({
         <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* 1. Most Searched Services */}
-            <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+            <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+                  <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
                     Most Searched Services
                   </h2>
-                  <p className="text-2xs text-slate-500">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400">
                     Anonymized search volume resolved to active Tier-3 services ({windowLabel})
                   </p>
                 </div>
-                <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-2xs font-bold">
+                <span className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-2xs font-bold">
                   {demandAnalytics.most_searched_services.length} services
                 </span>
               </div>
 
               {demandAnalytics.most_searched_services.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 p-6 text-center text-xs text-slate-500">
+                <div className="rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 p-6 text-center text-xs text-slate-500 dark:text-slate-400">
                   No anonymized catalogue search signals recorded yet for {windowLabel}. Customer queries on the homepage suggest bar, catalogue index, and discovery page appear here automatically.
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
                     <thead>
-                      <tr className="border-b border-slate-100 text-2xs font-extrabold uppercase text-slate-400">
+                      <tr className="border-b border-slate-100 dark:border-slate-800 text-2xs font-extrabold uppercase text-slate-400">
                         <th className="py-2 pr-3">Service</th>
                         <th className="py-2 px-2 text-right">Searches</th>
                         <th className="py-2 px-2 text-right">Booked</th>
@@ -345,22 +345,22 @@ export function AdminAnalyticsClient({
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {demandAnalytics.most_searched_services.map((srv) => (
-                        <tr key={srv.service_id} className="hover:bg-slate-50/70">
+                        <tr key={srv.service_id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70">
                           <td className="py-2.5 pr-3">
                             <Link
                               href={`/services/${srv.slug}`}
-                              className="font-bold text-slate-900 hover:text-teal-700 block"
+                              className="font-bold text-slate-900 dark:text-white hover:text-teal-700 dark:text-teal-400 block"
                             >
                               {srv.name}
                             </Link>
-                            <span className="text-2xs text-slate-500">
+                            <span className="text-2xs text-slate-500 dark:text-slate-400">
                               {srv.service_code} • {srv.category_name}
                             </span>
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900">
+                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900 dark:text-white">
                             {srv.search_count}
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono text-slate-600">
+                          <td className="py-2.5 px-2 text-right font-mono text-slate-600 dark:text-slate-300">
                             {srv.direct_bookings}
                           </td>
                           <td className="py-2.5 pl-2 text-right">
@@ -368,7 +368,7 @@ export function AdminAnalyticsClient({
                               className={`inline-block px-2 py-0.5 rounded-full text-2xs font-bold ${
                                 srv.available_pros === 0
                                   ? "bg-rose-100 text-rose-800"
-                                  : "bg-teal-50 text-teal-800"
+                                  : "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5]"
                               }`}
                             >
                               {srv.available_pros}
@@ -383,20 +383,20 @@ export function AdminAnalyticsClient({
             </section>
 
             {/* 6. Searches Returning No Results & Top Queries */}
-            <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+            <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+                  <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
                     Searches Returning No Results
                   </h2>
-                  <p className="text-2xs text-slate-500">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400">
                     Unmet customer search terms ({demandAnalytics.zero_result_searches.length} zero-result queries tracked)
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setShowZeroOnlyInQueries((prev) => !prev)}
-                  className="px-2.5 py-1 rounded-lg border border-slate-200 text-2xs font-bold text-slate-700 hover:bg-slate-50 cursor-pointer"
+                  className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-[#163654] text-2xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] cursor-pointer"
                 >
                   {showZeroOnlyInQueries ? "Show All Queries" : "Zero-Result Only"}
                 </button>
@@ -408,7 +408,7 @@ export function AdminAnalyticsClient({
                 ? demandAnalytics.zero_result_searches
                 : demandAnalytics.top_search_queries
               ).length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 p-6 text-center text-xs text-slate-500">
+                <div className="rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 p-6 text-center text-xs text-slate-500 dark:text-slate-400">
                   Zero-result search tracking is active with zero unmet search terms recorded yet.
                 </div>
               ) : (
@@ -417,7 +417,7 @@ export function AdminAnalyticsClient({
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
                         <thead>
-                          <tr className="border-b border-slate-100 text-2xs font-extrabold uppercase text-rose-500">
+                          <tr className="border-b border-slate-100 dark:border-slate-800 text-2xs font-extrabold uppercase text-rose-500">
                             <th className="py-2 pr-3">Zero-Result Query</th>
                             <th className="py-2 px-2">Surface / City</th>
                             <th className="py-2 px-2 text-right">Zero Hits</th>
@@ -430,17 +430,17 @@ export function AdminAnalyticsClient({
                               key={`${z.normalized_query}-${z.search_surface}-${z.city_filter}`}
                               className="hover:bg-rose-50/30"
                             >
-                              <td className="py-2 pr-3 font-bold text-slate-900">
+                              <td className="py-2 pr-3 font-bold text-slate-900 dark:text-white">
                                 &ldquo;{z.normalized_query}&rdquo;
                               </td>
-                              <td className="py-2 px-2 text-2xs text-slate-500 capitalize">
+                              <td className="py-2 px-2 text-2xs text-slate-500 dark:text-slate-400 capitalize">
                                 {z.search_surface}
                                 {z.city_filter ? ` • ${z.city_filter}` : ""}
                               </td>
                               <td className="py-2 px-2 text-right font-mono font-bold text-rose-700">
                                 {z.zero_result_count}
                               </td>
-                              <td className="py-2 pl-2 text-right font-mono text-slate-600">
+                              <td className="py-2 pl-2 text-right font-mono text-slate-600 dark:text-slate-300">
                                 {z.search_count}
                               </td>
                             </tr>
@@ -452,7 +452,7 @@ export function AdminAnalyticsClient({
 
                   {!showZeroOnlyInQueries &&
                     demandAnalytics.top_search_queries.length > 0 && (
-                      <div className="pt-2 border-t border-slate-100">
+                      <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
                         <div className="text-2xs font-bold uppercase tracking-wider text-slate-400 mb-2">
                           Top Search Terms Across Discovery Surfaces
                         </div>
@@ -460,10 +460,10 @@ export function AdminAnalyticsClient({
                           {demandAnalytics.top_search_queries.slice(0, 12).map((qRow) => (
                             <span
                               key={`${qRow.normalized_query}-${qRow.search_surface}-${qRow.city_filter}`}
-                              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-2xs font-semibold text-slate-700"
+                              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] px-3 py-1 text-2xs font-semibold text-slate-700 dark:text-slate-200"
                             >
                               <span>&ldquo;{qRow.normalized_query}&rdquo;</span>
-                              <span className="font-mono font-bold text-teal-700">
+                              <span className="font-mono font-bold text-teal-700 dark:text-teal-400">
                                 {qRow.search_count}
                               </span>
                             </span>
@@ -478,30 +478,30 @@ export function AdminAnalyticsClient({
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* 2. Most Requested Services */}
-            <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+            <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+                  <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
                     Most Requested Services
                   </h2>
-                  <p className="text-2xs text-slate-500">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400">
                     Direct bookings, open/custom requests, B2B maintenance requests, searches &amp; category context
                   </p>
                 </div>
-                <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-2xs font-bold">
+                <span className="px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-2xs font-bold">
                   Top {demandAnalytics.most_requested_services.length}
                 </span>
               </div>
 
               {demandAnalytics.most_requested_services.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 p-6 text-center text-xs text-slate-500">
+                <div className="rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 p-6 text-center text-xs text-slate-500 dark:text-slate-400">
                   No service request activity recorded in {windowLabel}.
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
                     <thead>
-                      <tr className="border-b border-slate-100 text-2xs font-extrabold uppercase text-slate-400">
+                      <tr className="border-b border-slate-100 dark:border-slate-800 text-2xs font-extrabold uppercase text-slate-400">
                         <th className="py-2 pr-3">Service</th>
                         <th className="py-2 px-2 text-right">Direct</th>
                         <th className="py-2 px-2 text-right">B2B / Search</th>
@@ -511,15 +511,15 @@ export function AdminAnalyticsClient({
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {demandAnalytics.most_requested_services.slice(0, 12).map((srv) => (
-                        <tr key={srv.service_id} className="hover:bg-slate-50/70">
+                        <tr key={srv.service_id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70">
                           <td className="py-2.5 pr-3">
                             <Link
                               href={`/services/${srv.slug}`}
-                              className="font-bold text-slate-900 hover:text-teal-700 block"
+                              className="font-bold text-slate-900 dark:text-white hover:text-teal-700 dark:text-teal-400 block"
                             >
                               {srv.name}
                             </Link>
-                            <span className="text-2xs text-slate-500">
+                            <span className="text-2xs text-slate-500 dark:text-slate-400">
                               {srv.category_name}
                               {srv.open_unmatched_bookings > 0
                                 ? ` • ${srv.open_unmatched_bookings} open`
@@ -529,16 +529,16 @@ export function AdminAnalyticsClient({
                                 : ""}
                             </span>
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900">
+                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900 dark:text-white">
                             {srv.direct_bookings}
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono text-slate-600">
+                          <td className="py-2.5 px-2 text-right font-mono text-slate-600 dark:text-slate-300">
                             {srv.maintenance_requests_count} / {srv.search_count}
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono text-slate-500">
+                          <td className="py-2.5 px-2 text-right font-mono text-slate-500 dark:text-slate-400">
                             {srv.category_bookings_context}
                           </td>
-                          <td className="py-2.5 pl-2 text-right font-mono font-bold text-teal-700">
+                          <td className="py-2.5 pl-2 text-right font-mono font-bold text-teal-700 dark:text-teal-400">
                             {srv.available_pros}
                           </td>
                         </tr>
@@ -550,24 +550,24 @@ export function AdminAnalyticsClient({
             </section>
 
             {/* 3. Most Frequently Booked Services */}
-            <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+            <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-black text-slate-900 tracking-tight">
+                  <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
                     Most Frequently Booked Services
                   </h2>
-                  <p className="text-2xs text-slate-500">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400">
                     Individual Tier-3 services ranked by total &amp; completed bookings ({windowLabel})
                   </p>
                 </div>
-                <span className="px-2.5 py-1 rounded-full bg-teal-50 text-teal-800 text-2xs font-bold">
+                <span className="px-2.5 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] text-2xs font-bold">
                   {summary?.direct_service_bookings_count ?? 0} tagged bookings
                 </span>
               </div>
 
               {demandAnalytics.most_frequently_booked_services.length === 0 ? (
-                <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50/70 p-6 space-y-2 text-center text-xs text-slate-500">
-                  <p className="font-semibold text-slate-700">
+                <div className="rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 p-6 space-y-2 text-center text-xs text-slate-500 dark:text-slate-400">
+                  <p className="font-semibold text-slate-700 dark:text-slate-200">
                     No bookings in {windowLabel} are tagged with a Tier-3 service ID yet.
                   </p>
                   <p>
@@ -575,7 +575,7 @@ export function AdminAnalyticsClient({
                     <button
                       type="button"
                       onClick={() => setSectionFocus("categories")}
-                      className="font-bold text-teal-700 underline cursor-pointer"
+                      className="font-bold text-teal-700 dark:text-teal-400 underline cursor-pointer"
                     >
                       Popular Categories
                     </button>{" "}
@@ -586,7 +586,7 @@ export function AdminAnalyticsClient({
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
                     <thead>
-                      <tr className="border-b border-slate-100 text-2xs font-extrabold uppercase text-slate-400">
+                      <tr className="border-b border-slate-100 dark:border-slate-800 text-2xs font-extrabold uppercase text-slate-400">
                         <th className="py-2 pr-3">Service</th>
                         <th className="py-2 px-2 text-right">Bookings</th>
                         <th className="py-2 px-2 text-right">Completed</th>
@@ -595,25 +595,25 @@ export function AdminAnalyticsClient({
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {demandAnalytics.most_frequently_booked_services.map((srv) => (
-                        <tr key={srv.service_id} className="hover:bg-slate-50/70">
+                        <tr key={srv.service_id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70">
                           <td className="py-2.5 pr-3">
                             <Link
                               href={`/services/${srv.slug}`}
-                              className="font-bold text-slate-900 hover:text-teal-700 block"
+                              className="font-bold text-slate-900 dark:text-white hover:text-teal-700 dark:text-teal-400 block"
                             >
                               {srv.name}
                             </Link>
-                            <span className="text-2xs text-slate-500">
+                            <span className="text-2xs text-slate-500 dark:text-slate-400">
                               {srv.service_code} • {srv.category_name}
                             </span>
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900">
+                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900 dark:text-white">
                             {srv.total_bookings}
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono text-emerald-700">
+                          <td className="py-2.5 px-2 text-right font-mono text-emerald-700 dark:text-emerald-300">
                             {srv.completed_bookings} ({srv.completion_rate_pct}%)
                           </td>
-                          <td className="py-2.5 pl-2 text-right font-mono font-bold text-slate-800">
+                          <td className="py-2.5 pl-2 text-right font-mono font-bold text-slate-800 dark:text-slate-100">
                             {formatKoboAsNaira(srv.gross_agreed_kobo)}
                           </td>
                         </tr>
@@ -629,24 +629,24 @@ export function AdminAnalyticsClient({
 
       {/* SECTION 2: 4. Popular Categories (Main & Subcategories) */}
       {showCategories && demandAnalytics && (
-        <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+        <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-base font-black text-slate-900 tracking-tight">
+              <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
                 Popular Categories &amp; Subcategories
               </h2>
-              <p className="text-2xs text-slate-500">
+              <p className="text-2xs text-slate-500 dark:text-slate-400">
                 Bookings, AI problem-triage interest, searches, settled volume, and active provider counts ({windowLabel})
               </p>
             </div>
-            <div className="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200">
+            <div className="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200 dark:border-[#163654]">
               <button
                 type="button"
                 onClick={() => setCategoryTierTab("main")}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
                   categoryTierTab === "main"
                     ? "bg-slate-900 text-white"
-                    : "text-slate-600 hover:text-slate-900"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
                 }`}
               >
                 Main Categories
@@ -657,7 +657,7 @@ export function AdminAnalyticsClient({
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold cursor-pointer ${
                   categoryTierTab === "subcategory"
                     ? "bg-slate-900 text-white"
-                    : "text-slate-600 hover:text-slate-900"
+                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
                 }`}
               >
                 Subcategories
@@ -668,7 +668,7 @@ export function AdminAnalyticsClient({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-100 text-2xs font-extrabold uppercase text-slate-400">
+                <tr className="border-b border-slate-100 dark:border-slate-800 text-2xs font-extrabold uppercase text-slate-400">
                   <th className="py-2 pr-3">Category</th>
                   <th className="py-2 px-2 text-right">Services</th>
                   <th className="py-2 px-2 text-right">Bookings</th>
@@ -681,24 +681,24 @@ export function AdminAnalyticsClient({
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {filteredCategories.map((cat) => (
-                  <tr key={cat.category_id} className="hover:bg-slate-50/70">
+                  <tr key={cat.category_id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70">
                     <td className="py-2.5 pr-3">
-                      <span className="font-bold text-slate-900 block">
+                      <span className="font-bold text-slate-900 dark:text-white block">
                         {cat.name}
                       </span>
                       {cat.parent_name && (
-                        <span className="text-2xs text-slate-500">
+                        <span className="text-2xs text-slate-500 dark:text-slate-400">
                           Under {cat.parent_name}
                         </span>
                       )}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-slate-600">
+                    <td className="py-2.5 px-2 text-right font-mono text-slate-600 dark:text-slate-300">
                       {cat.active_services_count}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900">
+                    <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900 dark:text-white">
                       {cat.total_bookings}
                       {cat.completed_bookings > 0 && (
-                        <span className="text-2xs text-emerald-700 font-normal ml-1">
+                        <span className="text-2xs text-emerald-700 dark:text-emerald-300 font-normal ml-1">
                           ({cat.completed_bookings} done)
                         </span>
                       )}
@@ -706,13 +706,13 @@ export function AdminAnalyticsClient({
                     <td className="py-2.5 px-2 text-right font-mono text-indigo-700">
                       {cat.ai_assistant_hits}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-slate-700">
+                    <td className="py-2.5 px-2 text-right font-mono text-slate-700 dark:text-slate-200">
                       {cat.search_count}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-slate-600">
+                    <td className="py-2.5 px-2 text-right font-mono text-slate-600 dark:text-slate-300">
                       {cat.maintenance_requests_count}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-slate-800">
+                    <td className="py-2.5 px-2 text-right font-mono text-slate-800 dark:text-slate-100">
                       {formatKoboAsNaira(cat.gross_agreed_kobo)}
                     </td>
                     <td className="py-2.5 pl-2 text-right">
@@ -720,7 +720,7 @@ export function AdminAnalyticsClient({
                         className={`inline-block px-2 py-0.5 rounded-full text-2xs font-bold ${
                           cat.available_pros_count === 0
                             ? "bg-rose-100 text-rose-800"
-                            : "bg-teal-50 text-teal-800"
+                            : "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5]"
                         }`}
                       >
                         {cat.available_pros_count}
@@ -738,13 +738,13 @@ export function AdminAnalyticsClient({
       {showSupply && demandAnalytics && (
         <div className="space-y-6">
           {/* 5. Services with Insufficient Providers */}
-          <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+          <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h2 className="text-base font-black text-slate-900 tracking-tight">
+                <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
                   Services With Insufficient Providers
                 </h2>
-                <p className="text-2xs text-slate-500">
+                <p className="text-2xs text-slate-500 dark:text-slate-400">
                   Services with zero linked providers, offline-only pros, unmet demand, or missing coverage in Port Harcourt, Lagos, or Abuja
                 </p>
               </div>
@@ -765,7 +765,7 @@ export function AdminAnalyticsClient({
                     className={`px-2.5 py-1 rounded-lg text-2xs font-bold border cursor-pointer ${
                       gapFilter === f.id
                         ? "bg-slate-900 text-white border-slate-900"
-                        : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
+                        : "bg-slate-50 dark:bg-[#071526] text-slate-700 dark:text-slate-200 border-slate-200 dark:border-[#163654] hover:bg-slate-100 dark:bg-slate-800"
                     }`}
                   >
                     {f.label}
@@ -775,14 +775,14 @@ export function AdminAnalyticsClient({
             </div>
 
             {filteredGaps.length === 0 ? (
-              <div className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-6 text-center text-xs font-medium text-emerald-800">
+              <div className="rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/60/40 p-6 text-center text-xs font-medium text-emerald-800 dark:text-emerald-300">
                 No active services match this supply-gap severity filter.
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
                   <thead>
-                    <tr className="border-b border-slate-100 text-2xs font-extrabold uppercase text-slate-400">
+                    <tr className="border-b border-slate-100 dark:border-slate-800 text-2xs font-extrabold uppercase text-slate-400">
                       <th className="py-2 pr-3">Service</th>
                       <th className="py-2 px-2">Severity</th>
                       <th className="py-2 px-2 text-right">Avail / Eligible</th>
@@ -797,12 +797,12 @@ export function AdminAnalyticsClient({
                     {filteredGaps.map((gap) => {
                       const badge = SEVERITY_BADGES[gap.gap_severity];
                       return (
-                        <tr key={gap.service_id} className="hover:bg-slate-50/70">
+                        <tr key={gap.service_id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70">
                           <td className="py-2.5 pr-3">
-                            <span className="font-bold text-slate-900 block">
+                            <span className="font-bold text-slate-900 dark:text-white block">
                               {gap.name}
                             </span>
-                            <span className="text-2xs text-slate-500">
+                            <span className="text-2xs text-slate-500 dark:text-slate-400">
                               {gap.service_code} • {gap.category_name}
                               {gap.requires_trade_certification ? " • Trade Cert Required" : ""}
                             </span>
@@ -814,7 +814,7 @@ export function AdminAnalyticsClient({
                               {badge.label}
                             </span>
                           </td>
-                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900">
+                          <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900 dark:text-white">
                             {gap.available_pros} / {gap.total_eligible_pros}
                           </td>
                           <td className="py-2.5 px-2 text-right font-mono">
@@ -847,7 +847,7 @@ export function AdminAnalyticsClient({
                           <td className="py-2.5 pl-2 text-right whitespace-nowrap">
                             <Link
                               href="/admin/professionals"
-                              className="text-teal-700 hover:underline font-bold"
+                              className="text-teal-700 dark:text-teal-400 hover:underline font-bold"
                             >
                               Recruit / Review →
                             </Link>
@@ -862,13 +862,13 @@ export function AdminAnalyticsClient({
           </section>
 
           {/* 8. Provider Availability by Service */}
-          <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+          <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h2 className="text-base font-black text-slate-900 tracking-tight">
+                <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
                   Provider Availability by Service
                 </h2>
-                <p className="text-2xs text-slate-500">
+                <p className="text-2xs text-slate-500 dark:text-slate-400">
                   Full supply roster across all {demandAnalytics.provider_availability_by_service.length} active Tier-3 services (direct service links, eligible pros, online availability, city split)
                 </p>
               </div>
@@ -877,14 +877,14 @@ export function AdminAnalyticsClient({
                 value={serviceSupplyQuery}
                 onChange={(e) => setServiceSupplyQuery(e.target.value)}
                 placeholder="Filter service or code..."
-                className="w-full sm:w-64 h-9 px-3 rounded-xl border border-slate-200 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full sm:w-64 h-9 px-3 rounded-xl border border-slate-200 dark:border-[#163654] text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
               />
             </div>
 
             <div className="overflow-x-auto max-h-[520px] overflow-y-auto">
               <table className="w-full text-left text-xs">
-                <thead className="sticky top-0 bg-white z-10">
-                  <tr className="border-b border-slate-200 text-2xs font-extrabold uppercase text-slate-400">
+                <thead className="sticky top-0 bg-white dark:bg-[#0D223A] z-10">
+                  <tr className="border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-400">
                     <th className="py-2 pr-3">Service</th>
                     <th className="py-2 px-2 text-right">Direct Links</th>
                     <th className="py-2 px-2 text-right">Eligible</th>
@@ -898,32 +898,32 @@ export function AdminAnalyticsClient({
                   {filteredAvailability.map((srv) => {
                     const badge = SEVERITY_BADGES[srv.gap_severity];
                     return (
-                      <tr key={srv.service_id} className="hover:bg-slate-50/70">
+                      <tr key={srv.service_id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70">
                         <td className="py-2.5 pr-3">
                           <Link
                             href={`/services/${srv.slug}`}
-                            className="font-bold text-slate-900 hover:text-teal-700 block"
+                            className="font-bold text-slate-900 dark:text-white hover:text-teal-700 dark:text-teal-400 block"
                           >
                             {srv.name}
                           </Link>
-                          <span className="text-2xs text-slate-500">
+                          <span className="text-2xs text-slate-500 dark:text-slate-400">
                             {srv.service_code} • {srv.category_name}
                             {srv.subcategory_name ? ` / ${srv.subcategory_name}` : ""}
                           </span>
                         </td>
-                        <td className="py-2.5 px-2 text-right font-mono text-slate-600">
+                        <td className="py-2.5 px-2 text-right font-mono text-slate-600 dark:text-slate-300">
                           {srv.direct_service_pros}
                         </td>
-                        <td className="py-2.5 px-2 text-right font-mono text-slate-800">
+                        <td className="py-2.5 px-2 text-right font-mono text-slate-800 dark:text-slate-100">
                           {srv.total_eligible_pros}
                         </td>
-                        <td className="py-2.5 px-2 text-right font-mono font-bold text-emerald-700">
+                        <td className="py-2.5 px-2 text-right font-mono font-bold text-emerald-700 dark:text-emerald-300">
                           {srv.available_pros}
                         </td>
-                        <td className="py-2.5 px-2 text-right font-mono text-slate-500">
+                        <td className="py-2.5 px-2 text-right font-mono text-slate-500 dark:text-slate-400">
                           {srv.offline_pros}
                         </td>
-                        <td className="py-2.5 px-2 text-right font-mono text-slate-700 whitespace-nowrap">
+                        <td className="py-2.5 px-2 text-right font-mono text-slate-700 dark:text-slate-200 whitespace-nowrap">
                           {srv.ph_pros} / {srv.lagos_pros} / {srv.abuja_pros}
                         </td>
                         <td className="py-2.5 pl-2 text-right">
@@ -945,12 +945,12 @@ export function AdminAnalyticsClient({
 
       {/* SECTION 4: 7. Demand by Location (City Summary + City/LGA Hub Table) */}
       {showLocations && demandAnalytics && (
-        <section className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-6">
+        <section className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-6">
           <div>
-            <h2 className="text-base font-black text-slate-900 tracking-tight">
+            <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
               Demand by Location vs. Active Provider Supply
             </h2>
-            <p className="text-2xs text-slate-500">
+            <p className="text-2xs text-slate-500 dark:text-slate-400">
               Booking demand, unmatched orders, and city search volume compared against available verified technicians ({windowLabel})
             </p>
           </div>
@@ -959,38 +959,38 @@ export function AdminAnalyticsClient({
             {demandAnalytics.demand_by_city.slice(0, 6).map((hub) => (
               <div
                 key={hub.city}
-                className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4 space-y-2"
+                className="rounded-2xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 p-4 space-y-2"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-black text-slate-900">
+                  <span className="text-sm font-black text-slate-900 dark:text-white">
                     {hub.city}
                   </span>
-                  <span className="px-2 py-0.5 rounded-full bg-white border border-slate-200 text-2xs font-bold text-slate-700">
+                  <span className="px-2 py-0.5 rounded-full bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-2xs font-bold text-slate-700 dark:text-slate-200">
                     {hub.available_pros_count} online pros
                   </span>
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center pt-1">
-                  <div className="bg-white rounded-xl p-2 border border-slate-100">
-                    <div className="text-sm font-black text-slate-900">
+                  <div className="bg-white dark:bg-[#0D223A] rounded-xl p-2 border border-slate-100 dark:border-slate-800">
+                    <div className="text-sm font-black text-slate-900 dark:text-white">
                       {hub.total_bookings}
                     </div>
-                    <div className="text-[10px] text-slate-500 font-semibold">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
                       Bookings
                     </div>
                   </div>
-                  <div className="bg-white rounded-xl p-2 border border-slate-100">
-                    <div className="text-sm font-black text-teal-700">
+                  <div className="bg-white dark:bg-[#0D223A] rounded-xl p-2 border border-slate-100 dark:border-slate-800">
+                    <div className="text-sm font-black text-teal-700 dark:text-teal-400">
                       {hub.search_count}
                     </div>
-                    <div className="text-[10px] text-slate-500 font-semibold">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
                       Searches
                     </div>
                   </div>
-                  <div className="bg-white rounded-xl p-2 border border-slate-100">
-                    <div className="text-sm font-black text-amber-700">
+                  <div className="bg-white dark:bg-[#0D223A] rounded-xl p-2 border border-slate-100 dark:border-slate-800">
+                    <div className="text-sm font-black text-amber-700 dark:text-amber-300">
                       {hub.bookings_per_available_pro ?? "—"}
                     </div>
-                    <div className="text-[10px] text-slate-500 font-semibold">
+                    <div className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
                       Jobs / Pro
                     </div>
                   </div>
@@ -1002,7 +1002,7 @@ export function AdminAnalyticsClient({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-100 text-2xs font-extrabold uppercase text-slate-400">
+                <tr className="border-b border-slate-100 dark:border-slate-800 text-2xs font-extrabold uppercase text-slate-400">
                   <th className="py-2 pr-3">City / District (LGA)</th>
                   <th className="py-2 px-2 text-right">Bookings</th>
                   <th className="py-2 px-2 text-right">Open / Unmatched</th>
@@ -1016,30 +1016,30 @@ export function AdminAnalyticsClient({
                 {demandAnalytics.demand_by_location.map((loc) => (
                   <tr
                     key={`${loc.city}-${loc.lga_or_district}`}
-                    className="hover:bg-slate-50/70"
+                    className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70"
                   >
                     <td className="py-2.5 pr-3">
-                      <span className="font-bold text-slate-900">{loc.city}</span>
-                      <span className="text-2xs text-slate-500 block">
+                      <span className="font-bold text-slate-900 dark:text-white">{loc.city}</span>
+                      <span className="text-2xs text-slate-500 dark:text-slate-400 block">
                         {loc.lga_or_district}
                       </span>
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900">
+                    <td className="py-2.5 px-2 text-right font-mono font-bold text-slate-900 dark:text-white">
                       {loc.total_bookings}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-amber-700">
+                    <td className="py-2.5 px-2 text-right font-mono text-amber-700 dark:text-amber-300">
                       {loc.open_unmatched_bookings}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-emerald-700">
+                    <td className="py-2.5 px-2 text-right font-mono text-emerald-700 dark:text-emerald-300">
                       {loc.completed_bookings}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-slate-600">
+                    <td className="py-2.5 px-2 text-right font-mono text-slate-600 dark:text-slate-300">
                       {loc.city_search_count}
                     </td>
-                    <td className="py-2.5 px-2 text-right font-mono text-slate-800">
+                    <td className="py-2.5 px-2 text-right font-mono text-slate-800 dark:text-slate-100">
                       {formatKoboAsNaira(loc.gross_agreed_kobo)}
                     </td>
-                    <td className="py-2.5 pl-2 text-right font-mono font-bold text-teal-700">
+                    <td className="py-2.5 pl-2 text-right font-mono font-bold text-teal-700 dark:text-teal-400">
                       {loc.available_pros_count}
                     </td>
                   </tr>
@@ -1053,12 +1053,12 @@ export function AdminAnalyticsClient({
       {/* Existing Breakdown Charts Grid (Preserved) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Regional Distribution */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
           <div>
-            <h3 className="text-sm font-black text-slate-900 tracking-tight">
+            <h3 className="text-sm font-black text-slate-900 dark:text-white tracking-tight">
               Regional Market Distribution
             </h3>
-            <p className="text-2xs text-slate-500">
+            <p className="text-2xs text-slate-500 dark:text-slate-400">
               Work volume across Nigeria pilot cities
             </p>
           </div>
@@ -1073,10 +1073,10 @@ export function AdminAnalyticsClient({
                 return (
                   <div key={city} className="space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span className="font-bold text-slate-800">{city}</span>
-                      <span className="text-slate-500 font-mono">{count} jobs ({pct}%)</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-100">{city}</span>
+                      <span className="text-slate-500 dark:text-slate-400 font-mono">{count} jobs ({pct}%)</span>
                     </div>
-                    <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                       <div
                         className="h-full bg-teal-500 rounded-full transition-all duration-500"
                         style={{ width: `${pct}%` }}
@@ -1090,12 +1090,12 @@ export function AdminAnalyticsClient({
         </div>
 
         {/* Booking Status Distribution */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
           <div>
-            <h3 className="text-sm font-black text-slate-900 tracking-tight">
+            <h3 className="text-sm font-black text-slate-900 dark:text-white tracking-tight">
               Order Lifecycle Breakdown
             </h3>
-            <p className="text-2xs text-slate-500">
+            <p className="text-2xs text-slate-500 dark:text-slate-400">
               Marketplace booking states
             </p>
           </div>
@@ -1110,12 +1110,12 @@ export function AdminAnalyticsClient({
                 return (
                   <div key={status} className="space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span className="font-bold text-slate-800 capitalize">
+                      <span className="font-bold text-slate-800 dark:text-slate-100 capitalize">
                         {status.replace(/_/g, " ")}
                       </span>
-                      <span className="text-slate-500 font-mono">{count} ({pct}%)</span>
+                      <span className="text-slate-500 dark:text-slate-400 font-mono">{count} ({pct}%)</span>
                     </div>
-                    <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${
                           status === "completed"
@@ -1135,12 +1135,12 @@ export function AdminAnalyticsClient({
         </div>
 
         {/* Dispute Categories Breakdown */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xs space-y-4">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
           <div>
-            <h3 className="text-sm font-black text-slate-900 tracking-tight">
+            <h3 className="text-sm font-black text-slate-900 dark:text-white tracking-tight">
               Dispute Category Patterns
             </h3>
-            <p className="text-2xs text-slate-500">
+            <p className="text-2xs text-slate-500 dark:text-slate-400">
               Reported quality &amp; billing complaints
             </p>
           </div>
@@ -1157,10 +1157,10 @@ export function AdminAnalyticsClient({
                 return (
                   <div key={cat} className="space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span className="font-bold text-slate-800 capitalize">{cat}</span>
-                      <span className="text-slate-500 font-mono">{count} cases ({pct}%)</span>
+                      <span className="font-bold text-slate-800 dark:text-slate-100 capitalize">{cat}</span>
+                      <span className="text-slate-500 dark:text-slate-400 font-mono">{count} cases ({pct}%)</span>
                     </div>
-                    <div className="h-2 rounded-full bg-slate-100 overflow-hidden">
+                    <div className="h-2 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                       <div
                         className="h-full bg-purple-500 rounded-full transition-all duration-500"
                         style={{ width: `${pct}%` }}

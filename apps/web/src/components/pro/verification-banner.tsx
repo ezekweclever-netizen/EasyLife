@@ -17,16 +17,16 @@ export function VerificationBanner({
 }: VerificationBannerProps) {
   if (status === "approved") {
     return (
-      <div className="rounded-xl border border-emerald-200 bg-emerald-50/70 p-4 sm:p-5 text-emerald-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/60/70 p-4 sm:p-5 text-emerald-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 w-8 h-8 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center shrink-0 text-emerald-700 font-bold">
+          <div className="mt-0.5 w-8 h-8 rounded-full bg-emerald-100 border border-emerald-300 dark:border-emerald-700 flex items-center justify-center shrink-0 text-emerald-700 dark:text-emerald-300 font-bold">
             ✓
           </div>
           <div>
             <h3 className="text-sm font-bold text-emerald-900">
               Verified EasyLife Professional
             </h3>
-            <p className="mt-0.5 text-xs text-emerald-800">
+            <p className="mt-0.5 text-xs text-emerald-800 dark:text-emerald-300">
               Your identity and trade credentials have been verified by EasyLife Operations. You are fully eligible to send quotes, accept service requests, and receive guaranteed escrow payouts.
             </p>
           </div>
@@ -42,20 +42,20 @@ export function VerificationBanner({
 
   if (status === "pending") {
     return (
-      <div className="rounded-xl border border-amber-300 bg-amber-50/80 p-4 sm:p-5 text-amber-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="rounded-xl border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/60/80 p-4 sm:p-5 text-amber-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 w-8 h-8 rounded-full bg-amber-100 border border-amber-300 flex items-center justify-center shrink-0 text-amber-700 font-bold">
+          <div className="mt-0.5 w-8 h-8 rounded-full bg-amber-100 border border-amber-300 dark:border-amber-700 flex items-center justify-center shrink-0 text-amber-700 dark:text-amber-300 font-bold">
             ⏳
           </div>
           <div>
             <h3 className="text-sm font-bold text-amber-900">
               Verification Documents Under Review
             </h3>
-            <p className="mt-0.5 text-xs text-amber-800">
+            <p className="mt-0.5 text-xs text-amber-800 dark:text-amber-300">
               Your identity credentials and qualifications are currently being reviewed by our vetting desk in Port Harcourt/Lagos/Abuja. Applications are typically processed within 24–48 hours.
             </p>
             {submittedAt && (
-              <p className="mt-1 text-[11px] text-amber-700 font-medium">
+              <p className="mt-1 text-[11px] text-amber-700 dark:text-amber-300 font-medium">
                 Submitted on {new Date(submittedAt).toLocaleDateString("en-NG", { dateStyle: "medium", timeZone: "Africa/Lagos" })}
               </p>
             )}
@@ -64,7 +64,7 @@ export function VerificationBanner({
         <div className="shrink-0">
           <Link
             href="/pro/profile#documents"
-            className="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-amber-400 bg-white text-xs font-bold text-amber-900 hover:bg-amber-100 transition shadow-xs"
+            className="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-amber-400 bg-white dark:bg-[#0D223A] text-xs font-bold text-amber-900 hover:bg-amber-100 transition shadow-xs"
           >
             View Uploaded Documents
           </Link>
@@ -75,16 +75,16 @@ export function VerificationBanner({
 
   if (status === "rejected") {
     return (
-      <div className="rounded-xl border border-red-300 bg-red-50 p-4 sm:p-5 text-red-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="rounded-xl border border-red-300 bg-red-50 dark:bg-red-950/60 p-4 sm:p-5 text-red-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 w-8 h-8 rounded-full bg-red-100 border border-red-300 flex items-center justify-center shrink-0 text-red-700 font-bold">
+          <div className="mt-0.5 w-8 h-8 rounded-full bg-red-100 border border-red-300 flex items-center justify-center shrink-0 text-red-700 dark:text-red-400 font-bold">
             !
           </div>
           <div>
             <h3 className="text-sm font-bold text-red-900">
               Verification Requires Correction
             </h3>
-            <p className="mt-0.5 text-xs text-red-800">
+            <p className="mt-0.5 text-xs text-red-800 dark:text-red-300">
               {rejectionReason || "Your uploaded documents could not be verified by our compliance team. Please review the requirements and re-submit a clearer copy."}
             </p>
           </div>
@@ -103,16 +103,16 @@ export function VerificationBanner({
 
   if (status === "suspended") {
     return (
-      <div className="rounded-xl border border-red-400 bg-red-50 p-4 sm:p-5 text-red-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="rounded-xl border border-red-400 bg-red-50 dark:bg-red-950/60 p-4 sm:p-5 text-red-950 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div className="flex items-start gap-3">
-          <div className="mt-0.5 w-8 h-8 rounded-full bg-red-200 border border-red-400 flex items-center justify-center shrink-0 text-red-800 font-bold">
+          <div className="mt-0.5 w-8 h-8 rounded-full bg-red-200 border border-red-400 flex items-center justify-center shrink-0 text-red-800 dark:text-red-300 font-bold">
             ✕
           </div>
           <div>
             <h3 className="text-sm font-bold text-red-900">
               Account Suspended by Platform Administration
             </h3>
-            <p className="mt-0.5 text-xs text-red-800">
+            <p className="mt-0.5 text-xs text-red-800 dark:text-red-300">
               Your professional privileges have been temporarily suspended. Please contact EasyLife support or the local operations desk to resolve any outstanding queries.
             </p>
           </div>
@@ -131,16 +131,16 @@ export function VerificationBanner({
 
   // Default: unsubmitted / unverified
   return (
-    <div className="rounded-xl border border-slate-300 bg-gradient-to-r from-slate-50 to-teal-50/40 p-4 sm:p-5 text-slate-900 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="rounded-xl border border-slate-300 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-teal-50/40 p-4 sm:p-5 text-slate-900 dark:text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div className="flex items-start gap-3">
-        <div className="mt-0.5 w-8 h-8 rounded-full bg-teal-100 border border-teal-300 flex items-center justify-center shrink-0 text-[#0D9488] font-bold">
+        <div className="mt-0.5 w-8 h-8 rounded-full bg-teal-100 border border-teal-300 dark:border-teal-700 flex items-center justify-center shrink-0 text-[#0D9488] font-bold">
           🛡️
         </div>
         <div>
-          <h3 className="text-sm font-bold text-slate-900">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             Account Status: Unverified
           </h3>
-          <p className="mt-0.5 text-xs text-slate-600 max-w-2xl leading-relaxed">
+          <p className="mt-0.5 text-xs text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
             EasyLife requires all technicians, artisans, and contractors to submit government identity (NIN / Voter&apos;s Card) and trade proof before sending quotations or receiving jobs. This protects customers and gives you access to premium bookings.
           </p>
         </div>

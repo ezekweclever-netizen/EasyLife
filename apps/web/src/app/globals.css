@@ -93,6 +93,7 @@
 }
 
 html.dark, [data-theme="dark"] {
+  color-scheme: dark;
   --easylife-primary: #5CD3D5;
   --easylife-primary-dark: #071526;
   --easylife-secondary: #24989A;
@@ -120,6 +121,26 @@ html.dark, [data-theme="dark"] {
   --easylife-teal-700: #38bdf8;
   --easylife-teal-600: #24989A;
   --easylife-teal-50: #0E2238;
+}
+
+/* Polished Dark Mode Scrollbars & Selection */
+html.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+html.dark ::-webkit-scrollbar-track {
+  background: #071526;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #163654;
+  border-radius: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #244B74;
+}
+html.dark ::selection {
+  background: rgba(36, 152, 154, 0.4);
+  color: #F8FAFC;
 }
 
 @theme {

@@ -36,34 +36,34 @@ export default async function PropertyServicesPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-10">
         {/* Services Showcase Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 space-y-2 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 space-y-2 shadow-xs">
             <div className="text-2xl">🔍</div>
-            <h3 className="text-xs font-bold text-slate-900">Property Sourcing</h3>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white">Property Sourcing</h3>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
               Engage an agent to inspect and locate vetted residential or commercial spaces matching your budget and requirements.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 space-y-2 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 space-y-2 shadow-xs">
             <div className="text-2xl">🤝</div>
-            <h3 className="text-xs font-bold text-slate-900">Rental Assistance</h3>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white">Rental Assistance</h3>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
               Tenancy negotiation, landlord liaison, move-in handover condition reports, and inventory documentation.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 space-y-2 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 space-y-2 shadow-xs">
             <div className="text-2xl">🏢</div>
-            <h3 className="text-xs font-bold text-slate-900">Property Management</h3>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white">Property Management</h3>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
               Day-to-day facility oversight, service charge collection, tenant relations, and preventive maintenance coordination.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-5 space-y-2 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 space-y-2 shadow-xs">
             <div className="text-2xl">📜</div>
-            <h3 className="text-xs font-bold text-slate-900">Real Estate Consultancy</h3>
-            <p className="text-[11px] text-slate-600 leading-relaxed">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white">Real Estate Consultancy</h3>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
               Title document verification guidance, deed preparation advisory, land registry checks, and investment appraisal.
             </p>
           </div>
@@ -72,7 +72,7 @@ export default async function PropertyServicesPage() {
         {/* Directory of Agents */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold text-slate-900">
+            <h2 className="text-sm font-bold text-slate-900 dark:text-white">
               Verified Property Consultants Across Port Harcourt, Lagos &amp; Abuja
             </h2>
             <Link
@@ -84,12 +84,12 @@ export default async function PropertyServicesPage() {
           </div>
 
           {agents.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center space-y-3">
+            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-10 text-center space-y-3">
               <div className="text-3xl">🏠</div>
-              <h3 className="text-sm font-bold text-slate-900">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                 Property Agents Currently Onboarding
               </h3>
-              <p className="text-xs text-slate-600 max-w-md mx-auto">
+              <p className="text-xs text-slate-600 dark:text-slate-300 max-w-md mx-auto">
                 No individual agent profiles are currently listed in this specific view. You can submit an everyday task or service inquiry, and a verified property professional will respond with a quotation.
               </p>
               <Link
@@ -104,38 +104,38 @@ export default async function PropertyServicesPage() {
               {agents.map((ag) => (
                 <div
                   key={ag.professional_id}
-                  className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-3 flex flex-col justify-between"
+                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs space-y-3 flex flex-col justify-between"
                 >
                   <div className="space-y-2">
                     <div className="flex items-start justify-between">
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
                         Property Consultant
                       </span>
                       {ag.is_verified && (
-                        <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-md">
+                        <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold rounded-md">
                           ✓ Verified Agent
                         </span>
                       )}
                     </div>
 
-                    <h4 className="text-sm font-bold text-slate-900">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white">
                       {ag.business_name}
                     </h4>
 
                     {ag.headline && (
-                      <p className="text-xs text-slate-600">
+                      <p className="text-xs text-slate-600 dark:text-slate-300">
                         {ag.headline}
                       </p>
                     )}
 
-                    <div className="text-xs text-slate-500 space-y-1">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 space-y-1">
                       <p>📍 {ag.primary_city}, {ag.primary_state}</p>
                       <p>⏳ {ag.years_of_experience} years professional experience</p>
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs text-slate-600">
+                  <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span className="text-xs text-slate-600 dark:text-slate-300">
                       Consultation: ₦{(ag.base_callout_fee_kobo / 100).toLocaleString()}
                     </span>
                     <Link

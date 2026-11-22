@@ -19,13 +19,13 @@ export function ProfileCompletionMeter({
   steps,
 }: ProfileCompletionMeterProps) {
   return (
-    <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs">
+    <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs">
       <div className="flex items-center justify-between mb-3">
         <div>
-          <h3 className="text-sm font-bold text-slate-900">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             Profile Completion
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             A complete profile increases customer bookings and quote acceptance by up to 80%.
           </p>
         </div>
@@ -37,7 +37,7 @@ export function ProfileCompletionMeter({
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+      <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden">
         <div
           className={`h-2.5 rounded-full transition-all duration-500 ${
             percentage === 100
@@ -57,8 +57,8 @@ export function ProfileCompletionMeter({
             key={s.name}
             className={`p-2.5 rounded-lg border text-xs transition-colors ${
               s.completed
-                ? "bg-emerald-50/50 border-emerald-200 text-emerald-950"
-                : "bg-slate-50 border-slate-200 text-slate-700"
+                ? "bg-emerald-50 dark:bg-emerald-950/60/50 border-emerald-200 dark:border-emerald-800 text-emerald-950"
+                : "bg-slate-50 dark:bg-[#071526] border-slate-200 dark:border-[#163654] text-slate-700 dark:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-1.5 font-bold mb-0.5">
@@ -66,14 +66,14 @@ export function ProfileCompletionMeter({
                 className={`w-4 h-4 rounded-full flex items-center justify-center text-[10px] ${
                   s.completed
                     ? "bg-emerald-500 text-white"
-                    : "bg-slate-300 text-slate-700"
+                    : "bg-slate-300 text-slate-700 dark:text-slate-200"
                 }`}
               >
                 {s.completed ? "✓" : idx + 1}
               </span>
               <span className="truncate">{s.name}</span>
             </div>
-            <p className="text-[11px] text-slate-500 truncate">{s.hint}</p>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{s.hint}</p>
           </div>
         ))}
       </div>

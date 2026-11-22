@@ -102,7 +102,7 @@ export function CustomerSupportChat() {
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden flex flex-col h-[650px] max-w-4xl mx-auto">
+    <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] shadow-xl overflow-hidden flex flex-col h-[650px] max-w-4xl mx-auto">
       {/* Header */}
       <div className="p-4 sm:p-5 bg-gradient-to-r from-teal-900 via-teal-800 to-slate-900 text-white flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -124,7 +124,7 @@ export function CustomerSupportChat() {
       </div>
 
       {/* Preset Topics Bar */}
-      <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center gap-2 overflow-x-auto no-scrollbar">
+      <div className="px-4 py-2.5 bg-slate-50 dark:bg-[#071526] border-b border-slate-200 dark:border-[#163654] flex items-center gap-2 overflow-x-auto no-scrollbar">
         <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 shrink-0">
           Topics:
         </span>
@@ -134,7 +134,7 @@ export function CustomerSupportChat() {
             type="button"
             onClick={() => handleSend(t.query)}
             disabled={isPending}
-            className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-teal-500 hover:text-teal-700 text-slate-700 text-xs font-medium whitespace-nowrap shadow-2xs transition disabled:opacity-50"
+            className="px-2.5 py-1 rounded-lg bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:text-teal-700 dark:text-teal-400 text-slate-700 dark:text-slate-200 text-xs font-medium whitespace-nowrap shadow-2xs transition disabled:opacity-50"
           >
             {t.label}
           </button>
@@ -142,7 +142,7 @@ export function CustomerSupportChat() {
       </div>
 
       {/* Messages Scroll Area */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50/40">
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50 dark:bg-[#071526]/40">
         {messages.map((msg) => {
           const isUser = msg.role === "user";
           const isEscalated = msg.result?.is_escalated;
@@ -157,13 +157,13 @@ export function CustomerSupportChat() {
                   isUser
                     ? "bg-[#0D9488] text-white rounded-tr-xs"
                     : isEscalated
-                    ? "bg-amber-50 border-2 border-amber-300 text-amber-950 rounded-tl-xs"
-                    : "bg-white border border-slate-200 text-slate-800 rounded-tl-xs"
+                    ? "bg-amber-50 dark:bg-amber-950/60 border-2 border-amber-300 dark:border-amber-700 text-amber-950 rounded-tl-xs"
+                    : "bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-slate-800 dark:text-slate-100 rounded-tl-xs"
                 }`}
               >
                 {/* Escalation Alert Badge */}
                 {isEscalated && (
-                  <div className="mb-2.5 pb-2 border-b border-amber-200 flex items-center gap-2">
+                  <div className="mb-2.5 pb-2 border-b border-amber-200 dark:border-amber-800 flex items-center gap-2">
                     <span className="px-2 py-0.5 rounded-md bg-amber-500 text-white font-black text-[10px] uppercase tracking-wider">
                       🚨 Case Escalated to Human Support
                     </span>
@@ -180,7 +180,7 @@ export function CustomerSupportChat() {
 
                 {/* Suggested Questions */}
                 {!isUser && msg.result?.suggested_questions && msg.result.suggested_questions.length > 0 && (
-                  <div className="mt-3 pt-2.5 border-t border-slate-100 flex flex-col gap-1.5">
+                  <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-1.5">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
                       Suggested follow-ups:
                     </span>
@@ -190,7 +190,7 @@ export function CustomerSupportChat() {
                         type="button"
                         onClick={() => handleSend(q)}
                         disabled={isPending}
-                        className="text-left text-xs text-teal-700 hover:text-teal-900 hover:underline font-medium flex items-center gap-1.5"
+                        className="text-left text-xs text-teal-700 dark:text-teal-400 hover:text-teal-900 hover:underline font-medium flex items-center gap-1.5"
                       >
                         <span>→</span>
                         <span>{q}</span>
@@ -214,7 +214,7 @@ export function CustomerSupportChat() {
         })}
 
         {isPending && (
-          <div className="flex items-center gap-2 text-xs text-slate-500 p-2">
+          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 p-2">
             <span className="flex h-2 w-2 rounded-full bg-teal-500 animate-ping" />
             <span>Consulting EasyLife knowledge base...</span>
           </div>
@@ -229,7 +229,7 @@ export function CustomerSupportChat() {
           e.preventDefault();
           handleSend();
         }}
-        className="p-3 sm:p-4 bg-white border-t border-slate-200 flex items-center gap-2"
+        className="p-3 sm:p-4 bg-white dark:bg-[#0D223A] border-t border-slate-200 dark:border-[#163654] flex items-center gap-2"
       >
         <input
           type="text"
@@ -237,7 +237,7 @@ export function CustomerSupportChat() {
           onChange={(e) => setInputText(e.target.value)}
           placeholder="Ask a question or describe your issue (e.g. How does escrow work?)..."
           disabled={isPending}
-          className="flex-1 h-11 px-4 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 focus:outline-hidden focus:border-[#0D9488] focus:ring-1 focus:ring-[#0D9488]"
+          className="flex-1 h-11 px-4 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0D9488] focus:ring-1 focus:ring-[#0D9488]"
         />
         <button
           type="submit"

@@ -139,7 +139,7 @@ export default async function ServiceDetailPage({
                   {availability.serviceCode}
                 </span>
               )}
-              <span className="rounded-full bg-amber-400/20 border border-amber-300/40 px-3 py-1 text-xs font-bold text-amber-100">
+              <span className="rounded-full bg-amber-400/20 border border-amber-300 dark:border-amber-700/40 px-3 py-1 text-xs font-bold text-amber-100">
                 {isPaused ? "Temporarily Paused" : "Service Temporarily Unavailable"}
               </span>
             </div>
@@ -159,7 +159,7 @@ export default async function ServiceDetailPage({
               <button
                 type="button"
                 disabled
-                className="rounded-xl bg-white/15 border border-white/25 px-5 py-3 text-sm font-bold text-white/70 cursor-not-allowed"
+                className="rounded-xl bg-white dark:bg-[#0D223A]/15 border border-white/25 px-5 py-3 text-sm font-bold text-white/70 cursor-not-allowed"
               >
                 Booking &amp; Quotation Requests Disabled
               </button>
@@ -173,7 +173,7 @@ export default async function ServiceDetailPage({
               )}
               <Link
                 href="/services"
-                className="rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 text-sm font-semibold text-white transition-colors"
+                className="rounded-xl bg-white dark:bg-[#0D223A]/10 hover:bg-white dark:bg-[#0D223A]/20 border border-white/20 px-4 py-3 text-sm font-semibold text-white transition-colors"
               >
                 Full Active Catalogue
               </Link>
@@ -201,7 +201,7 @@ export default async function ServiceDetailPage({
               {fallbackPopular.map((alt) => (
                 <article
                   key={alt.id}
-                  className="rounded-2xl bg-white border border-[#DAE7E7] p-5 flex flex-col justify-between gap-4 hover:border-[#24989A] transition-colors"
+                  className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-5 flex flex-col justify-between gap-4 hover:border-[#24989A] transition-colors"
                 >
                   <div>
                     <span className="text-[11px] font-mono font-bold text-[#68797C]">
@@ -237,7 +237,7 @@ export default async function ServiceDetailPage({
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl bg-white border border-[#DAE7E7] p-6 text-sm text-[#4E6065]">
+            <div className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-6 text-sm text-[#4E6065]">
               Explore our active{" "}
               <Link href="/services" className="font-bold text-[#24989A] underline">
                 service catalogue
@@ -373,7 +373,7 @@ export default async function ServiceDetailPage({
                   {service.service_code}
                 </span>
                 {service.is_featured && (
-                  <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-bold text-white">
+                  <span className="rounded-full bg-white dark:bg-[#0D223A]/15 px-3 py-1 text-xs font-bold text-white">
                     Featured Service
                   </span>
                 )}
@@ -383,7 +383,7 @@ export default async function ServiceDetailPage({
                   </span>
                 )}
                 {service.requires_site_inspection && (
-                  <span className="rounded-full bg-teal-500/20 border border-teal-300/30 px-3 py-1 text-xs font-semibold text-teal-100">
+                  <span className="rounded-full bg-teal-500/20 border border-teal-300 dark:border-teal-700/30 px-3 py-1 text-xs font-semibold text-teal-100">
                     Site Inspection / Scope Check Supported
                   </span>
                 )}
@@ -405,7 +405,7 @@ export default async function ServiceDetailPage({
                     <Link
                       key={kw}
                       href={`/explore-services?q=${encodeURIComponent(kw)}`}
-                      className="rounded-full bg-white/10 hover:bg-white/20 border border-white/15 px-3 py-1 text-xs font-medium text-[#DAE7E7] transition-colors"
+                      className="rounded-full bg-white dark:bg-[#0D223A]/10 hover:bg-white dark:bg-[#0D223A]/20 border border-white/15 px-3 py-1 text-xs font-medium text-[#DAE7E7] transition-colors"
                     >
                       #{kw}
                     </Link>
@@ -415,7 +415,7 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Right Booking & Benchmark Summary Card */}
-            <aside className="lg:col-span-4 rounded-3xl bg-white text-[#1F2F34] p-6 shadow-xl border border-white/60 space-y-5">
+            <aside className="lg:col-span-4 rounded-3xl bg-white dark:bg-[#0D223A] text-[#1F2F34] p-6 shadow-xl border border-white/60 space-y-5">
               <div className="flex items-center gap-3.5">
                 <div className="h-14 w-14 rounded-2xl bg-[#EEF6F7] border border-[#DAE7E7] flex items-center justify-center shrink-0 overflow-hidden">
                   {heroImageUrl ? (
@@ -502,7 +502,7 @@ export default async function ServiceDetailPage({
         {/* Service-Specific Requirements & Provider Verification Criteria */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Customer Scope / Preparation Checklist */}
-          <div className="rounded-3xl bg-white border border-[#DAE7E7] p-6 sm:p-7 shadow-xs space-y-4">
+          <div className="rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-6 sm:p-7 shadow-xs space-y-4">
             <div className="flex items-center gap-3">
               <span className="h-10 w-10 rounded-xl bg-[#EEF6F7] text-[#154752] flex items-center justify-center">
                 <Icon name="clipboard" className="h-5 w-5" />
@@ -536,7 +536,7 @@ export default async function ServiceDetailPage({
                         className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase ${
                           req.is_required
                             ? "bg-[#154752] text-white"
-                            : "bg-slate-200 text-slate-700"
+                            : "bg-slate-200 text-slate-700 dark:text-slate-200"
                         }`}
                       >
                         {req.is_required ? "Required" : "Recommended"}
@@ -554,7 +554,7 @@ export default async function ServiceDetailPage({
           </div>
 
           {/* Provider Verification & Qualification Requirements */}
-          <div className="rounded-3xl bg-white border border-[#DAE7E7] p-6 sm:p-7 shadow-xs space-y-4">
+          <div className="rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-6 sm:p-7 shadow-xs space-y-4">
             <div className="flex items-center gap-3">
               <span className="h-10 w-10 rounded-xl bg-[#EEF6F7] text-[#24989A] flex items-center justify-center">
                 <Icon name="shield" className="h-5 w-5" />
@@ -571,12 +571,12 @@ export default async function ServiceDetailPage({
 
             <div className="flex flex-wrap gap-2">
               {service.requires_verified_identity && (
-                <span className="rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-1.5 text-xs font-semibold text-emerald-800">
+                <span className="rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 px-3 py-1.5 text-xs font-semibold text-emerald-800 dark:text-emerald-300">
                   ✓ Verified Govt ID Required
                 </span>
               )}
               {service.requires_trade_certification && (
-                <span className="rounded-xl bg-teal-50 border border-teal-200 px-3 py-1.5 text-xs font-semibold text-[#0F766E]">
+                <span className="rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-3 py-1.5 text-xs font-semibold text-[#0F766E]">
                   ✓ Trade Certification Required
                 </span>
               )}
@@ -586,7 +586,7 @@ export default async function ServiceDetailPage({
                 </span>
               )}
               {service.min_years_experience > 0 && (
-                <span className="rounded-xl bg-slate-100 border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700">
+                <span className="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654] px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200">
                   Minimum {service.min_years_experience} Years Experience
                 </span>
               )}
@@ -661,7 +661,7 @@ export default async function ServiceDetailPage({
                 <Link
                   key={rel.id}
                   href={`/services/${rel.slug}`}
-                  className="rounded-2xl bg-white border border-[#DAE7E7] p-4 hover:border-[#24989A] transition-colors flex flex-col justify-between gap-3"
+                  className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-4 hover:border-[#24989A] transition-colors flex flex-col justify-between gap-3"
                 >
                   <div>
                     <span className="text-[10px] font-mono font-bold text-[#68797C]">
@@ -721,7 +721,7 @@ function MatchedSpecialistsSkeleton() {
       <div className="h-7 w-72 rounded bg-slate-200" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-44 rounded-2xl bg-white border border-slate-200" />
+          <div key={i} className="h-44 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654]" />
         ))}
       </div>
     </section>
@@ -776,7 +776,7 @@ async function MatchedSpecialistsSection({
                 className={`rounded-full px-3 py-1.5 text-xs font-bold transition-colors ${
                   active
                     ? "bg-[#154752] text-white"
-                    : "bg-white border border-[#DAE7E7] text-[#154752] hover:border-[#24989A]"
+                    : "bg-white dark:bg-[#0D223A] border border-[#DAE7E7] text-[#154752] hover:border-[#24989A]"
                 }`}
               >
                 {hub}
@@ -787,7 +787,7 @@ async function MatchedSpecialistsSection({
       </div>
 
       {matchedPros.length === 0 ? (
-        <div className="rounded-3xl bg-white border border-dashed border-[#CBD5E1] p-10 text-center max-w-2xl mx-auto space-y-4">
+        <div className="rounded-3xl bg-white dark:bg-[#0D223A] border border-dashed border-[#CBD5E1] p-10 text-center max-w-2xl mx-auto space-y-4">
           <h3 className="text-base font-bold text-[#154752]">
             No specialist profile currently listed directly for {serviceName}
             {normalizedCity !== "All Cities" ? ` in ${normalizedCity}` : ""}
@@ -806,7 +806,7 @@ async function MatchedSpecialistsSection({
             {normalizedCity !== "All Cities" && (
               <Link
                 href={`/services/${serviceSlug}`}
-                className="rounded-xl border border-[#DAE7E7] bg-white px-4 py-2.5 text-sm font-semibold text-[#154752]"
+                className="rounded-xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] px-4 py-2.5 text-sm font-semibold text-[#154752]"
               >
                 Check All Cities
               </Link>
@@ -818,7 +818,7 @@ async function MatchedSpecialistsSection({
           {matchedPros.map((pro) => (
             <article
               key={pro.professional_id}
-              className="rounded-2xl bg-white border border-[#DAE7E7] p-5 shadow-xs hover:border-[#24989A] transition-all flex flex-col justify-between space-y-4"
+              className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-5 shadow-xs hover:border-[#24989A] transition-all flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
@@ -871,7 +871,7 @@ async function MatchedSpecialistsSection({
                     {pro.primary_city}
                   </span>
                   {pro.service_title && (
-                    <span className="rounded-md bg-teal-50 border border-teal-200 px-2 py-0.5 font-medium text-[#0F766E] truncate max-w-[190px]">
+                    <span className="rounded-md bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-2 py-0.5 font-medium text-[#0F766E] truncate max-w-[190px]">
                       {pro.service_title}
                     </span>
                   )}

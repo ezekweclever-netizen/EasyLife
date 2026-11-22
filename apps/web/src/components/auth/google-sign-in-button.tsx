@@ -111,7 +111,7 @@ export function GoogleSignInButton({
         type="button"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
-        className="w-full h-10.5 px-4 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-800 text-sm font-semibold flex items-center justify-center gap-3 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
+        className="w-full h-10.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] active:bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold flex items-center justify-center gap-3 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
       >
         <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
           <path
@@ -137,7 +137,7 @@ export function GoogleSignInButton({
       {statusMessage && (
         <div
           role="status"
-          className="rounded-xl bg-amber-50 border border-amber-200 px-3.5 py-2.5 text-xs text-amber-900 leading-relaxed"
+          className="rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 px-3.5 py-2.5 text-xs text-amber-900 leading-relaxed"
         >
           {statusMessage}
         </div>

@@ -11,7 +11,7 @@ export default function CustomerDashboardError({
 }) {
   return (
     <div className="min-h-[65vh] flex items-center justify-center px-4 py-16 bg-[#F8FAFC]">
-      <div className="max-w-md w-full rounded-3xl bg-white border border-[#E2E8F0] p-8 text-center space-y-4 shadow-xs">
+      <div className="max-w-md w-full rounded-3xl bg-white dark:bg-[#0D223A] border border-[#E2E8F0] p-8 text-center space-y-4 shadow-xs">
         <h1 className="text-xl font-bold text-[#0F172A]">
           Unable to load your dashboard
         </h1>

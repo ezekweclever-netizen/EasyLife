@@ -95,10 +95,10 @@ export function LocationPicker({
   return (
     <div className="space-y-2 relative">
       <div className="flex items-center justify-between">
-        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+        <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
           {label}
         </label>
-        <span className="text-[10px] font-semibold text-[#0D9488] px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200">
+        <span className="text-[10px] font-semibold text-[#0D9488] px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800">
           📍 {filterCity ? `${filterCity} Hub` : "Port Harcourt • Lagos • Abuja"}
         </span>
       </div>
@@ -112,7 +112,7 @@ export function LocationPicker({
             if (suggestions.length > 0) setIsOpen(true);
           }}
           placeholder={placeholder}
-          className="w-full h-11 px-4 pr-10 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 bg-white focus:outline-hidden focus:border-[#0D9488] shadow-2xs"
+          className="w-full h-11 px-4 pr-10 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:outline-hidden focus:border-[#0D9488] shadow-2xs"
         />
 
         {isPending && (
@@ -123,20 +123,20 @@ export function LocationPicker({
 
         {/* Autocomplete Dropdown */}
         {isOpen && suggestions.length > 0 && (
-          <div className="absolute left-0 right-0 top-12 z-50 bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden divide-y divide-slate-100 max-h-60 overflow-y-auto">
+          <div className="absolute left-0 right-0 top-12 z-50 bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xl overflow-hidden divide-y divide-slate-100 max-h-60 overflow-y-auto">
             {suggestions.map((loc) => (
               <button
                 key={loc.id}
                 type="button"
                 onClick={() => handleSelect(loc)}
-                className="w-full text-left p-3 hover:bg-teal-50/60 transition flex items-start gap-2.5 text-xs text-slate-800"
+                className="w-full text-left p-3 hover:bg-teal-50 dark:bg-teal-950/60/60 transition flex items-start gap-2.5 text-xs text-slate-800 dark:text-slate-100"
               >
                 <span className="text-base shrink-0 mt-0.5">📍</span>
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-slate-900 truncate">
+                  <div className="font-semibold text-slate-900 dark:text-white truncate">
                     {loc.displayName}
                   </div>
-                  <div className="text-[11px] text-slate-500 font-mono mt-0.5">
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                     Lat: {loc.coordinates.latitude.toFixed(4)}, Lon: {loc.coordinates.longitude.toFixed(4)} • {loc.provider.toUpperCase()}
                   </div>
                 </div>
@@ -148,19 +148,19 @@ export function LocationPicker({
 
       {/* Selected Coordinates & Transit Metric Card */}
       {selectedLocation && (
-        <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+        <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 font-mono font-bold text-[10px]">
+            <span className="px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 dark:text-[#5CD3D5] font-mono font-bold text-[10px]">
               {selectedLocation.coordinates.latitude.toFixed(4)}°N, {selectedLocation.coordinates.longitude.toFixed(4)}°E
             </span>
-            <span className="text-slate-600 font-medium truncate max-w-xs">
+            <span className="text-slate-600 dark:text-slate-300 font-medium truncate max-w-xs">
               {selectedLocation.neighbourhood || selectedLocation.city} ({selectedLocation.lga || "LGA"})
             </span>
           </div>
 
           {distanceKm !== null && (
-            <div className="text-[11px] text-slate-500 shrink-0">
-              ~<strong className="text-slate-800">{distanceKm} km</strong> from {activeHubCity} Hub ({durationMins} mins drive)
+            <div className="text-[11px] text-slate-500 dark:text-slate-400 shrink-0">
+              ~<strong className="text-slate-800 dark:text-slate-100">{distanceKm} km</strong> from {activeHubCity} Hub ({durationMins} mins drive)
             </div>
           )}
         </div>

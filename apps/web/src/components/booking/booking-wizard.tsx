@@ -268,7 +268,7 @@ export function BookingWizard({
     const selectedCat = categories.find((c) => c.id === categoryId);
 
     return (
-      <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6 sm:p-10 shadow-sm space-y-8 max-w-2xl mx-auto text-center">
+      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-10 shadow-sm space-y-8 max-w-2xl mx-auto text-center">
         <div className="w-20 h-20 rounded-full bg-[#F0FDFA] text-[#0F766E] mx-auto flex items-center justify-center text-4xl shadow-inner">
           ✓
         </div>
@@ -298,7 +298,7 @@ export function BookingWizard({
             <button
               type="button"
               onClick={() => navigator.clipboard.writeText(createdBooking.referenceCode)}
-              className="text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-[#CBD5E1] hover:bg-white text-[#334155] transition-colors"
+              className="text-xs font-semibold px-2.5 py-1.5 rounded-lg border border-[#CBD5E1] hover:bg-white dark:bg-[#0D223A] text-[#334155] transition-colors"
             >
               Copy Code
             </button>
@@ -355,7 +355,7 @@ export function BookingWizard({
   // PROGRESS INDICATOR (Step 1 -> 2 -> 3 -> 4)
   // ==========================================
   return (
-    <div className="bg-white rounded-3xl border border-[#E2E8F0] shadow-sm overflow-hidden max-w-3xl mx-auto">
+    <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] shadow-sm overflow-hidden max-w-3xl mx-auto">
       {/* Progress Bar */}
       <div className="bg-[#F8FAFC] border-b border-[#E2E8F0] px-6 py-4">
         <div className="flex items-center justify-between max-w-md mx-auto">
@@ -399,7 +399,7 @@ export function BookingWizard({
 
       <div className="p-6 sm:p-8 space-y-6">
         {submissionError && (
-          <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-start gap-2">
+          <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-400 text-sm flex items-start gap-2">
             <span>⚠️</span>
             <span>{submissionError}</span>
           </div>
@@ -409,7 +409,7 @@ export function BookingWizard({
         {unavailableServiceNotice && (
           <div
             role="status"
-            className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 space-y-2 text-xs"
+            className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-amber-950 space-y-2 text-xs"
           >
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="font-bold text-sm">
@@ -497,7 +497,7 @@ export function BookingWizard({
                 <p className="text-[#64748B]">This pro will be sent your request first.</p>
               </div>
             </div>
-            <span className="font-semibold text-emerald-700">✓ Assigned</span>
+            <span className="font-semibold text-emerald-700 dark:text-emerald-300">✓ Assigned</span>
           </div>
         )}
 
@@ -518,7 +518,7 @@ export function BookingWizard({
                 id="cat-select"
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -542,7 +542,7 @@ export function BookingWizard({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., 2.5HP Standing AC not cooling in living room"
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
               />
               {fieldErrors.title && <p className="text-xs text-red-600">{fieldErrors.title}</p>}
             </div>
@@ -561,7 +561,7 @@ export function BookingWizard({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Describe what is happening, error codes, leaking pipes, unusual sounds, when the fault started, and any parts that may need replacement..."
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
               />
               {fieldErrors.description && (
                 <p className="text-xs text-red-600">{fieldErrors.description}</p>
@@ -586,7 +586,7 @@ export function BookingWizard({
                     className={`p-3.5 rounded-xl text-left border transition-all ${
                       urgency === u.id
                         ? "border-[#0F766E] bg-[#F0FDFA] ring-1 ring-[#0F766E]"
-                        : "border-[#E2E8F0] hover:border-[#CBD5E1] bg-white"
+                        : "border-[#E2E8F0] hover:border-[#CBD5E1] bg-white dark:bg-[#0D223A]"
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -621,7 +621,7 @@ export function BookingWizard({
 
             {/* Drag & Drop Upload Area */}
             <div className="border-2 border-dashed border-[#CBD5E1] rounded-2xl p-6 text-center space-y-3 bg-[#F8FAFC] hover:bg-[#F1F5F9] transition-colors">
-              <div className="w-12 h-12 rounded-full bg-white text-[#0F766E] text-2xl mx-auto flex items-center justify-center shadow-xs">
+              <div className="w-12 h-12 rounded-full bg-white dark:bg-[#0D223A] text-[#0F766E] text-2xl mx-auto flex items-center justify-center shadow-xs">
                 📷
               </div>
               <div>
@@ -650,7 +650,7 @@ export function BookingWizard({
                   {attachments.map((file, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-3 rounded-xl bg-white border border-[#E2E8F0] text-xs"
+                      className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-[#0D223A] border border-[#E2E8F0] text-xs"
                     >
                       <div className="flex items-center gap-2 truncate">
                         <span className="text-base">{file.type.startsWith("video") ? "🎥" : "🖼️"}</span>
@@ -660,7 +660,7 @@ export function BookingWizard({
                       <button
                         type="button"
                         onClick={() => removeAttachment(idx)}
-                        className="text-red-500 hover:text-red-700 font-semibold text-xs ml-2"
+                        className="text-red-500 hover:text-red-700 dark:text-red-400 font-semibold text-xs ml-2"
                       >
                         Remove
                       </button>
@@ -709,7 +709,7 @@ export function BookingWizard({
                   setCity(e.target.value);
                   setLgaOrDistrict("");
                 }}
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
               >
                 {NIGERIAN_CITIES.map((c) => (
                   <option key={c.name} value={c.name}>
@@ -728,7 +728,7 @@ export function BookingWizard({
                 id="lga-select"
                 value={lgaOrDistrict}
                 onChange={(e) => setLgaOrDistrict(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
               >
                 <option value="">Select LGA or District (Optional)</option>
                 {currentCityConfig.lgas.map((lga) => (
@@ -750,7 +750,7 @@ export function BookingWizard({
                 value={serviceAddress}
                 onChange={(e) => setServiceAddress(e.target.value)}
                 placeholder="e.g. Flat 3B, Plot 14, Peter Odili Road, Opposite Total Filling Station"
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
               />
               {fieldErrors.serviceAddress && (
                 <p className="text-xs text-red-600">{fieldErrors.serviceAddress}</p>
@@ -769,7 +769,7 @@ export function BookingWizard({
                   value={preferredDate}
                   min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => setPreferredDate(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
                 />
                 {fieldErrors.preferredDate && (
                   <p className="text-xs text-red-600">{fieldErrors.preferredDate}</p>
@@ -784,7 +784,7 @@ export function BookingWizard({
                   id="slot-select"
                   value={preferredTimeSlot}
                   onChange={(e) => setPreferredTimeSlot(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
                 >
                   <option value="Morning (8:00 AM – 12:00 PM)">Morning (8:00 AM – 12:00 PM)</option>
                   <option value="Afternoon (12:00 PM – 4:00 PM)">Afternoon (12:00 PM – 4:00 PM)</option>
@@ -805,7 +805,7 @@ export function BookingWizard({
                 value={additionalInstructions}
                 onChange={(e) => setAdditionalInstructions(e.target.value)}
                 placeholder="Estate security code, visitor parking details, watch out for dog in compound, ask for Mrs. Amadi..."
-                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
               />
             </div>
 
@@ -866,7 +866,7 @@ export function BookingWizard({
 
               <div>
                 <span className="text-[#64748B] block text-xs">Problem Description</span>
-                <p className="text-[#334155] whitespace-pre-line bg-white p-3 rounded-xl border border-[#E2E8F0]">
+                <p className="text-[#334155] whitespace-pre-line bg-white dark:bg-[#0D223A] p-3 rounded-xl border border-[#E2E8F0]">
                   {description}
                 </p>
               </div>

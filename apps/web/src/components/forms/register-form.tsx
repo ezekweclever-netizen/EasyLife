@@ -36,10 +36,10 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center" aria-hidden="true">
-          <div className="w-full border-t border-slate-200" />
+          <div className="w-full border-t border-slate-200 dark:border-[#163654]" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-2.5 text-slate-400 font-semibold">
+          <span className="bg-white dark:bg-[#0D223A] px-2.5 text-slate-400 font-semibold">
             or register with email
           </span>
         </div>
@@ -49,7 +49,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
       {state.status === "error" && state.message && (
         <div
           role="alert"
-          className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-800 flex items-start gap-3"
+          className="rounded-lg bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 p-4 text-sm text-red-800 dark:text-red-300 flex items-start gap-3"
         >
           <span className="font-bold text-red-600 mt-0.5">!</span>
           <span>{state.message}</span>
@@ -59,12 +59,12 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
       {state.status === "success" && state.message && (
         <div
           role="status"
-          className="rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-900 flex items-start gap-3"
+          className="rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 p-4 text-sm text-emerald-900 flex items-start gap-3"
         >
           <span className="font-bold text-emerald-600 mt-0.5">✓</span>
           <div>
             <p className="font-semibold">Account Registered Successfully</p>
-            <p className="mt-1 text-emerald-800">{state.message}</p>
+            <p className="mt-1 text-emerald-800 dark:text-emerald-300">{state.message}</p>
             <div className="mt-3">
               <Link
                 href="/login"
@@ -79,7 +79,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
 
       {/* Account Type Selection */}
       <fieldset>
-        <legend className="block text-base font-semibold text-[#0F172A] mb-2.5">
+        <legend className="block text-base font-semibold text-[#0F172A] dark:text-white mb-2.5">
           Select Your Account Type
         </legend>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -90,12 +90,12 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
                 key={opt.value}
                 className={`relative flex flex-col p-4 rounded-xl border cursor-pointer transition-all ${
                   isChecked
-                    ? "border-[#0D9488] bg-teal-50/40 ring-1 ring-[#0D9488]"
-                    : "border-[#CBD5E1] bg-white hover:border-slate-400"
+                    ? "border-[#0D9488] bg-teal-50 dark:bg-teal-950/60 ring-1 ring-[#0D9488]"
+                    : "border-[#CBD5E1] dark:border-[#163654] bg-white dark:bg-[#0D223A] hover:border-slate-400 dark:hover:border-slate-500"
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-base font-semibold text-[#0F172A]">
+                  <span className="text-base font-semibold text-[#0F172A] dark:text-white">
                     {opt.label}
                   </span>
                   <input
@@ -104,10 +104,10 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
                     value={opt.value}
                     checked={isChecked}
                     onChange={() => setSelectedRole(opt.value)}
-                    className="h-4 w-4 text-[#0D9488] focus:ring-[#0D9488] border-slate-300"
+                    className="h-4 w-4 text-[#0D9488] focus:ring-[#0D9488] border-slate-300 dark:border-slate-700"
                   />
                 </div>
-                <p className="mt-1.5 text-sm text-slate-600 leading-snug">
+                <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-300 leading-snug">
                   {opt.description}
                 </p>
               </label>
@@ -126,7 +126,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
         <div>
           <label
             htmlFor="fullName"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
           >
             Full Name
           </label>
@@ -138,10 +138,10 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             defaultValue={state.values?.fullName ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.fullName)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.fullName
-                ? "border-red-500 bg-red-50/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
             placeholder="e.g. Chukwuma Obi"
           />
@@ -155,7 +155,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
           >
             Email Address
           </label>
@@ -167,10 +167,10 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             defaultValue={state.values?.email ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.email)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.email
-                ? "border-red-500 bg-red-50/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
             placeholder="e.g. chukwuma@example.com"
           />
@@ -187,7 +187,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
           >
             Nigerian Phone Number
           </label>
@@ -198,10 +198,10 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             autoComplete="tel"
             defaultValue={state.values?.phone ?? ""}
             aria-invalid={Boolean(state.fieldErrors?.phone)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.phone
-                ? "border-red-500 bg-red-50/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
             placeholder="e.g. 0803 123 4567"
           />
@@ -210,7 +210,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
               {state.fieldErrors.phone}
             </p>
           ) : (
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
               Used for job SMS alerts &amp; OTP verification.
             </p>
           )}
@@ -219,7 +219,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
         <div>
           <label
             htmlFor="city"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
           >
             Pilot City (Operating Hub)
           </label>
@@ -229,14 +229,14 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             defaultValue={state.values?.city ?? "Port Harcourt"}
             required
             aria-invalid={Boolean(state.fieldErrors?.city)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.city
-                ? "border-red-500 bg-red-50/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
           >
             {PILOT_CITIES.map((city) => (
-              <option key={city} value={city}>
+              <option key={city} value={city} className="dark:bg-[#0D223A] dark:text-white">
                 {city}
               </option>
             ))}
@@ -255,14 +255,14 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
           <div className="flex items-center justify-between mb-1.5">
             <label
               htmlFor="password"
-              className="block text-sm font-semibold text-[#0F172A]"
+              className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200"
             >
               Password
             </label>
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
-              className="text-xs text-[#0D9488] font-medium hover:underline"
+              className="text-xs text-[#0D9488] dark:text-[#5CD3D5] font-medium hover:underline"
             >
               {showPassword ? "Hide" : "Show"}
             </button>
@@ -274,10 +274,10 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             autoComplete="new-password"
             required
             aria-invalid={Boolean(state.fieldErrors?.password)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.password
-                ? "border-red-500 bg-red-50/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
             placeholder="At least 8 chars, 1 letter, 1 number"
           />
@@ -291,7 +291,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
         <div>
           <label
             htmlFor="confirmPassword"
-            className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+            className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
           >
             Confirm Password
           </label>
@@ -302,10 +302,10 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             autoComplete="new-password"
             required
             aria-invalid={Boolean(state.fieldErrors?.confirmPassword)}
-            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-11 px-3.5 rounded-lg border text-sm text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.confirmPassword
-                ? "border-red-500 bg-red-50/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
+                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
             placeholder="Re-enter password"
           />
@@ -326,14 +326,14 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             type="checkbox"
             required
             aria-invalid={Boolean(state.fieldErrors?.acceptTerms)}
-            className="mt-1 h-4 w-4 rounded border-slate-300 text-[#0D9488] focus:ring-[#0D9488]"
+            className="mt-1 h-4 w-4 rounded border-slate-300 dark:border-slate-700 text-[#0D9488] focus:ring-[#0D9488]"
           />
-          <span className="text-xs text-slate-600 leading-relaxed">
+          <span className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
             I agree to the EasyLife{" "}
             <Link
               href="/terms-of-service"
               target="_blank"
-              className="text-[#0D9488] font-semibold underline"
+              className="text-[#0D9488] dark:text-[#5CD3D5] font-semibold underline"
             >
               Terms of Service
             </Link>
@@ -341,7 +341,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             <Link
               href="/privacy-policy"
               target="_blank"
-              className="text-[#0D9488] font-semibold underline"
+              className="text-[#0D9488] dark:text-[#5CD3D5] font-semibold underline"
             >
               Privacy Policy
             </Link>
@@ -349,7 +349,7 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
             <Link
               href="/verification-policy"
               target="_blank"
-              className="text-[#0D9488] font-semibold underline"
+              className="text-[#0D9488] dark:text-[#5CD3D5] font-semibold underline"
             >
               Professional Verification Policy
             </Link>
@@ -373,11 +373,11 @@ export function RegisterForm({ defaultRole }: { defaultRole?: string }) {
       </Button>
 
       {/* Already registered */}
-      <div className="text-center text-xs text-slate-600">
+      <div className="text-center text-xs text-slate-600 dark:text-slate-300">
         <span>Already have an account? </span>
         <Link
           href="/login"
-          className="font-semibold text-[#0D9488] hover:underline"
+          className="font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
         >
           Sign in
         </Link>

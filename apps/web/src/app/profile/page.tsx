@@ -63,7 +63,7 @@ export default async function CustomerProfilePage() {
         </div>
 
         {/* Account & Sign out Section */}
-        <div className="bg-white rounded-3xl border border-[#E2E8F0] p-6 shadow-xs flex items-center justify-between">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 shadow-xs flex items-center justify-between">
           <div>
             <h3 className="text-sm font-bold text-[#0F172A]">Sign Out</h3>
             <p className="text-xs text-[#64748B]">Sign out of your customer session on this device</p>
@@ -71,7 +71,7 @@ export default async function CustomerProfilePage() {
           <form action={logoutAction}>
             <button
               type="submit"
-              className="px-4 py-2 rounded-xl text-xs font-bold text-red-600 border border-red-200 hover:bg-red-50 transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-xl text-xs font-bold text-red-600 border border-red-200 dark:border-red-800 hover:bg-red-50 dark:bg-red-950/60 transition-colors cursor-pointer"
             >
               Sign Out
             </button>

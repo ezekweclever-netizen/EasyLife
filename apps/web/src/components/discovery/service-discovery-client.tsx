@@ -299,56 +299,56 @@ export function ServiceDiscoveryClient({
   return (
     <div className="space-y-8">
       {/* Everyday Services Directory Switcher */}
-      <div className="bg-slate-100 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto text-xs font-bold text-slate-700">
+      <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto text-xs font-bold text-slate-700 dark:text-slate-200">
         <Link
           href="/explore-services"
-          className="px-3.5 py-2 rounded-xl bg-white text-[#0A2540] shadow-xs whitespace-nowrap"
+          className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#0D223A] text-[#0A2540] dark:text-white shadow-xs whitespace-nowrap"
         >
           🔧 Trades &amp; Technicians
         </Link>
         <Link
           href="/services"
-          className="px-3.5 py-2 rounded-xl hover:bg-white/80 hover:text-[#0A2540] transition whitespace-nowrap"
+          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
         >
           📚 Full Service Catalogue
         </Link>
         <Link
           href="/dispatch"
-          className="px-3.5 py-2 rounded-xl hover:bg-white/80 hover:text-[#0A2540] transition whitespace-nowrap"
+          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
         >
           🏍️ Delivery &amp; Dispatch
         </Link>
         <Link
           href="/property-services"
-          className="px-3.5 py-2 rounded-xl hover:bg-white/80 hover:text-[#0A2540] transition whitespace-nowrap"
+          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
         >
           🏠 Property Consultants
         </Link>
         <Link
           href="/businesses"
-          className="px-3.5 py-2 rounded-xl hover:bg-white/80 hover:text-[#0A2540] transition whitespace-nowrap"
+          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
         >
           🏢 Local Businesses
         </Link>
         <Link
           href="/healthcare"
-          className="px-3.5 py-2 rounded-xl hover:bg-white/80 hover:text-[#0A2540] transition whitespace-nowrap"
+          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
         >
           🏥 Healthcare Directory
         </Link>
         <Link
           href="/tasks"
-          className="px-3.5 py-2 rounded-xl bg-[#0D9488]/10 text-[#0D9488] hover:bg-[#0D9488]/20 transition whitespace-nowrap ml-auto"
+          className="px-3.5 py-2 rounded-xl bg-[#0D9488]/10 text-[#0D9488] dark:text-[#5CD3D5] hover:bg-[#0D9488]/20 transition whitespace-nowrap ml-auto"
         >
           📝 Post Everyday Task
         </Link>
       </div>
 
       {/* Search & Filter Header Form */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 sm:p-6 shadow-xs space-y-4">
         {/* Multi-City Service Hubs Selector */}
         <div className="flex flex-wrap items-center gap-2 pb-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 mr-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1">
             Operating Hub:
           </span>
           {["All Cities", "Port Harcourt", "Lagos", "Abuja"].map((hub) => {
@@ -365,7 +365,7 @@ export function ServiceDiscoveryClient({
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition ${
                   selected
                     ? "bg-[#0D9488] text-white shadow-xs"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
                 }`}
               >
                 {hub === "All Cities" ? "All Hubs (PH • Lagos • Abuja)" : `📍 ${hub}`}
@@ -384,7 +384,7 @@ export function ServiceDiscoveryClient({
               if (e.key === "Enter") handleSearch();
             }}
             placeholder="Search by fault, individual service, or specialist name (e.g. Inverter technician, borehole pump, AC repair)..."
-            className="w-full pl-10 pr-28 py-3 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full pl-10 pr-28 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
           />
           <span className="absolute left-3 text-slate-400 text-base">🔍</span>
           <button
@@ -402,7 +402,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-cat"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Major Category
             </label>
@@ -421,7 +421,7 @@ export function ServiceDiscoveryClient({
                   serviceSlug: "",
                 });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
             >
               <option value="">All Major Categories</option>
               {catalogueTree.map((c) => (
@@ -436,7 +436,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-sub"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Subcategory
             </label>
@@ -454,7 +454,7 @@ export function ServiceDiscoveryClient({
                   serviceSlug: "",
                 });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900 disabled:opacity-55"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white disabled:opacity-55"
             >
               <option value="">
                 {categorySlug
@@ -473,7 +473,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-service"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Specific Service
             </label>
@@ -486,7 +486,7 @@ export function ServiceDiscoveryClient({
                 setServiceSlug(nextSrv);
                 applyFilters({ serviceSlug: nextSrv });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
             >
               <option value="">
                 All Services ({availableServices.length})
@@ -503,7 +503,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-city"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Operating City
             </label>
@@ -517,7 +517,7 @@ export function ServiceDiscoveryClient({
                 setSelectedNeighbourhood("");
                 applyFilters({ city: nextCity, neighbourhood: "" });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
             >
               <option value="All Cities">All Cities (PH, Lagos, Abuja)</option>
               <option value="Port Harcourt">Port Harcourt</option>
@@ -530,7 +530,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-area"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Neighbourhood / LGA
             </label>
@@ -538,7 +538,7 @@ export function ServiceDiscoveryClient({
               id="discovery-area"
               value={selectedNeighbourhood}
               onChange={(e) => setSelectedNeighbourhood(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
             >
               <option value="">All Neighbourhoods</option>
               {cityNeighbourhoods.map((n) => (
@@ -553,7 +553,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-distance"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Geographic Radius
             </label>
@@ -562,7 +562,7 @@ export function ServiceDiscoveryClient({
               name="distance"
               value={maxDistanceKm}
               onChange={(e) => setMaxDistanceKm(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
             >
               <option value="5">Within 5 km</option>
               <option value="10">Within 10 km</option>
@@ -577,7 +577,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-rating"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Min. Customer Rating
             </label>
@@ -586,7 +586,7 @@ export function ServiceDiscoveryClient({
               name="rating"
               value={minRating}
               onChange={(e) => setMinRating(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
             >
               <option value="0">Any Rating</option>
               <option value="4.0">★ 4.0 &amp; above</option>
@@ -599,7 +599,7 @@ export function ServiceDiscoveryClient({
           <div>
             <label
               htmlFor="discovery-date"
-              className="block text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1"
+              className="block text-[11px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider mb-1"
             >
               Target Appointment
             </label>
@@ -609,18 +609,18 @@ export function ServiceDiscoveryClient({
               name="availability"
               value={targetDate}
               onChange={(e) => setTargetDate(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
             />
           </div>
         </div>
 
         {/* Sort By + Provider Type + Checkbox Toggles & Actions */}
-        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-1.5">
               <label
                 htmlFor="discovery-sort"
-                className="font-bold text-slate-600 uppercase tracking-wider text-[11px]"
+                className="font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider text-[11px]"
               >
                 Sort:
               </label>
@@ -633,7 +633,7 @@ export function ServiceDiscoveryClient({
                   setSortBy(nextSort);
                   applyFilters({ sortBy: nextSort });
                 }}
-                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
               >
                 <option value="relevance">Best Match</option>
                 <option value="rating">Highest Rated</option>
@@ -647,7 +647,7 @@ export function ServiceDiscoveryClient({
             <div className="flex items-center gap-1.5">
               <label
                 htmlFor="discovery-type"
-                className="font-bold text-slate-600 uppercase tracking-wider text-[11px]"
+                className="font-bold text-slate-600 dark:text-slate-300 uppercase tracking-wider text-[11px]"
               >
                 Provider:
               </label>
@@ -660,7 +660,7 @@ export function ServiceDiscoveryClient({
                   setProviderType(nextType);
                   applyFilters({ providerType: nextType });
                 }}
-                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 bg-slate-50 text-slate-900"
+                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
               >
                 <option value="">All Providers</option>
                 <option value="individual">Independent Specialists</option>
@@ -674,9 +674,9 @@ export function ServiceDiscoveryClient({
                 name="verified"
                 checked={verifiedOnly}
                 onChange={(e) => setVerifiedOnly(e.target.checked)}
-                className="rounded border-slate-300 text-[#0D9488] focus:ring-[#0D9488]"
+                className="rounded border-slate-300 dark:border-slate-700 text-[#0D9488] focus:ring-[#0D9488]"
               />
-              <span className="font-semibold text-slate-700">Verified Pros Only</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-200">Verified Pros Only</span>
             </label>
 
             <label className="flex items-center gap-1.5 cursor-pointer">
@@ -685,9 +685,9 @@ export function ServiceDiscoveryClient({
                 name="available"
                 checked={availableOnly}
                 onChange={(e) => setAvailableOnly(e.target.checked)}
-                className="rounded border-slate-300 text-[#0D9488] focus:ring-[#0D9488]"
+                className="rounded border-slate-300 dark:border-slate-700 text-[#0D9488] focus:ring-[#0D9488]"
               />
-              <span className="font-semibold text-slate-700">Confirmed Available Only</span>
+              <span className="font-semibold text-slate-700 dark:text-slate-200">Confirmed Available Only</span>
             </label>
           </div>
 
@@ -695,7 +695,7 @@ export function ServiceDiscoveryClient({
             <button
               type="button"
               onClick={handleReset}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
             >
               Reset Filters
             </button>
@@ -715,7 +715,7 @@ export function ServiceDiscoveryClient({
       {unavailableNotice && (
         <div
           role="status"
-          className="rounded-2xl border border-amber-200 bg-amber-50 p-5 space-y-3"
+          className="rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/60 p-5 space-y-3"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
@@ -749,7 +749,7 @@ export function ServiceDiscoveryClient({
                 <Link
                   key={alt.href}
                   href={alt.href}
-                  className="rounded-full bg-white border border-amber-300 px-3 py-1 text-xs font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors"
+                  className="rounded-full bg-white dark:bg-[#0D223A] border border-amber-300 dark:border-amber-700 px-3 py-1 text-xs font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors"
                 >
                   {alt.label} →
                 </Link>
@@ -762,10 +762,10 @@ export function ServiceDiscoveryClient({
       {/* Results Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white">
             Matched Professionals ({resolvedTotalCount})
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {resolvedTotalCount > 0 && totalPages > 1
               ? `Showing ${showingFrom}–${showingTo} of ${resolvedTotalCount} verified professionals • `
               : ""}
@@ -783,15 +783,15 @@ export function ServiceDiscoveryClient({
 
       {/* Results Grid */}
       {results.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-dashed border-slate-200 p-10 text-center max-w-xl mx-auto space-y-4">
-          <div className="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 text-2xl mx-auto flex items-center justify-center">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] p-10 text-center max-w-xl mx-auto space-y-4">
+          <div className="w-16 h-16 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-2xl mx-auto flex items-center justify-center">
             📍
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900">
+            <h3 className="text-base font-bold text-slate-900 dark:text-white">
               No direct profile matches in {city} under this specific filter
             </h3>
-            <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
               No individual provider records match your exact search filters. Rather than showing fabricated results, EasyLife allows you to post an everyday task or custom request, and our accredited providers will prepare quotations for you.
             </p>
           </div>
@@ -811,7 +811,7 @@ export function ServiceDiscoveryClient({
             <button
               type="button"
               onClick={handleReset}
-              className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:text-slate-900"
+              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
             >
               Clear Filters
             </button>
@@ -826,7 +826,7 @@ export function ServiceDiscoveryClient({
           {results.map((pro) => (
             <div
               key={pro.professional_id}
-              className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs hover:border-[#0D9488] hover:shadow-md transition flex flex-col justify-between space-y-4"
+              className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs hover:border-[#0D9488] hover:shadow-md transition flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 {/* Pro Avatar & Basic info */}
@@ -850,7 +850,7 @@ export function ServiceDiscoveryClient({
 
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <h3 className="font-bold text-sm text-slate-900 truncate">
+                      <h3 className="font-bold text-sm text-slate-900 dark:text-white truncate">
                         {pro.business_name}
                       </h3>
                       {pro.is_verified && (
@@ -862,7 +862,7 @@ export function ServiceDiscoveryClient({
                       )}
                     </div>
 
-                    <p className="text-[11px] text-slate-500 truncate mt-0.5">
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
                       {pro.headline || `${pro.years_of_experience} Years Field Experience`}
                     </p>
 
@@ -874,7 +874,7 @@ export function ServiceDiscoveryClient({
                       </span>
                       <span className="text-slate-400">({pro.review_count} reviews)</span>
                       <span className="text-slate-300">•</span>
-                      <span className="text-slate-600 font-medium">
+                      <span className="text-slate-600 dark:text-slate-300 font-medium">
                         {pro.completed_jobs_count} completed jobs
                       </span>
                     </div>
@@ -882,27 +882,27 @@ export function ServiceDiscoveryClient({
                 </div>
 
                 {/* Bio snippet */}
-                <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                   {pro.bio || "Accredited technical trade professional operating on EasyLife."}
                 </p>
 
                 {/* Proximity, Availability & Category Badges */}
                 <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-                  <span className="px-2 py-0.5 rounded-md bg-teal-50 text-[#0D9488] font-semibold border border-teal-200">
+                  <span className="px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] font-semibold border border-teal-200 dark:border-teal-800">
                     {pro.category_name}
                   </span>
 
-                  <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium">
+                  <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">
                     📍 {pro.distance_km < 50 ? `${pro.distance_km.toFixed(1)} km away` : pro.primary_city}
                   </span>
 
                   {/* Strictly enforce: Do not claim available unless supported by availability data */}
                   {pro.is_available && pro.is_schedule_available ? (
-                    <span className="px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 font-bold border border-emerald-200">
+                    <span className="px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-800">
                       ● Available
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-500 font-medium">
+                    <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium">
                       ○ Book in Advance
                     </span>
                   )}
@@ -910,12 +910,12 @@ export function ServiceDiscoveryClient({
               </div>
 
               {/* Footer Call-out Rate & Actions */}
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                 <div>
                   <span className="text-[10px] text-slate-400 block font-medium">
                     Starting Call-out Fee
                   </span>
-                  <span className="text-sm font-black text-slate-900">
+                  <span className="text-sm font-black text-slate-900 dark:text-white">
                     {pro.base_callout_fee_kobo > 0
                       ? formatNaira(pro.base_callout_fee_kobo)
                       : "Price available on request"}
@@ -925,7 +925,7 @@ export function ServiceDiscoveryClient({
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/professionals/${pro.professional_id}`}
-                    className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition"
+                    className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
                   >
                     Profile
                   </Link>
@@ -950,9 +950,9 @@ export function ServiceDiscoveryClient({
       {totalPages > 1 && (
         <nav
           aria-label="Professional directory pagination"
-          className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200"
+          className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-[#163654]"
         >
-          <p className="text-xs font-medium text-slate-600">
+          <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
             Showing {showingFrom}–{showingTo} of {resolvedTotalCount} verified professionals (Page{" "}
             {currentPage} of {totalPages})
           </p>
@@ -961,12 +961,12 @@ export function ServiceDiscoveryClient({
               <Link
                 href={buildPageHref(currentPage - 1)}
                 scroll={false}
-                className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-[#154752] hover:bg-slate-50"
+                className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
               >
                 ← Previous
               </Link>
             ) : (
-              <span className="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-400">
+              <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
                 ← Previous
               </span>
             )}
@@ -980,7 +980,7 @@ export function ServiceDiscoveryClient({
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors ${
                   p === currentPage
                     ? "bg-[#154752] text-white border-[#154752]"
-                    : "bg-white text-[#154752] border-slate-200 hover:bg-slate-50"
+                    : "bg-white dark:bg-[#0D223A] text-[#154752] border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                 }`}
               >
                 {p}
@@ -991,12 +991,12 @@ export function ServiceDiscoveryClient({
               <Link
                 href={buildPageHref(currentPage + 1)}
                 scroll={false}
-                className="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-[#154752] hover:bg-slate-50"
+                className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
               >
                 Next →
               </Link>
             ) : (
-              <span className="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-400">
+              <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
                 Next →
               </span>
             )}

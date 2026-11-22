@@ -60,14 +60,14 @@ export function ReportModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
-      <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200">
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-          <h3 className="text-base font-bold text-slate-900">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-[#163654]">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+          <h3 className="text-base font-bold text-slate-900 dark:text-white">
             Report Profile / Listing
           </h3>
           <button
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-600 text-lg font-bold"
+            className="text-slate-400 hover:text-slate-600 dark:text-slate-300 text-lg font-bold"
           >
             ✕
           </button>
@@ -75,32 +75,32 @@ export function ReportModal({
 
         {isSuccess ? (
           <div className="py-8 text-center space-y-2">
-            <div className="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
+            <div className="w-12 h-12 bg-emerald-100 text-emerald-700 dark:text-emerald-300 rounded-full flex items-center justify-center mx-auto text-xl font-bold">
               ✓
             </div>
-            <h4 className="text-sm font-bold text-slate-900">
+            <h4 className="text-sm font-bold text-slate-900 dark:text-white">
               Report Submitted
             </h4>
-            <p className="text-xs text-slate-600">
+            <p className="text-xs text-slate-600 dark:text-slate-300">
               Thank you. Our administration team will investigate this report in accordance with EasyLife community safety guidelines.
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="mt-4 space-y-4">
             <div>
-              <p className="text-xs text-slate-600 mb-2">
-                Reporting: <strong className="text-slate-900">{entityName}</strong>
+              <p className="text-xs text-slate-600 dark:text-slate-300 mb-2">
+                Reporting: <strong className="text-slate-900 dark:text-white">{entityName}</strong>
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                 Reason for Reporting
               </label>
               <select
                 value={reason}
                 onChange={(e) => setReason(e.target.value as typeof reason)}
-                className="w-full text-xs rounded-lg border border-slate-300 p-2.5 bg-slate-50 text-slate-900 font-medium"
+                className="w-full text-xs rounded-lg border border-slate-300 dark:border-slate-700 p-2.5 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white font-medium"
               >
                 <option value="misrepresentation">Misrepresentation of services or credentials</option>
                 <option value="property_advertising_violation">Unauthorized Property Listing / Advertisement (Strictly Prohibited)</option>
@@ -112,7 +112,7 @@ export function ReportModal({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                 Specific Details &amp; Evidence
               </label>
               <textarea
@@ -120,12 +120,12 @@ export function ReportModal({
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
                 placeholder="Explain what was inaccurate, misleading, or violated platform guidelines..."
-                className="w-full text-xs rounded-lg border border-slate-300 p-2.5 text-slate-900 focus:ring-2 focus:ring-[#0D9488] focus:outline-none"
+                className="w-full text-xs rounded-lg border border-slate-300 dark:border-slate-700 p-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0D9488] focus:outline-none"
               />
             </div>
 
             {errorMsg && (
-              <p className="text-xs text-red-600 font-medium bg-red-50 p-2.5 rounded-lg border border-red-200">
+              <p className="text-xs text-red-600 font-medium bg-red-50 dark:bg-red-950/60 p-2.5 rounded-lg border border-red-200 dark:border-red-800">
                 {errorMsg}
               </p>
             )}
@@ -134,7 +134,7 @@ export function ReportModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-xs font-medium text-slate-600 hover:text-slate-800"
+                className="px-4 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:text-slate-100"
               >
                 Cancel
               </button>

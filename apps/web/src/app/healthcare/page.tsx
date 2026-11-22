@@ -53,7 +53,7 @@ export default async function HealthcareDirectoryPage({
       />
 
       {/* Prominent Legal & Medical Disclaimer Banner */}
-      <section className="bg-amber-50 border-y border-amber-200 py-3.5 px-4 sm:px-6">
+      <section className="bg-amber-50 dark:bg-amber-950/60 border-y border-amber-200 dark:border-amber-800 py-3.5 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto flex items-start gap-3 text-xs text-amber-900 leading-relaxed">
           <span className="text-base leading-none">ℹ️</span>
           <div>

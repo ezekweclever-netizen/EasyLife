@@ -11,7 +11,7 @@ export default function AppRouteError({
 }) {
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-16 bg-[#F8FAFC]">
-      <div className="max-w-md w-full rounded-3xl bg-white border border-[#DAE7E7] p-8 text-center space-y-4 shadow-xs">
+      <div className="max-w-md w-full rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-8 text-center space-y-4 shadow-xs">
         <div className="w-12 h-12 rounded-2xl bg-[#EEF6F7] text-[#154752] flex items-center justify-center mx-auto text-xl font-bold">
           !
         </div>

@@ -45,10 +45,10 @@ export default async function ProJobsPage() {
         <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
           Job Dispatch &amp; Operations
         </span>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
           Service Requests &amp; Active Jobs
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Review legitimate customer repair requests, prepare itemized quotations, update appointments, and request completion sign-off.
         </p>
       </div>

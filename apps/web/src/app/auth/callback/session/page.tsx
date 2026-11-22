@@ -50,14 +50,14 @@ export default function OAuthSessionCatcherPage() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-2xl border border-slate-200 p-8 text-center space-y-4 shadow-xs">
+      <div className="max-w-md w-full bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-8 text-center space-y-4 shadow-xs">
         {error ? (
           <>
-            <div className="w-12 h-12 rounded-full bg-red-50 text-red-600 font-bold text-xl mx-auto flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full bg-red-50 dark:bg-red-950/60 text-red-600 font-bold text-xl mx-auto flex items-center justify-center">
               !
             </div>
-            <h1 className="text-lg font-bold text-slate-900">Sign-In Incomplete</h1>
-            <p className="text-xs text-slate-600">{error}</p>
+            <h1 className="text-lg font-bold text-slate-900 dark:text-white">Sign-In Incomplete</h1>
+            <p className="text-xs text-slate-600 dark:text-slate-300">{error}</p>
             <div className="pt-2">
               <Link
                 href="/login"
@@ -70,10 +70,10 @@ export default function OAuthSessionCatcherPage() {
         ) : (
           <>
             <div className="w-10 h-10 rounded-full border-3 border-[#24989A] border-t-transparent animate-spin mx-auto" />
-            <h1 className="text-base font-bold text-slate-900">
+            <h1 className="text-base font-bold text-slate-900 dark:text-white">
               Completing EasyLife Sign-In...
             </h1>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Verifying your session and loading your dashboard.
             </p>
           </>

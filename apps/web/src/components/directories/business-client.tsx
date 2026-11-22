@@ -73,7 +73,7 @@ export function BusinessDirectoryClient({
   return (
     <div className="space-y-8">
       {/* Search Header & Register CTA */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="relative flex-1">
             <input
@@ -81,7 +81,7 @@ export function BusinessDirectoryClient({
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search local businesses by trade, company name, or service..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
             />
             <span className="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
           </div>
@@ -95,7 +95,7 @@ export function BusinessDirectoryClient({
         </div>
 
         {/* Category Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 border-t border-slate-100 pt-3">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 border-t border-slate-100 dark:border-slate-800 pt-3">
           {BUSINESS_CATEGORIES.map((cat) => (
             <button
               key={cat}
@@ -103,7 +103,7 @@ export function BusinessDirectoryClient({
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
                 selectedCategory === cat
                   ? "bg-[#0D9488] text-white shadow-xs"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
               }`}
             >
               {cat}
@@ -114,12 +114,12 @@ export function BusinessDirectoryClient({
 
       {/* Directory Roster */}
       {businesses.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-3">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-12 text-center space-y-3">
           <div className="text-3xl">🏢</div>
-          <h3 className="text-sm font-bold text-slate-900">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             No local businesses currently match your search
           </h3>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
             Try switching categories or clearing your search term. Are you an established local enterprise in Port Harcourt? List your business profile today.
           </p>
           <div className="flex items-center justify-center gap-3 pt-2">
@@ -129,7 +129,7 @@ export function BusinessDirectoryClient({
                 setSearchQuery("");
                 setBusinesses(initialBusinesses);
               }}
-              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition"
+              className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition"
             >
               Clear Filters
             </button>
@@ -146,42 +146,42 @@ export function BusinessDirectoryClient({
           {businesses.map((biz) => (
             <div
               key={biz.id}
-              className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-[#0D9488]/40 hover:shadow-md transition flex flex-col justify-between"
+              className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs hover:border-[#0D9488]/40 hover:shadow-md transition flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-2">
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#163654]">
                     {biz.business_category || biz.industry || "Local Enterprise"}
                   </span>
                   {biz.verification_status === "approved" && (
-                    <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-md">
+                    <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold rounded-md">
                       ✓ Verified Business
                     </span>
                   )}
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900 leading-snug">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-snug">
                     {biz.name}
                   </h3>
                   {biz.description && (
-                    <p className="mt-1 text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
                       {biz.description}
                     </p>
                   )}
                 </div>
 
-                <div className="space-y-1 text-xs text-slate-600">
+                <div className="space-y-1 text-xs text-slate-600 dark:text-slate-300">
                   <p>📍 {biz.address ? `${biz.address}, ` : ""}{biz.city}, {biz.state}</p>
                   {biz.contact_phone && <p>📞 {biz.contact_phone}</p>}
                 </div>
 
                 {biz.services_offered && biz.services_offered.length > 0 && (
-                  <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-1">
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1">
                     {biz.services_offered.map((srv, idx) => (
                       <span
                         key={idx}
-                        className="px-2 py-0.5 bg-slate-50 text-slate-600 rounded text-[10px] border border-slate-200"
+                        className="px-2 py-0.5 bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 rounded text-[10px] border border-slate-200 dark:border-[#163654]"
                       >
                         {srv}
                       </span>
@@ -190,7 +190,7 @@ export function BusinessDirectoryClient({
                 )}
               </div>
 
-              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   {biz.contact_phone && (
                     <a
@@ -202,7 +202,7 @@ export function BusinessDirectoryClient({
                   )}
                   <Link
                     href={`/contact?inquiry=business&target=${encodeURIComponent(biz.name)}`}
-                    className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition"
+                    className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition"
                   >
                     Inquire
                   </Link>

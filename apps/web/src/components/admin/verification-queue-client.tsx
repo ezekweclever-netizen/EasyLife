@@ -195,7 +195,7 @@ export function VerificationQueueClient({
   const renderProStatusBadge = (status?: string | null) => {
     if (status === "approved") {
       return (
-        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
           Pro: Verified
         </span>
       );
@@ -216,13 +216,13 @@ export function VerificationQueueClient({
     }
     if (status === "pending") {
       return (
-        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200">
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
           Pro: Pending Review
         </span>
       );
     }
     return (
-      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600">
+      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
         Pro: {status || "unsubmitted"}
       </span>
     );
@@ -231,9 +231,9 @@ export function VerificationQueueClient({
   return (
     <div className="space-y-6">
       {/* Filters Toolbar */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-slate-700">Filter Documents:</span>
+          <span className="text-xs font-bold text-slate-700 dark:text-slate-200">Filter Documents:</span>
           <div className="flex flex-wrap gap-1.5">
             {["all", "pending", "approved", "rejected"].map((st) => (
               <button
@@ -242,7 +242,7 @@ export function VerificationQueueClient({
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold capitalize transition ${
                   statusFilter === st
                     ? "bg-slate-900 text-white shadow-xs"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
                 }`}
               >
                 {st}
@@ -257,19 +257,19 @@ export function VerificationQueueClient({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Filter by business or owner..."
-            className="h-9 px-3 rounded-xl border border-slate-200 text-xs text-slate-800 focus:ring-2 focus:ring-teal-500/30 focus:outline-none"
+            className="h-9 px-3 rounded-xl border border-slate-200 dark:border-[#163654] text-xs text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-teal-500/30 focus:outline-none"
           />
-          <div className="text-xs text-slate-500">
-            Showing <strong className="text-slate-800">{filteredDocs.length}</strong> documents
+          <div className="text-xs text-slate-500 dark:text-slate-400">
+            Showing <strong className="text-slate-800 dark:text-slate-100">{filteredDocs.length}</strong> documents
           </div>
         </div>
       </div>
 
       {/* Verification Queue Table */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50/80 border-b border-slate-200 text-2xs font-extrabold uppercase text-slate-500 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Professional &amp; Trade</th>
                 <th className="py-3.5 px-4">Document Evidence</th>
@@ -292,18 +292,18 @@ export function VerificationQueueClient({
                   const eligibilities = pro?.service_eligibilities || {};
 
                   return (
-                    <tr key={doc.id} className="hover:bg-slate-50/60 transition align-top">
+                    <tr key={doc.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition align-top">
                       <td className="py-3.5 px-4 space-y-1">
-                        <div className="font-bold text-slate-900">
+                        <div className="font-bold text-slate-900 dark:text-white">
                           {pro?.business_name || "Professional"}
                         </div>
-                        <div className="text-2xs text-slate-500">
+                        <div className="text-2xs text-slate-500 dark:text-slate-400">
                           {pro?.profiles?.full_name || "—"} ({pro?.profiles?.email || "—"})
                         </div>
                         <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
                           {renderProStatusBadge(pro?.verification_status)}
                           {pro?.primary_city && (
-                            <span className="text-[10px] text-slate-500 font-medium">
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                               {pro.primary_city} • {pro.years_of_experience ?? 0} yrs
                             </span>
                           )}
@@ -311,11 +311,11 @@ export function VerificationQueueClient({
                       </td>
 
                       <td className="py-3.5 px-4 space-y-1">
-                        <div className="font-semibold text-slate-800 capitalize">
+                        <div className="font-semibold text-slate-800 dark:text-slate-100 capitalize">
                           {doc.document_type.replace(/_/g, " ")}
                         </div>
                         {doc.document_number_masked && (
-                          <div className="text-[10px] font-mono text-slate-500">
+                          <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
                             ID: {doc.document_number_masked}
                           </div>
                         )}
@@ -350,17 +350,17 @@ export function VerificationQueueClient({
                           services.slice(0, 3).map((s) => {
                             const elig = s.service_id ? eligibilities[s.service_id] : undefined;
                             return (
-                              <div key={s.id} className="text-[11px] border-l-2 border-slate-200 pl-2">
+                              <div key={s.id} className="text-[11px] border-l-2 border-slate-200 dark:border-[#163654] pl-2">
                                 <div className="flex flex-wrap items-center gap-1">
-                                  <span className="font-semibold text-slate-800">
+                                  <span className="font-semibold text-slate-800 dark:text-slate-100">
                                     {s.service_title || s.services?.name || s.service_categories?.name || "Service"}
                                   </span>
                                   {elig && (
                                     <span
                                       className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
                                         elig.eligible
-                                          ? "bg-emerald-50 text-emerald-700"
-                                          : "bg-amber-50 text-amber-800"
+                                          ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300"
+                                          : "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300"
                                       }`}
                                     >
                                       {elig.eligible ? "Eligible" : "Needs Reqs"}
@@ -368,12 +368,12 @@ export function VerificationQueueClient({
                                   )}
                                 </div>
                                 {s.certification_reference && (
-                                  <div className="text-[10px] font-mono text-slate-500">
+                                  <div className="text-[10px] font-mono text-slate-500 dark:text-slate-400">
                                     Cert: {s.certification_reference}
                                   </div>
                                 )}
                                 {elig && !elig.eligible && elig.missing_requirements.length > 0 && (
-                                  <div className="text-[10px] text-amber-800">
+                                  <div className="text-[10px] text-amber-800 dark:text-amber-300">
                                     {elig.missing_requirements[0]}
                                   </div>
                                 )}
@@ -390,11 +390,11 @@ export function VerificationQueueClient({
 
                       <td className="py-3.5 px-4">
                         {doc.verification_status === "approved" ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-emerald-100 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             ✓ Verified
                           </span>
                         ) : doc.verification_status === "pending" ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-amber-100 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
                             ⏳ Under Review
                           </span>
                         ) : (
@@ -413,7 +413,7 @@ export function VerificationQueueClient({
                             setActionSuccess(null);
                             setModalMode("approve");
                           }}
-                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition"
+                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition"
                         >
                           Approve Doc
                         </button>
@@ -461,7 +461,7 @@ export function VerificationQueueClient({
                             setActionSuccess(null);
                             setModalMode("overall_suspend");
                           }}
-                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-slate-200 text-slate-800 hover:bg-slate-300 transition"
+                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-slate-200 text-slate-800 dark:text-slate-100 hover:bg-slate-300 transition"
                         >
                           Suspend
                         </button>
@@ -478,9 +478,9 @@ export function VerificationQueueClient({
       {/* Action Modals */}
       {modalMode && activeDoc && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="font-extrabold text-sm text-slate-900">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="font-extrabold text-sm text-slate-900 dark:text-white">
                 {modalMode === "approve" && "Confirm Document Approval"}
                 {modalMode === "reject" && "Reject Document Evidence"}
                 {modalMode === "overall_approve" && "Grant Verified Badge to Professional"}
@@ -489,15 +489,15 @@ export function VerificationQueueClient({
               </div>
               <button
                 onClick={() => setModalMode(null)}
-                className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 text-xs font-bold"
+                className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold"
               >
                 ✕
               </button>
             </div>
 
-            <p className="text-xs text-slate-600">
+            <p className="text-xs text-slate-600 dark:text-slate-300">
               Target:{" "}
-              <strong className="text-slate-900">
+              <strong className="text-slate-900 dark:text-white">
                 {activeDoc.professional_profiles?.business_name}
               </strong>{" "}
               • Document:{" "}
@@ -505,37 +505,37 @@ export function VerificationQueueClient({
             </p>
 
             {/* Identity & Account Match Cross-Check Card */}
-            <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs space-y-2">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-800 uppercase text-[11px] tracking-wider">
+                <span className="font-bold text-slate-800 dark:text-slate-100 uppercase text-[11px] tracking-wider">
                   Identity &amp; Registration Cross-Check
                 </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-teal-100 text-teal-800">
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-teal-100 text-teal-800 dark:text-[#5CD3D5]">
                   Audited
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-2 text-[11px]">
                 <div>
-                  <span className="text-slate-500 block">Registered Full Name:</span>
-                  <span className="font-semibold text-slate-900 block truncate">
+                  <span className="text-slate-500 dark:text-slate-400 block">Registered Full Name:</span>
+                  <span className="font-semibold text-slate-900 dark:text-white block truncate">
                     {activeDoc.professional_profiles?.profiles?.full_name || "⚠️ Name not set"}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block">Registered Business:</span>
-                  <span className="font-semibold text-slate-900 block truncate">
+                  <span className="text-slate-500 dark:text-slate-400 block">Registered Business:</span>
+                  <span className="font-semibold text-slate-900 dark:text-white block truncate">
                     {activeDoc.professional_profiles?.business_name || "N/A"}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block">Document ID (Masked):</span>
-                  <span className="font-mono text-slate-700 block">
+                  <span className="text-slate-500 dark:text-slate-400 block">Document ID (Masked):</span>
+                  <span className="font-mono text-slate-700 dark:text-slate-200 block">
                     {activeDoc.document_number_masked || "On document image"}
                   </span>
                 </div>
                 <div>
-                  <span className="text-slate-500 block">Document Type:</span>
-                  <span className="font-medium text-slate-900 capitalize block">
+                  <span className="text-slate-500 dark:text-slate-400 block">Document Type:</span>
+                  <span className="font-medium text-slate-900 dark:text-white capitalize block">
                     {activeDoc.document_type.replace(/_/g, " ")}
                   </span>
                 </div>
@@ -553,7 +553,7 @@ export function VerificationQueueClient({
               Object.values(activeDoc.professional_profiles.service_eligibilities).some(
                 (e) => !e.eligible
               ) && (
-                <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-900 space-y-1">
+                <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-[11px] text-amber-900 space-y-1">
                   <div className="font-bold">Service Eligibility Diagnostic Notice:</div>
                   <p>
                     Accrediting approves this provider&apos;s overall identity &amp; any pending documents. Any individual services requiring additional trade or CAC certificates remain flagged until uploaded.
@@ -566,7 +566,7 @@ export function VerificationQueueClient({
               modalMode === "overall_suspend" ||
               modalMode === "approve") && (
               <div>
-                <label className="block text-2xs font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+                <label className="block text-2xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                   {modalMode === "approve"
                     ? "Reviewer Notes (Optional)"
                     : "Reason (Min 5 Characters, Mandatory & Audited) *"}
@@ -581,7 +581,7 @@ export function VerificationQueueClient({
                       ? "Optional internal review comment..."
                       : "E.g. Document image is illegible, expired, or does not match applicant profile."
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none"
                 />
               </div>
             )}
@@ -592,7 +592,7 @@ export function VerificationQueueClient({
               </div>
             )}
             {actionSuccess && (
-              <div className="p-3 rounded-xl bg-emerald-50 text-emerald-700 text-2xs font-semibold">
+              <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-2xs font-semibold">
                 {actionSuccess}
               </div>
             )}
@@ -601,7 +601,7 @@ export function VerificationQueueClient({
               <button
                 type="button"
                 onClick={() => setModalMode(null)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800"
               >
                 Cancel
               </button>

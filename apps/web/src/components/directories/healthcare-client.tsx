@@ -82,7 +82,7 @@ export function HealthcareDirectoryClient({
   return (
     <div className="space-y-8">
       {/* Search & Filters */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs space-y-4">
         {/* Search Bar */}
         <div className="relative">
           <input
@@ -90,13 +90,13 @@ export function HealthcareDirectoryClient({
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
             placeholder="Search medical facilities by name, specialized service, or street (e.g. Pediatrics, Trauma, Choba, D-Line, Antimalarial)..."
-            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
           />
           <span className="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
         </div>
 
         {/* Filter Controls */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-100">
+        <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-slate-100 dark:border-slate-800">
           {/* Facility Type Tabs */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
             {[
@@ -111,7 +111,7 @@ export function HealthcareDirectoryClient({
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
                   selectedType === tab.id
                     ? "bg-[#0A2540] text-white shadow-xs"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
                 }`}
               >
                 {tab.label}
@@ -124,7 +124,7 @@ export function HealthcareDirectoryClient({
             <select
               value={selectedLga}
               onChange={(e) => handleLgaChange(e.target.value)}
-              className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-slate-50 text-slate-700 font-medium"
+              className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-700 dark:text-slate-200 font-medium"
             >
               <option value="">All LGAs</option>
               <option value="Port Harcourt City">Port Harcourt City LGA</option>
@@ -135,14 +135,14 @@ export function HealthcareDirectoryClient({
             </select>
 
             {/* 24/7 Emergency Filter */}
-            <label className="flex items-center gap-1.5 cursor-pointer font-semibold text-slate-700">
+            <label className="flex items-center gap-1.5 cursor-pointer font-semibold text-slate-700 dark:text-slate-200">
               <input
                 type="checkbox"
                 checked={emergencyOnly}
                 onChange={(e) => handleEmergencyToggle(e.target.checked)}
-                className="rounded border-slate-300 text-red-600 focus:ring-red-600"
+                className="rounded border-slate-300 dark:border-slate-700 text-red-600 focus:ring-red-600"
               />
-              <span className="text-red-700">🚨 24/7 Emergency Only</span>
+              <span className="text-red-700 dark:text-red-400">🚨 24/7 Emergency Only</span>
             </label>
           </div>
         </div>
@@ -150,12 +150,12 @@ export function HealthcareDirectoryClient({
 
       {/* Facilities Grid */}
       {facilities.length === 0 ? (
-        <div className="bg-white rounded-2xl border border-slate-200 p-12 text-center space-y-3">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-12 text-center space-y-3">
           <div className="text-3xl">🏥</div>
-          <h3 className="text-sm font-bold text-slate-900">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             No matching healthcare facilities found
           </h3>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
             We could not find any healthcare facilities or pharmacies matching your filters in Port Harcourt. Try selecting &quot;All Facilities&quot; or clearing your search.
           </p>
           <button
@@ -166,7 +166,7 @@ export function HealthcareDirectoryClient({
               setSearchQuery("");
               setFacilities(initialFacilities);
             }}
-            className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition"
+            className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition"
           >
             Clear All Filters
           </button>
@@ -176,7 +176,7 @@ export function HealthcareDirectoryClient({
           {facilities.map((facility) => (
             <div
               key={facility.id}
-              className="bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:border-[#0D9488]/40 hover:shadow-md transition flex flex-col justify-between"
+              className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs hover:border-[#0D9488]/40 hover:shadow-md transition flex flex-col justify-between"
             >
               <div className="space-y-3">
                 {/* Header with Badges */}
@@ -188,7 +188,7 @@ export function HealthcareDirectoryClient({
                           ? "bg-blue-50 text-blue-700 border border-blue-200"
                           : facility.facility_type === "clinic"
                           ? "bg-purple-50 text-purple-700 border border-purple-200"
-                          : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                          : "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                       }`}
                     >
                       {facility.facility_type === "hospital"
@@ -198,30 +198,30 @@ export function HealthcareDirectoryClient({
                         : "Pharmacy"}
                     </span>
                     {facility.is_emergency_24_7 && (
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700 border border-red-200">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800">
                         🚨 24/7 Emergency
                       </span>
                     )}
                   </div>
-                  <span className="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-md">
+                  <span className="px-1.5 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold rounded-md">
                     ✓ Verified
                   </span>
                 </div>
 
                 {/* Name & Description */}
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900 leading-snug">
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-snug">
                     {facility.name}
                   </h3>
                   {facility.description && (
-                    <p className="mt-1 text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                       {facility.description}
                     </p>
                   )}
                 </div>
 
                 {/* Location & Operating Hours */}
-                <div className="space-y-1.5 text-xs text-slate-600">
+                <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
                   <div className="flex items-start gap-1.5">
                     <span className="text-slate-400">📍</span>
                     <span>
@@ -230,7 +230,7 @@ export function HealthcareDirectoryClient({
                   </div>
                   <div className="flex items-center gap-1.5">
                     <span className="text-slate-400">🕒</span>
-                    <span className="font-medium text-slate-700">
+                    <span className="font-medium text-slate-700 dark:text-slate-200">
                       {facility.operating_hours}
                     </span>
                   </div>
@@ -238,17 +238,17 @@ export function HealthcareDirectoryClient({
 
                 {/* Services Pills */}
                 {facility.services_offered && facility.services_offered.length > 0 && (
-                  <div className="pt-2 border-t border-slate-100 flex flex-wrap gap-1">
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1">
                     {facility.services_offered.slice(0, 4).map((service, idx) => (
                       <span
                         key={idx}
-                        className="px-2 py-0.5 rounded-md bg-slate-50 text-slate-600 text-[10px] font-medium border border-slate-200"
+                        className="px-2 py-0.5 rounded-md bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 text-[10px] font-medium border border-slate-200 dark:border-[#163654]"
                       >
                         {service}
                       </span>
                     ))}
                     {facility.services_offered.length > 4 && (
-                      <span className="px-1.5 py-0.5 rounded-md bg-slate-50 text-slate-400 text-[10px]">
+                      <span className="px-1.5 py-0.5 rounded-md bg-slate-50 dark:bg-[#071526] text-slate-400 text-[10px]">
                         +{facility.services_offered.length - 4} more
                       </span>
                     )}
@@ -257,7 +257,7 @@ export function HealthcareDirectoryClient({
               </div>
 
               {/* Action Buttons & Report */}
-              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <a
                     href={`tel:${facility.contact_phone}`}
@@ -270,7 +270,7 @@ export function HealthcareDirectoryClient({
                       href={facility.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition"
+                      className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition"
                     >
                       Website
                     </a>

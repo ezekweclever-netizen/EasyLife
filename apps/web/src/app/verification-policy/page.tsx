@@ -65,14 +65,14 @@ export default function VerificationPolicyPage() {
       <Section tone="grey">
         <div className="space-y-12">
           {/* Tier 1 Detail */}
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
             <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
               Stage 1
             </span>
             <h3 className="text-xl font-bold text-[#0F172A] mt-1 mb-3">
               Tier 1: Government Identity &amp; Contact Verification
             </h3>
-            <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
               We eliminate anonymous or alias accounts through rigorous legal validation:
             </p>
             <CheckList
@@ -86,14 +86,14 @@ export default function VerificationPolicyPage() {
           </div>
 
           {/* Tier 2 Detail */}
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
             <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
               Stage 2
             </span>
             <h3 className="text-xl font-bold text-[#0F172A] mt-1 mb-3">
               Tier 2: Trade Competence &amp; Operating Address
             </h3>
-            <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
               We ensure every technician possesses genuine trade craftsmanship and a verifiable physical base:
             </p>
             <CheckList
@@ -106,14 +106,14 @@ export default function VerificationPolicyPage() {
           </div>
 
           {/* Tier 3 Detail */}
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
             <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
               Stage 3
             </span>
             <h3 className="text-xl font-bold text-[#0F172A] mt-1 mb-3">
               Tier 3: Guarantor &amp; Professional Reference
             </h3>
-            <p className="text-xs text-slate-600 mb-4 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
               Accountability requires reputable community backing:
             </p>
             <CheckList
@@ -136,7 +136,7 @@ export default function VerificationPolicyPage() {
           description="Verification is not a one-time stamp. Technicians are continuously monitored to ensure consistent quality and safety."
         />
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="border border-red-200 rounded-xl p-6 bg-red-50/30">
+          <div className="border border-red-200 dark:border-red-800 rounded-xl p-6 bg-red-50 dark:bg-red-950/60/30">
             <h4 className="text-base font-bold text-red-950 mb-3">
               Immediate Grounds for Account Suspension
             </h4>
@@ -160,15 +160,15 @@ export default function VerificationPolicyPage() {
             </ul>
           </div>
 
-          <div className="border border-slate-200 rounded-xl p-6 bg-[#F8FAFC]">
+          <div className="border border-slate-200 dark:border-[#163654] rounded-xl p-6 bg-[#F8FAFC]">
             <h4 className="text-base font-bold text-[#0F172A] mb-3">
               Customer Feedback &amp; Re-audits
             </h4>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Every completed job requires mutual customer and technician ratings. Technicians who maintain consistently high quality and customer satisfaction are awarded Priority Pro status. Technicians whose ratings fall below platform benchmarks are temporarily suspended and required to complete refresher orientation.
             </p>
-            <div className="mt-6 pt-4 border-t border-slate-200">
-              <p className="text-xs text-slate-500">
+            <div className="mt-6 pt-4 border-t border-slate-200 dark:border-[#163654]">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 To report a safety or conduct concern, contact our dedicated operations team immediately at{" "}
                 <Link href="/contact" className="text-[#0D9488] font-semibold underline">
                   Safety &amp; Compliance Desk

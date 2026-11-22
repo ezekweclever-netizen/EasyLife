@@ -34,10 +34,10 @@ export default async function ProQuotationsPage() {
           <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
             Estimates &amp; Invoicing
           </span>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
             Quotation Management
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             Track itemized pricing sent to customers. When a client accepts, the booking is confirmed and funds are locked into Escrow.
           </p>
         </div>

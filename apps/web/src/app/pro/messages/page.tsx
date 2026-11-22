@@ -86,10 +86,10 @@ export default async function ProMessagesPage({ searchParams }: ProMessagesPageP
         <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
           Communications Desk
         </span>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
           Customer &amp; Support Messages
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Ask customers for additional fault photos, clarify electrical/plumbing specs, and coordinate site access in Port Harcourt, Lagos, or Abuja.
         </p>
       </div>

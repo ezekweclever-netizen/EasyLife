@@ -39,7 +39,7 @@ export function ExperienceShell({
   if (experience === "customer") {
     return (
       <div className="min-h-screen flex flex-col bg-[#F3F8F8]">
-        <header className="bg-white border-b border-[#DAE7E7] sticky top-0 z-20">
+        <header className="bg-white dark:bg-[#0D223A] border-b border-[#DAE7E7] sticky top-0 z-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
             <div className="flex items-center gap-6">
               <EasyLifeLogo theme="light" size="sm" showSlogan />
@@ -111,12 +111,12 @@ export function ExperienceShell({
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
                     item.active
                       ? "bg-[#24989A] text-white"
-                      : "text-[#DAE7E7] hover:bg-white/10"
+                      : "text-[#DAE7E7] hover:bg-white dark:bg-[#0D223A]/10"
                   }`}
                 >
                   {item.label}
                   {typeof item.badgeCount === "number" && (
-                    <span className="ml-1.5 px-1.5 py-0.2 rounded-full bg-white/20 text-[10px]">
+                    <span className="ml-1.5 px-1.5 py-0.2 rounded-full bg-white dark:bg-[#0D223A]/20 text-[10px]">
                       {item.badgeCount}
                     </span>
                   )}
@@ -150,7 +150,7 @@ export function ExperienceShell({
         <div>
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
             <EasyLifeLogo theme="dark" size="sm" showSlogan />
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-white/10 text-[#24989A] border border-[#24989A]/30">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-white dark:bg-[#0D223A]/10 text-[#24989A] border border-[#24989A]/30">
               {isAdmin ? "Admin" : "Facility B2B"}
             </span>
           </div>
@@ -170,7 +170,7 @@ export function ExperienceShell({
                 className={`flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                   item.active
                     ? "bg-[#24989A] text-white"
-                    : "text-[#DAE7E7] hover:bg-white/10"
+                    : "text-[#DAE7E7] hover:bg-white dark:bg-[#0D223A]/10"
                 }`}
               >
                 <span>{item.label}</span>
@@ -191,7 +191,7 @@ export function ExperienceShell({
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="bg-white border-b border-[#DAE7E7] px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <header className="bg-white dark:bg-[#0D223A] border-b border-[#DAE7E7] px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <h1 className="text-xl font-bold text-[#154752]">{title}</h1>
             {subtitle && (

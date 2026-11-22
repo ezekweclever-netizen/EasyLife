@@ -132,35 +132,35 @@ export function DisputeModal({
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse" />
-              <h3 className="text-xl font-black text-slate-900">
+              <h3 className="text-xl font-black text-slate-900 dark:text-white">
                 File Service Dispute
               </h3>
             </div>
-            <p className="text-xs text-slate-500 mt-1">
-              Booking #{referenceCode} with <span className="font-semibold text-slate-700">{proName}</span>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              Booking #{referenceCode} with <span className="font-semibold text-slate-700 dark:text-slate-200">{proName}</span>
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="text-slate-400 hover:text-slate-700 text-lg font-bold"
+            className="text-slate-400 hover:text-slate-700 dark:text-slate-200 text-lg font-bold"
           >
             ✕
           </button>
         </div>
 
         {/* Accountability Protection Warning */}
-        <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 space-y-1">
+        <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-xs text-amber-900 space-y-1">
           <p className="font-bold flex items-center gap-1.5">
             <span>🛡️ Escrow Protection Active</span>
           </p>
-          <p className="text-[11px] leading-relaxed text-amber-800">
+          <p className="text-[11px] leading-relaxed text-amber-800 dark:text-amber-300">
             A disputed booking <strong>will not automatically complete or release payment</strong>. An EasyLife administrator will investigate your evidence, communicate with both parties, and document a formal resolution.
           </p>
         </div>
 
         {error && (
-          <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-900">
+          <div className="p-3.5 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs font-semibold text-red-900">
             {error}
           </div>
         )}
@@ -168,7 +168,7 @@ export function DisputeModal({
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Category Selector */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-1.5">
               Dispute Category *
             </label>
             <div className="space-y-2">
@@ -177,8 +177,8 @@ export function DisputeModal({
                   key={cat.value}
                   className={`flex items-start gap-3 p-3 rounded-xl border text-xs cursor-pointer transition ${
                     category === cat.value
-                      ? "border-red-500 bg-red-50/50 text-slate-900"
-                      : "border-slate-200 hover:bg-slate-50 text-slate-600"
+                      ? "border-red-500 bg-red-50 dark:bg-red-950/60/50 text-slate-900 dark:text-white"
+                      : "border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-slate-600 dark:text-slate-300"
                   }`}
                 >
                   <input
@@ -190,8 +190,8 @@ export function DisputeModal({
                     className="mt-0.5 text-red-600 focus:ring-red-500"
                   />
                   <div>
-                    <span className="font-bold block text-slate-900">{cat.label}</span>
-                    <span className="text-[11px] text-slate-500">{cat.desc}</span>
+                    <span className="font-bold block text-slate-900 dark:text-white">{cat.label}</span>
+                    <span className="text-[11px] text-slate-500 dark:text-slate-400">{cat.desc}</span>
                   </div>
                 </label>
               ))}
@@ -200,7 +200,7 @@ export function DisputeModal({
 
           {/* Disputed Amount */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-1">
               Disputed Amount (₦ Naira) *
             </label>
             <input
@@ -210,7 +210,7 @@ export function DisputeModal({
               required
               value={disputedAmount}
               onChange={(e) => setDisputedAmount(parseFloat(e.target.value) || 0)}
-              className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900 bg-white font-mono font-bold"
+              className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] font-mono font-bold"
             />
             <span className="text-[10px] text-slate-400 mt-0.5 block">
               Default is agreed escrow total (₦{agreedAmountNaira.toLocaleString("en-NG")}).
@@ -219,7 +219,7 @@ export function DisputeModal({
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-1">
               Describe the Issue in Detail *
             </label>
             <textarea
@@ -228,7 +228,7 @@ export function DisputeModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide chronological facts: dates, actions promised vs executed, defects observed, unapproved charges demanded..."
-              className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900 bg-white"
+              className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
             />
             <div className="flex justify-between items-center text-[10px] text-slate-400 mt-1">
               <span>Minimum 10 characters</span>
@@ -238,7 +238,7 @@ export function DisputeModal({
 
           {/* Evidence Uploads */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-1">
               Supporting Evidence (Photographs / Documents / Receipts)
             </label>
             <div className="space-y-2">
@@ -248,7 +248,7 @@ export function DisputeModal({
                   accept=".pdf,.jpg,.jpeg,.png,.webp"
                   onChange={handleEvidenceFileUpload}
                   disabled={isUploadingEvidence}
-                  className="flex-1 p-2 rounded-xl border border-slate-300 text-xs bg-white file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white"
+                  className="flex-1 p-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs bg-white dark:bg-[#0D223A] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white"
                 />
               </div>
               <input
@@ -256,7 +256,7 @@ export function DisputeModal({
                 value={evidenceInput}
                 onChange={(e) => setEvidenceInput(e.target.value)}
                 placeholder="Or paste existing evidence URL / storage path (optional)"
-                className="w-full p-2.5 rounded-xl border border-slate-300 text-xs"
+                className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs"
               />
               <div className="flex gap-2">
                 <input
@@ -264,7 +264,7 @@ export function DisputeModal({
                   value={evidenceDescription}
                   onChange={(e) => setEvidenceDescription(e.target.value)}
                   placeholder="Caption / description (e.g. Photo of leak after specialist departed)"
-                  className="flex-1 p-2.5 rounded-xl border border-slate-300 text-xs"
+                  className="flex-1 p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs"
                 />
                 <button
                   type="button"
@@ -280,15 +280,15 @@ export function DisputeModal({
             {evidenceList.length > 0 && (
               <div className="mt-3 space-y-1.5">
                 {evidenceList.map((ev, idx) => (
-                  <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                  <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 dark:bg-[#071526] p-2.5 rounded-xl border border-slate-200 dark:border-[#163654]">
                     <div className="truncate mr-2">
-                      <span className="font-bold text-slate-800 block truncate">{ev.file_name}</span>
-                      {ev.description && <span className="text-slate-500 block truncate">{ev.description}</span>}
+                      <span className="font-bold text-slate-800 dark:text-slate-100 block truncate">{ev.file_name}</span>
+                      {ev.description && <span className="text-slate-500 dark:text-slate-400 block truncate">{ev.description}</span>}
                     </div>
                     <button
                       type="button"
                       onClick={() => setEvidenceList(evidenceList.filter((_, i) => i !== idx))}
-                      className="text-red-500 hover:text-red-700 font-bold shrink-0"
+                      className="text-red-500 hover:text-red-700 dark:text-red-400 font-bold shrink-0"
                     >
                       ✕
                     </button>
@@ -303,7 +303,7 @@ export function DisputeModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-center"
+              className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 transition text-center"
             >
               Cancel
             </button>

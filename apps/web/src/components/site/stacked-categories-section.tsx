@@ -172,7 +172,7 @@ export function StackedCategoriesSection() {
     <section
       id="popular-categories"
       aria-label="What You Can Do on EasyLife"
-      className="relative bg-[#F3F8F8] py-16 sm:py-24 border-b border-[#DAE7E7]"
+      className="relative bg-[#F3F8F8] dark:bg-[#071526] py-16 sm:py-24 border-b border-[#DAE7E7] dark:border-[#163654]"
       style={{ overflowX: "clip" }}
     >
       <div className="max-w-[1120px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -258,7 +258,7 @@ export function StackedCategoriesSection() {
                         <Link
                           key={pill.label}
                           href={pill.href}
-                          className="inline-flex items-center rounded-full bg-white/14 hover:bg-white/24 focus-visible:bg-white/24 px-2.5 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-[13px] font-medium text-white backdrop-blur-xs transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+                          className="inline-flex items-center rounded-full bg-white/15 hover:bg-white/25 focus-visible:bg-white/25 px-2.5 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-[13px] font-medium text-white backdrop-blur-xs transition-colors focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
                         >
                           {pill.label}
                         </Link>

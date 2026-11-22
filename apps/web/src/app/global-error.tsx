@@ -11,7 +11,7 @@ export default function GlobalError({
   return (
     <html lang="en">
       <body className="min-h-screen bg-[#F8FAFC] text-[#1F2F34] flex items-center justify-center p-4 font-sans antialiased">
-        <div className="max-w-md w-full rounded-3xl bg-white border border-[#DAE7E7] p-8 text-center space-y-4 shadow-sm">
+        <div className="max-w-md w-full rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-8 text-center space-y-4 shadow-sm">
           <h1 className="text-xl font-bold text-[#154752]">
             EasyLife — Temporary Service Interruption
           </h1>

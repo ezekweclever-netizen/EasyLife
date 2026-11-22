@@ -138,19 +138,19 @@ export function UserManagerClient({
   return (
     <div className="space-y-6">
       {/* Search and Filters Toolbar */}
-      <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <form onSubmit={handleSearch} className="flex flex-col sm:flex-row flex-1 sm:items-center gap-2">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by name, email, or telephone..."
-            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
+            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
           />
           <select
             value={suspendedFilter}
             onChange={(e) => setSuspendedFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
+            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
           >
             <option value="all">All Account Statuses</option>
             <option value="active">Active Only</option>
@@ -165,17 +165,17 @@ export function UserManagerClient({
           </button>
         </form>
 
-        <div className="text-xs text-slate-500">
-          Showing <strong className="text-slate-800">{users.length}</strong> of{" "}
-          <strong className="text-slate-800">{totalCount}</strong> accounts
+        <div className="text-xs text-slate-500 dark:text-slate-400">
+          Showing <strong className="text-slate-800 dark:text-slate-100">{users.length}</strong> of{" "}
+          <strong className="text-slate-800 dark:text-slate-100">{totalCount}</strong> accounts
         </div>
       </div>
 
       {/* Users Table */}
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50/80 border-b border-slate-200 text-2xs font-extrabold uppercase text-slate-500 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">User</th>
                 <th className="py-3.5 px-4">Roles</th>
@@ -194,12 +194,12 @@ export function UserManagerClient({
                 </tr>
               ) : (
                 users.map((u) => (
-                  <tr key={u.id} className="hover:bg-slate-50/60 transition">
+                  <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
                     <td className="py-3.5 px-4">
-                      <div className="font-bold text-slate-900">
+                      <div className="font-bold text-slate-900 dark:text-white">
                         {u.full_name || "Unnamed User"}
                       </div>
-                      <div className="text-2xs text-slate-500 font-mono">
+                      <div className="text-2xs text-slate-500 dark:text-slate-400 font-mono">
                         {u.email || "No email"} • {u.phone || "No phone"}
                       </div>
                     </td>
@@ -215,21 +215,21 @@ export function UserManagerClient({
                                   : r.role === "professional"
                                   ? "bg-blue-100 text-blue-800"
                                   : r.role === "business"
-                                  ? "bg-teal-100 text-teal-800"
-                                  : "bg-slate-100 text-slate-700"
+                                  ? "bg-teal-100 text-teal-800 dark:text-[#5CD3D5]"
+                                  : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
                               }`}
                             >
                               {r.role}
                             </span>
                           ))
                         ) : (
-                          <span className="px-2 py-0.5 rounded-md text-2xs bg-slate-100 text-slate-500">
+                          <span className="px-2 py-0.5 rounded-md text-2xs bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
                             customer
                           </span>
                         )}
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-slate-600">
+                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-300">
                       {u.city || "Nigeria"}
                       {u.state ? `, ${u.state}` : ""}
                     </td>
@@ -240,7 +240,7 @@ export function UserManagerClient({
                           Suspended
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-extrabold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-extrabold bg-emerald-100 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                           Active
                         </span>
@@ -255,7 +255,7 @@ export function UserManagerClient({
                           setTargetUser(u);
                           setModalMode("details");
                         }}
-                        className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition"
+                        className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 transition"
                       >
                         Details
                       </button>
@@ -269,7 +269,7 @@ export function UserManagerClient({
                             setActionSuccess(null);
                             setModalMode("reinstate");
                           }}
-                          className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition"
+                          className="px-2.5 py-1 rounded-lg text-2xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition"
                         >
                           Reinstate
                         </button>
@@ -296,17 +296,17 @@ export function UserManagerClient({
         </div>
 
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600">
+          <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-[#071526]/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600 dark:text-slate-300">
             <span>
-              Page <strong className="text-slate-900">{page}</strong> of{" "}
-              <strong className="text-slate-900">{totalPages}</strong> ({totalCount} total accounts)
+              Page <strong className="text-slate-900 dark:text-white">{page}</strong> of{" "}
+              <strong className="text-slate-900 dark:text-white">{totalPages}</strong> ({totalCount} total accounts)
             </span>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 disabled={isPending || page <= 1}
                 onClick={() => loadPage(page - 1)}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-semibold hover:bg-slate-50 disabled:opacity-40"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] disabled:opacity-40"
               >
                 ← Previous
               </button>
@@ -328,9 +328,9 @@ export function UserManagerClient({
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleSuspendSubmit}
-            className="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200"
+            className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2 text-rose-700 font-black text-sm">
                 <span>⚠️</span>
                 <span>Confirm Account Suspension</span>
@@ -338,18 +338,18 @@ export function UserManagerClient({
               <button
                 type="button"
                 onClick={() => setModalMode(null)}
-                className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 text-xs font-bold"
+                className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold"
               >
                 ✕
               </button>
             </div>
 
-            <p className="text-xs text-slate-600">
-              You are suspending <strong className="text-slate-900">{targetUser.full_name || targetUser.email}</strong>. This account will be prevented from placing orders or accepting jobs.
+            <p className="text-xs text-slate-600 dark:text-slate-300">
+              You are suspending <strong className="text-slate-900 dark:text-white">{targetUser.full_name || targetUser.email}</strong>. This account will be prevented from placing orders or accepting jobs.
             </p>
 
             <div>
-              <label className="block text-2xs font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+              <label className="block text-2xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                 Documented Reason (Mandatory &amp; Logged to Audit Trail) *
               </label>
               <textarea
@@ -358,7 +358,7 @@ export function UserManagerClient({
                 value={reasonInput}
                 onChange={(e) => setReasonInput(e.target.value)}
                 placeholder="E.g. Repeated violation of marketplace standards or unresolved dispute #REF-1234."
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none"
               />
             </div>
 
@@ -368,7 +368,7 @@ export function UserManagerClient({
               </div>
             )}
             {actionSuccess && (
-              <div className="p-3 rounded-xl bg-emerald-50 text-emerald-700 text-2xs font-semibold">
+              <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-2xs font-semibold">
                 {actionSuccess}
               </div>
             )}
@@ -377,7 +377,7 @@ export function UserManagerClient({
               <button
                 type="button"
                 onClick={() => setModalMode(null)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800"
               >
                 Cancel
               </button>
@@ -397,28 +397,28 @@ export function UserManagerClient({
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleReinstateSubmit}
-            className="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200"
+            className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="flex items-center gap-2 text-emerald-700 font-black text-sm">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-black text-sm">
                 <span>✅</span>
                 <span>Reinstate Account</span>
               </div>
               <button
                 type="button"
                 onClick={() => setModalMode(null)}
-                className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 text-xs font-bold"
+                className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold"
               >
                 ✕
               </button>
             </div>
 
-            <p className="text-xs text-slate-600">
-              Restore full platform access for <strong className="text-slate-900">{targetUser.full_name || targetUser.email}</strong>.
+            <p className="text-xs text-slate-600 dark:text-slate-300">
+              Restore full platform access for <strong className="text-slate-900 dark:text-white">{targetUser.full_name || targetUser.email}</strong>.
             </p>
 
             <div>
-              <label className="block text-2xs font-extrabold uppercase tracking-wider text-slate-600 mb-1">
+              <label className="block text-2xs font-extrabold uppercase tracking-wider text-slate-600 dark:text-slate-300 mb-1">
                 Reinstatement Justification Note
               </label>
               <textarea
@@ -426,7 +426,7 @@ export function UserManagerClient({
                 value={reasonInput}
                 onChange={(e) => setReasonInput(e.target.value)}
                 placeholder="E.g. Customer provided proof of payment resolution; professional KYC verified."
-                className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:outline-none"
               />
             </div>
 
@@ -436,7 +436,7 @@ export function UserManagerClient({
               </div>
             )}
             {actionSuccess && (
-              <div className="p-3 rounded-xl bg-emerald-50 text-emerald-700 text-2xs font-semibold">
+              <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-2xs font-semibold">
                 {actionSuccess}
               </div>
             )}
@@ -445,7 +445,7 @@ export function UserManagerClient({
               <button
                 type="button"
                 onClick={() => setModalMode(null)}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800"
               >
                 Cancel
               </button>
@@ -463,47 +463,47 @@ export function UserManagerClient({
       {/* User Details Modal */}
       {modalMode === "details" && targetUser && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div className="font-extrabold text-sm text-slate-900">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="font-extrabold text-sm text-slate-900 dark:text-white">
                 User Account Dossier
               </div>
               <button
                 onClick={() => setModalMode(null)}
-                className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 text-xs font-bold"
+                className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-xs font-bold"
               >
                 ✕
               </button>
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="bg-slate-50 p-4 rounded-2xl space-y-2">
+              <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl space-y-2">
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Account ID:</span>
-                  <span className="font-mono text-2xs text-slate-800">{targetUser.id}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Account ID:</span>
+                  <span className="font-mono text-2xs text-slate-800 dark:text-slate-100">{targetUser.id}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Full Name:</span>
-                  <span className="font-bold text-slate-900">{targetUser.full_name || "—"}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Full Name:</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{targetUser.full_name || "—"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Email:</span>
-                  <span className="font-semibold text-slate-800">{targetUser.email || "—"}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Email:</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-100">{targetUser.email || "—"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Phone:</span>
-                  <span className="font-semibold text-slate-800">{targetUser.phone || "—"}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Phone:</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-100">{targetUser.phone || "—"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Location:</span>
-                  <span className="text-slate-800">{targetUser.city || "—"}, {targetUser.state || "—"}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Location:</span>
+                  <span className="text-slate-800 dark:text-slate-100">{targetUser.city || "—"}, {targetUser.state || "—"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Joined:</span>
-                  <span className="font-mono text-2xs text-slate-700">{new Date(targetUser.created_at).toLocaleString()}</span>
+                  <span className="text-slate-500 dark:text-slate-400">Joined:</span>
+                  <span className="font-mono text-2xs text-slate-700 dark:text-slate-200">{new Date(targetUser.created_at).toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-slate-500">Suspension Status:</span>
+                  <span className="text-slate-500 dark:text-slate-400">Suspension Status:</span>
                   <span className={targetUser.is_suspended ? "text-rose-700 font-bold" : "text-emerald-700 font-bold"}>
                     {targetUser.is_suspended ? `Suspended (${targetUser.suspension_reason || "No reason recorded"})` : "Active / In Good Standing"}
                   </span>

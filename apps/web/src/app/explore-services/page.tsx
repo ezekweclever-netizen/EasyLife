@@ -485,7 +485,7 @@ export default async function ExploreServicesPage({
             <Link
               key={c.id}
               href={`/explore-services?cat=${encodeURIComponent(c.slug)}${cityQs}`}
-              className="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium transition"
+              className="px-2.5 py-1 rounded-full bg-white dark:bg-[#0D223A]/10 hover:bg-white dark:bg-[#0D223A]/20 text-white font-medium transition"
             >
               {c.name}
             </Link>
@@ -496,17 +496,17 @@ export default async function ExploreServicesPage({
       {/* Main Matching & Discovery Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
         {activeGroup && (
-          <div className="rounded-2xl border border-[#24989A]/30 bg-[#EEF9F9] p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="rounded-2xl border border-[#24989A]/30 dark:border-teal-800 bg-[#EEF9F9] dark:bg-teal-950/40 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2.5">
                 <span className="px-2.5 py-0.5 rounded-full bg-[#154752] text-white text-xs font-bold uppercase tracking-wider">
                   Category Group Selected
                 </span>
-                <h2 className="text-lg sm:text-xl font-bold text-[#154752]">
+                <h2 className="text-lg sm:text-xl font-bold text-[#154752] dark:text-white">
                   {activeGroup.label}
                 </h2>
               </div>
-              <p className="text-sm sm:text-base text-[#4E6065]">
+              <p className="text-sm sm:text-base text-[#4E6065] dark:text-slate-300">
                 {activeGroup.description}
               </p>
               <div className="flex flex-wrap gap-2 pt-1.5">
@@ -516,7 +516,7 @@ export default async function ExploreServicesPage({
                     <Link
                       key={subCat.id}
                       href={`/explore-services?cat=${encodeURIComponent(subCat.slug)}${cityQs}`}
-                      className="px-3 py-1 rounded-full bg-white border border-[#DAE7E7] text-xs sm:text-sm font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition"
+                      className="px-3 py-1 rounded-full bg-white dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] text-xs sm:text-sm font-semibold text-[#154752] dark:text-slate-200 hover:border-[#24989A] hover:text-[#24989A] transition"
                     >
                       {subCat.name}
                     </Link>
@@ -534,7 +534,7 @@ export default async function ExploreServicesPage({
               )}
               <Link
                 href="/explore-services"
-                className="px-4 py-2 rounded-xl bg-white border border-[#DAE7E7] text-sm font-semibold text-[#1F2F34] hover:bg-slate-50 transition"
+                className="px-4 py-2 rounded-xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] text-sm font-semibold text-[#1F2F34] dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition"
               >
                 Show All Categories
               </Link>
@@ -545,20 +545,20 @@ export default async function ExploreServicesPage({
         {/* 3-Tier Interactive Hierarchy Drilldown: Main Category -> Subcategory -> Individual Service */}
         <section
           aria-label="Service hierarchy navigation"
-          className="rounded-2xl bg-white border border-[#DAE7E7] p-5 shadow-xs space-y-4"
+          className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] p-5 shadow-xs space-y-4"
         >
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h2 className="text-sm sm:text-base font-bold text-[#154752]">
+              <h2 className="text-sm sm:text-base font-bold text-[#154752] dark:text-white">
                 Browse by Category, Subcategory &amp; Individual Service
               </h2>
-              <p className="text-xs text-[#68797C]">
+              <p className="text-xs text-[#68797C] dark:text-slate-400">
                 Drill down cleanly from {catalogueTree.length} major categories into subcategories and standardised services.
               </p>
             </div>
             <Link
               href="/services"
-              className="text-xs font-bold text-[#24989A] hover:underline"
+              className="text-xs font-bold text-[#24989A] dark:text-[#5CD3D5] hover:underline"
             >
               Open Full 3-Tier Catalogue →
             </Link>
@@ -570,8 +570,8 @@ export default async function ExploreServicesPage({
               href={buildFilterHref({})}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
                 !selectedCategory
-                  ? "bg-[#154752] text-white border-[#154752]"
-                  : "bg-[#F8FBFB] text-[#154752] border-[#DAE7E7] hover:border-[#24989A]"
+                  ? "bg-[#154752] dark:bg-[#24989A] text-white border-[#154752] dark:border-[#24989A]"
+                  : "bg-[#F8FBFB] dark:bg-[#071526] text-[#154752] dark:text-slate-200 border-[#DAE7E7] dark:border-[#163654] hover:border-[#24989A] dark:hover:border-[#24989A]"
               }`}
             >
               All Categories
@@ -584,8 +584,8 @@ export default async function ExploreServicesPage({
                   href={buildFilterHref({ catSlug: mainCat.slug })}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
                     isSelected
-                      ? "bg-[#154752] text-white border-[#154752]"
-                      : "bg-[#F8FBFB] text-[#154752] border-[#DAE7E7] hover:border-[#24989A]"
+                      ? "bg-[#154752] dark:bg-[#24989A] text-white border-[#154752] dark:border-[#24989A]"
+                      : "bg-[#F8FBFB] dark:bg-[#071526] text-[#154752] dark:text-slate-200 border-[#DAE7E7] dark:border-[#163654] hover:border-[#24989A] dark:hover:border-[#24989A]"
                   }`}
                 >
                   {mainCat.name}
@@ -596,8 +596,8 @@ export default async function ExploreServicesPage({
 
           {/* Tier 2: Subcategories for Selected Main Category */}
           {selectedCategory && selectedCategory.subcategories.length > 0 && (
-            <div className="pt-3 border-t border-[#EEF6F7] space-y-2">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-[#68797C]">
+            <div className="pt-3 border-t border-[#EEF6F7] dark:border-[#163654] space-y-2">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-[#68797C] dark:text-slate-400">
                 Subcategories in {selectedCategory.name}
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -606,7 +606,7 @@ export default async function ExploreServicesPage({
                   className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-colors ${
                     !selectedSubcategory
                       ? "bg-[#24989A] text-white border-[#24989A]"
-                      : "bg-[#F3F8F8] text-[#154752] border-[#DAE7E7] hover:border-[#24989A]"
+                      : "bg-[#F3F8F8] dark:bg-[#071526] text-[#154752] dark:text-slate-200 border-[#DAE7E7] dark:border-[#163654] hover:border-[#24989A] dark:hover:border-[#24989A]"
                   }`}
                 >
                   All in {selectedCategory.name}
@@ -623,7 +623,7 @@ export default async function ExploreServicesPage({
                       className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-colors ${
                         isSubSelected
                           ? "bg-[#24989A] text-white border-[#24989A]"
-                          : "bg-[#F3F8F8] text-[#154752] border-[#DAE7E7] hover:border-[#24989A]"
+                          : "bg-[#F3F8F8] dark:bg-[#071526] text-[#154752] dark:text-slate-200 border-[#DAE7E7] dark:border-[#163654] hover:border-[#24989A] dark:hover:border-[#24989A]"
                       }`}
                     >
                       {subNode.name} ({subNode.services.length})
@@ -636,9 +636,9 @@ export default async function ExploreServicesPage({
 
           {/* Tier 3: Individual Services in Selected Scope */}
           {selectedCategory && drilldownServices.length > 0 && (
-            <div className="pt-3 border-t border-[#EEF6F7] space-y-2.5">
+            <div className="pt-3 border-t border-[#EEF6F7] dark:border-[#163654] space-y-2.5">
               <div className="flex items-center justify-between gap-2">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#68797C]">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#68797C] dark:text-slate-400">
                   Individual Services in {selectedSubcategory?.name || selectedCategory.name} ({drilldownServices.length})
                 </p>
                 {selectedService && (
@@ -647,7 +647,7 @@ export default async function ExploreServicesPage({
                       catSlug: selectedCategory.slug,
                       subSlug: selectedSubcategory?.slug,
                     })}
-                    className="text-xs font-semibold text-[#24989A] hover:underline"
+                    className="text-xs font-semibold text-[#24989A] dark:text-[#5CD3D5] hover:underline"
                   >
                     Show All in {selectedSubcategory?.name || selectedCategory.name}
                   </Link>
@@ -668,33 +668,33 @@ export default async function ExploreServicesPage({
                       key={srv.id}
                       className={`rounded-xl border p-3.5 flex flex-col justify-between gap-2.5 transition-colors ${
                         isSrvActive
-                          ? "border-[#24989A] bg-[#EEF9F9]"
-                          : "border-[#DAE7E7] bg-[#F8FBFB] hover:border-[#24989A]"
+                          ? "border-[#24989A] bg-[#EEF9F9] dark:bg-teal-950/40"
+                          : "border-[#DAE7E7] dark:border-[#163654] bg-[#F8FBFB] dark:bg-[#071526] hover:border-[#24989A]"
                       }`}
                     >
                       <div>
                         <div className="flex items-center justify-between gap-2 text-[10px]">
-                          <span className="font-mono font-bold text-[#68797C]">
+                          <span className="font-mono font-bold text-[#68797C] dark:text-slate-400">
                             {srv.service_code}
                           </span>
-                          <span className="font-bold text-[#154752]">
+                          <span className="font-bold text-[#154752] dark:text-[#5CD3D5]">
                             {formatServicePriceRange(
                               srv.base_price_min_kobo,
                               srv.base_price_max_kobo
                             )}
                           </span>
                         </div>
-                        <p className="mt-1 text-xs sm:text-sm font-bold text-[#154752]">
+                        <p className="mt-1 text-xs sm:text-sm font-bold text-[#154752] dark:text-white">
                           {srv.name}
                         </p>
                         {srv.short_description && (
-                          <p className="mt-1 text-xs text-[#4E6065] line-clamp-2">
+                          <p className="mt-1 text-xs text-[#4E6065] dark:text-slate-300 line-clamp-2">
                             {srv.short_description}
                           </p>
                         )}
                       </div>
 
-                      <div className="flex items-center justify-between gap-2 text-[11px] font-bold pt-2 border-t border-[#DAE7E7]/70">
+                      <div className="flex items-center justify-between gap-2 text-[11px] font-bold pt-2 border-t border-[#DAE7E7]/70 dark:border-[#163654]">
                         <Link
                           href={buildFilterHref({
                             catSlug: selectedCategory!.slug,
@@ -703,8 +703,8 @@ export default async function ExploreServicesPage({
                           })}
                           className={
                             isSrvActive
-                              ? "text-[#0F766E]"
-                              : "text-[#24989A] hover:underline"
+                              ? "text-[#0F766E] dark:text-[#5CD3D5]"
+                              : "text-[#24989A] dark:text-[#5CD3D5] hover:underline"
                           }
                         >
                           {isSrvActive ? "✓ Filtering Pros" : "Match Specialists"}
@@ -712,7 +712,7 @@ export default async function ExploreServicesPage({
                         <div className="flex items-center gap-2.5">
                           <Link
                             href={`/services/${srv.slug}`}
-                            className="text-[#154752] hover:underline"
+                            className="text-[#154752] dark:text-slate-300 hover:underline"
                           >
                             Details
                           </Link>
@@ -738,30 +738,30 @@ export default async function ExploreServicesPage({
 
         {/* Active Individual Service Spotlight */}
         {selectedService && (
-          <div className="rounded-2xl border border-[#24989A]/40 bg-white p-5 sm:p-6 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="rounded-2xl border border-[#24989A]/40 dark:border-[#163654] bg-white dark:bg-[#0D223A] p-5 sm:p-6 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="space-y-1.5">
               <div className="flex flex-wrap items-center gap-2 text-xs">
                 <span className="rounded-full bg-[#154752] px-2.5 py-0.5 font-mono font-bold text-white">
                   {selectedService.service_code}
                 </span>
-                <span className="font-semibold text-[#24989A]">
+                <span className="font-semibold text-[#24989A] dark:text-[#5CD3D5]">
                   Selected Service Filter
                 </span>
                 {selectedService.requires_trade_certification && (
-                  <span className="rounded-full bg-teal-50 border border-teal-200 px-2.5 py-0.5 font-semibold text-[#0F766E]">
+                  <span className="rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-2.5 py-0.5 font-semibold text-[#0F766E] dark:text-[#5CD3D5]">
                     Trade Certification Checked
                   </span>
                 )}
               </div>
-              <h2 className="text-lg sm:text-xl font-bold text-[#154752]">
+              <h2 className="text-lg sm:text-xl font-bold text-[#154752] dark:text-white">
                 {selectedService.name}
               </h2>
               {selectedService.short_description && (
-                <p className="text-sm text-[#4E6065] max-w-2xl">
+                <p className="text-sm text-[#4E6065] dark:text-slate-300 max-w-2xl">
                   {selectedService.short_description}
                 </p>
               )}
-              <p className="text-xs font-semibold text-[#154752]">
+              <p className="text-xs font-semibold text-[#154752] dark:text-slate-200">
                 Estimate Benchmark:{" "}
                 {formatServicePriceRange(
                   selectedService.base_price_min_kobo,
@@ -775,7 +775,7 @@ export default async function ExploreServicesPage({
             <div className="flex flex-wrap items-center gap-2.5 shrink-0">
               <Link
                 href={`/services/${selectedService.slug}`}
-                className="rounded-xl border border-[#DAE7E7] bg-[#F3F8F8] px-4 py-2 text-xs font-bold text-[#154752] hover:bg-[#EEF6F7]"
+                className="rounded-xl border border-[#DAE7E7] dark:border-[#163654] bg-[#F3F8F8] dark:bg-[#071526] px-4 py-2 text-xs font-bold text-[#154752] dark:text-slate-200 hover:bg-[#EEF6F7] dark:hover:bg-slate-800"
               >
                 View Service Specs
               </Link>
@@ -793,21 +793,21 @@ export default async function ExploreServicesPage({
 
         {/* Keyword-Matched Individual Catalogue Services */}
         {q.trim() && keywordCatalogueRes && keywordCatalogueRes.items.length > 0 && (
-          <section className="rounded-2xl bg-[#EEF6F7] border border-[#DAE7E7] p-5 space-y-3">
+          <section className="rounded-2xl bg-[#EEF6F7] dark:bg-[#071526] border border-[#DAE7E7] dark:border-[#163654] p-5 space-y-3">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div>
-                <h2 className="text-sm sm:text-base font-bold text-[#154752]">
+                <h2 className="text-sm sm:text-base font-bold text-[#154752] dark:text-white">
                   Catalogue Services Matching &ldquo;{q.trim()}&rdquo; ({keywordCatalogueRes.totalCount})
                 </h2>
                 {keywordServicesTotalPages > 1 && (
-                  <p className="text-[11px] text-[#68797C]">
+                  <p className="text-[11px] text-[#68797C] dark:text-slate-400">
                     Page {currentSrvPage} of {keywordServicesTotalPages}
                   </p>
                 )}
               </div>
               <Link
                 href={`/services?q=${encodeURIComponent(q.trim())}`}
-                className="text-xs font-bold text-[#24989A] hover:underline"
+                className="text-xs font-bold text-[#24989A] dark:text-[#5CD3D5] hover:underline"
               >
                 Filter All Matching Services →
               </Link>
@@ -816,34 +816,34 @@ export default async function ExploreServicesPage({
               {keywordCatalogueRes.items.map((srv) => (
                 <div
                   key={srv.id}
-                  className="rounded-xl bg-white border border-[#DAE7E7] p-4 flex flex-col justify-between gap-3"
+                  className="rounded-xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] p-4 flex flex-col justify-between gap-3"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2">
-                      <p className="text-[11px] font-bold text-[#24989A] uppercase tracking-wider truncate">
+                      <p className="text-[11px] font-bold text-[#24989A] dark:text-[#5CD3D5] uppercase tracking-wider truncate">
                         {srv.category_name}
                         {srv.subcategory_name ? ` • ${srv.subcategory_name}` : ""}
                       </p>
                       {srv.available_provider_count > 0 && (
-                        <span className="shrink-0 rounded-full bg-[#EEF6F7] px-2 py-0.5 text-[10px] font-bold text-[#154752]">
+                        <span className="shrink-0 rounded-full bg-[#EEF6F7] dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-2 py-0.5 text-[10px] font-bold text-[#154752] dark:text-[#5CD3D5]">
                           {srv.available_provider_count} pros
                         </span>
                       )}
                     </div>
                     <Link
                       href={`/services/${srv.slug}`}
-                      className="mt-1 block text-sm font-bold text-[#154752] hover:text-[#24989A]"
+                      className="mt-1 block text-sm font-bold text-[#154752] dark:text-white hover:text-[#24989A] dark:hover:text-[#5CD3D5]"
                     >
                       {srv.name}
                     </Link>
                     {srv.short_description && (
-                      <p className="mt-1 text-xs text-[#4E6065] line-clamp-2">
+                      <p className="mt-1 text-xs text-[#4E6065] dark:text-slate-300 line-clamp-2">
                         {srv.short_description}
                       </p>
                     )}
                   </div>
-                  <div className="flex items-center justify-between text-xs font-bold pt-2 border-t border-[#EEF6F7]">
-                    <span className="text-[#154752]">
+                  <div className="flex items-center justify-between text-xs font-bold pt-2 border-t border-[#EEF6F7] dark:border-[#163654]">
+                    <span className="text-[#154752] dark:text-[#5CD3D5]">
                       {formatServicePriceRange(
                         srv.base_price_min_kobo,
                         srv.base_price_max_kobo
@@ -852,7 +852,7 @@ export default async function ExploreServicesPage({
                     <div className="flex items-center gap-2.5">
                       <Link
                         href={`/services/${srv.slug}`}
-                        className="text-[#24989A] hover:underline"
+                        className="text-[#24989A] dark:text-[#5CD3D5] hover:underline"
                       >
                         Details
                       </Link>
@@ -862,7 +862,7 @@ export default async function ExploreServicesPage({
                         )}&service=${encodeURIComponent(srv.id)}&title=${encodeURIComponent(
                           srv.name
                         )}${city !== "All Cities" ? `&city=${encodeURIComponent(city)}` : ""}`}
-                        className="rounded-lg bg-[#154752] px-2.5 py-1 text-white"
+                        className="rounded-lg bg-[#154752] px-2.5 py-1 text-white hover:bg-[#0D282E]"
                       >
                         Book
                       </Link>
@@ -873,7 +873,7 @@ export default async function ExploreServicesPage({
             </div>
 
             {keywordServicesTotalPages > 1 && (
-              <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#DAE7E7]">
+              <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#DAE7E7] dark:border-[#163654]">
                 {currentSrvPage > 1 && (
                   <Link
                     href={buildFilterHref({
@@ -882,7 +882,7 @@ export default async function ExploreServicesPage({
                       srvSlug: selectedService?.slug,
                       srvPageNum: currentSrvPage - 1,
                     })}
-                    className="rounded-lg border border-[#DAE7E7] bg-white px-3 py-1.5 text-xs font-bold text-[#154752] hover:bg-[#F3F8F8]"
+                    className="rounded-lg border border-[#DAE7E7] dark:border-[#163654] bg-white dark:bg-[#0D223A] px-3 py-1.5 text-xs font-bold text-[#154752] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800"
                   >
                     ← Prev Services
                   </Link>
@@ -895,7 +895,7 @@ export default async function ExploreServicesPage({
                       srvSlug: selectedService?.slug,
                       srvPageNum: currentSrvPage + 1,
                     })}
-                    className="rounded-lg border border-[#DAE7E7] bg-white px-3 py-1.5 text-xs font-bold text-[#154752] hover:bg-[#F3F8F8]"
+                    className="rounded-lg border border-[#DAE7E7] dark:border-[#163654] bg-white dark:bg-[#0D223A] px-3 py-1.5 text-xs font-bold text-[#154752] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800"
                   >
                     More Matching Services →
                   </Link>
@@ -931,13 +931,13 @@ export default async function ExploreServicesPage({
         />
 
         {/* Top-Level Accredited Major Categories Grid Overview (Main Categories Only) */}
-        <section className="mt-16 pt-10 border-t border-slate-200 space-y-6">
+        <section className="mt-16 pt-10 border-t border-slate-200 dark:border-[#163654] space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
-              <h2 className="text-2xl font-bold text-slate-900">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
                 Accredited Major Service Categories ({catalogueTree.length})
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 mt-1">
+              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-1">
                 Official everyday maintenance and repair categories available across Port Harcourt, Lagos, and Abuja.
               </p>
             </div>
@@ -950,7 +950,7 @@ export default async function ExploreServicesPage({
           </div>
 
           {catalogueTree.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-600">
+            <div className="rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] p-8 text-center text-sm text-slate-600 dark:text-slate-300">
               No active service categories could be loaded right now.{" "}
               <Link href="/book" className="font-bold text-[#0D9488] underline">
                 Submit a direct service request
@@ -968,26 +968,26 @@ export default async function ExploreServicesPage({
                 return (
                   <div
                     key={c.id}
-                    className="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col justify-between hover:border-[#0D9488] transition shadow-xs"
+                    className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 flex flex-col justify-between hover:border-[#0D9488] transition shadow-xs"
                   >
                     <div>
                       <div className="flex items-center gap-3 mb-2.5">
-                        <span className="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center text-[#0D9488] shrink-0">
+                        <span className="w-9 h-9 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 flex items-center justify-center text-[#0D9488] shrink-0">
                           <Icon
                             name={resolveCatalogueIcon(c.icon_name, c.slug)}
                             className="h-4.5 w-4.5"
                           />
                         </span>
                         <div className="min-w-0">
-                          <h3 className="font-bold text-base text-slate-900 truncate">
+                          <h3 className="font-bold text-base text-slate-900 dark:text-white truncate">
                             {c.name}
                           </h3>
-                          <p className="text-[11px] font-medium text-slate-500">
+                          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
                             {subCount} subcategor{subCount === 1 ? "y" : "ies"} • {srvCount} service{srvCount === 1 ? "" : "s"}
                           </p>
                         </div>
                       </div>
-                      <p className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                      <p className="text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
                         {c.description}
                       </p>
 
@@ -997,7 +997,7 @@ export default async function ExploreServicesPage({
                             <Link
                               key={sc.id}
                               href={`/explore-services?cat=${encodeURIComponent(c.slug)}&sub=${encodeURIComponent(sc.slug)}${cityQs}`}
-                              className="px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-teal-50 hover:text-[#0F766E] text-[11px] font-medium text-slate-700 transition-colors"
+                              className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:bg-teal-950/60 hover:text-[#0F766E] text-[11px] font-medium text-slate-700 dark:text-slate-200 transition-colors"
                             >
                               {sc.name}
                             </Link>
@@ -1006,7 +1006,7 @@ export default async function ExploreServicesPage({
                       )}
                     </div>
 
-                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-sm">
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-sm">
                       <Link
                         href={`/explore-services?cat=${encodeURIComponent(c.slug)}${cityQs}`}
                         className="font-semibold text-[#0D9488] hover:underline"
@@ -1015,7 +1015,7 @@ export default async function ExploreServicesPage({
                       </Link>
                       <Link
                         href={`/book?category=${encodeURIComponent(c.id)}`}
-                        className="font-bold text-slate-700 hover:text-slate-900"
+                        className="font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white dark:text-white"
                       >
                         Request
                       </Link>
@@ -1032,7 +1032,7 @@ export default async function ExploreServicesPage({
 
   if (auth) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+      <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#071526] pb-24 md:pb-12 text-[#0F172A] dark:text-slate-100">
         <CustomerHeader
           user={{
             id: auth.user.id,

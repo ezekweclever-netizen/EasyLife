@@ -84,13 +84,13 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
+    <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs space-y-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
-          <h2 className="text-base font-bold text-slate-900">
+          <h2 className="text-base font-bold text-slate-900 dark:text-white">
             Business &amp; Trade Details
           </h2>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Public profile details, provider classification, and live booking availability.
           </p>
         </div>
@@ -102,8 +102,8 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
             onClick={handleToggleAvailability}
             className={`px-3.5 py-1.5 rounded-full text-xs font-bold border transition cursor-pointer ${
               isAvailable
-                ? "bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100"
-                : "bg-slate-100 text-slate-700 border-slate-300 hover:bg-slate-200"
+                ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-300 dark:border-slate-700 hover:bg-slate-200"
             }`}
           >
             {isAvailable ? "● Available for Jobs (Switch Off)" : "○ Unavailable (Switch On)"}
@@ -115,7 +115,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
               setIsEditing((prev) => !prev);
               setFeedback(null);
             }}
-            className="px-3.5 py-1.5 rounded-xl border border-slate-300 bg-white text-xs font-bold text-slate-700 hover:bg-slate-50 transition"
+            className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
           >
             {isEditing ? "Cancel Edit" : "Edit Business Details"}
           </button>
@@ -138,8 +138,8 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
         <div
           className={`p-3 rounded-xl text-xs font-medium border ${
             feedback.ok
-              ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-              : "bg-red-50 border-red-200 text-red-800"
+              ? "bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-900"
+              : "bg-red-50 dark:bg-red-950/60 border-red-200 dark:border-red-800 text-red-800 dark:text-red-300"
           }`}
         >
           {feedback.msg}
@@ -150,7 +150,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
         <form onSubmit={handleSaveProfile} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Trade / Business Name *
               </label>
               <input
@@ -159,18 +159,18 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
                 minLength={3}
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Provider Classification
               </label>
               <select
                 value={providerType}
                 onChange={(e) => setProviderType(e.target.value as ProviderType)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               >
                 {Object.entries(PROVIDER_TYPE_LABELS).map(([val, label]) => (
                   <option key={val} value={val}>
@@ -181,25 +181,25 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Professional Headline
               </label>
               <input
                 type="text"
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Primary Operating Hub
               </label>
               <select
                 value={primaryCity}
                 onChange={(e) => setPrimaryCity(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               >
                 {PILOT_CITIES.map((c) => (
                   <option key={c} value={c}>
@@ -210,7 +210,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Years of Practical Experience *
               </label>
               <input
@@ -220,12 +220,12 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
                 required
                 value={yearsOfExperience}
                 onChange={(e) => setYearsOfExperience(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Base Call-out Diagnosis Fee (₦ NGN)
               </label>
               <input
@@ -235,13 +235,13 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
                 required
                 value={baseCalloutFeeNaira}
                 onChange={(e) => setBaseCalloutFeeNaira(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
               Professional Bio &amp; Capabilities (min 20 characters) *
             </label>
             <textarea
@@ -250,7 +250,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
               minLength={20}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="w-full p-3 rounded-lg border border-slate-300 text-xs text-slate-900 bg-white"
+              className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
             />
           </div>
 
@@ -258,7 +258,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="px-4 py-2 rounded-lg border border-slate-300 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+              className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
             >
               Cancel
             </button>
@@ -275,43 +275,43 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
         <>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 text-xs">
             <div>
-              <span className="text-slate-500 font-medium block">Trade / Business Name</span>
-              <span className="text-sm font-bold text-slate-900 mt-1 block">
+              <span className="text-slate-500 dark:text-slate-400 font-medium block">Trade / Business Name</span>
+              <span className="text-sm font-bold text-slate-900 dark:text-white mt-1 block">
                 {profile.business_name}
               </span>
             </div>
 
             <div>
-              <span className="text-slate-500 font-medium block">Provider Classification</span>
-              <span className="text-sm font-semibold text-slate-900 mt-1 block">
+              <span className="text-slate-500 dark:text-slate-400 font-medium block">Provider Classification</span>
+              <span className="text-sm font-semibold text-slate-900 dark:text-white mt-1 block">
                 {PROVIDER_TYPE_LABELS[profile.provider_type || "trade_technician"] ||
                   profile.provider_type}
               </span>
             </div>
 
             <div>
-              <span className="text-slate-500 font-medium block">Primary Hub</span>
-              <span className="text-sm font-semibold text-slate-900 mt-1 block">
+              <span className="text-slate-500 dark:text-slate-400 font-medium block">Primary Hub</span>
+              <span className="text-sm font-semibold text-slate-900 dark:text-white mt-1 block">
                 {profile.primary_city}, {profile.primary_state}
               </span>
             </div>
 
             <div>
-              <span className="text-slate-500 font-medium block">Headline</span>
-              <span className="text-sm font-semibold text-slate-900 mt-1 block">
+              <span className="text-slate-500 dark:text-slate-400 font-medium block">Headline</span>
+              <span className="text-sm font-semibold text-slate-900 dark:text-white mt-1 block">
                 {profile.headline || "Specialist Service Professional"}
               </span>
             </div>
 
             <div>
-              <span className="text-slate-500 font-medium block">Years of Experience</span>
-              <span className="text-sm font-bold text-slate-900 mt-1 block">
+              <span className="text-slate-500 dark:text-slate-400 font-medium block">Years of Experience</span>
+              <span className="text-sm font-bold text-slate-900 dark:text-white mt-1 block">
                 {profile.years_of_experience} Years
               </span>
             </div>
 
             <div>
-              <span className="text-slate-500 font-medium block">Base Call-out Diagnosis Fee</span>
+              <span className="text-slate-500 dark:text-slate-400 font-medium block">Base Call-out Diagnosis Fee</span>
               <span className="text-sm font-bold text-[#0D9488] mt-1 block">
                 ₦{Math.round((profile.base_callout_fee_kobo || 0) / 100).toLocaleString("en-NG")}
               </span>
@@ -319,10 +319,10 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
           </div>
 
           <div>
-            <span className="text-slate-500 font-medium block text-xs mb-1">
+            <span className="text-slate-500 dark:text-slate-400 font-medium block text-xs mb-1">
               Professional Bio &amp; Capabilities
             </span>
-            <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/50 text-xs text-slate-800 leading-relaxed whitespace-pre-wrap">
+            <div className="p-4 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/50 text-xs text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap">
               {profile.bio || "No description provided."}
             </div>
           </div>

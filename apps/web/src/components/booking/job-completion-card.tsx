@@ -99,7 +99,7 @@ export function JobCompletionCard({
   // 1. Pro marked complete — Customer action required
   if (bookingStatus === "pro_marked_complete") {
     return (
-      <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border-2 border-amber-300 p-6 sm:p-8 shadow-sm space-y-6">
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl border-2 border-amber-300 dark:border-amber-700 p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <span className="inline-block px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500 text-white uppercase tracking-wider">
@@ -113,7 +113,7 @@ export function JobCompletionCard({
             </p>
           </div>
           {proMarkedCompleteAt && (
-            <div className="text-xs text-amber-800 font-medium sm:text-right shrink-0">
+            <div className="text-xs text-amber-800 dark:text-amber-300 font-medium sm:text-right shrink-0">
               Submitted: {new Date(proMarkedCompleteAt).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })},{" "}
               {new Date(proMarkedCompleteAt).toLocaleDateString("en-NG", { month: "short", day: "numeric", timeZone: "Africa/Lagos" })}
             </div>
@@ -122,11 +122,11 @@ export function JobCompletionCard({
 
         {/* Professional Notes */}
         {proNotes && (
-          <div className="bg-white/80 backdrop-blur-xs rounded-2xl border border-amber-200 p-4 space-y-1">
-            <span className="text-[11px] font-bold text-amber-800 uppercase tracking-wider block">
+          <div className="bg-white dark:bg-[#0D223A]/80 backdrop-blur-xs rounded-2xl border border-amber-200 dark:border-amber-800 p-4 space-y-1">
+            <span className="text-[11px] font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider block">
               Specialist Completion Notes
             </span>
-            <p className="text-xs sm:text-sm text-slate-800 whitespace-pre-line font-medium">
+            <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-100 whitespace-pre-line font-medium">
               "{proNotes}"
             </p>
           </div>
@@ -134,12 +134,12 @@ export function JobCompletionCard({
 
         {/* Feedback Banners */}
         {actionError && (
-          <div className="p-4 rounded-2xl bg-red-50 border border-red-200 text-xs font-bold text-red-900">
+          <div className="p-4 rounded-2xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs font-bold text-red-900">
             {actionError}
           </div>
         )}
         {actionSuccess && (
-          <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-900">
+          <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-xs font-bold text-emerald-900">
             {actionSuccess}
           </div>
         )}
@@ -162,7 +162,7 @@ export function JobCompletionCard({
               setActionError(null);
               setShowReworkModal(true);
             }}
-            className="px-5 py-3.5 rounded-2xl bg-white border border-amber-300 text-amber-900 hover:bg-amber-100 font-bold text-xs transition disabled:opacity-50"
+            className="px-5 py-3.5 rounded-2xl bg-white dark:bg-[#0D223A] border border-amber-300 dark:border-amber-700 text-amber-900 hover:bg-amber-100 font-bold text-xs transition disabled:opacity-50"
           >
             Report Incomplete Work
           </button>
@@ -171,7 +171,7 @@ export function JobCompletionCard({
             type="button"
             disabled={isPending}
             onClick={onOpenDispute}
-            className="px-4 py-3.5 rounded-2xl border border-red-200 text-red-600 hover:bg-red-50 font-bold text-xs transition"
+            className="px-4 py-3.5 rounded-2xl border border-red-200 dark:border-red-800 text-red-600 hover:bg-red-50 dark:bg-red-950/60 font-bold text-xs transition"
           >
             File Formal Dispute
           </button>
@@ -180,23 +180,23 @@ export function JobCompletionCard({
         {/* Rework Modal */}
         {showReworkModal && (
           <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200">
+            <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200 dark:border-[#163654]">
               <div>
-                <h3 className="text-lg font-bold text-slate-900">Report Incomplete Work</h3>
-                <p className="text-xs text-slate-500 mt-1">
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Report Incomplete Work</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                   Specify what tasks were not finished to your satisfaction. The specialist will be instructed to return and address them.
                 </p>
               </div>
 
               {actionError && (
-                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs font-semibold text-red-800">
+                <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs font-semibold text-red-800 dark:text-red-300">
                   {actionError}
                 </div>
               )}
 
               <form onSubmit={handleReportIncompleteWork} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Describe Unfinished or Substandard Tasks *
                   </label>
                   <textarea
@@ -205,12 +205,12 @@ export function JobCompletionCard({
                     value={reworkReason}
                     onChange={(e) => setReworkReason(e.target.value)}
                     placeholder="e.g. The leak under the kitchen sink is still dripping; the safety valve was not installed as quoted..."
-                    className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900 bg-white"
+                    className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Upload Supporting Photographs (Optional)
                   </label>
                   <div className="flex gap-2">
@@ -219,7 +219,7 @@ export function JobCompletionCard({
                       value={reworkPhotoInput}
                       onChange={(e) => setReworkPhotoInput(e.target.value)}
                       placeholder="Paste image URL (e.g. https://... or storage path)"
-                      className="flex-1 p-2.5 rounded-xl border border-slate-300 text-xs"
+                      className="flex-1 p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs"
                     />
                     <button
                       type="button"
@@ -232,12 +232,12 @@ export function JobCompletionCard({
                   {reworkPhotos.length > 0 && (
                     <div className="mt-2 space-y-1">
                       {reworkPhotos.map((p, idx) => (
-                        <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 p-2 rounded-lg border">
+                        <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 dark:bg-[#071526] p-2 rounded-lg border">
                           <span className="truncate max-w-xs">{p}</span>
                           <button
                             type="button"
                             onClick={() => setReworkPhotos(reworkPhotos.filter((_, i) => i !== idx))}
-                            className="text-red-500 hover:text-red-700 font-bold"
+                            className="text-red-500 hover:text-red-700 dark:text-red-400 font-bold"
                           >
                             ✕
                           </button>
@@ -251,7 +251,7 @@ export function JobCompletionCard({
                   <button
                     type="button"
                     onClick={() => setShowReworkModal(false)}
-                    className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100"
+                    className="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800"
                   >
                     Cancel
                   </button>
@@ -274,18 +274,18 @@ export function JobCompletionCard({
   // 2. Active rework in progress
   if (bookingStatus === "in_progress" && reworkNotes) {
     return (
-      <section className="bg-amber-50/70 rounded-3xl border border-amber-200 p-6 shadow-xs space-y-3 text-xs">
-        <div className="flex items-center gap-2 text-amber-800 font-bold uppercase tracking-wider text-[11px]">
+      <section className="bg-amber-50 dark:bg-amber-950/60/70 rounded-3xl border border-amber-200 dark:border-amber-800 p-6 shadow-xs space-y-3 text-xs">
+        <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 font-bold uppercase tracking-wider text-[11px]">
           <span>⚠ Rework in Progress (Cycle #{reworkCount})</span>
         </div>
-        <p className="text-slate-800 font-medium">
+        <p className="text-slate-800 dark:text-slate-100 font-medium">
           You requested corrections on this job: <span className="italic">"{reworkNotes}"</span>. The specialist has been notified to resolve these items.
         </p>
         <div className="flex items-center gap-4 pt-1">
           <button
             type="button"
             onClick={onOpenDispute}
-            className="text-red-600 hover:text-red-800 font-bold text-xs"
+            className="text-red-600 hover:text-red-800 dark:text-red-300 font-bold text-xs"
           >
             File Formal Dispute if specialist does not return →
           </button>
@@ -297,7 +297,7 @@ export function JobCompletionCard({
   // 3. Completed Booking — Review Banner
   if (bookingStatus === "completed") {
     return (
-      <section className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl border border-emerald-200 p-6 sm:p-8 shadow-xs space-y-4">
+      <section className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl border border-emerald-200 dark:border-emerald-800 p-6 sm:p-8 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-600 text-white uppercase tracking-wider">
@@ -306,7 +306,7 @@ export function JobCompletionCard({
             <h2 className="text-xl font-bold text-emerald-950">
               This Service Request is Successfully Closed
             </h2>
-            <p className="text-xs text-emerald-800">
+            <p className="text-xs text-emerald-800 dark:text-emerald-300">
               Escrow funds have been released to {proName}.
             </p>
           </div>
@@ -320,7 +320,7 @@ export function JobCompletionCard({
               ★ Rate &amp; Review Specialist
             </button>
           ) : (
-            <span className="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-900 font-bold text-xs border border-emerald-200">
+            <span className="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-900 font-bold text-xs border border-emerald-200 dark:border-emerald-800">
               ✓ Review Submitted
             </span>
           )}

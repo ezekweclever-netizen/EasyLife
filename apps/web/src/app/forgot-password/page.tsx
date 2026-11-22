@@ -38,27 +38,27 @@ export default function ForgotPasswordPage() {
 
   return (
     <PublicShell>
-      <div className="py-6 sm:py-10 bg-[#F8FAFC] min-h-[calc(100vh-5.5rem)] flex flex-col justify-center">
+      <div className="py-6 sm:py-10 bg-[#F8FAFC] dark:bg-[#071526] min-h-[calc(100vh-5.5rem)] flex flex-col justify-center">
         <div className="w-full max-w-md mx-auto px-4 sm:px-6">
           <div className="text-center mb-5">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A]">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-white">
               {recoveryToken ? "Set a New Password" : "Reset Your Password"}
             </h1>
-            <p className="mt-1.5 text-sm sm:text-base text-slate-600">
+            <p className="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300">
               {recoveryToken
                 ? "Choose a strong new password (minimum 8 characters) for your EasyLife account."
                 : "Enter the email address associated with your EasyLife account and we will send you a password reset link."}
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
             {recoveryToken ? (
               <form action={updateAction} className="space-y-5">
                 <input type="hidden" name="accessToken" value={recoveryToken} />
                 {updateState.status === "error" && (
                   <div
                     role="alert"
-                    className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-800"
+                    className="rounded-lg bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 p-4 text-sm text-red-800 dark:text-red-300"
                   >
                     {updateState.message}
                   </div>
@@ -66,12 +66,12 @@ export default function ForgotPasswordPage() {
                 {updateState.status === "success" && (
                   <div
                     role="status"
-                    className="rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-900 space-y-2"
+                    className="rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 p-4 text-sm text-emerald-900 space-y-2"
                   >
                     <p>{updateState.message}</p>
                     <Link
                       href="/login"
-                      className="inline-block font-bold text-[#0D9488] hover:underline"
+                      className="inline-block font-bold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
                     >
                       Proceed to Sign In →
                     </Link>
@@ -81,7 +81,7 @@ export default function ForgotPasswordPage() {
                 <div>
                   <label
                     htmlFor="newPassword"
-                    className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+                    className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
                   >
                     New Password
                   </label>
@@ -91,7 +91,7 @@ export default function ForgotPasswordPage() {
                     type="password"
                     minLength={8}
                     required
-                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-base text-[#0F172A] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
                     placeholder="Minimum 8 characters"
                   />
                 </div>
@@ -99,7 +99,7 @@ export default function ForgotPasswordPage() {
                 <div>
                   <label
                     htmlFor="confirmPassword"
-                    className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+                    className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
                   >
                     Confirm New Password
                   </label>
@@ -109,7 +109,7 @@ export default function ForgotPasswordPage() {
                     type="password"
                     minLength={8}
                     required
-                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-base text-[#0F172A] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
                     placeholder="Re-enter your new password"
                   />
                 </div>
@@ -123,7 +123,7 @@ export default function ForgotPasswordPage() {
                 {requestState.status === "error" && (
                   <div
                     role="alert"
-                    className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-800"
+                    className="rounded-lg bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 p-4 text-sm text-red-800 dark:text-red-300"
                   >
                     {requestState.message}
                   </div>
@@ -131,7 +131,7 @@ export default function ForgotPasswordPage() {
                 {requestState.status === "success" && (
                   <div
                     role="status"
-                    className="rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-900"
+                    className="rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 p-4 text-sm text-emerald-900"
                   >
                     {requestState.message}
                   </div>
@@ -140,7 +140,7 @@ export default function ForgotPasswordPage() {
                 <div>
                   <label
                     htmlFor="reset-email"
-                    className="block text-sm font-semibold text-[#0F172A] mb-1.5"
+                    className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
                   >
                     Registered Email Address
                   </label>
@@ -150,7 +150,7 @@ export default function ForgotPasswordPage() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-base text-[#0F172A] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
                     placeholder="e.g. name@example.com"
                   />
                 </div>
@@ -162,7 +162,7 @@ export default function ForgotPasswordPage() {
                 <div className="text-center pt-1">
                   <Link
                     href="/login"
-                    className="text-sm font-semibold text-[#0D9488] hover:underline"
+                    className="text-sm font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
                   >
                     ← Back to Sign In
                   </Link>

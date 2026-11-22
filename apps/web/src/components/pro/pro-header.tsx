@@ -92,7 +92,7 @@ export function ProHeader({
   }
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-slate-200">
+    <header className="sticky top-0 z-40 bg-white dark:bg-[#0D223A] border-b border-slate-200 dark:border-[#163654]">
       <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18 gap-2 sm:gap-3">
           {/* Left: Brand & Pro Badge */}
@@ -114,8 +114,8 @@ export function ProHeader({
                     href={item.href}
                     className={`relative px-2.5 2xl:px-3 py-2 rounded-lg text-[13.5px] 2xl:text-[15px] font-medium transition-colors whitespace-nowrap shrink-0 inline-flex items-center ${
                       isActive
-                        ? "text-[#0D9488] bg-teal-50/70 font-semibold"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+                        ? "text-[#0D9488] dark:text-[#5CD3D5] bg-teal-50/70 dark:bg-teal-950/60 font-semibold"
+                        : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60"
                     }`}
                   >
                     <span>{item.label}</span>
@@ -145,16 +145,16 @@ export function ProHeader({
 
             {/* Business info snippet */}
             <div className="hidden 2xl:flex flex-col text-right shrink-0">
-              <span className="text-sm font-bold text-slate-900 truncate max-w-[140px]">
+              <span className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-[140px]">
                 {businessName}
               </span>
-              <span className="text-xs text-slate-500">{primaryCity}</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">{primaryCity}</span>
             </div>
 
             {/* Avatar / Profile quick link */}
             <Link
               href="/pro/profile"
-              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 border border-slate-300 flex items-center justify-center overflow-hidden hover:ring-2 hover:ring-[#0D9488] transition shrink-0"
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 flex items-center justify-center overflow-hidden hover:ring-2 hover:ring-[#0D9488] transition shrink-0"
               title="Manage Profile"
             >
               {avatarUrl ? (
@@ -177,7 +177,7 @@ export function ProHeader({
             {/* Customer Switch */}
             <Link
               href="/dashboard"
-              className="hidden md:inline-flex text-xs text-slate-700 dark:text-slate-200 hover:text-slate-900 font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 whitespace-nowrap shrink-0 transition"
+              className="hidden md:inline-flex text-xs text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:bg-[#071526] dark:hover:bg-slate-800 whitespace-nowrap shrink-0 transition"
               title="Switch to Customer Mode"
             >
               Customer View
@@ -190,7 +190,7 @@ export function ProHeader({
             <form action={logoutAction} className="hidden md:block shrink-0">
               <button
                 type="submit"
-                className="text-xs text-red-700 hover:bg-red-50 font-semibold px-2.5 py-1.5 rounded-lg border border-red-200 transition cursor-pointer whitespace-nowrap"
+                className="text-xs text-red-700 dark:text-red-400 hover:bg-red-50 dark:bg-red-950/60 dark:hover:bg-red-950/40 font-semibold px-2.5 py-1.5 rounded-lg border border-red-200 dark:border-red-800 transition cursor-pointer whitespace-nowrap"
               >
                 Sign Out
               </button>
@@ -201,7 +201,7 @@ export function ProHeader({
               ref={toggleButtonRef}
               type="button"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="xl:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 cursor-pointer shrink-0"
+              className="xl:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 cursor-pointer shrink-0"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
@@ -221,7 +221,7 @@ export function ProHeader({
       {mobileMenuOpen && (
         <div
           ref={drawerRef}
-          className="xl:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1 shadow-lg"
+          className="xl:hidden border-t border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] px-4 pt-2 pb-4 space-y-1 shadow-lg"
         >
           {navItems.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/pro/dashboard" && pathname?.startsWith(item.href));
@@ -232,8 +232,8 @@ export function ProHeader({
                 onClick={() => setMobileMenuOpen(false)}
                 className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-medium ${
                   isActive
-                    ? "text-[#0D9488] bg-teal-50 font-semibold"
-                    : "text-slate-700 hover:bg-slate-50"
+                    ? "text-[#0D9488] dark:text-[#5CD3D5] bg-teal-50 dark:bg-teal-950/60 font-semibold"
+                    : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                 }`}
               >
                 <span>{item.label}</span>
@@ -245,18 +245,18 @@ export function ProHeader({
               </Link>
             );
           })}
-          <div className="pt-3 border-t border-slate-100 mt-2 flex items-center justify-between gap-3">
+          <div className="pt-3 border-t border-slate-100 dark:border-slate-800 mt-2 flex items-center justify-between gap-3">
             <Link
               href="/dashboard"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-sm font-semibold text-[#0D9488] hover:underline"
+              className="text-sm font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
             >
               Switch to Customer Mode →
             </Link>
             <form action={logoutAction}>
               <button
                 type="submit"
-                className="text-sm font-semibold text-red-700 hover:underline cursor-pointer"
+                className="text-sm font-semibold text-red-700 dark:text-red-400 hover:underline cursor-pointer"
               >
                 Sign Out
               </button>

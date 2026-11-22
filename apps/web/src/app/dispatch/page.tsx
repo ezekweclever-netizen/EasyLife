@@ -35,7 +35,7 @@ export default async function DispatchDirectoryPage() {
           </div>
           <Link
             href="/book?cat=everyday-tasks&trade=dispatch"
-            className="px-6 py-3 rounded-xl bg-white text-[#0A2540] hover:bg-slate-100 font-bold text-xs sm:text-sm transition shadow-md whitespace-nowrap"
+            className="px-6 py-3 rounded-xl bg-white dark:bg-[#0D223A] text-[#0A2540] hover:bg-slate-100 dark:bg-slate-800 font-bold text-xs sm:text-sm transition shadow-md whitespace-nowrap"
           >
             Request a Dispatch Rider →
           </Link>
@@ -43,35 +43,35 @@ export default async function DispatchDirectoryPage() {
 
         {/* Delivery Options Guide */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white rounded-xl border border-slate-200 p-4 text-center space-y-2">
+          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 text-center space-y-2">
             <div className="text-2xl">⚡</div>
-            <h3 className="text-xs font-bold text-slate-900">Same-Day Express</h3>
-            <p className="text-[11px] text-slate-600">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white">Same-Day Express</h3>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300">
               Urgent documents, parcels, and items delivered within 60–120 minutes across town.
             </p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-200 p-4 text-center space-y-2">
+          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 text-center space-y-2">
             <div className="text-2xl">📦</div>
-            <h3 className="text-xs font-bold text-slate-900">Scheduled Package Pickup</h3>
-            <p className="text-[11px] text-slate-600">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white">Scheduled Package Pickup</h3>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300">
               Bulk e-commerce order pickups, marketplace item collection, and regular runs.
             </p>
           </div>
-          <div className="bg-white rounded-xl border border-slate-200 p-4 text-center space-y-2">
+          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 text-center space-y-2">
             <div className="text-2xl">🛡️</div>
-            <h3 className="text-xs font-bold text-slate-900">Vetted &amp; Tracked</h3>
-            <p className="text-[11px] text-slate-600">
+            <h3 className="text-xs font-bold text-slate-900 dark:text-white">Vetted &amp; Tracked</h3>
+            <p className="text-[11px] text-slate-600 dark:text-slate-300">
               Every rider submits verifiable NIN and bike credentials. Direct communication and phone verification.
             </p>
           </div>
         </div>
 
         {/* Vehicle Options Showcase */}
-        <div className="bg-slate-50 rounded-2xl border border-slate-200 p-6 space-y-4">
+        <div className="bg-slate-50 dark:bg-[#071526] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h3 className="text-sm font-bold text-slate-900">Supported Delivery Fleet &amp; Vehicle Options</h3>
-              <p className="text-xs text-slate-500">Choose the right vehicle capacity for your cargo or errand.</p>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">Supported Delivery Fleet &amp; Vehicle Options</h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Choose the right vehicle capacity for your cargo or errand.</p>
             </div>
             <Link
               href="/book?cat=everyday-tasks&trade=dispatch"
@@ -81,19 +81,19 @@ export default async function DispatchDirectoryPage() {
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-            <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-1.5">
-              <span className="text-xs font-bold text-slate-900 block">🛵 Express Motorcycle Dispatch</span>
-              <p className="text-[11px] text-slate-600">Ideal for documents, food, parcels, pharmaceuticals, and small items up to 15kg.</p>
-              <span className="inline-block text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Fastest in Traffic</span>
+            <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 space-y-1.5">
+              <span className="text-xs font-bold text-slate-900 dark:text-white block">🛵 Express Motorcycle Dispatch</span>
+              <p className="text-[11px] text-slate-600 dark:text-slate-300">Ideal for documents, food, parcels, pharmaceuticals, and small items up to 15kg.</p>
+              <span className="inline-block text-[10px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded">Fastest in Traffic</span>
             </div>
-            <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-1.5">
-              <span className="text-xs font-bold text-slate-900 block">🚗 Minivan &amp; Car Delivery</span>
-              <p className="text-[11px] text-slate-600">Weather-protected transport for fragile gifts, bulk carton orders, cakes, and tech equipment up to 100kg.</p>
-              <span className="inline-block text-[10px] font-semibold text-teal-700 bg-teal-50 px-2 py-0.5 rounded">Weather-Protected</span>
+            <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 space-y-1.5">
+              <span className="text-xs font-bold text-slate-900 dark:text-white block">🚗 Minivan &amp; Car Delivery</span>
+              <p className="text-[11px] text-slate-600 dark:text-slate-300">Weather-protected transport for fragile gifts, bulk carton orders, cakes, and tech equipment up to 100kg.</p>
+              <span className="inline-block text-[10px] font-semibold text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded">Weather-Protected</span>
             </div>
-            <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-1.5">
-              <span className="text-xs font-bold text-slate-900 block">🚚 Cargo Haulage &amp; Moving</span>
-              <p className="text-[11px] text-slate-600">Commercial light truck and haulage for moving home appliances, building materials, and bulk inventory.</p>
+            <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 space-y-1.5">
+              <span className="text-xs font-bold text-slate-900 dark:text-white block">🚚 Cargo Haulage &amp; Moving</span>
+              <p className="text-[11px] text-slate-600 dark:text-slate-300">Commercial light truck and haulage for moving home appliances, building materials, and bulk inventory.</p>
               <span className="inline-block text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Heavy Cargo</span>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default async function DispatchDirectoryPage() {
         {/* Riders Roster / Directory */}
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold text-slate-900">
+            <h2 className="text-sm font-bold text-slate-900 dark:text-white">
               Available Dispatch Professionals in Port Harcourt
             </h2>
             <Link
@@ -114,12 +114,12 @@ export default async function DispatchDirectoryPage() {
           </div>
 
           {riders.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center space-y-3">
+            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-10 text-center space-y-3">
               <div className="text-3xl">🏍️</div>
-              <h3 className="text-sm font-bold text-slate-900">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                 Dispatch Riders Onboarding in Port Harcourt
               </h3>
-              <p className="text-xs text-slate-600 max-w-md mx-auto">
+              <p className="text-xs text-slate-600 dark:text-slate-300 max-w-md mx-auto">
                 No individual rider profiles are currently listed for instant direct call in this view. You can still submit a delivery request and our available network riders will quote your request immediately.
               </p>
               <Link
@@ -134,31 +134,31 @@ export default async function DispatchDirectoryPage() {
               {riders.map((r) => (
                 <div
                   key={r.professional_id}
-                  className="bg-white rounded-2xl border border-slate-200 p-5 space-y-3 shadow-xs hover:border-[#0D9488]/40 transition"
+                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 space-y-3 shadow-xs hover:border-[#0D9488]/40 transition"
                 >
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900">
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">
                         {r.business_name}
                       </h4>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         {r.headline || "Motorcycle Courier & Dispatch"}
                       </p>
                     </div>
                     {r.is_verified && (
-                      <span className="px-2 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-bold rounded-full">
+                      <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold rounded-full">
                         ✓ Verified
                       </span>
                     )}
                   </div>
 
-                  <div className="text-xs text-slate-600 space-y-1">
+                  <div className="text-xs text-slate-600 dark:text-slate-300 space-y-1">
                     <p>📍 {r.primary_city}, {r.primary_state}</p>
                     <p>★ {Number(r.average_rating).toFixed(1)} ({r.review_count} reviews) • {r.completed_jobs_count} trips</p>
                   </div>
 
-                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-800">
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
                       From ₦{(r.base_callout_fee_kobo / 100).toLocaleString()}/trip
                     </span>
                     <Link

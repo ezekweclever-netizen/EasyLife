@@ -52,9 +52,9 @@ export function IntelligentMaintenanceWidget({
   });
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+    <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] shadow-sm p-6 sm:p-8 space-y-6">
       {/* Top Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-teal-500 animate-pulse" />
@@ -62,17 +62,17 @@ export function IntelligentMaintenanceWidget({
               Automated Operations Assistant
             </span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mt-1">
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight mt-1">
             Intelligent Maintenance Reminders
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
             Rule-based schedules configured for air conditioners, generators, inverters, pumps, and facility assets.
           </p>
         </div>
 
         {/* Explicit Policy Disclaimer */}
-        <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-600 max-w-sm">
-          <strong className="font-bold text-slate-800 block text-[11px] uppercase tracking-wider">
+        <div className="p-3 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs text-slate-600 dark:text-slate-300 max-w-sm">
+          <strong className="font-bold text-slate-800 dark:text-slate-100 block text-[11px] uppercase tracking-wider">
             ⚙️ Non-Predictive Interval Policy
           </strong>
           Reminders are strictly calculated from your configured service intervals. EasyLife does not claim to predict hardware failure or mechanical wear.
@@ -87,7 +87,7 @@ export function IntelligentMaintenanceWidget({
           className={`p-4 rounded-2xl text-left border transition ${
             statusTab === "all"
               ? "bg-slate-900 text-white border-slate-900 shadow-md"
-              : "bg-slate-50 border-slate-200 text-slate-800 hover:bg-slate-100"
+              : "bg-slate-50 dark:bg-[#071526] border-slate-200 dark:border-[#163654] text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:bg-slate-800"
           }`}
         >
           <span className="text-2xs font-bold uppercase tracking-wider block opacity-80">
@@ -121,7 +121,7 @@ export function IntelligentMaintenanceWidget({
           className={`p-4 rounded-2xl text-left border transition ${
             statusTab === "upcoming"
               ? "bg-amber-500 text-white border-amber-500 shadow-md"
-              : "bg-amber-50/70 border-amber-200 text-amber-900 hover:bg-amber-100"
+              : "bg-amber-50 dark:bg-amber-950/60/70 border-amber-200 dark:border-amber-800 text-amber-900 hover:bg-amber-100"
           }`}
         >
           <span className="text-2xs font-bold uppercase tracking-wider block opacity-80">
@@ -138,7 +138,7 @@ export function IntelligentMaintenanceWidget({
           className={`p-4 rounded-2xl text-left border transition ${
             statusTab === "completed"
               ? "bg-emerald-600 text-white border-emerald-600 shadow-md"
-              : "bg-emerald-50/70 border-emerald-200 text-emerald-900 hover:bg-emerald-100"
+              : "bg-emerald-50 dark:bg-emerald-950/60/70 border-emerald-200 dark:border-emerald-800 text-emerald-900 hover:bg-emerald-100"
           }`}
         >
           <span className="text-2xs font-bold uppercase tracking-wider block opacity-80">
@@ -151,7 +151,7 @@ export function IntelligentMaintenanceWidget({
       </div>
 
       {message && (
-        <div className="p-3 rounded-xl bg-teal-50 border border-teal-200 text-xs font-semibold text-teal-900">
+        <div className="p-3 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs font-semibold text-teal-900">
           ✓ {message}
         </div>
       )}
@@ -159,7 +159,7 @@ export function IntelligentMaintenanceWidget({
       {/* Reminder Cards Grid */}
       <div className="space-y-3">
         {filteredReminders.length === 0 ? (
-          <div className="py-12 text-center text-slate-400 text-xs font-medium bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+          <div className="py-12 text-center text-slate-400 text-xs font-medium bg-slate-50 dark:bg-[#071526] rounded-2xl border border-dashed border-slate-200 dark:border-[#163654]">
             No maintenance reminders found under the &quot;{statusTab}&quot; tab.
           </div>
         ) : (
@@ -183,8 +183,8 @@ export function IntelligentMaintenanceWidget({
                   isOverdue
                     ? "bg-rose-50/40 border-rose-200"
                     : isDueToday
-                    ? "bg-amber-50/40 border-amber-200"
-                    : "bg-white border-slate-200 hover:border-slate-300"
+                    ? "bg-amber-50 dark:bg-amber-950/60/40 border-amber-200 dark:border-amber-800"
+                    : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
                 }`}
               >
                 <div className="space-y-1.5 flex-1">
@@ -195,23 +195,23 @@ export function IntelligentMaintenanceWidget({
                       {rem.status === "due_today" ? "Due Today" : rem.status.toUpperCase()}
                     </span>
 
-                    <span className="text-xs font-bold text-slate-800">
+                    <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
                       {rem.title}
                     </span>
 
                     {rem.asset_name && (
-                      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-mono text-[11px]">
+                      <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono text-[11px]">
                         🏷️ {rem.asset_name} ({rem.asset_brand || "Standard"} {rem.asset_model || ""})
                       </span>
                     )}
                   </div>
 
-                  <div className="text-xs text-slate-500 flex flex-wrap items-center gap-x-4 gap-y-1">
+                  <div className="text-xs text-slate-500 dark:text-slate-400 flex flex-wrap items-center gap-x-4 gap-y-1">
                     <span>
-                      🏢 Property: <strong className="text-slate-700">{rem.property_name}</strong>
+                      🏢 Property: <strong className="text-slate-700 dark:text-slate-200">{rem.property_name}</strong>
                     </span>
                     <span>
-                      📅 Due Date: <strong className="text-slate-700">{rem.next_due_date}</strong>
+                      📅 Due Date: <strong className="text-slate-700 dark:text-slate-200">{rem.next_due_date}</strong>
                     </span>
                     <span>
                       ⏱️ {rem.reminder_basis}
@@ -219,7 +219,7 @@ export function IntelligentMaintenanceWidget({
                   </div>
 
                   {rem.description && (
-                    <p className="text-xs text-slate-600 line-clamp-1">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-1">
                       {rem.description}
                     </p>
                   )}
@@ -231,7 +231,7 @@ export function IntelligentMaintenanceWidget({
                     type="button"
                     onClick={() => handleMarkCompleted(rem.schedule_id)}
                     disabled={isPending}
-                    className="px-3 py-1.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-bold hover:bg-slate-50 transition shadow-2xs disabled:opacity-50"
+                    className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition shadow-2xs disabled:opacity-50"
                   >
                     Mark Done
                   </button>

@@ -306,7 +306,7 @@ export function SiteHeader({
 
               <button
                 type="button"
-                className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 text-[#1F2F34] dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 text-[#1F2F34] dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 transition-colors"
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-navigation"
                 aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}

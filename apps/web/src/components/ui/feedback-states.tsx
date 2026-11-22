@@ -83,7 +83,7 @@ export function EmptyState({
 }: EmptyStateProps) {
   return (
     <div
-      className={`rounded-2xl border border-dashed border-[#DAE7E7] bg-white p-8 text-center flex flex-col items-center justify-center ${className}`}
+      className={`rounded-2xl border border-dashed border-[#DAE7E7] bg-white dark:bg-[#0D223A] p-8 text-center flex flex-col items-center justify-center ${className}`}
     >
       <div
         className="h-12 w-12 rounded-full bg-[#F3F8F8] border border-[#24989A]/30 flex items-center justify-center text-[#24989A] font-bold text-lg mb-3"
@@ -115,7 +115,7 @@ export function LoadingState({
     <div
       role="status"
       aria-live="polite"
-      className={`rounded-2xl border border-[#DAE7E7] bg-white p-8 flex flex-col items-center justify-center gap-3 ${className}`}
+      className={`rounded-2xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] p-8 flex flex-col items-center justify-center gap-3 ${className}`}
     >
       <div
         className="h-7 w-7 rounded-full border-3 border-[#24989A] border-t-transparent animate-spin"

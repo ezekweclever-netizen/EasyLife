@@ -57,20 +57,20 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-teal-300">
               Operations Monitor
             </span>
-            <span className="text-xs text-slate-500 font-medium">
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               Marketplace Work Orders
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mt-1">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1">
             Service Booking Management
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             Audit customer work requests, assigned service artisans, dispatch status, and settled financial amounts.
           </p>
         </div>
@@ -99,7 +99,7 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
               className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
                 isActive
                   ? "bg-slate-900 text-white"
-                  : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
+                  : "bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
               }`}
             >
               {tab.label}
@@ -108,9 +108,9 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
         })}
       </div>
 
-      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xs overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between">
-          <div className="text-xs font-bold text-slate-800">
+      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
+        <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+          <div className="text-xs font-bold text-slate-800 dark:text-slate-100">
             Service Bookings ({totalCount})
           </div>
           <span className="text-2xs text-slate-400">
@@ -120,7 +120,7 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50/80 border-b border-slate-200 text-2xs font-extrabold uppercase text-slate-500 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Reference &amp; Task</th>
                 <th className="py-3.5 px-4">Customer</th>
@@ -140,17 +140,17 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
                 </tr>
               ) : (
                 bookings.map((b: any) => (
-                  <tr key={b.id} className="hover:bg-slate-50/60 transition">
+                  <tr key={b.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
                     <td className="py-3.5 px-4">
-                      <span className="font-mono text-2xs font-black text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200">
+                      <span className="font-mono text-2xs font-black text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded-md border border-teal-200 dark:border-teal-800">
                         {b.reference_code || b.id.slice(0, 8)}
                       </span>
-                      <div className="font-bold text-slate-900 mt-1 line-clamp-1">
+                      <div className="font-bold text-slate-900 dark:text-white mt-1 line-clamp-1">
                         {b.title || "Standard Service Booking"}
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="text-slate-800 font-semibold">
+                      <div className="text-slate-800 dark:text-slate-100 font-semibold">
                         {b.profiles?.full_name || "Customer"}
                       </div>
                       <div className="text-2xs text-slate-400 font-mono">
@@ -158,15 +158,15 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <div className="text-slate-800 font-semibold">
+                      <div className="text-slate-800 dark:text-slate-100 font-semibold">
                         {b.professional_profiles?.business_name || "Unassigned"}
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-slate-600">
+                    <td className="py-3.5 px-4 text-slate-600 dark:text-slate-300">
                       {b.city || "Nigeria"}
                       {b.state ? `, ${b.state}` : ""}
                     </td>
-                    <td className="py-3.5 px-4 font-mono font-bold text-slate-900">
+                    <td className="py-3.5 px-4 font-mono font-bold text-slate-900 dark:text-white">
                       {formatNaira(b.agreed_amount_kobo || 0)}
                     </td>
                     <td className="py-3.5 px-4">
@@ -189,22 +189,22 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
         </div>
 
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-slate-100 bg-slate-50/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600">
+          <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-[#071526]/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600 dark:text-slate-300">
             <span>
-              Showing <strong className="text-slate-900">{offset + 1}</strong>–
-              <strong className="text-slate-900">{Math.min(offset + bookings.length, totalCount)}</strong> of{" "}
-              <strong className="text-slate-900">{totalCount}</strong> bookings
+              Showing <strong className="text-slate-900 dark:text-white">{offset + 1}</strong>–
+              <strong className="text-slate-900 dark:text-white">{Math.min(offset + bookings.length, totalCount)}</strong> of{" "}
+              <strong className="text-slate-900 dark:text-white">{totalCount}</strong> bookings
             </span>
             <div className="flex items-center gap-2">
               {currentPage > 1 ? (
                 <Link
                   href={`/admin/bookings?status=${encodeURIComponent(status)}&page=${currentPage - 1}`}
-                  className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white font-semibold hover:bg-slate-50"
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                 >
                   ← Previous
                 </Link>
               ) : (
-                <span className="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-400">
+                <span className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-slate-400">
                   ← Previous
                 </span>
               )}
@@ -216,7 +216,7 @@ export default async function AdminBookingsPage({ searchParams }: AdminBookingsP
                   Next →
                 </Link>
               ) : (
-                <span className="px-3 py-1.5 rounded-lg border border-slate-200 text-slate-400">
+                <span className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-slate-400">
                   Next →
                 </span>
               )}

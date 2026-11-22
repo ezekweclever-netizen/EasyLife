@@ -45,7 +45,7 @@ export function Input({
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={descriptionId}
-        className={`w-full h-11 px-3.5 rounded-xl bg-white text-sm text-[#1F2F34] placeholder:text-[#68797C]/60 border transition-colors ${
+        className={`w-full h-11 px-3.5 rounded-xl bg-white dark:bg-[#0D223A] text-sm text-[#1F2F34] placeholder:text-[#68797C]/60 border transition-colors ${
           error
             ? "border-[#C53030] bg-[#FDF0F0] focus:border-[#C53030]"
             : "border-[#DAE7E7] hover:border-[#C2D4D4] focus:border-[#24989A] focus:ring-1 focus:ring-[#24989A]"
@@ -116,7 +116,7 @@ export function Select({
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={descriptionId}
-        className={`w-full h-11 px-3.5 rounded-xl bg-white text-sm text-[#1F2F34] border transition-colors ${
+        className={`w-full h-11 px-3.5 rounded-xl bg-white dark:bg-[#0D223A] text-sm text-[#1F2F34] border transition-colors ${
           error
             ? "border-[#C53030] bg-[#FDF0F0] focus:border-[#C53030]"
             : "border-[#DAE7E7] hover:border-[#C2D4D4] focus:border-[#24989A] focus:ring-1 focus:ring-[#24989A]"
@@ -190,7 +190,7 @@ export function Textarea({
         required={required}
         aria-invalid={Boolean(error)}
         aria-describedby={descriptionId}
-        className={`w-full p-3.5 rounded-xl bg-white text-sm text-[#1F2F34] placeholder:text-[#68797C]/60 border transition-colors ${
+        className={`w-full p-3.5 rounded-xl bg-white dark:bg-[#0D223A] text-sm text-[#1F2F34] placeholder:text-[#68797C]/60 border transition-colors ${
           error
             ? "border-[#C53030] bg-[#FDF0F0] focus:border-[#C53030]"
             : "border-[#DAE7E7] hover:border-[#C2D4D4] focus:border-[#24989A] focus:ring-1 focus:ring-[#24989A]"

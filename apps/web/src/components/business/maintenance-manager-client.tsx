@@ -204,12 +204,12 @@ export function MaintenanceManagerClient({
   return (
     <div className="space-y-6">
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-slate-200 dark:border-[#163654]">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Maintenance Management & Fault Reporting
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
             Dispatch technicians, track emergency breakdowns, schedule repairs, and record audited maintenance costs.
           </p>
         </div>
@@ -219,7 +219,7 @@ export function MaintenanceManagerClient({
               setActiveRequestForCompletion(null);
               setIsCompleteModalOpen(true);
             }}
-            className="px-3.5 py-2.5 rounded-lg text-sm font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 transition"
+            className="px-3.5 py-2.5 rounded-lg text-sm font-semibold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-100 transition"
           >
             Record Work / Invoice
           </button>
@@ -237,13 +237,13 @@ export function MaintenanceManagerClient({
       </div>
 
       {/* Main Tabs */}
-      <div className="flex items-center gap-4 border-b border-slate-200 pb-1">
+      <div className="flex items-center gap-4 border-b border-slate-200 dark:border-[#163654] pb-1">
         <button
           onClick={() => setActiveTab("requests")}
           className={`pb-2.5 text-sm font-bold border-b-2 transition ${
             activeTab === "requests"
-              ? "border-teal-600 text-teal-800"
-              : "border-transparent text-slate-500 hover:text-slate-800"
+              ? "border-teal-600 text-teal-800 dark:text-[#5CD3D5]"
+              : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100"
           }`}
         >
           Active Maintenance Requests ({requests.length})
@@ -252,8 +252,8 @@ export function MaintenanceManagerClient({
           onClick={() => setActiveTab("history")}
           className={`pb-2.5 text-sm font-bold border-b-2 transition ${
             activeTab === "history"
-              ? "border-teal-600 text-teal-800"
-              : "border-transparent text-slate-500 hover:text-slate-800"
+              ? "border-teal-600 text-teal-800 dark:text-[#5CD3D5]"
+              : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100"
           }`}
         >
           Maintenance History & Invoices ({records.length})
@@ -272,7 +272,7 @@ export function MaintenanceManagerClient({
             }
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
           />
         </div>
 
@@ -280,7 +280,7 @@ export function MaintenanceManagerClient({
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+            className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
           >
             <option value="all">All Request Statuses</option>
             <option value="open">Open Faults</option>
@@ -294,7 +294,7 @@ export function MaintenanceManagerClient({
         <select
           value={propertyFilter}
           onChange={(e) => setPropertyFilter(e.target.value)}
-          className="px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
         >
           <option value="all">All Properties ({properties.length})</option>
           {properties.map((p) => (
@@ -309,10 +309,10 @@ export function MaintenanceManagerClient({
       {activeTab === "requests" && (
         <div className="space-y-4">
           {filteredRequests.length === 0 ? (
-            <div className="bg-white rounded-2xl border border-dashed border-slate-300 p-12 text-center">
+            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
               <div className="text-4xl mb-3">🛠️</div>
-              <h3 className="text-base font-semibold text-slate-800">No maintenance requests found</h3>
-              <p className="text-sm text-slate-500 mt-1 max-w-md mx-auto">
+              <h3 className="text-base font-semibold text-slate-800 dark:text-slate-100">No maintenance requests found</h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
                 {searchTerm || statusFilter !== "all" || propertyFilter !== "all"
                   ? "No requests match your current search and filter selections."
                   : "All equipment and properties are currently operational with no outstanding faults."}
@@ -337,56 +337,56 @@ export function MaintenanceManagerClient({
                 return (
                   <div
                     key={req.id}
-                    className="bg-white rounded-2xl border border-slate-200 p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
+                    className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <span
                           className={`inline-block px-2.5 py-0.5 rounded-full text-2xs font-extrabold uppercase tracking-wider border ${
-                            severityStyles[req.fault_severity] || "bg-slate-100 text-slate-800"
+                            severityStyles[req.fault_severity] || "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100"
                           }`}
                         >
                           {req.fault_severity} Priority
                         </span>
                         <span
                           className={`inline-block px-2.5 py-0.5 rounded-full text-2xs font-bold uppercase tracking-wider border capitalize ${
-                            statusStyles[req.status] || "bg-slate-100 text-slate-800"
+                            statusStyles[req.status] || "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100"
                           }`}
                         >
                           {req.status.replace("_", " ")}
                         </span>
                       </div>
 
-                      <h3 className="text-base font-bold text-slate-900 mt-1">{req.title}</h3>
-                      <p className="text-xs text-slate-600 mt-1 line-clamp-3 leading-relaxed">
+                      <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">{req.title}</h3>
+                      <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 line-clamp-3 leading-relaxed">
                         {req.description}
                       </p>
 
-                      <div className="mt-4 p-3 bg-slate-50 rounded-xl space-y-1 text-xs">
-                        <div className="flex items-center justify-between text-slate-600">
+                      <div className="mt-4 p-3 bg-slate-50 dark:bg-[#071526] rounded-xl space-y-1 text-xs">
+                        <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
                           <span>Property:</span>
-                          <span className="font-semibold text-slate-800">
+                          <span className="font-semibold text-slate-800 dark:text-slate-100">
                             {prop?.name || "Assigned Site"} ({prop?.code || "—"})
                           </span>
                         </div>
                         {asset && (
-                          <div className="flex items-center justify-between text-slate-600">
+                          <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
                             <span>Equipment:</span>
-                            <span className="font-semibold text-slate-800">
+                            <span className="font-semibold text-slate-800 dark:text-slate-100">
                               {asset.name} ({asset.asset_tag})
                             </span>
                           </div>
                         )}
-                        <div className="flex items-center justify-between text-slate-600">
+                        <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
                           <span>Estimated Cost:</span>
-                          <span className="font-semibold text-slate-900">
+                          <span className="font-semibold text-slate-900 dark:text-white">
                             {formatMinorUnits(req.estimated_cost_kobo || 0)}
                           </span>
                         </div>
                         {req.scheduled_date && (
-                          <div className="flex items-center justify-between text-slate-600">
+                          <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
                             <span>Scheduled Date:</span>
-                            <span className="font-semibold text-teal-700">
+                            <span className="font-semibold text-teal-700 dark:text-teal-400">
                               {new Date(req.scheduled_date).toLocaleDateString()}
                             </span>
                           </div>
@@ -395,14 +395,14 @@ export function MaintenanceManagerClient({
 
                       {req.photos && req.photos.length > 0 && (
                         <div className="mt-3 flex items-center gap-2 overflow-x-auto py-1">
-                          <span className="text-2xs font-semibold text-slate-500">Photos:</span>
+                          <span className="text-2xs font-semibold text-slate-500 dark:text-slate-400">Photos:</span>
                           {req.photos.map((photo, i) => (
                             <a
                               key={i}
                               href={photo}
                               target="_blank"
                               rel="noreferrer"
-                              className="text-2xs text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200"
+                              className="text-2xs text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded border border-teal-200 dark:border-teal-800"
                             >
                               Image {i + 1}
                             </a>
@@ -411,7 +411,7 @@ export function MaintenanceManagerClient({
                       )}
                     </div>
 
-                    <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                       <span className="text-2xs text-slate-400">
                         Reported: {new Date(req.created_at).toLocaleDateString()}
                       </span>
@@ -434,19 +434,19 @@ export function MaintenanceManagerClient({
 
       {/* TAB 2: Maintenance Records (History & Invoices) */}
       {activeTab === "history" && (
-        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-2xs">
+        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
           {filteredRecords.length === 0 ? (
             <div className="p-12 text-center">
               <div className="text-4xl mb-3">📋</div>
-              <h3 className="text-base font-semibold text-slate-800">No maintenance records yet</h3>
-              <p className="text-sm text-slate-500 mt-1 max-w-md mx-auto">
+              <h3 className="text-base font-semibold text-slate-800 dark:text-slate-100">No maintenance records yet</h3>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
                 Completed maintenance work, technician sign-offs, and uploaded invoices will be logged here for full auditability.
               </p>
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 border-b border-slate-200 text-2xs uppercase tracking-wider text-slate-500 font-bold">
+                <thead className="bg-slate-50 dark:bg-[#071526] border-b border-slate-200 dark:border-[#163654] text-2xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
                   <tr>
                     <th className="py-3.5 px-4">Completion Date</th>
                     <th className="py-3.5 px-4">Summary & Work Done</th>
@@ -458,23 +458,23 @@ export function MaintenanceManagerClient({
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-xs">
                   {filteredRecords.map((rec) => (
-                    <tr key={rec.id} className="hover:bg-slate-50/80 transition">
-                      <td className="py-3.5 px-4 whitespace-nowrap text-slate-600 font-medium">
+                    <tr key={rec.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition">
+                      <td className="py-3.5 px-4 whitespace-nowrap text-slate-600 dark:text-slate-300 font-medium">
                         {new Date(rec.performed_at).toLocaleDateString()}
                       </td>
                       <td className="py-3.5 px-4 max-w-xs">
-                        <div className="font-bold text-slate-900">{rec.summary}</div>
-                        <div className="text-2xs text-slate-500 mt-0.5 line-clamp-2">
+                        <div className="font-bold text-slate-900 dark:text-white">{rec.summary}</div>
+                        <div className="text-2xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
                           {rec.work_performed}
                         </div>
                       </td>
-                      <td className="py-3.5 px-4 text-slate-700 font-medium">
+                      <td className="py-3.5 px-4 text-slate-700 dark:text-slate-200 font-medium">
                         {rec.performed_by_name || "EasyLife Verified Pro"}
                       </td>
-                      <td className="py-3.5 px-4 text-slate-600">
+                      <td className="py-3.5 px-4 text-slate-600 dark:text-slate-300">
                         {rec.parts_replaced || <span className="text-slate-400">—</span>}
                       </td>
-                      <td className="py-3.5 px-4 font-bold text-slate-900 whitespace-nowrap">
+                      <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white whitespace-nowrap">
                         {formatMinorUnits(rec.cost_kobo || 0)}
                       </td>
                       <td className="py-3.5 px-4 whitespace-nowrap">
@@ -483,12 +483,12 @@ export function MaintenanceManagerClient({
                             href={rec.invoice_url}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center gap-1 text-teal-700 font-semibold underline text-2xs"
+                            className="inline-flex items-center gap-1 text-teal-700 dark:text-teal-400 font-semibold underline text-2xs"
                           >
                             <span>🧾</span> {rec.invoice_number || "View Invoice"}
                           </a>
                         ) : rec.invoice_number ? (
-                          <span className="font-mono text-2xs text-slate-600">
+                          <span className="font-mono text-2xs text-slate-600 dark:text-slate-300">
                             #{rec.invoice_number}
                           </span>
                         ) : (
@@ -507,12 +507,12 @@ export function MaintenanceManagerClient({
       {/* MODAL 1: Report Fault */}
       {isFaultModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 my-8">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-              <h2 className="text-lg font-bold text-slate-900">Report Equipment or Facility Fault</h2>
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Report Equipment or Facility Fault</h2>
               <button
                 onClick={() => setIsFaultModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 text-lg font-bold"
+                className="text-slate-400 hover:text-slate-600 dark:text-slate-300 text-lg font-bold"
               >
                 ✕
               </button>
@@ -522,8 +522,8 @@ export function MaintenanceManagerClient({
               <div
                 className={`p-3 rounded-xl mb-4 text-xs font-medium ${
                   feedback.ok
-                    ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                    : "bg-red-50 text-red-800 border border-red-200"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                    : "bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
                 }`}
               >
                 {feedback.message}
@@ -532,7 +532,7 @@ export function MaintenanceManagerClient({
 
             <form onSubmit={handleFaultSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Property Site *
                 </label>
                 <select
@@ -543,7 +543,7 @@ export function MaintenanceManagerClient({
                     setSelectedAssetInForm("");
                   }}
                   required
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 >
                   {properties.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -554,14 +554,14 @@ export function MaintenanceManagerClient({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Specific Asset / Equipment (Optional)
                 </label>
                 <select
                   name="assetId"
                   value={selectedAssetInForm}
                   onChange={(e) => setSelectedAssetInForm(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 >
                   <option value="">General Facility (No specific asset)</option>
                   {propertyAssets.map((a) => (
@@ -573,7 +573,7 @@ export function MaintenanceManagerClient({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Fault Title *
                 </label>
                 <input
@@ -581,19 +581,19 @@ export function MaintenanceManagerClient({
                   name="title"
                   required
                   placeholder="e.g. AC compressor humming loudly, generator refusing to crank"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Severity Level *
                   </label>
                   <select
                     name="faultSeverity"
                     defaultValue="medium"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     <option value="low">Low (Cosmetic / Minor)</option>
                     <option value="medium">Medium (Degraded Performance)</option>
@@ -602,19 +602,19 @@ export function MaintenanceManagerClient({
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Requested Date
                   </label>
                   <input
                     type="date"
                     name="scheduledDate"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Estimated Repair Budget (NGN)
                 </label>
                 <input
@@ -623,12 +623,12 @@ export function MaintenanceManagerClient({
                   min="0"
                   step="500"
                   placeholder="e.g. 35000"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Detailed Fault Description *
                 </label>
                 <textarea
@@ -636,13 +636,13 @@ export function MaintenanceManagerClient({
                   rows={3}
                   required
                   placeholder="Describe symptoms, when it started, error codes on display panels..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
               {/* Photos attachment */}
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <label className="block text-xs font-bold text-slate-700">
+              <div className="p-3 bg-slate-50 dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-[#163654] space-y-2">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200">
                   Supporting Photographs / Video Link
                 </label>
                 <div className="flex gap-2">
@@ -651,7 +651,7 @@ export function MaintenanceManagerClient({
                     value={photoUrl}
                     onChange={(e) => setPhotoUrl(e.target.value)}
                     placeholder="https://... photo url"
-                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs bg-white"
+                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs bg-white dark:bg-[#0D223A]"
                   />
                   <button
                     type="button"
@@ -666,7 +666,7 @@ export function MaintenanceManagerClient({
                     {photosList.map((p, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-teal-50 text-teal-800 text-2xs font-semibold"
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] text-2xs font-semibold"
                       >
                         Photo {idx + 1}
                         <button
@@ -682,11 +682,11 @@ export function MaintenanceManagerClient({
                 )}
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsFaultModalOpen(false)}
-                  className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition"
+                  className="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 rounded-lg transition"
                 >
                   Cancel
                 </button>
@@ -706,14 +706,14 @@ export function MaintenanceManagerClient({
       {/* MODAL 2: Record Completion & Incurred Cost */}
       {isCompleteModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 my-8">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
-              <h2 className="text-lg font-bold text-slate-900">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 Record Maintenance Completion & Invoice
               </h2>
               <button
                 onClick={() => setIsCompleteModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600 text-lg font-bold"
+                className="text-slate-400 hover:text-slate-600 dark:text-slate-300 text-lg font-bold"
               >
                 ✕
               </button>
@@ -723,8 +723,8 @@ export function MaintenanceManagerClient({
               <div
                 className={`p-3 rounded-xl mb-4 text-xs font-medium ${
                   feedback.ok
-                    ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
-                    : "bg-red-50 text-red-800 border border-red-200"
+                    ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                    : "bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
                 }`}
               >
                 {feedback.message}
@@ -735,14 +735,14 @@ export function MaintenanceManagerClient({
               {!activeRequestForCompletion && (
                 <>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Property *
                     </label>
                     <select
                       name="propertyId"
                       defaultValue={properties[0]?.id || ""}
                       required
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                     >
                       {properties.map((p) => (
                         <option key={p.id} value={p.id}>
@@ -752,12 +752,12 @@ export function MaintenanceManagerClient({
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                       Equipment Asset (Optional)
                     </label>
                     <select
                       name="assetId"
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                     >
                       <option value="">General Facility Maintenance</option>
                       {assets.map((a) => (
@@ -771,7 +771,7 @@ export function MaintenanceManagerClient({
               )}
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Work Summary *
                 </label>
                 <input
@@ -784,12 +784,12 @@ export function MaintenanceManagerClient({
                   }
                   required
                   placeholder="e.g. 500kVA Generator 250-Hour Major Service"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Details of Work Performed *
                 </label>
                 <textarea
@@ -797,13 +797,13 @@ export function MaintenanceManagerClient({
                   rows={2}
                   required
                   placeholder="Changed engine oil (15W-40), replaced primary & secondary fuel filters, flushed radiator coolant..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Technician / Vendor Name *
                   </label>
                   <input
@@ -811,11 +811,11 @@ export function MaintenanceManagerClient({
                     name="performedByName"
                     defaultValue="EasyLife Verified Technician"
                     required
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Total Cost (NGN) *
                   </label>
                   <input
@@ -825,53 +825,53 @@ export function MaintenanceManagerClient({
                     step="100"
                     required
                     placeholder="e.g. 85000"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                   Parts Replaced
                 </label>
                 <input
                   type="text"
                   name="partsReplaced"
                   placeholder="e.g. Oil filter LF9009, Fuel filter FF5776, 2x 100Ah Batteries"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Invoice Number
                   </label>
                   <input
                     type="text"
                     name="invoiceNumber"
                     placeholder="e.g. INV-2026-081"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
                     Invoice URL / PDF Link
                   </label>
                   <input
                     type="url"
                     name="invoiceUrl"
                     placeholder="https://... invoice link"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setIsCompleteModalOpen(false)}
-                  className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition"
+                  className="px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 rounded-lg transition"
                 >
                   Cancel
                 </button>

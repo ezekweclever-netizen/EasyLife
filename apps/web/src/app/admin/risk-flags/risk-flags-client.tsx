@@ -109,17 +109,17 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
     <div className="space-y-6">
       {/* Metrics Summary Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs">
+        <div className="p-4 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] shadow-2xs">
           <span className="text-2xs font-bold uppercase tracking-wider text-slate-400 block">
             Total Flagged
           </span>
-          <span className="text-2xl font-black text-slate-900 mt-1 block">
+          <span className="text-2xl font-black text-slate-900 dark:text-white mt-1 block">
             {summary.total}
           </span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 shadow-2xs">
-          <span className="text-2xs font-bold uppercase tracking-wider text-amber-700 block">
+        <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/60/70 border border-amber-200 dark:border-amber-800 shadow-2xs">
+          <span className="text-2xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 block">
             Pending Review
           </span>
           <span className="text-2xl font-black text-amber-900 mt-1 block">
@@ -145,8 +145,8 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
           </span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200 shadow-2xs">
-          <span className="text-2xs font-bold uppercase tracking-wider text-emerald-700 block">
+        <div className="p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60/70 border border-emerald-200 dark:border-emerald-800 shadow-2xs">
+          <span className="text-2xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 block">
             Resolved
           </span>
           <span className="text-2xl font-black text-emerald-900 mt-1 block">
@@ -154,23 +154,23 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
           </span>
         </div>
 
-        <div className="p-4 rounded-2xl bg-slate-100 border border-slate-200 shadow-2xs">
-          <span className="text-2xs font-bold uppercase tracking-wider text-slate-600 block">
+        <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654] shadow-2xs">
+          <span className="text-2xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 block">
             Dismissed
           </span>
-          <span className="text-2xl font-black text-slate-700 mt-1 block">
+          <span className="text-2xl font-black text-slate-700 dark:text-slate-200 mt-1 block">
             {summary.dismissed}
           </span>
         </div>
       </div>
 
       {/* Manual Audit Utility */}
-      <div className="p-4 rounded-2xl bg-white border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
+      <div className="p-4 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-2xs">
         <div>
-          <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
+          <h3 className="text-xs font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider flex items-center gap-1.5">
             🔍 On-Demand Profile Risk Audit
           </h3>
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-slate-500 dark:text-slate-400">
             Scan any user ID for duplicate accounts, rapid cancellations, or dispute frequency.
           </p>
         </div>
@@ -181,7 +181,7 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
             value={auditUserId}
             onChange={(e) => setAuditUserId(e.target.value)}
             placeholder="Paste User Profile UUID..."
-            className="flex-1 sm:w-64 h-9 px-3 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-hidden focus:border-[#0D9488]"
+            className="flex-1 sm:w-64 h-9 px-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0D9488]"
           />
           <button
             type="button"
@@ -210,16 +210,16 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
       )}
 
       {/* Filters Bar */}
-      <div className="p-4 rounded-2xl bg-white border border-slate-200 flex flex-wrap items-center gap-3 shadow-2xs">
+      <div className="p-4 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] flex flex-wrap items-center gap-3 shadow-2xs">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-slate-600">Status:</span>
+          <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Status:</span>
           <select
             value={statusFilter}
             onChange={(e) => {
               setStatusFilter(e.target.value);
               reloadFlags(e.target.value, typeFilter, severityFilter);
             }}
-            className="h-9 px-2.5 rounded-xl border border-slate-300 text-xs font-medium text-slate-800 bg-white"
+            className="h-9 px-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#0D223A]"
           >
             <option value="all">All Statuses</option>
             <option value="pending_review">Pending Review</option>
@@ -230,14 +230,14 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-slate-600">Indicator:</span>
+          <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Indicator:</span>
           <select
             value={typeFilter}
             onChange={(e) => {
               setTypeFilter(e.target.value);
               reloadFlags(statusFilter, e.target.value, severityFilter);
             }}
-            className="h-9 px-2.5 rounded-xl border border-slate-300 text-xs font-medium text-slate-800 bg-white"
+            className="h-9 px-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#0D223A]"
           >
             <option value="all">All Indicator Types</option>
             <option value="duplicate_account">Duplicate Accounts</option>
@@ -249,14 +249,14 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-slate-600">Severity:</span>
+          <span className="text-xs font-bold text-slate-600 dark:text-slate-300">Severity:</span>
           <select
             value={severityFilter}
             onChange={(e) => {
               setSeverityFilter(e.target.value);
               reloadFlags(statusFilter, typeFilter, e.target.value);
             }}
-            className="h-9 px-2.5 rounded-xl border border-slate-300 text-xs font-medium text-slate-800 bg-white"
+            className="h-9 px-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#0D223A]"
           >
             <option value="all">All Severities</option>
             <option value="high">High Severity</option>
@@ -271,11 +271,11 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
       </div>
 
       {/* Flags Table */}
-      <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-2xs">
+      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-slate-50/80 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider text-[11px]">
+              <tr className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider text-[11px]">
                 <th className="py-3.5 px-4">Entity</th>
                 <th className="py-3.5 px-4">Indicator Type</th>
                 <th className="py-3.5 px-4">Severity</th>
@@ -311,9 +311,9 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
                       : "bg-slate-100 text-slate-600 border-slate-200 font-medium";
 
                   return (
-                    <tr key={flag.id} className="hover:bg-slate-50/60 transition">
+                    <tr key={flag.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
                       <td className="py-3.5 px-4 font-mono text-[11px]">
-                        <span className="font-bold text-slate-900 uppercase block">
+                        <span className="font-bold text-slate-900 dark:text-white uppercase block">
                           {flag.entity_type}
                         </span>
                         <span className="text-slate-400 text-[10px]">
@@ -321,7 +321,7 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
                         </span>
                       </td>
 
-                      <td className="py-3.5 px-4 font-semibold text-slate-800">
+                      <td className="py-3.5 px-4 font-semibold text-slate-800 dark:text-slate-100">
                         {flag.flag_type.replace(/_/g, " ")}
                       </td>
 
@@ -333,7 +333,7 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
                         </span>
                       </td>
 
-                      <td className="py-3.5 px-4 max-w-xs text-slate-700 leading-snug">
+                      <td className="py-3.5 px-4 max-w-xs text-slate-700 dark:text-slate-200 leading-snug">
                         {flag.description}
                       </td>
 
@@ -363,7 +363,7 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
                             setActionError(null);
                             setActionSuccess(null);
                           }}
-                          className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-slate-800 text-[11px] transition shadow-2xs"
+                          className="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 font-bold text-slate-800 dark:text-slate-100 text-[11px] transition shadow-2xs"
                         >
                           Review Flag →
                         </button>
@@ -380,16 +380,16 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
       {/* Review & Arbitration Modal */}
       {selectedFlag && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
-          <div className="bg-white rounded-3xl max-w-2xl w-full border border-slate-200 shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto space-y-5">
-            <div className="flex items-start justify-between pb-3 border-b border-slate-100">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-2xl w-full border border-slate-200 dark:border-[#163654] shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto space-y-5">
+            <div className="flex items-start justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div>
                 <span className="text-2xs font-bold uppercase tracking-wider text-rose-600">
                   Administrative Risk Case File
                 </span>
-                <h2 className="text-lg font-bold text-slate-900 mt-0.5">
+                <h2 className="text-lg font-bold text-slate-900 dark:text-white mt-0.5">
                   {selectedFlag.flag_type.replace(/_/g, " ").toUpperCase()}
                 </h2>
-                <p className="text-xs text-slate-500 font-mono mt-0.5">
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5">
                   Flag ID: {selectedFlag.id} • Entity: {selectedFlag.entity_type} ({selectedFlag.entity_id})
                 </p>
               </div>
@@ -397,15 +397,15 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
               <button
                 type="button"
                 onClick={() => setSelectedFlag(null)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800"
               >
                 ✕
               </button>
             </div>
 
             {/* Non-Accusation Rule Notice */}
-            <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed">
-              <strong className="font-bold block text-[11px] uppercase tracking-wider text-amber-800 mb-0.5">
+            <div className="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800 text-xs text-amber-900 leading-relaxed">
+              <strong className="font-bold block text-[11px] uppercase tracking-wider text-amber-800 dark:text-amber-300 mb-0.5">
                 🛡️ Important Policy Compliance
               </strong>
               These flags only trigger administrative review. Do not automatically accuse or permanently suspend users. Every decision must be based on verified evidence and recorded with documentation.
@@ -413,13 +413,13 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
 
             {/* Evidence & Details */}
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block mb-1.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1.5">
                 Automated Evidence &amp; Rule Findings
               </span>
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
-                <p className="font-medium text-slate-800">{selectedFlag.description}</p>
+              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs space-y-2">
+                <p className="font-medium text-slate-800 dark:text-slate-100">{selectedFlag.description}</p>
                 {selectedFlag.details && Object.keys(selectedFlag.details).length > 0 && (
-                  <pre className="p-2.5 rounded-lg bg-white border border-slate-200 text-[11px] font-mono text-slate-700 overflow-x-auto">
+                  <pre className="p-2.5 rounded-lg bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-[11px] font-mono text-slate-700 dark:text-slate-200 overflow-x-auto">
                     {JSON.stringify(selectedFlag.details, null, 2)}
                   </pre>
                 )}
@@ -428,7 +428,7 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
 
             {/* Admin Notes */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-1.5">
                 Administrative Notes &amp; Finding Rationale *
               </label>
               <textarea
@@ -437,7 +437,7 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
                 value={adminNotes}
                 onChange={(e) => setAdminNotes(e.target.value)}
                 placeholder="Document your investigation findings, verified evidence, or rationale for dismissal/resolution..."
-                className="w-full p-3 rounded-xl border border-slate-300 text-xs text-slate-900 focus:outline-hidden focus:border-[#0D9488]"
+                className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0D9488]"
               />
             </div>
 
@@ -448,17 +448,17 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
             )}
 
             {actionSuccess && (
-              <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-semibold text-emerald-900">
+              <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold text-emerald-900">
                 ✓ {actionSuccess}
               </div>
             )}
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center justify-end gap-2 pt-2 border-t border-slate-100">
+            <div className="flex flex-wrap items-center justify-end gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
               <button
                 type="button"
                 onClick={() => setSelectedFlag(null)}
-                className="px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-xs font-bold hover:bg-slate-50"
+                className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
               >
                 Cancel
               </button>
@@ -467,7 +467,7 @@ export function RiskFlagsClient({ initialData, initialSummary }: RiskFlagsClient
                 type="button"
                 onClick={() => handleReviewAction("dismissed")}
                 disabled={isPending}
-                className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold transition disabled:opacity-50"
+                className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 dark:text-slate-100 text-xs font-bold transition disabled:opacity-50"
               >
                 Dismiss (False Positive)
               </button>

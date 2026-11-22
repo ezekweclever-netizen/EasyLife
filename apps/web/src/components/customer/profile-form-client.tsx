@@ -46,7 +46,7 @@ export function ProfileFormClient({
       {state.status === "error" && state.message && (
         <div
           role="alert"
-          className="rounded-xl bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-800 font-medium flex items-start gap-2.5"
+          className="rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 px-4 py-3 text-sm text-red-800 dark:text-red-300 font-medium flex items-start gap-2.5"
         >
           <span className="font-bold text-red-600">!</span>
           <span>{state.message}</span>
@@ -56,7 +56,7 @@ export function ProfileFormClient({
       {state.status === "success" && state.message && (
         <div
           role="status"
-          className="rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3 text-sm text-emerald-900 font-medium flex items-start gap-2.5"
+          className="rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 px-4 py-3 text-sm text-emerald-900 font-medium flex items-start gap-2.5"
         >
           <span className="font-bold text-emerald-600">✓</span>
           <span>{state.message}</span>
@@ -77,7 +77,7 @@ export function ProfileFormClient({
             type="text"
             required
             defaultValue={initialFullName}
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
           />
         </div>
 
@@ -94,7 +94,7 @@ export function ProfileFormClient({
             type="text"
             defaultValue={initialDisplayName}
             placeholder="How should technicians address you?"
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
           />
         </div>
       </div>
@@ -132,7 +132,7 @@ export function ProfileFormClient({
             type="tel"
             defaultValue={initialPhone}
             placeholder="+234 800 000 0000"
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
           />
         </div>
       </div>
@@ -149,7 +149,7 @@ export function ProfileFormClient({
             id="city"
             name="city"
             defaultValue={initialCity || "Port Harcourt"}
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
           >
             <option value="Port Harcourt">Port Harcourt (Rivers State)</option>
             <option value="Lagos">Lagos (Lagos State)</option>
@@ -170,7 +170,7 @@ export function ProfileFormClient({
             type="text"
             defaultValue={initialAddressLine}
             placeholder="Street / Estate / Flat address"
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
           />
         </div>
       </div>

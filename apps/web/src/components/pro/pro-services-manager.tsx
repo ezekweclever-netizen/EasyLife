@@ -229,13 +229,13 @@ export function ProServicesManager({
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-5">
+    <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h3 className="text-sm font-bold text-slate-900">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             Service Offerings, Qualifications &amp; Eligibility ({services.length})
           </h3>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Select verified services from Main Categories &amp; Subcategories, declare service-specific credentials, and inspect eligibility status.
           </p>
         </div>
@@ -253,8 +253,8 @@ export function ProServicesManager({
         <div
           className={`p-3 rounded-xl text-xs font-medium border ${
             feedback.ok
-              ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-              : "bg-red-50 border-red-200 text-red-800"
+              ? "bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-900"
+              : "bg-red-50 dark:bg-red-950/60 border-red-200 dark:border-red-800 text-red-800 dark:text-red-300"
           }`}
         >
           {feedback.msg}
@@ -264,18 +264,18 @@ export function ProServicesManager({
       {showAddForm && (
         <form
           onSubmit={handleAddService}
-          className="p-4 rounded-xl border border-teal-200 bg-teal-50/40 space-y-4"
+          className="p-4 rounded-xl border border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/60/40 space-y-4"
         >
           {catalogueTree.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                   1. Main Category *
                 </label>
                 <select
                   value={selectedMainCatId}
                   onChange={(e) => handleSelectMainCategory(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                 >
                   {catalogueTree.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -286,7 +286,7 @@ export function ProServicesManager({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                   2. Subcategory
                 </label>
                 <select
@@ -295,7 +295,7 @@ export function ProServicesManager({
                     setSelectedSubcatId(e.target.value);
                     setSelectedServiceId("");
                   }}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                 >
                   <option value="all">All Subcategories ({availableCatalogueServices.length})</option>
                   {availableSubcategories.map((sub) => (
@@ -307,13 +307,13 @@ export function ProServicesManager({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                   3. Individual Service
                 </label>
                 <select
                   value={selectedServiceId}
                   onChange={(e) => handleSelectCatalogueService(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                 >
                   <option value="">-- Select Catalogue Service or Custom --</option>
                   {availableCatalogueServices.map((srv) => (
@@ -326,11 +326,11 @@ export function ProServicesManager({
             </div>
           ) : (
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Category *</label>
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Category *</label>
               <select
                 value={selectedMainCatId}
                 onChange={(e) => setSelectedMainCatId(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -342,16 +342,16 @@ export function ProServicesManager({
           )}
 
           {pickedCatalogueService && (
-            <div className="p-3 rounded-lg bg-white border border-teal-200 text-xs space-y-1.5">
+            <div className="p-3 rounded-lg bg-white dark:bg-[#0D223A] border border-teal-200 dark:border-teal-800 text-xs space-y-1.5">
               <div className="font-bold text-teal-950">
                 Service Eligibility Requirements for &quot;{pickedCatalogueService.name}&quot;
               </div>
               <div className="flex flex-wrap gap-1.5 text-[11px]">
-                <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                <span className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
                   Min Experience: {pickedCatalogueService.min_years_experience} yrs
                 </span>
                 {pickedCatalogueService.requires_trade_certification && (
-                  <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">
+                  <span className="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
                     Trade Certificate Required
                   </span>
                 )}
@@ -366,7 +366,7 @@ export function ProServicesManager({
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Offering Display Title *
               </label>
               <input
@@ -375,12 +375,12 @@ export function ProServicesManager({
                 value={serviceTitle}
                 onChange={(e) => setServiceTitle(e.target.value)}
                 placeholder="e.g. Split AC Installation & Regassing"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Starting Price (₦ NGN)
               </label>
               <input
@@ -390,12 +390,12 @@ export function ProServicesManager({
                 required
                 value={minPriceNaira}
                 onChange={(e) => setMinPriceNaira(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Upper Estimate (₦ NGN, Optional)
               </label>
               <input
@@ -405,14 +405,14 @@ export function ProServicesManager({
                 value={maxPriceNaira}
                 onChange={(e) => setMaxPriceNaira(e.target.value)}
                 placeholder="Optional"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Years Experience in Service
               </label>
               <input
@@ -421,12 +421,12 @@ export function ProServicesManager({
                 max="70"
                 value={yearsExperienceInService}
                 onChange={(e) => setYearsExperienceInService(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Certification / Licence Reference
               </label>
               <input
@@ -434,12 +434,12 @@ export function ProServicesManager({
                 value={certificationReference}
                 onChange={(e) => setCertificationReference(e.target.value)}
                 placeholder="e.g. NABTEB / COREN / City & Guilds"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                 Service-Specific Qualifications
               </label>
               <input
@@ -447,13 +447,13 @@ export function ProServicesManager({
                 value={qualificationNotes}
                 onChange={(e) => setQualificationNotes(e.target.value)}
                 placeholder="e.g. Certified in Inverter & Daikin systems"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 mb-1">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
               Scope / Description
             </label>
             <textarea
@@ -461,17 +461,17 @@ export function ProServicesManager({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Briefly describe what is included in this service..."
-              className="w-full p-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+              className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
             />
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+            <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200 cursor-pointer">
               <input
                 type="checkbox"
                 checked={isPrimary}
                 onChange={(e) => setIsPrimary(e.target.checked)}
-                className="h-4 w-4 rounded text-[#0D9488] border-slate-300"
+                className="h-4 w-4 rounded text-[#0D9488] border-slate-300 dark:border-slate-700"
               />
               <span>Mark as my Primary Specialty</span>
             </label>
@@ -503,31 +503,31 @@ export function ProServicesManager({
                 key={s.id}
                 className={`p-4 rounded-xl border text-xs space-y-3 ${
                   s.is_active
-                    ? "border-slate-200 bg-slate-50"
-                    : "border-slate-200 bg-slate-100/70 opacity-75"
+                    ? "border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]"
+                    : "border-slate-200 dark:border-[#163654] bg-slate-100 dark:bg-slate-800/70 opacity-75"
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                   <div className="space-y-1.5">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-bold text-slate-900 text-sm">
+                      <span className="font-bold text-slate-900 dark:text-white text-sm">
                         {s.service_title || s.service?.name || s.category?.name || "Specialty Service"}
                       </span>
-                      <span className="px-2 py-0.5 rounded bg-teal-50 text-[#0D9488] border border-teal-200 text-[10px] font-semibold">
+                      <span className="px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] border border-teal-200 dark:border-teal-800 text-[10px] font-semibold">
                         {s.category?.name || "Trade"}
                       </span>
                       {s.service && (
-                        <span className="px-2 py-0.5 rounded bg-slate-200 text-slate-700 text-[10px] font-mono">
+                        <span className="px-2 py-0.5 rounded bg-slate-200 text-slate-700 dark:text-slate-200 text-[10px] font-mono">
                           {s.service.service_code}
                         </span>
                       )}
                       {s.is_primary_skill && (
-                        <span className="px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-[10px] font-bold">
                           Primary Skill
                         </span>
                       )}
                       {!s.is_active && (
-                        <span className="px-2 py-0.5 rounded bg-slate-200 text-slate-600 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-slate-200 text-slate-600 dark:text-slate-300 text-[10px] font-bold">
                           Paused
                         </span>
                       )}
@@ -535,8 +535,8 @@ export function ProServicesManager({
                         <span
                           className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
                             eligibility.eligible
-                              ? "bg-emerald-50 text-emerald-800 border-emerald-200"
-                              : "bg-amber-50 text-amber-900 border-amber-200"
+                              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
+                              : "bg-amber-50 dark:bg-amber-950/60 text-amber-900 border-amber-200 dark:border-amber-800"
                           }`}
                         >
                           {eligibility.eligible ? "Eligible ✓" : "Requirements Pending"}
@@ -545,10 +545,10 @@ export function ProServicesManager({
                     </div>
 
                     {s.description && (
-                      <p className="text-slate-600 leading-relaxed">{s.description}</p>
+                      <p className="text-slate-600 dark:text-slate-300 leading-relaxed">{s.description}</p>
                     )}
 
-                    <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-600">
+                    <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-600 dark:text-slate-300">
                       <span className="text-[#0D9488] font-bold text-xs">
                         ₦{minPrice.toLocaleString("en-NG")}
                         {maxPrice ? ` – ₦${maxPrice.toLocaleString("en-NG")}` : "+"}
@@ -566,7 +566,7 @@ export function ProServicesManager({
                     </div>
 
                     {eligibility && !eligibility.eligible && eligibility.missing_requirements.length > 0 && (
-                      <div className="mt-2 p-2.5 rounded-lg bg-amber-50/90 border border-amber-200 text-[11px] text-amber-950">
+                      <div className="mt-2 p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/60/90 border border-amber-200 dark:border-amber-800 text-[11px] text-amber-950">
                         <span className="font-bold block mb-0.5">
                           Missing to Unlock Verified Eligibility:
                         </span>
@@ -583,7 +583,7 @@ export function ProServicesManager({
                         {proRequirements.map((req) => (
                           <span
                             key={req.id}
-                            className="px-2 py-0.5 rounded bg-white border border-slate-200 text-[10px] text-slate-600"
+                            className="px-2 py-0.5 rounded bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-[10px] text-slate-600 dark:text-slate-300"
                           >
                             {req.title}
                           </span>
@@ -599,7 +599,7 @@ export function ProServicesManager({
                       onClick={() =>
                         isEditingThis ? setEditingOfferingId(null) : openEditForm(s)
                       }
-                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 text-[11px] font-semibold"
+                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold"
                     >
                       {isEditingThis ? "Close Edit" : "Edit & Qualifications"}
                     </button>
@@ -607,7 +607,7 @@ export function ProServicesManager({
                       type="button"
                       disabled={isPending}
                       onClick={() => handleToggleActive(s)}
-                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 text-[11px] font-semibold"
+                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold"
                     >
                       {s.is_active ? "Pause" : "Activate"}
                     </button>
@@ -616,7 +616,7 @@ export function ProServicesManager({
                         type="button"
                         disabled={isPending}
                         onClick={() => handleDelete(s.id)}
-                        className="px-2.5 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-[11px] font-semibold"
+                        className="px-2.5 py-1.5 rounded-lg border border-red-200 dark:border-red-800 text-red-600 hover:bg-red-50 dark:bg-red-950/60 text-[11px] font-semibold"
                       >
                         Remove
                       </button>
@@ -625,21 +625,21 @@ export function ProServicesManager({
                 </div>
 
                 {isEditingThis && (
-                  <div className="p-3.5 rounded-xl border border-teal-200 bg-white space-y-3">
+                  <div className="p-3.5 rounded-xl border border-teal-200 dark:border-teal-800 bg-white dark:bg-[#0D223A] space-y-3">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
                           Offering Title
                         </label>
                         <input
                           type="text"
                           value={editTitle}
                           onChange={(e) => setEditTitle(e.target.value)}
-                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900"
+                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
                           Starting Price (₦)
                         </label>
                         <input
@@ -648,11 +648,11 @@ export function ProServicesManager({
                           step="500"
                           value={editMinPrice}
                           onChange={(e) => setEditMinPrice(e.target.value)}
-                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900"
+                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
                           Upper Estimate (₦)
                         </label>
                         <input
@@ -662,11 +662,11 @@ export function ProServicesManager({
                           value={editMaxPrice}
                           onChange={(e) => setEditMaxPrice(e.target.value)}
                           placeholder="Optional"
-                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900"
+                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
                           Service Experience (Yrs)
                         </label>
                         <input
@@ -675,52 +675,52 @@ export function ProServicesManager({
                           max="70"
                           value={editYearsExp}
                           onChange={(e) => setEditYearsExp(e.target.value)}
-                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900"
+                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
                           Certification Reference
                         </label>
                         <input
                           type="text"
                           value={editCertRef}
                           onChange={(e) => setEditCertRef(e.target.value)}
-                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900"
+                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
                           Qualification Notes
                         </label>
                         <input
                           type="text"
                           value={editQualNotes}
                           onChange={(e) => setEditQualNotes(e.target.value)}
-                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 text-xs text-slate-900"
+                          className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-bold text-slate-700 mb-1">
+                      <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
                         Description
                       </label>
                       <textarea
                         rows={2}
                         value={editDesc}
                         onChange={(e) => setEditDesc(e.target.value)}
-                        className="w-full p-2.5 rounded-lg border border-slate-300 text-xs text-slate-900"
+                        className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
                       />
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 cursor-pointer">
+                      <label className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200 cursor-pointer">
                         <input
                           type="checkbox"
                           checked={editIsPrimary}
                           onChange={(e) => setEditIsPrimary(e.target.checked)}
-                          className="h-4 w-4 rounded text-[#0D9488] border-slate-300"
+                          className="h-4 w-4 rounded text-[#0D9488] border-slate-300 dark:border-slate-700"
                         />
                         <span>Set as Primary Skill</span>
                       </label>
@@ -729,7 +729,7 @@ export function ProServicesManager({
                         <button
                           type="button"
                           onClick={() => setEditingOfferingId(null)}
-                          className="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-semibold text-slate-600"
+                          className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-600 dark:text-slate-300"
                         >
                           Cancel
                         </button>

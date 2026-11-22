@@ -8,10 +8,10 @@ export interface CardProps {
 }
 
 const VARIANT_STYLES: Record<NonNullable<CardProps["variant"]>, string> = {
-  default: "bg-white border-[#DAE7E7] text-[#1F2F34]",
-  navy: "bg-[#154752] border-[#24989A]/30 text-white",
-  "teal-tinted": "bg-[#F3F8F8] border-[#24989A]/30 text-[#1F2F34]",
-  muted: "bg-[#F3F8F8] border-[#DAE7E7] text-[#1F2F34]",
+  default: "bg-white dark:bg-[#0D223A] border-[#DAE7E7] dark:border-[#163654] text-[#1F2F34] dark:text-slate-100",
+  navy: "bg-[#154752] dark:bg-[#0A1A2F] border-[#24989A]/30 dark:border-teal-700/40 text-white",
+  "teal-tinted": "bg-[#F3F8F8] dark:bg-[#0A1A2F] border-[#24989A]/30 dark:border-teal-700/40 text-[#1F2F34] dark:text-slate-100",
+  muted: "bg-[#F3F8F8] dark:bg-[#0A1A2F] border-[#DAE7E7] dark:border-[#163654] text-[#1F2F34] dark:text-slate-100",
 };
 
 const PADDING_STYLES: Record<NonNullable<CardProps["padding"]>, string> = {
@@ -49,12 +49,12 @@ export function CardHeader({
 }) {
   return (
     <div
-      className={`flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 pb-4 border-b border-[#DAE7E7] ${className}`}
+      className={`flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 pb-4 border-b border-[#DAE7E7] dark:border-[#163654] ${className}`}
     >
       <div>
         <h3 className="text-base font-semibold text-inherit">{title}</h3>
         {subtitle && (
-          <p className="text-xs text-[#68797C] mt-0.5">{subtitle}</p>
+          <p className="text-xs text-[#68797C] dark:text-slate-400 mt-0.5">{subtitle}</p>
         )}
       </div>
       {action && <div className="shrink-0">{action}</div>}
@@ -75,20 +75,20 @@ export function StatCard({
 }) {
   const borderAccent = {
     teal: "border-l-4 border-l-[#0D9488]",
-    navy: "border-l-4 border-l-[#0A192F]",
+    navy: "border-l-4 border-l-[#0A192F] dark:border-l-[#24989A]",
     warning: "border-l-4 border-l-[#B45309]",
     error: "border-l-4 border-l-[#B91C1C]",
   }[accent];
 
   return (
     <Card padding="md" className={borderAccent}>
-      <p className="text-xs font-semibold uppercase tracking-wider text-[#6B7280]">
+      <p className="text-xs font-semibold uppercase tracking-wider text-[#6B7280] dark:text-slate-400">
         {label}
       </p>
-      <p className="mt-2 text-2xl font-bold text-[#0F172A] tracking-tight">
+      <p className="mt-2 text-2xl font-bold text-[#0F172A] dark:text-white tracking-tight">
         {value}
       </p>
-      {subtext && <p className="mt-1 text-xs text-[#4B5563]">{subtext}</p>}
+      {subtext && <p className="mt-1 text-xs text-[#4B5563] dark:text-slate-400">{subtext}</p>}
     </Card>
   );
 }

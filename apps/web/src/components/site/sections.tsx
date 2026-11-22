@@ -6,8 +6,8 @@ import { Icon, type IconName } from "./icons";
 type SectionTone = "white" | "grey" | "navy";
 
 const SECTION_TONES: Record<SectionTone, string> = {
-  white: "bg-white text-[#1F2F34]",
-  grey: "bg-[#F3F8F8] text-[#1F2F34]",
+  white: "bg-white dark:bg-[#071526] text-[#1F2F34] dark:text-slate-100",
+  grey: "bg-[#F3F8F8] dark:bg-[#071526] text-[#1F2F34] dark:text-slate-100",
   navy: "bg-[#154752] text-white",
 };
 
@@ -56,7 +56,7 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={`text-xs sm:text-sm font-bold uppercase tracking-[0.14em] ${
-            isDark ? "text-[#EE9277]" : "text-[#24989A]"
+            isDark ? "text-[#EE9277]" : "text-[#24989A] dark:text-[#5CD3D5]"
           }`}
         >
           {eyebrow}
@@ -65,7 +65,7 @@ export function SectionHeading({
       <h2
         id={id}
         className={`mt-2.5 text-3xl sm:text-4xl lg:text-[2.6rem] font-bold tracking-tight leading-[1.15] ${
-          isDark ? "text-white" : "text-[#154752]"
+          isDark ? "text-white" : "text-[#154752] dark:text-white"
         }`}
       >
         {title}
@@ -73,7 +73,7 @@ export function SectionHeading({
       {description && (
         <p
           className={`mt-4 text-base sm:text-lg lg:text-[1.15rem] leading-relaxed ${
-            isDark ? "text-[#DAE7E7]" : "text-[#68797C]"
+            isDark ? "text-[#DAE7E7]" : "text-[#68797C] dark:text-slate-300"
           }`}
         >
           {description}
@@ -136,28 +136,28 @@ export function FeatureCard({
       className={`rounded-2xl border p-7 sm:p-8 h-full transition-all ${
         isDark
           ? "bg-[#0D282E] border-[#24989A]/30"
-          : "bg-white border-[#DAE7E7] shadow-xs hover:border-[#24989A]/40"
+          : "bg-white dark:bg-[#0D223A] border-[#DAE7E7] dark:border-[#163654] shadow-xs hover:border-[#24989A]/40 dark:hover:border-[#24989A]/60"
       }`}
     >
       <div
         className={`h-13 w-13 rounded-xl flex items-center justify-center ${
           isDark
             ? "bg-[#24989A]/20 text-[#24989A]"
-            : "bg-[#F3F8F8] text-[#154752]"
+            : "bg-[#F3F8F8] dark:bg-teal-950/60 text-[#154752] dark:text-[#5CD3D5]"
         }`}
       >
         <Icon name={icon} className="h-6 w-6" />
       </div>
       <h3
         className={`mt-5 text-lg sm:text-xl font-bold leading-snug ${
-          isDark ? "text-white" : "text-[#154752]"
+          isDark ? "text-white" : "text-[#154752] dark:text-white"
         }`}
       >
         {title}
       </h3>
       <p
         className={`mt-2.5 text-base leading-relaxed ${
-          isDark ? "text-[#DAE7E7]" : "text-[#68797C]"
+          isDark ? "text-[#DAE7E7]" : "text-[#68797C] dark:text-slate-300"
         }`}
       >
         {description}
@@ -187,7 +187,7 @@ export function StepList({
           className={`relative rounded-2xl border p-7 sm:p-8 ${
             isDark
               ? "bg-[#0D282E] border-[#24989A]/30"
-              : "bg-white border-[#DAE7E7] shadow-xs"
+              : "bg-white dark:bg-[#0D223A] border-[#DAE7E7] dark:border-[#163654] shadow-xs"
           }`}
         >
           <span
@@ -198,7 +198,7 @@ export function StepList({
           </span>
           <h3
             className={`mt-4 text-lg sm:text-xl font-bold leading-snug ${
-              isDark ? "text-white" : "text-[#154752]"
+              isDark ? "text-white" : "text-[#154752] dark:text-white"
             }`}
           >
             <span className="sr-only">Step {index + 1}: </span>
@@ -206,7 +206,7 @@ export function StepList({
           </h3>
           <p
             className={`mt-2.5 text-base leading-relaxed ${
-              isDark ? "text-[#DAE7E7]" : "text-[#68797C]"
+              isDark ? "text-[#DAE7E7]" : "text-[#68797C] dark:text-slate-300"
             }`}
           >
             {step.description}
@@ -233,7 +233,7 @@ export function CheckList({
           </span>
           <span
             className={`text-base leading-relaxed ${
-              tone === "dark" ? "text-[#DAE7E7]" : "text-[#1F2F34]"
+              tone === "dark" ? "text-[#DAE7E7]" : "text-[#1F2F34] dark:text-slate-200"
             }`}
           >
             {item}
@@ -252,19 +252,19 @@ export interface FaqItem {
 /** Native <details>/<summary> accordion — keyboard and screen-reader accessible without JS. */
 export function FaqList({ items }: { items: readonly FaqItem[] }) {
   return (
-    <div className="divide-y divide-[#DAE7E7] rounded-2xl border border-[#DAE7E7] bg-white">
+    <div className="divide-y divide-[#DAE7E7] dark:divide-[#163654] rounded-2xl border border-[#DAE7E7] dark:border-[#163654] bg-white dark:bg-[#0D223A]">
       {items.map((item) => (
         <details key={item.question} className="group p-6 sm:p-7">
-          <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-base sm:text-lg font-bold text-[#154752] [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-base sm:text-lg font-bold text-[#154752] dark:text-white [&::-webkit-details-marker]:hidden">
             <span>{item.question}</span>
             <span
               aria-hidden="true"
-              className="mt-0.5 h-7 w-7 shrink-0 rounded-full border border-[#DAE7E7] flex items-center justify-center text-[#24989A] text-lg transition-transform group-open:rotate-45"
+              className="mt-0.5 h-7 w-7 shrink-0 rounded-full border border-[#DAE7E7] dark:border-[#163654] flex items-center justify-center text-[#24989A] dark:text-[#5CD3D5] text-lg transition-transform group-open:rotate-45"
             >
               +
             </span>
           </summary>
-          <p className="mt-3.5 text-base leading-relaxed text-[#68797C]">{item.answer}</p>
+          <p className="mt-3.5 text-base leading-relaxed text-[#68797C] dark:text-slate-300">{item.answer}</p>
         </details>
       ))}
     </div>
@@ -285,9 +285,9 @@ export function CtaBanner({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section aria-labelledby={id} className="bg-white py-16 sm:py-24">
+    <section aria-labelledby={id} className="bg-white dark:bg-[#071526] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-[#154752] px-7 py-12 sm:px-14 sm:py-16 text-white flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 shadow-md">
+        <div className="rounded-3xl bg-[#154752] dark:bg-[#0D223A] border border-[#24989A]/20 dark:border-[#163654] px-7 py-12 sm:px-14 sm:py-16 text-white flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 shadow-md">
           <div className="max-w-2xl">
             <h2 id={id} className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
               {title}

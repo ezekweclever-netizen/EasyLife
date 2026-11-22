@@ -375,7 +375,7 @@ export function ChatClient({
                     setSelectedConv(null);
                     router.push(basePath);
                   }}
-                  className="md:hidden p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold shrink-0"
+                  className="md:hidden p-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 text-xs font-bold shrink-0"
                   aria-label="Back to conversations list"
                 >
                   ←
@@ -417,7 +417,7 @@ export function ChatClient({
                         ? `/pro/jobs/${selectedConv.booking_id}`
                         : `/bookings/${selectedConv.booking_id}`
                     }
-                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-[#CBD5E1] dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-[#0F766E] dark:text-[#5CD3D5] transition"
+                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-[#CBD5E1] dark:border-slate-700 hover:bg-slate-50 dark:bg-[#071526] dark:hover:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-[#0F766E] dark:text-[#5CD3D5] transition"
                   >
                     View Booking →
                   </Link>
@@ -426,9 +426,9 @@ export function ChatClient({
             </div>
 
             {/* Messages Scroll Area */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50/40">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50 dark:bg-[#071526]/40">
               {errorMsg && (
-                <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 font-medium">
+                <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs text-red-800 dark:text-red-300 font-medium">
                   {errorMsg}
                 </div>
               )}
@@ -465,7 +465,7 @@ export function ChatClient({
                             className={`p-2.5 rounded-xl border text-xs flex items-center gap-3 ${
                               isMine
                                 ? "bg-teal-800/40 border-teal-600 text-teal-100"
-                                : "bg-slate-50 border-slate-200 text-slate-800"
+                                : "bg-slate-50 dark:bg-[#071526] border-slate-200 dark:border-[#163654] text-slate-800 dark:text-slate-100"
                             }`}
                           >
                             <span className="text-lg">📎</span>
@@ -512,9 +512,9 @@ export function ChatClient({
             </div>
 
             {/* Chat Composer */}
-            <form onSubmit={handleSendMessage} className="p-3 sm:p-4 border-t border-[#E2E8F0] bg-white space-y-2">
+            <form onSubmit={handleSendMessage} className="p-3 sm:p-4 border-t border-[#E2E8F0] bg-white dark:bg-[#0D223A] space-y-2">
               {selectedFile && (
-                <div className="flex items-center justify-between bg-teal-50 border border-teal-200 rounded-xl px-3 py-1.5 text-xs text-teal-900">
+                <div className="flex items-center justify-between bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 rounded-xl px-3 py-1.5 text-xs text-teal-900">
                   <span className="truncate flex items-center gap-1.5">
                     📎 <strong className="truncate">{selectedFile.name}</strong> ({(selectedFile.size / 1024).toFixed(1)} KB)
                   </span>
@@ -524,7 +524,7 @@ export function ChatClient({
                       setSelectedFile(null);
                       if (fileInputRef.current) fileInputRef.current.value = "";
                     }}
-                    className="text-teal-700 hover:text-red-600 font-bold text-xs ml-2"
+                    className="text-teal-700 dark:text-teal-400 hover:text-red-600 font-bold text-xs ml-2"
                   >
                     ✕
                   </button>
@@ -544,7 +544,7 @@ export function ChatClient({
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   title="Attach fault photo or document (max 8MB)"
-                  className="w-10 h-10 rounded-xl border border-[#CBD5E1] text-[#64748B] hover:bg-slate-100 flex items-center justify-center transition shrink-0"
+                  className="w-10 h-10 rounded-xl border border-[#CBD5E1] text-[#64748B] hover:bg-slate-100 dark:bg-slate-800 flex items-center justify-center transition shrink-0"
                 >
                   📎
                 </button>
@@ -569,7 +569,7 @@ export function ChatClient({
           </>
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center p-8 text-center space-y-3">
-            <div className="w-16 h-16 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-2xl font-bold">
+            <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center text-2xl font-bold">
               ✉️
             </div>
             <h3 className="text-base font-bold text-[#0F172A]">Select a Conversation</h3>

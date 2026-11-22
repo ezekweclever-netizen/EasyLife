@@ -59,10 +59,10 @@ export default async function ProProfilePage() {
         <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
           Account &amp; Vetting
         </span>
-        <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight mt-0.5">
+        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
           Professional Profile &amp; Verification
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 mt-1">
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
           Manage your business details, service offerings and qualifications, approved service locations, weekly schedule, and KYC credentials.
         </p>
       </div>

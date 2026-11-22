@@ -114,7 +114,7 @@ export default async function ProfessionalProfilePage({
                   {typeof pro.response_rate_pct === "number" && pro.response_rate_pct > 0 && (
                     <>
                       <span>•</span>
-                      <span className="text-emerald-700 font-semibold">⚡ {pro.response_rate_pct}% response rate</span>
+                      <span className="text-emerald-700 dark:text-emerald-300 font-semibold">⚡ {pro.response_rate_pct}% response rate</span>
                     </>
                   )}
                 </div>
@@ -122,7 +122,7 @@ export default async function ProfessionalProfilePage({
             </div>
 
             {/* Quick Booking CTA Card */}
-            <div className="bg-white rounded-xl border border-[#E2E8F0] p-4 flex sm:flex-col items-center justify-between gap-4 shadow-xs shrink-0 md:w-64">
+            <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-[#E2E8F0] p-4 flex sm:flex-col items-center justify-between gap-4 shadow-xs shrink-0 md:w-64">
               <div>
                 <span className="text-xs text-[#64748B] block">Callout Fee</span>
                 <span className="text-lg font-extrabold text-[#0F172A]">
@@ -149,7 +149,7 @@ export default async function ProfessionalProfilePage({
           {/* LEFT 2 COLUMNS: Bio, Experience, Portfolio, Reviews */}
           <div className="lg:col-span-2 space-y-8">
             {/* Description & Bio */}
-            <section className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-3 shadow-xs">
+            <section className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-6 space-y-3 shadow-xs">
               <h2 className="text-lg font-bold text-[#0F172A]">About This Professional</h2>
               <p className="text-sm text-[#475569] leading-relaxed whitespace-pre-line">
                 {pro.bio ||
@@ -158,7 +158,7 @@ export default async function ProfessionalProfilePage({
             </section>
 
             {/* Experience & Credentials */}
-            <section className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
+            <section className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
               <h2 className="text-lg font-bold text-[#0F172A]">Experience & Verification</h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="p-3.5 rounded-xl bg-[#F8FAFC] border border-[#F1F5F9]">
@@ -193,7 +193,7 @@ export default async function ProfessionalProfilePage({
             </section>
 
             {/* Offered Services Catalogue (Multiple Services Supported) */}
-            <section className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
+            <section className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
               <div>
                 <h2 className="text-lg font-bold text-[#0F172A]">
                   Services Offered ({pro.services?.length || 0})
@@ -249,7 +249,7 @@ export default async function ProfessionalProfilePage({
             </section>
 
             {/* Portfolio Samples */}
-            <section className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
+            <section className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
               <h2 className="text-lg font-bold text-[#0F172A]">Work Portfolio & Past Installations</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="border border-[#E2E8F0] rounded-xl overflow-hidden bg-[#F8FAFC]">
@@ -274,7 +274,7 @@ export default async function ProfessionalProfilePage({
             </section>
 
             {/* Customer Reviews & Feedback */}
-            <section className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
+            <section className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-6 space-y-4 shadow-xs">
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-lg font-bold text-[#0F172A]">Customer Reviews</h2>
@@ -315,7 +315,7 @@ export default async function ProfessionalProfilePage({
                       )}
                       <p className="text-sm text-[#334155] leading-relaxed">{rev.comment}</p>
                       {rev.professional_response && (
-                        <div className="mt-2 p-3 rounded-lg bg-white border border-[#E2E8F0] text-xs text-[#475569]">
+                        <div className="mt-2 p-3 rounded-lg bg-white dark:bg-[#0D223A] border border-[#E2E8F0] text-xs text-[#475569]">
                           <span className="font-bold text-[#0F766E]">Response from {displayName}: </span>
                           {rev.professional_response}
                         </div>
@@ -345,7 +345,7 @@ export default async function ProfessionalProfilePage({
           {/* RIGHT SIDEBAR: Service Areas, Working Hours, Categories & Guarantee */}
           <div className="space-y-6">
             {/* Service Areas */}
-            <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-3 shadow-xs">
+            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-6 space-y-3 shadow-xs">
               <h3 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider">
                 Service Areas Covered
               </h3>
@@ -371,7 +371,7 @@ export default async function ProfessionalProfilePage({
             </div>
 
             {/* Working Hours */}
-            <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6 space-y-3 shadow-xs">
+            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-6 space-y-3 shadow-xs">
               <h3 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider">
                 Working Hours & Availability
               </h3>
@@ -386,7 +386,7 @@ export default async function ProfessionalProfilePage({
                 </div>
                 <div className="flex justify-between py-1 border-b border-[#F1F5F9]">
                   <span className="text-[#64748B]">Sunday</span>
-                  <span className="font-semibold text-amber-700">Emergency Callout Only</span>
+                  <span className="font-semibold text-amber-700 dark:text-amber-300">Emergency Callout Only</span>
                 </div>
                 <div className="flex justify-between py-1">
                   <span className="text-[#64748B]">Emergency 24/7</span>

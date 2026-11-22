@@ -25,7 +25,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
       {state.status === "error" && state.message && (
         <div
           role="alert"
-          className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-800 flex items-start gap-3"
+          className="rounded-lg bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 p-4 text-sm text-red-800 dark:text-red-300 flex items-start gap-3"
         >
           <span className="font-bold text-red-600 mt-0.5">!</span>
           <span>{state.message}</span>
@@ -35,12 +35,12 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
       {state.status === "success" && state.message && (
         <div
           role="status"
-          className="rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-900 flex items-start gap-3"
+          className="rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 p-4 text-sm text-emerald-900 flex items-start gap-3"
         >
           <span className="font-bold text-emerald-600 mt-0.5">✓</span>
           <div>
             <p className="font-semibold">Inquiry Received</p>
-            <p className="mt-1 text-emerald-800">{state.message}</p>
+            <p className="mt-1 text-emerald-800 dark:text-emerald-300">{state.message}</p>
           </div>
         </div>
       )}
@@ -62,9 +62,9 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.fullName ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.fullName)}
-            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.fullName
-                ? "border-red-500 bg-red-50/20"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
                 : "border-[#CBD5E1] hover:border-slate-400"
             }`}
             placeholder="e.g. Amaka Danladi"
@@ -91,9 +91,9 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.email ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.email)}
-            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.email
-                ? "border-red-500 bg-red-50/20"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
                 : "border-[#CBD5E1] hover:border-slate-400"
             }`}
             placeholder="e.g. amaka@example.com"
@@ -121,7 +121,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             type="tel"
             autoComplete="tel"
             defaultValue={state.values?.phone ?? ""}
-            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
             placeholder="e.g. 0802 000 0000"
           />
           {state.fieldErrors?.phone && (
@@ -148,7 +148,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             }
             required
             aria-invalid={Boolean(state.fieldErrors?.inquiryType)}
-            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
           >
             {CONTACT_INQUIRY_TYPES.map((type) => (
               <option key={type} value={type}>
@@ -177,7 +177,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             id="city"
             name="city"
             defaultValue={state.values?.city ?? ""}
-            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
           >
             <option value="">Select a city (or nationwide)</option>
             {PILOT_CITIES.map((city) => (
@@ -202,9 +202,9 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.subject ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.subject)}
-            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
               state.fieldErrors?.subject
-                ? "border-red-500 bg-red-50/20"
+                ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
                 : "border-[#CBD5E1] hover:border-slate-400"
             }`}
             placeholder="Brief description of your query"
@@ -232,9 +232,9 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
           defaultValue={state.values?.message ?? ""}
           required
           aria-invalid={Boolean(state.fieldErrors?.message)}
-          className={`w-full p-3.5 rounded-lg border text-base text-[#0F172A] bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+          className={`w-full p-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
             state.fieldErrors?.message
-              ? "border-red-500 bg-red-50/20"
+              ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
               : "border-[#CBD5E1] hover:border-slate-400"
           }`}
           placeholder="Please explain how we can assist you..."

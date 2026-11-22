@@ -117,11 +117,11 @@ export default function BusinessSolutionsPage() {
           align="center"
         />
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl border border-red-200 p-6 sm:p-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 text-red-700 text-xs font-bold mb-4">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-red-200 dark:border-red-800 p-6 sm:p-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-400 text-xs font-bold mb-4">
               Traditional Ad-hoc Approach
             </div>
-            <ul className="space-y-3.5 text-xs text-slate-700">
+            <ul className="space-y-3.5 text-xs text-slate-700 dark:text-slate-200">
               <li className="flex items-start gap-2.5">
                 <span className="text-red-500 font-bold shrink-0">✕</span>
                 <span>Unvetted roadside technicians with unknown competence.</span>
@@ -141,11 +141,11 @@ export default function BusinessSolutionsPage() {
             </ul>
           </div>
 
-          <div className="bg-white rounded-2xl border border-teal-300 p-6 sm:p-8 shadow-sm ring-1 ring-[#0D9488]/30">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 text-[#0D9488] text-xs font-bold mb-4">
+          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-teal-300 dark:border-teal-700 p-6 sm:p-8 shadow-sm ring-1 ring-[#0D9488]/30">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] text-xs font-bold mb-4">
               EasyLife Business System
             </div>
-            <ul className="space-y-3.5 text-xs text-slate-700">
+            <ul className="space-y-3.5 text-xs text-slate-700 dark:text-slate-200">
               <li className="flex items-start gap-2.5">
                 <span className="text-[#0D9488] font-bold shrink-0">✓</span>
                 <span>Strictly verified trade specialists backed by comprehensive background vetting.</span>
@@ -176,21 +176,21 @@ export default function BusinessSolutionsPage() {
           description="Flexible solutions configured to meet the specific compliance and uptime needs of diverse facilities."
         />
         <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="rounded-xl border border-slate-200 p-6 bg-[#F8FAFC]">
+          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-[#F8FAFC]">
             <h4 className="text-base font-bold text-[#0F172A]">Healthcare &amp; Diagnostics</h4>
-            <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Uninterrupted cold-chain storage, medical oxygen booster pumps, and zero-flicker generator changeover calibration for clinics and laboratories.
             </p>
           </div>
-          <div className="rounded-xl border border-slate-200 p-6 bg-[#F8FAFC]">
+          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-[#F8FAFC]">
             <h4 className="text-base font-bold text-[#0F172A]">Hospitality &amp; Quick Service Retail</h4>
-            <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Commercial kitchen exhaust extraction, refrigeration maintenance, deep cleaning, and rapid plumbing response to prevent customer disruption.
             </p>
           </div>
-          <div className="rounded-xl border border-slate-200 p-6 bg-[#F8FAFC]">
+          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-[#F8FAFC]">
             <h4 className="text-base font-bold text-[#0F172A]">Estates &amp; Property Managers</h4>
-            <p className="mt-2 text-xs text-slate-600 leading-relaxed">
+            <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Central borehole treatment plant oversight, street lighting arrays, gate automation, and tenant reactive maintenance ticketing with complete billing transparency.
             </p>
           </div>

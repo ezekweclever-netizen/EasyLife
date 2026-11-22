@@ -53,7 +53,7 @@ export default async function NotificationsPage() {
 
           <Link
             href="/messages"
-            className="self-start sm:self-auto px-4 py-2 rounded-xl border border-[#CBD5E1] bg-white text-xs font-bold text-[#0F172A] hover:bg-slate-50 transition"
+            className="self-start sm:self-auto px-4 py-2 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#0F172A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
           >
             Go to Messages →
           </Link>

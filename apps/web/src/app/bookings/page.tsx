@@ -118,7 +118,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
               return (
                 <div
                   key={booking.id}
-                  className="bg-white rounded-2xl border border-[#E2E8F0] p-5 sm:p-6 shadow-xs hover:border-[#CBD5E1] transition-all flex flex-col md:flex-row md:items-center justify-between gap-5"
+                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-5 sm:p-6 shadow-xs hover:border-[#CBD5E1] transition-all flex flex-col md:flex-row md:items-center justify-between gap-5"
                 >
                   <div className="space-y-2 max-w-2xl">
                     <div className="flex flex-wrap items-center gap-2 text-xs">
@@ -134,7 +134,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
                         </span>
                       )}
                       {booking.urgency === "emergency" && (
-                        <span className="px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-bold text-[10px] animate-pulse">
+                        <span className="px-2 py-0.5 rounded-full bg-red-100 text-red-700 dark:text-red-400 font-bold text-[10px] animate-pulse">
                           🚨 Emergency
                         </span>
                       )}
@@ -170,7 +170,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
             })}
 
             {totalPages > 1 && (
-              <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white rounded-2xl border border-[#E2E8F0] px-5 py-3.5 text-xs text-[#64748B]">
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] px-5 py-3.5 text-xs text-[#64748B]">
                 <span>
                   Showing <strong className="text-[#0F172A]">{offset + 1}</strong>–
                   <strong className="text-[#0F172A]">{Math.min(offset + bookings.length, totalCount)}</strong> of{" "}
@@ -206,7 +206,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
             )}
           </div>
         ) : (
-          <div className="bg-white rounded-3xl border border-[#E2E8F0] p-12 text-center space-y-4 max-w-lg mx-auto shadow-xs">
+          <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-12 text-center space-y-4 max-w-lg mx-auto shadow-xs">
             <div className="w-16 h-16 rounded-full bg-[#F0FDFA] text-[#0F766E] text-2xl mx-auto flex items-center justify-center font-bold">
               📋
             </div>

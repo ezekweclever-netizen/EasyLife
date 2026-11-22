@@ -106,20 +106,20 @@ function SettingSwitchRow({
   onChange: (next: boolean) => void;
 }) {
   return (
-    <div className="flex items-start justify-between gap-4 py-4 border-b border-slate-100 last:border-b-0">
+    <div className="flex items-start justify-between gap-4 py-4 border-b border-slate-100 dark:border-slate-800 last:border-b-0">
       <div className="space-y-0.5 pr-2">
         <div className="flex items-center gap-2 flex-wrap">
           <label
             htmlFor={id}
             className={`text-sm font-semibold ${
-              disabled ? "text-slate-400" : "text-slate-900 cursor-pointer"
+              disabled ? "text-slate-400" : "text-slate-900 dark:text-white cursor-pointer"
             }`}
           >
             {label}
           </label>
           {badge}
         </div>
-        <p className="text-xs text-slate-500 leading-relaxed">{description}</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">{description}</p>
       </div>
       <button
         id={id}
@@ -138,7 +138,7 @@ function SettingSwitchRow({
       >
         <span
           aria-hidden="true"
-          className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-sm transition ${
+          className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white dark:bg-[#0D223A] shadow-sm transition ${
             checked ? "translate-x-5" : "translate-x-0"
           }`}
         />
@@ -283,7 +283,7 @@ export function PlatformSettingsClient({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       {/* Left Navigation Menu */}
-      <aside className="lg:col-span-3 bg-white rounded-2xl border border-slate-200/80 shadow-xs p-2 space-y-1 lg:sticky lg:top-24">
+      <aside className="lg:col-span-3 bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654]/80 shadow-xs p-2 space-y-1 lg:sticky lg:top-24">
         <div className="px-3 py-2 text-2xs font-extrabold uppercase tracking-wider text-slate-400">
           Settings Sections
         </div>
@@ -301,14 +301,14 @@ export function PlatformSettingsClient({
               className={`w-full text-left px-3.5 py-2.5 rounded-xl transition flex items-center justify-between gap-2 ${
                 isActive
                   ? "bg-slate-900 text-white shadow-sm"
-                  : "text-slate-700 hover:bg-slate-100"
+                  : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
               }`}
             >
               <div>
                 <div className="text-xs font-bold leading-tight">{sec.shortLabel}</div>
                 <div
                   className={`text-2xs mt-0.5 line-clamp-1 ${
-                    isActive ? "text-slate-300" : "text-slate-500"
+                    isActive ? "text-slate-300" : "text-slate-500 dark:text-slate-400"
                   }`}
                 >
                   {sec.title}
@@ -333,8 +333,8 @@ export function PlatformSettingsClient({
             role="status"
             className={`rounded-2xl px-4 py-3.5 text-sm font-semibold border flex items-center justify-between gap-3 ${
               feedback.type === "success"
-                ? "bg-emerald-50 text-emerald-800 border-emerald-200"
-                : "bg-red-50 text-red-800 border-red-200"
+                ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
+                : "bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800"
             }`}
           >
             <span>{feedback.message}</span>
@@ -350,15 +350,15 @@ export function PlatformSettingsClient({
 
         <form
           onSubmit={(e) => handleSaveSection(activeTab, e)}
-          className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden"
+          className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden"
         >
           {/* Section Header */}
-          <div className="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50/60">
+          <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 dark:bg-[#071526]/60">
             <div>
-              <h2 className="text-lg font-extrabold text-slate-900">
+              <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">
                 {currentSectionMeta.title}
               </h2>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 {currentSectionMeta.description}
               </p>
             </div>
@@ -366,7 +366,7 @@ export function PlatformSettingsClient({
               <div className="text-2xs font-semibold uppercase tracking-wider text-slate-400">
                 Last Saved
               </div>
-              <div className="text-xs font-semibold text-slate-700">{lastUpdatedLabel}</div>
+              <div className="text-xs font-semibold text-slate-700 dark:text-slate-200">{lastUpdatedLabel}</div>
             </div>
           </div>
 
@@ -379,7 +379,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="platform_name"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Platform Name *
                     </label>
@@ -394,9 +394,9 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, platform_name: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Displayed across the website header, emails, and customer receipts.
                     </p>
                   </div>
@@ -404,7 +404,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="website_url"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Website URL
                     </label>
@@ -417,9 +417,9 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, website_url: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Primary public web address used in links and notifications.
                     </p>
                   </div>
@@ -428,7 +428,7 @@ export function PlatformSettingsClient({
                 <div>
                   <label
                     htmlFor="platform_description"
-                    className="block text-xs font-bold text-slate-700 mb-1.5"
+                    className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                   >
                     Platform Description
                   </label>
@@ -441,9 +441,9 @@ export function PlatformSettingsClient({
                       setGeneral((p) => ({ ...p, platform_description: e.target.value }));
                       markDirty("general");
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                   />
-                  <p className="text-2xs text-slate-500 mt-1">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                     Short public summary describing EasyLife&apos;s marketplace mission.
                   </p>
                 </div>
@@ -452,7 +452,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="platform_logo_url"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Platform Logo Path or URL
                     </label>
@@ -465,9 +465,9 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, platform_logo_url: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Path to the official brand logo displayed in navigation bars.
                     </p>
                   </div>
@@ -475,7 +475,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="business_address"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Business Address
                     </label>
@@ -488,9 +488,9 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, business_address: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Shown on official correspondence and legal notices when configured.
                     </p>
                   </div>
@@ -500,7 +500,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="contact_email"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Contact Email
                     </label>
@@ -513,9 +513,9 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, contact_email: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Primary customer support and operations email address.
                     </p>
                   </div>
@@ -523,7 +523,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="contact_phone"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Contact Phone Number
                     </label>
@@ -536,19 +536,19 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, contact_phone: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Official support phone number (leave blank if phone support is not active).
                     </p>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2 border-t border-slate-100">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pt-2 border-t border-slate-100 dark:border-slate-800">
                   <div>
                     <label
                       htmlFor="default_currency"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Default Platform Currency
                     </label>
@@ -559,7 +559,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, default_currency: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     >
                       {CURRENCY_OPTIONS.map((c) => (
                         <option key={c.code} value={c.code}>
@@ -572,7 +572,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="default_country"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Default Country
                     </label>
@@ -583,7 +583,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, default_country: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     >
                       {COUNTRY_OPTIONS.map((country) => (
                         <option key={country} value={country}>
@@ -596,7 +596,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="default_timezone"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Default Timezone
                     </label>
@@ -607,7 +607,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, default_timezone: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     >
                       {TIMEZONE_OPTIONS.map((tz) => (
                         <option key={tz.value} value={tz.value}>
@@ -619,18 +619,18 @@ export function PlatformSettingsClient({
                 </div>
 
                 {/* Supported Operating Cities */}
-                <div className="pt-2 border-t border-slate-100">
-                  <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5">
                     Active Operating Cities
                   </label>
-                  <p className="text-2xs text-slate-500 mb-3">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400 mb-3">
                     Cities where EasyLife customers can discover and request services.
                   </p>
                   <div className="flex flex-wrap gap-2 mb-3">
                     {general.supported_cities.map((city) => (
                       <span
                         key={city}
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800"
                       >
                         {city}
                         {general.supported_cities.length > 1 && (
@@ -658,12 +658,12 @@ export function PlatformSettingsClient({
                         }
                       }}
                       placeholder="Add a city (e.g. Enugu, Ibadan)"
-                      className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 text-xs text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <button
                       type="button"
                       onClick={addCity}
-                      className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition"
+                      className="px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-800 dark:text-slate-100 text-xs font-bold transition"
                     >
                       Add City
                     </button>
@@ -679,7 +679,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Account Registration Controls
                   </h3>
-                  <div className="rounded-xl border border-slate-200/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
                     <SettingSwitchRow
                       id="enable_customer_registration"
                       label="Enable Customer Registration"
@@ -717,7 +717,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Verification &amp; Approval Requirements
                   </h3>
-                  <div className="rounded-xl border border-slate-200/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
                     <SettingSwitchRow
                       id="require_email_verification"
                       label="Require Email Verification"
@@ -765,11 +765,11 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Password &amp; Authentication Policies
                   </h3>
-                  <div className="rounded-xl border border-slate-200/80 p-4 space-y-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 space-y-4">
                     <div className="max-w-xs">
                       <label
                         htmlFor="min_password_length"
-                        className="block text-xs font-bold text-slate-700 mb-1.5"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                       >
                         Minimum Password Length
                       </label>
@@ -786,9 +786,9 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("registration");
                         }}
-                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
-                      <p className="text-2xs text-slate-500 mt-1">
+                      <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Recommended minimum is 8 to 12 characters.
                       </p>
                     </div>
@@ -810,7 +810,7 @@ export function PlatformSettingsClient({
             {/* 3. SERVICE MARKETPLACE SETTINGS */}
             {activeTab === "marketplace" && (
               <div className="space-y-6">
-                <div className="rounded-xl border border-slate-200/80 px-4">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
                   <SettingSwitchRow
                     id="enable_service_bookings"
                     label="Enable Service Bookings"
@@ -870,7 +870,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="default_quotation_expiry_hours"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Quotation Validity Window (Hours)
                     </label>
@@ -887,9 +887,9 @@ export function PlatformSettingsClient({
                         }));
                         markDirty("marketplace");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Number of hours before an unaccepted quotation automatically expires.
                     </p>
                   </div>
@@ -897,7 +897,7 @@ export function PlatformSettingsClient({
                   <div>
                     <label
                       htmlFor="dispute_auto_escalate_hours"
-                      className="block text-xs font-bold text-slate-700 mb-1.5"
+                      className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                     >
                       Dispute Escalation Threshold (Hours)
                     </label>
@@ -914,16 +914,16 @@ export function PlatformSettingsClient({
                         }));
                         markDirty("marketplace");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
-                    <p className="text-2xs text-slate-500 mt-1">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Hours before an unreviewed customer dispute triggers a supervisor alert.
                     </p>
                   </div>
                 </div>
 
                 {/* Maintenance Mode Panel */}
-                <div className="rounded-xl border border-amber-200 bg-amber-50/50 p-4 space-y-3">
+                <div className="rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/60/50 p-4 space-y-3">
                   <SettingSwitchRow
                     id="maintenance_mode_enabled"
                     label="Platform Maintenance Mode"
@@ -938,7 +938,7 @@ export function PlatformSettingsClient({
                     <div>
                       <label
                         htmlFor="maintenance_mode_message"
-                        className="block text-xs font-bold text-slate-700 mb-1.5"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                       >
                         Maintenance Banner Message
                       </label>
@@ -954,26 +954,26 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("marketplace");
                         }}
-                        className="w-full px-3.5 py-2 rounded-xl border border-amber-300 bg-white text-sm text-slate-900 focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 focus:outline-none"
+                        className="w-full px-3.5 py-2 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-[#0D223A] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 focus:outline-none"
                       />
                     </div>
                   )}
                 </div>
 
                 {/* Quick Links to Catalogue Management */}
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <div className="text-xs font-bold text-slate-900">
+                    <div className="text-xs font-bold text-slate-900 dark:text-white">
                       Service Categories &amp; Service Availability
                     </div>
-                    <p className="text-2xs text-slate-500 mt-0.5">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-0.5">
                       Manage individual service statuses (Active, Paused, Inactive), homepage visibility, and category structure.
                     </p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Link
                       href="/admin/categories"
-                      className="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-xs font-bold text-slate-700 transition"
+                      className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
                     >
                       Manage Categories
                     </Link>
@@ -992,23 +992,23 @@ export function PlatformSettingsClient({
             {activeTab === "financial" && (
               <div className="space-y-6">
                 {/* Payment Provider Status Card */}
-                <div className="rounded-xl border border-slate-200/80 p-4 bg-slate-50/70 space-y-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 bg-slate-50 dark:bg-[#071526]/70 space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
-                      <div className="text-sm font-bold text-slate-900">
+                      <div className="text-sm font-bold text-slate-900 dark:text-white">
                         Payment Provider Configuration Status
                       </div>
-                      <p className="text-xs text-slate-500">
+                      <p className="text-xs text-slate-500 dark:text-slate-400">
                         Credentials are managed securely on the server and are never displayed in full.
                       </p>
                     </div>
                     {integrations.paystackConfigured ? (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 self-start sm:self-auto">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 self-start sm:self-auto">
                         <span className="w-2 h-2 rounded-full bg-emerald-500" />
                         Credentials Configured ({integrations.paystackKeyHint})
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200 self-start sm:self-auto">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 self-start sm:self-auto">
                         <span className="w-2 h-2 rounded-full bg-amber-500" />
                         Not Configured
                       </span>
@@ -1033,7 +1033,7 @@ export function PlatformSettingsClient({
                 </div>
 
                 {/* Commission Settings */}
-                <div className="rounded-xl border border-slate-200/80 p-4 space-y-4">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 space-y-4">
                   <SettingSwitchRow
                     id="commission_enabled"
                     label="Enable Platform Commission"
@@ -1049,7 +1049,7 @@ export function PlatformSettingsClient({
                     <div>
                       <label
                         htmlFor="default_commission_percent"
-                        className="block text-xs font-bold text-slate-700 mb-1.5"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                       >
                         Default Platform Commission (%)
                       </label>
@@ -1068,9 +1068,9 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("financial");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 disabled:bg-slate-100 disabled:text-slate-400 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800 disabled:text-slate-400 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
-                      <p className="text-2xs text-slate-500 mt-1">
+                      <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Set between 0% and 50%. Only applied when commission is enabled.
                       </p>
                     </div>
@@ -1078,7 +1078,7 @@ export function PlatformSettingsClient({
                     <div>
                       <label
                         htmlFor="minimum_callout_fee_naira"
-                        className="block text-xs font-bold text-slate-700 mb-1.5"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                       >
                         Minimum Diagnostic / Callout Fee (NGN)
                       </label>
@@ -1095,9 +1095,9 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("financial");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
-                      <p className="text-2xs text-slate-500 mt-1">
+                      <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Leave at 0 if no platform-wide callout minimum is enforced.
                       </p>
                     </div>
@@ -1106,10 +1106,10 @@ export function PlatformSettingsClient({
 
                 {/* Supported Currencies */}
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                     Supported Platform Currencies
                   </label>
-                  <p className="text-2xs text-slate-500 mb-3">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400 mb-3">
                     Select currencies permitted for quotations and invoices.
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -1122,8 +1122,8 @@ export function PlatformSettingsClient({
                           onClick={() => toggleCurrency(curr.code)}
                           className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition ${
                             selected
-                              ? "bg-teal-50 text-teal-800 border-teal-300"
-                              : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
+                              ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border-teal-300 dark:border-teal-700"
+                              : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
                           }`}
                         >
                           {selected ? "✓ " : ""}
@@ -1135,7 +1135,7 @@ export function PlatformSettingsClient({
                 </div>
 
                 {/* Tax Configuration */}
-                <div className="rounded-xl border border-slate-200/80 p-4 space-y-4">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 space-y-4">
                   <SettingSwitchRow
                     id="tax_enabled"
                     label="Enable Tax Calculation"
@@ -1151,7 +1151,7 @@ export function PlatformSettingsClient({
                       <div>
                         <label
                           htmlFor="tax_label"
-                          className="block text-xs font-bold text-slate-700 mb-1.5"
+                          className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                         >
                           Tax Label
                         </label>
@@ -1165,13 +1165,13 @@ export function PlatformSettingsClient({
                             setFinancial((p) => ({ ...p, tax_label: e.target.value }));
                             markDirty("financial");
                           }}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                         />
                       </div>
                       <div>
                         <label
                           htmlFor="tax_rate_percent"
-                          className="block text-xs font-bold text-slate-700 mb-1.5"
+                          className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                         >
                           Tax Rate (%)
                         </label>
@@ -1189,25 +1189,25 @@ export function PlatformSettingsClient({
                             }));
                             markDirty("financial");
                           }}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                         />
                       </div>
                     </div>
                   )}
                 </div>
 
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 flex items-center justify-between gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] p-4 flex items-center justify-between gap-3">
                   <div>
-                    <div className="text-xs font-bold text-slate-900">
+                    <div className="text-xs font-bold text-slate-900 dark:text-white">
                       City &amp; Category Commission Rules
                     </div>
-                    <p className="text-2xs text-slate-500 mt-0.5">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-0.5">
                       Configure targeted commission rules by city or service category.
                     </p>
                   </div>
                   <Link
                     href="/admin/commissions"
-                    className="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-xs font-bold text-slate-700 transition shrink-0"
+                    className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition shrink-0"
                   >
                     Open Commission Rules
                   </Link>
@@ -1222,7 +1222,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Delivery Channels
                   </h3>
-                  <div className="rounded-xl border border-slate-200/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
                     <SettingSwitchRow
                       id="email_notifications_enabled"
                       label="Email Notifications"
@@ -1232,8 +1232,8 @@ export function PlatformSettingsClient({
                         <span
                           className={`text-2xs font-bold px-2 py-0.5 rounded-full ${
                             integrations.emailProviderConfigured
-                              ? "bg-emerald-50 text-emerald-700"
-                              : "bg-slate-100 text-slate-500"
+                              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
                           }`}
                         >
                           {integrations.emailProviderConfigured
@@ -1255,8 +1255,8 @@ export function PlatformSettingsClient({
                         <span
                           className={`text-2xs font-bold px-2 py-0.5 rounded-full ${
                             integrations.pushProviderConfigured
-                              ? "bg-emerald-50 text-emerald-700"
-                              : "bg-amber-50 text-amber-700"
+                              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300"
+                              : "bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300"
                           }`}
                         >
                           {integrations.pushProviderConfigured
@@ -1278,8 +1278,8 @@ export function PlatformSettingsClient({
                         <span
                           className={`text-2xs font-bold px-2 py-0.5 rounded-full ${
                             integrations.smsProviderConfigured
-                              ? "bg-emerald-50 text-emerald-700"
-                              : "bg-slate-100 text-slate-500"
+                              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
                           }`}
                         >
                           {integrations.smsProviderConfigured
@@ -1299,7 +1299,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Event Triggers
                   </h3>
-                  <div className="rounded-xl border border-slate-200/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
                     <SettingSwitchRow
                       id="booking_notifications_enabled"
                       label="Booking &amp; Quotation Notifications"
@@ -1342,7 +1342,7 @@ export function PlatformSettingsClient({
                 <div className="max-w-md">
                   <label
                     htmlFor="admin_alert_email"
-                    className="block text-xs font-bold text-slate-700 mb-1.5"
+                    className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                   >
                     Administrative Alert Recipient Email
                   </label>
@@ -1355,9 +1355,9 @@ export function PlatformSettingsClient({
                       setNotifications((p) => ({ ...p, admin_alert_email: e.target.value }));
                       markDirty("notifications");
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                   />
-                  <p className="text-2xs text-slate-500 mt-1">
+                  <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                     Email address receiving escalated platform alerts and operational notices.
                   </p>
                 </div>
@@ -1371,7 +1371,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Administrative Access &amp; Governance
                   </h3>
-                  <div className="rounded-xl border border-slate-200/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
                     <SettingSwitchRow
                       id="restrict_admin_registration"
                       label="Restrict Administrator Role Assignment"
@@ -1423,7 +1423,7 @@ export function PlatformSettingsClient({
                     <div>
                       <label
                         htmlFor="session_timeout_minutes"
-                        className="block text-xs font-bold text-slate-700 mb-1.5"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                       >
                         Session Timeout (Minutes)
                       </label>
@@ -1440,9 +1440,9 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("security");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
-                      <p className="text-2xs text-slate-500 mt-1">
+                      <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Idle session timeout window (15 – 1,440 mins).
                       </p>
                     </div>
@@ -1450,7 +1450,7 @@ export function PlatformSettingsClient({
                     <div>
                       <label
                         htmlFor="max_login_attempts"
-                        className="block text-xs font-bold text-slate-700 mb-1.5"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                       >
                         Max Failed Login Attempts
                       </label>
@@ -1467,9 +1467,9 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("security");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
-                      <p className="text-2xs text-slate-500 mt-1">
+                      <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Consecutive failures before temporary lockout.
                       </p>
                     </div>
@@ -1477,7 +1477,7 @@ export function PlatformSettingsClient({
                     <div>
                       <label
                         htmlFor="lockout_duration_minutes"
-                        className="block text-xs font-bold text-slate-700 mb-1.5"
+                        className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1.5"
                       >
                         Lockout Duration (Minutes)
                       </label>
@@ -1494,28 +1494,28 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("security");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
-                      <p className="text-2xs text-slate-500 mt-1">
+                      <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Cooldown period after repeated failed sign-ins.
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <div className="text-xs font-bold text-slate-900">
+                    <div className="text-xs font-bold text-slate-900 dark:text-white">
                       Roles, Permissions &amp; Security Audit Trail
                     </div>
-                    <p className="text-2xs text-slate-500 mt-0.5">
+                    <p className="text-2xs text-slate-500 dark:text-slate-400 mt-0.5">
                       Review user access permissions and inspect immutable administrative logs.
                     </p>
                   </div>
                   <div className="flex items-center gap-2 shrink-0">
                     <Link
                       href="/admin/users"
-                      className="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-xs font-bold text-slate-700 transition"
+                      className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
                     >
                       Manage User Roles
                     </Link>
@@ -1532,10 +1532,10 @@ export function PlatformSettingsClient({
           </div>
 
           {/* Section Footer Save Bar */}
-          <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="text-xs text-slate-500">
+          <div className="px-6 py-4 bg-slate-50 dark:bg-[#071526] border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="text-xs text-slate-500 dark:text-slate-400">
               {dirtySections[activeTab] ? (
-                <span className="font-semibold text-amber-700">
+                <span className="font-semibold text-amber-700 dark:text-amber-300">
                   You have unsaved changes in {currentSectionMeta.shortLabel}.
                 </span>
               ) : (

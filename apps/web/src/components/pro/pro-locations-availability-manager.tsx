@@ -154,13 +154,13 @@ export function ProLocationsAvailabilityManager({
   return (
     <div className="space-y-8">
       {/* Operating Hubs & Approved Service Areas */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-5">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               Operating Hubs &amp; Approved Coverage ({areas.length})
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Operate across approved hubs in Port Harcourt, Lagos, and Abuja with neighbourhood-level matching.
             </p>
           </div>
@@ -177,8 +177,8 @@ export function ProLocationsAvailabilityManager({
           <div
             className={`p-3 rounded-xl text-xs font-medium border ${
               areaFeedback.ok
-                ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-                : "bg-red-50 border-red-200 text-red-800"
+                ? "bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-900"
+                : "bg-red-50 dark:bg-red-950/60 border-red-200 dark:border-red-800 text-red-800 dark:text-red-300"
             }`}
           >
             {areaFeedback.msg}
@@ -188,11 +188,11 @@ export function ProLocationsAvailabilityManager({
         {showAddArea && (
           <form
             onSubmit={handleAddArea}
-            className="p-4 rounded-xl border border-teal-200 bg-teal-50/40 space-y-4"
+            className="p-4 rounded-xl border border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/60/40 space-y-4"
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                   Approved Pilot City *
                 </label>
                 <select
@@ -201,7 +201,7 @@ export function ProLocationsAvailabilityManager({
                     setAreaCity(e.target.value);
                     setSelectedNeighbourhoodId("");
                   }}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                 >
                   {PILOT_CITIES.map((c) => (
                     <option key={c} value={c}>
@@ -212,13 +212,13 @@ export function ProLocationsAvailabilityManager({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                   Approved Neighbourhood ({cityNeighbourhoods.length} available)
                 </label>
                 <select
                   value={selectedNeighbourhoodId}
                   onChange={(e) => setSelectedNeighbourhoodId(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                 >
                   <option value="">-- Optional: Select Approved Neighbourhood --</option>
                   {cityNeighbourhoods.map((nb) => (
@@ -230,7 +230,7 @@ export function ProLocationsAvailabilityManager({
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                   LGA / District Name (if no neighbourhood picked)
                 </label>
                 <input
@@ -239,12 +239,12 @@ export function ProLocationsAvailabilityManager({
                   onChange={(e) => setCustomLga(e.target.value)}
                   disabled={Boolean(selectedNeighbourhoodId)}
                   placeholder="e.g. Obio/Akpor, Ikeja, Maitama"
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900 disabled:bg-slate-100"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">
                   Coverage Radius (km)
                 </label>
                 <input
@@ -253,7 +253,7 @@ export function ProLocationsAvailabilityManager({
                   max="200"
                   value={radiusKm}
                   onChange={(e) => setRadiusKm(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                 />
               </div>
             </div>
@@ -271,12 +271,12 @@ export function ProLocationsAvailabilityManager({
         )}
 
         <div className="space-y-2.5">
-          <div className="p-3 rounded-xl border border-teal-200 bg-teal-50/40 text-xs flex items-center justify-between">
+          <div className="p-3 rounded-xl border border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/60/40 text-xs flex items-center justify-between">
             <div>
               <span className="font-bold text-teal-900 block">
                 Primary Base: {primaryCity}, {primaryState}
               </span>
-              <span className="text-[11px] text-teal-700 mt-0.5 block">
+              <span className="text-[11px] text-teal-700 dark:text-teal-400 mt-0.5 block">
                 Used as your default city anchor for customer discovery.
               </span>
             </div>
@@ -287,13 +287,13 @@ export function ProLocationsAvailabilityManager({
               key={a.id}
               className={`p-3.5 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs ${
                 a.is_active
-                  ? "border-slate-200 bg-slate-50"
-                  : "border-slate-200 bg-slate-100/70 opacity-75"
+                  ? "border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]"
+                  : "border-slate-200 dark:border-[#163654] bg-slate-100 dark:bg-slate-800/70 opacity-75"
               }`}
             >
               <div>
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="font-bold text-slate-900">
+                  <span className="font-bold text-slate-900 dark:text-white">
                     {a.neighbourhood ? `${a.neighbourhood} • ${a.lga_or_district}` : a.lga_or_district} ({a.city})
                   </span>
                   {a.is_primary && (
@@ -304,14 +304,14 @@ export function ProLocationsAvailabilityManager({
                   <span
                     className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                       a.is_active
-                        ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                        : "bg-slate-200 text-slate-600"
+                        ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                        : "bg-slate-200 text-slate-600 dark:text-slate-300"
                     }`}
                   >
                     {a.is_active ? "Active" : "Paused"}
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-500 font-mono mt-0.5 block">
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5 block">
                   {a.service_radius_km} km coverage radius
                 </span>
               </div>
@@ -322,7 +322,7 @@ export function ProLocationsAvailabilityManager({
                     type="button"
                     disabled={isPending}
                     onClick={() => handleSetPrimary(a.id)}
-                    className="px-2.5 py-1 rounded-lg border border-teal-200 text-[#0D9488] hover:bg-teal-50 text-[11px] font-semibold"
+                    className="px-2.5 py-1 rounded-lg border border-teal-200 dark:border-teal-800 text-[#0D9488] hover:bg-teal-50 dark:bg-teal-950/60 text-[11px] font-semibold"
                   >
                     Set Primary
                   </button>
@@ -331,7 +331,7 @@ export function ProLocationsAvailabilityManager({
                   type="button"
                   disabled={isPending}
                   onClick={() => handleToggleArea(a.id, !a.is_active)}
-                  className="px-2.5 py-1 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 text-[11px] font-semibold"
+                  className="px-2.5 py-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-[11px] font-semibold"
                 >
                   {a.is_active ? "Pause" : "Activate"}
                 </button>
@@ -340,7 +340,7 @@ export function ProLocationsAvailabilityManager({
                     type="button"
                     disabled={isPending}
                     onClick={() => handleRemoveArea(a.id)}
-                    className="px-2.5 py-1 rounded-lg border border-red-200 text-red-600 hover:bg-red-50 text-[11px] font-semibold"
+                    className="px-2.5 py-1 rounded-lg border border-red-200 dark:border-red-800 text-red-600 hover:bg-red-50 dark:bg-red-950/60 text-[11px] font-semibold"
                   >
                     Remove
                   </button>
@@ -352,13 +352,13 @@ export function ProLocationsAvailabilityManager({
       </div>
 
       {/* Weekly Working Schedule */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
               Working Hours &amp; Weekly Schedule
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Set the exact days and operating hours when customers can book you.
             </p>
           </div>
@@ -376,28 +376,28 @@ export function ProLocationsAvailabilityManager({
           <div
             className={`p-3 rounded-xl text-xs font-medium border ${
               availFeedback.ok
-                ? "bg-emerald-50 border-emerald-200 text-emerald-900"
-                : "bg-red-50 border-red-200 text-red-800"
+                ? "bg-emerald-50 dark:bg-emerald-950/60 border-emerald-200 dark:border-emerald-800 text-emerald-900"
+                : "bg-red-50 dark:bg-red-950/60 border-red-200 dark:border-red-800 text-red-800 dark:text-red-300"
             }`}
           >
             {availFeedback.msg}
           </div>
         )}
 
-        <div className="divide-y divide-slate-100 border border-slate-200 rounded-xl overflow-hidden">
+        <div className="divide-y divide-slate-100 border border-slate-200 dark:border-[#163654] rounded-xl overflow-hidden">
           {schedule.map((row) => (
             <div
               key={row.dayOfWeek}
-              className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white hover:bg-slate-50/70"
+              className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70"
             >
-              <label className="flex items-center gap-2.5 text-xs font-bold text-slate-900 cursor-pointer w-36">
+              <label className="flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white cursor-pointer w-36">
                 <input
                   type="checkbox"
                   checked={row.isAvailable}
                   onChange={(e) =>
                     updateScheduleDay(row.dayOfWeek, { isAvailable: e.target.checked })
                   }
-                  className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300"
+                  className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 dark:border-slate-700"
                 />
                 <span>{row.label}</span>
               </label>
@@ -410,7 +410,7 @@ export function ProLocationsAvailabilityManager({
                     onChange={(e) =>
                       updateScheduleDay(row.dayOfWeek, { startTime: e.target.value })
                     }
-                    className="h-9 px-2.5 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                    className="h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                   />
                   <span className="text-slate-400">to</span>
                   <input
@@ -419,7 +419,7 @@ export function ProLocationsAvailabilityManager({
                     onChange={(e) =>
                       updateScheduleDay(row.dayOfWeek, { endTime: e.target.value })
                     }
-                    className="h-9 px-2.5 rounded-lg border border-slate-300 bg-white text-xs text-slate-900"
+                    className="h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
                   />
                 </div>
               ) : (
