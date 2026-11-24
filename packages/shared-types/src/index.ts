@@ -8,7 +8,44 @@ export type UserRole =
   | "professional"
   | "business"
   | "property_manager"
-  | "admin";
+  | "admin"
+  | "employer"
+  | "moderator";
+
+export type JobEmploymentType =
+  | "full_time"
+  | "part_time"
+  | "contract"
+  | "freelance"
+  | "internship"
+  | "apprenticeship";
+
+export type JobWorkplaceType = "on_site" | "remote" | "hybrid";
+
+export type JobSalaryPeriod = "hour" | "day" | "week" | "month" | "project";
+
+export type JobVacancyStatus =
+  | "draft"
+  | "open"
+  | "paused"
+  | "closed"
+  | "filled"
+  | "expired";
+
+export type JobApplicationStatus =
+  | "submitted"
+  | "under_review"
+  | "shortlisted"
+  | "interviewed"
+  | "offered"
+  | "rejected"
+  | "withdrawn";
+
+export type ContentModerationStatus =
+  | "pending"
+  | "approved"
+  | "rejected"
+  | "flagged";
 
 export type PilotCityName = "Port Harcourt" | "Lagos" | "Abuja";
 

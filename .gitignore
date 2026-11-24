@@ -40,6 +40,7 @@ apps/mobile/android/key.properties
 *.jks
 
 # Logs & OS files
+browser_evidence/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

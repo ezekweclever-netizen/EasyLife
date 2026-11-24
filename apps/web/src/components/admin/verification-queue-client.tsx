@@ -195,28 +195,28 @@ export function VerificationQueueClient({
   const renderProStatusBadge = (status?: string | null) => {
     if (status === "approved") {
       return (
-        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
           Pro: Verified
         </span>
       );
     }
     if (status === "rejected") {
       return (
-        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-800 border border-rose-200">
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
           Pro: Rejected
         </span>
       );
     }
     if (status === "suspended") {
       return (
-        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-white">
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 dark:bg-slate-700 text-white border border-slate-700">
           Pro: Suspended
         </span>
       );
     }
     if (status === "pending") {
       return (
-        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
           Pro: Pending Review
         </span>
       );
@@ -257,9 +257,9 @@ export function VerificationQueueClient({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Filter by business or owner..."
-            className="h-9 px-3 rounded-xl border border-slate-200 dark:border-[#163654] text-xs text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-teal-500/30 focus:outline-none"
+            className="h-9 w-60 sm:w-72 px-3 rounded-xl border border-slate-200 dark:border-[#163654] text-xs text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-teal-500/30 focus:outline-none"
           />
-          <div className="text-xs text-slate-500 dark:text-slate-400">
+          <div className="text-xs text-slate-500 dark:text-slate-400 shrink-0">
             Showing <strong className="text-slate-800 dark:text-slate-100">{filteredDocs.length}</strong> documents
           </div>
         </div>
@@ -390,81 +390,89 @@ export function VerificationQueueClient({
 
                       <td className="py-3.5 px-4">
                         {doc.verification_status === "approved" ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-emerald-100 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                             ✓ Verified
                           </span>
                         ) : doc.verification_status === "pending" ? (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-amber-100 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-amber-100 dark:bg-amber-950/70 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800">
                             ⏳ Under Review
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-rose-100 text-rose-800 border border-rose-200">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-2xs font-bold bg-rose-100 dark:bg-rose-950/70 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
                             ✕ Rejected
                           </span>
                         )}
                       </td>
 
-                      <td className="py-3.5 px-4 text-right space-x-1 whitespace-nowrap">
-                        <button
-                          onClick={() => {
-                            setActiveDoc(doc);
-                            setReasonInput("");
-                            setActionError(null);
-                            setActionSuccess(null);
-                            setModalMode("approve");
-                          }}
-                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition"
-                        >
-                          Approve Doc
-                        </button>
-                        <button
-                          onClick={() => {
-                            setActiveDoc(doc);
-                            setReasonInput("");
-                            setActionError(null);
-                            setActionSuccess(null);
-                            setModalMode("reject");
-                          }}
-                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 transition"
-                        >
-                          Reject Doc
-                        </button>
-                        <button
-                          onClick={() => {
-                            setActiveDoc(doc);
-                            setReasonInput("");
-                            setActionError(null);
-                            setActionSuccess(null);
-                            setModalMode("overall_approve");
-                          }}
-                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-slate-900 text-white hover:bg-slate-800 transition"
-                        >
-                          Accredit Pro
-                        </button>
-                        <button
-                          onClick={() => {
-                            setActiveDoc(doc);
-                            setReasonInput("");
-                            setActionError(null);
-                            setActionSuccess(null);
-                            setModalMode("overall_reject");
-                          }}
-                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-rose-900 text-white hover:bg-rose-800 transition"
-                        >
-                          Reject Pro
-                        </button>
-                        <button
-                          onClick={() => {
-                            setActiveDoc(doc);
-                            setReasonInput("");
-                            setActionError(null);
-                            setActionSuccess(null);
-                            setModalMode("overall_suspend");
-                          }}
-                          className="px-2 py-1 rounded-lg text-2xs font-bold bg-slate-200 text-slate-800 dark:text-slate-100 hover:bg-slate-300 transition"
-                        >
-                          Suspend
-                        </button>
+                      <td className="py-3.5 px-4 text-right">
+                        <div className="flex flex-col items-end gap-1.5 min-w-[210px]">
+                          <div className="flex items-center gap-1">
+                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mr-1">Doc:</span>
+                            <button
+                              onClick={() => {
+                                setActiveDoc(doc);
+                                setReasonInput("");
+                                setActionError(null);
+                                setActionSuccess(null);
+                                setModalMode("approve");
+                              }}
+                              className="px-2 py-0.5 rounded-md text-2xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition"
+                            >
+                              Approve
+                            </button>
+                            <button
+                              onClick={() => {
+                                setActiveDoc(doc);
+                                setReasonInput("");
+                                setActionError(null);
+                                setActionSuccess(null);
+                                setModalMode("reject");
+                              }}
+                              className="px-2 py-0.5 rounded-md text-2xs font-bold bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 transition"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mr-1">Pro:</span>
+                            <button
+                              onClick={() => {
+                                setActiveDoc(doc);
+                                setReasonInput("");
+                                setActionError(null);
+                                setActionSuccess(null);
+                                setModalMode("overall_approve");
+                              }}
+                              className="px-2 py-0.5 rounded-md text-2xs font-bold bg-slate-900 dark:bg-teal-700 text-white hover:bg-slate-800 transition"
+                            >
+                              Accredit
+                            </button>
+                            <button
+                              onClick={() => {
+                                setActiveDoc(doc);
+                                setReasonInput("");
+                                setActionError(null);
+                                setActionSuccess(null);
+                                setModalMode("overall_reject");
+                              }}
+                              className="px-2 py-0.5 rounded-md text-2xs font-bold bg-rose-900 text-white hover:bg-rose-800 transition"
+                            >
+                              Reject
+                            </button>
+                            <button
+                              onClick={() => {
+                                setActiveDoc(doc);
+                                setReasonInput("");
+                                setActionError(null);
+                                setActionSuccess(null);
+                                setModalMode("overall_suspend");
+                              }}
+                              className="px-2 py-0.5 rounded-md text-2xs font-bold bg-amber-600 hover:bg-amber-500 text-white transition"
+                            >
+                              Suspend
+                            </button>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   );

@@ -16,12 +16,13 @@ export const PILOT_CITY_STATE: Readonly<Record<PilotCity, string>> = {
   Abuja: "FCT",
 };
 
-/** 'admin' is intentionally excluded — admins are provisioned server-side only. */
+/** 'admin' and 'moderator' are intentionally excluded — administrative staff are provisioned server-side only. */
 export const SELF_REGISTRABLE_ROLES = [
   "customer",
   "professional",
   "business",
   "property_manager",
+  "employer",
 ] as const;
 export type SelfRegistrableRole = (typeof SELF_REGISTRABLE_ROLES)[number];
 
@@ -49,6 +50,11 @@ export const ROLE_OPTIONS: ReadonlyArray<{
     value: "property_manager",
     label: "Landlord / Property Manager",
     description: "Track properties, assets and maintenance schedules.",
+  },
+  {
+    value: "employer",
+    label: "Employer / Recruiter",
+    description: "Post job vacancies, discover talent and hire skilled workers.",
   },
 ];
 

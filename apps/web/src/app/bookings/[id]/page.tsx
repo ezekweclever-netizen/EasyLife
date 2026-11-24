@@ -40,7 +40,7 @@ export default async function BookingDetailPage({
   }
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#071526] pb-24 md:pb-12 text-[#0F172A] dark:text-slate-100">
       <CustomerHeader
         user={{
           id: auth.user.id,

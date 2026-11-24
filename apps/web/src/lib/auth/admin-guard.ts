@@ -117,16 +117,16 @@ export async function resolveUserDashboardPath(
       ? profileRes.data[0].primary_role
       : null;
 
-  if (primaryRole === "admin") return "/admin";
+  if (primaryRole === "admin" || primaryRole === "moderator") return "/admin";
   if (primaryRole === "professional") return "/pro/dashboard";
-  if (primaryRole === "business" || primaryRole === "property_manager") return "/business";
+  if (primaryRole === "business" || primaryRole === "property_manager" || primaryRole === "employer") return "/business";
 
   // Secondary check in user_roles in case elevated role was added alongside customer
   if (rolesRes.ok && Array.isArray(rolesRes.data)) {
     const roles = rolesRes.data.map((r) => r.role);
-    if (roles.includes("admin")) return "/admin";
+    if (roles.includes("admin") || roles.includes("moderator")) return "/admin";
     if (roles.includes("professional")) return "/pro/dashboard";
-    if (roles.includes("business") || roles.includes("property_manager")) return "/business";
+    if (roles.includes("business") || roles.includes("property_manager") || roles.includes("employer")) return "/business";
   }
 
   return "/dashboard";

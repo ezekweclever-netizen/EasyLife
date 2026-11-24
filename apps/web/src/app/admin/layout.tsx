@@ -79,25 +79,25 @@ export default async function AdminLayout({
       <div className="flex-1 lg:pl-72 flex flex-col min-h-screen overflow-x-hidden">
         {/* Top Operational Status Header */}
         <header className="h-14 bg-white dark:bg-[#0D223A] border-b border-slate-200 dark:border-[#163654] px-4 sm:px-8 flex items-center justify-between shrink-0 sticky top-0 z-30 shadow-2xs">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+              <span className="text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider whitespace-nowrap">
                 Production Marketplace Core
               </span>
             </div>
-            <span className="hidden sm:inline-block text-slate-300 dark:text-slate-700">|</span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <span className="hidden xl:inline-block text-slate-300 dark:text-slate-700">|</span>
+            <span className="hidden xl:inline-flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium whitespace-nowrap">
               Active Regional Hubs:
               <strong className="text-slate-800 dark:text-slate-200 font-semibold">Port Harcourt • Lagos • Abuja</strong>
             </span>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-2xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+          <div className="flex items-center gap-3 shrink-0">
+            <span className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-2xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 whitespace-nowrap">
               🛡️ Audit Trail Immutable
             </span>
-            <span className="text-xs text-slate-400 dark:text-slate-500 font-mono">
+            <span className="text-xs text-slate-400 dark:text-slate-500 font-mono whitespace-nowrap">
               v1.0-prod
             </span>
           </div>

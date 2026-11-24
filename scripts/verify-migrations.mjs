@@ -58,6 +58,11 @@ const REQUIRED_TABLES = [
   "reports",
   "platform_settings",
   "commission_settings",
+  // Group G: Master MVP Extension (Stage 2)
+  "employer_profiles",
+  "job_vacancies",
+  "job_applications",
+  "business_promotions",
 ];
 
 function stripSqlComments(sql) {

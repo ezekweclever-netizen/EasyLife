@@ -44,7 +44,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
   const totalPages = Math.max(1, Math.ceil(totalCount / BOOKINGS_PAGE_SIZE));
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#071526] pb-24 md:pb-12 text-[#0F172A] dark:text-slate-100">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -57,9 +57,9 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">My Bookings</h1>
-            <p className="text-xs sm:text-sm text-[#64748B]">
-              Track and manage all your home & facility service requests
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-white">My Bookings</h1>
+            <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
+              Track and manage all your home &amp; facility service requests
             </p>
           </div>
           <Link
@@ -74,7 +74,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
         </div>
 
         {/* Tab Filters: All, Active, Completed, Cancelled */}
-        <div className="flex items-center gap-2 border-b border-[#E2E8F0] pb-2 overflow-x-auto">
+        <div className="flex items-center gap-2 border-b border-[#E2E8F0] dark:border-[#163654] pb-2 overflow-x-auto">
           {[
             { id: "all", label: "All Bookings" },
             { id: "active", label: "Active Requests" },
@@ -89,7 +89,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors shrink-0 ${
                   isActive
                     ? "bg-[#0F766E] text-white shadow-xs"
-                    : "text-[#64748B] hover:text-[#0F172A] hover:bg-[#F1F5F9]"
+                    : "text-[#64748B] dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-slate-800"
                 }`}
               >
                 {t.label}
@@ -118,37 +118,37 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
               return (
                 <div
                   key={booking.id}
-                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-5 sm:p-6 shadow-xs hover:border-[#CBD5E1] transition-all flex flex-col md:flex-row md:items-center justify-between gap-5"
+                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] dark:border-[#163654] p-5 sm:p-6 shadow-xs hover:border-[#CBD5E1] dark:hover:border-[#24989A] transition-all flex flex-col md:flex-row md:items-center justify-between gap-5"
                 >
                   <div className="space-y-2 max-w-2xl">
                     <div className="flex flex-wrap items-center gap-2 text-xs">
-                      <span className="font-mono font-bold text-[#0F766E] bg-[#F0FDFA] px-2.5 py-0.5 rounded-md border border-[#CCFBF1]">
+                      <span className="font-mono font-bold text-[#0F766E] dark:text-teal-300 bg-[#F0FDFA] dark:bg-teal-950/60 px-2.5 py-0.5 rounded-md border border-[#CCFBF1] dark:border-teal-800">
                         {booking.reference_code}
                       </span>
                       <span className={`px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] ${badgeClass}`}>
                         {booking.status.replace(/_/g, " ")}
                       </span>
                       {booking.category && (
-                        <span className="px-2.5 py-0.5 rounded-md bg-[#F1F5F9] text-[#475569] font-medium">
+                        <span className="px-2.5 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-slate-800 text-[#475569] dark:text-slate-300 font-medium">
                           {booking.category.name}
                         </span>
                       )}
                       {booking.urgency === "emergency" && (
-                        <span className="px-2 py-0.5 rounded-full bg-red-100 text-red-700 dark:text-red-400 font-bold text-[10px] animate-pulse">
+                        <span className="px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-bold text-[10px] animate-pulse">
                           🚨 Emergency
                         </span>
                       )}
                     </div>
 
-                    <h2 className="text-base sm:text-lg font-bold text-[#0F172A]">
+                    <h2 className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white">
                       {booking.title}
                     </h2>
 
-                    <p className="text-xs text-[#64748B] line-clamp-2">
+                    <p className="text-xs text-[#64748B] dark:text-slate-400 line-clamp-2">
                       {booking.description}
                     </p>
 
-                    <div className="flex flex-wrap items-center gap-4 text-xs text-[#64748B] pt-1">
+                    <div className="flex flex-wrap items-center gap-4 text-xs text-[#64748B] dark:text-slate-400 pt-1">
                       <span>📍 {booking.service_address}, {booking.city}</span>
                       {booking.preferred_date && (
                         <span>📅 Preferred: {booking.preferred_date} ({booking.preferred_time_slot || "Anytime"})</span>

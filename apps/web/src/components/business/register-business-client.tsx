@@ -22,175 +22,190 @@ export function RegisterBusinessClient() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-12 px-4 sm:px-6">
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] p-8 shadow-sm">
-        <div className="text-center max-w-md mx-auto mb-8">
-          <span className="w-12 h-12 rounded-2xl bg-teal-600 text-white font-black text-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
-            EL
-          </span>
-          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-            Create Your Business Account
-          </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
-            Centralise facility maintenance, track equipment lifecycles, dispatch technicians, and manage multiple property locations on EasyLife.
-          </p>
+    <div className="min-h-screen bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-slate-100 flex flex-col">
+      <header className="border-b border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] shrink-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-9 h-9 rounded-lg bg-teal-600 text-white font-bold flex items-center justify-center text-lg shadow-xs">
+              EL
+            </span>
+            <span className="font-extrabold text-slate-900 dark:text-white text-lg">
+              EasyLife <span className="text-teal-700 dark:text-teal-400 font-semibold text-sm">Business</span>
+            </span>
+          </div>
         </div>
+      </header>
 
-        {feedback && (
-          <div
-            className={`p-4 rounded-xl mb-6 text-xs font-semibold ${
-              feedback.ok
-                ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
-                : "bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
-            }`}
-          >
-            {feedback.message}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                Organization / Company Name *
-              </label>
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder="e.g. Niger Delta Logistics Ltd"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                Portal Handle / Slug *
-              </label>
-              <input
-                type="text"
-                name="slug"
-                required
-                placeholder="e.g. nd-logistics"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              />
-            </div>
+      <div className="max-w-2xl mx-auto py-12 px-4 sm:px-6 w-full flex-1">
+        <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
+          <div className="text-center max-w-md mx-auto mb-8">
+            <span className="w-12 h-12 rounded-2xl bg-teal-600 text-white font-black text-2xl flex items-center justify-center mx-auto mb-4 shadow-xs">
+              EL
+            </span>
+            <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+              Create Your Business Account
+            </h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+              Centralise facility maintenance, track equipment lifecycles, dispatch technicians, and manage multiple property locations on EasyLife.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                Official Business Email *
-              </label>
-              <input
-                type="email"
-                name="contactEmail"
-                required
-                placeholder="facilities@ndlogistics.ng"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              />
+          {feedback && (
+            <div
+              className={`p-4 rounded-xl mb-6 text-xs font-semibold ${
+                feedback.ok
+                  ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
+                  : "bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800"
+              }`}
+            >
+              {feedback.message}
             </div>
+          )}
 
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                Contact Phone Number
-              </label>
-              <input
-                type="tel"
-                name="contactPhone"
-                placeholder="+234 803 000 0000"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                Industry / Sector
-              </label>
-              <select
-                name="industry"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              >
-                <option value="Real Estate & Property Management">Real Estate & Property Management</option>
-                <option value="Oil & Gas / Energy">Oil & Gas / Energy</option>
-                <option value="Hospitality & Hotels">Hospitality & Hotels</option>
-                <option value="Commercial Banking & Finance">Commercial Banking & Finance</option>
-                <option value="Healthcare & Hospitals">Healthcare & Hospitals</option>
-                <option value="Manufacturing & Industrial">Manufacturing & Industrial</option>
-                <option value="Retail & Supermarkets">Retail & Supermarkets</option>
-                <option value="Other">Other Business</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                CAC Registration Number (Optional)
-              </label>
-              <input
-                type="text"
-                name="registrationNumber"
-                placeholder="RC-1928374"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              />
-            </div>
-          </div>
-
-          <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
-              Primary Business Location
-            </h3>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                Street Address
-              </label>
-              <input
-                type="text"
-                name="address"
-                placeholder="e.g. Plot 12 Stadium Road, GRA Phase 4"
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mt-3">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                  City
+                  Organization / Company Name *
                 </label>
                 <input
                   type="text"
-                  name="city"
-                  defaultValue="Port Harcourt"
+                  name="name"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  placeholder="e.g. Niger Delta Logistics Ltd"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
-                  State
+                  Portal Handle / Slug *
                 </label>
                 <input
                   type="text"
-                  name="state"
-                  defaultValue="Rivers State"
+                  name="slug"
                   required
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  placeholder="e.g. nd-logistics"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={isPending}
-            className="w-full mt-6 py-3 px-4 rounded-xl text-sm font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-md transition disabled:opacity-50"
-          >
-            {isPending ? "Creating Business Account..." : "Create Business Account"}
-          </button>
-        </form>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  Official Business Email *
+                </label>
+                <input
+                  type="email"
+                  name="contactEmail"
+                  required
+                  placeholder="facilities@ndlogistics.ng"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  Contact Phone Number
+                </label>
+                <input
+                  type="tel"
+                  name="contactPhone"
+                  placeholder="+234 803 000 0000"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  Industry / Sector
+                </label>
+                <select
+                  name="industry"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#0D223A]"
+                >
+                  <option value="Real Estate & Property Management">Real Estate & Property Management</option>
+                  <option value="Oil & Gas / Energy">Oil & Gas / Energy</option>
+                  <option value="Hospitality & Hotels">Hospitality & Hotels</option>
+                  <option value="Commercial Banking & Finance">Commercial Banking & Finance</option>
+                  <option value="Healthcare & Hospitals">Healthcare & Hospitals</option>
+                  <option value="Manufacturing & Industrial">Manufacturing & Industrial</option>
+                  <option value="Retail & Supermarkets">Retail & Supermarkets</option>
+                  <option value="Other">Other Business</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  CAC Registration Number (Optional)
+                </label>
+                <input
+                  type="text"
+                  name="registrationNumber"
+                  placeholder="RC-1928374"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                />
+              </div>
+            </div>
+
+            <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-3">
+                Primary Business Location
+              </h3>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                  Street Address
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  placeholder="e.g. Plot 12 Stadium Road, GRA Phase 4"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 mt-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    name="city"
+                    defaultValue="Port Harcourt"
+                    required
+                    className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-200 mb-1">
+                    State
+                  </label>
+                  <input
+                    type="text"
+                    name="state"
+                    defaultValue="Rivers State"
+                    required
+                    className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isPending}
+              className="w-full mt-6 py-3 px-4 rounded-xl text-sm font-bold text-white bg-teal-600 hover:bg-teal-500 shadow-md transition disabled:opacity-50"
+            >
+              {isPending ? "Creating Business Account..." : "Create Business Account"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

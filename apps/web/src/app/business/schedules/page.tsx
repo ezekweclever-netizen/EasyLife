@@ -28,11 +28,7 @@ export default async function BusinessSchedulesPage({ searchParams }: SchedulesP
   const business = await getActiveBusiness();
 
   if (!business) {
-    return (
-      <div className="min-h-screen bg-slate-50 dark:bg-[#071526]">
-        <RegisterBusinessClient />
-      </div>
-    );
+    return <RegisterBusinessClient />;
   }
 
   const resolvedParams = searchParams ? await searchParams : {};

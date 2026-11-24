@@ -17,10 +17,11 @@ export async function SiteFooter({
   settings?: PublicPlatformSettings;
 } = {}) {
   const settings = initialSettings || (await getPublicPlatformSettings());
-  const citiesText =
-    settings.supportedCities.length > 0
-      ? settings.supportedCities.join(", ").replace(/, ([^,]*)$/, " and $1")
-      : EASYLIFE_BRAND.pilotCities.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1");
+  const pilotCities = ["Port Harcourt", "Lagos", "Abuja"];
+  const activeCities = (settings.supportedCities || []).filter((c) => pilotCities.includes(c));
+  const citiesList = activeCities.length > 0 ? activeCities : pilotCities;
+  const citiesText = citiesList.join(", ").replace(/, ([^,]*)$/, " and $1");
+  const displayPhone = settings.contactPhone || "+234 704 994 8582";
 
   return (
     <footer className="bg-[#0D282E] text-[#DAE7E7]" aria-labelledby="site-footer-heading">
@@ -35,14 +36,14 @@ export async function SiteFooter({
               {settings.platformDescription || EASYLIFE_BRAND.description} — operating across{" "}
               {citiesText}.
             </p>
-            {settings.contactPhone && (
+            {displayPhone && (
               <p className="mt-3 text-sm text-[#DAE7E7]/70">
                 Support:{" "}
                 <a
-                  href={`tel:${settings.contactPhone}`}
+                  href={`tel:${displayPhone.replace(/\s+/g, "")}`}
                   className="text-[#24989A] hover:underline"
                 >
-                  {settings.contactPhone}
+                  {displayPhone}
                 </a>
               </p>
             )}

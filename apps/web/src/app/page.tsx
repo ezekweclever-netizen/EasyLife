@@ -139,8 +139,95 @@ export default async function HomePage({
       {/* 1. Full-Bleed Hero Section & Main Service Search */}
       <ScrollHeroSection />
 
-      {/* 3. 3-Step Sticky Purpose Card Stack (Find Solutions, Discover Opportunities, Achieve Goals) */}
+      {/* 3. 3-Step Sticky Purpose Card Stack (Find Services, Jobs & Opportunities, Business Hub) */}
       <StackedCategoriesSection />
+
+      {/* 3b. Quick Category Grid: Core Everyday Trade Services */}
+      <Section id="core-services" tone="white">
+        <SectionHeading
+          id="services-heading"
+          eyebrow="Accredited Trade Services"
+          title="Popular Everyday Services Across Our Hubs"
+          description="Browse vetted professionals in Port Harcourt, Lagos, and Abuja. Fixed quotes, vetted pros, and escrow-protected milestones."
+          align="center"
+        />
+        <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+          {[
+            {
+              title: "Plumbing & Borehole",
+              href: "/services?cat=plumbing-services",
+              icon: "wrench" as const,
+              count: "Vetted Pros",
+            },
+            {
+              title: "Electrical & Solar",
+              href: "/services?cat=electrical-services",
+              icon: "zap" as const,
+              count: "Certified Technicians",
+            },
+            {
+              title: "AC & Refrigeration",
+              href: "/services?cat=ac-refrigeration-services",
+              icon: "wind" as const,
+              count: "Deep Servicing",
+            },
+            {
+              title: "Generator Servicing",
+              href: "/services?cat=generator-services",
+              icon: "settings" as const,
+              count: "Perkins / Firman",
+            },
+            {
+              title: "Carpentry & Woodwork",
+              href: "/services?cat=carpentry-woodwork-services",
+              icon: "hammer" as const,
+              count: "Cabinet & Doors",
+            },
+            {
+              title: "Home & Deep Cleaning",
+              href: "/services?cat=cleaning-waste-services",
+              icon: "sparkles" as const,
+              count: "Post-Construction",
+            },
+            {
+              title: "Apartment Relocation",
+              href: "/post-a-need?category=moving",
+              icon: "truck" as const,
+              count: "Haulage Trucks",
+            },
+            {
+              title: "Painting & Screeding",
+              href: "/services?cat=painting-wall-services",
+              icon: "paintbrush" as const,
+              count: "Interior / Exterior",
+            },
+          ].map((cat) => (
+            <Link
+              key={cat.title}
+              href={cat.href}
+              className="group p-5 rounded-2xl border border-slate-200/90 dark:border-[#163654] bg-[#F8FAFA] dark:bg-[#0D223A] hover:bg-white dark:hover:bg-[#102D4C] hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="w-11 h-11 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-teal-100 dark:border-teal-900/60">
+                  <Icon name={cat.icon} className="w-5 h-5" />
+                </div>
+                <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors leading-snug">
+                  {cat.title}
+                </h3>
+              </div>
+              <div className="mt-4 pt-2 border-t border-slate-200/60 dark:border-slate-800 text-[11px] font-semibold text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-between">
+                <span>{cat.count}</span>
+                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="mt-8 text-center">
+          <ButtonLink href="/services" size="md">
+            View All Service Categories &rarr;
+          </ButtonLink>
+        </div>
+      </Section>
 
       {/* 4. How EasyLife Works */}
       <Section id="how-it-works" tone="grey">
@@ -162,6 +249,90 @@ export default async function HomePage({
           >
             See the Complete Process for Pros &amp; Businesses →
           </ButtonLink>
+        </div>
+      </Section>
+
+      {/* 4b. Free Everyday Tools & Calculators Showcase */}
+      <Section id="free-tools-preview" tone="white">
+        <div className="rounded-3xl border border-slate-200/90 dark:border-[#163654] bg-[#F8FAFA] dark:bg-[#0D223A] p-6 sm:p-10 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-slate-800">
+            <div>
+              <span className="text-xs font-bold tracking-wider text-[#24989A] dark:text-[#5CD3D5] uppercase">
+                100% Free Everyday Utilities
+              </span>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-1">
+                Smart Calculators for Nigerian Homes &amp; Businesses
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-xl">
+                Get instant estimates with zero sign-up required. Benchmark repair costs, calculate generator load sizing, and plan maintenance schedules.
+              </p>
+            </div>
+            <ButtonLink href="/tools" size="md" className="shrink-0">
+              Open All Free Tools &rarr;
+            </ButtonLink>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link
+              href="/tools"
+              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Icon name="receipt" className="w-5 h-5" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+                Service Cost Estimator
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Instant price benchmarks for AC, generator, plumbing &amp; electrical repairs by city.
+              </p>
+            </Link>
+
+            <Link
+              href="/tools"
+              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Icon name="zap" className="w-5 h-5" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+                Generator Sizing Tool
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Check appliances in your home and calculate the exact kVA rating needed.
+              </p>
+            </Link>
+
+            <Link
+              href="/tools"
+              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Icon name="truck" className="w-5 h-5" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+                Relocation &amp; Van Haulage
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Apartment moving cost calculator with truck sizing and distance rates.
+              </p>
+            </Link>
+
+            <Link
+              href="/tools"
+              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Icon name="calendar" className="w-5 h-5" />
+              </div>
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+                Maintenance Planner
+              </h3>
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+                Preventive servicing cycles for inverters, ACs, and water pumps.
+              </p>
+            </Link>
+          </div>
         </div>
       </Section>
 
@@ -432,9 +603,9 @@ export default async function HomePage({
       <CtaBanner
         id="home-cta"
         title="Ready to Experience Smarter Service Delivery?"
-        description="Whether you have an urgent electrical repair, need a trusted plumber, or want to register as a verified service professional, EasyLife is ready."
-        primary={{ label: "Find a Service Professional", href: "/explore-services" }}
-        secondary={{ label: "Register Your Trade Business", href: "/become-a-professional" }}
+        description="Whether you have an urgent electrical repair, need a trusted plumber, want to hire trade talent, or register your local business, EasyLife is ready."
+        primary={{ label: "Find Services", href: "/services" }}
+        secondary={{ label: "Post a Need", href: "/post-a-need" }}
       />
     </PublicShell>
   );

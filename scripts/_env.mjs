@@ -99,7 +99,8 @@ export async function connectClientWithRetry(ClientCtor, connectionString, maxAt
     const client = new ClientCtor({
       connectionString,
       ssl: { rejectUnauthorized: false },
-      connectionTimeoutMillis: 25000,
+      connectionTimeoutMillis: 15000,
+      keepAlive: true,
     });
     client.on("error", () => {});
     try {

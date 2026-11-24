@@ -14,11 +14,7 @@ export default async function BusinessTeamPage() {
   const business = await getActiveBusiness();
 
   if (!business) {
-    return (
-      <div className="min-h-screen bg-slate-50 dark:bg-[#071526]">
-        <RegisterBusinessClient />
-      </div>
-    );
+    return <RegisterBusinessClient />;
   }
 
   const { members: rawMembers, invitations: rawInvitations } = await fetchBusinessTeam(

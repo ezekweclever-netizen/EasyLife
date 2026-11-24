@@ -68,14 +68,14 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
       {/* 10 Core Marketplace KPIs */}
       <div>
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <h2 className="text-base font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>Marketplace Performance &amp; Activity Overview</span>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654]">
+            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654] whitespace-nowrap shrink-0">
               Live DB
             </span>
           </h2>
-          <span className="text-xs text-slate-500 dark:text-slate-400">
+          <span className="text-xs text-slate-500 dark:text-slate-400 shrink-0">
             Updated just now
           </span>
         </div>
@@ -86,11 +86,11 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/users"
             className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
                 Customers
               </span>
-              <span className="text-lg">👥</span>
+              <span className="text-lg shrink-0">👥</span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               {metrics.total_customers}
@@ -105,11 +105,11 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/professionals"
             className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
                 Professionals
               </span>
-              <span className="text-lg">👷</span>
+              <span className="text-lg shrink-0">👷</span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               {metrics.total_professionals}
@@ -124,16 +124,16 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/professionals?status=verified"
             className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-emerald-500 hover:shadow-md transition relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 truncate min-w-0">
                 Verified Pros
               </span>
-              <span className="text-lg">✅</span>
+              <span className="text-lg shrink-0">✅</span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-emerald-700 dark:text-emerald-300">
               {metrics.verified_professionals}
             </div>
-            <div className="text-2xs text-emerald-600 mt-1 font-medium">
+            <div className="text-2xs text-emerald-600 dark:text-emerald-400 mt-1 font-medium">
               Badge accredited
             </div>
           </Link>
@@ -143,15 +143,15 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/verifications"
             className={`group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border shadow-xs transition relative overflow-hidden ${
               metrics.pending_verification_requests > 0
-                ? "border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/60/20 hover:border-amber-500"
+                ? "border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 hover:border-amber-500"
                 : "border-slate-200 dark:border-[#163654]/80 hover:border-teal-500"
             }`}
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-300 truncate min-w-0">
                 Pending KYC
               </span>
-              <span className="text-lg">⏳</span>
+              <span className="text-lg shrink-0">⏳</span>
             </div>
             <div className={`text-2xl sm:text-3xl font-black ${
               metrics.pending_verification_requests > 0 ? "text-amber-750" : "text-slate-900 dark:text-white"
@@ -168,11 +168,11 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/businesses"
             className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
                 Businesses
               </span>
-              <span className="text-lg">🏢</span>
+              <span className="text-lg shrink-0">🏢</span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               {metrics.total_businesses}
@@ -187,11 +187,11 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/bookings"
             className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
                 Total Bookings
               </span>
-              <span className="text-lg">📋</span>
+              <span className="text-lg shrink-0">📋</span>
             </div>
             <div className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               {metrics.total_bookings}
@@ -206,16 +206,16 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/bookings?status=active"
             className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-blue-500 hover:shadow-md transition relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-blue-700">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300 truncate min-w-0">
                 Active Bookings
               </span>
-              <span className="text-lg">⚡</span>
+              <span className="text-lg shrink-0">⚡</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-blue-700">
+            <div className="text-2xl sm:text-3xl font-black text-blue-700 dark:text-blue-300">
               {metrics.active_bookings}
             </div>
-            <div className="text-2xs text-blue-600 mt-1 font-medium">
+            <div className="text-2xs text-blue-600 dark:text-blue-400 mt-1 font-medium">
               In progress or dispatched
             </div>
           </Link>
@@ -225,16 +225,16 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/bookings?status=completed"
             className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 truncate min-w-0">
                 Completed
               </span>
-              <span className="text-lg">🏁</span>
+              <span className="text-lg shrink-0">🏁</span>
             </div>
-            <div className="text-2xl sm:text-3xl font-black text-teal-700 dark:text-teal-400">
+            <div className="text-2xl sm:text-3xl font-black text-teal-700 dark:text-teal-300">
               {metrics.completed_bookings}
             </div>
-            <div className="text-2xs text-teal-600 mt-1 font-medium">
+            <div className="text-2xs text-teal-600 dark:text-teal-400 mt-1 font-medium">
               Successfully fulfilled
             </div>
           </Link>
@@ -244,22 +244,22 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             href="/admin/disputes"
             className={`group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border shadow-xs transition relative overflow-hidden ${
               metrics.open_disputes > 0
-                ? "border-rose-300 bg-rose-50/20 hover:border-rose-500"
+                ? "border-rose-300 dark:border-rose-700 bg-rose-50/20 hover:border-rose-500"
                 : "border-slate-200 dark:border-[#163654]/80 hover:border-teal-500"
             }`}
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-rose-700">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-rose-700 dark:text-rose-300 truncate min-w-0">
                 Open Disputes
               </span>
-              <span className="text-lg">⚖️</span>
+              <span className="text-lg shrink-0">⚖️</span>
             </div>
             <div className={`text-2xl sm:text-3xl font-black ${
-              metrics.open_disputes > 0 ? "text-rose-700" : "text-slate-900 dark:text-white"
+              metrics.open_disputes > 0 ? "text-rose-700 dark:text-rose-300" : "text-slate-900 dark:text-white"
             }`}>
               {metrics.open_disputes}
             </div>
-            <div className="text-2xs text-rose-600 mt-1 font-medium">
+            <div className="text-2xs text-rose-600 dark:text-rose-400 mt-1 font-medium">
               {metrics.open_disputes > 0 ? "Blocked from completion" : "Zero open disputes"}
             </div>
           </Link>
@@ -267,18 +267,18 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 10. Platform Revenue */}
           <Link
             href="/admin/analytics"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-teal-200 dark:border-teal-800 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden bg-gradient-to-br from-white to-teal-50/30"
+            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-teal-200 dark:border-teal-800/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden bg-gradient-to-br from-white via-teal-50/30 to-teal-100/20 dark:from-[#0D223A] dark:via-[#0D223A] dark:to-teal-950/40"
           >
-            <div className="flex items-center justify-between text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5]">
+            <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
+              <span className="text-2xs font-bold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5] truncate min-w-0">
                 Platform Revenue
               </span>
-              <span className="text-lg">💰</span>
+              <span className="text-lg shrink-0">💰</span>
             </div>
             <div className="text-xl sm:text-2xl font-black text-teal-800 dark:text-[#5CD3D5] truncate">
               {formatNaira(metrics.platform_revenue_naira)}
             </div>
-            <div className="text-2xs text-teal-600 mt-1 font-medium">
+            <div className="text-2xs text-teal-700 dark:text-teal-400 mt-1 font-medium">
               From settled transactions
             </div>
           </Link>

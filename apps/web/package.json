@@ -12,6 +12,8 @@
   "dependencies": {
     "@easylife/shared-config": "*",
     "@easylife/shared-types": "*",
+    "html2canvas-pro": "^2.6.4",
+    "jspdf": "^4.2.1",
     "next": "^15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

@@ -165,7 +165,7 @@ export default async function ServiceDetailPage({
               </button>
               {parentCategory && (
                 <Link
-                  href={`/explore-services?cat=${encodeURIComponent(parentCategory.slug)}`}
+                  href={`/services?cat=${encodeURIComponent(parentCategory.slug)}`}
                   className="rounded-xl bg-[#24989A] hover:bg-[#1D7E80] px-4 py-3 text-sm font-semibold text-white transition-colors"
                 >
                   Browse Active {parentCategory.name}
@@ -189,7 +189,7 @@ export default async function ServiceDetailPage({
                 : "Recommended Active Services"}
             </h2>
             <Link
-              href="/explore-services"
+              href="/services"
               className="text-xs font-bold text-[#24989A] hover:underline"
             >
               Match Specialists →
@@ -243,8 +243,8 @@ export default async function ServiceDetailPage({
                 service catalogue
               </Link>{" "}
               or{" "}
-              <Link href="/tasks" className="font-bold text-[#154752] underline">
-                post an everyday task
+              <Link href="/post-a-need" className="font-bold text-[#154752] underline">
+                post a need
               </Link>
               .
             </div>
@@ -344,7 +344,7 @@ export default async function ServiceDetailPage({
               <>
                 <span aria-hidden="true">/</span>
                 <Link
-                  href={`/explore-services?cat=${encodeURIComponent(parentCategory.slug)}`}
+                  href={`/services?cat=${encodeURIComponent(parentCategory.slug)}`}
                   className="hover:text-white transition-colors"
                 >
                   {parentCategory.name}
@@ -355,7 +355,7 @@ export default async function ServiceDetailPage({
               <>
                 <span aria-hidden="true">/</span>
                 <Link
-                  href={`/explore-services?cat=${encodeURIComponent(parentCategory.slug)}&sub=${encodeURIComponent(parentSubcategory.slug)}`}
+                  href={`/services?cat=${encodeURIComponent(parentCategory.slug)}&sub=${encodeURIComponent(parentSubcategory.slug)}`}
                   className="hover:text-white transition-colors"
                 >
                   {parentSubcategory.name}
@@ -404,7 +404,7 @@ export default async function ServiceDetailPage({
                   {service.keywords.slice(0, 8).map((kw) => (
                     <Link
                       key={kw}
-                      href={`/explore-services?q=${encodeURIComponent(kw)}`}
+                      href={`/services?q=${encodeURIComponent(kw)}`}
                       className="rounded-full bg-white dark:bg-[#0D223A]/10 hover:bg-white dark:bg-[#0D223A]/20 border border-white/15 px-3 py-1 text-xs font-medium text-[#DAE7E7] transition-colors"
                     >
                       #{kw}
@@ -477,7 +477,7 @@ export default async function ServiceDetailPage({
                 </Link>
                 {parentCategory && (
                   <Link
-                    href={`/explore-services?cat=${encodeURIComponent(parentCategory.slug)}${
+                    href={`/services?cat=${encodeURIComponent(parentCategory.slug)}${
                       parentSubcategory
                         ? `&sub=${encodeURIComponent(parentSubcategory.slug)}`
                         : ""

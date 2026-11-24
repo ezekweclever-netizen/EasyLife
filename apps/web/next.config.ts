@@ -16,6 +16,35 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/explore-services",
+        destination: "/services",
+        permanent: false,
+      },
+      {
+        source: "/tasks",
+        destination: "/post-a-need",
+        permanent: false,
+      },
+      {
+        source: "/post-task",
+        destination: "/post-a-need",
+        permanent: false,
+      },
+      {
+        source: "/book",
+        destination: "/post-a-need",
+        permanent: false,
+      },
+      {
+        source: "/businesses",
+        destination: "/business-hub",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

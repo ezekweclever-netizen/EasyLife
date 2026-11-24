@@ -14,15 +14,19 @@ interface BusinessDirectoryClientProps {
 
 const BUSINESS_CATEGORIES = [
   "All",
-  "IT & Computer Repair",
-  "Tailoring & Fashion Design",
-  "Printing, Branding & Signage",
-  "Catering & Event Rentals",
+  "Restaurants & Food",
+  "Bakeries & Confectionery",
+  "Supermarkets & Groceries",
+  "Pharmacies & Health Stores",
+  "Local Shops & Retail",
+  "Business & Corporate Services",
   "Commercial Facility Maintenance",
   "Solar & Electrical Contractors",
-  "Automotive Workshop & Servicing",
+  "Automotive & Engineering",
   "General Services",
 ];
+
+const PILOT_CITIES = ["All Cities", "Port Harcourt", "Lagos", "Abuja"];
 
 export function BusinessDirectoryClient({
   initialBusinesses,
@@ -32,11 +36,18 @@ export function BusinessDirectoryClient({
 }: BusinessDirectoryClientProps) {
   const [businesses, setBusinesses] = useState<DirectoryBusinessItem[]>(initialBusinesses);
   const [selectedCategory, setSelectedCategory] = useState<string>(defaultCategory);
+  const [selectedCity, setSelectedCity] = useState<string>(defaultCity);
   const [searchQuery, setSearchQuery] = useState<string>(defaultQuery);
   const [reportTarget, setReportTarget] = useState<{ id: string; name: string } | null>(null);
 
-  const filterResults = (cat: string, q: string) => {
+  const filterResults = (cat: string, city: string, q: string) => {
     let filtered = [...initialBusinesses];
+
+    if (city && city !== "All Cities") {
+      filtered = filtered.filter(
+        (b) => b.city && b.city.toLowerCase().includes(city.toLowerCase())
+      );
+    }
 
     if (cat !== "All") {
       filtered = filtered.filter(
@@ -62,17 +73,22 @@ export function BusinessDirectoryClient({
 
   const handleCategoryChange = (cat: string) => {
     setSelectedCategory(cat);
-    filterResults(cat, searchQuery);
+    filterResults(cat, selectedCity, searchQuery);
+  };
+
+  const handleCityChange = (city: string) => {
+    setSelectedCity(city);
+    filterResults(selectedCategory, city, searchQuery);
   };
 
   const handleSearchChange = (q: string) => {
     setSearchQuery(q);
-    filterResults(selectedCategory, q);
+    filterResults(selectedCategory, selectedCity, q);
   };
 
   return (
     <div className="space-y-8">
-      {/* Search Header & Register CTA */}
+      {/* Search Header & City Filter */}
       <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="relative flex-1">
@@ -94,13 +110,35 @@ export function BusinessDirectoryClient({
           </Link>
         </div>
 
+        {/* City Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-slate-100 dark:border-slate-800">
+          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-1">
+            Pilot City:
+          </span>
+          {PILOT_CITIES.map((city) => (
+            <button
+              key={city}
+              type="button"
+              onClick={() => handleCityChange(city)}
+              className={`px-3 py-1 rounded-full text-xs font-semibold transition cursor-pointer ${
+                selectedCity === city
+                  ? "bg-[#0A2540] dark:bg-slate-700 text-white shadow-xs"
+                  : "bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
+              }`}
+            >
+              {city}
+            </button>
+          ))}
+        </div>
+
         {/* Category Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 border-t border-slate-100 dark:border-slate-800 pt-3">
           {BUSINESS_CATEGORIES.map((cat) => (
             <button
               key={cat}
+              type="button"
               onClick={() => handleCategoryChange(cat)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
                 selectedCategory === cat
                   ? "bg-[#0D9488] text-white shadow-xs"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
@@ -120,16 +158,18 @@ export function BusinessDirectoryClient({
             No local businesses currently match your search
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-            Try switching categories or clearing your search term. Are you an established local enterprise in Port Harcourt? List your business profile today.
+            Try switching cities, categories, or clearing your search term. Are you an established local enterprise? List your business profile today.
           </p>
           <div className="flex items-center justify-center gap-3 pt-2">
             <button
+              type="button"
               onClick={() => {
                 setSelectedCategory("All");
+                setSelectedCity("All Cities");
                 setSearchQuery("");
                 setBusinesses(initialBusinesses);
               }}
-              className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition"
+              className="px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition cursor-pointer"
             >
               Clear Filters
             </button>
@@ -143,81 +183,120 @@ export function BusinessDirectoryClient({
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {businesses.map((biz) => (
-            <div
-              key={biz.id}
-              className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs hover:border-[#0D9488]/40 hover:shadow-md transition flex flex-col justify-between"
-            >
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-2">
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#163654]">
-                    {biz.business_category || biz.industry || "Local Enterprise"}
-                  </span>
-                  {biz.verification_status === "approved" && (
-                    <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold rounded-md">
-                      ✓ Verified Business
+          {businesses.map((biz) => {
+            const profileUrl = `/business-hub/${biz.slug || biz.id}`;
+            const isFoodCategory =
+              biz.business_category?.toLowerCase().includes("restaurant") ||
+              biz.business_category?.toLowerCase().includes("food") ||
+              biz.business_category?.toLowerCase().includes("baker");
+
+            return (
+              <div
+                key={biz.id}
+                className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs hover:border-[#0D9488]/50 hover:shadow-md transition flex flex-col justify-between group"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#163654]">
+                      {biz.business_category || biz.industry || "Local Enterprise"}
                     </span>
-                  )}
-                </div>
-
-                <div>
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white leading-snug">
-                    {biz.name}
-                  </h3>
-                  {biz.description && (
-                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
-                      {biz.description}
-                    </p>
-                  )}
-                </div>
-
-                <div className="space-y-1 text-xs text-slate-600 dark:text-slate-300">
-                  <p>📍 {biz.address ? `${biz.address}, ` : ""}{biz.city}, {biz.state}</p>
-                  {biz.contact_phone && <p>📞 {biz.contact_phone}</p>}
-                </div>
-
-                {biz.services_offered && biz.services_offered.length > 0 && (
-                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1">
-                    {biz.services_offered.map((srv, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2 py-0.5 bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 rounded text-[10px] border border-slate-200 dark:border-[#163654]"
-                      >
-                        {srv}
+                    {biz.verification_status === "approved" && (
+                      <span className="px-2 py-0.5 bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold rounded-md">
+                        ✓ Verified Business
                       </span>
-                    ))}
+                    )}
                   </div>
-                )}
-              </div>
 
-              <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  {biz.contact_phone && (
-                    <a
-                      href={`tel:${biz.contact_phone}`}
-                      className="px-3 py-1.5 bg-[#0D9488] hover:bg-[#0F766E] text-white rounded-lg text-xs font-bold transition"
+                  <div>
+                    <Link
+                      href={profileUrl}
+                      className="text-base font-bold text-slate-900 dark:text-white leading-snug group-hover:text-[#0D9488] transition-colors block"
                     >
-                      Call Business
-                    </a>
+                      {biz.name}
+                    </Link>
+                    {biz.description && (
+                      <p className="mt-1 text-xs text-slate-600 dark:text-slate-300 line-clamp-3 leading-relaxed">
+                        {biz.description}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="space-y-1 text-xs text-slate-600 dark:text-slate-300">
+                    <p className="flex items-center gap-1">
+                      <span>📍</span>
+                      <span>{biz.address ? `${biz.address}, ` : ""}{biz.city}, {biz.state}</span>
+                    </p>
+                    {biz.contact_phone && (
+                      <p className="flex items-center gap-1">
+                        <span>📞</span>
+                        <span>{biz.contact_phone}</span>
+                      </p>
+                    )}
+                    {isFoodCategory && (
+                      <p className="text-[10px] text-amber-700 dark:text-amber-400 font-medium">
+                        🍽️ Directory discovery & dining hours (no delivery checkout)
+                      </p>
+                    )}
+                  </div>
+
+                  {biz.services_offered && biz.services_offered.length > 0 && (
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1">
+                      {biz.services_offered.slice(0, 4).map((srv, idx) => (
+                        <span
+                          key={idx}
+                          className="px-2 py-0.5 bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 rounded text-[10px] border border-slate-200 dark:border-[#163654]"
+                        >
+                          {srv}
+                        </span>
+                      ))}
+                      {biz.services_offered.length > 4 && (
+                        <span className="px-1.5 py-0.5 text-slate-400 text-[10px]">
+                          +{biz.services_offered.length - 4} more
+                        </span>
+                      )}
+                    </div>
                   )}
-                  <Link
-                    href={`/contact?inquiry=business&target=${encodeURIComponent(biz.name)}`}
-                    className="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition"
-                  >
-                    Inquire
-                  </Link>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setReportTarget({ id: biz.id, name: biz.name })}
-                  className="text-[11px] text-slate-400 hover:text-red-600 transition"
-                >
-                  Flag / Report
-                </button>
+                <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col gap-2.5">
+                  <div className="flex items-center justify-between gap-2">
+                    <Link
+                      href={profileUrl}
+                      className="flex-1 text-center px-3.5 py-2 bg-[#0D9488] hover:bg-[#0F766E] text-white rounded-xl text-xs font-bold transition shadow-xs"
+                    >
+                      View Profile &amp; Services &rarr;
+                    </Link>
+
+                    {biz.contact_phone && (
+                      <a
+                        href={`tel:${biz.contact_phone}`}
+                        className="px-3 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition"
+                        title="Call business phone"
+                      >
+                        📞 Call
+                      </a>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
+                    <Link
+                      href={`/contact?inquiry=business&target=${encodeURIComponent(biz.name)}`}
+                      className="hover:text-slate-600 dark:hover:text-slate-200 transition"
+                    >
+                      Inquire via EasyLife
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setReportTarget({ id: biz.id, name: biz.name })}
+                      className="hover:text-red-600 transition cursor-pointer"
+                    >
+                      Flag / Report
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

@@ -413,26 +413,53 @@ export function searchServiceCategories(
 }
 
 export const PUBLIC_PRIMARY_NAV_LINKS = [
-  { label: "Explore Services", href: "/explore-services" },
-  { label: "Dispatch & Delivery", href: "/dispatch" },
-  { label: "Local Businesses", href: "/businesses" },
-  { label: "Healthcare Directory", href: "/healthcare" },
-  { label: "Property Services", href: "/property-services" },
-  { label: "Post a Task", href: "/tasks" },
-  { label: "How It Works", href: "/how-it-works" },
-  { label: "Become a Pro", href: "/become-a-professional" },
+  {
+    label: "Home",
+    href: "/",
+    icon: "home" as const,
+    description: "Everyday Problems. Smarter Solutions.",
+  },
+  {
+    label: "Find Services",
+    href: "/services",
+    icon: "search" as const,
+    description: "Verified professionals & trade services",
+  },
+  {
+    label: "Post a Need",
+    href: "/post-a-need",
+    icon: "clipboard" as const,
+    description: "Get competitive quotes from vetted pros",
+  },
+  {
+    label: "Jobs & Opportunities",
+    href: "/jobs",
+    icon: "briefcase" as const,
+    description: "Vacancies, gigs & apprenticeships",
+  },
+  {
+    label: "Business Hub",
+    href: "/business-hub",
+    icon: "building" as const,
+    description: "Directory, deals & corporate facilities",
+  },
+  {
+    label: "Free Tools",
+    href: "/tools",
+    icon: "wrench" as const,
+    description: "Cost estimators & power calculators",
+  },
 ] as const;
 
 export const PUBLIC_FOOTER_LINKS = {
   platform: [
-    { label: "Homepage", href: "/" },
-    { label: "Explore Services", href: "/explore-services" },
-    { label: "Delivery & Dispatch", href: "/dispatch" },
-    { label: "Local Businesses", href: "/businesses" },
-    { label: "Healthcare Directory", href: "/healthcare" },
-    { label: "Property Services (No Listings)", href: "/property-services" },
-    { label: "Everyday Tasks", href: "/tasks" },
-    { label: "Business Solutions", href: "/business-solutions" },
+    { label: "Home", href: "/" },
+    { label: "Find Services", href: "/services" },
+    { label: "Post a Need", href: "/post-a-need" },
+    { label: "Jobs & Opportunities", href: "/jobs" },
+    { label: "Business Hub", href: "/business-hub" },
+    { label: "Free Tools", href: "/tools" },
+    { label: "How It Works", href: "/how-it-works" },
   ],
   companyAndSupport: [
     { label: "About EasyLife", href: "/about" },
@@ -449,5 +476,6 @@ export const PUBLIC_FOOTER_LINKS = {
     { label: "Create Account", href: "/register" },
     { label: "Register as a Professional", href: "/register?role=professional" },
     { label: "Register a Business", href: "/register?role=business" },
+    { label: "Register as an Employer", href: "/register?role=employer" },
   ],
 } as const;

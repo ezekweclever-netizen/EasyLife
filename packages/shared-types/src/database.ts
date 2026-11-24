@@ -8,6 +8,7 @@ import type {
   AppointmentStatus,
   AssetCategory,
   BookingStatus,
+  ContentModerationStatus,
   DirectoryReportReason,
   DirectoryReportStatus,
   DisputeCategory,
@@ -16,6 +17,11 @@ import type {
   FaultSeverityLevel,
   HealthcareFacilityType,
   InvitationStatus,
+  JobApplicationStatus,
+  JobEmploymentType,
+  JobSalaryPeriod,
+  JobVacancyStatus,
+  JobWorkplaceType,
   MaintenanceFrequency,
   MaintenanceRequestStatus,
   MessageDeliveryStatus,
@@ -245,6 +251,7 @@ export interface ProfessionalProfileRow {
   verified_by: string | null;
   rejection_reason: string | null;
   base_callout_fee_kobo: number;
+  hourly_rate_kobo?: number | null;
   currency_code: string;
   average_rating: number;
   review_count: number;
@@ -350,10 +357,16 @@ export interface BusinessRow {
   operating_hours?: Record<string, unknown> | null;
   services_offered?: string[] | null;
   photos?: string[] | null;
+  website?: string | null;
+  logo_url?: string | null;
+  rating?: number;
+  review_count?: number;
   is_directory_listed?: boolean;
   latitude?: number | null;
   longitude?: number | null;
   verification_status: VerificationStatus;
+  verified_at?: string | null;
+  verified_by?: string | null;
   is_active: boolean;
   created_at: string;
   updated_at: string;
@@ -990,7 +1003,6 @@ export interface DirectoryReportRow {
   id: string;
   reporter_id: string | null;
   entity_type: "professional" | "business" | "healthcare_facility" | "general_listing";
-  entity_id: string;
   entity_name: string;
   reason: "misrepresentation" | "suspicious_activity" | "unlicensed_practice" | "property_advertising_violation" | "inaccurate_contact_info" | "other";
   details: string;
@@ -1000,6 +1012,108 @@ export interface DirectoryReportRow {
   resolved_at: string | null;
   created_at: string;
   updated_at: string;
+}
+
+export interface EmployerProfileRow {
+  id: string;
+  user_id: string;
+  company_name: string;
+  slug: string;
+  company_description: string | null;
+  industry: string | null;
+  website: string | null;
+  logo_url: string | null;
+  contact_email: string | null;
+  contact_phone: string | null;
+  city: string;
+  state: string;
+  address: string | null;
+  verification_status: VerificationStatus;
+  is_verified: boolean;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface JobVacancyRow {
+  id: string;
+  reference_code: string;
+  employer_id: string | null;
+  business_id: string | null;
+  posted_by: string;
+  title: string;
+  slug: string;
+  category: string;
+  employment_type: JobEmploymentType;
+  workplace_type: JobWorkplaceType;
+  description: string;
+  requirements: string | null;
+  responsibilities: string | null;
+  city: string;
+  state: string;
+  address: string | null;
+  min_salary_kobo: number | null;
+  max_salary_kobo: number | null;
+  salary_period: JobSalaryPeriod;
+  currency_code: string;
+  is_negotiable: boolean;
+  benefits: string[];
+  application_deadline: string | null;
+  positions_available: number;
+  status: JobVacancyStatus;
+  moderation_status: ContentModerationStatus;
+  moderated_at: string | null;
+  moderated_by: string | null;
+  rejection_reason: string | null;
+  views_count: number;
+  applications_count: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+export interface JobApplicationRow {
+  id: string;
+  reference_code: string;
+  vacancy_id: string;
+  applicant_id: string;
+  applicant_name: string;
+  applicant_email: string;
+  applicant_phone: string;
+  resume_url: string | null;
+  cover_letter: string | null;
+  portfolio_links: string[];
+  status: JobApplicationStatus;
+  employer_notes: string | null;
+  reviewed_at: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface BusinessPromotionRow {
+  id: string;
+  business_id: string;
+  created_by: string;
+  title: string;
+  slug: string;
+  description: string;
+  discount_percentage: number | null;
+  discount_amount_kobo: number | null;
+  discount_code: string | null;
+  conditions: string | null;
+  banner_url: string | null;
+  start_date: string;
+  end_date: string | null;
+  is_active: boolean;
+  moderation_status: ContentModerationStatus;
+  moderated_at: string | null;
+  moderated_by: string | null;
+  views_count: number;
+  redemption_count: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
 }
 
 /**

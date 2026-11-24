@@ -55,7 +55,7 @@ interface SuggestPayload {
 }
 
 /**
- * Main service search. Submits a GET request to /explore-services?q=...
+ * Main service search. Submits a GET request to /services?q=...
  * (works without JavaScript; Next.js <Form> adds client-side navigation) and
  * provides live database-backed category, subcategory, and individual service suggestions.
  */
@@ -142,11 +142,11 @@ export function ServiceSearchForm({
         })),
         ...suggestions.subcategories.map((sub) => ({
           label: sub.name,
-          href: `/explore-services?cat=${encodeURIComponent(sub.parent_slug)}&sub=${encodeURIComponent(sub.slug)}`,
+          href: `/services?cat=${encodeURIComponent(sub.parent_slug)}&sub=${encodeURIComponent(sub.slug)}`,
         })),
         ...suggestions.categories.map((cat) => ({
           label: cat.name,
-          href: `/explore-services?cat=${encodeURIComponent(cat.slug)}`,
+          href: `/services?cat=${encodeURIComponent(cat.slug)}`,
         })),
       ]
     : [];
@@ -179,7 +179,7 @@ export function ServiceSearchForm({
   return (
     <div ref={containerRef} className="relative text-left">
       <Form
-        action="/explore-services"
+        action="/services"
         role="search"
         aria-label="Search EasyLife services"
         onSubmit={() => setIsOpen(false)}
@@ -220,9 +220,10 @@ export function ServiceSearchForm({
         </div>
         <button
           type="submit"
-          className="h-12 px-5 sm:px-7 rounded-xl bg-[#24989A] hover:bg-[#1D7E80] text-white text-sm sm:text-base font-bold transition-all shadow-xs cursor-pointer shrink-0"
+          className="h-12 px-4 sm:px-7 rounded-xl bg-[#24989A] hover:bg-[#1D7E80] text-white text-sm sm:text-base font-bold transition-all shadow-xs cursor-pointer shrink-0"
         >
-          Search services
+          <span className="hidden sm:inline">Search services</span>
+          <span className="sm:hidden">Search</span>
         </button>
       </Form>
 
@@ -242,7 +243,7 @@ export function ServiceSearchForm({
             <div className="px-5 py-4 text-sm text-[#4E6065] flex items-center justify-between gap-3">
               <span>Live suggestions are temporarily unavailable.</span>
               <Link
-                href={`/explore-services${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`}
+                href={`/services${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`}
                 onClick={() => setIsOpen(false)}
                 className="font-semibold text-[#24989A] hover:underline shrink-0"
               >
@@ -260,7 +261,7 @@ export function ServiceSearchForm({
               </p>
               <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
                 <Link
-                  href={`/explore-services?q=${encodeURIComponent(query.trim())}`}
+                  href={`/services?q=${encodeURIComponent(query.trim())}`}
                   onClick={() => setIsOpen(false)}
                   className="text-[#24989A] hover:underline"
                 >
@@ -372,7 +373,7 @@ export function ServiceSearchForm({
                           key={sub.id}
                           role="option"
                           aria-selected={isHighlighted}
-                          href={`/explore-services?cat=${encodeURIComponent(sub.parent_slug)}&sub=${encodeURIComponent(sub.slug)}`}
+                          href={`/services?cat=${encodeURIComponent(sub.parent_slug)}&sub=${encodeURIComponent(sub.slug)}`}
                           onClick={() => setIsOpen(false)}
                           className={`flex items-center justify-between gap-2 px-3 py-2 rounded-xl transition-colors ${
                             isHighlighted
@@ -412,7 +413,7 @@ export function ServiceSearchForm({
                           key={cat.id}
                           role="option"
                           aria-selected={isHighlighted}
-                          href={`/explore-services?cat=${encodeURIComponent(cat.slug)}`}
+                          href={`/services?cat=${encodeURIComponent(cat.slug)}`}
                           onClick={() => setIsOpen(false)}
                           className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors ${
                             isHighlighted
@@ -434,7 +435,7 @@ export function ServiceSearchForm({
 
               <div className="bg-[#F3F8F8] px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
                 <Link
-                  href={`/explore-services${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`}
+                  href={`/services${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`}
                   onClick={() => setIsOpen(false)}
                   className="font-bold text-[#154752] hover:text-[#24989A] transition-colors"
                 >

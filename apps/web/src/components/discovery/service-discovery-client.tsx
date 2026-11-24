@@ -246,13 +246,13 @@ export function ServiceDiscoveryClient({
   }) => {
     const qs = buildQueryParams({ ...overrides, page: overrides?.page ?? 1 }).toString();
     startTransition(() => {
-      router.push(qs ? `/explore-services?${qs}` : "/explore-services", { scroll: false });
+      router.push(qs ? `/services?${qs}` : "/services", { scroll: false });
     });
   };
 
   const buildPageHref = (targetPage: number) => {
     const qs = buildQueryParams({ page: targetPage }).toString();
-    return qs ? `/explore-services?${qs}` : "/explore-services";
+    return qs ? `/services?${qs}` : "/services";
   };
 
   const handleSearch = (e?: React.FormEvent) => {
@@ -276,7 +276,7 @@ export function ServiceDiscoveryClient({
     setProviderType("");
     setSortBy("relevance");
     startTransition(() => {
-      router.push("/explore-services", { scroll: false });
+      router.push("/services", { scroll: false });
     });
   };
 
@@ -298,49 +298,31 @@ export function ServiceDiscoveryClient({
 
   return (
     <div className="space-y-8">
-      {/* Everyday Services Directory Switcher */}
+      {/* Two-Tier Directory & Marketplace Switcher */}
       <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto text-xs font-bold text-slate-700 dark:text-slate-200">
         <Link
-          href="/explore-services"
-          className="px-3.5 py-2 rounded-xl bg-white dark:bg-[#0D223A] text-[#0A2540] dark:text-white shadow-xs whitespace-nowrap"
-        >
-          🔧 Trades &amp; Technicians
-        </Link>
-        <Link
           href="/services"
-          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
+          className="px-4 py-2 rounded-xl bg-white dark:bg-[#0D223A] text-[#0A2540] dark:text-white shadow-xs whitespace-nowrap"
         >
-          📚 Full Service Catalogue
+          🔧 Verified Professionals
         </Link>
         <Link
-          href="/dispatch"
-          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
+          href="/services?view=catalogue"
+          className="px-4 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
         >
-          🏍️ Delivery &amp; Dispatch
+          📚 Service Catalogue &amp; Pricing
         </Link>
         <Link
-          href="/property-services"
-          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
+          href="/business-hub"
+          className="px-4 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
         >
-          🏠 Property Consultants
+          🏢 Business Hub
         </Link>
         <Link
-          href="/businesses"
-          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
+          href="/post-a-need"
+          className="px-4 py-2 rounded-xl bg-[#0D9488]/15 text-[#0D9488] dark:text-[#5CD3D5] hover:bg-[#0D9488]/25 transition whitespace-nowrap ml-auto"
         >
-          🏢 Local Businesses
-        </Link>
-        <Link
-          href="/healthcare"
-          className="px-3.5 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
-        >
-          🏥 Healthcare Directory
-        </Link>
-        <Link
-          href="/tasks"
-          className="px-3.5 py-2 rounded-xl bg-[#0D9488]/10 text-[#0D9488] dark:text-[#5CD3D5] hover:bg-[#0D9488]/20 transition whitespace-nowrap ml-auto"
-        >
-          📝 Post Everyday Task
+          📝 Post a Need →
         </Link>
       </div>
 
@@ -803,10 +785,10 @@ export function ServiceDiscoveryClient({
               Submit Service Request
             </Link>
             <Link
-              href={`/tasks`}
+              href="/post-a-need"
               className="px-5 py-2.5 rounded-xl bg-[#0A2540] text-white text-xs font-bold hover:bg-[#1E3A5F] transition shadow-xs"
             >
-              Post an Everyday Task
+              Post a Need →
             </Link>
             <button
               type="button"

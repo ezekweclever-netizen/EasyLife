@@ -16,23 +16,7 @@ export default async function BusinessDashboardPage() {
   const business = await getActiveBusiness();
 
   if (!business) {
-    return (
-      <div className="min-h-screen bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-slate-100">
-        <header className="border-b border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="w-9 h-9 rounded-lg bg-teal-600 text-white font-bold flex items-center justify-center text-lg shadow-sm">
-                EL
-              </span>
-              <span className="font-extrabold text-slate-900 dark:text-white text-lg">
-                EasyLife <span className="text-teal-700 dark:text-teal-400 font-semibold text-sm">Business</span>
-              </span>
-            </div>
-          </div>
-        </header>
-        <RegisterBusinessClient />
-      </div>
-    );
+    return <RegisterBusinessClient />;
   }
 
   const rawMetrics = await fetchBusinessDashboardMetrics(business.id as string);

@@ -177,18 +177,18 @@ export function ScrollHeroSection() {
             <ServiceSearchForm id="hero-search" tone="dark" />
           </div>
 
-          {/* Direct Action CTAs */}
+          {/* Direct Action CTAs: Find Services and Post a Need */}
           <div className="mt-6 sm:mt-7 flex flex-wrap items-center justify-center md:justify-start gap-3">
-            <ButtonLink href="/explore-services" size="lg">
-              Explore All Services
+            <ButtonLink href="/services" size="lg">
+              Find Services
             </ButtonLink>
             <ButtonLink
-              href="/become-a-professional"
+              href="/post-a-need"
               size="lg"
               variant="outline-inverse"
               className="bg-[#091E38]/50 backdrop-blur-xs"
             >
-              Join as a Professional
+              Post a Need
             </ButtonLink>
           </div>
         </div>

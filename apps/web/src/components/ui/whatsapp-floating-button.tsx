@@ -16,7 +16,7 @@ export function WhatsAppFloatingButton({
   return (
     <aside
       aria-label="Direct WhatsApp Support"
-      className="fixed bottom-5 right-5 z-40 group print:hidden"
+      className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-30 group print:hidden"
     >
       <a
         href={url}

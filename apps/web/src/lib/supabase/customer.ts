@@ -74,6 +74,7 @@ export interface PublicProfessionalItem {
   verification_status: string;
   verified_at: string | null;
   base_callout_fee_kobo: number | null;
+  hourly_rate_kobo?: number | null;
   currency_code: string;
   average_rating: number;
   review_count: number;

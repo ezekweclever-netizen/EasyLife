@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 import { checkCatalogueServiceAvailability } from "@/lib/supabase/catalogue-availability";
 import { getSupabasePublicConfig, supabaseFetch } from "@/lib/supabase/rest";
+import { getDiscoverableProfessionals, type PublicProfessionalItem } from "@/lib/supabase/customer";
 
 export interface BookingFormState {
   status: "idle" | "success" | "error";
@@ -51,6 +52,18 @@ export async function createBookingAction(
   const additionalInstructions = String(formData.get("additionalInstructions") || "").trim();
   const professionalId = String(formData.get("professionalId") || "").trim();
   const attachmentsJsonRaw = String(formData.get("attachmentsJson") || "[]").trim();
+  const budgetEstimateNairaRaw = String(formData.get("budgetEstimateNaira") || "").trim();
+  const contactPreference = String(formData.get("contactPreference") || "in_app").trim();
+  const aiSuggestedCategoryId = String(formData.get("aiSuggestedCategoryId") || "").trim();
+  const aiUrgency = String(formData.get("aiUrgency") || "").trim();
+  const aiCategorizationMetaRaw = String(formData.get("aiCategorizationMeta") || "").trim();
+  const isCustomTask = formData.get("isCustomTask") === "true";
+  const neighbourhood = String(formData.get("neighbourhood") || "").trim();
+
+  const budgetEstimateNaira = budgetEstimateNairaRaw
+    ? parseFloat(budgetEstimateNairaRaw.replace(/[^0-9.]/g, ""))
+    : 0;
+  const budgetEstimateKobo = budgetEstimateNaira > 0 ? Math.round(budgetEstimateNaira * 100) : null;
 
   type UploadedAttachmentMeta = {
     storage_bucket?: string;
@@ -138,10 +151,26 @@ export async function createBookingAction(
   if (city === "Lagos") state = "Lagos State";
   if (city === "Abuja") state = "Federal Capital Territory";
 
-  // Combine instructions into description if present
-  const fullDescription = additionalInstructions
-    ? `${description}\n\n[Additional Access & Site Instructions]: ${additionalInstructions}`
-    : description;
+  // Combine instructions and preferences into description
+  const noteParts: string[] = [];
+  if (additionalInstructions) {
+    noteParts.push(`[Additional Access & Site Instructions]: ${additionalInstructions}`);
+  }
+  if (contactPreference && contactPreference !== "in_app") {
+    const prefLabel =
+      contactPreference === "whatsapp"
+        ? "WhatsApp"
+        : contactPreference === "phone"
+        ? "Direct Phone Call"
+        : contactPreference;
+    noteParts.push(`[Preferred Contact Method]: ${prefLabel}`);
+  }
+  if (budgetEstimateNaira > 0) {
+    noteParts.push(`[Customer Target Budget]: ₦${budgetEstimateNaira.toLocaleString()}`);
+  }
+
+  const fullDescription =
+    noteParts.length > 0 ? `${description}\n\n${noteParts.join("\n")}` : description;
 
   const payload: Record<string, unknown> = {
     customer_id: auth.user.id,
@@ -151,6 +180,7 @@ export async function createBookingAction(
     city,
     state,
     lga_or_district: lgaOrDistrict || null,
+    neighbourhood: neighbourhood || lgaOrDistrict || null,
     service_address: serviceAddress,
     urgency: ["emergency", "high", "normal", "scheduled"].includes(urgency) ? urgency : "normal",
     status: "submitted",
@@ -159,11 +189,35 @@ export async function createBookingAction(
     currency_code: "NGN",
   };
 
+  if (budgetEstimateKobo && budgetEstimateKobo > 0) {
+    payload.budget_estimate_kobo = budgetEstimateKobo;
+  }
+
+  if (isCustomTask) {
+    payload.is_custom_task = true;
+  }
+
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (aiSuggestedCategoryId && uuidRegex.test(aiSuggestedCategoryId)) {
+    payload.ai_suggested_category_id = aiSuggestedCategoryId;
+  }
+
+  if (aiUrgency) {
+    payload.ai_urgency = aiUrgency;
+  }
+
+  if (aiCategorizationMetaRaw) {
+    try {
+      payload.ai_categorization_meta = JSON.parse(aiCategorizationMetaRaw);
+    } catch {
+      payload.ai_categorization_meta = { raw: aiCategorizationMetaRaw };
+    }
+  }
+
   if (professionalId && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(professionalId)) {
     payload.professional_id = professionalId;
   }
 
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if (serviceId && uuidRegex.test(serviceId)) {
     const availability = await checkCatalogueServiceAvailability(serviceId);
     if (availability.status === "paused") {
@@ -594,4 +648,27 @@ export async function updateBookingJobExecutionAction(
 
   return { ok: true, message: "Job execution status updated successfully.", data: rpcResult };
 }
+
+/**
+ * Fetch verified professionals matching a location and/or category
+ * for real-time recommendation during the Post a Need request flow.
+ */
+export async function getMatchingProfessionalsAction(params: {
+  city?: string;
+  categoryId?: string;
+  limit?: number;
+}): Promise<PublicProfessionalItem[]> {
+  try {
+    return await getDiscoverableProfessionals({
+      city: params.city,
+      categoryId: params.categoryId,
+      verifiedOnly: true,
+      limit: params.limit || 6,
+    });
+  } catch (err) {
+    console.error("Failed to fetch matching professionals:", err);
+    return [];
+  }
+}
+
 

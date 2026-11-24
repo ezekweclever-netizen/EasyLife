@@ -42,6 +42,114 @@ export function isActorAdmin(actor: AuthenticatedActor): boolean {
   );
 }
 
+export function isActorModerator(actor: AuthenticatedActor): boolean {
+  return (
+    actor.isActive &&
+    !actor.isSuspended &&
+    (actor.primaryRole === "moderator" ||
+      actor.roles.includes("moderator") ||
+      actor.primaryRole === "admin" ||
+      actor.roles.includes("admin"))
+  );
+}
+
+export function isActorEmployer(actor: AuthenticatedActor): boolean {
+  return (
+    actor.isActive &&
+    !actor.isSuspended &&
+    (actor.primaryRole === "employer" ||
+      actor.roles.includes("employer") ||
+      actor.primaryRole === "business" ||
+      actor.roles.includes("business") ||
+      actor.primaryRole === "admin" ||
+      actor.roles.includes("admin"))
+  );
+}
+
+export function canManageJobVacancy(
+  actor: AuthenticatedActor,
+  vacancy: { postedBy: string }
+): AuthorizationDecision {
+  if (!actor.isActive || actor.isSuspended) {
+    return { allowed: false, reason: "Account is inactive or suspended." };
+  }
+  if (isActorModerator(actor)) {
+    return { allowed: true, reason: "Admin/Moderator management access granted." };
+  }
+  if (vacancy.postedBy === actor.userId) {
+    return { allowed: true, reason: "Vacancy owner access granted." };
+  }
+  return {
+    allowed: false,
+    reason: "FORBIDDEN: You do not have permission to manage this vacancy.",
+  };
+}
+
+export function canApplyToJobVacancy(
+  actor: AuthenticatedActor,
+  vacancy: { status: string; moderationStatus: string }
+): AuthorizationDecision {
+  if (!actor.isActive || actor.isSuspended) {
+    return { allowed: false, reason: "Account is inactive or suspended." };
+  }
+  if (vacancy.status !== "open" || vacancy.moderationStatus !== "approved") {
+    return {
+      allowed: false,
+      reason: "This job opportunity is not currently open for applications.",
+    };
+  }
+  return { allowed: true, reason: "Applicant authorized to apply." };
+}
+
+export function canAccessJobApplication(
+  actor: AuthenticatedActor,
+  application: { applicantId: string; vacancyPostedBy: string }
+): AuthorizationDecision {
+  if (!actor.isActive || actor.isSuspended) {
+    return { allowed: false, reason: "Account is inactive or suspended." };
+  }
+  if (isActorModerator(actor)) {
+    return { allowed: true, reason: "Admin/Moderator access granted." };
+  }
+  if (application.applicantId === actor.userId) {
+    return { allowed: true, reason: "Applicant access granted." };
+  }
+  if (application.vacancyPostedBy === actor.userId) {
+    return { allowed: true, reason: "Hiring manager access granted." };
+  }
+  return {
+    allowed: false,
+    reason: "FORBIDDEN: You do not have permission to access this application.",
+  };
+}
+
+export function canManageBusinessPromotion(
+  actor: AuthenticatedActor,
+  promotion: { createdBy: string; businessId: string }
+): AuthorizationDecision {
+  if (!actor.isActive || actor.isSuspended) {
+    return { allowed: false, reason: "Account is inactive or suspended." };
+  }
+  if (isActorModerator(actor)) {
+    return { allowed: true, reason: "Admin/Moderator access granted." };
+  }
+  if (promotion.createdBy === actor.userId) {
+    return { allowed: true, reason: "Promotion creator access granted." };
+  }
+  if (actor.businessMemberships) {
+    const isMember = actor.businessMemberships.some(
+      (m) => m.businessId === promotion.businessId && m.isActive
+    );
+    if (isMember) {
+      return { allowed: true, reason: "Business member access granted." };
+    }
+  }
+  return {
+    allowed: false,
+    reason: "FORBIDDEN: You do not have permission to manage this promotion.",
+  };
+}
+
 export function canAccessBookingRecord(
   actor: AuthenticatedActor,
   booking: {
