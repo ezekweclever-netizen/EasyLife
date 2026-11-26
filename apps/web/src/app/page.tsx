@@ -480,8 +480,8 @@ export default async function HomePage({
               </div>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/business-solutions">
-                Explore Business Features
+              <ButtonLink href="/business-hub">
+                Explore Business Hub
               </ButtonLink>
               <ButtonLink href="/contact?topic=business_solutions" variant="outline">
                 Contact Facility Desk

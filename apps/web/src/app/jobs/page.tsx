@@ -135,7 +135,7 @@ export default async function JobsOpportunitiesPage({
   let vacancies: Array<JobVacancyRow & { company_name?: string }> = [];
   try {
     let queryPath =
-      "/rest/v1/job_vacancies?status=eq.open&moderation_status=eq.approved&order=created_at.desc&limit=30";
+      "/rest/v1/job_vacancies?select=*,business:businesses(id,name,slug),employer:employer_profiles(id,company_name,slug)&status=eq.open&moderation_status=eq.approved&order=created_at.desc&limit=30";
 
     if (city !== "All") {
       queryPath += `&city=ilike.*${encodeURIComponent(city)}*`;
@@ -153,9 +153,25 @@ export default async function JobsOpportunitiesPage({
       queryPath += `&or=(title.ilike.*${qClean}*,description.ilike.*${qClean}*,requirements.ilike.*${qClean}*)`;
     }
 
-    const res = await supabaseAdminFetch<JobVacancyRow[]>(queryPath);
+    const res = await supabaseAdminFetch<
+      Array<
+        JobVacancyRow & {
+          company_name?: string;
+          business?: { id: string; name: string; slug: string } | null;
+          employer?: { id: string; company_name: string; slug: string } | null;
+        }
+      >
+    >(queryPath);
+
     if (res.ok && Array.isArray(res.data) && res.data.length > 0) {
-      vacancies = res.data;
+      vacancies = res.data.map((item) => ({
+        ...item,
+        company_name:
+          item.employer?.company_name ||
+          item.business?.name ||
+          item.company_name ||
+          "Verified EasyLife Partner Employer",
+      }));
     }
   } catch (err) {
     console.warn("Could not fetch vacancies from DB, using fallback list:", err);

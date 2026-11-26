@@ -350,13 +350,17 @@ export async function registerAction(
     };
   }
 
+  const appUrl = (
+    process.env.NEXT_PUBLIC_APP_URL?.trim() || "https://easylife.ng"
+  ).replace(/\/+$/, "");
+
   const res = await supabaseFetch<{
     id?: string;
     access_token?: string;
     refresh_token?: string;
     expires_in?: number;
     user?: { id: string; email?: string };
-  }>(config, "/auth/v1/signup", {
+  }>(config, `/auth/v1/signup?redirect_to=${encodeURIComponent(`${appUrl}/auth/callback`)}`, {
     method: "POST",
     body: {
       email,
@@ -367,6 +371,9 @@ export async function registerAction(
         city,
         state,
         phone,
+      },
+      options: {
+        emailRedirectTo: `${appUrl}/auth/callback`,
       },
     },
   });

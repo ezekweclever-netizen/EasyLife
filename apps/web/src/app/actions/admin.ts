@@ -1160,3 +1160,166 @@ export async function fetchAdminAnalytics(days: number = 90) {
       disputesRes.ok && Array.isArray(disputesRes.data) ? disputesRes.data : [],
   };
 }
+
+/**
+ * 23. Fetch Job Vacancies for Admin Operations & Moderation
+ */
+export async function fetchAdminJobs(params: {
+  status?: string;
+  moderationStatus?: string;
+  search?: string;
+  city?: string;
+  limit?: number;
+  offset?: number;
+} = {}): Promise<{
+  vacancies: Array<Record<string, unknown>>;
+  totalCount: number;
+}> {
+  const auth = await getAuthenticatedUser();
+  const limit = Math.min(100, Math.max(1, params.limit ?? 20));
+  const offset = Math.max(0, params.offset ?? 0);
+
+  let query = `/rest/v1/job_vacancies?select=*,posted_by_profile:profiles!posted_by(id,full_name,email,phone),employer:employer_profiles(id,company_name,city),business:businesses(id,name,city)&order=created_at.desc&limit=${limit}&offset=${offset}`;
+
+  if (params.moderationStatus && params.moderationStatus !== "all") {
+    query += `&moderation_status=eq.${encodeURIComponent(params.moderationStatus)}`;
+  }
+  if (params.status && params.status !== "all") {
+    query += `&status=eq.${encodeURIComponent(params.status)}`;
+  }
+  if (params.city && params.city !== "all") {
+    query += `&city=ilike.*${encodeURIComponent(params.city)}*`;
+  }
+  if (params.search?.trim()) {
+    const q = encodeURIComponent(params.search.trim());
+    query += `&or=(title.ilike.*${q}*,description.ilike.*${q}*,city.ilike.*${q}*)`;
+  }
+
+  const res = await runAdminQuery<Array<Record<string, unknown>>>(query, {
+    accessToken: auth?.accessToken,
+    headers: { Prefer: "count=exact" },
+  });
+
+  const vacancies = res.ok && Array.isArray(res.data) ? res.data : [];
+  return {
+    vacancies,
+    totalCount:
+      res.ok && res.totalCount !== undefined && res.totalCount !== null
+        ? res.totalCount
+        : vacancies.length,
+  };
+}
+
+/**
+ * 24. Moderate a Job Vacancy (Approve, Reject, Close)
+ */
+export async function moderateJobVacancyAction(
+  vacancyId: string,
+  decision: "approved" | "rejected" | "closed",
+  reason?: string
+): Promise<AdminActionResult> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized. Administrator privileges required." };
+  }
+
+  const updatePayload: Record<string, unknown> = {
+    moderation_status: decision === "closed" ? "approved" : decision,
+    moderated_at: new Date().toISOString(),
+    moderated_by: adminCheck.user.id,
+    updated_at: new Date().toISOString(),
+  };
+
+  if (decision === "closed") {
+    updatePayload.status = "closed";
+  } else if (decision === "approved") {
+    updatePayload.status = "open";
+    updatePayload.rejection_reason = null;
+  } else if (decision === "rejected") {
+    updatePayload.status = "closed";
+    updatePayload.rejection_reason = reason?.trim() || "Does not meet platform trade standards.";
+  }
+
+  const res = await runAdminQuery(
+    `/rest/v1/job_vacancies?id=eq.${vacancyId}`,
+    {
+      method: "PATCH",
+      body: updatePayload,
+      accessToken: adminCheck.accessToken,
+    }
+  );
+
+  if (!res.ok) {
+    return { ok: false, message: res.message || "Failed to update vacancy moderation status." };
+  }
+
+  revalidatePath("/admin/jobs");
+  revalidatePath("/jobs");
+  revalidatePath(`/jobs/${vacancyId}`);
+
+  return {
+    ok: true,
+    message: `Job vacancy has been ${decision === "approved" ? "approved and published" : decision === "rejected" ? "rejected" : "closed"}.`,
+  };
+}
+
+/**
+ * 25. Delete a Job Vacancy (Permanent or Soft Delete)
+ */
+export async function deleteJobVacancyAction(
+  vacancyId: string
+): Promise<AdminActionResult> {
+  const adminCheck = await verifyAdminSession();
+  if (!adminCheck.ok) {
+    return { ok: false, message: "Unauthorized. Administrator privileges required." };
+  }
+
+  const res = await runAdminQuery(
+    `/rest/v1/job_vacancies?id=eq.${vacancyId}`,
+    {
+      method: "PATCH",
+      body: {
+        deleted_at: new Date().toISOString(),
+        status: "closed",
+        updated_at: new Date().toISOString(),
+      },
+      accessToken: adminCheck.accessToken,
+    }
+  );
+
+  if (!res.ok) {
+    return { ok: false, message: res.message || "Failed to remove vacancy." };
+  }
+
+  revalidatePath("/admin/jobs");
+  revalidatePath("/jobs");
+
+  return { ok: true, message: "Job vacancy has been removed." };
+}
+
+/**
+ * 26. Fetch Job Applications for Admin Inspection
+ */
+export async function fetchAdminJobApplications(params: {
+  vacancyId?: string;
+  status?: string;
+  limit?: number;
+} = {}): Promise<Array<Record<string, unknown>>> {
+  const auth = await getAuthenticatedUser();
+  const limit = Math.min(100, Math.max(1, params.limit ?? 50));
+
+  let query = `/rest/v1/job_applications?select=*,vacancy:job_vacancies(id,title,city,status),applicant:profiles!applicant_id(id,full_name,email,phone)&order=created_at.desc&limit=${limit}`;
+
+  if (params.vacancyId) {
+    query += `&vacancy_id=eq.${params.vacancyId}`;
+  }
+  if (params.status && params.status !== "all") {
+    query += `&status=eq.${encodeURIComponent(params.status)}`;
+  }
+
+  const res = await runAdminQuery<Array<Record<string, unknown>>>(query, {
+    accessToken: auth?.accessToken,
+  });
+
+  return res.ok && Array.isArray(res.data) ? res.data : [];
+}

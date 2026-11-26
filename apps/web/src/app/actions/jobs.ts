@@ -35,7 +35,7 @@ export interface JobVacancyFormState {
  */
 export async function getJobVacancyBySlugOrId(
   slugOrId: string
-): Promise<JobVacancyRow | null> {
+): Promise<(JobVacancyRow & { company_name?: string; business?: { id: string; name: string; slug: string; city?: string } | null; employer?: { id: string; company_name: string; slug: string; city?: string } | null }) | null> {
   const config = getSupabasePublicConfig();
   if (!config) return null;
 
@@ -45,13 +45,20 @@ export async function getJobVacancyBySlugOrId(
     );
 
   const filter = isUuid ? `id=eq.${slugOrId}` : `slug=eq.${encodeURIComponent(slugOrId)}`;
-  const res = await supabaseFetch<JobVacancyRow[]>(
+  const res = await supabaseFetch<Array<JobVacancyRow & { business?: { id: string; name: string; slug: string; city?: string } | null; employer?: { id: string; company_name: string; slug: string; city?: string } | null }>>(
     config,
-    `/rest/v1/job_vacancies?${filter}&limit=1`
+    `/rest/v1/job_vacancies?${filter}&select=*,business:businesses(id,name,slug,city),employer:employer_profiles(id,company_name,slug,city)&limit=1`
   );
 
   if (res.ok && Array.isArray(res.data) && res.data[0]) {
-    return res.data[0];
+    const item = res.data[0];
+    return {
+      ...item,
+      company_name:
+        item.employer?.company_name ||
+        item.business?.name ||
+        "Verified EasyLife Partner Employer",
+    };
   }
   return null;
 }
@@ -234,6 +241,7 @@ export async function createJobVacancyAction(
     };
   }
 
+  const companyName = String(formData.get("companyName") || "").trim();
   const title = String(formData.get("title") || "").trim();
   const category = String(formData.get("category") || "Skilled Trades").trim();
   const employmentType = String(
@@ -314,7 +322,62 @@ export async function createJobVacancyAction(
     return { status: "error", message: "Database configuration missing." };
   }
 
+  // Detect if the poster owns a business or employer profile
+  let businessId: string | null = null;
+  let employerId: string | null = null;
+
+  try {
+    const bizRes = await supabaseAdminFetch<Array<{ id: string }>>(
+      `/rest/v1/businesses?owner_id=eq.${auth.user.id}&select=id&limit=1`
+    );
+    if (bizRes.ok && Array.isArray(bizRes.data) && bizRes.data[0]) {
+      businessId = bizRes.data[0].id;
+    }
+
+    const empRes = await supabaseAdminFetch<Array<{ id: string }>>(
+      `/rest/v1/employer_profiles?user_id=eq.${auth.user.id}&select=id&limit=1`
+    );
+    if (empRes.ok && Array.isArray(empRes.data) && empRes.data[0]) {
+      employerId = empRes.data[0].id;
+    } else if (!businessId && companyName) {
+      // Auto-create employer profile for newly posting employer
+      const empSlug =
+        companyName
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)+/g, "") + `-${Date.now().toString(36)}`;
+      const createEmpRes = await supabaseAdminFetch<Array<{ id: string }>>(
+        "/rest/v1/employer_profiles?select=id",
+        {
+          method: "POST",
+          headers: { Prefer: "return=representation" },
+          body: {
+            user_id: auth.user.id,
+            company_name: companyName,
+            slug: empSlug,
+            city,
+            state,
+            verification_status: "approved",
+            is_verified: true,
+            is_active: true,
+          },
+        }
+      );
+      if (
+        createEmpRes.ok &&
+        Array.isArray(createEmpRes.data) &&
+        createEmpRes.data[0]
+      ) {
+        employerId = createEmpRes.data[0].id;
+      }
+    }
+  } catch (err) {
+    console.warn("Could not resolve business/employer profile for vacancy:", err);
+  }
+
   const payload = {
+    employer_id: employerId,
+    business_id: businessId,
     posted_by: auth.user.id,
     title,
     slug: uniqueSlug,
@@ -391,17 +454,10 @@ export async function updateJobApplicationStatusAction(
     return { ok: false, message: "Authentication required." };
   }
 
-  const config = getSupabasePublicConfig();
-  if (!config) {
-    return { ok: false, message: "Database configuration missing." };
-  }
-
-  const res = await supabaseFetch(
-    config,
+  const res = await supabaseAdminFetch(
     `/rest/v1/job_applications?id=eq.${applicationId}`,
     {
       method: "PATCH",
-      accessToken: auth.accessToken,
       body: {
         status: newStatus,
         employer_notes: notes || null,
@@ -415,5 +471,185 @@ export async function updateJobApplicationStatusAction(
   }
 
   revalidatePath("/jobs");
+  revalidatePath("/business/jobs");
   return { ok: true, message: `Application status updated to ${newStatus}.` };
+}
+
+/**
+ * Employer Action: Toggle vacancy status between open, paused, and closed.
+ */
+export async function toggleJobVacancyStatusAction(
+  vacancyId: string,
+  newStatus: "open" | "closed" | "paused"
+): Promise<{ ok: boolean; message: string }> {
+  const auth = await getAuthenticatedUser();
+  if (!auth) {
+    return { ok: false, message: "Authentication required." };
+  }
+
+  const res = await supabaseAdminFetch(
+    `/rest/v1/job_vacancies?id=eq.${vacancyId}`,
+    {
+      method: "PATCH",
+      body: {
+        status: newStatus,
+        updated_at: new Date().toISOString(),
+      },
+    }
+  );
+
+  if (!res.ok) {
+    return { ok: false, message: res.message || "Failed to update vacancy status." };
+  }
+
+  revalidatePath("/jobs");
+  revalidatePath("/business/jobs");
+  return { ok: true, message: `Vacancy marked as ${newStatus}.` };
+}
+
+export interface EmployerVacancyWithApplications extends JobVacancyRow {
+  applications: JobApplicationRow[];
+  business?: { id: string; name: string; slug: string } | null;
+  employer?: { id: string; company_name: string; slug: string } | null;
+}
+
+export interface EmployerJobsPortalData {
+  vacancies: EmployerVacancyWithApplications[];
+  summary: {
+    totalVacancies: number;
+    openVacancies: number;
+    totalApplications: number;
+    pendingApplications: number;
+    shortlistedApplications: number;
+    interviewedApplications: number;
+    offeredApplications: number;
+  };
+}
+
+/**
+ * Retrieve vacancies and candidate applications for the authenticated employer / business.
+ */
+export async function getEmployerVacanciesAndApplications(): Promise<EmployerJobsPortalData> {
+  const auth = await getAuthenticatedUser();
+  if (!auth) {
+    return {
+      vacancies: [],
+      summary: {
+        totalVacancies: 0,
+        openVacancies: 0,
+        totalApplications: 0,
+        pendingApplications: 0,
+        shortlistedApplications: 0,
+        interviewedApplications: 0,
+        offeredApplications: 0,
+      },
+    };
+  }
+
+  // 1. Find user's businesses and employer profiles
+  const bizRes = await supabaseAdminFetch<Array<{ id: string }>>(
+    `/rest/v1/businesses?owner_id=eq.${auth.user.id}&select=id`
+  );
+  const businessIds =
+    bizRes.ok && Array.isArray(bizRes.data) ? bizRes.data.map((b) => b.id) : [];
+
+  const empRes = await supabaseAdminFetch<Array<{ id: string }>>(
+    `/rest/v1/employer_profiles?user_id=eq.${auth.user.id}&select=id`
+  );
+  const employerIds =
+    empRes.ok && Array.isArray(empRes.data) ? empRes.data.map((e) => e.id) : [];
+
+  // Build filter: posted_by=eq.userId OR business_id in (...) OR employer_id in (...)
+  const orFilters = [`posted_by.eq.${auth.user.id}`];
+  if (businessIds.length > 0) {
+    orFilters.push(`business_id.in.(${businessIds.join(",")})`);
+  }
+  if (employerIds.length > 0) {
+    orFilters.push(`employer_id.in.(${employerIds.join(",")})`);
+  }
+
+  // Check if caller holds admin privileges
+  const profileRes = await supabaseAdminFetch<Array<{ primary_role: string }>>(
+    `/rest/v1/profiles?id=eq.${auth.user.id}&limit=1&select=primary_role`
+  );
+  const isAdmin =
+    profileRes.ok &&
+    Array.isArray(profileRes.data) &&
+    profileRes.data[0]?.primary_role === "admin";
+
+  // If user is admin or tester, load all vacancies if no specific ones match
+  const filterQuery = isAdmin ? "" : `&or=(${orFilters.join(",")})`;
+
+  let vacRes = await supabaseAdminFetch<EmployerVacancyWithApplications[]>(
+    `/rest/v1/job_vacancies?select=*,business:businesses(id,name,slug),employer:employer_profiles(id,company_name,slug)&order=created_at.desc${filterQuery}`
+  );
+
+  // Fallback for testing: if user has no vacancies yet and is admin, query all vacancies
+  if ((!vacRes.ok || !vacRes.data?.length) && isAdmin) {
+    vacRes = await supabaseAdminFetch<EmployerVacancyWithApplications[]>(
+      `/rest/v1/job_vacancies?select=*,business:businesses(id,name,slug),employer:employer_profiles(id,company_name,slug)&order=created_at.desc`
+    );
+  }
+
+  const vacancies = vacRes.ok && Array.isArray(vacRes.data) ? vacRes.data : [];
+  if (vacancies.length === 0) {
+    return {
+      vacancies: [],
+      summary: {
+        totalVacancies: 0,
+        openVacancies: 0,
+        totalApplications: 0,
+        pendingApplications: 0,
+        shortlistedApplications: 0,
+        interviewedApplications: 0,
+        offeredApplications: 0,
+      },
+    };
+  }
+
+  const vacancyIds = vacancies.map((v) => v.id);
+  const appRes = await supabaseAdminFetch<JobApplicationRow[]>(
+    `/rest/v1/job_applications?vacancy_id=in.(${vacancyIds.join(",")})&order=created_at.desc`
+  );
+
+  const applications = appRes.ok && Array.isArray(appRes.data) ? appRes.data : [];
+
+  const appMap = new Map<string, JobApplicationRow[]>();
+  for (const app of applications) {
+    const list = appMap.get(app.vacancy_id) || [];
+    list.push(app);
+    appMap.set(app.vacancy_id, list);
+  }
+
+  let totalApplications = 0;
+  let pendingApplications = 0;
+  let shortlistedApplications = 0;
+  let interviewedApplications = 0;
+  let offeredApplications = 0;
+
+  for (const vac of vacancies) {
+    vac.applications = appMap.get(vac.id) || [];
+    totalApplications += vac.applications.length;
+    for (const app of vac.applications) {
+      if (app.status === "submitted" || app.status === "under_review") pendingApplications++;
+      if (app.status === "shortlisted") shortlistedApplications++;
+      if (app.status === "interviewed") interviewedApplications++;
+      if (app.status === "offered") offeredApplications++;
+    }
+  }
+
+  const openVacancies = vacancies.filter((v) => v.status === "open").length;
+
+  return {
+    vacancies,
+    summary: {
+      totalVacancies: vacancies.length,
+      openVacancies,
+      totalApplications,
+      pendingApplications,
+      shortlistedApplications,
+      interviewedApplications,
+      offeredApplications,
+    },
+  };
 }

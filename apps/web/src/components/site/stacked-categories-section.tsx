@@ -67,7 +67,7 @@ export const EASYLIFE_PURPOSE_CARDS: readonly StickyPurposeCard[] = [
       { label: "Full-Time", href: "/jobs?type=full_time" },
       { label: "Trade Gigs", href: "/jobs?type=contract" },
       { label: "Apprenticeships", href: "/jobs?type=apprenticeship" },
-      { label: "Post a Job", href: "/register?role=employer" },
+      { label: "Post a Job", href: "/jobs/post" },
     ],
     gradientStyle: "linear-gradient(135deg, #064E46 0%, #087F70 100%)",
     ambientGlowPrimary: "rgba(45, 212, 191, 0.32)",
@@ -92,7 +92,7 @@ export const EASYLIFE_PURPOSE_CARDS: readonly StickyPurposeCard[] = [
     pills: [
       { label: "Business Directory", href: "/business-hub" },
       { label: "Member Deals", href: "/business-hub" },
-      { label: "Asset Tracking", href: "/business-solutions" },
+      { label: "Asset Tracking", href: "/business-hub" },
       { label: "Facility Portal", href: "/business" },
     ],
     gradientStyle: "linear-gradient(135deg, #33216F 0%, #5140A9 100%)",

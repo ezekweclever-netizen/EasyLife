@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { RoleSwitcher } from "@/components/auth/role-switcher";
 
 interface AdminSidebarProps {
   adminEmail?: string | null;
@@ -26,6 +27,7 @@ const NAV_GROUPS = [
       { href: "/admin/users", label: "User Accounts", icon: "👥" },
       { href: "/admin/professionals", label: "Professionals", icon: "👷" },
       { href: "/admin/verifications", label: "KYC & Verifications", icon: "🛡️" },
+      { href: "/admin/jobs", label: "Jobs & Vacancies", icon: "💼" },
       { href: "/admin/businesses", label: "Businesses & Facilities", icon: "🏢" },
       { href: "/admin/categories", label: "Service Categories", icon: "📁" },
       { href: "/admin/services", label: "Services & Rules", icon: "🛠️" },
@@ -138,6 +140,9 @@ export function AdminSidebar({
             </div>
           ))}
         </nav>
+
+        {/* Multi-Role Quick Switcher */}
+        <RoleSwitcher variant="sidebar" />
 
         {/* Admin User Footer Profile & Security Badge */}
         <div className="p-4 border-t border-slate-800 bg-slate-950/40 shrink-0 space-y-2.5">

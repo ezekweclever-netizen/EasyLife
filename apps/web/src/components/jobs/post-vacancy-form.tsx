@@ -10,6 +10,7 @@ export function PostVacancyForm() {
   const router = useRouter();
 
   const [title, setTitle] = useState("");
+  const [companyName, setCompanyName] = useState("");
   const [category, setCategory] = useState("Electrical & Solar");
   const [employmentType, setEmploymentType] = useState("full_time");
   const [workplaceType, setWorkplaceType] = useState("on_site");
@@ -38,6 +39,7 @@ export function PostVacancyForm() {
 
     const formData = new FormData();
     formData.append("title", title.trim());
+    if (companyName.trim()) formData.append("companyName", companyName.trim());
     formData.append("category", category);
     formData.append("employmentType", employmentType);
     formData.append("workplaceType", workplaceType);
@@ -118,6 +120,23 @@ export function PostVacancyForm() {
           {fieldErrors.title && (
             <p className="text-xs text-red-600">{fieldErrors.title}</p>
           )}
+        </div>
+
+        {/* Company / Hiring Organization */}
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+            Hiring Organization / Employer Name
+          </label>
+          <input
+            type="text"
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+            placeholder="e.g. Apex Industrial Solutions Ltd / Prime Facility Works"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+          />
+          <p className="text-[11px] text-slate-400">
+            If you already manage a registered business on EasyLife, your verified business profile will be linked automatically.
+          </p>
         </div>
 
         {/* Category & Employment Type */}

@@ -60,6 +60,13 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
               {vacancy.title}
             </h1>
 
+            <p className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400">
+              Hiring Organization:{" "}
+              <span className="text-[#0F766E] dark:text-[#5CD3D5] font-bold">
+                {(vacancy as any).company_name || "Verified EasyLife Partner Employer"}
+              </span>
+            </p>
+
             <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               <span className="flex items-center gap-1.5 font-medium">
                 <Icon name="map-pin" className="w-4 h-4 text-[#0D9488]" />

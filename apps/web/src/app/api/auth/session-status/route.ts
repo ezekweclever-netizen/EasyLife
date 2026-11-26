@@ -14,6 +14,7 @@ export async function GET() {
         roles: [],
         hasProRole: false,
         hasBusinessRole: false,
+        availableDashboards: [],
         avatarUrl: null,
         fullName: null,
       },
@@ -38,8 +39,70 @@ export async function GET() {
     rolesList.push(primaryRole);
   }
 
-  const hasProRole = rolesList.includes("professional");
-  const hasBusinessRole = rolesList.includes("business") || rolesList.includes("property_manager");
+  const isAdmin = rolesList.includes("admin") || primaryRole === "admin";
+  const hasProRole = rolesList.includes("professional") || primaryRole === "professional" || isAdmin;
+  const hasBusinessRole =
+    rolesList.includes("business") ||
+    rolesList.includes("property_manager") ||
+    rolesList.includes("facility_manager") ||
+    rolesList.includes("employer") ||
+    primaryRole === "business" ||
+    primaryRole === "property_manager" ||
+    primaryRole === "employer" ||
+    isAdmin;
+
+  const availableDashboards: Array<{
+    role: string;
+    label: string;
+    href: string;
+    icon: string;
+    description: string;
+  }> = [
+    {
+      role: "customer",
+      label: "Customer View",
+      href: "/dashboard",
+      icon: "👤",
+      description: "Service bookings, requests & profile",
+    },
+  ];
+
+  if (hasProRole) {
+    availableDashboards.push({
+      role: "professional",
+      label: "Trade Professional",
+      href: "/pro/dashboard",
+      icon: "🛠️",
+      description: "Assigned jobs, leads & earnings",
+    });
+  }
+
+  if (hasBusinessRole) {
+    availableDashboards.push({
+      role: "business",
+      label: "Business & Facilities",
+      href: "/business",
+      icon: "🏢",
+      description: "Properties, equipment & maintenance",
+    });
+    availableDashboards.push({
+      role: "employer",
+      label: "Employer & Vacancies",
+      href: "/business/jobs",
+      icon: "💼",
+      description: "Post jobs & review applicants",
+    });
+  }
+
+  if (isAdmin) {
+    availableDashboards.push({
+      role: "admin",
+      label: "Admin Operations",
+      href: "/admin",
+      icon: "🛡️",
+      description: "Full platform oversight & moderation",
+    });
+  }
 
   return NextResponse.json(
     {
@@ -52,6 +115,7 @@ export async function GET() {
       hasProRole,
       hasBusinessRole,
       dashboardHref,
+      availableDashboards,
     },
     { status: 200, headers: { "Cache-Control": "no-store" } }
   );

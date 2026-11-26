@@ -7,6 +7,7 @@ import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
 import { NotificationBell } from "@/components/notifications/notification-bell";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { RoleSwitcher } from "@/components/auth/role-switcher";
 
 export interface CustomerHeaderProps {
   user?: {
@@ -367,6 +368,9 @@ export function CustomerHeader({
             {/* Theme Toggle */}
             <ThemeToggle compact />
 
+            {/* Multi-Role Switcher */}
+            <RoleSwitcher variant="header" />
+
             {/* User Profile Menu */}
             <div className="relative shrink-0" ref={profileMenuRef}>
               <button
@@ -531,6 +535,9 @@ export function CustomerHeader({
                   </Link>
                 );
               })}
+            </div>
+            <div className="max-w-[1440px] mx-auto px-6 pb-3">
+              <RoleSwitcher variant="mobile" onSelect={() => setIsTabletMenuOpen(false)} />
             </div>
           </nav>
         )}

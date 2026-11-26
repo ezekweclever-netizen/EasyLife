@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { RoleSwitcher } from "@/components/auth/role-switcher";
 
 interface BusinessNavProps {
   businessName: string;
@@ -16,6 +17,7 @@ export function BusinessNav({ businessName, businessCity = "Port Harcourt" }: Bu
 
   const links = [
     { href: "/business", label: "Dashboard", icon: "📊" },
+    { href: "/business/jobs", label: "Vacancies & Applicants", icon: "💼" },
     { href: "/business/properties", label: "Properties", icon: "🏢" },
     { href: "/business/assets", label: "Equipment & Assets", icon: "⚙️" },
     { href: "/business/maintenance", label: "Maintenance", icon: "🛠️" },
@@ -46,13 +48,7 @@ export function BusinessNav({ businessName, businessCity = "Port Harcourt" }: Bu
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
               Facility Portal Active
             </span>
-            <Link
-              href="/dashboard"
-              className="text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:bg-[#071526] dark:hover:bg-slate-800 transition"
-              title="Switch to Customer Mode"
-            >
-              Customer View
-            </Link>
+            <RoleSwitcher variant="header" />
             <ThemeToggle compact />
             <form action={logoutAction}>
               <button

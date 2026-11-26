@@ -195,8 +195,8 @@ export default function HowItWorksPage() {
               We offer customised facility maintenance packages for multi-branch organizations in Port Harcourt, Lagos, and Abuja, with dedicated SLA response times and designated account managers.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <ButtonLink href="/business-solutions">
-                Explore Business Solutions
+              <ButtonLink href="/business-hub">
+                Explore Business Hub
               </ButtonLink>
               <ButtonLink href="/contact?topic=business_solutions" variant="outline-inverse">
                 Contact Enterprise Desk

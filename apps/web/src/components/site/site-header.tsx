@@ -8,6 +8,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { PUBLIC_PRIMARY_NAV_LINKS } from "@/lib/public-catalog";
 import { logoutAction } from "@/app/actions/profile";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { RoleSwitcher } from "@/components/auth/role-switcher";
 import { Icon, type IconName } from "./icons";
 
 export interface SiteHeaderAuthState {
@@ -177,6 +178,7 @@ export function SiteHeader({
 
               {authState.isLoggedIn ? (
                 <>
+                  <RoleSwitcher variant="header" />
                   <ButtonLink href={authState.dashboardHref} size="sm">
                     My Dashboard
                   </ButtonLink>
@@ -300,6 +302,13 @@ export function SiteHeader({
                   <span>Chat with EasyLife Support on WhatsApp</span>
                 </a>
               </div>
+
+              {/* Mobile Role Switcher (if logged in with multiple roles) */}
+              {authState.isLoggedIn && (
+                <div className="px-3 sm:px-4 py-2">
+                  <RoleSwitcher variant="mobile" onSelect={() => setIsMenuOpen(false)} />
+                </div>
+              )}
 
               {/* Authentication Quick Action Buttons */}
               <div className="px-4 py-4 grid grid-cols-2 gap-2.5 bg-neutral-50/70 dark:bg-[#071526]/70 rounded-b-2xl">

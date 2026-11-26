@@ -8,6 +8,7 @@ import { NotificationBell } from "@/components/notifications/notification-bell";
 import { EasyLifeLogo } from "@/components/ui/logo";
 import { logoutAction } from "@/app/actions/profile";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { RoleSwitcher } from "@/components/auth/role-switcher";
 
 interface ProHeaderProps {
   businessName?: string;
@@ -174,14 +175,8 @@ export function ProHeader({
               )}
             </Link>
 
-            {/* Customer Switch */}
-            <Link
-              href="/dashboard"
-              className="hidden md:inline-flex text-xs text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white font-semibold px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:bg-[#071526] dark:hover:bg-slate-800 whitespace-nowrap shrink-0 transition"
-              title="Switch to Customer Mode"
-            >
-              Customer View
-            </Link>
+            {/* Multi-Role Switcher */}
+            <RoleSwitcher variant="header" />
 
             {/* Theme Toggle */}
             <ThemeToggle compact />
@@ -245,6 +240,11 @@ export function ProHeader({
               </Link>
             );
           })}
+          {/* Mobile Role Switcher */}
+          <div className="py-2">
+            <RoleSwitcher variant="mobile" onSelect={() => setMobileMenuOpen(false)} />
+          </div>
+
           <div className="pt-3 border-t border-slate-100 dark:border-slate-800 mt-2 flex items-center justify-between gap-3">
             <Link
               href="/dashboard"
