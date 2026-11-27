@@ -1,5 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { after } from "next/server";
 import { getAuthenticatedUser } from "@/lib/auth/session";
@@ -23,7 +24,6 @@ import {
 } from "@/lib/supabase/matching";
 import { CustomerHeader } from "@/components/customer/customer-header";
 import { PublicShell } from "@/components/site/public-shell";
-import { PageHero } from "@/components/site/sections";
 import { ServiceSearchForm } from "@/components/site/service-search-form";
 import { Icon } from "@/components/site/icons";
 import {
@@ -384,48 +384,80 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
 
   const content = (
     <>
-      <PageHero
-        eyebrow="Accredited Trades &amp; Professional Marketplace"
-        title="Find &amp; Book Verified Service Professionals"
-        description="Connect with accredited artisans, technicians, and trade specialists across Port Harcourt, Lagos, and Abuja. Browse by trade, filter by neighbourhood, or explore standardised service scopes."
-      >
-        <div className="pt-3 max-w-2xl">
-          <ServiceSearchForm
-            id="services-marketplace-search"
-            defaultQuery={trimmedQuery}
-            tone="dark"
+      <section className="relative w-full overflow-hidden bg-[#071E28] text-white border-b border-[#24989A]/20">
+        {/* Full-bleed Hero Background Image */}
+        <div className="absolute inset-0 z-0 select-none">
+          <Image
+            src="/images/hero-find-services.jpg"
+            alt="Smiling customer shaking hands with certified technician"
+            fill
+            priority
+            sizes="100vw"
+            quality={90}
+            className="object-cover object-[70%_15%] sm:object-[74%_18%] md:object-[78%_20%] lg:object-[82%_22%]"
           />
+          {/* Base darkening overlay */}
+          <div className="absolute inset-0 bg-[#051726]/45" />
+          {/* Horizontal directional gradient: deep dark on left for text legibility, transparent on right to reveal technician and handshake */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#03111C]/95 via-[#051C2E]/85 md:via-[#051C2E]/75 to-[#07253D]/30" />
+          {/* Mobile vertical gradient reinforcement */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#03111C] via-transparent to-[#03111C]/60 sm:hidden" />
         </div>
 
-        {/* Core Approved Trade Chips */}
-        <div className="flex flex-wrap items-center gap-2 pt-4 text-xs text-teal-100">
-          <span className="font-bold text-white/80">Approved Core Trades:</span>
-          {[
-            { label: "Plumbing", slug: "plumbing-water-systems" },
-            { label: "Electrical", slug: "electrical-power-backup" },
-            { label: "HVAC & AC", slug: "hvac-air-conditioning" },
-            { label: "Generators", slug: "generator-maintenance" },
-            { label: "Carpentry", slug: "carpentry-doors-locks" },
-            { label: "Cleaning", slug: "cleaning-fumigation" },
-            { label: "Painting", slug: "painting-wall-finishing" },
-            { label: "Appliance Repair", slug: "appliance-repair" },
-          ].map((catItem) => (
-            <Link
-              key={catItem.slug}
-              href={`/services?cat=${encodeURIComponent(catItem.slug)}${
-                city !== "All Cities" ? `&city=${encodeURIComponent(city)}` : ""
-              }`}
-              className={`px-3 py-1 rounded-full font-semibold transition ${
-                normalizedCat === catItem.slug
-                  ? "bg-[#F87116] text-white shadow-xs"
-                  : "bg-white/10 dark:bg-white/5 hover:bg-white/20 text-white"
-              }`}
-            >
-              {catItem.label}
-            </Link>
-          ))}
+        {/* Content container */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <div className="max-w-3xl">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-xs">
+              Accredited Trades &amp; Professional Marketplace
+            </p>
+            <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-sm">
+              Find &amp; Book Verified Service Professionals
+            </h1>
+            <p className="mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed drop-shadow-xs">
+              Connect with accredited artisans, technicians, and trade specialists across Port Harcourt, Lagos, and Abuja. Browse by trade, filter by neighbourhood, or explore standardised service scopes.
+            </p>
+
+            <div className="mt-8">
+              <div className="pt-1 max-w-2xl">
+                <ServiceSearchForm
+                  id="services-marketplace-search"
+                  defaultQuery={trimmedQuery}
+                  tone="dark"
+                />
+              </div>
+
+              {/* Core Approved Trade Chips */}
+              <div className="flex flex-wrap items-center gap-2 pt-4 text-xs text-teal-100">
+                <span className="font-bold text-white/90 drop-shadow-xs">Approved Core Trades:</span>
+                {[
+                  { label: "Plumbing", slug: "plumbing-water-systems" },
+                  { label: "Electrical", slug: "electrical-power-backup" },
+                  { label: "HVAC & AC", slug: "hvac-air-conditioning" },
+                  { label: "Generators", slug: "generator-maintenance" },
+                  { label: "Carpentry", slug: "carpentry-doors-locks" },
+                  { label: "Cleaning", slug: "cleaning-fumigation" },
+                  { label: "Painting", slug: "painting-wall-finishing" },
+                  { label: "Appliance Repair", slug: "appliance-repair" },
+                ].map((catItem) => (
+                  <Link
+                    key={catItem.slug}
+                    href={`/services?cat=${encodeURIComponent(catItem.slug)}${
+                      city !== "All Cities" ? `&city=${encodeURIComponent(city)}` : ""
+                    }`}
+                    className={`px-3 py-1 rounded-full font-semibold transition backdrop-blur-xs ${
+                      normalizedCat === catItem.slug
+                        ? "bg-[#F87116] text-white shadow-xs"
+                        : "bg-white/15 dark:bg-white/10 hover:bg-white/25 text-white"
+                    }`}
+                  >
+                    {catItem.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-      </PageHero>
+      </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Marketplace Mode Switcher */}
