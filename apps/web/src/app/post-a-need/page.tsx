@@ -87,7 +87,7 @@ export default async function PostANeedPage({
 
   return (
     <PublicShell>
-      <section className="relative w-full overflow-hidden bg-[#071E28] text-white border-b border-[#24989A]/20">
+      <section className="relative w-full overflow-hidden min-h-[460px] sm:min-h-[500px] flex items-center justify-center bg-[#071E28] text-white border-b border-[#24989A]/20">
         {/* Full-bleed Hero Background Image */}
         <div className="absolute inset-0 z-0 select-none">
           <Image
@@ -97,26 +97,22 @@ export default async function PostANeedPage({
             priority
             sizes="100vw"
             quality={92}
-            className="object-cover object-[48%_10%] sm:object-[50%_12%] md:object-[52%_15%] lg:object-[55%_18%]"
+            className="object-cover object-[50%_15%] sm:object-[50%_18%] md:object-[50%_20%]"
           />
-          {/* Base subtle ambient darkening */}
-          <div className="absolute inset-0 bg-[#051726]/35" />
-          {/* Directional gradient: strong opacity behind left text, fading to reveal smiling customer, quotes badge, and technician */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#020B13]/95 via-[#041726]/80 via-40% md:to-transparent to-[#041726]/40" />
-          {/* Mobile vertical gradient reinforcement for text legibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#020B13]/95 via-[#041726]/75 to-[#020B13]/50 sm:hidden" />
+          {/* Subtle, transparent dark overlay preserving full image clarity and prominence */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/55" />
         </div>
 
-        {/* Content container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
-          <div className="max-w-2xl lg:max-w-xl">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-xs">
+        {/* Content container: Fully Centered Horizontally and Vertically */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center text-center">
+          <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Everyday Problems. Smarter Solutions.
             </p>
-            <h1 className="mt-3 text-3xl sm:text-4xl lg:text-[3rem] font-bold tracking-tight leading-[1.14] text-white drop-shadow-sm">
+            <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
               Post a Need — Describe Your Problem, Get Honest Quotes
             </h1>
-            <p className="mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed drop-shadow-xs">
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Whether it&apos;s an urgent emergency repair or a planned project, describe your problem in plain English. EasyLife AI diagnoses your fault and connects you with accredited local trade specialists across Port Harcourt, Lagos, and Abuja.
             </p>
           </div>

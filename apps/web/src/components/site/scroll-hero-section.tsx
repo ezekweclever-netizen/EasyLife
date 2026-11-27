@@ -105,7 +105,7 @@ export function ScrollHeroSection() {
     <section
       ref={sectionRef}
       aria-label="EasyLife Marketplace Hero"
-      className="relative w-full min-h-[720px] sm:min-h-[760px] md:min-h-[640px] lg:min-h-[calc(100svh-72px)] lg:max-h-[900px] flex items-end md:items-center overflow-hidden bg-[#0A1D36] text-white border-b border-[#24989A]/20"
+      className="relative w-full min-h-[620px] sm:min-h-[660px] md:min-h-[680px] lg:min-h-[calc(100svh-72px)] lg:max-h-[880px] flex items-center justify-center overflow-hidden bg-[#0A1D36] text-white border-b border-[#24989A]/20"
     >
       {/* Full-Width, Full-Height Edge-to-Edge Background Photograph */}
       <div
@@ -120,73 +120,52 @@ export function ScrollHeroSection() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[56%_2%] sm:object-[54%_4%] md:object-[76%_20%] lg:object-[74%_20%] xl:object-[70%_20%]"
+          className="object-cover object-[50%_15%] sm:object-[50%_18%] md:object-[50%_20%]"
         />
       </div>
 
-      {/* Responsive Blue-Navy Gradient Overlays for Text Readability */}
-      {/* Mobile vertical gradient: allows faces at the top to remain completely clear, smoothly darkens behind content below */}
+      {/* Subtle, transparent dark overlay preserving full image clarity and prominence */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-10 md:hidden"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(8, 25, 48, 0.0) 0%, rgba(8, 25, 48, 0.04) 24%, rgba(8, 25, 48, 0.72) 42%, rgba(8, 25, 48, 0.95) 58%, #081930 100%)",
-        }}
+        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-black/45 via-black/25 to-black/55"
       />
 
-      {/* Tablet & Desktop directional blue-navy gradient: rich contrast on left, luminous photo on right */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-10 hidden md:block"
-        style={{
-          background:
-            "linear-gradient(96deg, rgba(8, 25, 48, 0.96) 0%, rgba(9, 28, 54, 0.92) 38%, rgba(11, 36, 68, 0.48) 58%, rgba(10, 29, 54, 0.08) 100%)",
-        }}
-      />
-
-      {/* Subtle bottom atmospheric vignette */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-24 z-10 bg-gradient-to-t from-[#081930]/65 to-transparent"
-      />
-
-      {/* Foreground Content Layer */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[300px] pb-8 sm:pt-[340px] sm:pb-10 md:py-20 lg:py-24">
+      {/* Foreground Content Layer: Fully Centered Horizontally and Vertically */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-28 flex flex-col items-center justify-center text-center">
         <div
           ref={contentRef}
-          className="max-w-[480px] md:max-w-[440px] lg:max-w-[500px] xl:max-w-[540px] mx-auto md:mx-0 text-center md:text-left will-change-transform"
+          className="max-w-3xl mx-auto text-center will-change-transform flex flex-col items-center justify-center"
         >
           {/* Pilot Cities Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#091E38]/85 border border-white/20 text-[#E6F1F5] text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-xs backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 border border-white/25 text-[#E6F1F5] text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-xs">
             <span className="h-2 w-2 rounded-full bg-[#EE9277] animate-pulse" />
             <span>Operating in Port Harcourt • Lagos • Abuja</span>
           </div>
 
-          <h1 className="text-[2rem] sm:text-[2.5rem] md:text-[2.2rem] lg:text-[3.25rem] xl:text-[3.5rem] font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_2px_14px_rgba(8,25,48,0.4)]">
+          <h1 className="text-[2.1rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.6rem] font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
             Everyday Problems. <br />
             <span className="text-[#5CD3D5]">Smarter Solutions.</span>
           </h1>
 
-          <p className="mt-3.5 sm:mt-5 text-sm sm:text-base lg:text-[1.075rem] text-[#E6F1F5] max-w-xl mx-auto md:mx-0 leading-relaxed drop-shadow-[0_1px_6px_rgba(8,25,48,0.35)]">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-[#E6F1F5] max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
             EasyLife helps people and businesses find reliable everyday services and manage essential maintenance with less effort.
           </p>
 
-          {/* Main Service Search Bar (No Popular Services links) */}
-          <div className="mt-6 sm:mt-8 max-w-xl mx-auto md:mx-0">
+          {/* Main Service Search Bar */}
+          <div className="mt-6 sm:mt-8 w-full max-w-xl mx-auto">
             <ServiceSearchForm id="hero-search" tone="dark" />
           </div>
 
           {/* Direct Action CTAs: Find Services and Post a Need */}
-          <div className="mt-6 sm:mt-7 flex flex-wrap items-center justify-center md:justify-start gap-3">
-            <ButtonLink href="/services" size="lg">
+          <div className="mt-6 sm:mt-7 flex flex-wrap items-center justify-center gap-3">
+            <ButtonLink href="/services" size="lg" className="shadow-md">
               Find Services
             </ButtonLink>
             <ButtonLink
               href="/post-a-need"
               size="lg"
               variant="outline-inverse"
-              className="bg-[#091E38]/50 backdrop-blur-xs"
+              className="bg-black/35 border-white/30 text-white hover:bg-black/50 shadow-md"
             >
               Post a Need
             </ButtonLink>

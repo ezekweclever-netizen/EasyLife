@@ -384,7 +384,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
 
   const content = (
     <>
-      <section className="relative w-full overflow-hidden bg-[#071E28] text-white border-b border-[#24989A]/20">
+      <section className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[560px] flex items-center justify-center bg-[#071E28] text-white border-b border-[#24989A]/20">
         {/* Full-bleed Hero Background Image */}
         <div className="absolute inset-0 z-0 select-none">
           <Image
@@ -393,32 +393,28 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
             fill
             priority
             sizes="100vw"
-            quality={90}
-            className="object-cover object-[70%_15%] sm:object-[74%_18%] md:object-[78%_20%] lg:object-[82%_22%]"
+            quality={92}
+            className="object-cover object-[50%_15%] sm:object-[50%_18%] md:object-[50%_20%]"
           />
-          {/* Base darkening overlay */}
-          <div className="absolute inset-0 bg-[#051726]/45" />
-          {/* Horizontal directional gradient: deep dark on left for text legibility, transparent on right to reveal technician and handshake */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#03111C]/95 via-[#051C2E]/85 md:via-[#051C2E]/75 to-[#07253D]/30" />
-          {/* Mobile vertical gradient reinforcement */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#03111C] via-transparent to-[#03111C]/60 sm:hidden" />
+          {/* Subtle, transparent dark overlay preserving full image clarity and prominence */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/55" />
         </div>
 
-        {/* Content container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
-          <div className="max-w-3xl">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-xs">
+        {/* Content container: Fully Centered Horizontally and Vertically */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center text-center">
+          <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Accredited Trades &amp; Professional Marketplace
             </p>
-            <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-sm">
+            <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
               Find &amp; Book Verified Service Professionals
             </h1>
-            <p className="mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed drop-shadow-xs">
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Connect with accredited artisans, technicians, and trade specialists across Port Harcourt, Lagos, and Abuja. Browse by trade, filter by neighbourhood, or explore standardised service scopes.
             </p>
 
-            <div className="mt-8">
-              <div className="pt-1 max-w-2xl">
+            <div className="mt-8 w-full flex flex-col items-center justify-center">
+              <div className="w-full max-w-2xl mx-auto">
                 <ServiceSearchForm
                   id="services-marketplace-search"
                   defaultQuery={trimmedQuery}
@@ -427,8 +423,8 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
               </div>
 
               {/* Core Approved Trade Chips */}
-              <div className="flex flex-wrap items-center gap-2 pt-4 text-xs text-teal-100">
-                <span className="font-bold text-white/90 drop-shadow-xs">Approved Core Trades:</span>
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-5 text-xs text-teal-100 max-w-3xl mx-auto">
+                <span className="font-bold text-white/95 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">Approved Core Trades:</span>
                 {[
                   { label: "Plumbing", slug: "plumbing-water-systems" },
                   { label: "Electrical", slug: "electrical-power-backup" },
@@ -444,10 +440,10 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                     href={`/services?cat=${encodeURIComponent(catItem.slug)}${
                       city !== "All Cities" ? `&city=${encodeURIComponent(city)}` : ""
                     }`}
-                    className={`px-3 py-1 rounded-full font-semibold transition backdrop-blur-xs ${
+                    className={`px-3 py-1 rounded-full font-semibold transition ${
                       normalizedCat === catItem.slug
                         ? "bg-[#F87116] text-white shadow-xs"
-                        : "bg-white/15 dark:bg-white/10 hover:bg-white/25 text-white"
+                        : "bg-black/40 hover:bg-black/60 text-white border border-white/20"
                     }`}
                   >
                     {catItem.label}
