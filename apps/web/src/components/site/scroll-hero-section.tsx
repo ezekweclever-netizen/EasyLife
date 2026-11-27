@@ -105,7 +105,7 @@ export function ScrollHeroSection() {
     <section
       ref={sectionRef}
       aria-label="EasyLife Marketplace Hero"
-      className="relative w-full min-h-[820px] sm:min-h-[840px] md:min-h-[640px] lg:min-h-[calc(100svh-72px)] lg:max-h-[900px] flex items-end md:items-center overflow-hidden bg-[#0A1D36] text-white border-b border-[#24989A]/20"
+      className="relative w-full min-h-[720px] sm:min-h-[760px] md:min-h-[640px] lg:min-h-[calc(100svh-72px)] lg:max-h-[900px] flex items-end md:items-center overflow-hidden bg-[#0A1D36] text-white border-b border-[#24989A]/20"
     >
       {/* Full-Width, Full-Height Edge-to-Edge Background Photograph */}
       <div
@@ -115,23 +115,23 @@ export function ScrollHeroSection() {
         style={{ transformOrigin: "center 30%" }}
       >
         <Image
-          src="/images/hero-woman-smartphone.jpg"
-          alt=""
+          src="/images/hero-home-community.jpg"
+          alt="EasyLife community: verified trade technician, happy Nigerian family, and business professional"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[55%_0%] sm:object-[55%_0%] md:object-[6%_12%] lg:object-[14%_18%] xl:object-[18%_20%]"
+          className="object-cover object-[56%_2%] sm:object-[54%_4%] md:object-[76%_20%] lg:object-[74%_20%] xl:object-[70%_20%]"
         />
       </div>
 
       {/* Responsive Blue-Navy Gradient Overlays for Text Readability */}
-      {/* Mobile vertical gradient: allows woman's face and smile at the top to be completely clear, smoothly darkens behind content below */}
+      {/* Mobile vertical gradient: allows faces at the top to remain completely clear, smoothly darkens behind content below */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-10 md:hidden"
         style={{
           background:
-            "linear-gradient(180deg, rgba(8, 25, 48, 0.0) 0%, rgba(8, 25, 48, 0.08) 32%, rgba(8, 25, 48, 0.78) 48%, rgba(8, 25, 48, 0.96) 66%, #081930 100%)",
+            "linear-gradient(180deg, rgba(8, 25, 48, 0.0) 0%, rgba(8, 25, 48, 0.04) 24%, rgba(8, 25, 48, 0.72) 42%, rgba(8, 25, 48, 0.95) 58%, #081930 100%)",
         }}
       />
 
@@ -141,7 +141,7 @@ export function ScrollHeroSection() {
         className="pointer-events-none absolute inset-0 z-10 hidden md:block"
         style={{
           background:
-            "linear-gradient(96deg, rgba(8, 25, 48, 0.96) 0%, rgba(9, 28, 54, 0.90) 36%, rgba(11, 36, 68, 0.42) 56%, rgba(10, 29, 54, 0.04) 100%)",
+            "linear-gradient(96deg, rgba(8, 25, 48, 0.96) 0%, rgba(9, 28, 54, 0.92) 38%, rgba(11, 36, 68, 0.48) 58%, rgba(10, 29, 54, 0.08) 100%)",
         }}
       />
 
@@ -152,10 +152,10 @@ export function ScrollHeroSection() {
       />
 
       {/* Foreground Content Layer */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[410px] pb-10 sm:pt-[430px] sm:pb-12 md:py-20 lg:py-24">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-[300px] pb-8 sm:pt-[340px] sm:pb-10 md:py-20 lg:py-24">
         <div
           ref={contentRef}
-          className="max-w-[460px] md:max-w-[360px] lg:max-w-[460px] xl:max-w-[490px] mx-auto md:mx-0 text-center md:text-left will-change-transform"
+          className="max-w-[480px] md:max-w-[440px] lg:max-w-[500px] xl:max-w-[540px] mx-auto md:mx-0 text-center md:text-left will-change-transform"
         >
           {/* Pilot Cities Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#091E38]/85 border border-white/20 text-[#E6F1F5] text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-xs backdrop-blur-sm">
