@@ -1,8 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PublicShell } from "@/components/site/public-shell";
-import { PageHero } from "@/components/site/sections";
 import { ButtonLink } from "@/components/ui/button";
 import { Icon } from "@/components/site/icons";
 import { getAuthenticatedUser } from "@/lib/auth/session";
@@ -87,11 +87,41 @@ export default async function PostANeedPage({
 
   return (
     <PublicShell>
-      <PageHero
-        badge="Everyday Problems. Smarter Solutions."
-        title="Post a Need — Describe Your Problem, Get Honest Quotes"
-        description="Whether it's an urgent emergency repair or a planned project, describe your problem in plain English. EasyLife AI diagnoses your fault and connects you with accredited local trade specialists across Port Harcourt, Lagos, and Abuja."
-      />
+      <section className="relative w-full overflow-hidden bg-[#071E28] text-white border-b border-[#24989A]/20">
+        {/* Full-bleed Hero Background Image */}
+        <div className="absolute inset-0 z-0 select-none">
+          <Image
+            src="/images/hero-post-a-need.jpg"
+            alt="Customer celebrating receiving instant transparent quotes on EasyLife"
+            fill
+            priority
+            sizes="100vw"
+            quality={92}
+            className="object-cover object-[48%_10%] sm:object-[50%_12%] md:object-[52%_15%] lg:object-[55%_18%]"
+          />
+          {/* Base subtle ambient darkening */}
+          <div className="absolute inset-0 bg-[#051726]/35" />
+          {/* Directional gradient: strong opacity behind left text, fading to reveal smiling customer, quotes badge, and technician */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#020B13]/95 via-[#041726]/80 via-40% md:to-transparent to-[#041726]/40" />
+          {/* Mobile vertical gradient reinforcement for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#020B13]/95 via-[#041726]/75 to-[#020B13]/50 sm:hidden" />
+        </div>
+
+        {/* Content container */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
+          <div className="max-w-2xl lg:max-w-xl">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-xs">
+              Everyday Problems. Smarter Solutions.
+            </p>
+            <h1 className="mt-3 text-3xl sm:text-4xl lg:text-[3rem] font-bold tracking-tight leading-[1.14] text-white drop-shadow-sm">
+              Post a Need — Describe Your Problem, Get Honest Quotes
+            </h1>
+            <p className="mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed drop-shadow-xs">
+              Whether it&apos;s an urgent emergency repair or a planned project, describe your problem in plain English. EasyLife AI diagnoses your fault and connects you with accredited local trade specialists across Port Harcourt, Lagos, and Abuja.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-12">
         {/* Main Request Wizard */}
