@@ -46,7 +46,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             <span>🛡️</span>
             <span>Review KYC Queue</span>
             {metrics.pending_verification_requests > 0 && (
-              <span className="px-1.5 py-0.5 rounded-full bg-white dark:bg-[#0D223A] text-teal-800 dark:text-[#5CD3D5] text-2xs font-black">
+              <span className="px-1.5 py-0.5 rounded-full bg-white dark:bg-[#1F2328] text-teal-800 dark:text-[#F06A1F] text-2xs font-black">
                 {metrics.pending_verification_requests}
               </span>
             )}
@@ -71,7 +71,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
         <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
           <h2 className="text-base font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>Marketplace Performance &amp; Activity Overview</span>
-            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654] whitespace-nowrap shrink-0">
+            <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#2E343B] whitespace-nowrap shrink-0">
               Live DB
             </span>
           </h2>
@@ -84,7 +84,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 1. Customers */}
           <Link
             href="/admin/users"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
               <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
@@ -103,7 +103,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 2. Professionals */}
           <Link
             href="/admin/professionals"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
               <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
@@ -122,7 +122,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 3. Verified Pros */}
           <Link
             href="/admin/professionals?status=verified"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-emerald-500 hover:shadow-md transition relative overflow-hidden"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs hover:border-emerald-500 hover:shadow-md transition relative overflow-hidden"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
               <span className="text-2xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 truncate min-w-0">
@@ -141,10 +141,10 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 4. Pending Verification */}
           <Link
             href="/admin/verifications"
-            className={`group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border shadow-xs transition relative overflow-hidden ${
+            className={`group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border shadow-xs transition relative overflow-hidden ${
               metrics.pending_verification_requests > 0
                 ? "border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/20 hover:border-amber-500"
-                : "border-slate-200 dark:border-[#163654]/80 hover:border-teal-500"
+                : "border-slate-200 dark:border-[#2E343B]/80 hover:border-teal-500"
             }`}
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
@@ -166,7 +166,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 5. Businesses */}
           <Link
             href="/admin/businesses"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
               <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
@@ -185,7 +185,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 6. Total Bookings */}
           <Link
             href="/admin/bookings"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
               <span className="text-2xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 truncate min-w-0">
@@ -204,7 +204,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 7. Active Bookings */}
           <Link
             href="/admin/bookings?status=active"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-blue-500 hover:shadow-md transition relative overflow-hidden"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs hover:border-blue-500 hover:shadow-md transition relative overflow-hidden"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
               <span className="text-2xs font-bold uppercase tracking-wider text-blue-700 dark:text-blue-300 truncate min-w-0">
@@ -223,7 +223,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 8. Completed Bookings */}
           <Link
             href="/admin/bookings?status=completed"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
               <span className="text-2xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-300 truncate min-w-0">
@@ -242,10 +242,10 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 9. Open Disputes */}
           <Link
             href="/admin/disputes"
-            className={`group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border shadow-xs transition relative overflow-hidden ${
+            className={`group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border shadow-xs transition relative overflow-hidden ${
               metrics.open_disputes > 0
                 ? "border-rose-300 dark:border-rose-700 bg-rose-50/20 hover:border-rose-500"
-                : "border-slate-200 dark:border-[#163654]/80 hover:border-teal-500"
+                : "border-slate-200 dark:border-[#2E343B]/80 hover:border-teal-500"
             }`}
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
@@ -267,15 +267,15 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
           {/* 10. Platform Revenue */}
           <Link
             href="/admin/analytics"
-            className="group bg-white dark:bg-[#0D223A] rounded-2xl p-4 border border-teal-200 dark:border-teal-800/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden bg-gradient-to-br from-white via-teal-50/30 to-teal-100/20 dark:from-[#0D223A] dark:via-[#0D223A] dark:to-teal-950/40"
+            className="group bg-white dark:bg-[#1F2328] rounded-2xl p-4 border border-teal-200 dark:border-teal-800/80 shadow-xs hover:border-teal-500 hover:shadow-md transition relative overflow-hidden bg-gradient-to-br from-white via-teal-50/30 to-teal-100/20 dark:from-[#1F2328] dark:via-[#1F2328] dark:to-teal-950/40"
           >
             <div className="flex items-center justify-between gap-1 text-slate-400 mb-2">
-              <span className="text-2xs font-bold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5] truncate min-w-0">
+              <span className="text-2xs font-bold uppercase tracking-wider text-teal-800 dark:text-[#F06A1F] truncate min-w-0">
                 Platform Revenue
               </span>
               <span className="text-lg shrink-0">💰</span>
             </div>
-            <div className="text-xl sm:text-2xl font-black text-teal-800 dark:text-[#5CD3D5] truncate">
+            <div className="text-xl sm:text-2xl font-black text-teal-800 dark:text-[#F06A1F] truncate">
               {formatNaira(metrics.platform_revenue_naira)}
             </div>
             <div className="text-2xs text-teal-700 dark:text-teal-400 mt-1 font-medium">
@@ -286,7 +286,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
       </div>
 
       {/* Core Administrative Modules Hub */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-6">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs space-y-6">
         <div>
           <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight">
             Administrative Modules &amp; Governance
@@ -299,7 +299,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Link
             href="/admin/users"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               👥
@@ -316,7 +316,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/verifications"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               🛡️
@@ -333,7 +333,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/categories"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               📁
@@ -350,7 +350,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/disputes"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               ⚖️
@@ -367,7 +367,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/reviews"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               ⭐
@@ -384,7 +384,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/commissions"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               💰
@@ -401,7 +401,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/settings"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               ⚙️
@@ -418,7 +418,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/audit-logs"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               📜
@@ -435,7 +435,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/notifications"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               🔔
@@ -452,7 +452,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
 
           <Link
             href="/admin/analytics"
-            className="p-4 rounded-2xl border border-slate-200 dark:border-[#163654] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition flex items-start gap-3 group"
+            className="p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] hover:border-teal-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition flex items-start gap-3 group"
           >
             <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-lg group-hover:bg-teal-50 dark:bg-teal-950/60 group-hover:text-teal-600 shrink-0">
               📊
@@ -470,7 +470,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
       </div>
 
       {/* Recent Immutable Audit Logs Table */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
           <div>
             <h2 className="text-lg font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
@@ -510,7 +510,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {metrics.recent_audit_logs.map((log) => (
-                  <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70 transition">
+                  <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/70 transition">
                     <td className="py-3 px-3 text-slate-500 dark:text-slate-400 whitespace-nowrap font-mono text-2xs">
                       {new Date(log.created_at).toLocaleString("en-NG", {
                         dateStyle: "short",
@@ -550,7 +550,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
       {/* Inspect Audit Log Modal */}
       {selectedAuditLog && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#2E343B]">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="font-extrabold text-sm text-slate-900 dark:text-white">
                 Audit Record Inspector
@@ -564,7 +564,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="grid grid-cols-2 gap-2 bg-slate-50 dark:bg-[#071526] p-3 rounded-xl">
+              <div className="grid grid-cols-2 gap-2 bg-slate-50 dark:bg-[#1F2328] p-3 rounded-xl">
                 <div>
                   <span className="text-2xs text-slate-400 block font-bold uppercase">Action</span>
                   <span className="font-mono text-slate-900 dark:text-white font-bold">{selectedAuditLog.action}</span>

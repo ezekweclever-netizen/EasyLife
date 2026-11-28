@@ -85,7 +85,7 @@ export function PerformanceStats({
           className={`p-4 rounded-xl border transition-all hover:shadow-xs group ${
             st.highlight
               ? "bg-teal-50 dark:bg-teal-950/60/50 border-teal-300 dark:border-teal-700"
-              : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+              : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
           }`}
         >
           <span className="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1 group-hover:text-slate-800 dark:text-slate-100">
@@ -93,7 +93,7 @@ export function PerformanceStats({
           </span>
           <span
             className={`block text-xl font-extrabold tracking-tight ${
-              st.highlight ? "text-[#0D9488]" : "text-slate-900 dark:text-white"
+              st.highlight ? "text-[#E8590C]" : "text-slate-900 dark:text-white"
             }`}
           >
             {st.value}

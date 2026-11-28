@@ -42,13 +42,13 @@ export const EASYLIFE_PURPOSE_CARDS: readonly StickyPurposeCard[] = [
       { label: "Carpentry", href: "/services?cat=carpentry-woodwork-services" },
       { label: "Cleaning", href: "/services?cat=cleaning-waste-services" },
     ],
-    gradientStyle: "linear-gradient(135deg, #102D78 0%, #1649A5 100%)",
-    ambientGlowPrimary: "rgba(96, 165, 250, 0.36)",
-    ambientGlowSecondary: "rgba(56, 189, 248, 0.16)",
+    gradientStyle: "linear-gradient(135deg, #15181C 0%, #1F2328 50%, #2A3037 100%)",
+    ambientGlowPrimary: "rgba(232, 89, 12, 0.22)",
+    ambientGlowSecondary: "rgba(232, 89, 12, 0.12)",
     illustrationSrc: "/cards/find-solutions.jpg",
     illustrationAlt:
       "3D illustration representing everyday services, verified professionals, and home repairs",
-    shadowColor: "rgba(16, 45, 120, 0.34)",
+    shadowColor: "rgba(31, 35, 40, 0.35)",
   },
   {
     id: "discover-opportunities",
@@ -69,13 +69,13 @@ export const EASYLIFE_PURPOSE_CARDS: readonly StickyPurposeCard[] = [
       { label: "Apprenticeships", href: "/jobs?type=apprenticeship" },
       { label: "Post a Job", href: "/jobs/post" },
     ],
-    gradientStyle: "linear-gradient(135deg, #064E46 0%, #087F70 100%)",
-    ambientGlowPrimary: "rgba(45, 212, 191, 0.32)",
-    ambientGlowSecondary: "rgba(16, 185, 129, 0.18)",
+    gradientStyle: "linear-gradient(135deg, #1A1F24 0%, #252B32 50%, #303740 100%)",
+    ambientGlowPrimary: "rgba(232, 89, 12, 0.24)",
+    ambientGlowSecondary: "rgba(232, 89, 12, 0.14)",
     illustrationSrc: "/cards/discover-opportunities.jpg",
     illustrationAlt:
       "3D illustration representing career opportunities, vocational gigs, and trade employment",
-    shadowColor: "rgba(6, 78, 70, 0.34)",
+    shadowColor: "rgba(31, 35, 40, 0.35)",
   },
   {
     id: "achieve-goals",
@@ -95,13 +95,13 @@ export const EASYLIFE_PURPOSE_CARDS: readonly StickyPurposeCard[] = [
       { label: "Asset Tracking", href: "/business-hub" },
       { label: "Facility Portal", href: "/business" },
     ],
-    gradientStyle: "linear-gradient(135deg, #33216F 0%, #5140A9 100%)",
-    ambientGlowPrimary: "rgba(167, 139, 250, 0.36)",
-    ambientGlowSecondary: "rgba(129, 140, 248, 0.18)",
+    gradientStyle: "linear-gradient(135deg, #16191D 0%, #20262C 50%, #2B323B 100%)",
+    ambientGlowPrimary: "rgba(232, 89, 12, 0.22)",
+    ambientGlowSecondary: "rgba(232, 89, 12, 0.12)",
     illustrationSrc: "/cards/achieve-goals.jpg",
     illustrationAlt:
       "3D illustration representing local businesses, corporate facilities, and digital resources",
-    shadowColor: "rgba(51, 33, 111, 0.36)",
+    shadowColor: "rgba(31, 35, 40, 0.35)",
   },
 ];
 
@@ -199,19 +199,19 @@ export function StackedCategoriesSection() {
     <section
       id="popular-categories"
       aria-label="What You Can Do on EasyLife"
-      className="relative bg-[#F3F8F8] dark:bg-[#071526] py-16 sm:py-24 border-b border-[#DAE7E7] dark:border-[#163654]"
+      className="relative bg-[#FAF7F3] dark:bg-[#15181C] py-16 sm:py-24 border-b border-[#E6E0D8] dark:border-[#2E343B]"
       style={{ overflowX: "clip" }}
     >
       <div className="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading above Sticky Stack */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <span className="text-xs sm:text-sm font-bold tracking-wider text-[#24989A] uppercase">
+          <span className="text-xs sm:text-sm font-bold tracking-wider text-[#E8590C] uppercase">
             Everyday Problems. Smarter Solutions.
           </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+          <h2 className="mt-2 text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#1F2328] dark:text-[#FAF7F3]">
             Three Ways EasyLife Works For You
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+          <p className="mt-3 text-sm sm:text-base text-[#4A525C] dark:text-[#C3C8CF]">
             From emergency repairs to rewarding careers and business maintenance — discover our consolidated ecosystem.
           </p>
         </div>
@@ -296,7 +296,7 @@ export function StackedCategoriesSection() {
                     <ul className="mt-3 space-y-1 sm:space-y-1.5 text-xs sm:text-sm text-white/90 hidden sm:block">
                       {card.bullets.map((bullet) => (
                         <li key={bullet} className="flex items-start gap-2">
-                          <span className="text-[#5CD3D5] font-bold text-xs">✓</span>
+                          <span className="text-[#E8590C] font-bold text-xs">✓</span>
                           <span className="leading-tight">{bullet}</span>
                         </li>
                       ))}

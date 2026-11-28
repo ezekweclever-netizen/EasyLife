@@ -78,7 +78,7 @@ export function NotificationDispatchClient({
   return (
     <div className="space-y-8">
       {/* Dispatch Notification Card */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs space-y-4">
         <div>
           <h2 className="text-base font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>📢 Dispatch Official Platform Notification</span>
@@ -100,7 +100,7 @@ export function NotificationDispatchClient({
                 value={recipientUserId}
                 onChange={(e) => setRecipientUserId(e.target.value)}
                 placeholder="e.g. 00000000-0000-0000-0000-000000000000"
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-mono focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-mono focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
               />
             </div>
 
@@ -111,7 +111,7 @@ export function NotificationDispatchClient({
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
               >
                 <option value="system_alert">System Alert (Operational)</option>
                 <option value="compliance_notice">Compliance &amp; Policy Notice</option>
@@ -132,7 +132,7 @@ export function NotificationDispatchClient({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Important notice regarding your service verification status"
-              className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
             />
           </div>
 
@@ -146,7 +146,7 @@ export function NotificationDispatchClient({
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Enter the official text that will appear in the user's notification center..."
-              className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+              className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
             />
           </div>
 
@@ -174,7 +174,7 @@ export function NotificationDispatchClient({
       </div>
 
       {/* Notifications History Log */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs overflow-hidden">
         <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <div className="text-xs font-bold text-slate-800 dark:text-slate-100">
             System Notification Transmission Log ({logs.length})
@@ -186,7 +186,7 @@ export function NotificationDispatchClient({
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#1F2328]/80 border-b border-slate-200 dark:border-[#2E343B] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Title &amp; Type</th>
                 <th className="py-3.5 px-4">Recipient</th>
@@ -203,7 +203,7 @@ export function NotificationDispatchClient({
                 </tr>
               ) : (
                 logs.map((log) => (
-                  <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
+                  <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/60 transition">
                     <td className="py-3.5 px-4">
                       <div className="font-bold text-slate-900 dark:text-white">
                         {log.title}

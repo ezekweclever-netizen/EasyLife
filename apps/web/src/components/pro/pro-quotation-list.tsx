@@ -89,7 +89,7 @@ export function ProQuotationList({
       )}
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-[#163654] pb-3">
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 dark:border-[#2E343B] pb-3">
         {[
           { key: "all", label: "All Quotes", count: quotations.length },
           { key: "pending", label: "Pending Customer Review", count: quotations.filter((q) => q.status === "pending").length },
@@ -106,14 +106,14 @@ export function ProQuotationList({
               onClick={() => setFilter(tab.key as any)}
               className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5 ${
                 isActive
-                  ? "bg-[#0D9488] text-white shadow-xs"
+                  ? "bg-[#E8590C] text-white shadow-xs"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
               }`}
             >
               <span>{tab.label}</span>
               <span
                 className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                  isActive ? "bg-white dark:bg-[#0D223A]/20 text-white" : "bg-slate-200 text-slate-700 dark:text-slate-200"
+                  isActive ? "bg-white dark:bg-[#1F2328]/20 text-white" : "bg-slate-200 text-slate-700 dark:text-slate-200"
                 }`}
               >
                 {tab.count}
@@ -124,7 +124,7 @@ export function ProQuotationList({
       </div>
 
       {filteredQuotes.length === 0 ? (
-        <div className="p-12 text-center rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] space-y-2">
+        <div className="p-12 text-center rounded-2xl border border-dashed border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] space-y-2">
           <span className="text-3xl block">📄</span>
           <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             No quotations found in this filter
@@ -135,7 +135,7 @@ export function ProQuotationList({
           <div className="mt-4">
             <Link
               href="/pro/jobs"
-              className="text-xs font-bold text-[#0D9488] hover:underline"
+              className="text-xs font-bold text-[#E8590C] hover:underline"
             >
               Browse Open Service Requests →
             </Link>
@@ -176,7 +176,7 @@ export function ProQuotationList({
               );
             } else if (isWithdrawn) {
               statusPill = (
-                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654]">
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#2E343B]">
                   Withdrawn
                 </span>
               );
@@ -191,10 +191,10 @@ export function ProQuotationList({
             return (
               <div
                 key={q.id}
-                className={`bg-white dark:bg-[#0D223A] rounded-2xl border p-6 shadow-xs space-y-4 transition ${
+                className={`bg-white dark:bg-[#1F2328] rounded-2xl border p-6 shadow-xs space-y-4 transition ${
                   isAccepted
                     ? "border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-950/60/20"
-                    : "border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+                    : "border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-3 border-b border-slate-100 dark:border-slate-800">
@@ -219,7 +219,7 @@ export function ProQuotationList({
                   </div>
 
                   <div className="text-left sm:text-right">
-                    <span className="text-xl font-black text-[#0D9488] block">
+                    <span className="text-xl font-black text-[#E8590C] block">
                       ₦{(q.total_amount_kobo / 100).toLocaleString("en-NG")}
                     </span>
                     <span className="text-[11px] text-slate-400">
@@ -230,7 +230,7 @@ export function ProQuotationList({
 
                 {/* Scope of Work */}
                 {q.work_description && (
-                  <div className="bg-slate-50 dark:bg-[#071526]/70 p-3 rounded-xl border border-slate-100 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-200">
+                  <div className="bg-slate-50 dark:bg-[#1F2328]/70 p-3 rounded-xl border border-slate-100 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-200">
                     <strong className="text-slate-900 dark:text-white block mb-0.5">Proposed Work:</strong>
                     <p className="whitespace-pre-line">{q.work_description}</p>
                   </div>
@@ -247,7 +247,7 @@ export function ProQuotationList({
                         {new Date(q.clarification_requested_at).toLocaleDateString("en-NG")}
                       </span>
                     </div>
-                    <p className="italic bg-white dark:bg-[#0D223A]/70 p-2.5 rounded-lg border border-amber-200 dark:border-amber-800/60">
+                    <p className="italic bg-white dark:bg-[#1F2328]/70 p-2.5 rounded-lg border border-amber-200 dark:border-amber-800/60">
                       &ldquo;{q.clarification_notes}&rdquo;
                     </p>
                     <div className="flex justify-end">
@@ -270,7 +270,7 @@ export function ProQuotationList({
                 )}
 
                 {/* Cost Breakdown Matrix */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 dark:bg-[#071526] rounded-xl p-3 border border-slate-200 dark:border-[#163654] text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-slate-50 dark:bg-[#1F2328] rounded-xl p-3 border border-slate-200 dark:border-[#2E343B] text-xs">
                   <div>
                     <span className="text-[10px] text-slate-500 dark:text-slate-400 block uppercase font-bold">Labour Charges</span>
                     <strong className="font-mono text-slate-800 dark:text-slate-100">
@@ -293,7 +293,7 @@ export function ProQuotationList({
 
                 {/* Itemized Rows */}
                 {q.items && q.items.length > 0 && (
-                  <div className="bg-white dark:bg-[#0D223A] rounded-xl p-3 border border-slate-200 dark:border-[#163654] divide-y divide-slate-100 text-xs">
+                  <div className="bg-white dark:bg-[#1F2328] rounded-xl p-3 border border-slate-200 dark:border-[#2E343B] divide-y divide-slate-100 text-xs">
                     <div className="pb-2 font-bold text-slate-600 dark:text-slate-300 grid grid-cols-12 gap-2 text-[11px]">
                       <span className="col-span-6">Description</span>
                       <span className="col-span-2 text-center">Type</span>
@@ -337,7 +337,7 @@ export function ProQuotationList({
                       <button
                         type="button"
                         onClick={() => setActiveModalQuote(q)}
-                        className="px-3 py-1.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold transition shadow-xs"
+                        className="px-3 py-1.5 rounded-lg bg-[#E8590C] hover:bg-[#E8590C] text-white text-xs font-bold transition shadow-xs"
                       >
                         Edit &amp; Submit Draft →
                       </button>
@@ -348,7 +348,7 @@ export function ProQuotationList({
                         <button
                           type="button"
                           onClick={() => setActiveModalQuote(q)}
-                          className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-slate-700 dark:text-slate-200 text-xs font-semibold transition"
+                          className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 text-xs font-semibold transition"
                         >
                           Revise Quote
                         </button>
@@ -365,7 +365,7 @@ export function ProQuotationList({
                     {isAccepted && q.booking_id && (
                       <Link
                         href={`/pro/jobs/${q.booking_id}`}
-                        className="px-3 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+                        className="px-3 py-1.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
                       >
                         Manage Active Job →
                       </Link>
@@ -381,7 +381,7 @@ export function ProQuotationList({
       {/* WITHDRAWAL MODAL */}
       {quoteToWithdraw && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full border border-slate-200 dark:border-[#163654] shadow-2xl p-6 sm:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-md w-full border border-slate-200 dark:border-[#2E343B] shadow-2xl p-6 sm:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150">
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-red-600">
                 Withdraw Quotation
@@ -417,7 +417,7 @@ export function ProQuotationList({
                   type="button"
                   onClick={() => setQuoteToWithdraw(null)}
                   disabled={isPending}
-                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
                 >
                   Cancel
                 </button>

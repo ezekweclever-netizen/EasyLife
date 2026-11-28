@@ -84,20 +84,20 @@ export function ApplyJobModal({
       aria-labelledby="modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs overflow-y-auto"
     >
-      <div className="relative w-full max-w-lg bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] shadow-2xl overflow-hidden my-8">
+      <div className="relative w-full max-w-lg bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] shadow-2xl overflow-hidden my-8">
         {/* Modal Header */}
-        <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-start justify-between gap-4">
+        <div className="p-6 border-b border-[#E6E0D8] dark:border-[#2E343B] flex items-start justify-between gap-4">
           <div>
-            <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Apply for Position
             </span>
             <h2
               id="modal-title"
-              className="text-lg font-bold text-slate-900 dark:text-white mt-0.5 line-clamp-1"
+              className="text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3] mt-0.5 line-clamp-1"
             >
               {vacancy.title}
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-0.5">
               {vacancy.city}, {vacancy.state} • EasyLife Zero Application Fee Guarantee
             </p>
           </div>
@@ -115,30 +115,30 @@ export function ApplyJobModal({
           {successReference ? (
             /* Success State */
             <div className="text-center space-y-5 py-4">
-              <div className="w-16 h-16 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] mx-auto flex items-center justify-center text-3xl border border-teal-200 dark:border-teal-800">
+              <div className="w-16 h-16 rounded-full bg-[#FCEBDD] text-[#E8590C] mx-auto flex items-center justify-center text-3xl border border-[#E8590C]/30">
                 ✓
               </div>
               <div className="space-y-1">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                <h3 className="text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                   Application Submitted!
                 </h3>
-                <p className="text-xs text-slate-600 dark:text-slate-300 max-w-sm mx-auto">
+                <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] max-w-sm mx-auto">
                   Your details and trade pitch have been delivered directly to the hiring employer.
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-slate-800 text-left space-y-1">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              <div className="p-4 rounded-2xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-left space-y-1">
+                <span className="text-[10px] font-bold text-[#4A525C] dark:text-[#C3C8CF] uppercase tracking-wider">
                   Tracking Reference Code
                 </span>
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-base font-black text-[#0F766E] dark:text-[#5CD3D5]">
+                  <span className="font-mono text-base font-black text-[#E8590C]">
                     {successReference}
                   </span>
                   <button
                     type="button"
                     onClick={() => navigator.clipboard.writeText(successReference)}
-                    className="text-xs font-semibold px-2.5 py-1 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200"
+                    className="text-xs font-semibold px-2.5 py-1 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] hover:bg-white dark:hover:bg-slate-800 text-[#1F2328] dark:text-[#FAF7F3]"
                   >
                     Copy
                   </button>
@@ -148,14 +148,14 @@ export function ApplyJobModal({
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link
                   href="/jobs/applications"
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs bg-[#0F766E] text-white hover:bg-[#0D655E] transition"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs bg-[#E8590C] text-white hover:bg-[#C84A06] transition"
                 >
                   Track My Applications &rarr;
                 </Link>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-semibold text-xs border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50"
+                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl font-semibold text-xs border border-[#E6E0D8] dark:border-[#2E343B] text-[#4A525C] dark:text-[#C3C8CF] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                 >
                   Close Window
                 </button>
@@ -172,7 +172,7 @@ export function ApplyJobModal({
                       href={`/login?next=${encodeURIComponent(
                         `/jobs/${vacancy.slug || vacancy.id}`
                       )}`}
-                      className="font-bold underline text-[#0F766E] dark:text-[#5CD3D5]"
+                      className="font-bold underline text-[#E8590C] hover:text-[#C84A06]"
                     >
                       log in or create an account
                     </Link>
@@ -198,7 +198,7 @@ export function ApplyJobModal({
                   value={applicantName}
                   onChange={(e) => setApplicantName(e.target.value)}
                   placeholder="e.g. Chukwuma Emmanuel"
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 />
                 {fieldErrors.applicantName && (
                   <p className="text-[11px] text-red-600">{fieldErrors.applicantName}</p>
@@ -217,7 +217,7 @@ export function ApplyJobModal({
                     value={applicantEmail}
                     onChange={(e) => setApplicantEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                   />
                   {fieldErrors.applicantEmail && (
                     <p className="text-[11px] text-red-600">
@@ -236,7 +236,7 @@ export function ApplyJobModal({
                     value={applicantPhone}
                     onChange={(e) => setApplicantPhone(e.target.value)}
                     placeholder="08031234567"
-                    className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                   />
                   {fieldErrors.applicantPhone && (
                     <p className="text-[11px] text-red-600">
@@ -260,7 +260,7 @@ export function ApplyJobModal({
                   value={coverLetter}
                   onChange={(e) => setCoverLetter(e.target.value)}
                   placeholder="Outline your hands-on trade experience, certifications, and why you are interested in this position..."
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 />
                 {fieldErrors.coverLetter && (
                   <p className="text-[11px] text-red-600">{fieldErrors.coverLetter}</p>
@@ -277,12 +277,12 @@ export function ApplyJobModal({
                   value={resumeUrl}
                   onChange={(e) => setResumeUrl(e.target.value)}
                   placeholder="https://drive.google.com/... or LinkedIn profile"
-                  className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 />
               </div>
 
               {/* Safety Notice */}
-              <div className="p-3 rounded-xl bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-900 text-[11px] text-[#0F766E] dark:text-[#5CD3D5]">
+              <div className="p-3 rounded-xl bg-[#FCEBDD]/60 dark:bg-[#1F2328] border border-[#E8590C]/30 text-[11px] text-[#1F2328] dark:text-[#FAF7F3]">
                 🔒 <strong>No Application Fee:</strong> EasyLife strictly prohibits employers from demanding form fees, registration charges, or payments. Applying is 100% free.
               </div>
 
@@ -292,14 +292,14 @@ export function ApplyJobModal({
                   type="button"
                   onClick={onClose}
                   disabled={isSubmitting}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50"
+                  className="px-4 py-2 rounded-xl text-xs font-semibold border border-[#E6E0D8] dark:border-[#2E343B] text-[#4A525C] dark:text-[#C3C8CF] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] transition-all shadow-sm flex items-center gap-2 disabled:opacity-50"
+                  className="px-6 py-2.5 rounded-xl text-xs font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] transition-all shadow-sm flex items-center gap-2 disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>

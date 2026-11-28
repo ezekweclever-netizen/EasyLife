@@ -43,7 +43,7 @@ export function ToolMoving() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Logistics &amp; Relocation
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -54,14 +54,14 @@ export function ToolMoving() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
           <div>
             <label className="block font-bold mb-1">Residence / Office Size</label>
             <select
               value={homeSize}
               onChange={(e) => setHomeSize(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
             >
               <option value="1bed">1-Bedroom Flat (Mini Move)</option>
               <option value="2bed">2-3 Bedroom Apartment</option>
@@ -76,7 +76,7 @@ export function ToolMoving() {
               type="number"
               value={distanceKm}
               onChange={(e) => setDistanceKm(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-mono font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono font-bold"
             />
           </div>
 
@@ -85,7 +85,7 @@ export function ToolMoving() {
             <select
               value={floorLevel}
               onChange={(e) => setFloorLevel(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             >
               <option value="ground">Ground Floor / Direct Access</option>
               <option value="stairs">1st — 3rd Floor (Staircase Carry)</option>
@@ -98,7 +98,7 @@ export function ToolMoving() {
             <select
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             >
               <option value="Port Harcourt">Port Harcourt, Rivers</option>
               <option value="Lagos">Lagos State</option>
@@ -108,7 +108,7 @@ export function ToolMoving() {
         </div>
 
         {/* Add-ons Checkboxes */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
           <span className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">
             Optional Relocation Support Services
           </span>
@@ -141,12 +141,12 @@ export function ToolMoving() {
         </div>
 
         {/* Results Card */}
-        <div className="p-6 rounded-2xl bg-teal-50/70 dark:bg-[#0D223A] border border-teal-200/90 dark:border-slate-700 space-y-4">
+        <div className="p-6 rounded-2xl bg-[#FCEBDD]/70 dark:bg-[#1F2328] border border-[#E8590C]/30/90 dark:border-slate-700 space-y-4">
           <div className="text-center space-y-1">
             <span className="text-xs text-slate-500 uppercase tracking-wider font-bold">
               Total Estimated Relocation &amp; Freight Cost
             </span>
-            <div className="text-2xl sm:text-3xl font-black text-[#0D9488] dark:text-[#5CD3D5] font-mono">
+            <div className="text-2xl sm:text-3xl font-black text-[#E8590C] dark:text-[#F06A1F] font-mono">
               ~₦{total.toLocaleString()}
             </div>
             <p className="text-[11px] text-slate-400">
@@ -155,21 +155,21 @@ export function ToolMoving() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
-            <div className="p-2.5 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="p-2.5 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800">
               <span className="text-slate-400 block text-[10px]">Truck Haulage</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono">₦{baseTruck.toLocaleString()}</span>
             </div>
-            <div className="p-2.5 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="p-2.5 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800">
               <span className="text-slate-400 block text-[10px]">Distance &amp; Fuel</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono">₦{distanceFee.toLocaleString()}</span>
             </div>
-            <div className="p-2.5 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="p-2.5 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800">
               <span className="text-slate-400 block text-[10px]">Crew &amp; Stairs</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono">
                 ₦{(crewCost + floorSurcharge).toLocaleString()}
               </span>
             </div>
-            <div className="p-2.5 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800">
+            <div className="p-2.5 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800">
               <span className="text-slate-400 block text-[10px]">Packing &amp; AC</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono">
                 ₦{(packingCost + acCost).toLocaleString()}
@@ -177,7 +177,7 @@ export function ToolMoving() {
             </div>
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-[#071526] p-4 rounded-xl border border-teal-200/50">
+          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-[#1F2328] p-4 rounded-xl border border-[#E8590C]/30/50">
             <div>
               <span className="font-bold text-slate-900 dark:text-white block text-xs">
                 Need reliable movers and trucks in {city}?
@@ -188,7 +188,7 @@ export function ToolMoving() {
             </div>
             <Link
               href={`/post-a-need?category=moving-relocation&city=${encodeURIComponent(city)}`}
-              className="px-4 py-2 rounded-xl bg-[#0D9488] text-white text-xs font-bold text-center hover:bg-[#0B7A6F] transition shrink-0"
+              className="px-4 py-2 rounded-xl bg-[#E8590C] text-white text-xs font-bold text-center hover:bg-[#0B7A6F] transition shrink-0"
             >
               Book Moving Truck &rarr;
             </Link>
@@ -199,7 +199,7 @@ export function ToolMoving() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Relocation Manifest &amp; Haulage Estimate</span>
           </button>
@@ -216,7 +216,7 @@ export function ToolMoving() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Logistics, Moving &amp; Freight Manifest
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -234,7 +234,7 @@ export function ToolMoving() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Total Estimated Outflow</span>
-              <span className="text-xl font-black text-[#0D9488] font-mono mt-0.5 block">₦{total.toLocaleString()}</span>
+              <span className="text-xl font-black text-[#E8590C] font-mono mt-0.5 block">₦{total.toLocaleString()}</span>
             </div>
           </div>
 

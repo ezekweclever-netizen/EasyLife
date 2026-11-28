@@ -30,10 +30,10 @@ export default async function AdminReviewsPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] py-10 px-4 sm:px-6 lg:px-8 text-[#0F172A]">
+    <div className="min-h-screen bg-[#FAF7F3] py-10 px-4 sm:px-6 lg:px-8 text-[#1F2328]">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#2E343B]">
           <div>
             <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1">
               <Link href="/dashboard" className="hover:text-slate-800 dark:text-slate-100">
@@ -55,19 +55,19 @@ export default async function AdminReviewsPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/admin/disputes"
-              className="px-4 py-2.5 rounded-xl bg-white dark:bg-[#0D223A] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition shadow-xs"
+              className="px-4 py-2.5 rounded-xl bg-white dark:bg-[#1F2328] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition shadow-xs"
             >
               ⚖ Dispute Arbitration
             </Link>
             <Link
               href="/admin/categories"
-              className="px-4 py-2.5 rounded-xl bg-white dark:bg-[#0D223A] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition shadow-xs"
+              className="px-4 py-2.5 rounded-xl bg-white dark:bg-[#1F2328] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition shadow-xs"
             >
               Categories
             </Link>
             <Link
               href="/dashboard"
-              className="px-4 py-2.5 rounded-xl bg-[#0F766E] text-white text-xs font-bold hover:bg-[#0D655E] transition shadow-xs"
+              className="px-4 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#C84A06] transition shadow-xs"
             >
               Dashboard
             </Link>

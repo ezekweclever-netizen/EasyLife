@@ -33,25 +33,25 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
       <div>
         <Link
           href="/jobs"
-          className="text-xs font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline inline-flex items-center gap-1"
+          className="text-xs font-semibold text-[#E8590C] hover:underline inline-flex items-center gap-1"
         >
           <span>&larr; Back to All Jobs &amp; Opportunities</span>
         </Link>
       </div>
 
       {/* Main Job Card */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-6 sm:p-10 shadow-xl space-y-8">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-10 shadow-xl space-y-8">
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] uppercase tracking-wider">
                 {vacancy.category}
               </span>
               <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 capitalize">
                 {(vacancy.employment_type || "Full Time").replace("_", " ")}
               </span>
-              <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 capitalize">
+              <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 capitalize">
                 {(vacancy.workplace_type || "On Site").replace("_", " ")}
               </span>
             </div>
@@ -62,14 +62,14 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
 
             <p className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400">
               Hiring Organization:{" "}
-              <span className="text-[#0F766E] dark:text-[#5CD3D5] font-bold">
+              <span className="text-[#E8590C] font-bold">
                 {(vacancy as any).company_name || "Verified EasyLife Partner Employer"}
               </span>
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               <span className="flex items-center gap-1.5 font-medium">
-                <Icon name="map-pin" className="w-4 h-4 text-[#0D9488]" />
+                <Icon name="map-pin" className="w-4 h-4 text-[#E8590C]" />
                 <span>
                   {vacancy.city}, {vacancy.state}
                 </span>
@@ -108,7 +108,7 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
             <button
               type="button"
               onClick={() => setIsApplyModalOpen(true)}
-              className="w-full md:w-auto px-8 py-3 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full md:w-auto px-8 py-3 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Apply for This Role</span>
               <span>&rarr;</span>
@@ -134,7 +134,7 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 Key Responsibilities
               </h2>
-              <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line bg-slate-50 dark:bg-[#071526]/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
+              <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line bg-[#FAF7F3] dark:bg-[#1F2328]/80 p-5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B]">
                 {vacancy.responsibilities}
               </div>
             </div>
@@ -146,7 +146,7 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 Requirements &amp; Trade Qualifications
               </h2>
-              <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line bg-slate-50 dark:bg-[#071526]/50 p-5 rounded-2xl border border-slate-100 dark:border-slate-800">
+              <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line bg-[#FAF7F3] dark:bg-[#1F2328]/80 p-5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B]">
                 {vacancy.requirements}
               </div>
             </div>
@@ -162,7 +162,7 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
                 {vacancy.benefits.map((benefit, idx) => (
                   <span
                     key={idx}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] text-xs font-semibold border border-teal-200/80 dark:border-teal-900"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] text-xs font-semibold border border-[#E8590C]/30 dark:border-[#F06A1F]/40"
                   >
                     <span>✓</span>
                     <span>{benefit}</span>
@@ -209,7 +209,7 @@ export function JobDetailClient({ vacancy, currentUser }: JobDetailClientProps) 
           <button
             type="button"
             onClick={() => setIsApplyModalOpen(true)}
-            className="w-full sm:w-auto px-8 py-3 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full sm:w-auto px-8 py-3 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
           >
             <span>Apply for This Role</span>
             <span>&rarr;</span>

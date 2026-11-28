@@ -8,22 +8,22 @@ const ALERT_STYLES: Record<
   { container: string; title: string; badge: string }
 > = {
   info: {
-    container: "bg-[#EBF6F9] border-[#A9DCE7] text-[#1A6E84]",
-    title: "text-[#1A6E84]",
-    badge: "bg-[#1A6E84] text-white",
+    container: "bg-[#EBF0F5] border-[#C3C8CF] text-[#4A525C]",
+    title: "text-[#1F2328]",
+    badge: "bg-[#4A525C] text-white",
   },
   success: {
-    container: "bg-[#E7F7F1] border-[#A3E5D0] text-[#127A5B]",
-    title: "text-[#127A5B]",
-    badge: "bg-[#127A5B] text-white",
+    container: "bg-[#E8F5ED] border-[#A3D9B5] text-[#2E7D4F]",
+    title: "text-[#2E7D4F]",
+    badge: "bg-[#2E7D4F] text-white",
   },
   warning: {
-    container: "bg-[#FEF5E7] border-[#FCD9A5] text-[#B25E0A]",
-    title: "text-[#B25E0A]",
-    badge: "bg-[#B25E0A] text-white",
+    container: "bg-[#FEF7EC] border-[#F5D499] text-[#B7791F]",
+    title: "text-[#B7791F]",
+    badge: "bg-[#B7791F] text-white",
   },
   error: {
-    container: "bg-[#FDF0F0] border-[#F8B4B4] text-[#C53030]",
+    container: "bg-[#FDE8E8] border-[#F8B4B4] text-[#C53030]",
     title: "text-[#C53030]",
     badge: "bg-[#C53030] text-white",
   },
@@ -83,16 +83,16 @@ export function EmptyState({
 }: EmptyStateProps) {
   return (
     <div
-      className={`rounded-2xl border border-dashed border-[#DAE7E7] bg-white dark:bg-[#0D223A] p-8 text-center flex flex-col items-center justify-center ${className}`}
+      className={`rounded-2xl border border-dashed border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] p-8 text-center flex flex-col items-center justify-center ${className}`}
     >
       <div
-        className="h-12 w-12 rounded-full bg-[#F3F8F8] border border-[#24989A]/30 flex items-center justify-center text-[#24989A] font-bold text-lg mb-3"
+        className="h-12 w-12 rounded-full bg-[#FCEBDD] border border-[#E8590C]/30 flex items-center justify-center text-[#E8590C] font-bold text-lg mb-3"
         aria-hidden="true"
       >
         E
       </div>
-      <h3 className="text-base font-semibold text-[#1F2F34]">{title}</h3>
-      <p className="mt-1 text-sm text-[#68797C] max-w-md">{description}</p>
+      <h3 className="text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3]">{title}</h3>
+      <p className="mt-1 text-sm text-[#4A525C] dark:text-[#C3C8CF] max-w-md">{description}</p>
       {actionLabel && onAction && (
         <div className="mt-4">
           <Button variant="primary" size="sm" onClick={onAction}>
@@ -115,13 +115,13 @@ export function LoadingState({
     <div
       role="status"
       aria-live="polite"
-      className={`rounded-2xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] p-8 flex flex-col items-center justify-center gap-3 ${className}`}
+      className={`rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] p-8 flex flex-col items-center justify-center gap-3 ${className}`}
     >
       <div
-        className="h-7 w-7 rounded-full border-3 border-[#24989A] border-t-transparent animate-spin"
+        className="h-7 w-7 rounded-full border-3 border-[#E8590C] border-t-transparent animate-spin"
         aria-hidden="true"
       />
-      <p className="text-sm font-medium text-[#1F2F34]">{label}</p>
+      <p className="text-sm font-medium text-[#1F2328] dark:text-[#FAF7F3]">{label}</p>
     </div>
   );
 }
@@ -130,7 +130,7 @@ export function Skeleton({ className = "h-4 w-full" }: { className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className={`animate-pulse rounded-md bg-[#DAE7E7] ${className}`}
+      className={`animate-pulse rounded-md bg-[#E6E0D8] dark:bg-[#2E343B] ${className}`}
     />
   );
 }
@@ -153,14 +153,14 @@ export function ErrorState({
   return (
     <div
       role="alert"
-      className={`rounded-xl border border-[#FCA5A5] bg-[#FEF2F2] p-6 text-[#991B1B] ${className}`}
+      className={`rounded-xl border border-[#F8B4B4] bg-[#FDE8E8] dark:bg-[#C53030]/10 p-6 text-[#C53030] ${className}`}
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h3 className="text-base font-semibold text-[#991B1B]">{title}</h3>
-          <p className="mt-1 text-sm text-[#7F1D1D]">{message}</p>
+          <h3 className="text-base font-semibold text-[#C53030]">{title}</h3>
+          <p className="mt-1 text-sm text-[#9B2626] dark:text-[#F8B4B4]">{message}</p>
           {requestId && (
-            <p className="mt-2 text-xs font-mono text-[#991B1B]/80">
+            <p className="mt-2 text-xs font-mono text-[#C53030]/80">
               Reference ID: {requestId}
             </p>
           )}

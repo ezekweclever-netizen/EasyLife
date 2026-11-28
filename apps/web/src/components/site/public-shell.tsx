@@ -9,10 +9,10 @@ export async function PublicShell({ children }: { children: React.ReactNode }) {
   const settings = await getPublicPlatformSettings();
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-[#1F2F34] dark:bg-[#071526] dark:text-[#E6F1F5] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#FAF7F3] text-[#1F2328] dark:bg-[#15181C] dark:text-[#FAF7F3] transition-colors duration-200">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-[#154752] focus:px-4 focus:py-2 focus:text-base focus:font-semibold focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-50 focus:rounded-lg focus:bg-[#E8590C] focus:px-4 focus:py-2 focus:text-base focus:font-semibold focus:text-white"
       >
         Skip to main content
       </a>

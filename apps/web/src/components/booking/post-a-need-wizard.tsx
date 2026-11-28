@@ -476,13 +476,13 @@ export function PostANeedWizard({
     const selectedCategoryObj = categories.find((c) => c.id === categoryId);
 
     return (
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-6 sm:p-10 shadow-xl space-y-8 max-w-2xl mx-auto text-center">
-        <div className="w-20 h-20 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] mx-auto flex items-center justify-center text-4xl shadow-inner border border-teal-100 dark:border-teal-800">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200/90 dark:border-[#2E343B] p-6 sm:p-10 shadow-xl space-y-8 max-w-2xl mx-auto text-center">
+        <div className="w-20 h-20 rounded-full bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C] mx-auto flex items-center justify-center text-4xl shadow-inner border border-teal-100 dark:border-teal-800">
           ✓
         </div>
 
         <div className="space-y-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C] border border-[#E8590C]/30">
             Request Successfully Broadcast
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -496,15 +496,15 @@ export function PostANeedWizard({
         </div>
 
         {/* Reference Number Box */}
-        <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-slate-800 space-y-2 text-left">
+        <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 space-y-2 text-left">
           <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
             <span>Booking Reference Code</span>
-            <span className="font-semibold text-[#0F766E] dark:text-[#5CD3D5]">
+            <span className="font-semibold text-[#E8590C]">
               Save this reference
             </span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="font-mono text-xl sm:text-2xl font-black text-[#0F766E] dark:text-[#5CD3D5] tracking-wider">
+            <span className="font-mono text-xl sm:text-2xl font-black text-[#E8590C] tracking-wider">
               {createdBooking.referenceCode}
             </span>
             <button
@@ -512,7 +512,7 @@ export function PostANeedWizard({
               onClick={() =>
                 navigator.clipboard.writeText(createdBooking.referenceCode)
               }
-              className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-[#0D223A] text-slate-700 dark:text-slate-200 transition-colors"
+              className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-white dark:hover:bg-[#1F2328] text-slate-700 dark:text-slate-200 transition-colors"
             >
               Copy Code
             </button>
@@ -526,7 +526,7 @@ export function PostANeedWizard({
           </h3>
           <div className="space-y-3 text-xs sm:text-sm">
             <div className="flex items-start gap-3">
-              <span className="w-6 h-6 rounded-full bg-[#0F766E] text-white flex items-center justify-center font-bold text-xs shrink-0">
+              <span className="w-6 h-6 rounded-full bg-[#E8590C] text-white flex items-center justify-center font-bold text-xs shrink-0">
                 1
               </span>
               <div>
@@ -572,7 +572,7 @@ export function PostANeedWizard({
         <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
           <Link
             href={`/bookings/${createdBooking.id}`}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-sm"
+            className="w-full sm:w-auto px-6 py-3 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm"
           >
             View Request & Track Quotations &rarr;
           </Link>
@@ -591,9 +591,9 @@ export function PostANeedWizard({
   // PROGRESS WIZARD SHELL
   // ==========================================
   return (
-    <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] shadow-xl overflow-hidden max-w-4xl mx-auto">
+    <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200/90 dark:border-[#2E343B] shadow-xl overflow-hidden max-w-4xl mx-auto">
       {/* Wizard Progress Bar */}
-      <div className="bg-slate-50 dark:bg-[#071526] border-b border-slate-200/80 dark:border-[#163654] px-6 py-4">
+      <div className="bg-slate-50 dark:bg-[#1F2328] border-b border-slate-200/80 dark:border-[#2E343B] px-6 py-4">
         <div className="flex items-center justify-between max-w-xl mx-auto">
           {[
             { num: 1, label: "Problem & AI" },
@@ -609,9 +609,9 @@ export function PostANeedWizard({
                   disabled={s.num > step}
                   className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs transition-colors ${
                     step === s.num
-                      ? "bg-[#0F766E] text-white shadow-xs"
+                      ? "bg-[#E8590C] text-white shadow-xs"
                       : step > s.num
-                      ? "bg-[#CCFBF1] text-[#0F766E] dark:bg-teal-950 dark:text-teal-300"
+                      ? "bg-[#FCEBDD] text-[#E8590C] dark:bg-[#2E343B] dark:text-[#FCEBDD]"
                       : "bg-slate-200 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
                   }`}
                 >
@@ -625,7 +625,7 @@ export function PostANeedWizard({
                 <div
                   className={`w-8 sm:w-16 h-0.5 mx-1 transition-colors ${
                     step > s.num
-                      ? "bg-[#0F766E]"
+                      ? "bg-[#E8590C]"
                       : "bg-slate-200 dark:bg-slate-800"
                   }`}
                 />
@@ -649,7 +649,7 @@ export function PostANeedWizard({
         {step === 1 && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <span className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
                 Step 1 of 4: Describe Your Problem in Plain English
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
@@ -679,7 +679,7 @@ export function PostANeedWizard({
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="e.g. My distribution box keeps tripping whenever the living room AC turns on. I also smell a faint electrical burn near the changeover switch..."
-                className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
               />
               {fieldErrors.description && (
                 <p className="text-xs text-red-600 dark:text-red-400">
@@ -691,7 +691,7 @@ export function PostANeedWizard({
             {/* AI Diagnosis Action Button */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-900/60">
               <div className="space-y-0.5">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-[#0F766E] dark:text-[#5CD3D5]">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-[#E8590C]">
                   <Icon name="sparkles" className="w-4 h-4 text-amber-500" />
                   <span>AI Problem Diagnosis &amp; Scoping</span>
                 </div>
@@ -703,7 +703,7 @@ export function PostANeedWizard({
                 type="button"
                 onClick={handleAnalyzeWithAI}
                 disabled={isAiAnalyzing || !description.trim()}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs bg-[#0F766E] text-white hover:bg-[#0D655E] disabled:opacity-50 transition-all shrink-0 shadow-xs"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs bg-[#E8590C] text-white hover:bg-[#C84A06] disabled:opacity-50 transition-all shrink-0 shadow-xs"
               >
                 {isAiAnalyzing ? (
                   <>
@@ -727,17 +727,17 @@ export function PostANeedWizard({
 
             {/* AI Diagnosis Results Card */}
             {aiResult && (
-              <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-teal-300 dark:border-teal-800/80 space-y-4">
+              <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#1F2328] border border-[#E8590C]/40/80 space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
                   <div className="flex items-center gap-2">
-                    <span className="w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-950 flex items-center justify-center text-[#0D9488]">
+                    <span className="w-7 h-7 rounded-lg bg-[#FCEBDD] dark:bg-[#2E343B] flex items-center justify-center text-[#E8590C]">
                       <Icon name="sparkles" className="w-4 h-4" />
                     </span>
                     <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                       AI Diagnostic Insights
                     </h3>
                   </div>
-                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-teal-100 dark:bg-teal-950 text-[#0F766E] dark:text-[#5CD3D5]">
+                  <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C]">
                     OpenAI Analysis
                   </span>
                 </div>
@@ -756,12 +756,12 @@ export function PostANeedWizard({
 
                 {/* Recommended Category */}
                 {aiResult.categoryRecommendation && (
-                  <div className="p-3 rounded-xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="p-3 rounded-xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
                         Recommended Trade Category
                       </span>
-                      <p className="text-sm font-bold text-[#0F766E] dark:text-[#5CD3D5] mt-0.5">
+                      <p className="text-sm font-bold text-[#E8590C] mt-0.5">
                         {aiResult.categoryRecommendation.categoryName}
                       </p>
                     </div>
@@ -785,7 +785,7 @@ export function PostANeedWizard({
                             setHasAppliedAiCategory(true);
                           }
                         }}
-                        className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] transition"
+                        className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] transition"
                       >
                         Apply Recommended Category
                       </button>
@@ -836,7 +836,7 @@ export function PostANeedWizard({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. Electrical trip & inverter bypass repair"
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
               />
               {fieldErrors.title && (
                 <p className="text-xs text-red-600 dark:text-red-400">
@@ -865,7 +865,7 @@ export function PostANeedWizard({
                   setCategoryId(e.target.value);
                   setHasAppliedAiCategory(false);
                 }}
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -903,15 +903,15 @@ export function PostANeedWizard({
                   onClick={() => setSelectedPro(null)}
                   className={`p-3.5 rounded-2xl border cursor-pointer transition-all ${
                     selectedPro === null
-                      ? "border-[#0F766E] bg-teal-50/50 dark:bg-teal-950/30 ring-1 ring-[#0F766E]"
-                      : "border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white dark:bg-[#071526]"
+                      ? "border-[#E8590C] bg-[#FCEBDD]/50 dark:bg-[#2E343B]/40 ring-1 ring-[#E8590C]"
+                      : "border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white dark:bg-[#1F2328]"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-xs text-slate-900 dark:text-white">
                       Broadcast to All Verified Pros
                     </span>
-                    <span className="text-[10px] font-bold text-[#0F766E] dark:text-[#5CD3D5]">
+                    <span className="text-[10px] font-bold text-[#E8590C]">
                       Fastest Quotes
                     </span>
                   </div>
@@ -927,13 +927,13 @@ export function PostANeedWizard({
                     onClick={() => setSelectedPro(pro)}
                     className={`p-3.5 rounded-2xl border cursor-pointer transition-all ${
                       selectedPro?.professional_id === pro.professional_id
-                        ? "border-[#0F766E] bg-teal-50/50 dark:bg-teal-950/30 ring-1 ring-[#0F766E]"
-                        : "border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white dark:bg-[#071526]"
+                        ? "border-[#E8590C] bg-[#FCEBDD]/50 dark:bg-[#2E343B]/40 ring-1 ring-[#E8590C]"
+                        : "border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white dark:bg-[#1F2328]"
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 truncate">
-                        <div className="w-6 h-6 rounded-full bg-[#0F766E] text-white flex items-center justify-center font-bold text-[10px]">
+                        <div className="w-6 h-6 rounded-full bg-[#E8590C] text-white flex items-center justify-center font-bold text-[10px]">
                           {pro.display_name ? pro.display_name[0] : "P"}
                         </div>
                         <span className="font-bold text-xs text-slate-900 dark:text-white truncate">
@@ -957,7 +957,7 @@ export function PostANeedWizard({
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-sm flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm flex items-center gap-1.5"
               >
                 <span>Next: Attach Photos</span>
                 <span>&rarr;</span>
@@ -972,7 +972,7 @@ export function PostANeedWizard({
         {step === 2 && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <span className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
                 Step 2 of 4: Fault Photos &amp; Documents
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
@@ -984,8 +984,8 @@ export function PostANeedWizard({
             </div>
 
             {/* Upload Box */}
-            <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-3xl p-8 text-center space-y-3 bg-slate-50/50 dark:bg-[#071526]/50 hover:bg-slate-50 dark:hover:bg-[#071526] transition-colors">
-              <div className="w-14 h-14 rounded-2xl bg-teal-50 dark:bg-teal-950 text-[#0F766E] dark:text-[#5CD3D5] text-2xl mx-auto flex items-center justify-center shadow-inner">
+            <div className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-3xl p-8 text-center space-y-3 bg-slate-50/50 dark:bg-[#1F2328]/50 hover:bg-slate-50 dark:hover:bg-[#1F2328] transition-colors">
+              <div className="w-14 h-14 rounded-2xl bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C] text-2xl mx-auto flex items-center justify-center shadow-inner">
                 📷
               </div>
               <div>
@@ -996,7 +996,7 @@ export function PostANeedWizard({
                   Supports JPEG, PNG, WebP, and PDF (Up to 5 files, 8MB each)
                 </p>
               </div>
-              <label className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] cursor-pointer transition-colors shadow-xs">
+              <label className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] cursor-pointer transition-colors shadow-xs">
                 <span>Browse Files from Device</span>
                 <input
                   type="file"
@@ -1018,7 +1018,7 @@ export function PostANeedWizard({
                   {attachments.map((file, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center justify-between p-3.5 rounded-xl bg-white dark:bg-[#071526] border border-slate-200 dark:border-slate-800 text-xs"
+                      className="flex items-center justify-between p-3.5 rounded-xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 text-xs"
                     >
                       <div className="flex items-center gap-2 truncate">
                         <span className="text-base">
@@ -1055,7 +1055,7 @@ export function PostANeedWizard({
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-sm flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm flex items-center gap-1.5"
               >
                 <span>Next: Location &amp; Schedule</span>
                 <span>&rarr;</span>
@@ -1070,7 +1070,7 @@ export function PostANeedWizard({
         {step === 3 && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <span className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
                 Step 3 of 4: Service Location &amp; Preferred Timing
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
@@ -1097,7 +1097,7 @@ export function PostANeedWizard({
                     setCity(e.target.value);
                     setNeighbourhood("");
                   }}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 >
                   {PILOT_CITIES_CONFIG.map((c) => (
                     <option key={c.name} value={c.name}>
@@ -1119,7 +1119,7 @@ export function PostANeedWizard({
                   id="district-select"
                   value={neighbourhood}
                   onChange={(e) => setNeighbourhood(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 >
                   <option value="">Select Operating Neighbourhood</option>
                   {currentCityConfig.districts.map((d) => (
@@ -1145,7 +1145,7 @@ export function PostANeedWizard({
                 value={serviceAddress}
                 onChange={(e) => setServiceAddress(e.target.value)}
                 placeholder="e.g. Flat 3B, Plot 14 Peter Odili Road, Opposite Total Filling Station"
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
               />
               {fieldErrors.serviceAddress && (
                 <p className="text-xs text-red-600 dark:text-red-400">
@@ -1169,7 +1169,7 @@ export function PostANeedWizard({
                   value={preferredDate}
                   min={new Date().toISOString().split("T")[0]}
                   onChange={(e) => setPreferredDate(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 />
                 {fieldErrors.preferredDate && (
                   <p className="text-xs text-red-600 dark:text-red-400">
@@ -1189,7 +1189,7 @@ export function PostANeedWizard({
                   id="time-slot"
                   value={preferredTimeSlot}
                   onChange={(e) => setPreferredTimeSlot(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 >
                   <option value="Morning (8:00 AM – 12:00 PM)">
                     Morning (8:00 AM – 12:00 PM)
@@ -1239,15 +1239,15 @@ export function PostANeedWizard({
                     onClick={() => setUrgency(u.id as any)}
                     className={`p-3.5 rounded-2xl text-left border transition-all ${
                       urgency === u.id
-                        ? "border-[#0F766E] bg-teal-50/50 dark:bg-teal-950/40 ring-1 ring-[#0F766E]"
-                        : "border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white dark:bg-[#071526]"
+                        ? "border-[#E8590C] bg-[#FCEBDD]/50 dark:bg-[#2E343B]/40 ring-1 ring-[#E8590C]"
+                        : "border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white dark:bg-[#1F2328]"
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-xs text-slate-900 dark:text-white">
                         {u.label}
                       </span>
-                      <span className="text-[10px] font-semibold text-[#0F766E] dark:text-[#5CD3D5]">
+                      <span className="text-[10px] font-semibold text-[#E8590C]">
                         {u.badge}
                       </span>
                     </div>
@@ -1278,7 +1278,7 @@ export function PostANeedWizard({
                     value={targetBudgetNaira}
                     onChange={(e) => setTargetBudgetNaira(e.target.value)}
                     placeholder="e.g. 25,000"
-                    className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full pl-8 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                   />
                 </div>
                 <p className="text-[10px] text-slate-400">
@@ -1297,7 +1297,7 @@ export function PostANeedWizard({
                   id="contact-pref"
                   value={contactPreference}
                   onChange={(e) => setContactPreference(e.target.value as any)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 >
                   <option value="in_app">In-App Chat &amp; Notification (Default)</option>
                   <option value="whatsapp">WhatsApp Message</option>
@@ -1317,7 +1317,7 @@ export function PostANeedWizard({
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-sm flex items-center gap-1.5"
+                className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm flex items-center gap-1.5"
               >
                 <span>Next: Review &amp; Broadcast</span>
                 <span>&rarr;</span>
@@ -1332,7 +1332,7 @@ export function PostANeedWizard({
         {step === 4 && (
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
-              <span className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
                 Step 4 of 4: Review &amp; Broadcast Request
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
@@ -1344,7 +1344,7 @@ export function PostANeedWizard({
             </div>
 
             {/* Summary Review Card */}
-            <div className="p-5 sm:p-6 rounded-3xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-slate-800 space-y-4 text-xs sm:text-sm">
+            <div className="p-5 sm:p-6 rounded-3xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 space-y-4 text-xs sm:text-sm">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
                 <div>
                   <span className="text-slate-500 dark:text-slate-400 block text-xs">
@@ -1359,7 +1359,7 @@ export function PostANeedWizard({
                   <span className="text-slate-500 dark:text-slate-400 block text-xs">
                     Urgency
                   </span>
-                  <span className="font-bold capitalize text-[#0F766E] dark:text-[#5CD3D5]">
+                  <span className="font-bold capitalize text-[#E8590C]">
                     {urgency}
                   </span>
                 </div>
@@ -1394,7 +1394,7 @@ export function PostANeedWizard({
                 <span className="text-slate-500 dark:text-slate-400 block text-xs">
                   Problem Description
                 </span>
-                <p className="text-slate-700 dark:text-slate-300 whitespace-pre-line bg-white dark:bg-[#0D223A] p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 mt-1">
+                <p className="text-slate-700 dark:text-slate-300 whitespace-pre-line bg-white dark:bg-[#1F2328] p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 mt-1">
                   {description}
                 </p>
               </div>
@@ -1425,7 +1425,7 @@ export function PostANeedWizard({
                 </div>
                 <div>
                   <span className="text-slate-400 block">Dispatch Mode</span>
-                  <span className="font-bold text-[#0F766E] dark:text-[#5CD3D5]">
+                  <span className="font-bold text-[#E8590C]">
                     {selectedPro
                       ? `Direct to ${selectedPro.business_name || selectedPro.display_name}`
                       : `Broadcast to all verified ${city} pros`}
@@ -1443,7 +1443,7 @@ export function PostANeedWizard({
             </div>
 
             {/* Zero Upfront Risk & Escrow Guarantee */}
-            <div className="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/50 border border-teal-200 dark:border-teal-900 text-xs text-[#0F766E] dark:text-[#5CD3D5] space-y-1">
+            <div className="p-4 rounded-2xl bg-[#FCEBDD] dark:bg-[#2E343B] border border-teal-200 dark:border-teal-900 text-xs text-[#E8590C] space-y-1">
               <p className="font-bold flex items-center gap-1.5">
                 <span>🛡️ Zero Upfront Risk &amp; Escrow Guarantee</span>
               </p>
@@ -1470,13 +1470,13 @@ export function PostANeedWizard({
                 <div className="flex flex-wrap items-center gap-3 pt-2">
                   <Link
                     href={`/login?next=${encodeURIComponent("/post-a-need")}`}
-                    className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#0F766E] text-white hover:bg-[#0D655E] transition shadow-xs"
+                    className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#E8590C] text-white hover:bg-[#C84A06] transition shadow-xs"
                   >
                     Log In to Existing Account
                   </Link>
                   <Link
                     href={`/register?next=${encodeURIComponent("/post-a-need")}`}
-                    className="px-5 py-2.5 rounded-xl font-bold text-xs border border-amber-300 dark:border-amber-700 bg-white dark:bg-[#0D223A] text-slate-800 dark:text-slate-100 hover:bg-slate-50 transition"
+                    className="px-5 py-2.5 rounded-xl font-bold text-xs border border-amber-300 dark:border-amber-700 bg-white dark:bg-[#1F2328] text-slate-800 dark:text-slate-100 hover:bg-slate-50 transition"
                   >
                     Create Free Account
                   </Link>
@@ -1499,7 +1499,7 @@ export function PostANeedWizard({
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="px-8 py-3 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-md flex items-center gap-2 disabled:opacity-50"
+                  className="px-8 py-3 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-md flex items-center gap-2 disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
@@ -1513,7 +1513,7 @@ export function PostANeedWizard({
               ) : (
                 <Link
                   href={`/login?next=${encodeURIComponent("/post-a-need")}`}
-                  className="px-8 py-3 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-md flex items-center gap-2"
+                  className="px-8 py-3 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-md flex items-center gap-2"
                 >
                   <span>Log In to Broadcast &rarr;</span>
                 </Link>

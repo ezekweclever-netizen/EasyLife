@@ -44,7 +44,7 @@ export default async function ProDashboardPage() {
         <div className="mt-6">
           <Link
             href="/pro/register"
-            className="inline-flex items-center px-6 py-3 rounded-xl bg-[#0D9488] text-white text-sm font-bold hover:bg-[#0F766E] shadow-sm transition"
+            className="inline-flex items-center px-6 py-3 rounded-xl bg-[#E8590C] text-white text-sm font-bold hover:bg-[#E8590C] shadow-sm transition"
           >
             Start Professional Registration →
           </Link>
@@ -80,7 +80,7 @@ export default async function ProDashboardPage() {
       {/* 1. Welcome & Headline */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
             Professional Portal • {profile.primary_city}
           </span>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
@@ -94,13 +94,13 @@ export default async function ProDashboardPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/pro/jobs"
-            className="px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+            className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
           >
             Browse New Requests ({openRequests.length})
           </Link>
           <Link
             href="/pro/profile"
-            className="px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+            className="px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
           >
             Edit Profile
           </Link>
@@ -140,20 +140,20 @@ export default async function ProDashboardPage() {
               <h2 className="text-base font-bold text-slate-900 dark:text-white">
                 New Service Requests
               </h2>
-              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] border border-teal-200 dark:border-teal-800">
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-[#E8590C] border border-teal-200 dark:border-teal-800">
                 {openRequests.length} Available
               </span>
             </div>
             <Link
               href="/pro/jobs"
-              className="text-xs font-semibold text-[#0D9488] hover:underline"
+              className="text-xs font-semibold text-[#E8590C] hover:underline"
             >
               View all requests →
             </Link>
           </div>
 
           {openRequests.length === 0 ? (
-            <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
+            <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328]">
               <span className="text-2xl block mb-2">🔍</span>
               <p className="text-xs font-semibold text-slate-700 dark:text-slate-200">
                 No new open requests in {profile.primary_city} right now.
@@ -167,11 +167,11 @@ export default async function ProDashboardPage() {
               {openRequests.slice(0, 3).map((job) => (
                 <div
                   key={job.id}
-                  className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 hover:border-slate-300 dark:border-slate-700 transition shadow-xs flex flex-col justify-between"
+                  className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 hover:border-slate-300 dark:border-slate-700 transition shadow-xs flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-2">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#E8590C]">
                         {job.category?.name || "Service Request"}
                       </span>
                       <span
@@ -207,7 +207,7 @@ export default async function ProDashboardPage() {
                     </span>
                     <Link
                       href={`/pro/jobs/${job.id}`}
-                      className="px-3 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+                      className="px-3 py-1.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
                     >
                       Inspect &amp; Prepare Quote →
                     </Link>
@@ -233,14 +233,14 @@ export default async function ProDashboardPage() {
               </div>
               <Link
                 href="/pro/jobs?tab=active"
-                className="text-xs font-semibold text-[#0D9488] hover:underline"
+                className="text-xs font-semibold text-[#E8590C] hover:underline"
               >
                 Manage jobs →
               </Link>
             </div>
 
             {activeJobs.length === 0 ? (
-              <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
+              <div className="p-8 text-center rounded-xl border border-dashed border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328]">
                 <span className="text-2xl block mb-2">⚡</span>
                 <p className="text-xs font-semibold text-slate-700 dark:text-slate-200">
                   No active jobs in progress.
@@ -254,7 +254,7 @@ export default async function ProDashboardPage() {
                 {activeJobs.slice(0, 3).map((job) => (
                   <div
                     key={job.id}
-                    className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs"
+                    className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 shadow-xs"
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
@@ -288,7 +288,7 @@ export default async function ProDashboardPage() {
                     <div className="mt-3 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                       <Link
                         href={`/pro/jobs/${job.id}`}
-                        className="text-xs font-semibold text-[#0D9488] hover:underline"
+                        className="text-xs font-semibold text-[#E8590C] hover:underline"
                       >
                         View Full Job &amp; Handover →
                       </Link>
@@ -307,18 +307,18 @@ export default async function ProDashboardPage() {
               </h2>
               <Link
                 href="/pro/quotations"
-                className="text-xs font-semibold text-[#0D9488] hover:underline"
+                className="text-xs font-semibold text-[#E8590C] hover:underline"
               >
                 All quotations →
               </Link>
             </div>
 
             {pendingQuotations.length === 0 ? (
-              <div className="p-4 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs text-slate-500 dark:text-slate-400 text-center">
+              <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs text-slate-500 dark:text-slate-400 text-center">
                 No quotations currently awaiting customer acceptance.
               </div>
             ) : (
-              <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] divide-y divide-slate-100 overflow-hidden shadow-xs">
+              <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] divide-y divide-slate-100 overflow-hidden shadow-xs">
                 {pendingQuotations.slice(0, 3).map((q) => (
                   <div key={q.id} className="p-3.5 flex items-center justify-between">
                     <div>
@@ -330,7 +330,7 @@ export default async function ProDashboardPage() {
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className="text-xs font-extrabold text-[#0D9488] block">
+                      <span className="text-xs font-extrabold text-[#E8590C] block">
                         ₦{(q.total_amount_kobo / 100).toLocaleString("en-NG")}
                       </span>
                       <span className="text-[10px] font-bold text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/60 px-2 py-0.5 rounded-full">

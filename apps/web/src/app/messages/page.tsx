@@ -39,7 +39,7 @@ export default async function CustomerMessagesPage({ searchParams }: CustomerMes
     : null;
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#FAF7F3] pb-24 md:pb-12 text-[#1F2328]">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -52,10 +52,10 @@ export default async function CustomerMessagesPage({ searchParams }: CustomerMes
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0F766E]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
             Secure Communications
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mt-0.5">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1F2328] tracking-tight mt-0.5">
             Messages &amp; Direct Inquiries
           </h1>
           <p className="text-xs sm:text-sm text-[#64748B] mt-1">

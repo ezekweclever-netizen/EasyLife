@@ -51,7 +51,7 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
       <div>
         <Link
           href="/pro/jobs"
-          className="text-xs font-semibold text-[#0D9488] hover:underline inline-flex items-center gap-1 mb-2"
+          className="text-xs font-semibold text-[#E8590C] hover:underline inline-flex items-center gap-1 mb-2"
         >
           ← Back to Job Requests
         </Link>
@@ -81,7 +81,7 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
           <div className="flex items-center gap-2">
             <Link
               href={`/pro/messages?bookingRef=${job.reference_code}`}
-              className="px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+              className="px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
             >
               💬 Message Customer
             </Link>
@@ -90,9 +90,9 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
       </div>
 
       {/* Main Details Card */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs space-y-6">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 sm:p-8 shadow-xs space-y-6">
         {/* Category & Urgency */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-xs">
           <div>
             <span className="block text-slate-500 dark:text-slate-400 font-medium">Category</span>
             <span className="block font-bold text-slate-900 dark:text-white mt-0.5">
@@ -124,7 +124,7 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
           <h2 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-2">
             Customer Problem Description
           </h2>
-          <div className="p-4 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap">
+          <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap">
             {job.description}
           </div>
         </div>
@@ -135,7 +135,7 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-2">
               Service Location
             </h3>
-            <div className="p-4 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] space-y-1 text-xs">
+            <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328] space-y-1 text-xs">
               <p className="font-semibold text-slate-900 dark:text-white">
                 {job.service_address}
               </p>
@@ -155,7 +155,7 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-2">
               Customer Contact Information
             </h3>
-            <div className="p-4 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] space-y-1 text-xs">
+            <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328] space-y-1 text-xs">
               <p className="font-semibold text-slate-900 dark:text-white">
                 {job.customer_display_name}
               </p>
@@ -178,12 +178,12 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
               <span className="font-bold text-teal-950 block">
                 ✓ Confirmed Appointment Window
               </span>
-              <p className="text-teal-800 dark:text-[#5CD3D5]">
+              <p className="text-teal-800 dark:text-[#F06A1F]">
                 Scheduled for {new Date(job.scheduled_start_at).toLocaleDateString("en-NG", { weekday: "long", year: "numeric", month: "long", day: "numeric" })} at {new Date(job.scheduled_start_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" })}
                 {job.scheduled_end_at && ` – ${new Date(job.scheduled_end_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit" })}`}
               </p>
             </div>
-            <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-[#0D9488] text-white uppercase tracking-wider self-start sm:self-auto">
+            <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-[#E8590C] text-white uppercase tracking-wider self-start sm:self-auto">
               Locked in Calendar
             </span>
           </div>
@@ -196,12 +196,12 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">
                 Agreed Escrow Job Value
               </span>
-              <p className="text-[11px] text-teal-800 dark:text-[#5CD3D5]">
+              <p className="text-[11px] text-teal-800 dark:text-[#F06A1F]">
                 Locked securely in EasyLife Escrow. Transferred to wallet upon completion sign-off.
               </p>
             </div>
             <div className="text-right">
-              <span className="text-xl font-extrabold text-[#0D9488]">
+              <span className="text-xl font-extrabold text-[#E8590C]">
                 ₦{(job.agreed_amount_kobo / 100).toLocaleString("en-NG")}
               </span>
             </div>
@@ -221,7 +221,7 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
         )}
 
         {/* Job Management Controls */}
-        <div className="pt-6 border-t border-slate-200 dark:border-[#163654]">
+        <div className="pt-6 border-t border-slate-200 dark:border-[#2E343B]">
           <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 mb-3">
             Job Execution Controls
           </h3>
@@ -236,7 +236,7 @@ export default async function ProJobDetailsPage({ params }: ProJobDetailsPagePro
             <div className="flex items-center gap-3">
               <Link
                 href={`/pro/jobs?quote=${job.id}`}
-                className="px-5 py-2.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+                className="px-5 py-2.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
               >
                 Prepare Official Quotation →
               </Link>

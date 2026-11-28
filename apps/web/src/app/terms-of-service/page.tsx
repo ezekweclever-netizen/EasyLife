@@ -21,8 +21,8 @@ export default function TermsOfServicePage() {
       />
 
       <Section tone="white">
-        <div className="max-w-4xl mx-auto prose prose-slate prose-headings:text-[#0A192F] prose-a:text-[#0D9488]">
-          <div className="p-4 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs text-teal-950 mb-8 leading-relaxed">
+        <div className="max-w-4xl mx-auto prose prose-slate prose-headings:text-[#1F2328] dark:prose-headings:text-[#FAF7F3] prose-a:text-[#E8590C]">
+          <div className="p-4 rounded-xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] mb-8 leading-relaxed">
             <strong>Key Principle:</strong> EasyLife protects customers through escrow payment holding and protects service professionals through guaranteed payment upon verified completion. By using our platform, you agree to conduct all transactions and communications transparently.
           </div>
 

@@ -138,7 +138,7 @@ export function ToolAiAssistant() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           AI Diagnostic Intelligence
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -163,7 +163,7 @@ export function ToolAiAssistant() {
                 setCategory(preset.category);
                 setProblemText(preset.text);
               }}
-              className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] hover:text-[#0D9488] transition text-left cursor-pointer"
+              className="text-xs px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#E8590C] hover:text-[#E8590C] transition text-left cursor-pointer"
             >
               {preset.label}
             </button>
@@ -172,7 +172,7 @@ export function ToolAiAssistant() {
       </div>
 
       {/* Configuration Form */}
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
@@ -181,7 +181,7 @@ export function ToolAiAssistant() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             >
               <option value="generator">Generator &amp; Small Engine</option>
               <option value="solar">Solar, Inverter &amp; Batteries</option>
@@ -198,7 +198,7 @@ export function ToolAiAssistant() {
             <select
               value={urgency}
               onChange={(e) => setUrgency(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             >
               <option value="normal">Standard Routine Check</option>
               <option value="urgent">Urgent (Needed within 24h)</option>
@@ -212,7 +212,7 @@ export function ToolAiAssistant() {
             <select
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             >
               <option value="Port Harcourt">Port Harcourt, Rivers</option>
               <option value="Lagos">Lagos State</option>
@@ -232,7 +232,7 @@ export function ToolAiAssistant() {
             onChange={(e) => setProblemText(e.target.value)}
             rows={3}
             placeholder="e.g. Generator is vibrating abnormally, producing black smoke, and losing power under load..."
-            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs sm:text-sm text-slate-900 dark:text-white"
+            className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-slate-900 dark:text-white"
           />
         </div>
 
@@ -240,7 +240,7 @@ export function ToolAiAssistant() {
           type="button"
           onClick={handleDiagnose}
           disabled={isLoading || !problemText.trim()}
-          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
         >
           {isLoading ? (
             <span>Analyzing Issue...</span>
@@ -254,10 +254,10 @@ export function ToolAiAssistant() {
 
       {/* Output Results & Action Bar */}
       {diagnosticResult && (
-        <div className="bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-teal-500/30 space-y-5 shadow-sm">
+        <div className="bg-white dark:bg-[#1F2328] p-6 rounded-2xl border border-teal-500/30 space-y-5 shadow-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-4">
             <div>
-              <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
                 Report #{diagnosticResult.reportId}
               </span>
               <h3 className="text-base font-bold text-slate-900 dark:text-white">
@@ -270,7 +270,7 @@ export function ToolAiAssistant() {
               <button
                 type="button"
                 onClick={() => setIsPreviewOpen(true)}
-                className="px-3.5 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-[#5CD3D5] text-xs font-bold hover:bg-teal-100 border border-teal-200 dark:border-teal-800 transition flex items-center gap-1.5 cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C] dark:text-[#F06A1F] text-xs font-bold hover:bg-teal-100 border border-[#E8590C]/30 dark:border-[#2E343B] transition flex items-center gap-1.5 cursor-pointer"
               >
                 <span>👁️ View Document</span>
               </button>
@@ -278,7 +278,7 @@ export function ToolAiAssistant() {
           </div>
 
           <div className="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-slate-300">
-            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-slate-800">
+            <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800">
               <span className="font-bold text-slate-900 dark:text-white block mb-1">
                 Primary Diagnosis:
               </span>
@@ -297,7 +297,7 @@ export function ToolAiAssistant() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-slate-800">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800">
                 <span className="font-bold text-slate-900 dark:text-white block mb-1">
                   Parts &amp; Tooling Required:
                 </span>
@@ -308,11 +308,11 @@ export function ToolAiAssistant() {
                 </ul>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-slate-800">
+              <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800">
                 <span className="font-bold text-slate-900 dark:text-white block mb-1">
                   Expected Labor Range ({diagnosticResult.city}):
                 </span>
-                <span className="text-base font-black text-[#0D9488] block">
+                <span className="text-base font-black text-[#E8590C] block">
                   {diagnosticResult.laborEstimate}
                 </span>
                 <span className="text-[11px] text-slate-400">
@@ -322,7 +322,7 @@ export function ToolAiAssistant() {
             </div>
 
             {/* Direct Booking Dispatch Link */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-teal-50/50 dark:bg-teal-950/20 p-4 rounded-xl border border-teal-200/50">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-[#FCEBDD]/50 dark:bg-teal-950/20 p-4 rounded-xl border border-[#E8590C]/30/50">
               <div>
                 <span className="font-bold text-slate-900 dark:text-white block text-xs">
                   Ready to fix this with a verified artisan?
@@ -333,7 +333,7 @@ export function ToolAiAssistant() {
               </div>
               <Link
                 href={`/post-a-need?category=${encodeURIComponent(diagnosticResult.dispatchCategory)}&city=${encodeURIComponent(diagnosticResult.city)}`}
-                className="px-4 py-2 rounded-xl bg-[#0D9488] text-white text-xs font-bold text-center hover:bg-[#0B7A6F] transition shrink-0"
+                className="px-4 py-2 rounded-xl bg-[#E8590C] text-white text-xs font-bold text-center hover:bg-[#0B7A6F] transition shrink-0"
               >
                 Post Need with This Diagnostic &rarr;
               </Link>
@@ -383,7 +383,7 @@ export function ToolAiAssistant() {
               <h2 className="text-xs font-black uppercase text-slate-400 tracking-wider mb-1">
                 Technical Finding &amp; Probable Cause
               </h2>
-              <div className="p-4 rounded-xl bg-teal-50/50 border border-teal-200 text-slate-900 text-sm font-medium leading-relaxed">
+              <div className="p-4 rounded-xl bg-[#FCEBDD]/50 border border-[#E8590C]/30 text-slate-900 text-sm font-medium leading-relaxed">
                 {diagnosticResult.diagnosis}
               </div>
             </div>
@@ -420,7 +420,7 @@ export function ToolAiAssistant() {
                 <h2 className="text-xs font-black uppercase text-slate-400 tracking-wider mb-1">
                   Professional Labor Benchmark
                 </h2>
-                <div className="text-lg font-black text-[#0D9488]">
+                <div className="text-lg font-black text-[#E8590C]">
                   {diagnosticResult.laborEstimate}
                 </div>
                 <p className="text-[11px] text-slate-500 mt-0.5">

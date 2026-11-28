@@ -54,10 +54,10 @@ export function LoginForm({
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center" aria-hidden="true">
-          <div className="w-full border-t border-slate-200 dark:border-[#163654]" />
+          <div className="w-full border-t border-slate-200 dark:border-[#2E343B]" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white dark:bg-[#0D223A] px-2.5 text-slate-400 font-semibold">
+          <span className="bg-white dark:bg-[#1F2328] px-2.5 text-slate-400 font-semibold">
             or sign in with email
           </span>
         </div>
@@ -83,7 +83,7 @@ export function LoginForm({
                   type="button"
                   onClick={handleResend}
                   disabled={isResending}
-                  className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] hover:underline cursor-pointer disabled:opacity-50"
+                  className="text-xs font-bold text-[#E8590C] hover:underline cursor-pointer disabled:opacity-50"
                 >
                   {isResending ? "Sending..." : "Resend Verification Email"}
                 </button>
@@ -109,7 +109,7 @@ export function LoginForm({
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1"
+            className="block text-sm font-semibold text-[#1F2328] dark:text-slate-200 mb-1"
           >
             Email Address
           </label>
@@ -122,10 +122,10 @@ export function LoginForm({
             required
             aria-invalid={Boolean(state.fieldErrors?.email)}
             aria-describedby={state.fieldErrors?.email ? "email-error" : undefined}
-            className={`w-full h-10.5 px-3.5 rounded-lg border text-sm sm:text-base text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-10.5 px-3.5 rounded-lg border text-sm sm:text-base text-[#1F2328] dark:text-white bg-white dark:bg-[#1F2328] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] ${
               state.fieldErrors?.email
                 ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
-                : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
+                : "border-[#E6E0D8] dark:border-[#2E343B] dark:border-[#2E343B] hover:border-slate-400 dark:hover:border-slate-500"
             }`}
             placeholder="e.g. name@example.com"
           />
@@ -141,13 +141,13 @@ export function LoginForm({
           <div className="flex items-center justify-between mb-1">
             <label
               htmlFor="password"
-              className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200"
+              className="block text-sm font-semibold text-[#1F2328] dark:text-slate-200"
             >
               Password
             </label>
             <Link
               href="/forgot-password"
-              className="text-xs sm:text-sm text-[#0F766E] dark:text-[#5CD3D5] hover:underline font-medium"
+              className="text-xs sm:text-sm text-[#E8590C] hover:underline font-medium"
             >
               Forgot password?
             </Link>
@@ -161,10 +161,10 @@ export function LoginForm({
               required
               aria-invalid={Boolean(state.fieldErrors?.password)}
               aria-describedby={state.fieldErrors?.password ? "password-error" : undefined}
-              className={`w-full h-10.5 px-3.5 pr-12 rounded-lg border text-sm sm:text-base text-[#0F172A] dark:text-white bg-white dark:bg-[#0D223A] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+              className={`w-full h-10.5 px-3.5 pr-12 rounded-lg border text-sm sm:text-base text-[#1F2328] dark:text-white bg-white dark:bg-[#1F2328] placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] ${
                 state.fieldErrors?.password
                   ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
-                  : "border-[#CBD5E1] dark:border-[#163654] hover:border-slate-400 dark:hover:border-slate-500"
+                  : "border-[#E6E0D8] dark:border-[#2E343B] dark:border-[#2E343B] hover:border-slate-400 dark:hover:border-slate-500"
               }`}
               placeholder="Enter your password"
             />
@@ -198,7 +198,7 @@ export function LoginForm({
           <span>Don&apos;t have an EasyLife account yet? </span>
           <Link
             href="/register"
-            className="font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
+            className="font-semibold text-[#E8590C] hover:underline"
           >
             Create an account
           </Link>

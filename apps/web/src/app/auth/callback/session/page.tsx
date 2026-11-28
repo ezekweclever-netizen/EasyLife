@@ -49,8 +49,8 @@ export default function OAuthSessionCatcherPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-8 text-center space-y-4 shadow-xs">
+    <div className="min-h-screen bg-[#FAF7F3] flex items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-8 text-center space-y-4 shadow-xs">
         {error ? (
           <>
             <div className="w-12 h-12 rounded-full bg-red-50 dark:bg-red-950/60 text-red-600 font-bold text-xl mx-auto flex items-center justify-center">
@@ -61,7 +61,7 @@ export default function OAuthSessionCatcherPage() {
             <div className="pt-2">
               <Link
                 href="/login"
-                className="inline-flex px-5 py-2.5 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E]"
+                className="inline-flex px-5 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C]"
               >
                 Return to Sign In
               </Link>
@@ -69,7 +69,7 @@ export default function OAuthSessionCatcherPage() {
           </>
         ) : (
           <>
-            <div className="w-10 h-10 rounded-full border-3 border-[#24989A] border-t-transparent animate-spin mx-auto" />
+            <div className="w-10 h-10 rounded-full border-3 border-[#E8590C] border-t-transparent animate-spin mx-auto" />
             <h1 className="text-base font-bold text-slate-900 dark:text-white">
               Completing EasyLife Sign-In...
             </h1>

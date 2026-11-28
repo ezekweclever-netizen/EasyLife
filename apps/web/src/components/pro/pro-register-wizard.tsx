@@ -322,7 +322,7 @@ export function ProRegisterWizard({
   const hasCatalogueServices = catalogueTree.length > 0 && allCatalogueServicesMap.size > 0;
 
   return (
-    <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-sm p-6 sm:p-10">
+    <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-sm p-6 sm:p-10">
       {/* Wizard Step Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between max-w-lg mx-auto">
@@ -335,7 +335,7 @@ export function ProRegisterWizard({
               <div
                 className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-xs transition-colors ${
                   currentStep === st.num
-                    ? "bg-[#0D9488] text-white ring-4 ring-teal-100"
+                    ? "bg-[#E8590C] text-white ring-4 ring-teal-100"
                     : currentStep > st.num
                     ? "bg-emerald-500 text-white"
                     : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
@@ -413,8 +413,8 @@ export function ProRegisterWizard({
                     onClick={() => setProviderType(role.id as any)}
                     className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${
                       providerType === role.id
-                        ? "bg-teal-50 dark:bg-teal-950/60/70 border-[#0D9488] ring-2 ring-[#0D9488]/30 shadow-xs"
-                        : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+                        ? "bg-teal-50 dark:bg-teal-950/60/70 border-[#E8590C] ring-2 ring-[#E8590C]/30 shadow-xs"
+                        : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
                     }`}
                   >
                     <div className="flex items-center justify-between mb-1">
@@ -422,7 +422,7 @@ export function ProRegisterWizard({
                       <span
                         className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                           providerType === role.id
-                            ? "bg-[#0D9488] text-white"
+                            ? "bg-[#E8590C] text-white"
                             : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
                         }`}
                       >
@@ -443,7 +443,7 @@ export function ProRegisterWizard({
                 <select
                   value={vehicleType}
                   onChange={(e) => setVehicleType(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-teal-300 dark:border-teal-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                  className="w-full h-10 px-3 rounded-lg border border-teal-300 dark:border-teal-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                 >
                   <option value="Motorcycle">Motorcycle (Express Dispatch)</option>
                   <option value="Bicycle">Bicycle / E-Cargo Bike</option>
@@ -466,7 +466,7 @@ export function ProRegisterWizard({
                     type="checkbox"
                     checked={agentDisclaimerAccepted}
                     onChange={(e) => setAgentDisclaimerAccepted(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 rounded border-amber-400 text-[#0D9488] focus:ring-[#0D9488]"
+                    className="mt-0.5 h-4 w-4 rounded border-amber-400 text-[#E8590C] focus:ring-[#E8590C]"
                   />
                   <span className="text-[11px] font-semibold text-amber-950">
                     I acknowledge EasyLife does not provide property listings and agree never to upload property advertisements. *
@@ -497,7 +497,7 @@ export function ProRegisterWizard({
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
                 placeholder="e.g. Chukwuma Electricals & AC Services"
-                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
 
@@ -510,7 +510,7 @@ export function ProRegisterWizard({
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
                 placeholder="e.g. Certified Generator Technician & Industrial Electrician"
-                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
 
@@ -524,7 +524,7 @@ export function ProRegisterWizard({
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Describe your training, equipment brands you service, and workmanship guarantees..."
-                className="w-full p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
               <span className="text-[11px] text-slate-400">Minimum 20 characters.</span>
             </div>
@@ -540,7 +540,7 @@ export function ProRegisterWizard({
                 required
                 value={yearsExperience}
                 onChange={(e) => setYearsExperience(parseInt(e.target.value, 10) || 0)}
-                className="w-32 h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-32 h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
 
@@ -559,7 +559,7 @@ export function ProRegisterWizard({
                   setErrorMessage(null);
                   setCurrentStep(2);
                 }}
-                className="px-6 py-2.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+                className="px-6 py-2.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
               >
                 Continue to Services &amp; Hubs →
               </button>
@@ -609,7 +609,7 @@ export function ProRegisterWizard({
                         className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition ${
                           isActive
                             ? "bg-slate-900 text-white border-slate-900"
-                            : "bg-slate-50 dark:bg-[#071526] text-slate-700 dark:text-slate-200 border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+                            : "bg-slate-50 dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
                         }`}
                       >
                         {main.name}
@@ -627,7 +627,7 @@ export function ProRegisterWizard({
                 {activeMainCategory &&
                   (activeMainCategory.subcategories.length > 0 ||
                     activeMainCategory.direct_services.length > 0) && (
-                    <div className="flex flex-wrap items-center gap-1.5 bg-slate-50 dark:bg-[#071526] p-2.5 rounded-xl border border-slate-200 dark:border-[#163654]">
+                    <div className="flex flex-wrap items-center gap-1.5 bg-slate-50 dark:bg-[#1F2328] p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B]">
                       <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400 mr-1">
                         Subcategory:
                       </span>
@@ -636,8 +636,8 @@ export function ProRegisterWizard({
                         onClick={() => setActiveSubcatId("all")}
                         className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition ${
                           activeSubcatId === "all"
-                            ? "bg-[#0D9488] text-white"
-                            : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654] hover:bg-slate-100 dark:bg-slate-800"
+                            ? "bg-[#E8590C] text-white"
+                            : "bg-white dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#2E343B] hover:bg-slate-100 dark:bg-slate-800"
                         }`}
                       >
                         All in {activeMainCategory.name}
@@ -649,8 +649,8 @@ export function ProRegisterWizard({
                           onClick={() => setActiveSubcatId(sub.id)}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition ${
                             activeSubcatId === sub.id
-                              ? "bg-[#0D9488] text-white"
-                              : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#163654] hover:bg-slate-100 dark:bg-slate-800"
+                              ? "bg-[#E8590C] text-white"
+                              : "bg-white dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-[#2E343B] hover:bg-slate-100 dark:bg-slate-800"
                           }`}
                         >
                           {sub.name} ({sub.services.length})
@@ -662,7 +662,7 @@ export function ProRegisterWizard({
                 {/* Services List + Inline Qualification Inputs */}
                 <div className="grid grid-cols-1 gap-2.5 max-h-[380px] overflow-y-auto pr-1">
                   {visibleServices.length === 0 ? (
-                    <div className="p-4 rounded-xl border border-dashed border-slate-200 dark:border-[#163654] text-xs text-slate-500 dark:text-slate-400 text-center">
+                    <div className="p-4 rounded-xl border border-dashed border-slate-200 dark:border-[#2E343B] text-xs text-slate-500 dark:text-slate-400 text-center">
                       No active catalogue services inside this subcategory yet.
                     </div>
                   ) : (
@@ -683,8 +683,8 @@ export function ProRegisterWizard({
                           key={srv.id}
                           className={`rounded-xl border transition ${
                             isSelected
-                              ? "bg-teal-50 dark:bg-teal-950/60/40 border-[#0D9488] ring-1 ring-[#0D9488]/40"
-                              : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+                              ? "bg-teal-50 dark:bg-teal-950/60/40 border-[#E8590C] ring-1 ring-[#E8590C]/40"
+                              : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
                           }`}
                         >
                           <label className="p-3.5 flex items-start justify-between gap-3 cursor-pointer">
@@ -713,7 +713,7 @@ export function ProRegisterWizard({
                                     className={`px-2 py-0.5 rounded text-[10px] font-semibold border ${
                                       expShortfall
                                         ? "bg-rose-50 text-rose-700 border-rose-200"
-                                        : "bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#163654]"
+                                        : "bg-slate-50 dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#2E343B]"
                                     }`}
                                   >
                                     Min {srv.min_years_experience} yrs exp
@@ -736,12 +736,12 @@ export function ProRegisterWizard({
                               type="checkbox"
                               checked={isSelected}
                               onChange={() => toggleService(srv)}
-                              className="mt-1 h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 dark:border-slate-700 shrink-0"
+                              className="mt-1 h-4 w-4 rounded text-[#E8590C] focus:ring-[#E8590C] border-slate-300 dark:border-slate-700 shrink-0"
                             />
                           </label>
 
                           {isSelected && (
-                            <div className="px-3.5 pb-3.5 pt-2 border-t border-teal-200 dark:border-teal-800/70 grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-white dark:bg-[#0D223A]/70 rounded-b-xl">
+                            <div className="px-3.5 pb-3.5 pt-2 border-t border-teal-200 dark:border-teal-800/70 grid grid-cols-1 sm:grid-cols-3 gap-2.5 bg-white dark:bg-[#1F2328]/70 rounded-b-xl">
                               <div>
                                 <label className="block text-[10px] font-bold uppercase text-slate-600 dark:text-slate-300 mb-1">
                                   Years in This Service
@@ -758,7 +758,7 @@ export function ProRegisterWizard({
                                       e.target.value
                                     )
                                   }
-                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                                 />
                               </div>
                               <div>
@@ -776,7 +776,7 @@ export function ProRegisterWizard({
                                     )
                                   }
                                   placeholder="e.g. NABTEB / NEMSA / COREN"
-                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                                 />
                               </div>
                               <div>
@@ -794,7 +794,7 @@ export function ProRegisterWizard({
                                     )
                                   }
                                   placeholder="e.g. Daikin/LG Inverter specialist"
-                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                                  className="w-full h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                                 />
                               </div>
                             </div>
@@ -818,8 +818,8 @@ export function ProRegisterWizard({
                         key={cat.id}
                         className={`p-3 rounded-xl border cursor-pointer flex items-center justify-between transition-colors ${
                           isChecked
-                            ? "bg-teal-50 dark:bg-teal-950/60/60 border-[#0D9488] ring-1 ring-[#0D9488]"
-                            : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+                            ? "bg-teal-50 dark:bg-teal-950/60/60 border-[#E8590C] ring-1 ring-[#E8590C]"
+                            : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
                         }`}
                       >
                         <div>
@@ -836,7 +836,7 @@ export function ProRegisterWizard({
                           type="checkbox"
                           checked={isChecked}
                           onChange={() => toggleCategory(cat.id)}
-                          className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 dark:border-slate-700"
+                          className="h-4 w-4 rounded text-[#E8590C] focus:ring-[#E8590C] border-slate-300 dark:border-slate-700"
                         />
                       </label>
                     );
@@ -846,7 +846,7 @@ export function ProRegisterWizard({
             )}
 
             {/* Approved Pilot City & Operating Neighbourhoods */}
-            <div className="pt-4 border-t border-slate-200 dark:border-[#163654] space-y-4">
+            <div className="pt-4 border-t border-slate-200 dark:border-[#2E343B] space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-1.5">
@@ -855,7 +855,7 @@ export function ProRegisterWizard({
                   <select
                     value={city}
                     onChange={(e) => handleCityChange(e.target.value)}
-                    className="w-full h-11 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                    className="w-full h-11 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                   >
                     {PILOT_CITIES.map((c) => (
                       <option key={c} value={c}>
@@ -874,7 +874,7 @@ export function ProRegisterWizard({
                     value={lgaOrDistrict}
                     onChange={(e) => setLgaOrDistrict(e.target.value)}
                     placeholder="e.g. Trans-Amadi, Ikeja, or Wuse II"
-                    className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                    className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                   />
                 </div>
               </div>
@@ -884,7 +884,7 @@ export function ProRegisterWizard({
                   <label className="block text-xs font-semibold text-slate-800 dark:text-slate-100 mb-2">
                     Approved Neighbourhoods Covered in {city} ({selectedNeighbourhoodIds.length} selected)
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-48 overflow-y-auto p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/70">
                     {cityNeighbourhoods.map((nb) => {
                       const active = selectedNeighbourhoodIds.includes(nb.id);
                       return (
@@ -892,15 +892,15 @@ export function ProRegisterWizard({
                           key={nb.id}
                           className={`px-2.5 py-2 rounded-lg border text-xs flex items-center gap-2 cursor-pointer transition ${
                             active
-                              ? "bg-teal-50 dark:bg-teal-950/60 border-[#0D9488] text-teal-950 font-semibold"
-                              : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:border-slate-700"
+                              ? "bg-teal-50 dark:bg-teal-950/60 border-[#E8590C] text-teal-950 font-semibold"
+                              : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] text-slate-700 dark:text-slate-200 hover:border-slate-300 dark:border-slate-700"
                           }`}
                         >
                           <input
                             type="checkbox"
                             checked={active}
                             onChange={() => toggleNeighbourhood(nb.id)}
-                            className="h-3.5 w-3.5 rounded text-[#0D9488] border-slate-300 dark:border-slate-700"
+                            className="h-3.5 w-3.5 rounded text-[#E8590C] border-slate-300 dark:border-slate-700"
                           />
                           <div className="min-w-0">
                             <span className="block truncate">{nb.name}</span>
@@ -920,7 +920,7 @@ export function ProRegisterWizard({
               <button
                 type="button"
                 onClick={() => setCurrentStep(1)}
-                className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
               >
                 ← Back
               </button>
@@ -934,7 +934,7 @@ export function ProRegisterWizard({
                   setErrorMessage(null);
                   setCurrentStep(3);
                 }}
-                className="px-6 py-2.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+                className="px-6 py-2.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
               >
                 Continue to Schedule &amp; KYC →
               </button>
@@ -968,8 +968,8 @@ export function ProRegisterWizard({
                       onClick={() => toggleWorkingDay(wd.day)}
                       className={`px-3.5 py-2 rounded-xl border text-xs font-bold transition ${
                         active
-                          ? "bg-[#0D9488] text-white border-[#0D9488]"
-                          : "bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+                          ? "bg-[#E8590C] text-white border-[#E8590C]"
+                          : "bg-slate-50 dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
                       }`}
                     >
                       {wd.short}
@@ -988,7 +988,7 @@ export function ProRegisterWizard({
                   type="time"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
-                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                 />
               </div>
 
@@ -1000,7 +1000,7 @@ export function ProRegisterWizard({
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
-                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                  className="w-full h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                 />
               </div>
             </div>
@@ -1016,12 +1016,12 @@ export function ProRegisterWizard({
                 value={baseCalloutFee}
                 onChange={(e) => setBaseCalloutFee(parseFloat(e.target.value) || 0)}
                 placeholder="5000"
-                className="w-48 h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-48 h-11 px-3.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
 
             {/* Required Credentials Summary */}
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs text-slate-700 dark:text-slate-200 space-y-2">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-xs text-slate-700 dark:text-slate-200 space-y-2">
               <span className="font-bold text-slate-900 dark:text-white block">
                 Required Verification Checklist After Registration:
               </span>
@@ -1056,14 +1056,14 @@ export function ProRegisterWizard({
               <button
                 type="button"
                 onClick={() => setCurrentStep(2)}
-                className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
               >
                 ← Back
               </button>
               <button
                 type="submit"
                 disabled={isPending}
-                className="px-8 py-3 rounded-lg bg-[#0D9488] text-white text-sm font-bold hover:bg-[#0F766E] disabled:opacity-50 transition shadow-xs"
+                className="px-8 py-3 rounded-lg bg-[#E8590C] text-white text-sm font-bold hover:bg-[#E8590C] disabled:opacity-50 transition shadow-xs"
               >
                 {isPending ? "Saving Onboarding Profile..." : "Complete Registration & Upload KYC →"}
               </button>

@@ -60,7 +60,7 @@ export function ToolGenerator() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Energy &amp; Facilities
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -71,9 +71,9 @@ export function ToolGenerator() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         {/* Fuel & Operating Variables */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
           <div>
             <label className="block font-bold mb-1">Fuel Type</label>
             <select
@@ -84,7 +84,7 @@ export function ToolGenerator() {
                 if (ft === "diesel") setFuelPricePerLitre("1250");
                 else setFuelPricePerLitre("1050");
               }}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             >
               <option value="petrol">Petrol (PMS)</option>
               <option value="diesel">Automotive Diesel (AGO)</option>
@@ -97,7 +97,7 @@ export function ToolGenerator() {
               type="number"
               value={fuelPricePerLitre}
               onChange={(e) => setFuelPricePerLitre(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
             />
           </div>
           <div>
@@ -106,7 +106,7 @@ export function ToolGenerator() {
               type="number"
               value={dailyHours}
               onChange={(e) => setDailyHours(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
             />
           </div>
         </div>
@@ -123,8 +123,8 @@ export function ToolGenerator() {
                 key={app.id}
                 className={`p-3 rounded-xl border flex items-center justify-between transition ${
                   app.qty > 0
-                    ? "bg-teal-50/70 dark:bg-teal-950/40 border-[#0D9488]"
-                    : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-slate-700"
+                    ? "bg-[#FCEBDD]/70 dark:bg-teal-950/40 border-[#E8590C]"
+                    : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-slate-700"
                 }`}
               >
                 <div>
@@ -146,7 +146,7 @@ export function ToolGenerator() {
                   <button
                     type="button"
                     onClick={() => updateQty(app.id, 1)}
-                    className="w-7 h-7 rounded-lg bg-[#0D9488] text-white font-bold flex items-center justify-center hover:bg-[#0B7A6F] cursor-pointer"
+                    className="w-7 h-7 rounded-lg bg-[#E8590C] text-white font-bold flex items-center justify-center hover:bg-[#0B7A6F] cursor-pointer"
                   >
                     +
                   </button>
@@ -157,7 +157,7 @@ export function ToolGenerator() {
         </div>
 
         {/* Calculation Results Card */}
-        <div className="p-6 rounded-2xl bg-teal-50/70 dark:bg-[#0D223A] border border-teal-200/90 dark:border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div className="p-6 rounded-2xl bg-[#FCEBDD]/70 dark:bg-[#1F2328] border border-[#E8590C]/30/90 dark:border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           <div>
             <span className="text-[10px] font-bold text-slate-500 uppercase">Running Load</span>
             <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-mono mt-0.5">
@@ -168,7 +168,7 @@ export function ToolGenerator() {
 
           <div>
             <span className="text-[10px] font-bold text-slate-500 uppercase">Recommended Generator</span>
-            <div className="text-xl sm:text-2xl font-black text-[#0D9488] dark:text-[#5CD3D5] font-mono mt-0.5">
+            <div className="text-xl sm:text-2xl font-black text-[#E8590C] dark:text-[#F06A1F] font-mono mt-0.5">
               {recommendedKva} kVA
             </div>
             <span className="text-[10px] text-slate-400">Includes 25% buffer</span>
@@ -195,7 +195,7 @@ export function ToolGenerator() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Power Audit &amp; Sizing Report</span>
           </button>
@@ -212,7 +212,7 @@ export function ToolGenerator() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Electrical Facility Engineering &amp; Fuel Auditing
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -230,7 +230,7 @@ export function ToolGenerator() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Recommended Genset</span>
-              <span className="text-xl font-black text-[#0D9488] font-mono mt-0.5 block">{recommendedKva} kVA</span>
+              <span className="text-xl font-black text-[#E8590C] font-mono mt-0.5 block">{recommendedKva} kVA</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Projected Monthly Fuel</span>

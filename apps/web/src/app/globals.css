@@ -37,90 +37,113 @@
 
 :root {
   /* =========================================================================
-     EASYLIFE DESIGN SYSTEM — PALETTE C: HARBOR TEAL & CORAL
+     EASYLIFE CENTRALIZED GLOBAL DESIGN SYSTEM — OFFICIAL FOUNDATION PALETTE
      ========================================================================= */
-  --easylife-primary: #154752;
-  --easylife-primary-dark: #0d282e;
-  --easylife-secondary: #24989A;
-  --easylife-secondary-hover: #1d7e80;
-  --easylife-accent: #EE9277;
-  --easylife-accent-hover: #e77858;
-  --easylife-background: #F3F8F8;
-  --easylife-surface: #FFFFFF;
-  --easylife-text: #1F2F34;
-  --easylife-muted: #68797C;
-  --easylife-border: #DAE7E7;
-  --easylife-border-strong: #c2d4d4;
+  --color-charcoal: #1F2328;
+  --color-steel-grey: #4A525C;
+  --color-burnt-orange: #E8590C;
+  --color-orange-hover: #C84A06;
+  --color-peach: #FCEBDD;
+  --color-cream: #FAF7F3;
+  --color-white: #FFFFFF;
+  --color-border: #E6E0D8;
+  --color-dark-surface-text: #FAF7F3;
+  --color-secondary-dark-text: #C3C8CF;
+
+  /* Semantic Colours */
+  --color-success: #2E7D4F;
+  --color-warning: #B7791F;
+  --color-error: #C53030;
+  --color-information: #4A525C;
+
+  /* Functional Role Tokens (Light Mode Defaults) */
+  --easylife-primary: var(--color-burnt-orange);
+  --easylife-primary-hover: var(--color-orange-hover);
+  --easylife-secondary: var(--color-steel-grey);
+  --easylife-accent: var(--color-burnt-orange);
+  --easylife-accent-hover: var(--color-orange-hover);
+  --easylife-accent-soft: var(--color-peach);
+  --easylife-background: var(--color-cream);
+  --easylife-surface: var(--color-white);
+  --easylife-text: var(--color-charcoal);
+  --easylife-text-secondary: var(--color-steel-grey);
+  --easylife-muted: var(--color-steel-grey);
+  --easylife-border: var(--color-border);
+  --easylife-border-strong: #D5CEC4;
 
   /* Responsive Typography Scale Tokens */
   --easylife-font-body: 1rem;
   --easylife-font-lead: 1.125rem;
   --easylife-font-label: 0.9375rem;
 
-  /* Legacy / Compatibility Token Mappings */
-  --easylife-navy-950: #0d282e;
-  --easylife-navy-900: #154752;
-  --easylife-navy-800: #1a5663;
-  --easylife-navy-700: #206776;
-  --easylife-navy-600: #2b7a8a;
+  /* Semantic Status Tokens (Light Mode) */
+  --easylife-status-success-text: var(--color-success);
+  --easylife-status-success-bg: #E8F5ED;
+  --easylife-status-warning-text: var(--color-warning);
+  --easylife-status-warning-bg: #FEF7EC;
+  --easylife-status-error-text: var(--color-error);
+  --easylife-status-error-bg: #FDE8E8;
+  --easylife-status-info-text: var(--color-information);
+  --easylife-status-info-bg: #EBF0F5;
 
-  --easylife-teal-800: #186869;
-  --easylife-teal-700: #1d7e80;
-  --easylife-teal-600: #24989A;
-  --easylife-teal-500: #2dc0c2;
-  --easylife-teal-100: #d6f2f2;
-  --easylife-teal-50: #eef9f9;
-
-  --easylife-charcoal-900: #142024;
-  --easylife-charcoal-800: #1F2F34;
-  --easylife-charcoal-700: #35474c;
-  --easylife-charcoal-600: #4e6065;
-  --easylife-charcoal-500: #68797C;
-  --easylife-surface-white: #FFFFFF;
-  --easylife-surface-light: #F3F8F8;
-  --easylife-surface-muted: #e7f0f0;
-  --easylife-border-grey: #DAE7E7;
-
-  /* Semantic Status Colors (WCAG AAA / AA Accessible) */
-  --easylife-status-success-text: #127a5b;
-  --easylife-status-success-bg: #e7f7f1;
-  --easylife-status-warning-text: #b25e0a;
-  --easylife-status-warning-bg: #fef5e7;
-  --easylife-status-error-text: #c53030;
-  --easylife-status-error-bg: #fdf0f0;
-  --easylife-status-info-text: #1a6e84;
-  --easylife-status-info-bg: #ebf6f9;
+  /* Backwards-Compatibility Aliases */
+  --easylife-charcoal-900: #15181C;
+  --easylife-charcoal-800: var(--color-charcoal);
+  --easylife-charcoal-700: #2E343B;
+  --easylife-charcoal-600: var(--color-steel-grey);
+  --easylife-charcoal-500: #6B7582;
+  --easylife-surface-white: var(--color-white);
+  --easylife-surface-light: var(--color-cream);
+  --easylife-surface-muted: #F2EDE6;
+  --easylife-border-grey: var(--color-border);
 }
 
 html.dark, [data-theme="dark"] {
   color-scheme: dark;
-  --easylife-primary: #5CD3D5;
-  --easylife-primary-dark: #071526;
-  --easylife-secondary: #24989A;
-  --easylife-secondary-hover: #2dc0c2;
-  --easylife-accent: #EE9277;
-  --easylife-accent-hover: #f3aa94;
-  --easylife-background: #071526;
-  --easylife-surface: #0E2238;
-  --easylife-text: #F1F5F9;
-  --easylife-muted: #94A3B8;
-  --easylife-border: #163654;
-  --easylife-border-strong: #244B74;
 
-  --easylife-charcoal-900: #F8FAFC;
-  --easylife-charcoal-800: #F1F5F9;
-  --easylife-charcoal-700: #CBD5E1;
-  --easylife-charcoal-600: #94A3B8;
-  --easylife-charcoal-500: #64748B;
-  --easylife-surface-white: #0E2238;
-  --easylife-surface-light: #071526;
-  --easylife-surface-muted: #142E4B;
-  --easylife-border-grey: #163654;
+  /* =========================================================================
+     STAGE 5: DARK MODE AND ACCESSIBILITY PALETTE
+     - Background: #15181C
+     - Surfaces: #1F2328
+     - Primary text: #FAF7F3
+     - Secondary text: #C3C8CF
+     - Accent: #F06A1F
+     - Borders: #2E343B
+     ========================================================================= */
+  --easylife-primary: #F06A1F;
+  --easylife-primary-hover: #E8590C;
+  --easylife-secondary: #C3C8CF;
+  --easylife-accent: #F06A1F;
+  --easylife-accent-hover: #E8590C;
+  --easylife-accent-soft: rgba(240, 106, 31, 0.15);
+  --easylife-background: #15181C;
+  --easylife-surface: #1F2328;
+  --easylife-text: #FAF7F3;
+  --easylife-text-secondary: #C3C8CF;
+  --easylife-muted: #C3C8CF;
+  --easylife-border: #2E343B;
+  --easylife-border-strong: #4A525C;
 
-  --easylife-teal-800: #5CD3D5;
-  --easylife-teal-700: #38bdf8;
-  --easylife-teal-600: #24989A;
-  --easylife-teal-50: #0E2238;
+  /* Dark Mode Semantic Status Tokens */
+  --easylife-status-success-text: #48BB78;
+  --easylife-status-success-bg: #1A3626;
+  --easylife-status-warning-text: #ED8936;
+  --easylife-status-warning-bg: #382815;
+  --easylife-status-error-text: #F56565;
+  --easylife-status-error-bg: #381A1A;
+  --easylife-status-info-text: #C3C8CF;
+  --easylife-status-info-bg: #262D36;
+
+  /* Backwards-Compatibility Aliases */
+  --easylife-charcoal-900: #15181C;
+  --easylife-charcoal-800: #1F2328;
+  --easylife-charcoal-700: #C3C8CF;
+  --easylife-charcoal-600: #A2A9B3;
+  --easylife-charcoal-500: #4A525C;
+  --easylife-surface-white: #1F2328;
+  --easylife-surface-light: #15181C;
+  --easylife-surface-muted: #15181C;
+  --easylife-border-grey: #2E343B;
 }
 
 /* Polished Dark Mode Scrollbars & Selection */
@@ -129,26 +152,47 @@ html.dark ::-webkit-scrollbar {
   height: 8px;
 }
 html.dark ::-webkit-scrollbar-track {
-  background: #071526;
+  background: #15181C;
 }
 html.dark ::-webkit-scrollbar-thumb {
-  background: #163654;
+  background: #2E343B;
   border-radius: 4px;
 }
 html.dark ::-webkit-scrollbar-thumb:hover {
-  background: #244B74;
+  background: #4A525C;
 }
 html.dark ::selection {
-  background: rgba(36, 152, 154, 0.4);
-  color: #F8FAFC;
+  background: rgba(240, 106, 31, 0.4);
+  color: #FAF7F3;
 }
 
 @theme {
   --font-sans: "General Sans", ui-sans-serif, sans-serif;
-  --color-primary: #154752;
-  --color-secondary: #24989A;
-  --color-accent: #EE9277;
-  --color-canvas: #F3F8F8;
+
+  /* EasyLife Centralized Color Palette Tokens */
+  --color-charcoal: #1F2328;
+  --color-steel-grey: #4A525C;
+  --color-burnt-orange: #E8590C;
+  --color-orange-hover: #C84A06;
+  --color-peach: #FCEBDD;
+  --color-cream: #FAF7F3;
+  --color-border-warm: #E6E0D8;
+  --color-dark-surface-text: #FAF7F3;
+  --color-secondary-dark-text: #C3C8CF;
+
+  /* Semantic Tokens */
+  --color-success: #2E7D4F;
+  --color-warning: #B7791F;
+  --color-error: #C53030;
+  --color-information: #4A525C;
+
+  /* Functional Theme Tokens */
+  --color-primary: #E8590C;
+  --color-primary-hover: #C84A06;
+  --color-secondary: #4A525C;
+  --color-accent: #E8590C;
+  --color-accent-soft: #FCEBDD;
+  --color-canvas: #FAF7F3;
 }
 
 /* Responsive Root Typography Scale for Desktop, Tablet & Mobile Readability */
@@ -191,8 +235,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Accessible Focus Ring Standard */
+/* Accessible Focus Ring Standard (Desktop, Tablet & Mobile Keyboard Focus) */
 :focus-visible {
-  outline: 2px solid var(--easylife-secondary);
+  outline: 2px solid var(--easylife-primary);
+  outline-offset: 2px;
+}
+
+html.dark :focus-visible,
+[data-theme="dark"] :focus-visible {
+  outline: 2px solid #F06A1F;
   outline-offset: 2px;
 }

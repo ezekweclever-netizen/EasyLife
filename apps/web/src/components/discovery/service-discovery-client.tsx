@@ -299,38 +299,38 @@ export function ServiceDiscoveryClient({
   return (
     <div className="space-y-8">
       {/* Two-Tier Directory & Marketplace Switcher */}
-      <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl flex items-center gap-1 overflow-x-auto text-xs font-bold text-slate-700 dark:text-slate-200">
+      <div className="bg-[#FAF7F3] dark:bg-[#1F2328] p-1.5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] flex items-center gap-1 overflow-x-auto text-xs font-bold text-[#4A525C] dark:text-[#C3C8CF]">
         <Link
           href="/services"
-          className="px-4 py-2 rounded-xl bg-white dark:bg-[#0D223A] text-[#0A2540] dark:text-white shadow-xs whitespace-nowrap"
+          className="px-4 py-2 rounded-xl bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] shadow-xs whitespace-nowrap"
         >
           🔧 Verified Professionals
         </Link>
         <Link
           href="/services?view=catalogue"
-          className="px-4 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
+          className="px-4 py-2 rounded-xl hover:bg-white dark:hover:bg-[#1F2328] hover:text-[#1F2328] dark:hover:text-[#FAF7F3] transition whitespace-nowrap"
         >
           📚 Service Catalogue &amp; Pricing
         </Link>
         <Link
           href="/business-hub"
-          className="px-4 py-2 rounded-xl hover:bg-white dark:hover:bg-[#0D223A]/80 hover:text-[#0A2540] dark:hover:text-white transition whitespace-nowrap"
+          className="px-4 py-2 rounded-xl hover:bg-white dark:hover:bg-[#1F2328] hover:text-[#1F2328] dark:hover:text-[#FAF7F3] transition whitespace-nowrap"
         >
           🏢 Business Hub
         </Link>
         <Link
           href="/post-a-need"
-          className="px-4 py-2 rounded-xl bg-[#0D9488]/15 text-[#0D9488] dark:text-[#5CD3D5] hover:bg-[#0D9488]/25 transition whitespace-nowrap ml-auto"
+          className="px-4 py-2 rounded-xl bg-[#FCEBDD] text-[#E8590C] hover:bg-[#FCEBDD]/80 transition whitespace-nowrap ml-auto"
         >
           📝 Post a Need →
         </Link>
       </div>
 
       {/* Search & Filter Header Form */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 sm:p-6 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 sm:p-6 shadow-xs space-y-4">
         {/* Multi-City Service Hubs Selector */}
         <div className="flex flex-wrap items-center gap-2 pb-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF] mr-1">
             Operating Hub:
           </span>
           {["All Cities", "Port Harcourt", "Lagos", "Abuja"].map((hub) => {
@@ -346,8 +346,8 @@ export function ServiceDiscoveryClient({
                 }}
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition ${
                   selected
-                    ? "bg-[#0D9488] text-white shadow-xs"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
+                    ? "bg-[#E8590C] text-white shadow-xs"
+                    : "bg-[#FAF7F3] dark:bg-[#1F2328] text-[#4A525C] dark:text-[#C3C8CF] hover:bg-[#FCEBDD] hover:text-[#E8590C]"
                 }`}
               >
                 {hub === "All Cities" ? "All Hubs (PH • Lagos • Abuja)" : `📍 ${hub}`}
@@ -366,13 +366,13 @@ export function ServiceDiscoveryClient({
               if (e.key === "Enter") handleSearch();
             }}
             placeholder="Search by fault, individual service, or specialist name (e.g. Inverter technician, borehole pump, AC repair)..."
-            className="w-full pl-10 pr-28 py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full pl-10 pr-28 py-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs sm:text-sm text-[#1F2328] dark:text-[#FAF7F3] placeholder-[#4A525C]/60 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
           <span className="absolute left-3 text-slate-400 text-base">🔍</span>
           <button
             type="button"
             onClick={() => handleSearch()}
-            className="absolute right-1.5 px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+            className="absolute right-1.5 px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#C84A06] transition shadow-xs"
           >
             {isPending ? "Matching..." : "Search"}
           </button>
@@ -403,7 +403,7 @@ export function ServiceDiscoveryClient({
                   serviceSlug: "",
                 });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
             >
               <option value="">All Major Categories</option>
               {catalogueTree.map((c) => (
@@ -436,7 +436,7 @@ export function ServiceDiscoveryClient({
                   serviceSlug: "",
                 });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white disabled:opacity-55"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white disabled:opacity-55"
             >
               <option value="">
                 {categorySlug
@@ -468,7 +468,7 @@ export function ServiceDiscoveryClient({
                 setServiceSlug(nextSrv);
                 applyFilters({ serviceSlug: nextSrv });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
             >
               <option value="">
                 All Services ({availableServices.length})
@@ -499,7 +499,7 @@ export function ServiceDiscoveryClient({
                 setSelectedNeighbourhood("");
                 applyFilters({ city: nextCity, neighbourhood: "" });
               }}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
             >
               <option value="All Cities">All Cities (PH, Lagos, Abuja)</option>
               <option value="Port Harcourt">Port Harcourt</option>
@@ -520,7 +520,7 @@ export function ServiceDiscoveryClient({
               id="discovery-area"
               value={selectedNeighbourhood}
               onChange={(e) => setSelectedNeighbourhood(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
             >
               <option value="">All Neighbourhoods</option>
               {cityNeighbourhoods.map((n) => (
@@ -544,7 +544,7 @@ export function ServiceDiscoveryClient({
               name="distance"
               value={maxDistanceKm}
               onChange={(e) => setMaxDistanceKm(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
             >
               <option value="5">Within 5 km</option>
               <option value="10">Within 10 km</option>
@@ -568,7 +568,7 @@ export function ServiceDiscoveryClient({
               name="rating"
               value={minRating}
               onChange={(e) => setMinRating(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
             >
               <option value="0">Any Rating</option>
               <option value="4.0">★ 4.0 &amp; above</option>
@@ -591,7 +591,7 @@ export function ServiceDiscoveryClient({
               name="availability"
               value={targetDate}
               onChange={(e) => setTargetDate(e.target.value)}
-              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+              className="w-full h-9 px-2 text-xs font-medium rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
             />
           </div>
         </div>
@@ -615,7 +615,7 @@ export function ServiceDiscoveryClient({
                   setSortBy(nextSort);
                   applyFilters({ sortBy: nextSort });
                 }}
-                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
               >
                 <option value="relevance">Best Match</option>
                 <option value="rating">Highest Rated</option>
@@ -642,7 +642,7 @@ export function ServiceDiscoveryClient({
                   setProviderType(nextType);
                   applyFilters({ providerType: nextType });
                 }}
-                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-white"
+                className="h-8 px-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-white"
               >
                 <option value="">All Providers</option>
                 <option value="individual">Independent Specialists</option>
@@ -656,9 +656,9 @@ export function ServiceDiscoveryClient({
                 name="verified"
                 checked={verifiedOnly}
                 onChange={(e) => setVerifiedOnly(e.target.checked)}
-                className="rounded border-slate-300 dark:border-slate-700 text-[#0D9488] focus:ring-[#0D9488]"
+                className="rounded border-[#E6E0D8] dark:border-[#2E343B] text-[#E8590C] focus:ring-[#E8590C]"
               />
-              <span className="font-semibold text-slate-700 dark:text-slate-200">Verified Pros Only</span>
+              <span className="font-semibold text-[#1F2328] dark:text-[#FAF7F3]">Verified Pros Only</span>
             </label>
 
             <label className="flex items-center gap-1.5 cursor-pointer">
@@ -667,9 +667,9 @@ export function ServiceDiscoveryClient({
                 name="available"
                 checked={availableOnly}
                 onChange={(e) => setAvailableOnly(e.target.checked)}
-                className="rounded border-slate-300 dark:border-slate-700 text-[#0D9488] focus:ring-[#0D9488]"
+                className="rounded border-[#E6E0D8] dark:border-[#2E343B] text-[#E8590C] focus:ring-[#E8590C]"
               />
-              <span className="font-semibold text-slate-700 dark:text-slate-200">Confirmed Available Only</span>
+              <span className="font-semibold text-[#1F2328] dark:text-[#FAF7F3]">Confirmed Available Only</span>
             </label>
           </div>
 
@@ -677,7 +677,7 @@ export function ServiceDiscoveryClient({
             <button
               type="button"
               onClick={handleReset}
-              className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+              className="px-3 py-1.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-[#4A525C] dark:text-[#C3C8CF] hover:text-[#1F2328] dark:hover:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] bg-white dark:bg-[#1F2328]"
             >
               Reset Filters
             </button>
@@ -685,7 +685,7 @@ export function ServiceDiscoveryClient({
               type="button"
               onClick={() => handleSearch()}
               disabled={isPending}
-              className="px-4 py-1.5 rounded-lg bg-[#0D9488] text-white font-bold hover:bg-[#0F766E] transition shadow-xs disabled:opacity-60"
+              className="px-4 py-1.5 rounded-lg bg-[#E8590C] text-white font-bold hover:bg-[#C84A06] transition shadow-xs disabled:opacity-60"
             >
               {isPending ? "Updating..." : "Apply Matching"}
             </button>
@@ -718,7 +718,7 @@ export function ServiceDiscoveryClient({
                   city !== "All Cities" ? `&city=${encodeURIComponent(city)}` : ""
                 }`
               }
-              className="px-4 py-2 rounded-xl bg-[#154752] text-white text-xs font-bold hover:bg-[#0D282E] shrink-0 self-start sm:self-center"
+              className="px-4 py-2 rounded-xl bg-[#1F2328] text-white text-xs font-bold hover:bg-[#15181C] shrink-0 self-start sm:self-center"
             >
               Submit Custom Request →
             </Link>
@@ -731,7 +731,7 @@ export function ServiceDiscoveryClient({
                 <Link
                   key={alt.href}
                   href={alt.href}
-                  className="rounded-full bg-white dark:bg-[#0D223A] border border-amber-300 dark:border-amber-700 px-3 py-1 text-xs font-semibold text-[#154752] hover:border-[#24989A] hover:text-[#24989A] transition-colors"
+                  className="rounded-full bg-white dark:bg-[#1F2328] border border-amber-300 dark:border-amber-700 px-3 py-1 text-xs font-semibold text-[#1F2328] dark:text-[#FAF7F3] hover:border-[#E8590C] hover:text-[#E8590C] transition-colors"
                 >
                   {alt.label} →
                 </Link>
@@ -757,7 +757,7 @@ export function ServiceDiscoveryClient({
 
         <Link
           href={activeServiceBookingHref || `/book${city !== "All Cities" ? `?city=${encodeURIComponent(city)}` : ""}`}
-          className="px-4 py-2 rounded-lg bg-[#0F172A] text-teal-300 text-xs font-bold hover:bg-slate-800 transition self-start sm:self-auto"
+          className="px-4 py-2 rounded-lg bg-[#1F2328] text-[#FAF7F3] text-xs font-bold hover:bg-[#15181C] hover:text-[#E8590C] transition self-start sm:self-auto"
         >
           Post a Service Request →
         </Link>
@@ -765,35 +765,35 @@ export function ServiceDiscoveryClient({
 
       {/* Results Grid */}
       {results.length === 0 ? (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] p-10 text-center max-w-xl mx-auto space-y-4">
-          <div className="w-16 h-16 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-2xl mx-auto flex items-center justify-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-dashed border-[#E6E0D8] dark:border-[#2E343B] p-10 text-center max-w-xl mx-auto space-y-4">
+          <div className="w-16 h-16 rounded-full bg-[#FCEBDD] border border-[#E8590C]/30 text-2xl text-[#E8590C] mx-auto flex items-center justify-center">
             📍
           </div>
           <div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">
+            <h3 className="text-base font-bold text-[#1F2328] dark:text-[#FAF7F3]">
               No direct profile matches in {city} under this specific filter
             </h3>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
+            <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1 leading-relaxed">
               No individual provider records match your exact search filters. Rather than showing fabricated results, EasyLife allows you to post an everyday task or custom request, and our accredited providers will prepare quotations for you.
             </p>
           </div>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               href={activeServiceBookingHref || `/book?city=${encodeURIComponent(city)}`}
-              className="px-5 py-2.5 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+              className="px-5 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#C84A06] transition shadow-xs"
             >
               Submit Service Request
             </Link>
             <Link
               href="/post-a-need"
-              className="px-5 py-2.5 rounded-xl bg-[#0A2540] text-white text-xs font-bold hover:bg-[#1E3A5F] transition shadow-xs"
+              className="px-5 py-2.5 rounded-xl bg-[#1F2328] text-white text-xs font-bold hover:bg-[#15181C] transition shadow-xs"
             >
               Post a Need →
             </Link>
             <button
               type="button"
               onClick={handleReset}
-              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
+              className="px-4 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs font-semibold text-[#4A525C] dark:text-[#C3C8CF] hover:text-[#1F2328] dark:hover:text-[#FAF7F3] bg-white dark:bg-[#1F2328]"
             >
               Clear Filters
             </button>
@@ -808,12 +808,12 @@ export function ServiceDiscoveryClient({
           {results.map((pro) => (
             <div
               key={pro.professional_id}
-              className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs hover:border-[#0D9488] hover:shadow-md transition flex flex-col justify-between space-y-4"
+              className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 shadow-xs hover:border-[#E8590C] hover:shadow-md transition flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 {/* Pro Avatar & Basic info */}
                 <div className="flex items-start gap-3.5">
-                  <div className="w-13 h-13 rounded-full bg-[#0D9488] text-white font-black text-lg flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
+                  <div className="w-13 h-13 rounded-full bg-[#1F2328] text-white font-black text-lg border border-[#E8590C]/40 flex items-center justify-center shrink-0 overflow-hidden shadow-xs">
                     {pro.avatar_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -832,11 +832,11 @@ export function ServiceDiscoveryClient({
 
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <h3 className="font-bold text-sm text-slate-900 dark:text-white truncate">
+                      <h3 className="font-bold text-sm text-[#1F2328] dark:text-[#FAF7F3] truncate">
                         {pro.business_name}
                       </h3>
                       {pro.is_verified && (
-                        <span className="text-[#0D9488] shrink-0" title="Verified Professional">
+                        <span className="text-[#E8590C] shrink-0" title="Verified Professional">
                           <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
@@ -844,7 +844,7 @@ export function ServiceDiscoveryClient({
                       )}
                     </div>
 
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                    <p className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF] truncate mt-0.5">
                       {pro.headline || `${pro.years_of_experience} Years Field Experience`}
                     </p>
 
@@ -856,7 +856,7 @@ export function ServiceDiscoveryClient({
                       </span>
                       <span className="text-slate-400">({pro.review_count} reviews)</span>
                       <span className="text-slate-300">•</span>
-                      <span className="text-slate-600 dark:text-slate-300 font-medium">
+                      <span className="text-[#4A525C] dark:text-[#C3C8CF] font-medium">
                         {pro.completed_jobs_count} completed jobs
                       </span>
                     </div>
@@ -864,17 +864,17 @@ export function ServiceDiscoveryClient({
                 </div>
 
                 {/* Bio snippet */}
-                <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] line-clamp-2 leading-relaxed">
                   {pro.bio || "Accredited technical trade professional operating on EasyLife."}
                 </p>
 
                 {/* Proximity, Availability & Category Badges */}
                 <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-                  <span className="px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] font-semibold border border-teal-200 dark:border-teal-800">
+                  <span className="px-2 py-0.5 rounded-md bg-[#FCEBDD] text-[#E8590C] font-semibold border border-[#E8590C]/30">
                     {pro.category_name}
                   </span>
 
-                  <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium">
+                  <span className="px-2 py-0.5 rounded-md bg-[#FAF7F3] dark:bg-[#1F2328] text-[#4A525C] dark:text-[#C3C8CF] font-medium">
                     📍 {pro.distance_km < 50 ? `${pro.distance_km.toFixed(1)} km away` : pro.primary_city}
                   </span>
 
@@ -884,7 +884,7 @@ export function ServiceDiscoveryClient({
                       ● Available
                     </span>
                   ) : (
-                    <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-medium">
+                    <span className="px-2 py-0.5 rounded-md bg-[#FAF7F3] dark:bg-[#1F2328] text-[#4A525C] dark:text-[#C3C8CF] font-medium">
                       ○ Book in Advance
                     </span>
                   )}
@@ -892,12 +892,12 @@ export function ServiceDiscoveryClient({
               </div>
 
               {/* Footer Call-out Rate & Actions */}
-              <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+              <div className="pt-3 border-t border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-medium">
+                  <span className="text-[10px] text-[#4A525C] dark:text-[#C3C8CF] block font-medium">
                     Starting Call-out Fee
                   </span>
-                  <span className="text-sm font-black text-slate-900 dark:text-white">
+                  <span className="text-sm font-black text-[#1F2328] dark:text-[#FAF7F3]">
                     {pro.base_callout_fee_kobo > 0
                       ? formatNaira(pro.base_callout_fee_kobo)
                       : "Price available on request"}
@@ -907,7 +907,7 @@ export function ServiceDiscoveryClient({
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/professionals/${pro.professional_id}`}
-                    className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+                    className="px-3 py-1.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-xs font-semibold text-[#4A525C] dark:text-[#C3C8CF] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] bg-white dark:bg-[#1F2328] transition"
                   >
                     Profile
                   </Link>
@@ -917,7 +917,7 @@ export function ServiceDiscoveryClient({
                         ? `${activeServiceBookingHref}&pro=${encodeURIComponent(pro.professional_id)}`
                         : `/book?pro=${pro.professional_id}`
                     }
-                    className="px-4 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+                    className="px-4 py-1.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#C84A06] transition shadow-xs"
                   >
                     Book
                   </Link>
@@ -932,9 +932,9 @@ export function ServiceDiscoveryClient({
       {totalPages > 1 && (
         <nav
           aria-label="Professional directory pagination"
-          className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-[#163654]"
+          className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B]"
         >
-          <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
+          <p className="text-xs font-medium text-[#4A525C] dark:text-[#C3C8CF]">
             Showing {showingFrom}–{showingTo} of {resolvedTotalCount} verified professionals (Page{" "}
             {currentPage} of {totalPages})
           </p>
@@ -943,12 +943,12 @@ export function ServiceDiscoveryClient({
               <Link
                 href={buildPageHref(currentPage - 1)}
                 scroll={false}
-                className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
               >
                 ← Previous
               </Link>
             ) : (
-              <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
+              <span className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] text-xs font-semibold text-slate-400">
                 ← Previous
               </span>
             )}
@@ -961,8 +961,8 @@ export function ServiceDiscoveryClient({
                 aria-current={p === currentPage ? "page" : undefined}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors ${
                   p === currentPage
-                    ? "bg-[#154752] text-white border-[#154752]"
-                    : "bg-white dark:bg-[#0D223A] text-[#154752] border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                    ? "bg-[#1F2328] text-white border-[#1F2328]"
+                    : "bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] border-[#E6E0D8] dark:border-[#2E343B] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] hover:text-[#E8590C]"
                 }`}
               >
                 {p}
@@ -973,12 +973,12 @@ export function ServiceDiscoveryClient({
               <Link
                 href={buildPageHref(currentPage + 1)}
                 scroll={false}
-                className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
               >
                 Next →
               </Link>
             ) : (
-              <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
+              <span className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] text-xs font-semibold text-slate-400">
                 Next →
               </span>
             )}

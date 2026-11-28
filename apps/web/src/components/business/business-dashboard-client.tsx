@@ -77,7 +77,7 @@ export function BusinessDashboardClient({
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Total Properties */}
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Properties</span>
             <span className="text-base">🏢</span>
@@ -87,7 +87,7 @@ export function BusinessDashboardClient({
         </div>
 
         {/* Registered Assets */}
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Assets</span>
             <span className="text-base">⚙️</span>
@@ -97,17 +97,17 @@ export function BusinessDashboardClient({
         </div>
 
         {/* Open Requests */}
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Open Faults</span>
             <span className="text-base">🛠️</span>
           </div>
-          <div className="text-2xl font-black text-teal-800 dark:text-[#5CD3D5]">{metrics.open_maintenance_requests}</div>
+          <div className="text-2xl font-black text-teal-800 dark:text-[#F06A1F]">{metrics.open_maintenance_requests}</div>
           <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Active jobs</div>
         </div>
 
         {/* Upcoming Maintenance */}
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Upcoming</span>
             <span className="text-base">📅</span>
@@ -117,7 +117,7 @@ export function BusinessDashboardClient({
         </div>
 
         {/* Overdue */}
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Overdue</span>
             <span className="text-base">⏰</span>
@@ -129,7 +129,7 @@ export function BusinessDashboardClient({
         </div>
 
         {/* Expenditure */}
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Expenditure</span>
             <span className="text-base">💳</span>
@@ -144,7 +144,7 @@ export function BusinessDashboardClient({
       {/* Main Content Layout: Activity Feed & Quick Actions */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Recent Activities */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs p-6">
+        <div className="lg:col-span-2 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs p-6">
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">Recent Maintenance Activity</h2>
@@ -152,7 +152,7 @@ export function BusinessDashboardClient({
             </div>
             <Link
               href="/business/maintenance"
-              className="text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:text-[#5CD3D5] hover:underline"
+              className="text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:text-[#F06A1F] hover:underline"
             >
               View Full History →
             </Link>
@@ -218,7 +218,7 @@ export function BusinessDashboardClient({
 
         {/* Right Column: Quick Management Shortcuts */}
         <div className="space-y-6">
-          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] shadow-2xs p-6">
+          <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs p-6">
             <h2 className="text-base font-extrabold text-slate-900 dark:text-white mb-4">Management Modules</h2>
             <div className="space-y-3">
               <Link
@@ -228,7 +228,7 @@ export function BusinessDashboardClient({
                 <div className="flex items-center gap-3">
                   <span className="text-xl">🏢</span>
                   <div>
-                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#5CD3D5]">
+                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#F06A1F]">
                       Properties & Units
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">
@@ -246,7 +246,7 @@ export function BusinessDashboardClient({
                 <div className="flex items-center gap-3">
                   <span className="text-xl">⚙️</span>
                   <div>
-                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#5CD3D5]">
+                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#F06A1F]">
                       Equipment Registry
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">
@@ -264,7 +264,7 @@ export function BusinessDashboardClient({
                 <div className="flex items-center gap-3">
                   <span className="text-xl">📅</span>
                   <div>
-                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#5CD3D5]">
+                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#F06A1F]">
                       Maintenance Schedules
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">
@@ -282,7 +282,7 @@ export function BusinessDashboardClient({
                 <div className="flex items-center gap-3">
                   <span className="text-xl">👥</span>
                   <div>
-                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#5CD3D5]">
+                    <div className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-teal-800 dark:text-[#F06A1F]">
                       Team & Permissions
                     </div>
                     <div className="text-xs text-slate-500 dark:text-slate-400">
@@ -295,7 +295,7 @@ export function BusinessDashboardClient({
             </div>
           </div>
 
-          <div className="bg-slate-50 dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-[#163654] p-5">
+          <div className="bg-slate-50 dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-5">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <span>🛡️</span> Service Accountability Guarantee
             </h3>

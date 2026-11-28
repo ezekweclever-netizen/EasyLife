@@ -9,7 +9,9 @@ import type {
 
 export type BadgeTone =
   | "teal"
+  | "orange"
   | "navy"
+  | "charcoal"
   | "success"
   | "warning"
   | "error"
@@ -17,13 +19,15 @@ export type BadgeTone =
   | "neutral";
 
 const TONE_CLASSES: Record<BadgeTone, string> = {
-  teal: "bg-[#F3F8F8] text-[#154752] border-[#24989A]/40",
-  navy: "bg-[#154752] text-white border-[#24989A]/30",
-  success: "bg-[#E7F7F1] text-[#127A5B] border-[#A3E5D0]",
-  warning: "bg-[#FEF5E7] text-[#B25E0A] border-[#FCD9A5]",
-  error: "bg-[#FDF0F0] text-[#C53030] border-[#F8B4B4]",
-  info: "bg-[#EBF6F9] text-[#1A6E84] border-[#A9DCE7]",
-  neutral: "bg-[#F3F8F8] text-[#4E6065] border-[#DAE7E7]",
+  teal: "bg-[#FCEBDD] dark:bg-[#1F2328] text-[#E8590C] dark:text-[#F06A1F] border-[#E8590C]/30 dark:border-[#F06A1F]/30",
+  orange: "bg-[#FCEBDD] dark:bg-[#1F2328] text-[#E8590C] dark:text-[#F06A1F] border-[#E8590C]/30 dark:border-[#F06A1F]/30",
+  navy: "bg-[#1F2328] text-[#FAF7F3] border-[#2E343B]",
+  charcoal: "bg-[#1F2328] text-[#FAF7F3] border-[#2E343B]",
+  success: "bg-[#E8F5ED] dark:bg-[#1A3626] text-[#2E7D4F] dark:text-[#48BB78] border-[#A3D9B5] dark:border-[#2E7D4F]/40",
+  warning: "bg-[#FEF7EC] dark:bg-[#382815] text-[#B7791F] dark:text-[#ED8936] border-[#F5D499] dark:border-[#B7791F]/40",
+  error: "bg-[#FDE8E8] dark:bg-[#381A1A] text-[#C53030] dark:text-[#F56565] border-[#F8B4B4] dark:border-[#C53030]/40",
+  info: "bg-[#EBF0F5] dark:bg-[#262D36] text-[#4A525C] dark:text-[#C3C8CF] border-[#C3C8CF] dark:border-[#2E343B]",
+  neutral: "bg-[#FAF7F3] dark:bg-[#1F2328] text-[#4A525C] dark:text-[#C3C8CF] border-[#E6E0D8] dark:border-[#2E343B]",
 };
 
 export interface BadgeProps {

@@ -116,7 +116,7 @@ export function ToolCvBuilder() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Career Development &amp; Artisans
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -127,7 +127,7 @@ export function ToolCvBuilder() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         {/* Template Selector */}
         <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
           <div className="flex items-center gap-2 text-xs">
@@ -137,7 +137,7 @@ export function ToolCvBuilder() {
               onClick={() => setTemplate("executive")}
               className={`px-3 py-1 rounded-lg font-bold transition cursor-pointer ${
                 template === "executive"
-                  ? "bg-[#0D9488] text-white"
+                  ? "bg-[#E8590C] text-white"
                   : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
               }`}
             >
@@ -148,7 +148,7 @@ export function ToolCvBuilder() {
               onClick={() => setTemplate("technical")}
               className={`px-3 py-1 rounded-lg font-bold transition cursor-pointer ${
                 template === "technical"
-                  ? "bg-[#0D9488] text-white"
+                  ? "bg-[#E8590C] text-white"
                   : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
               }`}
             >
@@ -159,7 +159,7 @@ export function ToolCvBuilder() {
               onClick={() => setTemplate("minimal")}
               className={`px-3 py-1 rounded-lg font-bold transition cursor-pointer ${
                 template === "minimal"
-                  ? "bg-[#0D9488] text-white"
+                  ? "bg-[#E8590C] text-white"
                   : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
               }`}
             >
@@ -169,8 +169,8 @@ export function ToolCvBuilder() {
         </div>
 
         {/* Personal Details */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
-          <span className="font-bold text-[#0D9488] uppercase tracking-wider block">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
+          <span className="font-bold text-[#E8590C] uppercase tracking-wider block">
             1. Personal &amp; Contact Header
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -180,7 +180,7 @@ export function ToolCvBuilder() {
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-bold"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
               />
             </div>
             <div>
@@ -189,7 +189,7 @@ export function ToolCvBuilder() {
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
             <div>
@@ -198,7 +198,7 @@ export function ToolCvBuilder() {
                 type="text"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
             <div>
@@ -207,7 +207,7 @@ export function ToolCvBuilder() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
             <div className="sm:col-span-2">
@@ -216,35 +216,35 @@ export function ToolCvBuilder() {
                 type="text"
                 value={cityState}
                 onChange={(e) => setCityState(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
           </div>
         </div>
 
         {/* Professional Summary */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
-          <span className="font-bold text-[#0D9488] uppercase tracking-wider block">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+          <span className="font-bold text-[#E8590C] uppercase tracking-wider block">
             2. Professional Summary
           </span>
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
             rows={3}
-            className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs leading-relaxed"
+            className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs leading-relaxed"
           />
         </div>
 
         {/* Employment History */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
           <div className="flex items-center justify-between">
-            <span className="font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="font-bold text-[#E8590C] uppercase tracking-wider">
               3. Work Experience &amp; Projects
             </span>
             <button
               type="button"
               onClick={addExperience}
-              className="px-3 py-1 rounded bg-[#0D9488] text-white text-[11px] font-bold hover:bg-[#0B7A6F] cursor-pointer"
+              className="px-3 py-1 rounded bg-[#E8590C] text-white text-[11px] font-bold hover:bg-[#0B7A6F] cursor-pointer"
             >
               + Add Experience
             </button>
@@ -254,7 +254,7 @@ export function ToolCvBuilder() {
             {experiences.map((exp, idx) => (
               <div
                 key={exp.id}
-                className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#071526] space-y-2"
+                className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-[#1F2328] space-y-2"
               >
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-slate-800 dark:text-slate-200">
@@ -275,28 +275,28 @@ export function ToolCvBuilder() {
                     value={exp.role}
                     onChange={(e) => updateExperience(exp.id, "role", e.target.value)}
                     placeholder="Job Title / Role"
-                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-bold"
+                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
                   />
                   <input
                     type="text"
                     value={exp.company}
                     onChange={(e) => updateExperience(exp.id, "company", e.target.value)}
                     placeholder="Company / Employer"
-                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
                   />
                   <input
                     type="text"
                     value={exp.city}
                     onChange={(e) => updateExperience(exp.id, "city", e.target.value)}
                     placeholder="Location"
-                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
                   />
                   <input
                     type="text"
                     value={exp.period}
                     onChange={(e) => updateExperience(exp.id, "period", e.target.value)}
                     placeholder="Duration (e.g. 2021 — Present)"
-                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
                   />
                 </div>
 
@@ -314,7 +314,7 @@ export function ToolCvBuilder() {
                       )
                     }
                     rows={3}
-                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs leading-relaxed"
+                    className="w-full px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs leading-relaxed"
                   />
                 </div>
               </div>
@@ -323,15 +323,15 @@ export function ToolCvBuilder() {
         </div>
 
         {/* Core Skills */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
-          <span className="font-bold text-[#0D9488] uppercase tracking-wider block">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+          <span className="font-bold text-[#E8590C] uppercase tracking-wider block">
             4. Core Skills &amp; Competencies
           </span>
           <textarea
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
             rows={2}
-            className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+            className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
           />
         </div>
 
@@ -339,7 +339,7 @@ export function ToolCvBuilder() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Application-Ready CV Document</span>
           </button>
@@ -358,7 +358,7 @@ export function ToolCvBuilder() {
           {/* Header */}
           <div className="border-b-2 border-slate-900 pb-5">
             <h1 className="text-3xl font-black text-slate-900 tracking-tight">{fullName}</h1>
-            <p className="text-sm font-bold text-[#0D9488] mt-1">{title}</p>
+            <p className="text-sm font-bold text-[#E8590C] mt-1">{title}</p>
             <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600 mt-2">
               <span>📞 {phone}</span>
               <span>✉️ {email}</span>
@@ -386,7 +386,7 @@ export function ToolCvBuilder() {
                     <h3 className="text-xs font-black text-slate-900">{exp.role}</h3>
                     <span className="text-[11px] font-bold text-slate-500">{exp.period}</span>
                   </div>
-                  <div className="flex justify-between text-[11px] text-[#0D9488] font-semibold">
+                  <div className="flex justify-between text-[11px] text-[#E8590C] font-semibold">
                     <span>{exp.company}</span>
                     <span className="text-slate-400">{exp.city}</span>
                   </div>

@@ -185,8 +185,8 @@ export function ServiceSearchForm({
         onSubmit={() => setIsOpen(false)}
         className={`flex flex-col sm:flex-row gap-2.5 rounded-2xl p-2.5 ${
           tone === "dark"
-            ? "bg-white dark:bg-[#0D223A] shadow-xl shadow-black/15"
-            : "bg-white dark:bg-[#0D223A] border border-[#DAE7E7] shadow-xs"
+            ? "bg-white dark:bg-[#1F2328] shadow-xl shadow-black/15"
+            : "bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] shadow-xs"
         }`}
       >
         <label htmlFor={id} className="sr-only">
@@ -195,7 +195,7 @@ export function ServiceSearchForm({
         <div className="relative flex-1">
           <Icon
             name="search"
-            className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#68797C]"
+            className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#4A525C] dark:text-[#C3C8CF]"
           />
           <input
             id={id}
@@ -215,12 +215,12 @@ export function ServiceSearchForm({
             aria-controls={listboxId}
             aria-autocomplete="list"
             placeholder={placeholder}
-            className="h-12 w-full rounded-xl bg-transparent pl-11 pr-3 text-base text-[#1F2F34] placeholder:text-[#68797C] focus:outline-none"
+            className="h-12 w-full rounded-xl bg-transparent pl-11 pr-3 text-base text-[#1F2328] dark:text-[#FAF7F3] placeholder:text-[#4A525C]/60 dark:placeholder:text-[#C3C8CF]/60 focus:outline-none"
           />
         </div>
         <button
           type="submit"
-          className="h-12 px-4 sm:px-7 rounded-xl bg-[#24989A] hover:bg-[#1D7E80] text-white text-sm sm:text-base font-bold transition-all shadow-xs cursor-pointer shrink-0"
+          className="h-12 px-4 sm:px-7 rounded-xl bg-[#E8590C] hover:bg-[#C84A06] text-white text-sm sm:text-base font-bold transition-all shadow-xs cursor-pointer shrink-0"
         >
           <span className="hidden sm:inline">Search services</span>
           <span className="sm:hidden">Search</span>
@@ -232,29 +232,29 @@ export function ServiceSearchForm({
           id={listboxId}
           role="listbox"
           aria-label="Service catalogue suggestions"
-          className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] shadow-2xl overflow-hidden text-[#1F2F34]"
+          className="absolute left-0 right-0 top-full mt-2 z-50 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] shadow-2xl overflow-hidden text-[#1F2328] dark:text-[#FAF7F3]"
         >
           {isLoading && !suggestions ? (
-            <div className="px-5 py-4 text-sm text-[#4E6065] flex items-center gap-2.5">
-              <span className="h-4 w-4 rounded-full border-2 border-[#24989A] border-t-transparent animate-spin" />
+            <div className="px-5 py-4 text-sm text-[#4A525C] dark:text-[#C3C8CF] flex items-center gap-2.5">
+              <span className="h-4 w-4 rounded-full border-2 border-[#E8590C] border-t-transparent animate-spin" />
               <span>Searching verified EasyLife services...</span>
             </div>
           ) : fetchError ? (
-            <div className="px-5 py-4 text-sm text-[#4E6065] flex items-center justify-between gap-3">
+            <div className="px-5 py-4 text-sm text-[#4A525C] dark:text-[#C3C8CF] flex items-center justify-between gap-3">
               <span>Live suggestions are temporarily unavailable.</span>
               <Link
                 href={`/services${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`}
                 onClick={() => setIsOpen(false)}
-                className="font-semibold text-[#24989A] hover:underline shrink-0"
+                className="font-semibold text-[#E8590C] hover:underline shrink-0"
               >
                 Search directory →
               </Link>
             </div>
           ) : suggestions && totalMatches === 0 ? (
             <div className="px-5 py-4 space-y-2.5">
-              <p className="text-sm text-[#4E6065]">
+              <p className="text-sm text-[#4A525C] dark:text-[#C3C8CF]">
                 No active service in our catalogue currently matches{" "}
-                <span className="font-semibold text-[#154752]">
+                <span className="font-semibold text-[#1F2328] dark:text-[#FAF7F3]">
                   &ldquo;{query.trim()}&rdquo;
                 </span>
                 . It may be temporarily paused or covered under a custom request.
@@ -263,38 +263,38 @@ export function ServiceSearchForm({
                 <Link
                   href={`/services?q=${encodeURIComponent(query.trim())}`}
                   onClick={() => setIsOpen(false)}
-                  className="text-[#24989A] hover:underline"
+                  className="text-[#E8590C] hover:underline"
                 >
                   Search technicians matching &ldquo;{query.trim()}&rdquo; →
                 </Link>
                 <Link
                   href={`/book?title=${encodeURIComponent(query.trim())}`}
                   onClick={() => setIsOpen(false)}
-                  className="text-[#154752] hover:underline"
+                  className="text-[#1F2328] dark:text-[#FAF7F3] hover:underline"
                 >
                   Request Custom Service →
                 </Link>
                 <Link
                   href="/tasks"
                   onClick={() => setIsOpen(false)}
-                  className="text-[#4E6065] hover:underline"
+                  className="text-[#4A525C] dark:text-[#C3C8CF] hover:underline"
                 >
                   Post Everyday Task
                 </Link>
                 <Link
                   href="/services"
                   onClick={() => setIsOpen(false)}
-                  className="text-[#154752] hover:underline"
+                  className="text-[#1F2328] dark:text-[#FAF7F3] hover:underline"
                 >
                   Browse Full Catalogue
                 </Link>
               </div>
             </div>
           ) : suggestions ? (
-            <div className="max-h-[420px] overflow-y-auto divide-y divide-[#EEF6F7]">
+            <div className="max-h-[420px] overflow-y-auto divide-y divide-[#E6E0D8]/60 dark:divide-[#2E343B]">
               {suggestions.services.length > 0 && (
                 <div className="p-2">
-                  <div className="px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-[#68797C]">
+                  <div className="px-3 py-1.5 flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF]">
                     <span>
                       {query.trim()
                         ? `Matching Services${
@@ -311,7 +311,7 @@ export function ServiceSearchForm({
                           : "/services"
                       }
                       onClick={() => setIsOpen(false)}
-                      className="text-[#24989A] hover:underline normal-case font-semibold"
+                      className="text-[#E8590C] hover:underline normal-case font-semibold"
                     >
                       View all →
                     </Link>
@@ -330,15 +330,15 @@ export function ServiceSearchForm({
                           onClick={() => setIsOpen(false)}
                           className={`flex items-center justify-between gap-3 px-3 py-2.5 rounded-xl transition-colors ${
                             isHighlighted
-                              ? "bg-[#EEF6F7] text-[#154752]"
-                              : "hover:bg-[#F3F8F8]"
+                              ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#1F2328] dark:text-[#FAF7F3]"
+                              : "hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                           }`}
                         >
                           <div className="min-w-0">
-                            <p className="text-sm font-bold text-[#154752] truncate">
+                            <p className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3] truncate">
                               {srv.name}
                             </p>
-                            <p className="text-xs text-[#68797C] truncate">
+                            <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] truncate">
                               {srv.category_name}
                               {srv.subcategory_name ? ` • ${srv.subcategory_name}` : ""}
                               {proCount > 0
@@ -346,7 +346,7 @@ export function ServiceSearchForm({
                                 : ""}
                             </p>
                           </div>
-                          <span className="shrink-0 text-xs font-bold text-[#24989A] bg-[#EEF6F7] px-2.5 py-1 rounded-lg">
+                          <span className="shrink-0 text-xs font-bold text-[#E8590C] bg-[#FCEBDD] dark:bg-[#E8590C]/20 px-2.5 py-1 rounded-lg">
                             {formatServicePriceRange(
                               srv.base_price_min_kobo,
                               srv.base_price_max_kobo
@@ -361,7 +361,7 @@ export function ServiceSearchForm({
 
               {suggestions.subcategories.length > 0 && (
                 <div className="p-2">
-                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#68797C]">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF]">
                     Subcategories
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
@@ -377,19 +377,19 @@ export function ServiceSearchForm({
                           onClick={() => setIsOpen(false)}
                           className={`flex items-center justify-between gap-2 px-3 py-2 rounded-xl transition-colors ${
                             isHighlighted
-                              ? "bg-[#EEF6F7] text-[#154752]"
-                              : "hover:bg-[#F3F8F8]"
+                              ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#1F2328] dark:text-[#FAF7F3]"
+                              : "hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                           }`}
                         >
                           <div className="min-w-0">
-                            <p className="text-xs font-bold text-[#154752] truncate">
+                            <p className="text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] truncate">
                               {sub.name}
                             </p>
-                            <p className="text-[11px] text-[#68797C] truncate">
+                            <p className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF] truncate">
                               {sub.parent_name}
                             </p>
                           </div>
-                          <span className="shrink-0 text-[11px] font-semibold text-[#68797C]">
+                          <span className="shrink-0 text-[11px] font-semibold text-[#4A525C] dark:text-[#C3C8CF]">
                             {sub.service_count} svc
                           </span>
                         </Link>
@@ -401,7 +401,7 @@ export function ServiceSearchForm({
 
               {suggestions.categories.length > 0 && (
                 <div className="p-2">
-                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#68797C]">
+                  <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF]">
                     Major Categories
                   </div>
                   <div className="flex flex-wrap gap-1.5 px-2 pb-1">
@@ -417,8 +417,8 @@ export function ServiceSearchForm({
                           onClick={() => setIsOpen(false)}
                           className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-colors ${
                             isHighlighted
-                              ? "bg-[#154752] text-white border-[#154752]"
-                              : "bg-[#F3F8F8] text-[#154752] border-[#DAE7E7] hover:border-[#24989A]"
+                              ? "bg-[#1F2328] text-white border-[#1F2328]"
+                              : "bg-[#FAF7F3] dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] border-[#E6E0D8] dark:border-[#2E343B] hover:border-[#E8590C]"
                           }`}
                         >
                           <Icon
@@ -433,11 +433,11 @@ export function ServiceSearchForm({
                 </div>
               )}
 
-              <div className="bg-[#F3F8F8] px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div className="bg-[#FAF7F3] dark:bg-[#15181C] border-t border-[#E6E0D8] dark:border-[#2E343B] px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs">
                 <Link
                   href={`/services${query.trim() ? `?q=${encodeURIComponent(query.trim())}` : ""}`}
                   onClick={() => setIsOpen(false)}
-                  className="font-bold text-[#154752] hover:text-[#24989A] transition-colors"
+                  className="font-bold text-[#1F2328] dark:text-[#FAF7F3] hover:text-[#E8590C] transition-colors"
                 >
                   {query.trim()
                     ? `Match professionals for "${query.trim()}" →`
@@ -447,13 +447,13 @@ export function ServiceSearchForm({
                   <Link
                     href={`/services?q=${encodeURIComponent(query.trim())}`}
                     onClick={() => setIsOpen(false)}
-                    className="font-semibold text-[#24989A] hover:underline"
+                    className="font-semibold text-[#E8590C] hover:underline"
                   >
                     See all {suggestions.totalServices} services →
                   </Link>
                 )}
                 {isLoading && (
-                  <span className="text-[11px] text-[#68797C]">Updating...</span>
+                  <span className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF]">Updating...</span>
                 )}
               </div>
             </div>

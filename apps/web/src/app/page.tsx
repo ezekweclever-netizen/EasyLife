@@ -205,17 +205,17 @@ export default async function HomePage({
             <Link
               key={cat.title}
               href={cat.href}
-              className="group p-5 rounded-2xl border border-slate-200/90 dark:border-[#163654] bg-[#F8FAFA] dark:bg-[#0D223A] hover:bg-white dark:hover:bg-[#102D4C] hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all flex flex-col justify-between"
+              className="group p-5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] hover:bg-white dark:hover:bg-[#1F2328] hover:border-[#E8590C] dark:hover:border-[#E8590C] hover:shadow-md transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="w-11 h-11 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-teal-100 dark:border-teal-900/60">
+                <div className="w-11 h-11 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-[#E8590C]/30">
                   <Icon name={cat.icon} className="w-5 h-5" />
                 </div>
-                <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors leading-snug">
+                <h3 className="text-sm sm:text-base font-bold text-[#1F2328] dark:text-[#FAF7F3] group-hover:text-[#E8590C] transition-colors leading-snug">
                   {cat.title}
                 </h3>
               </div>
-              <div className="mt-4 pt-2 border-t border-slate-200/60 dark:border-slate-800 text-[11px] font-semibold text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-between">
+              <div className="mt-4 pt-2 border-t border-[#E6E0D8] dark:border-[#2E343B] text-[11px] font-semibold text-[#E8590C] flex items-center justify-between">
                 <span>{cat.count}</span>
                 <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
               </div>
@@ -253,17 +253,17 @@ export default async function HomePage({
       </Section>
 
       {/* 4b. Free Everyday Tools & Calculators Showcase */}
-      <Section id="free-tools-preview" tone="white">
-        <div className="rounded-3xl border border-slate-200/90 dark:border-[#163654] bg-[#F8FAFA] dark:bg-[#0D223A] p-6 sm:p-10 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-200/80 dark:border-slate-800">
+      <Section id="free-tools-preview" tone="peach">
+        <div className="rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] p-6 sm:p-10 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-[#E6E0D8] dark:border-[#2E343B]">
             <div>
-              <span className="text-xs font-bold tracking-wider text-[#24989A] dark:text-[#5CD3D5] uppercase">
+              <span className="text-xs font-bold tracking-wider text-[#E8590C] uppercase">
                 100% Free Everyday Utilities
               </span>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 dark:text-white mt-1">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#1F2328] dark:text-[#FAF7F3] mt-1">
                 Smart Calculators for Nigerian Homes &amp; Businesses
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 max-w-xl">
+              <p className="text-xs sm:text-sm text-[#4A525C] dark:text-[#C3C8CF] mt-1 max-w-xl">
                 Get instant estimates with zero sign-up required. Benchmark repair costs, calculate generator load sizing, and plan maintenance schedules.
               </p>
             </div>
@@ -275,60 +275,60 @@ export default async function HomePage({
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/tools"
-              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+              className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] hover:border-[#E8590C] dark:hover:border-[#E8590C] hover:shadow-md transition-all group"
             >
-              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-[#E8590C]/30">
                 <Icon name="receipt" className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+              <h3 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3] group-hover:text-[#E8590C] transition-colors">
                 Service Cost Estimator
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1">
                 Instant price benchmarks for AC, generator, plumbing &amp; electrical repairs by city.
               </p>
             </Link>
 
             <Link
               href="/tools"
-              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+              className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] hover:border-[#E8590C] dark:hover:border-[#E8590C] hover:shadow-md transition-all group"
             >
-              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-[#E8590C]/30">
                 <Icon name="zap" className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+              <h3 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3] group-hover:text-[#E8590C] transition-colors">
                 Generator Sizing Tool
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1">
                 Check appliances in your home and calculate the exact kVA rating needed.
               </p>
             </Link>
 
             <Link
               href="/tools"
-              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+              className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] hover:border-[#E8590C] dark:hover:border-[#E8590C] hover:shadow-md transition-all group"
             >
-              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-[#E8590C]/30">
                 <Icon name="truck" className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+              <h3 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3] group-hover:text-[#E8590C] transition-colors">
                 Relocation &amp; Van Haulage
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1">
                 Apartment moving cost calculator with truck sizing and distance rates.
               </p>
             </Link>
 
             <Link
               href="/tools"
-              className="bg-white dark:bg-[#071526] p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 hover:border-[#24989A] dark:hover:border-[#24989A] hover:shadow-md transition-all group"
+              className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] hover:border-[#E8590C] dark:hover:border-[#E8590C] hover:shadow-md transition-all group"
             >
-              <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#24989A] dark:text-[#5CD3D5] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+              <div className="w-10 h-10 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-[#E8590C]/30">
                 <Icon name="calendar" className="w-5 h-5" />
               </div>
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#24989A] dark:group-hover:text-[#5CD3D5] transition-colors">
+              <h3 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3] group-hover:text-[#E8590C] transition-colors">
                 Maintenance Planner
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1">
                 Preventive servicing cycles for inverters, ACs, and water pumps.
               </p>
             </Link>
@@ -371,13 +371,13 @@ export default async function HomePage({
               {proBenefits.map((b) => (
                 <div
                   key={b.title}
-                  className="rounded-2xl bg-[#0D282E] border border-[#24989A]/30 p-5 shadow-xs"
+                  className="rounded-2xl bg-[#15181C] border border-[#2E343B] p-5 shadow-xs"
                 >
-                  <div className="h-10 w-10 rounded-lg bg-[#24989A]/20 border border-[#24989A]/40 text-[#24989A] flex items-center justify-center mb-3.5">
+                  <div className="h-10 w-10 rounded-lg bg-[#E8590C]/20 border border-[#E8590C]/40 text-[#E8590C] flex items-center justify-center mb-3.5">
                     <Icon name={b.icon} className="h-5 w-5" />
                   </div>
                   <h4 className="text-base sm:text-lg font-bold text-white">{b.title}</h4>
-                  <p className="mt-2 text-sm sm:text-base text-[#DAE7E7] leading-relaxed">
+                  <p className="mt-2 text-sm sm:text-base text-[#C3C8CF] leading-relaxed">
                     {b.description}
                   </p>
                 </div>
@@ -390,36 +390,36 @@ export default async function HomePage({
             </div>
           </div>
 
-          <div className="lg:max-w-md w-full bg-[#0D282E] border border-[#24989A]/30 rounded-3xl p-7 sm:p-9 shadow-lg">
+          <div className="lg:max-w-md w-full bg-[#15181C] border border-[#2E343B] rounded-3xl p-7 sm:p-9 shadow-lg">
             <h3 className="text-xl font-bold text-white">
               Vetting Requirements
             </h3>
-            <p className="mt-2.5 text-sm sm:text-base text-[#DAE7E7] leading-relaxed">
+            <p className="mt-2.5 text-sm sm:text-base text-[#C3C8CF] leading-relaxed">
               To protect both customers and great technicians, every applicant
               must provide:
             </p>
-            <ul className="mt-5 space-y-3.5 text-sm sm:text-base text-[#DAE7E7]">
+            <ul className="mt-5 space-y-3.5 text-sm sm:text-base text-[#C3C8CF]">
               <li className="flex items-start gap-2.5">
-                <span className="text-[#24989A] font-bold">✓</span>
+                <span className="text-[#E8590C] font-bold">✓</span>
                 <span>Valid Government ID (NIN, Driver’s Licence, or Voter’s Card)</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-[#24989A] font-bold">✓</span>
+                <span className="text-[#E8590C] font-bold">✓</span>
                 <span>Trade certificate or formal apprenticeship credential</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-[#24989A] font-bold">✓</span>
+                <span className="text-[#E8590C] font-bold">✓</span>
                 <span>Verifiable workshop or operating address</span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-[#24989A] font-bold">✓</span>
+                <span className="text-[#E8590C] font-bold">✓</span>
                 <span>Two credible guarantors or trade association reference</span>
               </li>
             </ul>
-            <div className="mt-6 pt-5 border-t border-[#24989A]/20">
+            <div className="mt-6 pt-5 border-t border-[#2E343B]">
               <Link
                 href="/verification-policy"
-                className="text-sm font-semibold text-[#24989A] hover:text-white underline underline-offset-4 transition-colors"
+                className="text-sm font-semibold text-[#E8590C] hover:text-white underline underline-offset-4 transition-colors"
               >
                 Read our complete Professional Verification Policy →
               </Link>
@@ -440,40 +440,40 @@ export default async function HomePage({
             />
             <div className="mt-7 space-y-5">
               <div className="flex items-start gap-4">
-                <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] dark:bg-teal-950/60 border border-[#DAE7E7] dark:border-teal-800 text-[#154752] dark:text-[#5CD3D5] flex items-center justify-center shrink-0 mt-0.5">
+                <div className="h-11 w-11 rounded-xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E8590C]/30 text-[#E8590C] flex items-center justify-center shrink-0 mt-0.5">
                   <Icon name="building" className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-[#154752] dark:text-white">
+                  <h4 className="text-base sm:text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                     Multi-Property Asset Tracking
                   </h4>
-                  <p className="text-sm sm:text-base text-[#68797C] dark:text-slate-300 mt-1 leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#4A525C] dark:text-[#C3C8CF] mt-1 leading-relaxed">
                     Track generators, commercial ACs, cold rooms, and borehole pumps across multiple branches from one central dashboard.
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] dark:bg-teal-950/60 border border-[#DAE7E7] dark:border-teal-800 text-[#154752] dark:text-[#5CD3D5] flex items-center justify-center shrink-0 mt-0.5">
+                <div className="h-11 w-11 rounded-xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E8590C]/30 text-[#E8590C] flex items-center justify-center shrink-0 mt-0.5">
                   <Icon name="calendar" className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-[#154752] dark:text-white">
+                  <h4 className="text-base sm:text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                     Preventive Maintenance Schedules
                   </h4>
-                  <p className="text-sm sm:text-base text-[#68797C] dark:text-slate-300 mt-1 leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#4A525C] dark:text-[#C3C8CF] mt-1 leading-relaxed">
                     Avoid expensive emergency breakdowns with automated servicing reminders and contracted routine visits.
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="h-11 w-11 rounded-xl bg-[#F3F8F8] dark:bg-teal-950/60 border border-[#DAE7E7] dark:border-teal-800 text-[#154752] dark:text-[#5CD3D5] flex items-center justify-center shrink-0 mt-0.5">
+                <div className="h-11 w-11 rounded-xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E8590C]/30 text-[#E8590C] flex items-center justify-center shrink-0 mt-0.5">
                   <Icon name="file-text" className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-[#154752] dark:text-white">
+                  <h4 className="text-base sm:text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                     Consolidated Monthly Invoicing
                   </h4>
-                  <p className="text-sm sm:text-base text-[#68797C] dark:text-slate-300 mt-1 leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#4A525C] dark:text-[#C3C8CF] mt-1 leading-relaxed">
                     Eliminate chaotic paper receipts. Receive clear VAT-compliant statements with full audit trails.
                   </p>
                 </div>
@@ -489,8 +489,8 @@ export default async function HomePage({
             </div>
           </div>
 
-          <div className="bg-[#F3F8F8] dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] rounded-3xl p-7 sm:p-9">
-            <h4 className="text-sm font-bold text-[#154752] dark:text-white uppercase tracking-wider mb-4">
+          <div className="bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] rounded-3xl p-7 sm:p-9">
+            <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider mb-4">
               Typical Business Equipment Managed
             </h4>
             <div className="space-y-3.5">
@@ -502,13 +502,13 @@ export default async function HomePage({
               ].map((item) => (
                 <div
                   key={item.name}
-                  className="bg-white dark:bg-[#071526] rounded-xl p-4 sm:p-5 border border-[#DAE7E7] dark:border-[#163654] flex items-center justify-between gap-4 shadow-xs"
+                  className="bg-white dark:bg-[#1F2328] rounded-xl p-4 sm:p-5 border border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-between gap-4 shadow-xs"
                 >
                   <div>
-                    <p className="text-sm sm:text-base font-semibold text-[#1F2F34] dark:text-white">{item.name}</p>
-                    <p className="text-xs sm:text-sm text-[#68797C] dark:text-slate-300 mt-0.5">Routine schedule: {item.cycle}</p>
+                    <p className="text-sm sm:text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3]">{item.name}</p>
+                    <p className="text-xs sm:text-sm text-[#4A525C] dark:text-[#C3C8CF] mt-0.5">Routine schedule: {item.cycle}</p>
                   </div>
-                  <span className="shrink-0 text-xs font-bold uppercase tracking-wider bg-[#F3F8F8] dark:bg-teal-950/60 text-[#154752] dark:text-[#5CD3D5] px-3 py-1 rounded-full border border-[#24989A]/30 dark:border-teal-800">
+                  <span className="shrink-0 text-xs font-bold uppercase tracking-wider bg-[#FCEBDD] text-[#E8590C] px-3 py-1 rounded-full border border-[#E8590C]/30">
                     Covered
                   </span>
                 </div>
@@ -519,7 +519,7 @@ export default async function HomePage({
       </Section>
 
       {/* 8. Trust and Verification Explanation */}
-      <Section id="trust-and-safety" tone="grey">
+      <Section id="trust-and-safety" tone="cream">
         <SectionHeading
           id="trust-heading"
           eyebrow="Uncompromising Standards"
@@ -528,38 +528,38 @@ export default async function HomePage({
           align="center"
         />
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#DAE7E7] dark:border-[#163654] p-7 sm:p-8 shadow-xs">
-            <div className="h-12 w-12 rounded-xl bg-[#F3F8F8] dark:bg-teal-950/60 text-[#154752] dark:text-[#5CD3D5] flex items-center justify-center font-bold text-base border border-[#DAE7E7] dark:border-teal-800">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-7 sm:p-8 shadow-xs">
+            <div className="h-12 w-12 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center font-bold text-base border border-[#E8590C]/30">
               01
             </div>
-            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#154752] dark:text-white">
+            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
               Three-Tier Identity Verification
             </h3>
-            <p className="mt-2.5 text-sm sm:text-base text-[#68797C] dark:text-slate-300 leading-relaxed">
+            <p className="mt-2.5 text-sm sm:text-base text-[#4A525C] dark:text-[#C3C8CF] leading-relaxed">
               We physically verify identity, NIN, address, and artisan apprenticeship credentials before any technician can accept jobs on our platform.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#DAE7E7] dark:border-[#163654] p-7 sm:p-8 shadow-xs">
-            <div className="h-12 w-12 rounded-xl bg-[#F3F8F8] dark:bg-teal-950/60 text-[#154752] dark:text-[#5CD3D5] flex items-center justify-center font-bold text-base border border-[#DAE7E7] dark:border-teal-800">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-7 sm:p-8 shadow-xs">
+            <div className="h-12 w-12 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center font-bold text-base border border-[#E8590C]/30">
               02
             </div>
-            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#154752] dark:text-white">
+            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
               Escrow-Locked Milestone Payments
             </h3>
-            <p className="mt-2.5 text-sm sm:text-base text-[#68797C] dark:text-slate-300 leading-relaxed">
+            <p className="mt-2.5 text-sm sm:text-base text-[#4A525C] dark:text-[#C3C8CF] leading-relaxed">
               Your money is never sent directly to a technician upfront. It stays secure in escrow until you verify the work is completely done.
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#DAE7E7] dark:border-[#163654] p-7 sm:p-8 shadow-xs">
-            <div className="h-12 w-12 rounded-xl bg-[#F3F8F8] dark:bg-teal-950/60 text-[#154752] dark:text-[#5CD3D5] flex items-center justify-center font-bold text-base border border-[#DAE7E7] dark:border-teal-800">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-7 sm:p-8 shadow-xs">
+            <div className="h-12 w-12 rounded-xl bg-[#FCEBDD] text-[#E8590C] flex items-center justify-center font-bold text-base border border-[#E8590C]/30">
               03
             </div>
-            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#154752] dark:text-white">
+            <h3 className="mt-4 text-lg sm:text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
               Local Ground Operations Support
             </h3>
-            <p className="mt-2.5 text-sm sm:text-base text-[#68797C] dark:text-slate-300 leading-relaxed">
+            <p className="mt-2.5 text-sm sm:text-base text-[#4A525C] dark:text-[#C3C8CF] leading-relaxed">
               Our regional operations teams in Port Harcourt, Lagos, and Abuja actively monitor disputes, service quality, and rapid response.
             </p>
           </div>
@@ -578,18 +578,18 @@ export default async function HomePage({
         <div className="mt-10 max-w-3xl mx-auto">
           <FaqList items={homepageFaqs} />
           <div className="mt-7 text-center">
-            <p className="text-base text-[#68797C]">
+            <p className="text-base text-[#4A525C] dark:text-[#C3C8CF]">
               Have another question? Visit our{" "}
               <Link
                 href="/help"
-                className="text-[#24989A] font-semibold hover:underline"
+                className="text-[#E8590C] font-semibold hover:underline"
               >
                 Help Centre
               </Link>{" "}
               or{" "}
               <Link
                 href="/contact"
-                className="text-[#24989A] font-semibold hover:underline"
+                className="text-[#E8590C] font-semibold hover:underline"
               >
                 Contact Support
               </Link>

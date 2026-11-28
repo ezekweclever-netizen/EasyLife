@@ -84,23 +84,23 @@ export function DocumentPreviewModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto print:p-0 print:bg-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#15181C]/80 backdrop-blur-sm overflow-y-auto print:p-0 print:bg-white">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-60 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow-xl border border-teal-500/50 flex items-center gap-2 animate-fade-in print:hidden">
-          <span className="w-2 h-2 rounded-full bg-[#0D9488] animate-pulse" />
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-60 px-4 py-2.5 rounded-xl bg-[#1F2328] text-white text-xs font-bold shadow-xl border border-[#E8590C]/50 flex items-center gap-2 animate-fade-in print:hidden">
+          <span className="w-2 h-2 rounded-full bg-[#E8590C] animate-pulse" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      <div className="relative w-full max-w-4xl bg-white dark:bg-[#071526] rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col max-h-[92vh] overflow-hidden print:max-h-none print:shadow-none print:border-none print:rounded-none">
+      <div className="relative w-full max-w-4xl bg-white dark:bg-[#1F2328] rounded-3xl shadow-2xl border border-[#E6E0D8] dark:border-[#2E343B] flex flex-col max-h-[92vh] overflow-hidden print:max-h-none print:shadow-none print:border-none print:rounded-none">
         {/* Modal Top Bar */}
-        <div className="flex items-center justify-between gap-3 p-3 sm:px-6 sm:py-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-[#0D223A]/90 print:hidden">
+        <div className="flex items-center justify-between gap-3 p-3 sm:px-6 sm:py-3.5 border-b border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3]/90 dark:bg-[#1F2328]/90 print:hidden">
           <div className="flex items-center gap-2 min-w-0 flex-1">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800/60 shrink-0">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30 shrink-0">
               {badge}
             </span>
-            <h2 className="text-xs sm:text-sm md:text-base font-black text-slate-900 dark:text-white truncate">
+            <h2 className="text-xs sm:text-sm md:text-base font-black text-[#1F2328] dark:text-[#FAF7F3] truncate">
               {title}
             </h2>
           </div>
@@ -108,8 +108,8 @@ export function DocumentPreviewModal({
           {/* Three Mandatory Actions + Print & Close */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {/* Action 1: View (Inspection mode indicator) */}
-            <span className="hidden lg:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 bg-white dark:bg-[#071526] border border-slate-200 dark:border-slate-700">
-              <svg className="w-3.5 h-3.5 text-[#0D9488]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <span className="hidden lg:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-semibold text-[#4A525C] dark:text-[#C3C8CF] bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B]">
+              <svg className="w-3.5 h-3.5 text-[#E8590C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
               </svg>
@@ -121,7 +121,7 @@ export function DocumentPreviewModal({
               type="button"
               onClick={handleShare}
               disabled={isSharing}
-              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-[#071526] hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              className="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
               title="Share document or PDF outside EasyLife"
             >
               <svg className="w-3.5 h-3.5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,7 +135,7 @@ export function DocumentPreviewModal({
               type="button"
               onClick={handleSavePdf}
               disabled={isExporting}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-white bg-[#0D9488] hover:bg-[#0B7A6F] shadow-sm transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-white bg-[#E8590C] hover:bg-[#C84A06] shadow-sm transition flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
               title="Download high-resolution multi-page PDF"
             >
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -148,7 +148,7 @@ export function DocumentPreviewModal({
             <button
               type="button"
               onClick={handlePrint}
-              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-[#071526] hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition hidden md:flex items-center gap-1 cursor-pointer"
+              className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-[#1F2328] hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700 transition hidden md:flex items-center gap-1 cursor-pointer"
               title="Print document"
             >
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -182,14 +182,14 @@ export function DocumentPreviewModal({
             }}
           >
             {/* Universal Document Header with EasyLife Seal & Branding */}
-            <div className="flex items-center justify-between border-b-2 border-slate-900 pb-5 mb-8">
+            <div className="flex items-center justify-between border-b-2 border-[#1F2328] pb-5 mb-8">
               <div>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#0D9488] flex items-center justify-center text-white font-black text-sm">
+                  <div className="w-8 h-8 rounded-lg bg-[#E8590C] flex items-center justify-center text-white font-black text-sm">
                     EL
                   </div>
-                  <span className="text-xl font-black tracking-tight text-slate-900">
-                    Easy<span className="text-[#0D9488]">Life</span>
+                  <span className="text-xl font-black tracking-tight text-[#1F2328]">
+                    Easy<span className="text-[#E8590C]">Life</span>
                   </span>
                 </div>
                 <p className="text-[10px] text-slate-500 font-medium uppercase tracking-widest mt-0.5">
@@ -213,7 +213,7 @@ export function DocumentPreviewModal({
             </div>
 
             {/* Universal Document Footer with Verification Tag & Security Disclaimer */}
-            <div className="border-t border-slate-200 pt-6 mt-12 text-[10px] text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div className="border-t border-[#E6E0D8] pt-6 mt-12 text-[10px] text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-2">
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
                 <span>Generated via EasyLife Free Tools Engine • Verified Layout</span>
@@ -224,11 +224,11 @@ export function DocumentPreviewModal({
         </div>
 
         {/* Modal Bottom Bar for Mobile Quick Actions */}
-        <div className="flex sm:hidden items-center justify-between p-3 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#071526] print:hidden">
+        <div className="flex sm:hidden items-center justify-between p-3 border-t border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] print:hidden">
           <button
             type="button"
             onClick={onClose}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-400"
+            className="px-3 py-1.5 rounded-lg text-xs font-bold text-[#4A525C] dark:text-[#C3C8CF]"
           >
             Close
           </button>
@@ -237,7 +237,7 @@ export function DocumentPreviewModal({
               type="button"
               onClick={handleShare}
               disabled={isSharing}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#FAF7F3] dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3]"
             >
               Share
             </button>
@@ -245,7 +245,7 @@ export function DocumentPreviewModal({
               type="button"
               onClick={handleSavePdf}
               disabled={isExporting}
-              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0D9488] text-white"
+              className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#E8590C] text-white"
             >
               Save PDF
             </button>

@@ -24,7 +24,7 @@ export default async function DispatchDirectoryPage() {
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Banner with Direct Request CTA */}
-        <div className="bg-gradient-to-r from-[#0A2540] to-[#0D9488] rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg">
+        <div className="bg-gradient-to-r from-[#1F2328] to-[#2E353D] rounded-2xl p-6 sm:p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg">
           <div className="space-y-2 text-center sm:text-left">
             <h2 className="text-lg sm:text-xl font-bold">
               Need a Parcel Picked Up or Delivered Immediately?
@@ -35,7 +35,7 @@ export default async function DispatchDirectoryPage() {
           </div>
           <Link
             href="/book?cat=everyday-tasks&trade=dispatch"
-            className="px-6 py-3 rounded-xl bg-white dark:bg-[#0D223A] text-[#0A2540] hover:bg-slate-100 dark:bg-slate-800 font-bold text-xs sm:text-sm transition shadow-md whitespace-nowrap"
+            className="px-6 py-3 rounded-xl bg-white dark:bg-[#1F2328] text-[#1F2328] hover:bg-slate-100 dark:bg-slate-800 font-bold text-xs sm:text-sm transition shadow-md whitespace-nowrap"
           >
             Request a Dispatch Rider →
           </Link>
@@ -43,21 +43,21 @@ export default async function DispatchDirectoryPage() {
 
         {/* Delivery Options Guide */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 text-center space-y-2">
+          <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 text-center space-y-2">
             <div className="text-2xl">⚡</div>
             <h3 className="text-xs font-bold text-slate-900 dark:text-white">Same-Day Express</h3>
             <p className="text-[11px] text-slate-600 dark:text-slate-300">
               Urgent documents, parcels, and items delivered within 60–120 minutes across town.
             </p>
           </div>
-          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 text-center space-y-2">
+          <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 text-center space-y-2">
             <div className="text-2xl">📦</div>
             <h3 className="text-xs font-bold text-slate-900 dark:text-white">Scheduled Package Pickup</h3>
             <p className="text-[11px] text-slate-600 dark:text-slate-300">
               Bulk e-commerce order pickups, marketplace item collection, and regular runs.
             </p>
           </div>
-          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 text-center space-y-2">
+          <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 text-center space-y-2">
             <div className="text-2xl">🛡️</div>
             <h3 className="text-xs font-bold text-slate-900 dark:text-white">Vetted &amp; Tracked</h3>
             <p className="text-[11px] text-slate-600 dark:text-slate-300">
@@ -67,7 +67,7 @@ export default async function DispatchDirectoryPage() {
         </div>
 
         {/* Vehicle Options Showcase */}
-        <div className="bg-slate-50 dark:bg-[#071526] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 space-y-4">
+        <div className="bg-slate-50 dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <h3 className="text-sm font-bold text-slate-900 dark:text-white">Supported Delivery Fleet &amp; Vehicle Options</h3>
@@ -75,23 +75,23 @@ export default async function DispatchDirectoryPage() {
             </div>
             <Link
               href="/book?cat=everyday-tasks&trade=dispatch"
-              className="text-xs font-bold text-[#0D9488] hover:underline"
+              className="text-xs font-bold text-[#E8590C] hover:underline"
             >
               Book On-Demand Delivery →
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
-            <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 space-y-1.5">
+            <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 space-y-1.5">
               <span className="text-xs font-bold text-slate-900 dark:text-white block">🛵 Express Motorcycle Dispatch</span>
               <p className="text-[11px] text-slate-600 dark:text-slate-300">Ideal for documents, food, parcels, pharmaceuticals, and small items up to 15kg.</p>
               <span className="inline-block text-[10px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded">Fastest in Traffic</span>
             </div>
-            <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 space-y-1.5">
+            <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 space-y-1.5">
               <span className="text-xs font-bold text-slate-900 dark:text-white block">🚗 Minivan &amp; Car Delivery</span>
               <p className="text-[11px] text-slate-600 dark:text-slate-300">Weather-protected transport for fragile gifts, bulk carton orders, cakes, and tech equipment up to 100kg.</p>
               <span className="inline-block text-[10px] font-semibold text-teal-700 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2 py-0.5 rounded">Weather-Protected</span>
             </div>
-            <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 space-y-1.5">
+            <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 space-y-1.5">
               <span className="text-xs font-bold text-slate-900 dark:text-white block">🚚 Cargo Haulage &amp; Moving</span>
               <p className="text-[11px] text-slate-600 dark:text-slate-300">Commercial light truck and haulage for moving home appliances, building materials, and bulk inventory.</p>
               <span className="inline-block text-[10px] font-semibold text-blue-700 bg-blue-50 px-2 py-0.5 rounded">Heavy Cargo</span>
@@ -107,14 +107,14 @@ export default async function DispatchDirectoryPage() {
             </h2>
             <Link
               href="/pro/register?type=dispatch"
-              className="text-xs text-[#0D9488] hover:underline font-bold"
+              className="text-xs text-[#E8590C] hover:underline font-bold"
             >
               Are you a dispatch rider? Join EasyLife →
             </Link>
           </div>
 
           {riders.length === 0 ? (
-            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-10 text-center space-y-3">
+            <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-10 text-center space-y-3">
               <div className="text-3xl">🏍️</div>
               <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                 Dispatch Riders Onboarding in Port Harcourt
@@ -124,7 +124,7 @@ export default async function DispatchDirectoryPage() {
               </p>
               <Link
                 href="/book?cat=everyday-tasks&trade=dispatch"
-                className="inline-block px-5 py-2.5 bg-[#0D9488] hover:bg-[#0F766E] text-white rounded-xl text-xs font-bold transition shadow-xs"
+                className="inline-block px-5 py-2.5 bg-[#E8590C] hover:bg-[#E8590C] text-white rounded-xl text-xs font-bold transition shadow-xs"
               >
                 Submit Delivery Request
               </Link>
@@ -134,7 +134,7 @@ export default async function DispatchDirectoryPage() {
               {riders.map((r) => (
                 <div
                   key={r.professional_id}
-                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 space-y-3 shadow-xs hover:border-[#0D9488]/40 transition"
+                  className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-5 space-y-3 shadow-xs hover:border-[#E8590C]/40 transition"
                 >
                   <div className="flex items-start justify-between">
                     <div>
@@ -163,7 +163,7 @@ export default async function DispatchDirectoryPage() {
                     </span>
                     <Link
                       href={`/book?cat=everyday-tasks&trade=dispatch&pro=${r.professional_id}`}
-                      className="px-3 py-1.5 bg-[#0D9488] text-white rounded-lg text-xs font-bold hover:bg-[#0F766E]"
+                      className="px-3 py-1.5 bg-[#E8590C] text-white rounded-lg text-xs font-bold hover:bg-[#E8590C]"
                     >
                       Book Delivery
                     </Link>

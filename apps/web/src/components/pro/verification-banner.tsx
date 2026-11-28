@@ -64,7 +64,7 @@ export function VerificationBanner({
         <div className="shrink-0">
           <Link
             href="/pro/profile#documents"
-            className="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-amber-400 bg-white dark:bg-[#0D223A] text-xs font-bold text-amber-900 hover:bg-amber-100 transition shadow-xs"
+            className="inline-flex items-center px-3.5 py-1.5 rounded-lg border border-amber-400 bg-white dark:bg-[#1F2328] text-xs font-bold text-amber-900 hover:bg-amber-100 transition shadow-xs"
           >
             View Uploaded Documents
           </Link>
@@ -120,7 +120,7 @@ export function VerificationBanner({
         <div className="shrink-0">
           <Link
             href="/contact"
-            className="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-[#0F172A] text-white text-xs font-bold hover:bg-slate-800 transition"
+            className="inline-flex items-center px-3.5 py-1.5 rounded-lg bg-[#1F2328] text-white text-xs font-bold hover:bg-slate-800 transition"
           >
             Contact Support Desk
           </Link>
@@ -133,7 +133,7 @@ export function VerificationBanner({
   return (
     <div className="rounded-xl border border-slate-300 dark:border-slate-700 bg-gradient-to-r from-slate-50 to-teal-50/40 p-4 sm:p-5 text-slate-900 dark:text-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div className="flex items-start gap-3">
-        <div className="mt-0.5 w-8 h-8 rounded-full bg-teal-100 border border-teal-300 dark:border-teal-700 flex items-center justify-center shrink-0 text-[#0D9488] font-bold">
+        <div className="mt-0.5 w-8 h-8 rounded-full bg-teal-100 border border-teal-300 dark:border-teal-700 flex items-center justify-center shrink-0 text-[#E8590C] font-bold">
           🛡️
         </div>
         <div>
@@ -148,7 +148,7 @@ export function VerificationBanner({
       <div className="shrink-0">
         <Link
           href="/pro/profile#documents"
-          className="inline-flex items-center px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+          className="inline-flex items-center px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
         >
           Submit Verification Documents →
         </Link>

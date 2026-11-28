@@ -131,11 +131,11 @@ export default async function ServiceDetailPage({
 
     const unavailableContent = (
       <>
-        <section className="bg-[#154752] text-white border-b border-[#24989A]/25">
+        <section className="bg-[#1F2328] text-white border-b border-[#2E343B]">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-5">
             <div className="flex flex-wrap items-center gap-2">
               {availability.serviceCode && (
-                <span className="rounded-full bg-[#0D282E] border border-[#24989A]/40 px-3 py-1 text-xs font-mono font-bold text-[#24989A]">
+                <span className="rounded-full bg-[#1F2328] border border-[#2E343B] px-3 py-1 text-xs font-mono font-bold text-[#E8590C]">
                   {availability.serviceCode}
                 </span>
               )}
@@ -149,7 +149,7 @@ export default async function ServiceDetailPage({
               {isPaused ? "Temporarily Paused" : "Currently Unavailable"}
             </h1>
 
-            <p className="text-base text-[#DAE7E7] max-w-2xl leading-relaxed">
+            <p className="text-base text-[#FAF7F3] max-w-2xl leading-relaxed">
               {availability.reason ||
                 "This service is temporarily paused and not accepting new bookings or quotation requests right now."}{" "}
               Please explore active services below or check back once EasyLife administration resumes this service.
@@ -159,21 +159,21 @@ export default async function ServiceDetailPage({
               <button
                 type="button"
                 disabled
-                className="rounded-xl bg-white dark:bg-[#0D223A]/15 border border-white/25 px-5 py-3 text-sm font-bold text-white/70 cursor-not-allowed"
+                className="rounded-xl bg-white dark:bg-[#1F2328]/15 border border-white/25 px-5 py-3 text-sm font-bold text-white/70 cursor-not-allowed"
               >
                 Booking &amp; Quotation Requests Disabled
               </button>
               {parentCategory && (
                 <Link
                   href={`/services?cat=${encodeURIComponent(parentCategory.slug)}`}
-                  className="rounded-xl bg-[#24989A] hover:bg-[#1D7E80] px-4 py-3 text-sm font-semibold text-white transition-colors"
+                  className="rounded-xl bg-[#E8590C] hover:bg-[#C84A06] px-4 py-3 text-sm font-semibold text-white transition-colors"
                 >
                   Browse Active {parentCategory.name}
                 </Link>
               )}
               <Link
                 href="/services"
-                className="rounded-xl bg-white dark:bg-[#0D223A]/10 hover:bg-white dark:bg-[#0D223A]/20 border border-white/20 px-4 py-3 text-sm font-semibold text-white transition-colors"
+                className="rounded-xl bg-white dark:bg-[#1F2328]/10 hover:bg-white dark:bg-[#1F2328]/20 border border-white/20 px-4 py-3 text-sm font-semibold text-white transition-colors"
               >
                 Full Active Catalogue
               </Link>
@@ -183,14 +183,14 @@ export default async function ServiceDetailPage({
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="text-xl font-bold text-[#154752]">
+            <h2 className="text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
               {parentCategory
                 ? `Active Alternatives in ${parentCategory.name}`
                 : "Recommended Active Services"}
             </h2>
             <Link
               href="/services"
-              className="text-xs font-bold text-[#24989A] hover:underline"
+              className="text-xs font-bold text-[#E8590C] hover:underline"
             >
               Match Specialists →
             </Link>
@@ -201,7 +201,7 @@ export default async function ServiceDetailPage({
               {fallbackPopular.map((alt) => (
                 <article
                   key={alt.id}
-                  className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-5 flex flex-col justify-between gap-4 hover:border-[#24989A] transition-colors"
+                  className="rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-5 flex flex-col justify-between gap-4 hover:border-[#E8590C] transition-colors"
                 >
                   <div>
                     <span className="text-[11px] font-mono font-bold text-[#68797C]">
@@ -209,18 +209,18 @@ export default async function ServiceDetailPage({
                     </span>
                     <Link
                       href={`/services/${alt.slug}`}
-                      className="mt-1 block text-base font-bold text-[#154752] hover:text-[#24989A]"
+                      className="mt-1 block text-base font-bold text-[#1F2328] dark:text-[#FAF7F3] hover:text-[#E8590C]"
                     >
                       {alt.name}
                     </Link>
                     {alt.short_description && (
-                      <p className="mt-1.5 text-xs text-[#4E6065] line-clamp-2">
+                      <p className="mt-1.5 text-xs text-[#4A525C] dark:text-[#C3C8CF] line-clamp-2">
                         {alt.short_description}
                       </p>
                     )}
                   </div>
-                  <div className="pt-3 border-t border-[#EEF6F7] flex items-center justify-between text-xs font-bold">
-                    <span className="text-[#154752]">
+                  <div className="pt-3 border-t border-[#FCEBDD] flex items-center justify-between text-xs font-bold">
+                    <span className="text-[#1F2328] dark:text-[#FAF7F3]">
                       {formatServicePriceRange(
                         alt.base_price_min_kobo,
                         alt.base_price_max_kobo
@@ -228,7 +228,7 @@ export default async function ServiceDetailPage({
                     </span>
                     <Link
                       href={`/services/${alt.slug}`}
-                      className="text-[#24989A] hover:underline"
+                      className="text-[#E8590C] hover:underline"
                     >
                       View Service →
                     </Link>
@@ -237,13 +237,13 @@ export default async function ServiceDetailPage({
               ))}
             </div>
           ) : (
-            <div className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-6 text-sm text-[#4E6065]">
+            <div className="rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-6 text-sm text-[#4A525C] dark:text-[#C3C8CF]">
               Explore our active{" "}
-              <Link href="/services" className="font-bold text-[#24989A] underline">
+              <Link href="/services" className="font-bold text-[#E8590C] underline">
                 service catalogue
               </Link>{" "}
               or{" "}
-              <Link href="/post-a-need" className="font-bold text-[#154752] underline">
+              <Link href="/post-a-need" className="font-bold text-[#1F2328] dark:text-[#FAF7F3] underline">
                 post a need
               </Link>
               .
@@ -255,7 +255,7 @@ export default async function ServiceDetailPage({
 
     if (auth) {
       return (
-        <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+        <div className="min-h-screen bg-[#FAF7F3] pb-24 md:pb-12 text-[#1F2328]">
           <CustomerHeader
             user={{
               id: auth.user.id,
@@ -327,11 +327,11 @@ export default async function ServiceDetailPage({
   const content = (
     <>
       {/* Hero Banner & 3-Tier Breadcrumb */}
-      <section className="bg-[#154752] text-white border-b border-[#24989A]/25">
+      <section className="bg-[#1F2328] text-white border-b border-[#2E343B]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-6">
           <nav
             aria-label="Service hierarchy breadcrumb"
-            className="flex flex-wrap items-center gap-2 text-xs text-[#DAE7E7]/85"
+            className="flex flex-wrap items-center gap-2 text-xs text-[#FAF7F3]/85"
           >
             <Link href="/" className="hover:text-white transition-colors">
               Home
@@ -369,16 +369,16 @@ export default async function ServiceDetailPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-8 space-y-5">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full bg-[#0D282E] border border-[#24989A]/40 px-3 py-1 text-xs font-mono font-bold text-[#24989A]">
+                <span className="rounded-full bg-[#1F2328] border border-[#2E343B] px-3 py-1 text-xs font-mono font-bold text-[#E8590C]">
                   {service.service_code}
                 </span>
                 {service.is_featured && (
-                  <span className="rounded-full bg-white dark:bg-[#0D223A]/15 px-3 py-1 text-xs font-bold text-white">
+                  <span className="rounded-full bg-white dark:bg-[#1F2328]/15 px-3 py-1 text-xs font-bold text-white">
                     Featured Service
                   </span>
                 )}
                 {service.is_popular && (
-                  <span className="rounded-full bg-[#EE9277]/20 border border-[#EE9277]/40 px-3 py-1 text-xs font-bold text-[#FFD5C7]">
+                  <span className="rounded-full bg-[#E8590C]/20 border border-[#E8590C]/40 px-3 py-1 text-xs font-bold text-[#FFD5C7]">
                     High Demand
                   </span>
                 )}
@@ -394,7 +394,7 @@ export default async function ServiceDetailPage({
               </h1>
 
               {(service.short_description || service.description) && (
-                <p className="text-base sm:text-lg text-[#DAE7E7] max-w-3xl leading-relaxed">
+                <p className="text-base sm:text-lg text-[#FAF7F3] max-w-3xl leading-relaxed">
                   {service.description || service.short_description}
                 </p>
               )}
@@ -405,7 +405,7 @@ export default async function ServiceDetailPage({
                     <Link
                       key={kw}
                       href={`/services?q=${encodeURIComponent(kw)}`}
-                      className="rounded-full bg-white dark:bg-[#0D223A]/10 hover:bg-white dark:bg-[#0D223A]/20 border border-white/15 px-3 py-1 text-xs font-medium text-[#DAE7E7] transition-colors"
+                      className="rounded-full bg-white dark:bg-[#1F2328]/10 hover:bg-white dark:bg-[#1F2328]/20 border border-white/15 px-3 py-1 text-xs font-medium text-[#FAF7F3] transition-colors"
                     >
                       #{kw}
                     </Link>
@@ -415,9 +415,9 @@ export default async function ServiceDetailPage({
             </div>
 
             {/* Right Booking & Benchmark Summary Card */}
-            <aside className="lg:col-span-4 rounded-3xl bg-white dark:bg-[#0D223A] text-[#1F2F34] p-6 shadow-xl border border-white/60 space-y-5">
+            <aside className="lg:col-span-4 rounded-3xl bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] p-6 shadow-xl border border-white/60 space-y-5">
               <div className="flex items-center gap-3.5">
-                <div className="h-14 w-14 rounded-2xl bg-[#EEF6F7] border border-[#DAE7E7] flex items-center justify-center shrink-0 overflow-hidden">
+                <div className="h-14 w-14 rounded-2xl bg-[#FCEBDD] dark:bg-[#2E343B] border border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-center shrink-0 overflow-hidden">
                   {heroImageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -434,7 +434,7 @@ export default async function ServiceDetailPage({
                         service.icon_name || parentCategory?.icon_name,
                         parentCategory?.slug
                       )}
-                      className="h-7 w-7 text-[#154752]"
+                      className="h-7 w-7 text-[#1F2328] dark:text-[#FAF7F3]"
                     />
                   )}
                 </div>
@@ -442,7 +442,7 @@ export default async function ServiceDetailPage({
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#68797C] block">
                     Typical Estimate Benchmark
                   </span>
-                  <p className="text-lg font-extrabold text-[#154752]">
+                  <p className="text-lg font-extrabold text-[#1F2328] dark:text-[#FAF7F3]">
                     {formatServicePriceRange(
                       service.base_price_min_kobo,
                       service.base_price_max_kobo
@@ -451,16 +451,16 @@ export default async function ServiceDetailPage({
                 </div>
               </div>
 
-              <dl className="grid grid-cols-2 gap-3 pt-3 border-t border-[#EEF6F7] text-xs">
-                <div className="rounded-xl bg-[#F8FAFC] p-3 border border-[#E2E8F0]">
+              <dl className="grid grid-cols-2 gap-3 pt-3 border-t border-[#FCEBDD] text-xs">
+                <div className="rounded-xl bg-[#FAF7F3] p-3 border border-[#E2E8F0]">
                   <dt className="text-[#68797C] font-medium">Typical Duration</dt>
-                  <dd className="mt-0.5 font-bold text-[#154752]">
+                  <dd className="mt-0.5 font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                     {durationText || "Scoped on inspection"}
                   </dd>
                 </div>
-                <div className="rounded-xl bg-[#F8FAFC] p-3 border border-[#E2E8F0]">
+                <div className="rounded-xl bg-[#FAF7F3] p-3 border border-[#E2E8F0]">
                   <dt className="text-[#68797C] font-medium">Min. Pro Experience</dt>
-                  <dd className="mt-0.5 font-bold text-[#154752]">
+                  <dd className="mt-0.5 font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                     {service.min_years_experience > 0
                       ? `${service.min_years_experience}+ years`
                       : "Vetted Specialist"}
@@ -471,7 +471,7 @@ export default async function ServiceDetailPage({
               <div className="space-y-2.5 pt-1">
                 <Link
                   href={bookHref}
-                  className="w-full inline-flex items-center justify-center rounded-xl bg-[#24989A] hover:bg-[#1D7E80] px-5 py-3.5 text-sm font-bold text-white shadow-sm transition-colors"
+                  className="w-full inline-flex items-center justify-center rounded-xl bg-[#E8590C] hover:bg-[#C84A06] px-5 py-3.5 text-sm font-bold text-white shadow-sm transition-colors"
                 >
                   Book This Service →
                 </Link>
@@ -482,7 +482,7 @@ export default async function ServiceDetailPage({
                         ? `&sub=${encodeURIComponent(parentSubcategory.slug)}`
                         : ""
                     }&service=${encodeURIComponent(service.slug)}`}
-                    className="w-full inline-flex items-center justify-center rounded-xl border border-[#DAE7E7] bg-[#F3F8F8] hover:bg-[#EEF6F7] px-4 py-2.5 text-xs font-bold text-[#154752] transition-colors"
+                    className="w-full inline-flex items-center justify-center rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] hover:bg-[#FCEBDD] dark:bg-[#2E343B] px-4 py-2.5 text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] transition-colors"
                   >
                     Filter Matching Pros in Directory
                   </Link>
@@ -502,13 +502,13 @@ export default async function ServiceDetailPage({
         {/* Service-Specific Requirements & Provider Verification Criteria */}
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Customer Scope / Preparation Checklist */}
-          <div className="rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-6 sm:p-7 shadow-xs space-y-4">
+          <div className="rounded-3xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-7 shadow-xs space-y-4">
             <div className="flex items-center gap-3">
-              <span className="h-10 w-10 rounded-xl bg-[#EEF6F7] text-[#154752] flex items-center justify-center">
+              <span className="h-10 w-10 rounded-xl bg-[#FCEBDD] dark:bg-[#2E343B] text-[#1F2328] dark:text-[#FAF7F3] flex items-center justify-center">
                 <Icon name="clipboard" className="h-5 w-5" />
               </span>
               <div>
-                <h2 className="text-lg font-bold text-[#154752]">
+                <h2 className="text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                   Customer Information &amp; Preparation
                 </h2>
                 <p className="text-xs text-[#68797C]">
@@ -518,7 +518,7 @@ export default async function ServiceDetailPage({
             </div>
 
             {customerRequirements.length === 0 ? (
-              <div className="rounded-2xl bg-[#F8FAFC] border border-[#E2E8F0] p-4 text-sm text-[#4E6065]">
+              <div className="rounded-2xl bg-[#FAF7F3] border border-[#E2E8F0] p-4 text-sm text-[#4A525C] dark:text-[#C3C8CF]">
                 Share photos of the fault area, location access details, and your preferred date when submitting your booking request.
               </div>
             ) : (
@@ -526,16 +526,16 @@ export default async function ServiceDetailPage({
                 {customerRequirements.map((req) => (
                   <li
                     key={req.id}
-                    className="rounded-2xl bg-[#F8FBFB] border border-[#DAE7E7] p-4 space-y-1"
+                    className="rounded-2xl bg-[#F8FBFB] border border-[#E6E0D8] dark:border-[#2E343B] p-4 space-y-1"
                   >
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-bold text-[#154752]">
+                      <span className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                         {req.title}
                       </span>
                       <span
                         className={`rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase ${
                           req.is_required
-                            ? "bg-[#154752] text-white"
+                            ? "bg-[#E8590C] text-white"
                             : "bg-slate-200 text-slate-700 dark:text-slate-200"
                         }`}
                       >
@@ -543,7 +543,7 @@ export default async function ServiceDetailPage({
                       </span>
                     </div>
                     {req.description && (
-                      <p className="text-xs text-[#4E6065] leading-relaxed">
+                      <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] leading-relaxed">
                         {req.description}
                       </p>
                     )}
@@ -554,13 +554,13 @@ export default async function ServiceDetailPage({
           </div>
 
           {/* Provider Verification & Qualification Requirements */}
-          <div className="rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-6 sm:p-7 shadow-xs space-y-4">
+          <div className="rounded-3xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-7 shadow-xs space-y-4">
             <div className="flex items-center gap-3">
-              <span className="h-10 w-10 rounded-xl bg-[#EEF6F7] text-[#24989A] flex items-center justify-center">
+              <span className="h-10 w-10 rounded-xl bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C] flex items-center justify-center">
                 <Icon name="shield" className="h-5 w-5" />
               </span>
               <div>
-                <h2 className="text-lg font-bold text-[#154752]">
+                <h2 className="text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                   Provider Qualification &amp; Verification Standards
                 </h2>
                 <p className="text-xs text-[#68797C]">
@@ -576,7 +576,7 @@ export default async function ServiceDetailPage({
                 </span>
               )}
               {service.requires_trade_certification && (
-                <span className="rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-3 py-1.5 text-xs font-semibold text-[#0F766E]">
+                <span className="rounded-xl bg-[#FCEBDD] dark:bg-[#2E343B] border border-[#E8590C]/30 px-3 py-1.5 text-xs font-semibold text-[#E8590C]">
                   ✓ Trade Certification Required
                 </span>
               )}
@@ -586,7 +586,7 @@ export default async function ServiceDetailPage({
                 </span>
               )}
               {service.min_years_experience > 0 && (
-                <span className="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654] px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200">
+                <span className="rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#2E343B] px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200">
                   Minimum {service.min_years_experience} Years Experience
                 </span>
               )}
@@ -594,8 +594,8 @@ export default async function ServiceDetailPage({
 
             {Array.isArray(service.eligible_provider_types) &&
               service.eligible_provider_types.length > 0 && (
-                <div className="text-xs text-[#4E6065]">
-                  <span className="font-bold text-[#154752]">Eligible Providers: </span>
+                <div className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
+                  <span className="font-bold text-[#1F2328] dark:text-[#FAF7F3]">Eligible Providers: </span>
                   {service.eligible_provider_types
                     .map((t) => PROVIDER_TYPE_LABELS[t] || t)
                     .join(" • ")}
@@ -604,8 +604,8 @@ export default async function ServiceDetailPage({
 
             {Array.isArray(service.required_document_types) &&
               service.required_document_types.length > 0 && (
-                <div className="text-xs text-[#4E6065]">
-                  <span className="font-bold text-[#154752]">Verified Documents Checked: </span>
+                <div className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
+                  <span className="font-bold text-[#1F2328] dark:text-[#FAF7F3]">Verified Documents Checked: </span>
                   {service.required_document_types
                     .map((d) => DOCUMENT_TYPE_LABELS[d] || d)
                     .join(", ")}
@@ -617,11 +617,11 @@ export default async function ServiceDetailPage({
                 {providerRequirements.map((req) => (
                   <li
                     key={req.id}
-                    className="rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] p-3 text-xs"
+                    className="rounded-xl bg-[#FAF7F3] border border-[#E2E8F0] p-3 text-xs"
                   >
-                    <p className="font-bold text-[#154752]">{req.title}</p>
+                    <p className="font-bold text-[#1F2328] dark:text-[#FAF7F3]">{req.title}</p>
                     {req.description && (
-                      <p className="text-[#4E6065] mt-0.5">{req.description}</p>
+                      <p className="text-[#4A525C] dark:text-[#C3C8CF] mt-0.5">{req.description}</p>
                     )}
                   </li>
                 ))}
@@ -644,14 +644,14 @@ export default async function ServiceDetailPage({
 
         {/* Related Services in Same Subcategory / Category */}
         {relatedServices.length > 0 && (
-          <section className="pt-8 border-t border-[#DAE7E7] space-y-5">
+          <section className="pt-8 border-t border-[#E6E0D8] dark:border-[#2E343B] space-y-5">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="text-xl font-bold text-[#154752]">
+              <h2 className="text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                 Related Services in {parentSubcategory?.name || parentCategory?.name}
               </h2>
               <Link
                 href="/services"
-                className="text-xs font-bold text-[#24989A] hover:underline"
+                className="text-xs font-bold text-[#E8590C] hover:underline"
               >
                 Full Catalogue →
               </Link>
@@ -661,22 +661,22 @@ export default async function ServiceDetailPage({
                 <Link
                   key={rel.id}
                   href={`/services/${rel.slug}`}
-                  className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-4 hover:border-[#24989A] transition-colors flex flex-col justify-between gap-3"
+                  className="rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-4 hover:border-[#E8590C] transition-colors flex flex-col justify-between gap-3"
                 >
                   <div>
                     <span className="text-[10px] font-mono font-bold text-[#68797C]">
                       {rel.service_code}
                     </span>
-                    <h3 className="mt-1 text-sm font-bold text-[#154752]">
+                    <h3 className="mt-1 text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                       {rel.name}
                     </h3>
                     {rel.short_description && (
-                      <p className="mt-1 text-xs text-[#4E6065] line-clamp-2">
+                      <p className="mt-1 text-xs text-[#4A525C] dark:text-[#C3C8CF] line-clamp-2">
                         {rel.short_description}
                       </p>
                     )}
                   </div>
-                  <span className="text-xs font-bold text-[#24989A]">
+                  <span className="text-xs font-bold text-[#E8590C]">
                     {formatServicePriceRange(
                       rel.base_price_min_kobo,
                       rel.base_price_max_kobo
@@ -694,7 +694,7 @@ export default async function ServiceDetailPage({
 
   if (auth) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+      <div className="min-h-screen bg-[#FAF7F3] pb-24 md:pb-12 text-[#1F2328]">
         <CustomerHeader
           user={{
             id: auth.user.id,
@@ -721,7 +721,7 @@ function MatchedSpecialistsSkeleton() {
       <div className="h-7 w-72 rounded bg-slate-200" />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="h-44 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654]" />
+          <div key={i} className="h-44 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B]" />
         ))}
       </div>
     </section>
@@ -753,10 +753,10 @@ async function MatchedSpecialistsSection({
     <section className="space-y-5">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold text-[#154752]">
+          <h2 className="text-2xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
             Matched Verified Specialists ({matchedPros.length})
           </h2>
-          <p className="text-sm text-[#4E6065] mt-1">
+          <p className="text-sm text-[#4A525C] dark:text-[#C3C8CF] mt-1">
             Accredited technicians offering {serviceName}
             {normalizedCity !== "All Cities" ? ` in ${normalizedCity}` : " across Port Harcourt, Lagos, and Abuja"}.
           </p>
@@ -775,8 +775,8 @@ async function MatchedSpecialistsSection({
                 }
                 className={`rounded-full px-3 py-1.5 text-xs font-bold transition-colors ${
                   active
-                    ? "bg-[#154752] text-white"
-                    : "bg-white dark:bg-[#0D223A] border border-[#DAE7E7] text-[#154752] hover:border-[#24989A]"
+                    ? "bg-[#E8590C] text-white"
+                    : "bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-[#1F2328] dark:text-[#FAF7F3] hover:border-[#E8590C]"
                 }`}
               >
                 {hub}
@@ -787,26 +787,26 @@ async function MatchedSpecialistsSection({
       </div>
 
       {matchedPros.length === 0 ? (
-        <div className="rounded-3xl bg-white dark:bg-[#0D223A] border border-dashed border-[#CBD5E1] p-10 text-center max-w-2xl mx-auto space-y-4">
-          <h3 className="text-base font-bold text-[#154752]">
+        <div className="rounded-3xl bg-white dark:bg-[#1F2328] border border-dashed border-[#CBD5E1] p-10 text-center max-w-2xl mx-auto space-y-4">
+          <h3 className="text-base font-bold text-[#1F2328] dark:text-[#FAF7F3]">
             No specialist profile currently listed directly for {serviceName}
             {normalizedCity !== "All Cities" ? ` in ${normalizedCity}` : ""}
           </h3>
-          <p className="text-sm text-[#4E6065]">
+          <p className="text-sm text-[#4A525C] dark:text-[#C3C8CF]">
             Submit a request with your job description and our verified technicians in{" "}
             {parentCategoryName || "this trade"} will respond with itemised quotes.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href={bookHref}
-              className="rounded-xl bg-[#24989A] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#1D7E80]"
+              className="rounded-xl bg-[#E8590C] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#C84A06]"
             >
               Request {serviceName} →
             </Link>
             {normalizedCity !== "All Cities" && (
               <Link
                 href={`/services/${serviceSlug}`}
-                className="rounded-xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] px-4 py-2.5 text-sm font-semibold text-[#154752]"
+                className="rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] px-4 py-2.5 text-sm font-semibold text-[#1F2328] dark:text-[#FAF7F3]"
               >
                 Check All Cities
               </Link>
@@ -818,11 +818,11 @@ async function MatchedSpecialistsSection({
           {matchedPros.map((pro) => (
             <article
               key={pro.professional_id}
-              className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] p-5 shadow-xs hover:border-[#24989A] transition-all flex flex-col justify-between space-y-4"
+              className="rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-xs hover:border-[#E8590C] transition-all flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 <div className="flex items-start gap-3">
-                  <div className="h-12 w-12 rounded-full bg-[#154752] text-white font-extrabold flex items-center justify-center shrink-0 overflow-hidden">
+                  <div className="h-12 w-12 rounded-full bg-[#E8590C] text-white font-extrabold flex items-center justify-center shrink-0 overflow-hidden">
                     {pro.avatar_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -840,12 +840,12 @@ async function MatchedSpecialistsSection({
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
-                      <h3 className="text-sm font-bold text-[#154752] truncate">
+                      <h3 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3] truncate">
                         {pro.business_name}
                       </h3>
                       {pro.is_verified && (
                         <span
-                          className="text-[#24989A] text-xs font-bold shrink-0"
+                          className="text-[#E8590C] text-xs font-bold shrink-0"
                           title="Verified Professional"
                         >
                           ✓
@@ -867,23 +867,23 @@ async function MatchedSpecialistsSection({
                 </div>
 
                 <div className="flex flex-wrap gap-1.5 text-[11px]">
-                  <span className="rounded-md bg-[#EEF6F7] px-2 py-0.5 font-semibold text-[#154752]">
+                  <span className="rounded-md bg-[#FCEBDD] dark:bg-[#2E343B] px-2 py-0.5 font-semibold text-[#1F2328] dark:text-[#FAF7F3]">
                     {pro.primary_city}
                   </span>
                   {pro.service_title && (
-                    <span className="rounded-md bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-2 py-0.5 font-medium text-[#0F766E] truncate max-w-[190px]">
+                    <span className="rounded-md bg-[#FCEBDD] dark:bg-[#2E343B] border border-[#E8590C]/30 px-2 py-0.5 font-medium text-[#E8590C] truncate max-w-[190px]">
                       {pro.service_title}
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#EEF6F7] flex items-center justify-between">
+              <div className="pt-3 border-t border-[#FCEBDD] flex items-center justify-between">
                 <div>
                   <span className="text-[10px] uppercase tracking-wider text-[#68797C] block">
                     Call-out Benchmark
                   </span>
-                  <span className="text-sm font-extrabold text-[#154752]">
+                  <span className="text-sm font-extrabold text-[#1F2328] dark:text-[#FAF7F3]">
                     {pro.base_callout_fee_kobo > 0
                       ? formatNairaFromKobo(pro.base_callout_fee_kobo)
                       : "Price available on request"}
@@ -892,13 +892,13 @@ async function MatchedSpecialistsSection({
                 <div className="flex items-center gap-2 text-xs font-bold">
                   <Link
                     href={`/professionals/${pro.professional_id}`}
-                    className="rounded-lg border border-[#DAE7E7] px-3 py-1.5 text-[#154752] hover:bg-[#F3F8F8]"
+                    className="rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] px-3 py-1.5 text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:bg-[#1F2328]"
                   >
                     Profile
                   </Link>
                   <Link
                     href={`${bookHref}&pro=${encodeURIComponent(pro.professional_id)}`}
-                    className="rounded-lg bg-[#24989A] px-3.5 py-1.5 text-white hover:bg-[#1D7E80]"
+                    className="rounded-lg bg-[#E8590C] px-3.5 py-1.5 text-white hover:bg-[#C84A06]"
                   >
                     Book Pro
                   </Link>

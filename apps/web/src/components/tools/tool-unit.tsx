@@ -52,7 +52,7 @@ export function ToolUnit() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Measurements &amp; Quantity Surveying
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -63,7 +63,7 @@ export function ToolUnit() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         <div className="flex gap-2 flex-wrap">
           {(["land", "length", "weight", "volume"] as const).map((t) => (
             <button
@@ -72,8 +72,8 @@ export function ToolUnit() {
               onClick={() => setUnitType(t)}
               className={`px-4 py-2 rounded-xl text-xs font-bold capitalize transition cursor-pointer ${
                 unitType === t
-                  ? "bg-[#0D9488] text-white shadow-xs"
-                  : "bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+                  ? "bg-[#E8590C] text-white shadow-xs"
+                  : "bg-white dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
               }`}
             >
               {t === "land" ? "Nigerian Land Plots" : t === "weight" ? "Weight & Cement" : t === "volume" ? "Fuel & Volumes" : "Distance / Length"}
@@ -89,13 +89,13 @@ export function ToolUnit() {
             type="number"
             value={val}
             onChange={(e) => setVal(e.target.value)}
-            className="w-full sm:w-64 px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs sm:text-sm font-mono font-bold"
+            className="w-full sm:w-64 px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs sm:text-sm font-mono font-bold"
           />
         </div>
 
         {/* Dynamic Conversion Grids */}
         {unitType === "land" && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 text-xs">
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Standard Plots (50 x 100 ft)</span>
               <span className="font-black text-slate-900 dark:text-white text-base mt-0.5 block font-mono">
@@ -104,7 +104,7 @@ export function ToolUnit() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Square Metres (m²)</span>
-              <span className="font-black text-[#0D9488] text-base mt-0.5 block font-mono">
+              <span className="font-black text-[#E8590C] text-base mt-0.5 block font-mono">
                 {landSqM.toLocaleString()} m²
               </span>
             </div>
@@ -124,14 +124,14 @@ export function ToolUnit() {
         )}
 
         {unitType === "length" && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 text-xs">
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Metres</span>
               <span className="font-black text-slate-900 dark:text-white text-base font-mono">{lenM} m</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Feet</span>
-              <span className="font-black text-[#0D9488] text-base font-mono">{lenFt.toFixed(2)} ft</span>
+              <span className="font-black text-[#E8590C] text-base font-mono">{lenFt.toFixed(2)} ft</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Inches</span>
@@ -145,14 +145,14 @@ export function ToolUnit() {
         )}
 
         {unitType === "weight" && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 text-xs">
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Kilograms</span>
               <span className="font-black text-slate-900 dark:text-white text-base font-mono">{wtKg} kg</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">50kg Cement Bags</span>
-              <span className="font-black text-[#0D9488] text-base font-mono">{wtCementBags.toFixed(1)} Bags</span>
+              <span className="font-black text-[#E8590C] text-base font-mono">{wtCementBags.toFixed(1)} Bags</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Pounds</span>
@@ -166,14 +166,14 @@ export function ToolUnit() {
         )}
 
         {unitType === "volume" && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 text-xs">
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">Litres</span>
               <span className="font-black text-slate-900 dark:text-white text-base font-mono">{volL} L</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">25L Yellow Jerrycans</span>
-              <span className="font-black text-[#0D9488] text-base font-mono">{volKeg25L.toFixed(1)} Kegs</span>
+              <span className="font-black text-[#E8590C] text-base font-mono">{volKeg25L.toFixed(1)} Kegs</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] font-bold uppercase">200L Steel Drums</span>
@@ -187,7 +187,7 @@ export function ToolUnit() {
         )}
 
         {/* Site Boundary Wall & Block Estimator */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
           <span className="font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
             Plot Boundary Fence &amp; Block Quantity Estimator
           </span>
@@ -198,7 +198,7 @@ export function ToolUnit() {
                 type="number"
                 value={plotLengthFt}
                 onChange={(e) => setPlotLengthFt(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -207,12 +207,12 @@ export function ToolUnit() {
                 type="number"
                 value={plotWidthFt}
                 onChange={(e) => setPlotWidthFt(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
           </div>
 
-          <div className="p-3 bg-teal-50/70 dark:bg-[#071526] rounded-xl border border-teal-200 dark:border-slate-700 grid grid-cols-3 gap-2 text-center">
+          <div className="p-3 bg-[#FCEBDD]/70 dark:bg-[#1F2328] rounded-xl border border-[#E8590C]/30 dark:border-slate-700 grid grid-cols-3 gap-2 text-center">
             <div>
               <span className="text-slate-500 block text-[10px]">Perimeter</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono">
@@ -221,7 +221,7 @@ export function ToolUnit() {
             </div>
             <div>
               <span className="text-slate-500 block text-[10px]">Estimated 9-inch Blocks</span>
-              <span className="font-black text-[#0D9488] font-mono text-sm">
+              <span className="font-black text-[#E8590C] font-mono text-sm">
                 ~{estBlocks.toLocaleString()} Blocks
               </span>
             </div>
@@ -238,7 +238,7 @@ export function ToolUnit() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Technical Survey Certificate</span>
           </button>
@@ -255,7 +255,7 @@ export function ToolUnit() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Land Cadastral &amp; Quantity Surveying
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -276,7 +276,7 @@ export function ToolUnit() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Boundary Fence Requirement</span>
-              <span className="text-xl font-black text-[#0D9488] font-mono mt-0.5 block">
+              <span className="text-xl font-black text-[#E8590C] font-mono mt-0.5 block">
                 ~{estBlocks.toLocaleString()} Blocks
               </span>
               <p className="text-slate-500 mt-1">Based on {perimeterM.toFixed(1)}m perimeter wall</p>
@@ -295,7 +295,7 @@ export function ToolUnit() {
               <tbody className="divide-y divide-slate-200 font-mono text-[11px]">
                 <tr>
                   <td className="p-2.5 font-bold font-sans">Square Metres (m²)</td>
-                  <td className="p-2.5 text-right font-bold text-[#0D9488]">{landSqM.toLocaleString()} m²</td>
+                  <td className="p-2.5 text-right font-bold text-[#E8590C]">{landSqM.toLocaleString()} m²</td>
                   <td className="p-2.5 text-right text-slate-500 font-sans">Standard metric cadastre</td>
                 </tr>
                 <tr>

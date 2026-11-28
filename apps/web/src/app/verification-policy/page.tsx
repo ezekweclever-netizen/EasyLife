@@ -65,11 +65,11 @@ export default function VerificationPolicyPage() {
       <Section tone="grey">
         <div className="space-y-12">
           {/* Tier 1 Detail */}
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-8 shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               Stage 1
             </span>
-            <h3 className="text-xl font-bold text-[#0F172A] mt-1 mb-3">
+            <h3 className="text-xl font-bold text-[#1F2328] mt-1 mb-3">
               Tier 1: Government Identity &amp; Contact Verification
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
@@ -86,11 +86,11 @@ export default function VerificationPolicyPage() {
           </div>
 
           {/* Tier 2 Detail */}
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-8 shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               Stage 2
             </span>
-            <h3 className="text-xl font-bold text-[#0F172A] mt-1 mb-3">
+            <h3 className="text-xl font-bold text-[#1F2328] mt-1 mb-3">
               Tier 2: Trade Competence &amp; Operating Address
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
@@ -106,11 +106,11 @@ export default function VerificationPolicyPage() {
           </div>
 
           {/* Tier 3 Detail */}
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-8 shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               Stage 3
             </span>
-            <h3 className="text-xl font-bold text-[#0F172A] mt-1 mb-3">
+            <h3 className="text-xl font-bold text-[#1F2328] mt-1 mb-3">
               Tier 3: Guarantor &amp; Professional Reference
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
@@ -160,17 +160,17 @@ export default function VerificationPolicyPage() {
             </ul>
           </div>
 
-          <div className="border border-slate-200 dark:border-[#163654] rounded-xl p-6 bg-[#F8FAFC]">
-            <h4 className="text-base font-bold text-[#0F172A] mb-3">
+          <div className="border border-[#E6E0D8] dark:border-[#2E343B] rounded-xl p-6 bg-[#FAF7F3] dark:bg-[#1F2328]">
+            <h4 className="text-base font-bold text-[#1F2328] mb-3">
               Customer Feedback &amp; Re-audits
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Every completed job requires mutual customer and technician ratings. Technicians who maintain consistently high quality and customer satisfaction are awarded Priority Pro status. Technicians whose ratings fall below platform benchmarks are temporarily suspended and required to complete refresher orientation.
             </p>
-            <div className="mt-6 pt-4 border-t border-slate-200 dark:border-[#163654]">
+            <div className="mt-6 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B]">
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 To report a safety or conduct concern, contact our dedicated operations team immediately at{" "}
-                <Link href="/contact" className="text-[#0D9488] font-semibold underline">
+                <Link href="/contact" className="text-[#E8590C] font-semibold underline">
                   Safety &amp; Compliance Desk
                 </Link>
                 .

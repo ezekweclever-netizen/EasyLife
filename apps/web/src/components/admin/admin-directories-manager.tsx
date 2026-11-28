@@ -63,12 +63,12 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
   return (
     <div className="space-y-6">
       {/* Tab Navigation */}
-      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-[#163654] pb-2 text-xs font-bold">
+      <div className="flex items-center gap-2 border-b border-slate-200 dark:border-[#2E343B] pb-2 text-xs font-bold">
         <button
           onClick={() => setActiveTab("reports")}
           className={`px-4 py-2 rounded-xl transition ${
             activeTab === "reports"
-              ? "bg-[#0A2540] text-white shadow-xs"
+              ? "bg-[#1F2328] text-white shadow-xs"
               : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
           }`}
         >
@@ -78,7 +78,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
           onClick={() => setActiveTab("businesses")}
           className={`px-4 py-2 rounded-xl transition ${
             activeTab === "businesses"
-              ? "bg-[#0A2540] text-white shadow-xs"
+              ? "bg-[#1F2328] text-white shadow-xs"
               : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
           }`}
         >
@@ -88,7 +88,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
           onClick={() => setActiveTab("healthcare")}
           className={`px-4 py-2 rounded-xl transition ${
             activeTab === "healthcare"
-              ? "bg-[#0A2540] text-white shadow-xs"
+              ? "bg-[#1F2328] text-white shadow-xs"
               : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
           }`}
         >
@@ -97,7 +97,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
       </div>
 
       {feedback && (
-        <div className="p-3 bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#5CD3D5] rounded-xl text-xs font-semibold">
+        <div className="p-3 bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#F06A1F] rounded-xl text-xs font-semibold">
           {feedback}
         </div>
       )}
@@ -115,7 +115,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
           </div>
 
           {reports.length === 0 ? (
-            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-8 text-center text-xs text-slate-500 dark:text-slate-400">
+            <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-8 text-center text-xs text-slate-500 dark:text-slate-400">
               ✓ No active reports. All listings are currently compliant with platform guidelines.
             </div>
           ) : (
@@ -123,7 +123,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
               {reports.map((rep) => (
                 <div
                   key={rep.id}
-                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 space-y-3 shadow-xs"
+                  className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-4 space-y-3 shadow-xs"
                 >
                   <div className="flex items-start justify-between">
                     <div>
@@ -147,7 +147,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-[#071526] p-2.5 rounded-lg border border-slate-200 dark:border-[#163654]">
+                  <p className="text-xs text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-[#1F2328] p-2.5 rounded-lg border border-slate-200 dark:border-[#2E343B]">
                     &quot;{rep.details}&quot;
                   </p>
 
@@ -201,10 +201,10 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
             </span>
           </div>
 
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-xs">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] overflow-hidden shadow-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-[#071526] border-b border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 font-bold uppercase text-[10px]">
+                <thead className="bg-slate-50 dark:bg-[#1F2328] border-b border-slate-200 dark:border-[#2E343B] text-slate-600 dark:text-slate-300 font-bold uppercase text-[10px]">
                   <tr>
                     <th className="p-3">Business Name</th>
                     <th className="p-3">Category</th>
@@ -215,7 +215,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {businesses.map((b) => (
-                    <tr key={b.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]">
+                    <tr key={b.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]">
                       <td className="p-3">
                         <p className="font-bold text-slate-900 dark:text-white">{b.name}</p>
                         <p className="text-[11px] text-slate-400">{b.registration_number || "CAC Unregistered"}</p>
@@ -291,10 +291,10 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
             </span>
           </div>
 
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-xs">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] overflow-hidden shadow-xs">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-slate-50 dark:bg-[#071526] border-b border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 font-bold uppercase text-[10px]">
+                <thead className="bg-slate-50 dark:bg-[#1F2328] border-b border-slate-200 dark:border-[#2E343B] text-slate-600 dark:text-slate-300 font-bold uppercase text-[10px]">
                   <tr>
                     <th className="p-3">Facility Name</th>
                     <th className="p-3">Type</th>
@@ -306,7 +306,7 @@ export function AdminDirectoriesManager(props: AdminDirectoriesManagerProps) {
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {facilities.map((f) => (
-                    <tr key={f.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]">
+                    <tr key={f.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]">
                       <td className="p-3 font-bold text-slate-900 dark:text-white">{f.name}</td>
                       <td className="p-3 capitalize text-slate-700 dark:text-slate-200 font-semibold">{f.facility_type}</td>
                       <td className="p-3 text-slate-600 dark:text-slate-300">{f.address}, {f.lga}</td>

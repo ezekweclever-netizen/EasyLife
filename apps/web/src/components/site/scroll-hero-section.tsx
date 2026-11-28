@@ -105,7 +105,7 @@ export function ScrollHeroSection() {
     <section
       ref={sectionRef}
       aria-label="EasyLife Marketplace Hero"
-      className="relative w-full min-h-[620px] sm:min-h-[660px] md:min-h-[680px] lg:min-h-[calc(100svh-72px)] lg:max-h-[880px] flex items-center justify-center overflow-hidden bg-[#0A1D36] text-white border-b border-[#24989A]/20"
+      className="relative w-full min-h-[620px] sm:min-h-[660px] md:min-h-[680px] lg:min-h-[calc(100svh-72px)] lg:max-h-[880px] flex items-center justify-center overflow-hidden bg-[#1F2328] text-white border-b border-[#2E343B]"
     >
       {/* Full-Width, Full-Height Edge-to-Edge Background Photograph */}
       <div
@@ -137,17 +137,17 @@ export function ScrollHeroSection() {
           className="max-w-3xl mx-auto text-center will-change-transform flex flex-col items-center justify-center"
         >
           {/* Pilot Cities Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 border border-white/25 text-[#E6F1F5] text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-xs">
-            <span className="h-2 w-2 rounded-full bg-[#EE9277] animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 border border-white/25 text-[#FAF7F3] text-xs sm:text-sm font-semibold mb-4 sm:mb-5 shadow-xs">
+            <span className="h-2 w-2 rounded-full bg-[#E8590C] animate-pulse" />
             <span>Operating in Port Harcourt • Lagos • Abuja</span>
           </div>
 
           <h1 className="text-[2.1rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.6rem] font-bold tracking-tight text-white leading-[1.12] drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
             Everyday Problems. <br />
-            <span className="text-[#5CD3D5]">Smarter Solutions.</span>
+            <span className="text-[#E8590C]">Smarter Solutions.</span>
           </h1>
 
-          <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-[#E6F1F5] max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+          <p className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-[#FAF7F3] max-w-2xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
             EasyLife helps people and businesses find reliable everyday services and manage essential maintenance with less effort.
           </p>
 

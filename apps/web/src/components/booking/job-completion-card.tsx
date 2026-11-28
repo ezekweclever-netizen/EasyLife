@@ -122,7 +122,7 @@ export function JobCompletionCard({
 
         {/* Professional Notes */}
         {proNotes && (
-          <div className="bg-white dark:bg-[#0D223A]/80 backdrop-blur-xs rounded-2xl border border-amber-200 dark:border-amber-800 p-4 space-y-1">
+          <div className="bg-white dark:bg-[#1F2328]/80 backdrop-blur-xs rounded-2xl border border-amber-200 dark:border-amber-800 p-4 space-y-1">
             <span className="text-[11px] font-bold text-amber-800 dark:text-amber-300 uppercase tracking-wider block">
               Specialist Completion Notes
             </span>
@@ -162,7 +162,7 @@ export function JobCompletionCard({
               setActionError(null);
               setShowReworkModal(true);
             }}
-            className="px-5 py-3.5 rounded-2xl bg-white dark:bg-[#0D223A] border border-amber-300 dark:border-amber-700 text-amber-900 hover:bg-amber-100 font-bold text-xs transition disabled:opacity-50"
+            className="px-5 py-3.5 rounded-2xl bg-white dark:bg-[#1F2328] border border-amber-300 dark:border-amber-700 text-amber-900 hover:bg-amber-100 font-bold text-xs transition disabled:opacity-50"
           >
             Report Incomplete Work
           </button>
@@ -180,7 +180,7 @@ export function JobCompletionCard({
         {/* Rework Modal */}
         {showReworkModal && (
           <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200 dark:border-[#163654]">
+            <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200 dark:border-[#2E343B]">
               <div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white">Report Incomplete Work</h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -205,7 +205,7 @@ export function JobCompletionCard({
                     value={reworkReason}
                     onChange={(e) => setReworkReason(e.target.value)}
                     placeholder="e.g. The leak under the kitchen sink is still dripping; the safety valve was not installed as quoted..."
-                    className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                    className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                   />
                 </div>
 
@@ -232,7 +232,7 @@ export function JobCompletionCard({
                   {reworkPhotos.length > 0 && (
                     <div className="mt-2 space-y-1">
                       {reworkPhotos.map((p, idx) => (
-                        <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 dark:bg-[#071526] p-2 rounded-lg border">
+                        <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 dark:bg-[#1F2328] p-2 rounded-lg border">
                           <span className="truncate max-w-xs">{p}</span>
                           <button
                             type="button"
@@ -315,7 +315,7 @@ export function JobCompletionCard({
             <button
               type="button"
               onClick={onOpenReview}
-              className="px-6 py-3 rounded-2xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-extrabold text-xs shadow-md transition self-start sm:self-auto flex items-center gap-2"
+              className="px-6 py-3 rounded-2xl bg-[#E8590C] hover:bg-[#C84A06] text-white font-extrabold text-xs shadow-md transition self-start sm:self-auto flex items-center gap-2"
             >
               ★ Rate &amp; Review Specialist
             </button>

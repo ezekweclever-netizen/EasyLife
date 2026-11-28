@@ -3,12 +3,14 @@ import Link from "next/link";
 import { ButtonLink } from "@/components/ui/button";
 import { Icon, type IconName } from "./icons";
 
-type SectionTone = "white" | "grey" | "navy";
+type SectionTone = "white" | "grey" | "navy" | "cream" | "peach";
 
 const SECTION_TONES: Record<SectionTone, string> = {
-  white: "bg-white dark:bg-[#071526] text-[#1F2F34] dark:text-slate-100",
-  grey: "bg-[#F3F8F8] dark:bg-[#071526] text-[#1F2F34] dark:text-slate-100",
-  navy: "bg-[#154752] text-white",
+  white: "bg-white dark:bg-[#15181C] text-[#1F2328] dark:text-[#FAF7F3]",
+  grey: "bg-[#FAF7F3] dark:bg-[#15181C] text-[#1F2328] dark:text-[#FAF7F3]",
+  cream: "bg-[#FAF7F3] dark:bg-[#15181C] text-[#1F2328] dark:text-[#FAF7F3]",
+  peach: "bg-[#FCEBDD] dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3]",
+  navy: "bg-[#1F2328] text-white",
 };
 
 export function Section({
@@ -56,7 +58,7 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={`text-xs sm:text-sm font-bold uppercase tracking-[0.14em] ${
-            isDark ? "text-[#EE9277]" : "text-[#24989A] dark:text-[#5CD3D5]"
+            isDark ? "text-[#E8590C]" : "text-[#E8590C]"
           }`}
         >
           {eyebrow}
@@ -65,7 +67,7 @@ export function SectionHeading({
       <h2
         id={id}
         className={`mt-2.5 text-3xl sm:text-4xl lg:text-[2.6rem] font-bold tracking-tight leading-[1.15] ${
-          isDark ? "text-white" : "text-[#154752] dark:text-white"
+          isDark ? "text-white" : "text-[#1F2328] dark:text-white"
         }`}
       >
         {title}
@@ -73,7 +75,7 @@ export function SectionHeading({
       {description && (
         <p
           className={`mt-4 text-base sm:text-lg lg:text-[1.15rem] leading-relaxed ${
-            isDark ? "text-[#DAE7E7]" : "text-[#68797C] dark:text-slate-300"
+            isDark ? "text-[#C3C8CF]" : "text-[#4A525C] dark:text-[#C3C8CF]"
           }`}
         >
           {description}
@@ -98,18 +100,18 @@ export function PageHero({
 }) {
   const tag = eyebrow || badge;
   return (
-    <section className="bg-[#154752] text-white border-b border-[#24989A]/20">
+    <section className="bg-[#1F2328] text-white border-b border-[#2E343B]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <div className="max-w-3xl">
           {tag && (
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277]">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#E8590C]">
               {tag}
             </p>
           )}
           <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12]">
             {title}
           </h1>
-          <p className="mt-5 text-base sm:text-lg lg:text-xl text-[#DAE7E7] leading-relaxed">
+          <p className="mt-5 text-base sm:text-lg lg:text-xl text-[#C3C8CF] leading-relaxed">
             {description}
           </p>
           {children && <div className="mt-8">{children}</div>}
@@ -135,29 +137,29 @@ export function FeatureCard({
     <div
       className={`rounded-2xl border p-7 sm:p-8 h-full transition-all ${
         isDark
-          ? "bg-[#0D282E] border-[#24989A]/30"
-          : "bg-white dark:bg-[#0D223A] border-[#DAE7E7] dark:border-[#163654] shadow-xs hover:border-[#24989A]/40 dark:hover:border-[#24989A]/60"
+          ? "bg-[#15181C] border-[#2E343B]"
+          : "bg-white dark:bg-[#1F2328] border-[#E6E0D8] dark:border-[#2E343B] shadow-xs hover:border-[#E8590C]/40 dark:hover:border-[#E8590C]/60"
       }`}
     >
       <div
         className={`h-13 w-13 rounded-xl flex items-center justify-center ${
           isDark
-            ? "bg-[#24989A]/20 text-[#24989A]"
-            : "bg-[#F3F8F8] dark:bg-teal-950/60 text-[#154752] dark:text-[#5CD3D5]"
+            ? "bg-[#E8590C]/20 text-[#E8590C]"
+            : "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C]"
         }`}
       >
         <Icon name={icon} className="h-6 w-6" />
       </div>
       <h3
         className={`mt-5 text-lg sm:text-xl font-bold leading-snug ${
-          isDark ? "text-white" : "text-[#154752] dark:text-white"
+          isDark ? "text-white" : "text-[#1F2328] dark:text-white"
         }`}
       >
         {title}
       </h3>
       <p
         className={`mt-2.5 text-base leading-relaxed ${
-          isDark ? "text-[#DAE7E7]" : "text-[#68797C] dark:text-slate-300"
+          isDark ? "text-[#C3C8CF]" : "text-[#4A525C] dark:text-[#C3C8CF]"
         }`}
       >
         {description}
@@ -186,19 +188,19 @@ export function StepList({
           key={step.title}
           className={`relative rounded-2xl border p-7 sm:p-8 ${
             isDark
-              ? "bg-[#0D282E] border-[#24989A]/30"
-              : "bg-white dark:bg-[#0D223A] border-[#DAE7E7] dark:border-[#163654] shadow-xs"
+              ? "bg-[#15181C] border-[#2E343B]"
+              : "bg-white dark:bg-[#1F2328] border-[#E6E0D8] dark:border-[#2E343B] shadow-xs"
           }`}
         >
           <span
             aria-hidden="true"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#24989A] text-white text-base font-bold shadow-xs"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8590C] text-white text-base font-bold shadow-xs"
           >
             {index + 1}
           </span>
           <h3
             className={`mt-4 text-lg sm:text-xl font-bold leading-snug ${
-              isDark ? "text-white" : "text-[#154752] dark:text-white"
+              isDark ? "text-white" : "text-[#1F2328] dark:text-white"
             }`}
           >
             <span className="sr-only">Step {index + 1}: </span>
@@ -206,7 +208,7 @@ export function StepList({
           </h3>
           <p
             className={`mt-2.5 text-base leading-relaxed ${
-              isDark ? "text-[#DAE7E7]" : "text-[#68797C] dark:text-slate-300"
+              isDark ? "text-[#C3C8CF]" : "text-[#4A525C] dark:text-[#C3C8CF]"
             }`}
           >
             {step.description}
@@ -228,12 +230,12 @@ export function CheckList({
     <ul className="space-y-4">
       {items.map((item) => (
         <li key={item} className="flex items-start gap-3.5">
-          <span className="mt-1 h-5 w-5 shrink-0 rounded-full bg-[#24989A] text-white flex items-center justify-center">
+          <span className="mt-1 h-5 w-5 shrink-0 rounded-full bg-[#2E7D4F] text-white flex items-center justify-center">
             <Icon name="check" className="h-3.5 w-3.5" />
           </span>
           <span
             className={`text-base leading-relaxed ${
-              tone === "dark" ? "text-[#DAE7E7]" : "text-[#1F2F34] dark:text-slate-200"
+              tone === "dark" ? "text-[#C3C8CF]" : "text-[#1F2328] dark:text-[#FAF7F3]"
             }`}
           >
             {item}
@@ -252,19 +254,19 @@ export interface FaqItem {
 /** Native <details>/<summary> accordion — keyboard and screen-reader accessible without JS. */
 export function FaqList({ items }: { items: readonly FaqItem[] }) {
   return (
-    <div className="divide-y divide-[#DAE7E7] dark:divide-[#163654] rounded-2xl border border-[#DAE7E7] dark:border-[#163654] bg-white dark:bg-[#0D223A]">
+    <div className="divide-y divide-[#E6E0D8] dark:divide-[#2E343B] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328]">
       {items.map((item) => (
         <details key={item.question} className="group p-6 sm:p-7">
-          <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-base sm:text-lg font-bold text-[#154752] dark:text-white [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-base sm:text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3] [&::-webkit-details-marker]:hidden">
             <span>{item.question}</span>
             <span
               aria-hidden="true"
-              className="mt-0.5 h-7 w-7 shrink-0 rounded-full border border-[#DAE7E7] dark:border-[#163654] flex items-center justify-center text-[#24989A] dark:text-[#5CD3D5] text-lg transition-transform group-open:rotate-45"
+              className="mt-0.5 h-7 w-7 shrink-0 rounded-full border border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-center text-[#E8590C] text-lg transition-transform group-open:rotate-45"
             >
               +
             </span>
           </summary>
-          <p className="mt-3.5 text-base leading-relaxed text-[#68797C] dark:text-slate-300">{item.answer}</p>
+          <p className="mt-3.5 text-base leading-relaxed text-[#4A525C] dark:text-[#C3C8CF]">{item.answer}</p>
         </details>
       ))}
     </div>
@@ -285,14 +287,14 @@ export function CtaBanner({
   secondary?: { label: string; href: string };
 }) {
   return (
-    <section aria-labelledby={id} className="bg-white dark:bg-[#071526] py-16 sm:py-24">
+    <section aria-labelledby={id} className="bg-white dark:bg-[#15181C] py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-[#154752] dark:bg-[#0D223A] border border-[#24989A]/20 dark:border-[#163654] px-7 py-12 sm:px-14 sm:py-16 text-white flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 shadow-md">
+        <div className="rounded-3xl bg-[#1F2328] dark:bg-[#15181C] border border-[#2E343B] px-7 py-12 sm:px-14 sm:py-16 text-white flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 shadow-md">
           <div className="max-w-2xl">
             <h2 id={id} className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
               {title}
             </h2>
-            <p className="mt-3.5 text-[#DAE7E7] text-base sm:text-lg lg:text-xl leading-relaxed">{description}</p>
+            <p className="mt-3.5 text-[#C3C8CF] text-base sm:text-lg lg:text-xl leading-relaxed">{description}</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-3.5 shrink-0">
             <ButtonLink href={primary.href} size="lg">
@@ -314,7 +316,7 @@ export function TextLink({ href, children }: { href: string; children: React.Rea
   return (
     <Link
       href={href}
-      className="font-semibold text-[#24989A] underline decoration-[#24989A]/40 underline-offset-4 hover:text-[#1D7E80] hover:decoration-[#24989A]"
+      className="font-semibold text-[#E8590C] underline decoration-[#E8590C]/40 underline-offset-4 hover:text-[#C84A06] hover:decoration-[#E8590C]"
     >
       {children}
     </Link>

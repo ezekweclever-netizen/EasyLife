@@ -52,7 +52,7 @@ export function ToolCurrency() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Foreign Exchange Intelligence
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -63,7 +63,7 @@ export function ToolCurrency() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-700 pb-3">
           <div className="flex items-center gap-2 text-xs">
             <span className="font-bold text-slate-500">Benchmark Mode:</span>
@@ -72,7 +72,7 @@ export function ToolCurrency() {
               onClick={() => setRateTier("market")}
               className={`px-3 py-1 rounded-lg font-bold transition cursor-pointer ${
                 rateTier === "market"
-                  ? "bg-[#0D9488] text-white"
+                  ? "bg-[#E8590C] text-white"
                   : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
               }`}
             >
@@ -83,7 +83,7 @@ export function ToolCurrency() {
               onClick={() => setRateTier("cbn")}
               className={`px-3 py-1 rounded-lg font-bold transition cursor-pointer ${
                 rateTier === "cbn"
-                  ? "bg-[#0D9488] text-white"
+                  ? "bg-[#E8590C] text-white"
                   : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
               }`}
             >
@@ -106,12 +106,12 @@ export function ToolCurrency() {
                 type="number"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="flex-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-mono font-bold"
+                className="flex-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono font-bold"
               />
               <select
                 value={fromCurr}
                 onChange={(e) => setFromCurr(e.target.value)}
-                className="w-32 px-2.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-bold"
+                className="w-32 px-2.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-bold"
               >
                 {Object.keys(CURRENCIES).map((c) => (
                   <option key={c} value={c}>
@@ -126,7 +126,7 @@ export function ToolCurrency() {
             <button
               type="button"
               onClick={handleSwap}
-              className="p-2 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-[#0D9488] hover:text-white transition cursor-pointer text-xs font-bold"
+              className="p-2 rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-[#E8590C] hover:text-white transition cursor-pointer text-xs font-bold"
               title="Swap currencies"
             >
               ⇄
@@ -140,7 +140,7 @@ export function ToolCurrency() {
             <select
               value={toCurr}
               onChange={(e) => setToCurr(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-bold"
             >
               {Object.keys(CURRENCIES).map((c) => (
                 <option key={c} value={c}>
@@ -152,12 +152,12 @@ export function ToolCurrency() {
         </div>
 
         {/* Primary Conversion Card */}
-        <div className="p-6 rounded-2xl bg-teal-50/70 dark:bg-[#0D223A] border border-teal-200/90 dark:border-slate-700 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+        <div className="p-6 rounded-2xl bg-[#FCEBDD]/70 dark:bg-[#1F2328] border border-[#E8590C]/30/90 dark:border-slate-700 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
           <div>
             <span className="text-xs text-slate-500 block">
               {amt.toLocaleString()} {fromCurr} =
             </span>
-            <div className="text-2xl sm:text-3xl font-black text-[#0D9488] dark:text-[#5CD3D5] font-mono mt-0.5">
+            <div className="text-2xl sm:text-3xl font-black text-[#E8590C] dark:text-[#F06A1F] font-mono mt-0.5">
               {CURRENCIES[toCurr]?.symbol}
               {convertedAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
               <span className="text-base text-slate-600 dark:text-slate-400 font-sans">{toCurr}</span>
@@ -167,7 +167,7 @@ export function ToolCurrency() {
             </span>
           </div>
 
-          <div className="p-3 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-1">
+          <div className="p-3 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800 text-xs space-y-1">
             <span className="font-bold text-slate-800 dark:text-slate-200 block">
               Bank Card / Fintech Fee ({cardSpreadPercent}%):
             </span>
@@ -203,7 +203,7 @@ export function ToolCurrency() {
               return (
                 <div
                   key={c}
-                  className="p-2.5 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-800 flex justify-between items-center"
+                  className="p-2.5 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800 flex justify-between items-center"
                 >
                   <span className="font-bold text-slate-500">{c}</span>
                   <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -220,7 +220,7 @@ export function ToolCurrency() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Foreign Exchange Valuation Slip</span>
           </button>
@@ -237,7 +237,7 @@ export function ToolCurrency() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               International Trade &amp; Remittance Valuation
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -257,7 +257,7 @@ export function ToolCurrency() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Converted Target Tender</span>
-              <span className="text-xl font-black text-[#0D9488] font-mono mt-0.5 block">
+              <span className="text-xl font-black text-[#E8590C] font-mono mt-0.5 block">
                 {CURRENCIES[toCurr]?.symbol}
                 {convertedAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}{" "}
                 {toCurr}

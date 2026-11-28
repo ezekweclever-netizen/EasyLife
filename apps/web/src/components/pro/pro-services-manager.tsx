@@ -229,7 +229,7 @@ export function ProServicesManager({
   };
 
   return (
-    <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-5">
+    <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h3 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -243,7 +243,7 @@ export function ProServicesManager({
         <button
           type="button"
           onClick={() => setShowAddForm((prev) => !prev)}
-          className="px-3.5 py-2 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+          className="px-3.5 py-2 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
         >
           {showAddForm ? "Cancel" : "+ Add Service Offering"}
         </button>
@@ -275,7 +275,7 @@ export function ProServicesManager({
                 <select
                   value={selectedMainCatId}
                   onChange={(e) => handleSelectMainCategory(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                 >
                   {catalogueTree.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -295,7 +295,7 @@ export function ProServicesManager({
                     setSelectedSubcatId(e.target.value);
                     setSelectedServiceId("");
                   }}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                 >
                   <option value="all">All Subcategories ({availableCatalogueServices.length})</option>
                   {availableSubcategories.map((sub) => (
@@ -313,7 +313,7 @@ export function ProServicesManager({
                 <select
                   value={selectedServiceId}
                   onChange={(e) => handleSelectCatalogueService(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                 >
                   <option value="">-- Select Catalogue Service or Custom --</option>
                   {availableCatalogueServices.map((srv) => (
@@ -330,7 +330,7 @@ export function ProServicesManager({
               <select
                 value={selectedMainCatId}
                 onChange={(e) => setSelectedMainCatId(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -342,7 +342,7 @@ export function ProServicesManager({
           )}
 
           {pickedCatalogueService && (
-            <div className="p-3 rounded-lg bg-white dark:bg-[#0D223A] border border-teal-200 dark:border-teal-800 text-xs space-y-1.5">
+            <div className="p-3 rounded-lg bg-white dark:bg-[#1F2328] border border-teal-200 dark:border-teal-800 text-xs space-y-1.5">
               <div className="font-bold text-teal-950">
                 Service Eligibility Requirements for &quot;{pickedCatalogueService.name}&quot;
               </div>
@@ -375,7 +375,7 @@ export function ProServicesManager({
                 value={serviceTitle}
                 onChange={(e) => setServiceTitle(e.target.value)}
                 placeholder="e.g. Split AC Installation & Regassing"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
@@ -390,7 +390,7 @@ export function ProServicesManager({
                 required
                 value={minPriceNaira}
                 onChange={(e) => setMinPriceNaira(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
@@ -405,7 +405,7 @@ export function ProServicesManager({
                 value={maxPriceNaira}
                 onChange={(e) => setMaxPriceNaira(e.target.value)}
                 placeholder="Optional"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
               />
             </div>
           </div>
@@ -421,7 +421,7 @@ export function ProServicesManager({
                 max="70"
                 value={yearsExperienceInService}
                 onChange={(e) => setYearsExperienceInService(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
@@ -434,7 +434,7 @@ export function ProServicesManager({
                 value={certificationReference}
                 onChange={(e) => setCertificationReference(e.target.value)}
                 placeholder="e.g. NABTEB / COREN / City & Guilds"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
               />
             </div>
 
@@ -447,7 +447,7 @@ export function ProServicesManager({
                 value={qualificationNotes}
                 onChange={(e) => setQualificationNotes(e.target.value)}
                 placeholder="e.g. Certified in Inverter & Daikin systems"
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
               />
             </div>
           </div>
@@ -461,7 +461,7 @@ export function ProServicesManager({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Briefly describe what is included in this service..."
-              className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+              className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
             />
           </div>
 
@@ -471,7 +471,7 @@ export function ProServicesManager({
                 type="checkbox"
                 checked={isPrimary}
                 onChange={(e) => setIsPrimary(e.target.checked)}
-                className="h-4 w-4 rounded text-[#0D9488] border-slate-300 dark:border-slate-700"
+                className="h-4 w-4 rounded text-[#E8590C] border-slate-300 dark:border-slate-700"
               />
               <span>Mark as my Primary Specialty</span>
             </label>
@@ -479,7 +479,7 @@ export function ProServicesManager({
             <button
               type="submit"
               disabled={isPending}
-              className="px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50"
+              className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50"
             >
               {isPending ? "Saving..." : "Save Service Offering"}
             </button>
@@ -503,8 +503,8 @@ export function ProServicesManager({
                 key={s.id}
                 className={`p-4 rounded-xl border text-xs space-y-3 ${
                   s.is_active
-                    ? "border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]"
-                    : "border-slate-200 dark:border-[#163654] bg-slate-100 dark:bg-slate-800/70 opacity-75"
+                    ? "border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]"
+                    : "border-slate-200 dark:border-[#2E343B] bg-slate-100 dark:bg-slate-800/70 opacity-75"
                 }`}
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
@@ -513,7 +513,7 @@ export function ProServicesManager({
                       <span className="font-bold text-slate-900 dark:text-white text-sm">
                         {s.service_title || s.service?.name || s.category?.name || "Specialty Service"}
                       </span>
-                      <span className="px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] border border-teal-200 dark:border-teal-800 text-[10px] font-semibold">
+                      <span className="px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-[#E8590C] border border-teal-200 dark:border-teal-800 text-[10px] font-semibold">
                         {s.category?.name || "Trade"}
                       </span>
                       {s.service && (
@@ -549,7 +549,7 @@ export function ProServicesManager({
                     )}
 
                     <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-600 dark:text-slate-300">
-                      <span className="text-[#0D9488] font-bold text-xs">
+                      <span className="text-[#E8590C] font-bold text-xs">
                         ₦{minPrice.toLocaleString("en-NG")}
                         {maxPrice ? ` – ₦${maxPrice.toLocaleString("en-NG")}` : "+"}
                       </span>
@@ -583,7 +583,7 @@ export function ProServicesManager({
                         {proRequirements.map((req) => (
                           <span
                             key={req.id}
-                            className="px-2 py-0.5 rounded bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-[10px] text-slate-600 dark:text-slate-300"
+                            className="px-2 py-0.5 rounded bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-[10px] text-slate-600 dark:text-slate-300"
                           >
                             {req.title}
                           </span>
@@ -599,7 +599,7 @@ export function ProServicesManager({
                       onClick={() =>
                         isEditingThis ? setEditingOfferingId(null) : openEditForm(s)
                       }
-                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold"
+                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold"
                     >
                       {isEditingThis ? "Close Edit" : "Edit & Qualifications"}
                     </button>
@@ -607,7 +607,7 @@ export function ProServicesManager({
                       type="button"
                       disabled={isPending}
                       onClick={() => handleToggleActive(s)}
-                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold"
+                      className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 text-[11px] font-semibold"
                     >
                       {s.is_active ? "Pause" : "Activate"}
                     </button>
@@ -625,7 +625,7 @@ export function ProServicesManager({
                 </div>
 
                 {isEditingThis && (
-                  <div className="p-3.5 rounded-xl border border-teal-200 dark:border-teal-800 bg-white dark:bg-[#0D223A] space-y-3">
+                  <div className="p-3.5 rounded-xl border border-teal-200 dark:border-teal-800 bg-white dark:bg-[#1F2328] space-y-3">
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <div>
                         <label className="block text-[11px] font-bold text-slate-700 dark:text-slate-200 mb-1">
@@ -720,7 +720,7 @@ export function ProServicesManager({
                           type="checkbox"
                           checked={editIsPrimary}
                           onChange={(e) => setEditIsPrimary(e.target.checked)}
-                          className="h-4 w-4 rounded text-[#0D9488] border-slate-300 dark:border-slate-700"
+                          className="h-4 w-4 rounded text-[#E8590C] border-slate-300 dark:border-slate-700"
                         />
                         <span>Set as Primary Skill</span>
                       </label>
@@ -737,7 +737,7 @@ export function ProServicesManager({
                           type="button"
                           disabled={isPending}
                           onClick={() => handleSaveEdit(s)}
-                          className="px-4 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50"
+                          className="px-4 py-1.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50"
                         >
                           {isPending ? "Saving..." : "Update Offering"}
                         </button>

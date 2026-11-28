@@ -20,7 +20,7 @@ export default async function AdminQuotationsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#2E343B]">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-teal-300">
@@ -39,7 +39,7 @@ export default async function AdminQuotationsPage() {
         </div>
       </div>
 
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs overflow-hidden">
         <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <div className="text-xs font-bold text-slate-800 dark:text-slate-100">
             Recorded Service Quotations ({quotations.length})
@@ -51,7 +51,7 @@ export default async function AdminQuotationsPage() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#1F2328]/80 border-b border-slate-200 dark:border-[#2E343B] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Booking Ref &amp; Job</th>
                 <th className="py-3.5 px-4">Quoting Professional</th>
@@ -70,7 +70,7 @@ export default async function AdminQuotationsPage() {
                 </tr>
               ) : (
                 quotations.map((q: any) => (
-                  <tr key={q.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
+                  <tr key={q.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/60 transition">
                     <td className="py-3.5 px-4">
                       <span className="font-mono text-2xs font-bold text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
                         {q.bookings?.reference_code || "JOB-REF"}

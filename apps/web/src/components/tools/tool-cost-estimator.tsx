@@ -108,7 +108,7 @@ export function ToolCostEstimator() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Market Benchmarking
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -119,14 +119,14 @@ export function ToolCostEstimator() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
           <div>
             <label className="block font-bold mb-1">Service Trade</label>
             <select
               value={selectedTrade}
               onChange={(e) => setSelectedTrade(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
             >
               {Object.keys(TRADES).map((k) => (
                 <option key={k} value={k}>
@@ -141,7 +141,7 @@ export function ToolCostEstimator() {
             <select
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             >
               <option value="Port Harcourt">Port Harcourt, Rivers</option>
               <option value="Lagos Island">Lagos (Island / Lekki / VI)</option>
@@ -155,7 +155,7 @@ export function ToolCostEstimator() {
             <select
               value={complexity}
               onChange={(e) => setComplexity(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             >
               <option value="minor">Minor Routine Maintenance</option>
               <option value="standard">Standard Component Overhaul</option>
@@ -170,18 +170,18 @@ export function ToolCostEstimator() {
               value={unitCount}
               onChange={(e) => setUnitCount(e.target.value)}
               min={1}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-mono font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono font-bold"
             />
           </div>
         </div>
 
         {/* Results Card */}
-        <div className="p-6 rounded-2xl bg-teal-50/70 dark:bg-[#0D223A] border border-teal-200/90 dark:border-slate-700 space-y-4">
+        <div className="p-6 rounded-2xl bg-[#FCEBDD]/70 dark:bg-[#1F2328] border border-[#E8590C]/30/90 dark:border-slate-700 space-y-4">
           <div className="text-center space-y-1">
             <span className="text-xs text-slate-500 uppercase tracking-wider font-bold">
               Total Estimated Project Investment ({city})
             </span>
-            <div className="text-2xl sm:text-3xl font-black text-[#0D9488] dark:text-[#5CD3D5] font-mono">
+            <div className="text-2xl sm:text-3xl font-black text-[#E8590C] dark:text-[#F06A1F] font-mono">
               ₦{totalMin.toLocaleString()} – ₦{totalMax.toLocaleString()}
             </div>
             <p className="text-[11px] text-slate-400">
@@ -190,19 +190,19 @@ export function ToolCostEstimator() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
-            <div className="p-3 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+            <div className="p-3 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800 text-center">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Workmanship Labor</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono mt-0.5 block">
                 ₦{laborMin.toLocaleString()} – ₦{laborMax.toLocaleString()}
               </span>
             </div>
-            <div className="p-3 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+            <div className="p-3 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800 text-center">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Spares &amp; Materials</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono mt-0.5 block">
                 ₦{partsMin.toLocaleString()} – ₦{partsMax.toLocaleString()}
               </span>
             </div>
-            <div className="p-3 bg-white dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+            <div className="p-3 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-800 text-center">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Logistics Allowance</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono mt-0.5 block">
                 ₦{transportFee.toLocaleString()}
@@ -210,7 +210,7 @@ export function ToolCostEstimator() {
             </div>
           </div>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-[#071526] p-4 rounded-xl border border-teal-200/50">
+          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 bg-white dark:bg-[#1F2328] p-4 rounded-xl border border-[#E8590C]/30/50">
             <div>
               <span className="font-bold text-slate-900 dark:text-white block text-xs">
                 Need competitive quotes from verified pros?
@@ -221,7 +221,7 @@ export function ToolCostEstimator() {
             </div>
             <Link
               href={`/post-a-need?category=${encodeURIComponent(tConf.dispatchCategory)}&city=${encodeURIComponent(city)}`}
-              className="px-4 py-2 rounded-xl bg-[#0D9488] text-white text-xs font-bold text-center hover:bg-[#0B7A6F] transition shrink-0"
+              className="px-4 py-2 rounded-xl bg-[#E8590C] text-white text-xs font-bold text-center hover:bg-[#0B7A6F] transition shrink-0"
             >
               Post Need with This Estimate &rarr;
             </Link>
@@ -232,7 +232,7 @@ export function ToolCostEstimator() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Cost Estimation Sheet</span>
           </button>
@@ -249,7 +249,7 @@ export function ToolCostEstimator() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Technical Quantity Surveying &amp; Labor Benchmarking
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -260,9 +260,9 @@ export function ToolCostEstimator() {
             </p>
           </div>
 
-          <div className="p-4 bg-teal-50 border border-teal-200 rounded-xl text-center space-y-1">
+          <div className="p-4 bg-[#FCEBDD] border border-[#E8590C]/30 rounded-xl text-center space-y-1">
             <span className="text-[10px] font-bold text-teal-800 uppercase">Estimated Turnkey Budget</span>
-            <div className="text-2xl font-black text-[#0D9488] font-mono">
+            <div className="text-2xl font-black text-[#E8590C] font-mono">
               ₦{totalMin.toLocaleString()} – ₦{totalMax.toLocaleString()}
             </div>
             <p className="text-[11px] text-teal-700">Scope: {unitCount} unit(s) • {complexity} overhaul</p>

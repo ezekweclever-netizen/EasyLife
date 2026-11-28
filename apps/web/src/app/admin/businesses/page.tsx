@@ -13,7 +13,7 @@ export default async function AdminBusinessesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#2E343B]">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-teal-300">
@@ -40,7 +40,7 @@ export default async function AdminBusinessesPage() {
         </Link>
       </div>
 
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs overflow-hidden">
         <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
           <div className="text-xs font-bold text-slate-800 dark:text-slate-100">
             Registered Enterprise Accounts ({businesses.length})
@@ -52,7 +52,7 @@ export default async function AdminBusinessesPage() {
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#1F2328]/80 border-b border-slate-200 dark:border-[#2E343B] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Organization Name</th>
                 <th className="py-3.5 px-4">Locations &amp; Branches</th>
@@ -70,7 +70,7 @@ export default async function AdminBusinessesPage() {
                 </tr>
               ) : (
                 businesses.map((b: any) => (
-                  <tr key={b.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
+                  <tr key={b.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/60 transition">
                     <td className="py-3.5 px-4">
                       <div className="font-bold text-slate-900 dark:text-white text-sm">
                         {b.name}
@@ -95,7 +95,7 @@ export default async function AdminBusinessesPage() {
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-2xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800">
+                      <span className="inline-block px-2.5 py-0.5 rounded-full text-2xs font-bold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border border-teal-200 dark:border-teal-800">
                         {Array.isArray(b.properties) ? b.properties[0]?.count || b.properties.length : 0} Assets / Sites
                       </span>
                     </td>

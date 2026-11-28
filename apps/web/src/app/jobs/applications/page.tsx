@@ -30,8 +30,8 @@ const STATUS_BADGES: Record<
   },
   shortlisted: {
     label: "Shortlisted",
-    bg: "bg-teal-50 dark:bg-teal-950/60",
-    text: "text-[#0F766E] dark:text-[#5CD3D5]",
+    bg: "bg-[#FCEBDD] dark:bg-[#1F2328]",
+    text: "text-[#E8590C]",
   },
   interviewed: {
     label: "Interview Scheduled",
@@ -87,8 +87,8 @@ export default async function JobApplicationsTrackerPage() {
         </div>
 
         {applications.length === 0 ? (
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-10 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] text-2xl mx-auto flex items-center justify-center">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] p-10 text-center space-y-4">
+            <div className="w-16 h-16 rounded-full bg-[#FCEBDD] text-[#E8590C] text-2xl mx-auto flex items-center justify-center">
               💼
             </div>
             <div className="space-y-1">
@@ -115,16 +115,16 @@ export default async function JobApplicationsTrackerPage() {
               return (
                 <div
                   key={app.id}
-                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow space-y-4"
+                  className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow space-y-4"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 uppercase">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FAF7F3] dark:bg-[#1F2328] text-[#4A525C] dark:text-[#C3C8CF] uppercase">
                           Ref: {app.reference_code}
                         </span>
                         {vacancy?.category && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5]">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30">
                             {vacancy.category}
                           </span>
                         )}
@@ -149,8 +149,8 @@ export default async function JobApplicationsTrackerPage() {
 
                   {/* Pitch / Cover Letter Excerpt */}
                   {app.cover_letter && (
-                    <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#071526]/50 border border-slate-100 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300">
-                      <span className="font-semibold text-slate-700 dark:text-slate-200 block text-[11px] mb-1">
+                    <div className="p-3.5 rounded-xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-slate-700 dark:text-slate-300">
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 block text-[11px] mb-1">
                         Your Application Pitch:
                       </span>
                       <p className="line-clamp-2 leading-relaxed">
@@ -161,22 +161,22 @@ export default async function JobApplicationsTrackerPage() {
 
                   {/* Employer Notes if Any */}
                   {app.employer_notes && (
-                    <div className="p-3.5 rounded-xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-900 text-xs text-[#0F766E] dark:text-[#5CD3D5]">
-                      <span className="font-bold block text-[11px] mb-0.5">
+                    <div className="p-3.5 rounded-xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3]">
+                      <span className="font-bold block text-[11px] mb-0.5 text-[#E8590C]">
                         Note from Employer:
                       </span>
                       <p>{app.employer_notes}</p>
                     </div>
                   )}
 
-                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-                    <span className="text-slate-400">
+                  <div className="pt-2 border-t border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-between text-xs">
+                    <span className="text-[#4A525C] dark:text-[#C3C8CF]">
                       Contact: {app.applicant_phone}
                     </span>
                     {vacancy && (
                       <Link
                         href={`/jobs/${vacancy.slug || vacancy.id}`}
-                        className="font-bold text-[#0F766E] dark:text-[#5CD3D5] hover:underline"
+                        className="font-bold text-[#E8590C] hover:text-[#C84A06] hover:underline"
                       >
                         View Vacancy Scope &rarr;
                       </Link>

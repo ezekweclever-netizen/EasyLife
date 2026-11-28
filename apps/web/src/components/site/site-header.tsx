@@ -136,13 +136,13 @@ export function SiteHeader({
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="max-w-[1440px] mx-auto rounded-2xl border border-slate-200/90 dark:border-[#163654] bg-white/95 dark:bg-[#0E2238]/95 backdrop-blur-md shadow-md sm:shadow-lg pointer-events-auto transition-colors">
+        <div className="max-w-[1440px] mx-auto rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white/95 dark:bg-[#1F2328]/95 backdrop-blur-md shadow-md sm:shadow-lg pointer-events-auto transition-colors">
           <div className="px-3.5 sm:px-6 h-18 sm:h-20 flex items-center justify-between gap-3 sm:gap-4">
             {/* Logo */}
             <Link
               href="/"
               aria-label="EasyLife — Everyday Problems. Smarter Solutions."
-              className="rounded-lg shrink-0 focus-visible:outline-2 focus-visible:outline-[#24989A]"
+              className="rounded-lg shrink-0 focus-visible:outline-2 focus-visible:outline-[#E8590C]"
               onClick={() => setIsMenuOpen(false)}
             >
               <EasyLifeLogo theme="light" size="md" showSlogan={true} />
@@ -160,8 +160,8 @@ export function SiteHeader({
                         aria-current={active ? "page" : undefined}
                         className={`inline-flex items-center whitespace-nowrap px-2 xl:px-2.5 2xl:px-3 py-2 rounded-lg text-xs xl:text-[13px] 2xl:text-[14px] font-medium transition-colors ${
                           active
-                            ? "bg-[#F3F8F8] dark:bg-[#163654]/80 text-[#154752] dark:text-[#5CD3D5] font-semibold border-b-2 border-[#24989A]"
-                            : "text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 hover:text-[#154752] dark:hover:text-[#5CD3D5]"
+                            ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-semibold border-b-2 border-[#E8590C]"
+                            : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] hover:text-[#E8590C] dark:hover:text-[#E8590C]"
                         }`}
                       >
                         {link.label}
@@ -185,7 +185,7 @@ export function SiteHeader({
                   <form action={logoutAction}>
                     <button
                       type="submit"
-                      className="inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-[14px] font-semibold text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                      className="inline-flex items-center justify-center rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] px-3.5 py-2 text-[14px] font-semibold text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#2E343B] transition-colors cursor-pointer"
                     >
                       Sign Out
                     </button>
@@ -209,7 +209,7 @@ export function SiteHeader({
 
               <button
                 type="button"
-                className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 text-[#1F2F34] dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 transition-colors"
+                className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] transition-colors"
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-navigation"
                 aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -228,11 +228,11 @@ export function SiteHeader({
             <nav
               id="mobile-navigation"
               aria-label="Mobile Navigation"
-              className="lg:hidden border-t border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0E2238] rounded-b-2xl shadow-2xl transition-all max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain relative z-50 divide-y divide-slate-100 dark:divide-[#163654]/70"
+              className="lg:hidden border-t border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] rounded-b-2xl shadow-2xl transition-all max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain relative z-50 divide-y divide-[#E6E0D8]/60 dark:divide-[#2E343B]"
             >
               {/* Six Core Section Links with Rich Visual Cards */}
               <div className="p-3 sm:p-4 space-y-1.5">
-                <p className="px-3 py-1 text-[11px] font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">
+                <p className="px-3 py-1 text-[11px] font-bold tracking-wider text-[#4A525C] dark:text-[#C3C8CF] uppercase">
                   Explore EasyLife
                 </p>
                 {PUBLIC_PRIMARY_NAV_LINKS.map((link) => {
@@ -246,15 +246,15 @@ export function SiteHeader({
                       onClick={() => setIsMenuOpen(false)}
                       className={`flex items-center gap-3.5 p-3 rounded-xl transition-all ${
                         active
-                          ? "bg-teal-50/80 dark:bg-[#163654] text-[#154752] dark:text-[#5CD3D5] font-semibold ring-1 ring-[#24989A]/30"
-                          : "text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-[#163654]/40"
+                          ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-semibold ring-1 ring-[#E8590C]/30"
+                          : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                       }`}
                     >
                       <div
                         className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
                           active
-                            ? "bg-[#24989A] text-white"
-                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                            ? "bg-[#E8590C] text-white"
+                            : "bg-[#FAF7F3] dark:bg-[#1F2328] text-[#4A525C] dark:text-[#C3C8CF]"
                         }`}
                       >
                         <Icon name={iconName} className="h-4.5 w-4.5" />
@@ -263,12 +263,12 @@ export function SiteHeader({
                         <div className="text-[14px] font-semibold leading-tight">
                           {link.label}
                         </div>
-                        <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
+                        <div className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF] truncate mt-0.5">
                           {link.description}
                         </div>
                       </div>
                       {active && (
-                        <div className="w-1.5 h-6 rounded-full bg-[#24989A] shrink-0" />
+                        <div className="w-1.5 h-6 rounded-full bg-[#E8590C] shrink-0" />
                       )}
                     </Link>
                   );
@@ -278,10 +278,10 @@ export function SiteHeader({
               {/* Theme Appearance Controls in Mobile Drawer */}
               <div className="px-4 py-3.5 flex items-center justify-between">
                 <div>
-                  <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 block">
+                  <span className="text-xs font-semibold text-[#1F2328] dark:text-[#FAF7F3] block">
                     Theme Appearance
                   </span>
-                  <span className="text-[11px] text-slate-400 dark:text-slate-500">
+                  <span className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF]">
                     Light, dark or match system
                   </span>
                 </div>
@@ -311,7 +311,7 @@ export function SiteHeader({
               )}
 
               {/* Authentication Quick Action Buttons */}
-              <div className="px-4 py-4 grid grid-cols-2 gap-2.5 bg-neutral-50/70 dark:bg-[#071526]/70 rounded-b-2xl">
+              <div className="px-4 py-4 grid grid-cols-2 gap-2.5 bg-[#FAF7F3] dark:bg-[#15181C] rounded-b-2xl">
                 {authState.isLoggedIn ? (
                   <>
                     <ButtonLink
@@ -324,7 +324,7 @@ export function SiteHeader({
                     <form action={logoutAction} className="w-full">
                       <button
                         type="submit"
-                        className="w-full h-full inline-flex items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-4 py-2.5 text-sm font-semibold text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                        className="w-full h-full inline-flex items-center justify-center rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] px-4 py-2.5 text-sm font-semibold text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#2E343B] transition-colors cursor-pointer"
                       >
                         Sign Out
                       </button>

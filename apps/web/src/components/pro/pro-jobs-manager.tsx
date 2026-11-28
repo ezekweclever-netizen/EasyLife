@@ -49,7 +49,7 @@ export function ProJobsManager({
   return (
     <div className="space-y-6">
       {/* Tab Switcher & Filter Bar */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-4 shadow-xs flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         {/* Tabs */}
         <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg shrink-0">
           <button
@@ -57,7 +57,7 @@ export function ProJobsManager({
             onClick={() => setActiveTab("eligible")}
             className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-colors ${
               activeTab === "eligible"
-                ? "bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white shadow-xs"
+                ? "bg-white dark:bg-[#1F2328] text-slate-900 dark:text-white shadow-xs"
                 : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
             }`}
           >
@@ -68,7 +68,7 @@ export function ProJobsManager({
             onClick={() => setActiveTab("active")}
             className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-colors ${
               activeTab === "active"
-                ? "bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white shadow-xs"
+                ? "bg-white dark:bg-[#1F2328] text-slate-900 dark:text-white shadow-xs"
                 : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
             }`}
           >
@@ -79,7 +79,7 @@ export function ProJobsManager({
             onClick={() => setActiveTab("history")}
             className={`px-3.5 py-1.5 rounded-md text-xs font-bold transition-colors ${
               activeTab === "history"
-                ? "bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white shadow-xs"
+                ? "bg-white dark:bg-[#1F2328] text-slate-900 dark:text-white shadow-xs"
                 : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white dark:text-white"
             }`}
           >
@@ -92,7 +92,7 @@ export function ProJobsManager({
           <select
             value={selectedCity}
             onChange={(e) => setSelectedCity(e.target.value)}
-            className="h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#0D223A]"
+            className="h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#1F2328]"
           >
             <option value="All Cities">All Pilot Cities</option>
             <option value="Port Harcourt">Port Harcourt</option>
@@ -103,7 +103,7 @@ export function ProJobsManager({
           <select
             value={selectedUrgency}
             onChange={(e) => setSelectedUrgency(e.target.value)}
-            className="h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#0D223A]"
+            className="h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-800 dark:text-slate-100 bg-white dark:bg-[#1F2328]"
           >
             <option value="all">All Urgencies</option>
             <option value="emergency">Emergency</option>
@@ -125,7 +125,7 @@ export function ProJobsManager({
           </div>
           <Link
             href="/pro/profile#documents"
-            className="font-bold text-[#0D9488] hover:underline"
+            className="font-bold text-[#E8590C] hover:underline"
           >
             Submit Documents →
           </Link>
@@ -134,7 +134,7 @@ export function ProJobsManager({
 
       {/* Jobs Listing */}
       {displayedJobs.length === 0 ? (
-        <div className="p-12 text-center rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
+        <div className="p-12 text-center rounded-2xl border border-dashed border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328]">
           <span className="text-3xl block mb-2">📋</span>
           <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             No service requests found
@@ -154,11 +154,11 @@ export function ProJobsManager({
             return (
               <div
                 key={job.id}
-                className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs hover:border-slate-300 dark:border-slate-700 transition flex flex-col justify-between"
+                className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-5 shadow-xs hover:border-slate-300 dark:border-slate-700 transition flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#E8590C]">
                       {job.category?.name || "General Service"}
                     </span>
                     <span
@@ -213,7 +213,7 @@ export function ProJobsManager({
                   <div className="flex items-center gap-2">
                     <Link
                       href={`/pro/jobs/${job.id}`}
-                      className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+                      className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
                     >
                       View Details
                     </Link>
@@ -222,7 +222,7 @@ export function ProJobsManager({
                       <button
                         type="button"
                         onClick={() => setActiveQuoteJob(job)}
-                        className="px-3.5 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+                        className="px-3.5 py-1.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
                       >
                         Prepare Quote
                       </button>

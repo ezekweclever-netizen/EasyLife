@@ -84,7 +84,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
   };
 
   return (
-    <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs space-y-6">
+    <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 sm:p-8 shadow-xs space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
           <h2 className="text-base font-bold text-slate-900 dark:text-white">
@@ -115,7 +115,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
               setIsEditing((prev) => !prev);
               setFeedback(null);
             }}
-            className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+            className="px-3.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
           >
             {isEditing ? "Cancel Edit" : "Edit Business Details"}
           </button>
@@ -159,7 +159,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
                 minLength={3}
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
 
@@ -170,7 +170,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
               <select
                 value={providerType}
                 onChange={(e) => setProviderType(e.target.value as ProviderType)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               >
                 {Object.entries(PROVIDER_TYPE_LABELS).map(([val, label]) => (
                   <option key={val} value={val}>
@@ -188,7 +188,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
                 type="text"
                 value={headline}
                 onChange={(e) => setHeadline(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
 
@@ -199,7 +199,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
               <select
                 value={primaryCity}
                 onChange={(e) => setPrimaryCity(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               >
                 {PILOT_CITIES.map((c) => (
                   <option key={c} value={c}>
@@ -220,7 +220,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
                 required
                 value={yearsOfExperience}
                 onChange={(e) => setYearsOfExperience(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
 
@@ -235,7 +235,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
                 required
                 value={baseCalloutFeeNaira}
                 onChange={(e) => setBaseCalloutFeeNaira(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
               />
             </div>
           </div>
@@ -250,7 +250,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
               minLength={20}
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+              className="w-full p-3 rounded-lg border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
             />
           </div>
 
@@ -258,14 +258,14 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+              className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isPending}
-              className="px-5 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50"
+              className="px-5 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50"
             >
               {isPending ? "Saving..." : "Save Profile Changes"}
             </button>
@@ -312,7 +312,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
 
             <div>
               <span className="text-slate-500 dark:text-slate-400 font-medium block">Base Call-out Diagnosis Fee</span>
-              <span className="text-sm font-bold text-[#0D9488] mt-1 block">
+              <span className="text-sm font-bold text-[#E8590C] mt-1 block">
                 ₦{Math.round((profile.base_callout_fee_kobo || 0) / 100).toLocaleString("en-NG")}
               </span>
             </div>
@@ -322,7 +322,7 @@ export function ProProfileEditor({ profile }: ProProfileEditorProps) {
             <span className="text-slate-500 dark:text-slate-400 font-medium block text-xs mb-1">
               Professional Bio &amp; Capabilities
             </span>
-            <div className="p-4 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/50 text-xs text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap">
+            <div className="p-4 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/50 text-xs text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-wrap">
               {profile.bio || "No description provided."}
             </div>
           </div>

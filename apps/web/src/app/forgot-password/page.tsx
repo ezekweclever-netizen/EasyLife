@@ -38,10 +38,10 @@ export default function ForgotPasswordPage() {
 
   return (
     <PublicShell>
-      <div className="py-6 sm:py-10 bg-[#F8FAFC] dark:bg-[#071526] min-h-[calc(100vh-5.5rem)] flex flex-col justify-center">
+      <div className="py-6 sm:py-10 bg-[#FAF7F3] dark:bg-[#1F2328] min-h-[calc(100vh-5.5rem)] flex flex-col justify-center">
         <div className="w-full max-w-md mx-auto px-4 sm:px-6">
           <div className="text-center mb-5">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#1F2328] dark:text-white">
               {recoveryToken ? "Set a New Password" : "Reset Your Password"}
             </h1>
             <p className="mt-1.5 text-sm sm:text-base text-slate-600 dark:text-slate-300">
@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-8 shadow-xs">
             {recoveryToken ? (
               <form action={updateAction} className="space-y-5">
                 <input type="hidden" name="accessToken" value={recoveryToken} />
@@ -71,7 +71,7 @@ export default function ForgotPasswordPage() {
                     <p>{updateState.message}</p>
                     <Link
                       href="/login"
-                      className="inline-block font-bold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
+                      className="inline-block font-bold text-[#E8590C] hover:underline"
                     >
                       Proceed to Sign In →
                     </Link>
@@ -81,7 +81,7 @@ export default function ForgotPasswordPage() {
                 <div>
                   <label
                     htmlFor="newPassword"
-                    className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
+                    className="block text-sm font-semibold text-[#1F2328] dark:text-slate-200 mb-1.5"
                   >
                     New Password
                   </label>
@@ -91,7 +91,7 @@ export default function ForgotPasswordPage() {
                     type="password"
                     minLength={8}
                     required
-                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-base text-[#0F172A] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full h-12 px-3.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-base text-[#1F2328] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                     placeholder="Minimum 8 characters"
                   />
                 </div>
@@ -99,7 +99,7 @@ export default function ForgotPasswordPage() {
                 <div>
                   <label
                     htmlFor="confirmPassword"
-                    className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
+                    className="block text-sm font-semibold text-[#1F2328] dark:text-slate-200 mb-1.5"
                   >
                     Confirm New Password
                   </label>
@@ -109,7 +109,7 @@ export default function ForgotPasswordPage() {
                     type="password"
                     minLength={8}
                     required
-                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-base text-[#0F172A] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full h-12 px-3.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-base text-[#1F2328] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                     placeholder="Re-enter your new password"
                   />
                 </div>
@@ -140,7 +140,7 @@ export default function ForgotPasswordPage() {
                 <div>
                   <label
                     htmlFor="reset-email"
-                    className="block text-sm font-semibold text-[#0F172A] dark:text-slate-200 mb-1.5"
+                    className="block text-sm font-semibold text-[#1F2328] dark:text-slate-200 mb-1.5"
                   >
                     Registered Email Address
                   </label>
@@ -150,7 +150,7 @@ export default function ForgotPasswordPage() {
                     type="email"
                     autoComplete="email"
                     required
-                    className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-base text-[#0F172A] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+                    className="w-full h-12 px-3.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-base text-[#1F2328] dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                     placeholder="e.g. name@example.com"
                   />
                 </div>
@@ -162,7 +162,7 @@ export default function ForgotPasswordPage() {
                 <div className="text-center pt-1">
                   <Link
                     href="/login"
-                    className="text-sm font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline"
+                    className="text-sm font-semibold text-[#E8590C] hover:underline"
                   >
                     ← Back to Sign In
                   </Link>

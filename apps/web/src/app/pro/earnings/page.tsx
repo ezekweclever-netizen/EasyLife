@@ -40,7 +40,7 @@ export default async function ProEarningsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
             Financial Wallet &amp; Escrow
           </span>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
@@ -53,7 +53,7 @@ export default async function ProEarningsPage() {
 
         <button
           type="button"
-          className="px-5 py-2.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs self-start sm:self-auto"
+          className="px-5 py-2.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs self-start sm:self-auto"
         >
           Withdraw to Nigerian Bank Account
         </button>
@@ -61,11 +61,11 @@ export default async function ProEarningsPage() {
 
       {/* Top 3 Financial Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs">
           <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block mb-1">
             Available Wallet Balance
           </span>
-          <span className="text-3xl font-black text-[#0D9488] block">
+          <span className="text-3xl font-black text-[#E8590C] block">
             {formatNaira(earnings.wallet_balance_kobo)}
           </span>
           <span className="text-xs text-slate-400 mt-2 block">
@@ -73,8 +73,8 @@ export default async function ProEarningsPage() {
           </span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/60/30 p-6 shadow-xs">
-          <span className="text-xs font-semibold text-teal-800 dark:text-[#5CD3D5] block mb-1">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-teal-200 dark:border-teal-800 bg-teal-50 dark:bg-teal-950/60/30 p-6 shadow-xs">
+          <span className="text-xs font-semibold text-teal-800 dark:text-[#F06A1F] block mb-1">
             Protected Escrow Balance
           </span>
           <span className="text-3xl font-black text-slate-900 dark:text-white block">
@@ -85,7 +85,7 @@ export default async function ProEarningsPage() {
           </span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs">
           <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block mb-1">
             Total Lifetime Earnings
           </span>
@@ -99,7 +99,7 @@ export default async function ProEarningsPage() {
       </div>
 
       {/* Nigerian Bank Account Payout Destination */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -111,13 +111,13 @@ export default async function ProEarningsPage() {
           </div>
           <button
             type="button"
-            className="px-3.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+            className="px-3.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
           >
             Update Bank Details
           </button>
         </div>
 
-        <div className="mt-4 p-4 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] flex flex-wrap items-center gap-6 text-xs">
+        <div className="mt-4 p-4 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] flex flex-wrap items-center gap-6 text-xs">
           <div>
             <span className="text-slate-400 block text-[11px]">Bank Name</span>
             <span className="font-bold text-slate-900 dark:text-white">Access Bank Nigeria</span>
@@ -140,7 +140,7 @@ export default async function ProEarningsPage() {
       </div>
 
       {/* Transactions & Escrow Ledger */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs space-y-4">
         <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
           <div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -153,7 +153,7 @@ export default async function ProEarningsPage() {
         </div>
 
         {earnings.transactions.length === 0 ? (
-          <div className="text-center py-12 px-4 rounded-xl border border-dashed border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]">
+          <div className="text-center py-12 px-4 rounded-xl border border-dashed border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]">
             <span className="text-2xl block mb-2">💳</span>
             <p className="text-xs font-semibold text-slate-700 dark:text-slate-200">
               No transactions recorded yet
@@ -165,7 +165,7 @@ export default async function ProEarningsPage() {
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-[#163654]">
+              <thead className="bg-slate-50 dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-[#2E343B]">
                 <tr>
                   <th className="py-3 px-4">Date</th>
                   <th className="py-3 px-4">Job Reference</th>
@@ -178,7 +178,7 @@ export default async function ProEarningsPage() {
               </thead>
               <tbody className="divide-y divide-slate-100 text-slate-800 dark:text-slate-100">
                 {earnings.transactions.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]">
+                  <tr key={tx.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]">
                     <td className="py-3.5 px-4 font-mono text-[11px] text-slate-500 dark:text-slate-400">
                       {new Date(tx.date).toLocaleDateString("en-NG")}
                     </td>
@@ -197,7 +197,7 @@ export default async function ProEarningsPage() {
                     <td className="py-3.5 px-4 text-right text-slate-500 dark:text-slate-400">
                       -{formatNaira(tx.platform_fee_kobo)}
                     </td>
-                    <td className="py-3.5 px-4 text-right font-black text-[#0D9488]">
+                    <td className="py-3.5 px-4 text-right font-black text-[#E8590C]">
                       {formatNaira(tx.net_kobo)}
                     </td>
                     <td className="py-3.5 px-4 text-center">
@@ -206,7 +206,7 @@ export default async function ProEarningsPage() {
                           tx.status === "paid_to_wallet"
                             ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
                             : tx.status === "in_escrow"
-                            ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800"
+                            ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border border-teal-200 dark:border-teal-800"
                             : "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
                         }`}
                       >

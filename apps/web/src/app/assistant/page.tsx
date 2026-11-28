@@ -39,7 +39,7 @@ export default async function AIAssistantPage() {
 
   if (auth) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+      <div className="min-h-screen bg-[#FAF7F3] pb-24 md:pb-12 text-[#1F2328]">
         <CustomerHeader
           user={{
             id: auth.user.id,
@@ -55,7 +55,7 @@ export default async function AIAssistantPage() {
 
   return (
     <PublicShell>
-      <div className="min-h-screen bg-[#F8FAFC]">
+      <div className="min-h-screen bg-[#FAF7F3]">
         <div className="max-w-5xl mx-auto">{content}</div>
       </div>
     </PublicShell>

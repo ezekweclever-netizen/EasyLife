@@ -71,14 +71,14 @@ export default async function AdminLayout({
   const adminName = adminCheck.fullName;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-slate-100 flex flex-col lg:flex-row antialiased">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-slate-100 flex flex-col lg:flex-row antialiased">
       {/* Navigation Sidebar */}
       <AdminSidebar adminEmail={adminEmail} adminName={adminName} />
 
       {/* Main Administrative Work Canvas */}
       <div className="flex-1 lg:pl-72 flex flex-col min-h-screen overflow-x-hidden">
         {/* Top Operational Status Header */}
-        <header className="h-14 bg-white dark:bg-[#0D223A] border-b border-slate-200 dark:border-[#163654] px-4 sm:px-8 flex items-center justify-between shrink-0 sticky top-0 z-30 shadow-2xs">
+        <header className="h-14 bg-white dark:bg-[#1F2328] border-b border-slate-200 dark:border-[#2E343B] px-4 sm:px-8 flex items-center justify-between shrink-0 sticky top-0 z-30 shadow-2xs">
           <div className="flex items-center gap-3 min-w-0">
             <div className="flex items-center gap-2 shrink-0">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />

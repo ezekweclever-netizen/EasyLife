@@ -40,11 +40,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               />
 
               <div className="mt-6 space-y-4">
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-5 bg-[#F8FAFC]">
-                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0D9488]">
+                <div className="rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 bg-white dark:bg-[#1F2328]">
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#E8590C]">
                     Port Harcourt Hub (Rivers State)
                   </p>
-                  <p className="text-base font-semibold text-[#0F172A] mt-1">
+                  <p className="text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mt-1">
                     EasyLife Operations Desk
                   </p>
                   <p className="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
@@ -52,11 +52,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-5 bg-[#F8FAFC]">
-                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0D9488]">
+                <div className="rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 bg-white dark:bg-[#1F2328]">
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#E8590C]">
                     Lagos Hub
                   </p>
-                  <p className="text-base font-semibold text-[#0F172A] mt-1">
+                  <p className="text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mt-1">
                     EasyLife Operations Desk
                   </p>
                   <p className="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
@@ -64,11 +64,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-5 bg-[#F8FAFC]">
-                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#0D9488]">
+                <div className="rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 bg-white dark:bg-[#1F2328]">
+                  <p className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#E8590C]">
                     Abuja Hub (FCT)
                   </p>
-                  <p className="text-base font-semibold text-[#0F172A] mt-1">
+                  <p className="text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mt-1">
                     EasyLife Operations Desk
                   </p>
                   <p className="text-sm text-slate-600 dark:text-slate-300 mt-0.5">
@@ -78,8 +78,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </div>
             </div>
 
-            <div className="rounded-xl bg-[#0A192F] text-white p-6 border border-slate-800">
-              <h4 className="text-sm sm:text-base font-bold text-teal-300 uppercase tracking-wider">
+            <div className="rounded-xl bg-[#1F2328] text-white p-6 border border-[#2E343B]">
+              <h4 className="text-sm sm:text-base font-bold text-[#E8590C] uppercase tracking-wider">
                 Support Hours &amp; Channels
               </h4>
               <div className="mt-4 space-y-3 text-sm text-slate-300">
@@ -93,7 +93,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Emergency Escalations</span>
-                  <span className="font-semibold text-teal-400">24/7 In-App Ticketing</span>
+                  <span className="font-semibold text-[#E8590C]">24/7 In-App Ticketing</span>
                 </div>
                 <div className="flex justify-between pt-2 border-t border-slate-800 items-center">
                   <span className="text-slate-400">Direct WhatsApp</span>
@@ -112,8 +112,8 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
           </div>
 
           {/* Interactive Form */}
-          <div className="lg:col-span-7 bg-[#F8FAFC] border border-slate-200 dark:border-[#163654] rounded-2xl p-6 sm:p-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] mb-1.5">
+          <div className="lg:col-span-7 bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] rounded-2xl p-6 sm:p-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5">
               Send Us a Message
             </h3>
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mb-6">

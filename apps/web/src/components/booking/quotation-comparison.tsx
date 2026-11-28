@@ -187,7 +187,7 @@ export function QuotationComparison({
 
   if (!quotations || quotations.length === 0) {
     return (
-      <div className="p-8 text-center bg-slate-50 dark:bg-[#071526] rounded-2xl border border-dashed border-slate-200 dark:border-[#163654] space-y-2">
+      <div className="p-8 text-center bg-slate-50 dark:bg-[#1F2328] rounded-2xl border border-dashed border-slate-200 dark:border-[#2E343B] space-y-2">
         <span className="text-3xl">⏳</span>
         <h3 className="text-sm font-bold text-slate-800 dark:text-slate-100">No Quotations Received Yet</h3>
         <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
@@ -222,9 +222,9 @@ export function QuotationComparison({
       )}
 
       {/* Comparison Grid Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-[#163654] pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-[#2E343B] pb-4">
         <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#E8590C]">
             Side-by-Side Comparison
           </span>
           <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
@@ -235,7 +235,7 @@ export function QuotationComparison({
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border border-teal-200 dark:border-teal-800">
             <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse" />
             Backend Verified Pricing
           </span>
@@ -261,10 +261,10 @@ export function QuotationComparison({
               key={quote.id}
               className={`flex flex-col justify-between rounded-3xl border transition-all ${
                 isAccepted
-                  ? "border-[#0D9488] bg-teal-50 dark:bg-teal-950/60/40 shadow-md ring-2 ring-[#0D9488]"
+                  ? "border-[#E8590C] bg-teal-50 dark:bg-teal-950/60/40 shadow-md ring-2 ring-[#E8590C]"
                   : isDeclined || isWithdrawn || isExpired
-                  ? "border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/60 opacity-80"
-                  : "border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] shadow-xs hover:border-slate-300 dark:border-slate-700 hover:shadow-md"
+                  ? "border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/60 opacity-80"
+                  : "border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] shadow-xs hover:border-slate-300 dark:border-slate-700 hover:shadow-md"
               } p-6`}
             >
               <div className="space-y-4">
@@ -282,7 +282,7 @@ export function QuotationComparison({
                   </div>
                   <div>
                     {isAccepted ? (
-                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#0D9488] text-white">
+                      <span className="px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#E8590C] text-white">
                         ✓ Accepted Quote
                       </span>
                     ) : isDeclined ? (
@@ -326,12 +326,12 @@ export function QuotationComparison({
                 </div>
 
                 {/* Total Price Callout */}
-                <div className="bg-slate-50 dark:bg-[#071526] rounded-2xl p-4 border border-slate-200 dark:border-[#163654]/80">
+                <div className="bg-slate-50 dark:bg-[#1F2328] rounded-2xl p-4 border border-slate-200 dark:border-[#2E343B]/80">
                   <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
                     Total Estimated Amount
                   </span>
                   <div className="flex items-baseline gap-2 mt-0.5">
-                    <span className="text-2xl font-black text-[#0D9488]">
+                    <span className="text-2xl font-black text-[#E8590C]">
                       ₦{(quote.total_amount_kobo / 100).toLocaleString("en-NG")}
                     </span>
                     <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">NGN</span>
@@ -346,7 +346,7 @@ export function QuotationComparison({
                   <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                     Cost Breakdown
                   </span>
-                  <div className="space-y-1.5 text-xs bg-white dark:bg-[#0D223A] rounded-xl p-3 border border-slate-200 dark:border-[#163654]">
+                  <div className="space-y-1.5 text-xs bg-white dark:bg-[#1F2328] rounded-xl p-3 border border-slate-200 dark:border-[#2E343B]">
                     <div className="flex justify-between items-center text-slate-700 dark:text-slate-200">
                       <span>Labour Charges:</span>
                       <strong className="font-mono">
@@ -374,7 +374,7 @@ export function QuotationComparison({
                     <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
                       Proposed Scope of Work
                     </span>
-                    <p className="text-xs text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-[#071526] p-3 rounded-xl border border-slate-100 dark:border-slate-800 whitespace-pre-line">
+                    <p className="text-xs text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-[#1F2328] p-3 rounded-xl border border-slate-100 dark:border-slate-800 whitespace-pre-line">
                       {quote.work_description}
                     </p>
                   </div>
@@ -404,7 +404,7 @@ export function QuotationComparison({
                 )}
 
                 {quote.decline_reason && (
-                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654] text-xs text-slate-700 dark:text-slate-200 space-y-1">
+                  <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#2E343B] text-xs text-slate-700 dark:text-slate-200 space-y-1">
                     <span className="font-bold block">Decline Reason:</span>
                     <p className="text-[11px]">{quote.decline_reason}</p>
                   </div>
@@ -416,7 +416,7 @@ export function QuotationComparison({
                     <button
                       type="button"
                       onClick={() => toggleExpand(quote.id)}
-                      className="text-xs font-semibold text-[#0D9488] hover:underline flex items-center justify-between w-full"
+                      className="text-xs font-semibold text-[#E8590C] hover:underline flex items-center justify-between w-full"
                     >
                       <span>
                         {expandedQuoteIds[quote.id] ? "Hide Line Items ▲" : `View Line Items (${quote.quotation_items.length}) ▼`}
@@ -424,7 +424,7 @@ export function QuotationComparison({
                     </button>
 
                     {expandedQuoteIds[quote.id] && (
-                      <div className="mt-2 space-y-1.5 pt-2 border-t border-dashed border-slate-200 dark:border-[#163654]">
+                      <div className="mt-2 space-y-1.5 pt-2 border-t border-dashed border-slate-200 dark:border-[#2E343B]">
                         {quote.quotation_items.map((item, idx) => (
                           <div key={idx} className="flex justify-between items-center text-xs text-slate-700 dark:text-slate-200">
                             <div>
@@ -450,7 +450,7 @@ export function QuotationComparison({
                   <button
                     type="button"
                     onClick={() => setSelectedQuoteForAccept(quote)}
-                    className="w-full py-2.5 px-4 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold text-xs shadow-xs transition"
+                    className="w-full py-2.5 px-4 rounded-xl bg-[#E8590C] hover:bg-[#E8590C] text-white font-bold text-xs shadow-xs transition"
                   >
                     Accept Quote &amp; Book →
                   </button>
@@ -464,14 +464,14 @@ export function QuotationComparison({
                         setSelectedQuoteForClarify(quote);
                         setClarificationNotes(quote.clarification_notes || "");
                       }}
-                      className="py-2 px-3 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-slate-700 dark:text-slate-200 font-semibold text-xs transition"
+                      className="py-2 px-3 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 font-semibold text-xs transition"
                     >
                       💬 Ask Question
                     </button>
                     <button
                       type="button"
                       onClick={() => setSelectedQuoteForDecline(quote)}
-                      className="py-2 px-3 rounded-lg border border-red-200 dark:border-red-800 bg-white dark:bg-[#0D223A] hover:bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-semibold text-xs transition"
+                      className="py-2 px-3 rounded-lg border border-red-200 dark:border-red-800 bg-white dark:bg-[#1F2328] hover:bg-red-50 dark:bg-red-950/60 text-red-700 dark:text-red-400 font-semibold text-xs transition"
                     >
                       Decline
                     </button>
@@ -494,7 +494,7 @@ export function QuotationComparison({
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs">
           <div className="bg-white dark:bg-[#0E2238] rounded-3xl max-w-lg w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-4 sm:p-6 md:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto overscroll-contain">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#E8590C]">
                 Confirm Appointment &amp; Quotation
               </span>
               <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-1">
@@ -516,11 +516,11 @@ export function QuotationComparison({
               <div className="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 space-y-2">
                 <div className="flex justify-between text-xs text-teal-900">
                   <span>Agreed Escrow Amount:</span>
-                  <span className="font-bold font-mono text-sm text-[#0D9488]">
+                  <span className="font-bold font-mono text-sm text-[#E8590C]">
                     ₦{(selectedQuoteForAccept.total_amount_kobo / 100).toLocaleString("en-NG")}
                   </span>
                 </div>
-                <div className="flex justify-between text-[11px] text-teal-800 dark:text-[#5CD3D5]">
+                <div className="flex justify-between text-[11px] text-teal-800 dark:text-[#F06A1F]">
                   <span>Labour: ₦{((selectedQuoteForAccept.labour_charges_kobo || 0) / 100).toLocaleString("en-NG")}</span>
                   <span>Materials: ₦{((selectedQuoteForAccept.materials_costs_kobo || 0) / 100).toLocaleString("en-NG")}</span>
                 </div>
@@ -538,7 +538,7 @@ export function QuotationComparison({
                     value={appointmentDate}
                     onChange={(e) => setAppointmentDate(e.target.value)}
                     min={new Date().toISOString().split("T")[0]}
-                    className="w-full text-xs p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 focus:outline-hidden focus:border-[#0D9488]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 focus:outline-hidden focus:border-[#E8590C]"
                   />
                 </div>
                 <div className="space-y-1">
@@ -548,7 +548,7 @@ export function QuotationComparison({
                     required
                     value={appointmentTime}
                     onChange={(e) => setAppointmentTime(e.target.value)}
-                    className="w-full text-xs p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 focus:outline-hidden focus:border-[#0D9488]"
+                    className="w-full text-xs p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 focus:outline-hidden focus:border-[#E8590C]"
                   />
                 </div>
               </div>
@@ -558,14 +558,14 @@ export function QuotationComparison({
                   type="button"
                   onClick={() => setSelectedQuoteForAccept(null)}
                   disabled={isPending}
-                  className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+                  className="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="px-5 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold shadow-xs transition"
+                  className="px-5 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#E8590C] text-white text-xs font-bold shadow-xs transition"
                 >
                   {isPending ? "Confirming..." : "Confirm & Accept Quotation"}
                 </button>
@@ -580,7 +580,7 @@ export function QuotationComparison({
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-xs">
           <div className="bg-white dark:bg-[#0E2238] rounded-3xl max-w-md w-full border border-slate-200 dark:border-slate-800 shadow-2xl p-4 sm:p-6 md:p-8 space-y-5 animate-in fade-in zoom-in-95 duration-150 max-h-[90vh] overflow-y-auto overscroll-contain">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#0D9488]">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#E8590C]">
                 Request Quotation Clarification
               </span>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1">
@@ -606,7 +606,7 @@ export function QuotationComparison({
                   value={clarificationNotes}
                   onChange={(e) => setClarificationNotes(e.target.value)}
                   placeholder="e.g. Could you clarify which brand of replacement parts will be used for the water heater?"
-                  className="w-full text-xs p-3 rounded-xl border border-slate-300 dark:border-slate-700 focus:outline-hidden focus:border-[#0D9488]"
+                  className="w-full text-xs p-3 rounded-xl border border-slate-300 dark:border-slate-700 focus:outline-hidden focus:border-[#E8590C]"
                 />
               </div>
 
@@ -615,14 +615,14 @@ export function QuotationComparison({
                   type="button"
                   onClick={() => setSelectedQuoteForClarify(null)}
                   disabled={isPending}
-                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="px-4 py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold shadow-xs transition"
+                  className="px-4 py-2 rounded-xl bg-[#E8590C] hover:bg-[#E8590C] text-white text-xs font-bold shadow-xs transition"
                 >
                   {isPending ? "Sending..." : "Submit Question"}
                 </button>
@@ -671,7 +671,7 @@ export function QuotationComparison({
                   type="button"
                   onClick={() => setSelectedQuoteForDecline(null)}
                   disabled={isPending}
-                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+                  className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
                 >
                   Back
                 </button>

@@ -147,9 +147,9 @@ export default function HelpCentrePage() {
       </Section>
 
       {/* Still need help */}
-      <Section tone="grey" className="border-t border-slate-200 dark:border-[#163654]">
+      <Section tone="grey" className="border-t border-slate-200 dark:border-[#2E343B]">
         <div className="text-center max-w-xl mx-auto">
-          <h3 className="text-xl font-bold text-[#0F172A]">
+          <h3 className="text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
             Still have an unanswered question?
           </h3>
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">

@@ -213,17 +213,17 @@ export function QuotationModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-2xl w-full border border-slate-200 dark:border-[#163654] shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto">
-        <div className="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#15181C]/70 backdrop-blur-xs overflow-y-auto">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-2xl w-full border border-[#E6E0D8] dark:border-[#2E343B] shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto">
+        <div className="flex items-start justify-between pb-4 border-b border-[#E6E0D8] dark:border-[#2E343B]">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               {existingQuotation ? "Revise / Edit Quotation" : "Prepare Structured Quotation"}
             </span>
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-0.5">
+            <h2 className="text-lg sm:text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3] mt-0.5">
               {bookingTitle}
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-0.5">
               Ref: <span className="font-mono font-medium">{bookingRef}</span>
             </p>
           </div>
@@ -250,19 +250,19 @@ export function QuotationModal({
 
         <div className="mt-6 space-y-6">
           {/* AI Quotation Assistant Panel */}
-          <div className="p-4 rounded-2xl bg-linear-to-r from-teal-50/80 via-emerald-50/50 to-white border border-teal-200 dark:border-teal-800">
+          <div className="p-4 rounded-2xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E8590C]/30">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="flex h-2 w-2 rounded-full bg-teal-500 animate-pulse" />
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-teal-950 flex items-center gap-1.5">
+                  <span className="flex h-2 w-2 rounded-full bg-[#E8590C] animate-pulse" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#1F2328] dark:text-[#FAF7F3] flex items-center gap-1.5">
                     ✨ AI Quotation Assistant
-                    <span className="text-[10px] font-normal px-2 py-0.5 rounded-full bg-teal-100/80 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800">
+                    <span className="text-[10px] font-normal px-2 py-0.5 rounded-full bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30">
                       Draft Proposal Generator
                     </span>
                   </h3>
                 </div>
-                <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">
+                <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1">
                   Generate structured labour, materials, and expense suggestions based on job requirements.
                 </p>
               </div>
@@ -274,7 +274,7 @@ export function QuotationModal({
                   handleGenerateAISuggestion();
                 }}
                 disabled={isAILoading}
-                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#0D9488] to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white text-xs font-bold shadow-xs hover:shadow transition disabled:opacity-50 flex items-center gap-2 shrink-0"
+                className="px-3.5 py-2 rounded-xl bg-[#E8590C] hover:bg-[#C84A06] text-white text-xs font-bold shadow-xs hover:shadow transition disabled:opacity-50 flex items-center gap-2 shrink-0"
               >
                 {isAILoading ? (
                   <>
@@ -297,25 +297,25 @@ export function QuotationModal({
             )}
 
             {showAIAssistant && aiSuggestion && (
-              <div className="mt-4 pt-4 border-t border-teal-200 dark:border-teal-800/70 space-y-3">
-                <div className="p-3 rounded-xl bg-white dark:bg-[#0D223A]/80 border border-teal-100 text-xs space-y-2">
+              <div className="mt-4 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B] space-y-3">
+                <div className="p-3 rounded-xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs space-y-2">
                   <div>
-                    <span className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400">Suggested Work Scope:</span>
-                    <p className="text-slate-800 dark:text-slate-100 font-medium mt-0.5">{aiSuggestion.work_description}</p>
+                    <span className="text-[10px] font-bold uppercase text-[#4A525C] dark:text-[#C3C8CF]">Suggested Work Scope:</span>
+                    <p className="text-[#1F2328] dark:text-[#FAF7F3] font-medium mt-0.5">{aiSuggestion.work_description}</p>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-4 text-[11px] text-slate-600 dark:text-slate-300 pt-1 border-t border-slate-100 dark:border-slate-800">
+                  <div className="flex flex-wrap items-center gap-4 text-[11px] text-[#4A525C] dark:text-[#C3C8CF] pt-1 border-t border-[#E6E0D8] dark:border-[#2E343B]">
                     <div>
-                      <span className="text-slate-400">Est. Duration:</span>{" "}
-                      <strong className="text-slate-800 dark:text-slate-100">{aiSuggestion.estimated_duration_minutes} mins</strong>
+                      <span className="text-[#4A525C] dark:text-[#C3C8CF]">Est. Duration:</span>{" "}
+                      <strong className="text-[#1F2328] dark:text-[#FAF7F3]">{aiSuggestion.estimated_duration_minutes} mins</strong>
                     </div>
                     <div>
-                      <span className="text-slate-400">Total Draft Benchmark:</span>{" "}
-                      <strong className="text-teal-700 dark:text-teal-400 font-bold">₦{aiSuggestion.total_suggested_naira.toLocaleString("en-NG")}</strong>
+                      <span className="text-[#4A525C] dark:text-[#C3C8CF]">Total Draft Benchmark:</span>{" "}
+                      <strong className="text-[#E8590C] font-bold">₦{aiSuggestion.total_suggested_naira.toLocaleString("en-NG")}</strong>
                     </div>
                     <div>
-                      <span className="text-slate-400">Items:</span>{" "}
-                      <strong className="text-slate-800 dark:text-slate-100">{aiSuggestion.items.length} suggested lines</strong>
+                      <span className="text-[#4A525C] dark:text-[#C3C8CF]">Items:</span>{" "}
+                      <strong className="text-[#1F2328] dark:text-[#FAF7F3]">{aiSuggestion.items.length} suggested lines</strong>
                     </div>
                   </div>
                 </div>
@@ -330,14 +330,14 @@ export function QuotationModal({
                   <button
                     type="button"
                     onClick={() => setShowAIAssistant(false)}
-                    className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                    className="px-3 py-1.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-[#4A525C] dark:text-[#C3C8CF] text-xs font-semibold hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                   >
                     Dismiss
                   </button>
                   <button
                     type="button"
                     onClick={handleApplyAISuggestion}
-                    className="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shadow-xs transition"
+                    className="px-4 py-1.5 rounded-lg bg-[#E8590C] hover:bg-[#C84A06] text-white text-xs font-bold shadow-xs transition"
                   >
                     Apply to Quotation Form →
                   </button>
@@ -357,7 +357,7 @@ export function QuotationModal({
               value={workDescription}
               onChange={(e) => setWorkDescription(e.target.value)}
               placeholder="e.g. Inspect leak at main valve, replace copper washer and pressure gasket, pressure test line."
-              className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:border-[#0D9488]"
+              className="w-full p-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
           </div>
 
@@ -371,21 +371,21 @@ export function QuotationModal({
                 <button
                   type="button"
                   onClick={() => addItem("labor")}
-                  className="px-2.5 py-1 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-[#0D9488] text-[11px] font-semibold hover:bg-teal-100 transition"
+                  className="px-2.5 py-1 rounded-lg bg-[#FCEBDD] border border-[#E8590C]/30 text-[#E8590C] text-[11px] font-semibold hover:bg-[#FCEBDD]/80 transition"
                 >
                   + Add Labour
                 </button>
                 <button
                   type="button"
                   onClick={() => addItem("parts")}
-                  className="px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-slate-700 dark:text-slate-200 text-[11px] font-semibold hover:bg-slate-100 dark:bg-slate-800 transition"
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-[#1F2328] dark:text-[#FAF7F3] text-[11px] font-semibold hover:bg-[#FAF7F3] transition"
                 >
                   + Add Materials
                 </button>
                 <button
                   type="button"
                   onClick={() => addItem("transport")}
-                  className="px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-slate-700 dark:text-slate-200 text-[11px] font-semibold hover:bg-slate-100 dark:bg-slate-800 transition"
+                  className="px-2.5 py-1 rounded-lg bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-[#1F2328] dark:text-[#FAF7F3] text-[11px] font-semibold hover:bg-[#FAF7F3] transition"
                 >
                   + Add Additional Fee
                 </button>
@@ -398,7 +398,7 @@ export function QuotationModal({
                 return (
                   <div
                     key={it.id}
-                    className="p-3 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/50 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 text-xs"
+                    className="p-3 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/50 flex flex-col sm:flex-row items-start sm:items-center gap-2.5 text-xs"
                   >
                     <span className="w-5 text-slate-400 font-mono text-[11px]">
                       #{idx + 1}
@@ -411,7 +411,7 @@ export function QuotationModal({
                           item_type: e.target.value as any,
                         })
                       }
-                      className="h-9 px-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-medium text-slate-800 dark:text-slate-100"
+                      className="h-9 px-2 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] font-medium text-[#1F2328] dark:text-[#FAF7F3]"
                     >
                       <option value="labor">Labour</option>
                       <option value="parts">Materials / Parts</option>
@@ -426,7 +426,7 @@ export function QuotationModal({
                       onChange={(e) => updateItem(it.id, { description: e.target.value })}
                       placeholder="Item description..."
                       required
-                      className="flex-1 h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white"
+                      className="flex-1 h-9 px-3 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3]"
                     />
 
                     <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -442,7 +442,7 @@ export function QuotationModal({
                             })
                           }
                           placeholder="Qty"
-                          className="w-full h-9 px-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white text-center"
+                          className="w-full h-9 px-2 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] text-center"
                         />
                       </div>
 
@@ -458,7 +458,7 @@ export function QuotationModal({
                             })
                           }
                           placeholder="Unit (₦)"
-                          className="w-full h-9 px-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-900 dark:text-white text-right"
+                          className="w-full h-9 px-2 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] text-right"
                         />
                       </div>
 
@@ -484,22 +484,22 @@ export function QuotationModal({
           </div>
 
           {/* Cost Breakdown & Trusted Backend Totals Preview */}
-          <div className="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/60/70 border border-teal-200 dark:border-teal-800 space-y-3">
+          <div className="p-4 rounded-2xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] space-y-3">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs text-slate-600 dark:text-slate-300 font-medium">
+                <span className="text-xs text-[#4A525C] dark:text-[#C3C8CF] font-medium">
                   Total Calculated Quotation
                 </span>
-                <p className="text-[10px] text-teal-800 dark:text-[#5CD3D5]">
+                <p className="text-[10px] text-[#4A525C] dark:text-[#C3C8CF]">
                   Calculated and validated by EasyLife trusted backend in minor units (kobo).
                 </p>
               </div>
-              <span className="text-2xl font-black text-[#0D9488]">
+              <span className="text-2xl font-black text-[#E8590C]">
                 ₦{totalNaira.toLocaleString("en-NG")}
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-teal-200 dark:border-teal-800 text-xs">
+            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[#E6E0D8] dark:border-[#2E343B] text-xs">
               <div>
                 <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Labour:</span>
                 <strong className="text-slate-800 dark:text-slate-100">₦{labourNaira.toLocaleString("en-NG")}</strong>
@@ -524,7 +524,7 @@ export function QuotationModal({
               <select
                 value={estimatedDurationMinutes}
                 onChange={(e) => setEstimatedDurationMinutes(parseInt(e.target.value, 10))}
-                className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328]"
               >
                 <option value={30}>30 Minutes</option>
                 <option value={60}>1 Hour</option>
@@ -542,7 +542,7 @@ export function QuotationModal({
               <select
                 value={validUntilDays}
                 onChange={(e) => setValidUntilDays(parseInt(e.target.value, 10))}
-                className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                className="w-full h-10 px-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328]"
               >
                 <option value={3}>3 Days</option>
                 <option value={7}>7 Days (Standard)</option>
@@ -559,7 +559,7 @@ export function QuotationModal({
                 type="datetime-local"
                 value={proposedStartAt}
                 onChange={(e) => setProposedStartAt(e.target.value)}
-                className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
+                className="w-full h-10 px-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328]"
               />
             </div>
           </div>
@@ -574,17 +574,17 @@ export function QuotationModal({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="e.g. 30-day warranty on workmanship; materials backed by manufacturer warranty."
-              className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
+              className="w-full p-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328]"
             />
           </div>
 
           {/* Form Actions: Save Draft vs Submit Final Quote */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-[#163654]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B]">
             <button
               type="button"
               onClick={onClose}
               disabled={isPending}
-              className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+              className="w-full sm:w-auto px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs font-semibold text-[#4A525C] dark:text-[#C3C8CF] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] transition"
             >
               Cancel
             </button>
@@ -594,7 +594,7 @@ export function QuotationModal({
                 type="button"
                 onClick={() => submitQuotation(true)}
                 disabled={isPending}
-                className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-teal-300 dark:border-teal-700 bg-teal-50 dark:bg-teal-950/60/60 hover:bg-teal-100 text-[#0D9488] text-xs font-bold transition"
+                className="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-[#E8590C]/40 bg-[#FCEBDD] hover:bg-[#FCEBDD]/80 text-[#E8590C] text-xs font-bold transition"
               >
                 {isPending ? "Saving..." : "Save as Draft"}
               </button>
@@ -603,7 +603,7 @@ export function QuotationModal({
                 type="button"
                 onClick={() => submitQuotation(false)}
                 disabled={isPending || totalNaira <= 0}
-                className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50 transition shadow-xs"
+                className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#C84A06] disabled:opacity-50 transition shadow-xs"
               >
                 {isPending ? "Submitting..." : `Submit Quote (₦${totalNaira.toLocaleString("en-NG")})`}
               </button>

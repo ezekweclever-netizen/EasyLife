@@ -98,7 +98,7 @@ export function LocationPicker({
         <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200">
           {label}
         </label>
-        <span className="text-[10px] font-semibold text-[#0D9488] px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800">
+        <span className="text-[10px] font-semibold text-[#E8590C] px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800">
           📍 {filterCity ? `${filterCity} Hub` : "Port Harcourt • Lagos • Abuja"}
         </span>
       </div>
@@ -112,7 +112,7 @@ export function LocationPicker({
             if (suggestions.length > 0) setIsOpen(true);
           }}
           placeholder={placeholder}
-          className="w-full h-11 px-4 pr-10 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:outline-hidden focus:border-[#0D9488] shadow-2xs"
+          className="w-full h-11 px-4 pr-10 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328] focus:outline-hidden focus:border-[#E8590C] shadow-2xs"
         />
 
         {isPending && (
@@ -123,7 +123,7 @@ export function LocationPicker({
 
         {/* Autocomplete Dropdown */}
         {isOpen && suggestions.length > 0 && (
-          <div className="absolute left-0 right-0 top-12 z-50 bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xl overflow-hidden divide-y divide-slate-100 max-h-60 overflow-y-auto">
+          <div className="absolute left-0 right-0 top-12 z-50 bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xl overflow-hidden divide-y divide-slate-100 max-h-60 overflow-y-auto">
             {suggestions.map((loc) => (
               <button
                 key={loc.id}
@@ -148,9 +148,9 @@ export function LocationPicker({
 
       {/* Selected Coordinates & Transit Metric Card */}
       {selectedLocation && (
-        <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+        <div className="p-3 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2">
-            <span className="px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 dark:text-[#5CD3D5] font-mono font-bold text-[10px]">
+            <span className="px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 dark:text-[#F06A1F] font-mono font-bold text-[10px]">
               {selectedLocation.coordinates.latitude.toFixed(4)}°N, {selectedLocation.coordinates.longitude.toFixed(4)}°E
             </span>
             <span className="text-slate-600 dark:text-slate-300 font-medium truncate max-w-xs">

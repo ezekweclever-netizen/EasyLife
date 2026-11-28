@@ -105,7 +105,7 @@ export function JobStatusActions({
             type="button"
             onClick={handleStartJob}
             disabled={isPending}
-            className="px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50 transition shadow-xs"
+            className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50 transition shadow-xs"
           >
             {isPending ? "Starting..." : "▶ Start Accepted Job"}
           </button>
@@ -125,7 +125,7 @@ export function JobStatusActions({
 
         {/* If completion already requested */}
         {currentStatus === "pro_marked_complete" && (
-          <span className="px-3 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#5CD3D5] text-xs font-semibold">
+          <span className="px-3 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#F06A1F] text-xs font-semibold">
             ⏳ Completion Submitted — Awaiting Customer Sign-off &amp; Escrow Release
           </span>
         )}
@@ -155,7 +155,7 @@ export function JobStatusActions({
           <button
             type="button"
             onClick={() => setShowScheduleModal(true)}
-            className="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+            className="px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
           >
             Update Appointment
           </button>
@@ -165,7 +165,7 @@ export function JobStatusActions({
       {/* Completion Modal */}
       {showCompletionModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-md w-full border border-slate-200 dark:border-[#163654] shadow-2xl p-6">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-md w-full border border-slate-200 dark:border-[#2E343B] shadow-2xl p-6">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Submit Job Completion Request
             </h3>
@@ -192,7 +192,7 @@ export function JobStatusActions({
                 <button
                   type="button"
                   onClick={() => setShowCompletionModal(false)}
-                  className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                  className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
                 >
                   Cancel
                 </button>
@@ -212,7 +212,7 @@ export function JobStatusActions({
       {/* Schedule Update Modal */}
       {showScheduleModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-sm w-full border border-slate-200 dark:border-[#163654] shadow-2xl p-6">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-sm w-full border border-slate-200 dark:border-[#2E343B] shadow-2xl p-6">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Update Appointment Time
             </h3>
@@ -238,14 +238,14 @@ export function JobStatusActions({
                 <button
                   type="button"
                   onClick={() => setShowScheduleModal(false)}
-                  className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                  className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isPending || !newScheduleDate}
-                  className="px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50 transition"
+                  className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50 transition"
                 >
                   {isPending ? "Updating..." : "Save Appointment"}
                 </button>

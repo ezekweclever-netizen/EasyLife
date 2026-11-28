@@ -24,7 +24,7 @@ export default async function AdminServicesPage({
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#2E343B]">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-teal-300">
@@ -46,14 +46,14 @@ export default async function AdminServicesPage({
         <div className="flex flex-wrap items-center gap-2.5 self-start sm:self-auto">
           <Link
             href="/admin/categories"
-            className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-800 dark:text-slate-100 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+            className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-slate-800 dark:text-slate-100 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
           >
             ← Back to Categories
           </Link>
           <Link
             href="/explore-services"
             target="_blank"
-            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-semibold text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:bg-teal-950/60 transition"
+            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs font-semibold text-teal-700 dark:text-teal-400 hover:bg-teal-50 dark:bg-teal-950/60 transition"
           >
             Public Catalog ↗
           </Link>

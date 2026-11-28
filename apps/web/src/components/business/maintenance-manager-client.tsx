@@ -204,7 +204,7 @@ export function MaintenanceManagerClient({
   return (
     <div className="space-y-6">
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1F2328] p-6 rounded-2xl border border-slate-200 dark:border-[#2E343B]">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Maintenance Management & Fault Reporting
@@ -237,12 +237,12 @@ export function MaintenanceManagerClient({
       </div>
 
       {/* Main Tabs */}
-      <div className="flex items-center gap-4 border-b border-slate-200 dark:border-[#163654] pb-1">
+      <div className="flex items-center gap-4 border-b border-slate-200 dark:border-[#2E343B] pb-1">
         <button
           onClick={() => setActiveTab("requests")}
           className={`pb-2.5 text-sm font-bold border-b-2 transition ${
             activeTab === "requests"
-              ? "border-teal-600 text-teal-800 dark:text-[#5CD3D5]"
+              ? "border-teal-600 text-teal-800 dark:text-[#F06A1F]"
               : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100"
           }`}
         >
@@ -252,7 +252,7 @@ export function MaintenanceManagerClient({
           onClick={() => setActiveTab("history")}
           className={`pb-2.5 text-sm font-bold border-b-2 transition ${
             activeTab === "history"
-              ? "border-teal-600 text-teal-800 dark:text-[#5CD3D5]"
+              ? "border-teal-600 text-teal-800 dark:text-[#F06A1F]"
               : "border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-100"
           }`}
         >
@@ -272,7 +272,7 @@ export function MaintenanceManagerClient({
             }
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
           />
         </div>
 
@@ -280,7 +280,7 @@ export function MaintenanceManagerClient({
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+            className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
           >
             <option value="all">All Request Statuses</option>
             <option value="open">Open Faults</option>
@@ -294,7 +294,7 @@ export function MaintenanceManagerClient({
         <select
           value={propertyFilter}
           onChange={(e) => setPropertyFilter(e.target.value)}
-          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
         >
           <option value="all">All Properties ({properties.length})</option>
           {properties.map((p) => (
@@ -309,7 +309,7 @@ export function MaintenanceManagerClient({
       {activeTab === "requests" && (
         <div className="space-y-4">
           {filteredRequests.length === 0 ? (
-            <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
+            <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
               <div className="text-4xl mb-3">🛠️</div>
               <h3 className="text-base font-semibold text-slate-800 dark:text-slate-100">No maintenance requests found</h3>
               <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
@@ -337,7 +337,7 @@ export function MaintenanceManagerClient({
                 return (
                   <div
                     key={req.id}
-                    className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
+                    className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-start justify-between gap-2 mb-2">
@@ -362,7 +362,7 @@ export function MaintenanceManagerClient({
                         {req.description}
                       </p>
 
-                      <div className="mt-4 p-3 bg-slate-50 dark:bg-[#071526] rounded-xl space-y-1 text-xs">
+                      <div className="mt-4 p-3 bg-slate-50 dark:bg-[#1F2328] rounded-xl space-y-1 text-xs">
                         <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
                           <span>Property:</span>
                           <span className="font-semibold text-slate-800 dark:text-slate-100">
@@ -434,7 +434,7 @@ export function MaintenanceManagerClient({
 
       {/* TAB 2: Maintenance Records (History & Invoices) */}
       {activeTab === "history" && (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] overflow-hidden shadow-2xs">
           {filteredRecords.length === 0 ? (
             <div className="p-12 text-center">
               <div className="text-4xl mb-3">📋</div>
@@ -446,7 +446,7 @@ export function MaintenanceManagerClient({
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 dark:bg-[#071526] border-b border-slate-200 dark:border-[#163654] text-2xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
+                <thead className="bg-slate-50 dark:bg-[#1F2328] border-b border-slate-200 dark:border-[#2E343B] text-2xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
                   <tr>
                     <th className="py-3.5 px-4">Completion Date</th>
                     <th className="py-3.5 px-4">Summary & Work Done</th>
@@ -458,7 +458,7 @@ export function MaintenanceManagerClient({
                 </thead>
                 <tbody className="divide-y divide-slate-100 text-xs">
                   {filteredRecords.map((rec) => (
-                    <tr key={rec.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition">
+                    <tr key={rec.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition">
                       <td className="py-3.5 px-4 whitespace-nowrap text-slate-600 dark:text-slate-300 font-medium">
                         {new Date(rec.performed_at).toLocaleDateString()}
                       </td>
@@ -507,7 +507,7 @@ export function MaintenanceManagerClient({
       {/* MODAL 1: Report Fault */}
       {isFaultModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#2E343B] my-8">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">Report Equipment or Facility Fault</h2>
               <button
@@ -543,7 +543,7 @@ export function MaintenanceManagerClient({
                     setSelectedAssetInForm("");
                   }}
                   required
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 >
                   {properties.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -561,7 +561,7 @@ export function MaintenanceManagerClient({
                   name="assetId"
                   value={selectedAssetInForm}
                   onChange={(e) => setSelectedAssetInForm(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 >
                   <option value="">General Facility (No specific asset)</option>
                   {propertyAssets.map((a) => (
@@ -581,7 +581,7 @@ export function MaintenanceManagerClient({
                   name="title"
                   required
                   placeholder="e.g. AC compressor humming loudly, generator refusing to crank"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -593,7 +593,7 @@ export function MaintenanceManagerClient({
                   <select
                     name="faultSeverity"
                     defaultValue="medium"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     <option value="low">Low (Cosmetic / Minor)</option>
                     <option value="medium">Medium (Degraded Performance)</option>
@@ -608,7 +608,7 @@ export function MaintenanceManagerClient({
                   <input
                     type="date"
                     name="scheduledDate"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>
@@ -623,7 +623,7 @@ export function MaintenanceManagerClient({
                   min="0"
                   step="500"
                   placeholder="e.g. 35000"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -636,12 +636,12 @@ export function MaintenanceManagerClient({
                   rows={3}
                   required
                   placeholder="Describe symptoms, when it started, error codes on display panels..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
               {/* Photos attachment */}
-              <div className="p-3 bg-slate-50 dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-[#163654] space-y-2">
+              <div className="p-3 bg-slate-50 dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] space-y-2">
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-200">
                   Supporting Photographs / Video Link
                 </label>
@@ -651,7 +651,7 @@ export function MaintenanceManagerClient({
                     value={photoUrl}
                     onChange={(e) => setPhotoUrl(e.target.value)}
                     placeholder="https://... photo url"
-                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs bg-white dark:bg-[#0D223A]"
+                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] text-xs bg-white dark:bg-[#1F2328]"
                   />
                   <button
                     type="button"
@@ -666,7 +666,7 @@ export function MaintenanceManagerClient({
                     {photosList.map((p, idx) => (
                       <span
                         key={idx}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] text-2xs font-semibold"
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] text-2xs font-semibold"
                       >
                         Photo {idx + 1}
                         <button
@@ -706,7 +706,7 @@ export function MaintenanceManagerClient({
       {/* MODAL 2: Record Completion & Incurred Cost */}
       {isCompleteModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#2E343B] my-8">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 Record Maintenance Completion & Invoice
@@ -742,7 +742,7 @@ export function MaintenanceManagerClient({
                       name="propertyId"
                       defaultValue={properties[0]?.id || ""}
                       required
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                     >
                       {properties.map((p) => (
                         <option key={p.id} value={p.id}>
@@ -757,7 +757,7 @@ export function MaintenanceManagerClient({
                     </label>
                     <select
                       name="assetId"
-                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                      className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                     >
                       <option value="">General Facility Maintenance</option>
                       {assets.map((a) => (
@@ -784,7 +784,7 @@ export function MaintenanceManagerClient({
                   }
                   required
                   placeholder="e.g. 500kVA Generator 250-Hour Major Service"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                 />
               </div>
 
@@ -797,7 +797,7 @@ export function MaintenanceManagerClient({
                   rows={2}
                   required
                   placeholder="Changed engine oil (15W-40), replaced primary & secondary fuel filters, flushed radiator coolant..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                 />
               </div>
 
@@ -811,7 +811,7 @@ export function MaintenanceManagerClient({
                     name="performedByName"
                     defaultValue="EasyLife Verified Technician"
                     required
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                   />
                 </div>
                 <div>
@@ -825,7 +825,7 @@ export function MaintenanceManagerClient({
                     step="100"
                     required
                     placeholder="e.g. 85000"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                   />
                 </div>
               </div>
@@ -838,7 +838,7 @@ export function MaintenanceManagerClient({
                   type="text"
                   name="partsReplaced"
                   placeholder="e.g. Oil filter LF9009, Fuel filter FF5776, 2x 100Ah Batteries"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                 />
               </div>
 
@@ -851,7 +851,7 @@ export function MaintenanceManagerClient({
                     type="text"
                     name="invoiceNumber"
                     placeholder="e.g. INV-2026-081"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                   />
                 </div>
                 <div>
@@ -862,7 +862,7 @@ export function MaintenanceManagerClient({
                     type="url"
                     name="invoiceUrl"
                     placeholder="https://... invoice link"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm"
                   />
                 </div>
               </div>

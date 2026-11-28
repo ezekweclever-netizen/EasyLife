@@ -154,7 +154,7 @@ export function ProLocationsAvailabilityManager({
   return (
     <div className="space-y-8">
       {/* Operating Hubs & Approved Service Areas */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-5">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs space-y-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -167,7 +167,7 @@ export function ProLocationsAvailabilityManager({
           <button
             type="button"
             onClick={() => setShowAddArea((prev) => !prev)}
-            className="px-3.5 py-2 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+            className="px-3.5 py-2 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
           >
             {showAddArea ? "Cancel" : "+ Add Service Location"}
           </button>
@@ -201,7 +201,7 @@ export function ProLocationsAvailabilityManager({
                     setAreaCity(e.target.value);
                     setSelectedNeighbourhoodId("");
                   }}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                 >
                   {PILOT_CITIES.map((c) => (
                     <option key={c} value={c}>
@@ -218,7 +218,7 @@ export function ProLocationsAvailabilityManager({
                 <select
                   value={selectedNeighbourhoodId}
                   onChange={(e) => setSelectedNeighbourhoodId(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                 >
                   <option value="">-- Optional: Select Approved Neighbourhood --</option>
                   {cityNeighbourhoods.map((nb) => (
@@ -239,7 +239,7 @@ export function ProLocationsAvailabilityManager({
                   onChange={(e) => setCustomLga(e.target.value)}
                   disabled={Boolean(selectedNeighbourhoodId)}
                   placeholder="e.g. Obio/Akpor, Ikeja, Maitama"
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800"
                 />
               </div>
 
@@ -253,7 +253,7 @@ export function ProLocationsAvailabilityManager({
                   max="200"
                   value={radiusKm}
                   onChange={(e) => setRadiusKm(e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                  className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                 />
               </div>
             </div>
@@ -262,7 +262,7 @@ export function ProLocationsAvailabilityManager({
               <button
                 type="submit"
                 disabled={isPending}
-                className="px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50"
+                className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50"
               >
                 {isPending ? "Adding..." : "Save Service Location"}
               </button>
@@ -287,8 +287,8 @@ export function ProLocationsAvailabilityManager({
               key={a.id}
               className={`p-3.5 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs ${
                 a.is_active
-                  ? "border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]"
-                  : "border-slate-200 dark:border-[#163654] bg-slate-100 dark:bg-slate-800/70 opacity-75"
+                  ? "border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]"
+                  : "border-slate-200 dark:border-[#2E343B] bg-slate-100 dark:bg-slate-800/70 opacity-75"
               }`}
             >
               <div>
@@ -297,7 +297,7 @@ export function ProLocationsAvailabilityManager({
                     {a.neighbourhood ? `${a.neighbourhood} • ${a.lga_or_district}` : a.lga_or_district} ({a.city})
                   </span>
                   {a.is_primary && (
-                    <span className="px-2 py-0.5 rounded bg-teal-100 text-[#0D9488] text-[10px] font-bold">
+                    <span className="px-2 py-0.5 rounded bg-teal-100 text-[#E8590C] text-[10px] font-bold">
                       Primary Hub
                     </span>
                   )}
@@ -322,7 +322,7 @@ export function ProLocationsAvailabilityManager({
                     type="button"
                     disabled={isPending}
                     onClick={() => handleSetPrimary(a.id)}
-                    className="px-2.5 py-1 rounded-lg border border-teal-200 dark:border-teal-800 text-[#0D9488] hover:bg-teal-50 dark:bg-teal-950/60 text-[11px] font-semibold"
+                    className="px-2.5 py-1 rounded-lg border border-teal-200 dark:border-teal-800 text-[#E8590C] hover:bg-teal-50 dark:bg-teal-950/60 text-[11px] font-semibold"
                   >
                     Set Primary
                   </button>
@@ -331,7 +331,7 @@ export function ProLocationsAvailabilityManager({
                   type="button"
                   disabled={isPending}
                   onClick={() => handleToggleArea(a.id, !a.is_active)}
-                  className="px-2.5 py-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-[11px] font-semibold"
+                  className="px-2.5 py-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] text-[11px] font-semibold"
                 >
                   {a.is_active ? "Pause" : "Activate"}
                 </button>
@@ -352,7 +352,7 @@ export function ProLocationsAvailabilityManager({
       </div>
 
       {/* Weekly Working Schedule */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -384,11 +384,11 @@ export function ProLocationsAvailabilityManager({
           </div>
         )}
 
-        <div className="divide-y divide-slate-100 border border-slate-200 dark:border-[#163654] rounded-xl overflow-hidden">
+        <div className="divide-y divide-slate-100 border border-slate-200 dark:border-[#2E343B] rounded-xl overflow-hidden">
           {schedule.map((row) => (
             <div
               key={row.dayOfWeek}
-              className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70"
+              className="p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white dark:bg-[#1F2328] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/70"
             >
               <label className="flex items-center gap-2.5 text-xs font-bold text-slate-900 dark:text-white cursor-pointer w-36">
                 <input
@@ -397,7 +397,7 @@ export function ProLocationsAvailabilityManager({
                   onChange={(e) =>
                     updateScheduleDay(row.dayOfWeek, { isAvailable: e.target.checked })
                   }
-                  className="h-4 w-4 rounded text-[#0D9488] focus:ring-[#0D9488] border-slate-300 dark:border-slate-700"
+                  className="h-4 w-4 rounded text-[#E8590C] focus:ring-[#E8590C] border-slate-300 dark:border-slate-700"
                 />
                 <span>{row.label}</span>
               </label>
@@ -410,7 +410,7 @@ export function ProLocationsAvailabilityManager({
                     onChange={(e) =>
                       updateScheduleDay(row.dayOfWeek, { startTime: e.target.value })
                     }
-                    className="h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                    className="h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                   />
                   <span className="text-slate-400">to</span>
                   <input
@@ -419,7 +419,7 @@ export function ProLocationsAvailabilityManager({
                     onChange={(e) =>
                       updateScheduleDay(row.dayOfWeek, { endTime: e.target.value })
                     }
-                    className="h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                    className="h-9 px-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                   />
                 </div>
               ) : (

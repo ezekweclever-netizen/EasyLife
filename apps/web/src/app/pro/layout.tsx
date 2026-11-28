@@ -23,7 +23,7 @@ export default async function ProLayout({
   const profile = await getProfessionalProfile(auth.user.id, auth.accessToken);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#071526] text-slate-900 dark:text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FAF7F3] dark:bg-[#1F2328] text-slate-900 dark:text-slate-100 flex flex-col font-sans">
       <ProHeader
         businessName={profile?.business_name || auth.user.email?.split("@")[0] || "Professional"}
         verificationStatus={profile?.verification_status || "unsubmitted"}

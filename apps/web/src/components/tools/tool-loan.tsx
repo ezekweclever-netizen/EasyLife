@@ -81,7 +81,7 @@ export function ToolLoan() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Credit &amp; Amortization
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -92,7 +92,7 @@ export function ToolLoan() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div>
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
@@ -102,7 +102,7 @@ export function ToolLoan() {
               type="number"
               value={principal}
               onChange={(e) => setPrincipal(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-mono font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono font-bold"
             />
           </div>
           <div>
@@ -113,7 +113,7 @@ export function ToolLoan() {
               type="number"
               value={annualRate}
               onChange={(e) => setAnnualRate(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-mono font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono font-bold"
             />
           </div>
           <div>
@@ -124,7 +124,7 @@ export function ToolLoan() {
               type="number"
               value={months}
               onChange={(e) => setMonths(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-mono font-bold"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono font-bold"
             />
           </div>
           <div>
@@ -134,7 +134,7 @@ export function ToolLoan() {
             <select
               value={calcMethod}
               onChange={(e) => setCalcMethod(e.target.value as any)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             >
               <option value="reducing">Reducing Balance (Standard EMI)</option>
               <option value="flat">Flat Interest Rate</option>
@@ -143,10 +143,10 @@ export function ToolLoan() {
         </div>
 
         {/* Results Card */}
-        <div className="p-6 rounded-2xl bg-teal-50/70 dark:bg-[#0D223A] border border-teal-200/90 dark:border-slate-700 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+        <div className="p-6 rounded-2xl bg-[#FCEBDD]/70 dark:bg-[#1F2328] border border-[#E8590C]/30/90 dark:border-slate-700 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
           <div>
             <span className="text-[11px] font-bold text-slate-500 uppercase">Monthly Repayment (EMI)</span>
-            <div className="text-xl sm:text-2xl font-black text-[#0D9488] dark:text-[#5CD3D5] mt-1 font-mono">
+            <div className="text-xl sm:text-2xl font-black text-[#E8590C] dark:text-[#F06A1F] mt-1 font-mono">
               ₦{Math.round(monthlyPayment).toLocaleString()}
             </div>
           </div>
@@ -169,7 +169,7 @@ export function ToolLoan() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Complete Amortization Schedule</span>
           </button>
@@ -186,7 +186,7 @@ export function ToolLoan() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Amortization &amp; Debt Service Schedule
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -212,7 +212,7 @@ export function ToolLoan() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Monthly Installment</span>
-              <span className="font-bold text-[#0D9488] font-mono">₦{Math.round(monthlyPayment).toLocaleString()}</span>
+              <span className="font-bold text-[#E8590C] font-mono">₦{Math.round(monthlyPayment).toLocaleString()}</span>
             </div>
           </div>
 
@@ -235,7 +235,7 @@ export function ToolLoan() {
                     <td className="p-2 text-right text-slate-600">{Math.round(row.opening).toLocaleString()}</td>
                     <td className="p-2 text-right text-slate-900">{Math.round(row.principal).toLocaleString()}</td>
                     <td className="p-2 text-right text-rose-600">{Math.round(row.interest).toLocaleString()}</td>
-                    <td className="p-2 text-right font-bold text-[#0D9488]">{Math.round(row.total).toLocaleString()}</td>
+                    <td className="p-2 text-right font-bold text-[#E8590C]">{Math.round(row.total).toLocaleString()}</td>
                     <td className="p-2 text-right font-semibold text-slate-800">{Math.round(row.closing).toLocaleString()}</td>
                   </tr>
                 ))}
@@ -245,7 +245,7 @@ export function ToolLoan() {
                   <td colSpan={2} className="p-2.5 uppercase text-slate-700">Total Payments</td>
                   <td className="p-2.5 text-right font-mono">₦{P.toLocaleString()}</td>
                   <td className="p-2.5 text-right text-rose-600 font-mono">₦{Math.round(totalInterest).toLocaleString()}</td>
-                  <td className="p-2.5 text-right text-[#0D9488] font-mono">₦{Math.round(totalRepayment).toLocaleString()}</td>
+                  <td className="p-2.5 text-right text-[#E8590C] font-mono">₦{Math.round(totalRepayment).toLocaleString()}</td>
                   <td className="p-2.5 text-right text-emerald-700 font-mono">₦0</td>
                 </tr>
               </tfoot>

@@ -81,7 +81,7 @@ export default function AboutPage() {
               <p>
                 At the same time, skilled Nigerian artisans face their own persistent hurdles: inconsistent work, unfair client bargaining, and frequent payment delays after delivering quality craftsmanship.
               </p>
-              <p className="font-semibold text-[#0F172A] dark:text-white">
+              <p className="font-semibold text-[#1F2328] dark:text-[#FAF7F3]">
                 EasyLife bridges this trust deficit. We connect households and businesses with thoroughly vetted trade professionals through an escrow-backed platform where both parties are completely protected.
               </p>
             </div>
@@ -151,11 +151,11 @@ export default function AboutPage() {
           description="We believe in deep local presence rather than distant algorithmic promises. Our field teams operate actively on the ground."
         />
         <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-white dark:bg-[#0D223A] shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488] dark:text-[#5CD3D5]">
+          <div className="rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 bg-white dark:bg-[#1F2328] shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               Pilot City 1
             </span>
-            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mt-1">
+            <h3 className="text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3] mt-1">
               Port Harcourt, Rivers State
             </h3>
             <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -163,11 +163,11 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-white dark:bg-[#0D223A] shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488] dark:text-[#5CD3D5]">
+          <div className="rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 bg-white dark:bg-[#1F2328] shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               Pilot City 2
             </span>
-            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mt-1">
+            <h3 className="text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3] mt-1">
               Lagos State
             </h3>
             <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -175,11 +175,11 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-slate-200 dark:border-[#163654] p-6 bg-white dark:bg-[#0D223A] shadow-xs">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488] dark:text-[#5CD3D5]">
+          <div className="rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 bg-white dark:bg-[#1F2328] shadow-xs">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               Pilot City 3
             </span>
-            <h3 className="text-lg font-bold text-[#0F172A] dark:text-white mt-1">
+            <h3 className="text-lg font-bold text-[#1F2328] dark:text-[#FAF7F3] mt-1">
               Abuja, Federal Capital Territory
             </h3>
             <p className="mt-2 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">

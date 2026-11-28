@@ -22,7 +22,7 @@ export default async function CustomerProfilePage() {
   const profile = await getCustomerProfile(auth.user.id, auth.accessToken);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#FAF7F3] pb-24 md:pb-12 text-[#1F2328]">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -36,15 +36,15 @@ export default async function CustomerProfilePage() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-white">Profile Settings</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1F2328] dark:text-white">Profile Settings</h1>
           <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
             Manage your personal details, profile photo, primary service city, and address
           </p>
         </div>
 
         {/* Profile Card Form */}
-        <div className="bg-white dark:bg-[#0E2238] rounded-3xl border border-[#E2E8F0] dark:border-[#163654] p-6 sm:p-8 shadow-xs space-y-6">
-          <div className="pb-6 border-b border-[#F1F5F9] dark:border-slate-800">
+        <div className="bg-white dark:bg-[#0E2238] rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-8 shadow-xs space-y-6">
+          <div className="pb-6 border-b border-[#FAF7F3] dark:border-slate-800">
             <ProfilePhotoUploader
               currentAvatarUrl={profile?.avatar_url}
               fallbackInitial={profile?.full_name ? profile.full_name[0] : (auth.user.email ? auth.user.email[0] : "C")}
@@ -63,9 +63,9 @@ export default async function CustomerProfilePage() {
         </div>
 
         {/* Account & Sign out Section */}
-        <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 shadow-xs flex items-center justify-between">
+        <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-6 shadow-xs flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-bold text-[#0F172A]">Sign Out</h3>
+            <h3 className="text-sm font-bold text-[#1F2328]">Sign Out</h3>
             <p className="text-xs text-[#64748B]">Sign out of your customer session on this device</p>
           </div>
           <form action={logoutAction}>

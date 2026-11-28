@@ -72,9 +72,9 @@ const SAMPLE_TABLE_ROWS: readonly SampleMaintenanceRow[] = [
 
 export default function DesignSystemShowcasePage() {
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A]">
+    <div className="min-h-screen bg-[#FAF7F3] text-[#1F2328]">
       {/* Header */}
-      <header className="bg-[#0A192F] text-white border-b border-[#1E293B]">
+      <header className="bg-[#1F2328] text-white border-b border-[#1F2328]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <EasyLifeLogo theme="dark" size="sm" showSlogan />
           <div className="flex items-center gap-3">
@@ -91,7 +91,7 @@ export default function DesignSystemShowcasePage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
         {/* 1. Brand Identity & Logo Direction */}
         <section>
-          <h1 className="text-3xl font-bold tracking-tight text-[#0A192F]">
+          <h1 className="text-3xl font-bold tracking-tight text-[#1F2328]">
             EasyLife Official Design System
           </h1>
           <p className="mt-2 text-sm text-[#4B5563] max-w-3xl">
@@ -133,7 +133,7 @@ export default function DesignSystemShowcasePage() {
 
         {/* 2. Experience Differentiation (4 Connected Experiences) */}
         <section>
-          <h2 className="text-xl font-bold text-[#0F172A]">
+          <h2 className="text-xl font-bold text-[#1F2328]">
             Differentiated Experience Profiles (One Brand, Four Tailored Layouts)
           </h2>
           <p className="text-sm text-[#4B5563] mt-1">
@@ -145,14 +145,14 @@ export default function DesignSystemShowcasePage() {
             {Object.values(EASYLIFE_EXPERIENCE_DESIGN_PROFILES).map((prof) => (
               <Card key={prof.id} padding="md">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
                     {prof.id} experience
                   </span>
-                  <span className="text-xs px-2 py-0.5 rounded bg-[#F1F5F9] text-[#334155] font-mono">
+                  <span className="text-xs px-2 py-0.5 rounded bg-[#FAF7F3] text-[#4A525C] font-mono">
                     density: {prof.layoutDensity}
                   </span>
                 </div>
-                <h3 className="text-base font-bold text-[#0F172A]">
+                <h3 className="text-base font-bold text-[#1F2328]">
                   {prof.label}
                 </h3>
                 <p className="text-xs text-[#4B5563] mt-1">
@@ -164,7 +164,7 @@ export default function DesignSystemShowcasePage() {
                       key={item}
                       className="text-xs text-[#374151] flex items-start gap-2"
                     >
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#0D9488] shrink-0" />
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#E8590C] shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -185,7 +185,7 @@ export default function DesignSystemShowcasePage() {
               {Object.entries(EASYLIFE_COLOR_PALETTE.navy).map(([shade, hex]) => (
                 <div
                   key={`navy-${shade}`}
-                  className="p-3 rounded-lg border border-[#E2E8F0]"
+                  className="p-3 rounded-lg border border-[#E6E0D8]"
                 >
                   <div
                     className="h-8 w-full rounded mb-2"
@@ -198,7 +198,7 @@ export default function DesignSystemShowcasePage() {
               {Object.entries(EASYLIFE_COLOR_PALETTE.teal).map(([shade, hex]) => (
                 <div
                   key={`teal-${shade}`}
-                  className="p-3 rounded-lg border border-[#E2E8F0]"
+                  className="p-3 rounded-lg border border-[#E6E0D8]"
                 >
                   <div
                     className="h-8 w-full rounded mb-2 border border-black/5"
@@ -220,10 +220,10 @@ export default function DesignSystemShowcasePage() {
               {ACCESSIBLE_COLOR_COMBINATIONS.map((combo) => (
                 <div
                   key={combo.pair}
-                  className="p-3 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0] flex items-center justify-between gap-4"
+                  className="p-3 rounded-lg bg-[#FAF7F3] border border-[#E6E0D8] flex items-center justify-between gap-4"
                 >
                   <div>
-                    <p className="text-xs font-semibold text-[#0F172A]">
+                    <p className="text-xs font-semibold text-[#1F2328]">
                       {combo.pair}
                     </p>
                     <p className="text-xs text-[#4B5563] mt-0.5">
@@ -374,7 +374,7 @@ export default function DesignSystemShowcasePage() {
                 key: "reference",
                 header: "Booking Ref",
                 render: (r) => (
-                  <span className="font-mono text-xs font-semibold text-[#0A192F]">
+                  <span className="font-mono text-xs font-semibold text-[#1F2328]">
                     {r.reference}
                   </span>
                 ),
@@ -415,7 +415,7 @@ export default function DesignSystemShowcasePage() {
 
         {/* 7. Notifications, Loading, Empty & Error States */}
         <section className="space-y-6">
-          <h2 className="text-xl font-bold text-[#0F172A]">
+          <h2 className="text-xl font-bold text-[#1F2328]">
             Notifications, Empty, Loading &amp; Error States (Rule 14)
           </h2>
 
@@ -469,9 +469,9 @@ export default function DesignSystemShowcasePage() {
               {Object.entries(EASYLIFE_TYPOGRAPHY.scale).map(([name, spec]) => (
                 <div
                   key={name}
-                  className="flex items-center justify-between py-1.5 border-b border-[#F1F5F9]"
+                  className="flex items-center justify-between py-1.5 border-b border-[#FAF7F3]"
                 >
-                  <span className="font-semibold uppercase text-[#0F172A]">
+                  <span className="font-semibold uppercase text-[#1F2328]">
                     {name}
                   </span>
                   <span className="font-mono text-[#6B7280]">
@@ -492,12 +492,12 @@ export default function DesignSystemShowcasePage() {
               {Object.entries(EASYLIFE_BREAKPOINTS).map(([bp, px]) => (
                 <div
                   key={bp}
-                  className="flex items-center justify-between py-1.5 border-b border-[#F1F5F9]"
+                  className="flex items-center justify-between py-1.5 border-b border-[#FAF7F3]"
                 >
-                  <span className="font-mono font-bold text-[#0D9488]">
+                  <span className="font-mono font-bold text-[#E8590C]">
                     {bp}
                   </span>
-                  <span className="font-mono text-[#0F172A]">{px}px</span>
+                  <span className="font-mono text-[#1F2328]">{px}px</span>
                 </div>
               ))}
             </div>

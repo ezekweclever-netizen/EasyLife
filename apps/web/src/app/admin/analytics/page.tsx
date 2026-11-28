@@ -51,7 +51,7 @@ export default async function AdminAnalyticsPage({
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#2E343B]">
         <div>
           <div className="flex items-center gap-2">
             <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-900 text-teal-300">
@@ -73,7 +73,7 @@ export default async function AdminAnalyticsPage({
           <div
             role="group"
             aria-label="Analytics timeframe selector"
-            className="inline-flex items-center rounded-xl bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200 dark:border-[#163654]"
+            className="inline-flex items-center rounded-xl bg-slate-100 dark:bg-slate-800 p-1 border border-slate-200 dark:border-[#2E343B]"
           >
             {TIMEFRAME_OPTIONS.map((opt) => {
               const isActive = opt.days === parsedDays;
@@ -94,7 +94,7 @@ export default async function AdminAnalyticsPage({
           </div>
           <Link
             href="/admin/services"
-            className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] hover:border-teal-500 text-xs font-bold text-slate-700 dark:text-slate-200"
+            className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] hover:border-teal-500 text-xs font-bold text-slate-700 dark:text-slate-200"
           >
             Manage Services →
           </Link>

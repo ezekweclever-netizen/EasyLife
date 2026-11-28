@@ -174,7 +174,7 @@ export default function BecomeAProfessionalPage() {
             <div className="mt-8">
               <Link
                 href="/verification-policy"
-                className="text-sm font-semibold text-[#0D9488] hover:underline inline-flex items-center gap-1"
+                className="text-sm font-semibold text-[#E8590C] hover:underline inline-flex items-center gap-1"
               >
                 <span>Read our full Verification &amp; Vetting Policy</span>
                 <span aria-hidden="true">→</span>
@@ -182,7 +182,7 @@ export default function BecomeAProfessionalPage() {
             </div>
           </div>
 
-          <div className="bg-[#0A192F] text-white rounded-2xl p-6 sm:p-8 border border-slate-800">
+          <div className="bg-[#1F2328] text-white rounded-2xl p-6 sm:p-8 border border-slate-800">
             <h3 className="text-lg font-bold text-white">
               Operating Pilot Locations
             </h3>
@@ -190,15 +190,15 @@ export default function BecomeAProfessionalPage() {
               We are currently accepting professional onboarding applications across:
             </p>
             <div className="mt-6 space-y-4">
-              <div className="p-4 rounded-xl bg-[#0F172A] border border-slate-800">
+              <div className="p-4 rounded-xl bg-[#1F2328] border border-slate-800">
                 <p className="text-sm font-bold text-teal-300">Port Harcourt &amp; Rivers State</p>
                 <p className="text-xs text-slate-400 mt-1">Old GRA, New GRA, Peter Odili, Trans-Amadi, Woji, Rumuola, Choba</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#0F172A] border border-slate-800">
+              <div className="p-4 rounded-xl bg-[#1F2328] border border-slate-800">
                 <p className="text-sm font-bold text-teal-300">Lagos State</p>
                 <p className="text-xs text-slate-400 mt-1">Ikeja, Lekki, Victoria Island, Ikoyi, Surulere, Yaba, Gbagada, Magodo</p>
               </div>
-              <div className="p-4 rounded-xl bg-[#0F172A] border border-slate-800">
+              <div className="p-4 rounded-xl bg-[#1F2328] border border-slate-800">
                 <p className="text-sm font-bold text-teal-300">Abuja (Federal Capital Territory)</p>
                 <p className="text-xs text-slate-400 mt-1">Maitama, Asokoro, Wuse II, Garki, Jabi, Utako, Gwarinpa, Apo</p>
               </div>

@@ -26,21 +26,21 @@ export interface ButtonProps
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary:
-    "bg-[#24989A] text-white hover:bg-[#1D7E80] active:bg-[#154752] border border-transparent shadow-xs font-semibold",
+    "bg-[#E8590C] dark:bg-[#F06A1F] text-white hover:bg-[#C84A06] dark:hover:bg-[#E8590C] active:bg-[#B33E05] border border-transparent shadow-xs font-semibold focus-visible:outline-2 focus-visible:outline-[#E8590C] dark:focus-visible:outline-[#F06A1F]",
   navy:
-    "bg-[#154752] text-white hover:bg-[#0D282E] active:bg-[#081B1F] border border-transparent shadow-xs font-semibold",
+    "bg-[#1F2328] text-white hover:bg-[#2B3138] active:bg-[#15181C] border border-transparent shadow-xs font-semibold focus-visible:outline-2 focus-visible:outline-[#1F2328] dark:focus-visible:outline-[#F06A1F]",
   secondary:
-    "bg-[#F3F8F8] dark:bg-slate-800 text-[#154752] dark:text-[#5CD3D5] hover:bg-[#DAE7E7] dark:hover:bg-slate-700 border border-[#DAE7E7] dark:border-slate-700 font-semibold",
+    "bg-[#FAF7F3] dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#E6E0D8] dark:hover:bg-[#2E343B] border border-[#E6E0D8] dark:border-[#2E343B] font-semibold focus-visible:outline-2 focus-visible:outline-[#E8590C] dark:focus-visible:outline-[#F06A1F]",
   outline:
-    "bg-white dark:bg-slate-800 text-[#1F2F34] dark:text-white hover:bg-[#F3F8F8] dark:hover:bg-slate-700 border border-[#DAE7E7] dark:border-slate-700 font-semibold",
+    "bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#2E343B] border border-[#E6E0D8] dark:border-[#2E343B] font-semibold focus-visible:outline-2 focus-visible:outline-[#E8590C] dark:focus-visible:outline-[#F06A1F]",
   ghost:
-    "bg-transparent text-[#1F2F34] dark:text-slate-200 hover:bg-[#F3F8F8] dark:hover:bg-slate-800 border border-transparent font-medium",
+    "bg-transparent text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] border border-transparent font-medium focus-visible:outline-2 focus-visible:outline-[#E8590C] dark:focus-visible:outline-[#F06A1F]",
   danger:
-    "bg-[#C53030] text-white hover:bg-[#991B1B] border border-transparent shadow-xs font-semibold",
+    "bg-[#C53030] text-white hover:bg-[#9B2626] border border-transparent shadow-xs font-semibold focus-visible:outline-2 focus-visible:outline-[#C53030]",
   inverse:
-    "bg-white text-[#154752] hover:bg-[#F3F8F8] border border-transparent shadow-xs font-semibold",
+    "bg-white text-[#1F2328] hover:bg-[#FAF7F3] border border-transparent shadow-xs font-semibold focus-visible:outline-2 focus-visible:outline-[#1F2328]",
   "outline-inverse":
-    "bg-transparent text-white hover:bg-white/10 border border-white/40 font-semibold",
+    "bg-transparent text-white hover:bg-white/10 border border-white/40 font-semibold focus-visible:outline-2 focus-visible:outline-white",
 };
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {

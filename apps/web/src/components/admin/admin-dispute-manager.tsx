@@ -135,7 +135,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
     <div className="space-y-6">
       {/* Metric Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Open Disputes</span>
           <div className="flex items-center gap-2">
             <span className="text-2xl font-black text-amber-600">{openCount}</span>
@@ -144,25 +144,25 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
           <span className="text-[11px] text-slate-400">Needs initial triage</span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Under Review</span>
           <div className="text-2xl font-black text-blue-600">{underReviewCount}</div>
           <span className="text-[11px] text-slate-400">Investigating evidence</span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Awaiting Info</span>
           <div className="text-2xl font-black text-purple-600">{awaitingInfoCount}</div>
           <span className="text-[11px] text-slate-400">Evidence requested</span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Resolved</span>
           <div className="text-2xl font-black text-emerald-600">{resolvedCount}</div>
           <span className="text-[11px] text-slate-400">Formally adjudicated</span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1 col-span-2 sm:col-span-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1 col-span-2 sm:col-span-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Disputed Value</span>
           <div className="text-xl font-black text-slate-900 dark:text-white truncate">
             ₦{totalDisputedNaira.toLocaleString("en-NG")}
@@ -172,7 +172,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-[#0D223A] p-4 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1F2328] p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Status Filter Tabs */}
         <div className="flex items-center gap-1 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0">
           {[
@@ -189,7 +189,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
               onClick={() => setStatusFilter(tab.key)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition ${
                 statusFilter === tab.key
-                  ? "bg-[#0F172A] text-white shadow-xs"
+                  ? "bg-[#1F2328] text-white shadow-xs"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
               }`}
             >
@@ -205,16 +205,16 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search code, booking, category..."
-            className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+            className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
           />
         </div>
       </div>
 
       {/* Disputes Data Table */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B] shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs text-slate-600 dark:text-slate-300">
-            <thead className="bg-slate-50 dark:bg-[#071526] text-slate-700 dark:text-slate-200 font-extrabold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-[#163654]">
+            <thead className="bg-slate-50 dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 font-extrabold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-[#2E343B]">
               <tr>
                 <th className="py-4 px-6">Case Ref / Date</th>
                 <th className="py-4 px-6">Booking Reference</th>
@@ -233,7 +233,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
                 </tr>
               ) : (
                 filteredDisputes.map((d) => (
-                  <tr key={d.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition">
+                  <tr key={d.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition">
                     <td className="py-4 px-6">
                       <span className="font-mono font-bold text-slate-900 dark:text-white block">{d.reference_code}</span>
                       <span className="text-[10px] text-slate-400">
@@ -244,7 +244,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
                       <Link
                         href={`/bookings/${d.booking_id}`}
                         target="_blank"
-                        className="font-mono font-bold text-[#0D9488] hover:underline block"
+                        className="font-mono font-bold text-[#E8590C] hover:underline block"
                       >
                         #{d.booking?.reference_code || d.booking_id.slice(0, 8)} ↗
                       </Link>
@@ -298,7 +298,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
       {/* Arbitration Modal */}
       {selectedDispute && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-200 dark:border-[#163654] max-h-[92vh] overflow-y-auto">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-3xl w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-slate-200 dark:border-[#2E343B] max-h-[92vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="flex items-start justify-between border-b pb-4">
               <div>
@@ -339,14 +339,14 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
 
             {/* Case Details Card */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl border border-slate-200 dark:border-[#163654] space-y-2 text-xs">
+              <div className="bg-slate-50 dark:bg-[#1F2328] p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] space-y-2 text-xs">
                 <span className="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-[10px] block">
                   Dispute Summary &amp; Claim
                 </span>
                 <p className="text-slate-900 dark:text-white whitespace-pre-line leading-relaxed font-medium">
                   "{selectedDispute.description}"
                 </p>
-                <div className="pt-2 border-t border-slate-200 dark:border-[#163654] flex justify-between items-center text-[11px]">
+                <div className="pt-2 border-t border-slate-200 dark:border-[#2E343B] flex justify-between items-center text-[11px]">
                   <span className="text-slate-500 dark:text-slate-400">Claimed Disputed Value:</span>
                   <span className="font-mono font-black text-slate-900 dark:text-white">
                     ₦{((selectedDispute.disputed_amount_kobo || 0) / 100).toLocaleString("en-NG")}
@@ -355,7 +355,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
               </div>
 
               {/* Uploaded Evidence Gallery */}
-              <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl border border-slate-200 dark:border-[#163654] space-y-2 text-xs">
+              <div className="bg-slate-50 dark:bg-[#1F2328] p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] space-y-2 text-xs">
                 <span className="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-[10px] block">
                   Supporting Evidence Files ({selectedDispute.evidence?.length || 0})
                 </span>
@@ -364,13 +364,13 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
                 ) : (
                   <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
                     {selectedDispute.evidence.map((ev) => (
-                      <div key={ev.id} className="p-2 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] flex items-center justify-between text-[11px]">
+                      <div key={ev.id} className="p-2 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] flex items-center justify-between text-[11px]">
                         <span className="truncate max-w-[200px] font-bold text-slate-800 dark:text-slate-100">{ev.file_name}</span>
                         <a
                           href={ev.storage_path}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-[#0D9488] font-bold hover:underline shrink-0 text-[10px]"
+                          className="text-[#E8590C] font-bold hover:underline shrink-0 text-[10px]"
                         >
                           View File ↗
                         </a>
@@ -382,12 +382,12 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
             </div>
 
             {/* Internal Notes Timeline */}
-            <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl border border-slate-200 dark:border-[#163654] space-y-3 text-xs">
+            <div className="bg-slate-50 dark:bg-[#1F2328] p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] space-y-3 text-xs">
               <span className="font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider text-[10px] block">
                 Confidential Investigation Logs (Admin Only)
               </span>
               {selectedDispute.internal_notes ? (
-                <div className="p-3 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] text-slate-800 dark:text-slate-100 text-xs font-mono whitespace-pre-line max-h-32 overflow-y-auto">
+                <div className="p-3 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] text-slate-800 dark:text-slate-100 text-xs font-mono whitespace-pre-line max-h-32 overflow-y-auto">
                   {selectedDispute.internal_notes}
                 </div>
               ) : (
@@ -406,7 +406,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
                   <select
                     value={editStatus}
                     onChange={(e) => setEditStatus(e.target.value as DisputeStatus)}
-                    className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] font-semibold"
+                    className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328] font-semibold"
                   >
                     <option value="open">Open (Initial triage)</option>
                     <option value="under_review">Under Review (Investigation active)</option>
@@ -425,7 +425,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
                   <select
                     value={resolutionType}
                     onChange={(e) => setResolutionType(e.target.value)}
-                    className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                    className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                   >
                     <option value="">Select decision outcome...</option>
                     <option value="full_refund">Full Refund to Customer (100% Escrow Return)</option>
@@ -465,7 +465,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
                   value={newInternalNote}
                   onChange={(e) => setNewInternalNote(e.target.value)}
                   placeholder="Record findings from phone call with client or specialist, inspection photos review, etc..."
-                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                 />
               </div>
 
@@ -479,7 +479,7 @@ export function AdminDisputeManager({ initialDisputes }: AdminDisputeManagerProp
                   value={resolutionSummary}
                   onChange={(e) => setResolutionSummary(e.target.value)}
                   placeholder="Explain findings, evidence evaluated, policy basis, and instructions dispatched to customer and specialist..."
-                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                  className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                 />
               </div>
 

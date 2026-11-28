@@ -99,7 +99,7 @@ export function TeamManagerClient({
   return (
     <div className="space-y-6">
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1F2328] p-6 rounded-2xl border border-slate-200 dark:border-[#2E343B]">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Team Members & Access Roles
@@ -120,8 +120,8 @@ export function TeamManagerClient({
       </div>
 
       {/* Active Team Members */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
-        <div className="p-4 border-b border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/50 flex items-center justify-between">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] overflow-hidden shadow-2xs">
+        <div className="p-4 border-b border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/50 flex items-center justify-between">
           <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider">
             Active Organization Members ({members.length})
           </h2>
@@ -134,7 +134,7 @@ export function TeamManagerClient({
             const email = member.profiles?.email || "—";
 
             return (
-              <div key={member.id} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
+              <div key={member.id} className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/60 transition">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-slate-200 text-slate-700 dark:text-slate-200 font-bold flex items-center justify-center text-sm">
                     {displayName.charAt(0).toUpperCase()}
@@ -175,8 +175,8 @@ export function TeamManagerClient({
 
       {/* Pending Invitations */}
       {invitations.length > 0 && (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
-          <div className="p-4 border-b border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/50">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] overflow-hidden shadow-2xs">
+          <div className="p-4 border-b border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/50">
             <h2 className="text-sm font-bold text-slate-800 dark:text-slate-100 uppercase tracking-wider">
               Pending Invitations ({invitations.length})
             </h2>
@@ -203,7 +203,7 @@ export function TeamManagerClient({
       {/* Modal: Invite Team Member */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#2E343B] my-8">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">Invite Authorized Team Member</h2>
               <button
@@ -236,7 +236,7 @@ export function TeamManagerClient({
                   name="email"
                   required
                   placeholder="facilities@easylife-corp.ng"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -247,7 +247,7 @@ export function TeamManagerClient({
                 <select
                   value={selectedRole}
                   onChange={(e) => setSelectedRole(e.target.value as BusinessMemberRole)}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 >
                   <option value="admin">Admin (Full administrative & configuration access)</option>
                   <option value="facility_manager">Facility Manager (Manages assets, requests, & schedules)</option>
@@ -263,7 +263,7 @@ export function TeamManagerClient({
                   {PERMISSION_OPTIONS.map((perm) => (
                     <label
                       key={perm.id}
-                      className="flex items-start gap-2.5 p-2 rounded-lg border border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] cursor-pointer text-xs"
+                      className="flex items-start gap-2.5 p-2 rounded-lg border border-slate-200 dark:border-[#2E343B] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] cursor-pointer text-xs"
                     >
                       <input
                         type="checkbox"

@@ -125,7 +125,7 @@ export function AdminJobsManager({
     <div className="space-y-6">
       {/* Top Metrics Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-5 shadow-xs">
           <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
             Total Vacancies
           </span>
@@ -134,7 +134,7 @@ export function AdminJobsManager({
           </span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-amber-200 dark:border-amber-900/40 p-5 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-amber-200 dark:border-amber-900/40 p-5 shadow-xs">
           <span className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider block">
             Pending Moderation
           </span>
@@ -143,7 +143,7 @@ export function AdminJobsManager({
           </span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-emerald-200 dark:border-emerald-900/40 p-5 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-emerald-200 dark:border-emerald-900/40 p-5 shadow-xs">
           <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider block">
             Active &amp; Published
           </span>
@@ -152,7 +152,7 @@ export function AdminJobsManager({
           </span>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-5 shadow-xs">
           <span className="text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider block">
             Total Applications
           </span>
@@ -183,7 +183,7 @@ export function AdminJobsManager({
       )}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 sm:p-5 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-4 sm:p-5 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           {/* Tab Navigation */}
           <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-slate-800/80">
@@ -191,7 +191,7 @@ export function AdminJobsManager({
               onClick={() => setFilterTab("all")}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                 filterTab === "all"
-                  ? "bg-white dark:bg-[#163654] text-slate-900 dark:text-white shadow-xs"
+                  ? "bg-white dark:bg-[#2E343B] text-slate-900 dark:text-white shadow-xs"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
               }`}
             >
@@ -201,7 +201,7 @@ export function AdminJobsManager({
               onClick={() => setFilterTab("pending")}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                 filterTab === "pending"
-                  ? "bg-white dark:bg-[#163654] text-amber-600 dark:text-amber-400 shadow-xs"
+                  ? "bg-white dark:bg-[#2E343B] text-amber-600 dark:text-amber-400 shadow-xs"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
               }`}
             >
@@ -211,7 +211,7 @@ export function AdminJobsManager({
               onClick={() => setFilterTab("approved")}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                 filterTab === "approved"
-                  ? "bg-white dark:bg-[#163654] text-emerald-600 dark:text-emerald-400 shadow-xs"
+                  ? "bg-white dark:bg-[#2E343B] text-emerald-600 dark:text-emerald-400 shadow-xs"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
               }`}
             >
@@ -221,7 +221,7 @@ export function AdminJobsManager({
               onClick={() => setFilterTab("closed")}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
                 filterTab === "closed"
-                  ? "bg-white dark:bg-[#163654] text-slate-900 dark:text-white shadow-xs"
+                  ? "bg-white dark:bg-[#2E343B] text-slate-900 dark:text-white shadow-xs"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900"
               }`}
             >
@@ -233,7 +233,7 @@ export function AdminJobsManager({
           <Link
             href="/jobs/post"
             target="_blank"
-            className="px-4 py-2 rounded-xl text-xs font-bold bg-[#0D9488] hover:bg-[#0F766E] text-white transition shrink-0 inline-flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl text-xs font-bold bg-[#E8590C] hover:bg-[#E8590C] text-white transition shrink-0 inline-flex items-center gap-1.5"
           >
             <span>+ Create Vacancy</span>
           </Link>
@@ -246,13 +246,13 @@ export function AdminJobsManager({
             placeholder="Search by title, reference, or employer..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="sm:col-span-2 h-10 px-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="sm:col-span-2 h-10 px-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
 
           <select
             value={cityFilter}
             onChange={(e) => setCityFilter(e.target.value)}
-            className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="h-10 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           >
             <option value="all">All Pilot Cities</option>
             <option value="Port Harcourt">Port Harcourt</option>
@@ -263,7 +263,7 @@ export function AdminJobsManager({
       </div>
 
       {/* Vacancy Table */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs overflow-hidden">
         {filtered.length === 0 ? (
           <div className="p-12 text-center space-y-3">
             <span className="text-3xl block">💼</span>
@@ -423,7 +423,7 @@ export function AdminJobsManager({
           aria-modal="true"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs"
         >
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] max-w-md w-full p-6 space-y-4 shadow-2xl">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] max-w-md w-full p-6 space-y-4 shadow-2xl">
             <h3 className="text-base font-bold text-slate-900 dark:text-white">
               Reject Vacancy: {rejectModalVacancy.title}
             </h3>
@@ -436,7 +436,7 @@ export function AdminJobsManager({
               value={rejectReason}
               onChange={(e) => setRejectReason(e.target.value)}
               placeholder="e.g. Compensation is below statutory minimum, or trade details are ambiguous..."
-              className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
 
             <div className="flex items-center justify-end gap-2 pt-2">

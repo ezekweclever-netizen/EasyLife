@@ -16,7 +16,7 @@ export default async function BusinessJobsPage() {
   const jobsData = await getEmployerVacanciesAndApplications();
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-slate-100">
       <BusinessNav
         businessName={String(business?.name || "Employer Operations")}
         businessCity={String(business?.city || "Port Harcourt")}

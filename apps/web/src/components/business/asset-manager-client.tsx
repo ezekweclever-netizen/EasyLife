@@ -134,7 +134,7 @@ export function AssetManagerClient({
   return (
     <div className="space-y-6">
       {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1F2328] p-6 rounded-2xl border border-slate-200 dark:border-[#2E343B]">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Equipment & Maintainable Assets
@@ -152,7 +152,7 @@ export function AssetManagerClient({
       </div>
 
       {/* Category Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 border-b border-slate-200 dark:border-[#163654]">
+      <div className="flex items-center gap-1.5 overflow-x-auto pb-2 border-b border-slate-200 dark:border-[#2E343B]">
         {CATEGORY_TABS.map((tab) => {
           const isActive = selectedCategory === tab.id;
           const count =
@@ -166,7 +166,7 @@ export function AssetManagerClient({
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition ${
                 isActive
                   ? "bg-slate-900 text-white shadow-xs"
-                  : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654]"
+                  : "bg-white dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#2E343B]"
               }`}
             >
               <span>{tab.icon}</span>
@@ -191,13 +191,13 @@ export function AssetManagerClient({
             placeholder="Search by equipment name, brand, model, serial #, or tag..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
           />
         </div>
         <select
           value={selectedProperty}
           onChange={(e) => setSelectedProperty(e.target.value)}
-          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
         >
           <option value="all">All Properties ({properties.length})</option>
           {properties.map((p) => (
@@ -210,7 +210,7 @@ export function AssetManagerClient({
 
       {/* Assets Table / List */}
       {filteredAssets.length === 0 ? (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
           <div className="text-4xl mb-3">⚙️</div>
           <h3 className="text-base font-semibold text-slate-800 dark:text-slate-100">No equipment items found</h3>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
@@ -226,10 +226,10 @@ export function AssetManagerClient({
           </button>
         </div>
       ) : (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] overflow-hidden shadow-2xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] overflow-hidden shadow-2xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-slate-50 dark:bg-[#071526] border-b border-slate-200 dark:border-[#163654] text-2xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
+              <thead className="bg-slate-50 dark:bg-[#1F2328] border-b border-slate-200 dark:border-[#2E343B] text-2xs uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">
                 <tr>
                   <th className="py-3.5 px-4">Equipment & Tag</th>
                   <th className="py-3.5 px-4">Category</th>
@@ -248,7 +248,7 @@ export function AssetManagerClient({
                     "Assigned Facility";
 
                   return (
-                    <tr key={asset.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/80 transition">
+                    <tr key={asset.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/80 transition">
                       <td className="py-3.5 px-4">
                         <div className="font-bold text-slate-900 dark:text-white text-sm">{asset.name}</div>
                         <div className="text-2xs font-mono font-semibold text-teal-700 dark:text-teal-400 mt-0.5">
@@ -299,7 +299,7 @@ export function AssetManagerClient({
                         <div className="flex items-center justify-end gap-2">
                           <Link
                             href={`/business/maintenance?action=report-fault&assetId=${asset.id}&propertyId=${asset.property_id}`}
-                            className="px-2 py-1 rounded bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 text-teal-800 dark:text-[#5CD3D5] font-semibold text-2xs"
+                            className="px-2 py-1 rounded bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 text-teal-800 dark:text-[#F06A1F] font-semibold text-2xs"
                           >
                             Report Fault
                           </Link>
@@ -323,7 +323,7 @@ export function AssetManagerClient({
       {/* Modal for Registering / Editing Asset */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-xl w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-xl w-full p-6 shadow-xl border border-slate-200 dark:border-[#2E343B] my-8">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 {editingAsset ? "Edit Equipment Record" : "Register Maintainable Asset"}
@@ -360,7 +360,7 @@ export function AssetManagerClient({
                     defaultValue={editingAsset?.name || ""}
                     required
                     placeholder="e.g. 500kVA Cummins Diesel Generator"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -373,7 +373,7 @@ export function AssetManagerClient({
                     defaultValue={editingAsset?.asset_tag || ""}
                     required
                     placeholder="e.g. GEN-HQ-01"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>
@@ -386,7 +386,7 @@ export function AssetManagerClient({
                   <select
                     name="assetCategory"
                     defaultValue={editingAsset?.asset_category || "air_conditioner"}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     <option value="air_conditioner">Air Conditioner</option>
                     <option value="generator">Generator</option>
@@ -406,7 +406,7 @@ export function AssetManagerClient({
                     name="propertyId"
                     defaultValue={editingAsset?.property_id || properties[0]?.id || ""}
                     required
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     {properties.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -427,7 +427,7 @@ export function AssetManagerClient({
                     name="brand"
                     defaultValue={editingAsset?.brand || ""}
                     placeholder="e.g. Cummins, Daikin, LG"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -439,7 +439,7 @@ export function AssetManagerClient({
                     name="modelNumber"
                     defaultValue={editingAsset?.model_number || ""}
                     placeholder="e.g. C500D5e"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -451,7 +451,7 @@ export function AssetManagerClient({
                     name="serialNumber"
                     defaultValue={editingAsset?.serial_number || ""}
                     placeholder="e.g. SN-8924018A"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>
@@ -466,7 +466,7 @@ export function AssetManagerClient({
                     name="locationInProperty"
                     defaultValue={editingAsset?.location_in_property || ""}
                     placeholder="e.g. Generator House, Rooftop"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -477,7 +477,7 @@ export function AssetManagerClient({
                     type="date"
                     name="installationDate"
                     defaultValue={editingAsset?.installation_date || ""}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -489,13 +489,13 @@ export function AssetManagerClient({
                     name="maintenanceIntervalDays"
                     defaultValue={editingAsset?.maintenance_interval_days || 90}
                     min="7"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>
 
               {/* Supporting Documents */}
-              <div className="p-3 bg-slate-50 dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-[#163654] space-y-2">
+              <div className="p-3 bg-slate-50 dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] space-y-2">
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-200">
                   Supporting Documents (Warranty, Manuals, Commissioning Reports)
                 </label>
@@ -505,14 +505,14 @@ export function AssetManagerClient({
                     value={docName}
                     onChange={(e) => setDocName(e.target.value)}
                     placeholder="Document Title (e.g. Warranty Certificate)"
-                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs bg-white dark:bg-[#0D223A]"
+                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] text-xs bg-white dark:bg-[#1F2328]"
                   />
                   <input
                     type="url"
                     value={docUrl}
                     onChange={(e) => setDocUrl(e.target.value)}
                     placeholder="Document URL (https://...)"
-                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-xs bg-white dark:bg-[#0D223A]"
+                    className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] text-xs bg-white dark:bg-[#1F2328]"
                   />
                   <button
                     type="button"
@@ -560,7 +560,7 @@ export function AssetManagerClient({
                   rows={2}
                   defaultValue={editingAsset?.notes || ""}
                   placeholder="Service requirements, fuel specs, oil filter part numbers..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 

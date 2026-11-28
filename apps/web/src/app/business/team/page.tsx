@@ -48,7 +48,7 @@ export default async function BusinessTeamPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#071526]">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#1F2328]">
       <BusinessNav
         businessName={String(business.name || "Enterprise Operations")}
         businessCity={String(business.city || "Port Harcourt")}

@@ -67,9 +67,9 @@ export function ProfileFormClient({
         <div className="space-y-1.5">
           <label
             htmlFor="fullName"
-            className="block text-xs font-bold text-[#334155] uppercase tracking-wider"
+            className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider"
           >
-            Full Name <span className="text-red-500">*</span>
+            Full Name <span className="text-[#C53030]">*</span>
           </label>
           <input
             id="fullName"
@@ -77,14 +77,14 @@ export function ProfileFormClient({
             type="text"
             required
             defaultValue={initialFullName}
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
         </div>
 
         <div className="space-y-1.5">
           <label
             htmlFor="displayName"
-            className="block text-xs font-bold text-[#334155] uppercase tracking-wider"
+            className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider"
           >
             Display / Preferred Name
           </label>
@@ -94,7 +94,7 @@ export function ProfileFormClient({
             type="text"
             defaultValue={initialDisplayName}
             placeholder="How should technicians address you?"
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-[#1F2328] dark:text-[#FAF7F3] placeholder:text-[#4A525C]/60 dark:placeholder:text-[#C3C8CF]/60 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
         </div>
       </div>
@@ -103,7 +103,7 @@ export function ProfileFormClient({
         <div className="space-y-1.5">
           <label
             htmlFor="email"
-            className="block text-xs font-bold text-[#334155] uppercase tracking-wider"
+            className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider"
           >
             Email Address
           </label>
@@ -112,9 +112,9 @@ export function ProfileFormClient({
             type="email"
             disabled
             value={email}
-            className="w-full px-4 py-2.5 rounded-xl border border-[#E2E8F0] bg-[#F1F5F9] text-sm text-[#64748B] cursor-not-allowed"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] text-sm text-[#4A525C] dark:text-[#C3C8CF] cursor-not-allowed"
           />
-          <span className="text-[10px] text-[#94A3B8]">
+          <span className="text-[10px] text-[#4A525C] dark:text-[#C3C8CF]">
             Managed through authentication provider
           </span>
         </div>
@@ -122,7 +122,7 @@ export function ProfileFormClient({
         <div className="space-y-1.5">
           <label
             htmlFor="phone"
-            className="block text-xs font-bold text-[#334155] uppercase tracking-wider"
+            className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider"
           >
             Nigerian Phone Number
           </label>
@@ -132,7 +132,7 @@ export function ProfileFormClient({
             type="tel"
             defaultValue={initialPhone}
             placeholder="+234 800 000 0000"
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-[#1F2328] dark:text-[#FAF7F3] placeholder:text-[#4A525C]/60 dark:placeholder:text-[#C3C8CF]/60 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
         </div>
       </div>
@@ -141,7 +141,7 @@ export function ProfileFormClient({
         <div className="space-y-1.5">
           <label
             htmlFor="city"
-            className="block text-xs font-bold text-[#334155] uppercase tracking-wider"
+            className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider"
           >
             Primary Service City
           </label>
@@ -149,7 +149,7 @@ export function ProfileFormClient({
             id="city"
             name="city"
             defaultValue={initialCity || "Port Harcourt"}
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           >
             <option value="Port Harcourt">Port Harcourt (Rivers State)</option>
             <option value="Lagos">Lagos (Lagos State)</option>
@@ -160,7 +160,7 @@ export function ProfileFormClient({
         <div className="space-y-1.5">
           <label
             htmlFor="addressLine"
-            className="block text-xs font-bold text-[#334155] uppercase tracking-wider"
+            className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider"
           >
             Default Property Address
           </label>
@@ -170,19 +170,19 @@ export function ProfileFormClient({
             type="text"
             defaultValue={initialAddressLine}
             placeholder="Street / Estate / Flat address"
-            className="w-full px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-[#1F2328] dark:text-[#FAF7F3] placeholder:text-[#4A525C]/60 dark:placeholder:text-[#C3C8CF]/60 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
         </div>
       </div>
 
-      <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#F1F5F9]">
-        <span className="text-xs text-[#64748B]">
+      <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-[#E6E0D8] dark:border-[#2E343B]">
+        <span className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
           All data stored securely on Supabase
         </span>
         <button
           type="submit"
           disabled={isPending}
-          className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-xs disabled:opacity-60 cursor-pointer"
+          className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-xs disabled:opacity-60 cursor-pointer"
         >
           {isPending ? "Saving Changes..." : "Save Changes"}
         </button>

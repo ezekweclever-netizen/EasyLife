@@ -31,7 +31,7 @@ export function ToolReceipt() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Financial Records
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -42,10 +42,10 @@ export function ToolReceipt() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
-            <span className="text-xs font-bold text-[#0D9488] uppercase tracking-wider block">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider block">
               Issuing Business Details
             </span>
             <input
@@ -53,25 +53,25 @@ export function ToolReceipt() {
               value={bizName}
               onChange={(e) => setBizName(e.target.value)}
               placeholder="Business Name"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-bold"
             />
             <input
               type="text"
               value={bizAddress}
               onChange={(e) => setBizAddress(e.target.value)}
               placeholder="Business Address"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
             />
             <input
               type="text"
               value={bizPhone}
               onChange={(e) => setBizPhone(e.target.value)}
               placeholder="Business Phone"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
             />
           </div>
 
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
               Customer &amp; Payment Details
             </span>
@@ -80,13 +80,13 @@ export function ToolReceipt() {
               value={receivedFrom}
               onChange={(e) => setReceivedFrom(e.target.value)}
               placeholder="Received From (Payer)"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-bold"
             />
             <div className="grid grid-cols-2 gap-2">
               <select
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
               >
                 <option value="Bank Transfer">Bank Transfer (NIP)</option>
                 <option value="POS Terminal">POS Card Payment</option>
@@ -98,20 +98,20 @@ export function ToolReceipt() {
                 value={txRef}
                 onChange={(e) => setTxRef(e.target.value)}
                 placeholder="Transaction / POS Ref"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-mono"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono"
               />
             </div>
           </div>
         </div>
 
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
           <div>
             <label className="block font-bold mb-1">Service / Merchandise Description</label>
             <textarea
               value={serviceDescription}
               onChange={(e) => setServiceDescription(e.target.value)}
               rows={2}
-              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
             />
           </div>
 
@@ -122,7 +122,7 @@ export function ToolReceipt() {
                 type="number"
                 value={totalBill}
                 onChange={(e) => setTotalBill(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -131,7 +131,7 @@ export function ToolReceipt() {
                 type="number"
                 value={amountPaid}
                 onChange={(e) => setAmountPaid(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono font-bold text-[#0D9488]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono font-bold text-[#E8590C]"
               />
             </div>
             <div>
@@ -149,7 +149,7 @@ export function ToolReceipt() {
               value={amountInWords}
               onChange={(e) => setAmountInWords(e.target.value)}
               placeholder="e.g. Eighty-Five Thousand Naira Only"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
           </div>
 
@@ -160,7 +160,7 @@ export function ToolReceipt() {
                 type="text"
                 value={issuedBy}
                 onChange={(e) => setIssuedBy(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
             <div>
@@ -169,7 +169,7 @@ export function ToolReceipt() {
                 type="date"
                 value={receiptDate}
                 onChange={(e) => setReceiptDate(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
           </div>
@@ -179,7 +179,7 @@ export function ToolReceipt() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Official Payment Receipt</span>
           </button>
@@ -242,9 +242,9 @@ export function ToolReceipt() {
               )}
             </div>
 
-            <div className="text-right p-4 bg-teal-50 border border-teal-200 rounded-xl">
+            <div className="text-right p-4 bg-[#FCEBDD] border border-[#E8590C]/30 rounded-xl">
               <span className="text-[10px] uppercase font-bold text-teal-800 block">Amount Received</span>
-              <span className="text-2xl font-black text-[#0D9488] font-mono">
+              <span className="text-2xl font-black text-[#E8590C] font-mono">
                 ₦{paid.toLocaleString()}
               </span>
             </div>

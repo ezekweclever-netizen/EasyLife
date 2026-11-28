@@ -238,15 +238,15 @@ export function ChatClient({
   };
 
   return (
-    <div className="bg-white dark:bg-[#0E2238] rounded-3xl border border-[#E2E8F0] dark:border-[#163654] shadow-sm overflow-hidden h-[calc(100vh-14rem)] min-h-[540px] max-h-[850px] flex flex-col md:flex-row">
+    <div className="bg-white dark:bg-[#0E2238] rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] shadow-sm overflow-hidden h-[calc(100vh-14rem)] min-h-[540px] max-h-[850px] flex flex-col md:flex-row">
       {/* Thread List Sidebar */}
       <div
-        className={`w-full md:w-80 border-b md:border-b-0 md:border-r border-[#E2E8F0] dark:border-[#163654] bg-[#F8FAFC] dark:bg-[#071526] flex-col ${
+        className={`w-full md:w-80 border-b md:border-b-0 md:border-r border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] flex-col ${
           selectedConv ? "hidden md:flex" : "flex"
         }`}
       >
         {/* Search header */}
-        <div className="p-4 border-b border-[#E2E8F0] dark:border-[#163654] space-y-2">
+        <div className="p-4 border-b border-[#E6E0D8] dark:border-[#2E343B] space-y-2">
           <div className="flex items-center justify-between text-xs font-bold text-[#64748B] uppercase tracking-wider">
             <span>Conversations</span>
             <span>{filteredConversations.length} Active</span>
@@ -257,7 +257,7 @@ export function ChatClient({
               placeholder="Search chats, reference, pro..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-3 py-2 pl-8 rounded-xl border border-[#CBD5E1] dark:border-slate-700 bg-white dark:bg-slate-900 text-xs text-[#0F172A] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+              className="w-full px-3 py-2 pl-8 rounded-xl border border-[#CBD5E1] dark:border-slate-700 bg-white dark:bg-slate-900 text-xs text-[#1F2328] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
             <svg
               className="w-3.5 h-3.5 text-[#94A3B8] absolute left-2.5 top-2.5"
@@ -276,13 +276,13 @@ export function ChatClient({
         </div>
 
         {/* Conversation list */}
-        <div className="flex-1 overflow-y-auto divide-y divide-[#F1F5F9] dark:divide-slate-800">
+        <div className="flex-1 overflow-y-auto divide-y divide-[#FAF7F3] dark:divide-slate-800">
           {filteredConversations.length === 0 ? (
             <div className="p-8 text-center space-y-2">
-              <div className="w-10 h-10 rounded-full bg-[#E2E8F0] text-[#64748B] mx-auto flex items-center justify-center text-sm font-bold">
+              <div className="w-10 h-10 rounded-full bg-[#E6E0D8] text-[#64748B] mx-auto flex items-center justify-center text-sm font-bold">
                 💬
               </div>
-              <p className="text-xs font-bold text-[#0F172A] dark:text-white">No conversations yet</p>
+              <p className="text-xs font-bold text-[#1F2328] dark:text-white">No conversations yet</p>
               <p className="text-[11px] text-[#64748B] dark:text-slate-400">
                 Messages related to your bookings and quotes will appear here.
               </p>
@@ -299,12 +299,12 @@ export function ChatClient({
                   onClick={() => handleSelectConversation(c.id)}
                   className={`p-3.5 cursor-pointer transition-colors space-y-1.5 ${
                     isSelected
-                      ? "bg-teal-50/70 dark:bg-teal-950/40 border-l-4 border-l-[#0F766E]"
+                      ? "bg-teal-50/70 dark:bg-teal-950/40 border-l-4 border-l-[#E8590C]"
                       : "hover:bg-slate-100/60 dark:hover:bg-slate-800/40"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-bold text-xs text-[#0F172A] dark:text-white truncate flex items-center gap-1.5">
+                    <span className="font-bold text-xs text-[#1F2328] dark:text-white truncate flex items-center gap-1.5">
                       {c.other_party?.is_verified && (
                         <span className="text-teal-600 font-extrabold text-[11px]" title="Verified Specialist">
                           ✓
@@ -319,7 +319,7 @@ export function ChatClient({
 
                   {c.booking_reference && (
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E2E8F0] dark:bg-slate-800 text-[#475569] dark:text-slate-300">
+                      <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-[#E6E0D8] dark:bg-slate-800 text-[#475569] dark:text-slate-300">
                         #{c.booking_reference}
                       </span>
                       {c.category_name && (
@@ -345,7 +345,7 @@ export function ChatClient({
                     </p>
 
                     {c.unread_count > 0 && (
-                      <span className="px-1.5 py-0.5 rounded-full bg-[#0F766E] text-white font-extrabold text-[10px] shrink-0">
+                      <span className="px-1.5 py-0.5 rounded-full bg-[#E8590C] text-white font-extrabold text-[10px] shrink-0">
                         {c.unread_count}
                       </span>
                     )}
@@ -366,7 +366,7 @@ export function ChatClient({
         {selectedConv ? (
           <>
             {/* Thread Header */}
-            <div className="p-3.5 sm:p-4 border-b border-[#E2E8F0] dark:border-[#163654] flex items-center justify-between gap-3 bg-white dark:bg-[#0E2238]">
+            <div className="p-3.5 sm:p-4 border-b border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-between gap-3 bg-white dark:bg-[#0E2238]">
               <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
                 {/* Mobile Back Button */}
                 <button
@@ -381,7 +381,7 @@ export function ChatClient({
                   ←
                 </button>
 
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#0F766E] to-teal-400 text-white flex items-center justify-center font-bold text-xs sm:text-sm shrink-0 shadow-xs">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gradient-to-tr from-[#E8590C] to-teal-400 text-white flex items-center justify-center font-bold text-xs sm:text-sm shrink-0 shadow-xs">
                   {(
                     selectedConv.other_party?.business_name ||
                     selectedConv.other_party?.full_name ||
@@ -390,7 +390,7 @@ export function ChatClient({
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 sm:gap-2">
-                    <h2 className="text-xs sm:text-sm font-bold text-[#0F172A] dark:text-white truncate">
+                    <h2 className="text-xs sm:text-sm font-bold text-[#1F2328] dark:text-white truncate">
                       {selectedConv.other_party?.business_name ||
                         selectedConv.other_party?.full_name ||
                         "EasyLife Support"}
@@ -417,7 +417,7 @@ export function ChatClient({
                         ? `/pro/jobs/${selectedConv.booking_id}`
                         : `/bookings/${selectedConv.booking_id}`
                     }
-                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-[#CBD5E1] dark:border-slate-700 hover:bg-slate-50 dark:bg-[#071526] dark:hover:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-[#0F766E] dark:text-[#5CD3D5] transition"
+                    className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-[#CBD5E1] dark:border-slate-700 hover:bg-slate-50 dark:bg-[#1F2328] dark:hover:bg-slate-800 text-[10px] sm:text-[11px] font-bold text-[#E8590C] dark:text-[#F06A1F] transition"
                   >
                     View Booking →
                   </Link>
@@ -426,7 +426,7 @@ export function ChatClient({
             </div>
 
             {/* Messages Scroll Area */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50 dark:bg-[#071526]/40">
+            <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50 dark:bg-[#1F2328]/40">
               {errorMsg && (
                 <div className="p-3 rounded-xl bg-red-50 dark:bg-red-950/60 border border-red-200 dark:border-red-800 text-xs text-red-800 dark:text-red-300 font-medium">
                   {errorMsg}
@@ -452,8 +452,8 @@ export function ChatClient({
                       <div
                         className={`max-w-[85%] sm:max-w-[75%] p-3.5 rounded-2xl text-xs sm:text-sm space-y-2 shadow-xs break-words [overflow-wrap:anywhere] min-w-0 ${
                           isMine
-                            ? "bg-[#0F766E] text-white rounded-br-none"
-                            : "bg-white dark:bg-slate-800 text-[#0F172A] dark:text-white border border-[#E2E8F0] dark:border-slate-700 rounded-bl-none"
+                            ? "bg-[#E8590C] text-white rounded-br-none"
+                            : "bg-white dark:bg-slate-800 text-[#1F2328] dark:text-white border border-[#E6E0D8] dark:border-slate-700 rounded-bl-none"
                         }`}
                       >
                         {/* Body */}
@@ -465,7 +465,7 @@ export function ChatClient({
                             className={`p-2.5 rounded-xl border text-xs flex items-center gap-3 ${
                               isMine
                                 ? "bg-teal-800/40 border-teal-600 text-teal-100"
-                                : "bg-slate-50 dark:bg-[#071526] border-slate-200 dark:border-[#163654] text-slate-800 dark:text-slate-100"
+                                : "bg-slate-50 dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] text-slate-800 dark:text-slate-100"
                             }`}
                           >
                             <span className="text-lg">📎</span>
@@ -512,7 +512,7 @@ export function ChatClient({
             </div>
 
             {/* Chat Composer */}
-            <form onSubmit={handleSendMessage} className="p-3 sm:p-4 border-t border-[#E2E8F0] bg-white dark:bg-[#0D223A] space-y-2">
+            <form onSubmit={handleSendMessage} className="p-3 sm:p-4 border-t border-[#E6E0D8] bg-white dark:bg-[#1F2328] space-y-2">
               {selectedFile && (
                 <div className="flex items-center justify-between bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 rounded-xl px-3 py-1.5 text-xs text-teal-900">
                   <span className="truncate flex items-center gap-1.5">
@@ -554,13 +554,13 @@ export function ChatClient({
                   placeholder="Type a message or inquiry..."
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
-                  className="flex-1 px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-[#F8FAFC] text-xs sm:text-sm text-[#0F172A] focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
+                  className="flex-1 px-4 py-2.5 rounded-xl border border-[#CBD5E1] bg-[#FAF7F3] text-xs sm:text-sm text-[#1F2328] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                 />
 
                 <button
                   type="submit"
                   disabled={isPending || (!messageText.trim() && !selectedFile)}
-                  className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#0F766E] text-white hover:bg-[#0D655E] transition disabled:opacity-50 shrink-0 shadow-xs"
+                  className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#E8590C] text-white hover:bg-[#C84A06] transition disabled:opacity-50 shrink-0 shadow-xs"
                 >
                   {isPending ? "Sending..." : "Send"}
                 </button>
@@ -572,7 +572,7 @@ export function ChatClient({
             <div className="w-16 h-16 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center text-2xl font-bold">
               ✉️
             </div>
-            <h3 className="text-base font-bold text-[#0F172A]">Select a Conversation</h3>
+            <h3 className="text-base font-bold text-[#1F2328]">Select a Conversation</h3>
             <p className="text-xs text-[#64748B] max-w-sm">
               Choose an active booking thread from the left to read messages, send fault photos, or coordinate appointments.
             </p>

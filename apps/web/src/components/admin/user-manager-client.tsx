@@ -138,19 +138,19 @@ export function UserManagerClient({
   return (
     <div className="space-y-6">
       {/* Search and Filters Toolbar */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <form onSubmit={handleSearch} className="flex flex-col sm:flex-row flex-1 sm:items-center gap-2">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by name, email, or telephone..."
-            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
+            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
           />
           <select
             value={suspendedFilter}
             onChange={(e) => setSuspendedFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
+            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:outline-none focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500"
           >
             <option value="all">All Account Statuses</option>
             <option value="active">Active Only</option>
@@ -172,10 +172,10 @@ export function UserManagerClient({
       </div>
 
       {/* Users Table */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#1F2328]/80 border-b border-slate-200 dark:border-[#2E343B] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">User</th>
                 <th className="py-3.5 px-4">Roles</th>
@@ -194,7 +194,7 @@ export function UserManagerClient({
                 </tr>
               ) : (
                 users.map((u) => (
-                  <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
+                  <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/60 transition">
                     <td className="py-3.5 px-4">
                       <div className="font-bold text-slate-900 dark:text-white">
                         {u.full_name || "Unnamed User"}
@@ -215,7 +215,7 @@ export function UserManagerClient({
                                   : r.role === "professional"
                                   ? "bg-blue-100 text-blue-800"
                                   : r.role === "business"
-                                  ? "bg-teal-100 text-teal-800 dark:text-[#5CD3D5]"
+                                  ? "bg-teal-100 text-teal-800 dark:text-[#F06A1F]"
                                   : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
                               }`}
                             >
@@ -296,7 +296,7 @@ export function UserManagerClient({
         </div>
 
         {totalPages > 1 && (
-          <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-[#071526]/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600 dark:text-slate-300">
+          <div className="px-4 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-[#1F2328]/50 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-600 dark:text-slate-300">
             <span>
               Page <strong className="text-slate-900 dark:text-white">{page}</strong> of{" "}
               <strong className="text-slate-900 dark:text-white">{totalPages}</strong> ({totalCount} total accounts)
@@ -306,7 +306,7 @@ export function UserManagerClient({
                 type="button"
                 disabled={isPending || page <= 1}
                 onClick={() => loadPage(page - 1)}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] disabled:opacity-40"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] disabled:opacity-40"
               >
                 ← Previous
               </button>
@@ -328,7 +328,7 @@ export function UserManagerClient({
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleSuspendSubmit}
-            className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]"
+            className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#2E343B]"
           >
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2 text-rose-700 font-black text-sm">
@@ -397,7 +397,7 @@ export function UserManagerClient({
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
           <form
             onSubmit={handleReinstateSubmit}
-            className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]"
+            className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#2E343B]"
           >
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-black text-sm">
@@ -463,7 +463,7 @@ export function UserManagerClient({
       {/* User Details Modal */}
       {modalMode === "details" && targetUser && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#2E343B]">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="font-extrabold text-sm text-slate-900 dark:text-white">
                 User Account Dossier
@@ -477,7 +477,7 @@ export function UserManagerClient({
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl space-y-2">
+              <div className="bg-slate-50 dark:bg-[#1F2328] p-4 rounded-2xl space-y-2">
                 <div className="flex justify-between">
                   <span className="text-slate-500 dark:text-slate-400">Account ID:</span>
                   <span className="font-mono text-2xs text-slate-800 dark:text-slate-100">{targetUser.id}</span>

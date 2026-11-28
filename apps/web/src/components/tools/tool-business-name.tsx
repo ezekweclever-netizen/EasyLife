@@ -88,7 +88,7 @@ export function ToolBusinessName() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Brand Architecture &amp; Identity
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -99,7 +99,7 @@ export function ToolBusinessName() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
           <div>
             <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
@@ -108,7 +108,7 @@ export function ToolBusinessName() {
             <select
               value={industry}
               onChange={(e) => setIndustry(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             >
               <option value="logistics">Logistics &amp; Haulage</option>
               <option value="solar">Solar &amp; Power Engineering</option>
@@ -126,7 +126,7 @@ export function ToolBusinessName() {
             <select
               value={style}
               onChange={(e) => setStyle(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             >
               <option value="punchy">Punchy &amp; Modern</option>
               <option value="corporate">Corporate &amp; Formal</option>
@@ -144,7 +144,7 @@ export function ToolBusinessName() {
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               placeholder="e.g. Apex, Delta, Falcon, Kosi"
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             />
           </div>
 
@@ -155,7 +155,7 @@ export function ToolBusinessName() {
             <select
               value={cityFocus}
               onChange={(e) => setCityFocus(e.target.value)}
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium"
             >
               <option value="National">Nationwide (Nigeria)</option>
               <option value="Lagos">Lagos Commercial Hub</option>
@@ -169,7 +169,7 @@ export function ToolBusinessName() {
           type="button"
           onClick={handleGenerate}
           disabled={isGenerating}
-          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center justify-center gap-2 cursor-pointer"
         >
           {isGenerating ? "Synthesizing Names..." : "⚡ Generate Brand Candidates"}
         </button>
@@ -185,7 +185,7 @@ export function ToolBusinessName() {
               <button
                 type="button"
                 onClick={() => setIsPreviewOpen(true)}
-                className="px-3.5 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-[#5CD3D5] text-xs font-bold hover:bg-teal-100 border border-teal-200 dark:border-teal-800 transition flex items-center gap-1.5 cursor-pointer"
+                className="px-3.5 py-1.5 rounded-xl bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C] dark:text-[#F06A1F] text-xs font-bold hover:bg-teal-100 border border-[#E8590C]/30 dark:border-[#2E343B] transition flex items-center gap-1.5 cursor-pointer"
               >
                 <span>👁️ View Brand Brief</span>
               </button>
@@ -199,8 +199,8 @@ export function ToolBusinessName() {
                 onClick={() => setSelectedName(item)}
                 className={`p-4 rounded-2xl border transition cursor-pointer flex flex-col justify-between ${
                   selectedName?.name === item.name
-                    ? "bg-teal-50/70 dark:bg-teal-950/40 border-[#0D9488] shadow-sm"
-                    : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-slate-800 hover:border-slate-300"
+                    ? "bg-[#FCEBDD]/70 dark:bg-teal-950/40 border-[#E8590C] shadow-sm"
+                    : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-slate-800 hover:border-slate-300"
                 }`}
               >
                 <div className="space-y-2">
@@ -232,7 +232,7 @@ export function ToolBusinessName() {
                   <span className="text-slate-400 font-mono">
                     {item.domainSuggestions[0]}
                   </span>
-                  <span className="font-bold text-[#0D9488]">
+                  <span className="font-bold text-[#E8590C]">
                     {selectedName?.name === item.name ? "Selected ✓" : "Select &rarr;"}
                   </span>
                 </div>
@@ -253,7 +253,7 @@ export function ToolBusinessName() {
         >
           <div className="space-y-6 text-slate-800">
             <div className="border-b border-slate-200 pb-4">
-              <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
                 Corporate Affairs Commission (CAC) Preparation Brief
               </span>
               <h1 className="text-2xl font-black text-slate-900 mt-1">

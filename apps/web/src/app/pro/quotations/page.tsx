@@ -31,7 +31,7 @@ export default async function ProQuotationsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
             Estimates &amp; Invoicing
           </span>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
@@ -44,7 +44,7 @@ export default async function ProQuotationsPage() {
 
         <Link
           href="/pro/jobs"
-          className="px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs self-start sm:self-auto"
+          className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs self-start sm:self-auto"
         >
           + Prepare New Quote
         </Link>

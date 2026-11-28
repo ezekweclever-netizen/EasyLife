@@ -151,19 +151,19 @@ export function ProfessionalManagerClient({
   return (
     <div className="space-y-6">
       {/* Toolbar */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <form onSubmit={handleFilter} className="flex flex-col sm:flex-row flex-1 sm:items-center gap-2">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by business name or trade..."
-            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+            className="flex-1 px-4 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
           />
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+            className="px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
           >
             <option value="all">All Verification Statuses</option>
             <option value="approved">Approved / Verified</option>
@@ -191,10 +191,10 @@ export function ProfessionalManagerClient({
       </div>
 
       {/* Professionals Table */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#1F2328]/80 border-b border-slate-200 dark:border-[#2E343B] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Business / Trade</th>
                 <th className="py-3.5 px-4">Owner Profile</th>
@@ -213,7 +213,7 @@ export function ProfessionalManagerClient({
                 </tr>
               ) : (
                 pros.map((p) => (
-                  <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition">
+                  <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/60 transition">
                     <td className="py-3.5 px-4">
                       <div className="font-bold text-slate-900 dark:text-white">
                         {p.business_name}
@@ -303,7 +303,7 @@ export function ProfessionalManagerClient({
       {/* Pro Detail Modal */}
       {selectedPro && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654] max-h-[90vh] overflow-y-auto">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-2xl w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#2E343B] max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="font-extrabold text-sm text-slate-900 dark:text-white">
                 Professional Trade Dossier
@@ -317,7 +317,7 @@ export function ProfessionalManagerClient({
             </div>
 
             <div className="space-y-4 text-xs">
-              <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div className="bg-slate-50 dark:bg-[#1F2328] p-4 rounded-2xl grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
                   <span className="text-slate-500 dark:text-slate-400 block text-[11px]">Business Name</span>
                   <span className="font-bold text-slate-900 dark:text-white">{selectedPro.business_name}</span>
@@ -363,12 +363,12 @@ export function ProfessionalManagerClient({
                 ) : (
                   <div className="space-y-1.5">
                     {(selectedPro.professional_services || []).map((ps) => (
-                      <div key={ps.id} className="p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A]">
+                      <div key={ps.id} className="p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328]">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-slate-900 dark:text-white">
                             {ps.service_title || ps.services?.name || ps.service_categories?.name || "Service"}
                           </span>
-                          <span className="font-mono text-[#0D9488] font-bold">
+                          <span className="font-mono text-[#E8590C] font-bold">
                             {formatNaira(ps.min_price_kobo)}
                           </span>
                         </div>
@@ -391,7 +391,7 @@ export function ProfessionalManagerClient({
                     Operating Locations ({(selectedPro.professional_service_areas || []).length})
                   </h4>
                   {(selectedPro.professional_service_areas || []).map((area) => (
-                    <div key={area.id} className="p-2 rounded-lg bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-[11px]">
+                    <div key={area.id} className="p-2 rounded-lg bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-[11px]">
                       {area.neighbourhood ? `${area.neighbourhood}, ` : ""}
                       {area.lga_or_district} ({area.city}) • {area.service_radius_km}km
                     </div>
@@ -403,7 +403,7 @@ export function ProfessionalManagerClient({
                     Submitted KYC Docs ({(selectedPro.professional_documents || []).length})
                   </h4>
                   {(selectedPro.professional_documents || []).map((doc) => (
-                    <div key={doc.id} className="p-2 rounded-lg bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-[11px] flex justify-between">
+                    <div key={doc.id} className="p-2 rounded-lg bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-[11px] flex justify-between">
                       <span className="capitalize">{doc.document_type.replace(/_/g, " ")}</span>
                       <span className="font-bold uppercase">{doc.verification_status}</span>
                     </div>

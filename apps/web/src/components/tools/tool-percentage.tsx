@@ -52,7 +52,7 @@ export function ToolPercentage() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Instant Commercial Math
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -65,7 +65,7 @@ export function ToolPercentage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Module 1: X% of Y */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase text-slate-800 dark:text-slate-200">
               1. Percentage of an Amount
@@ -79,7 +79,7 @@ export function ToolPercentage() {
                 type="number"
                 value={valA}
                 onChange={(e) => setValA(e.target.value)}
-                className="w-24 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs text-center font-mono"
+                className="w-24 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-center font-mono"
               />
               <span className="text-xs font-bold">% of</span>
             </div>
@@ -88,20 +88,20 @@ export function ToolPercentage() {
               value={valB}
               onChange={(e) => setValB(e.target.value)}
               placeholder="Total Base (₦)"
-              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-mono"
+              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono"
             />
           </div>
 
-          <div className="p-3 bg-teal-50/70 dark:bg-[#071526] rounded-xl border border-teal-500/30 flex justify-between items-center text-xs sm:text-sm">
+          <div className="p-3 bg-[#FCEBDD]/70 dark:bg-[#1F2328] rounded-xl border border-teal-500/30 flex justify-between items-center text-xs sm:text-sm">
             <span className="text-slate-500">Result:</span>
-            <span className="font-black text-base text-[#0D9488] font-mono">
+            <span className="font-black text-base text-[#E8590C] font-mono">
               ₦{Math.round(percentOf).toLocaleString()}
             </span>
           </div>
         </div>
 
         {/* Module 2: % Change */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase text-slate-800 dark:text-slate-200">
               2. Price Increase / Decrease
@@ -115,7 +115,7 @@ export function ToolPercentage() {
               value={fromVal}
               onChange={(e) => setFromVal(e.target.value)}
               placeholder="From (₦)"
-              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-mono"
+              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono"
             />
             <span className="text-xs font-bold self-center">to</span>
             <input
@@ -123,11 +123,11 @@ export function ToolPercentage() {
               value={toVal}
               onChange={(e) => setToVal(e.target.value)}
               placeholder="To (₦)"
-              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-mono"
+              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono"
             />
           </div>
 
-          <div className="p-3 bg-teal-50/70 dark:bg-[#071526] rounded-xl border border-teal-500/30 flex justify-between items-center text-xs sm:text-sm">
+          <div className="p-3 bg-[#FCEBDD]/70 dark:bg-[#1F2328] rounded-xl border border-teal-500/30 flex justify-between items-center text-xs sm:text-sm">
             <span className="text-slate-500">Percentage Shift:</span>
             <span
               className={`font-black text-base font-mono ${
@@ -140,7 +140,7 @@ export function ToolPercentage() {
         </div>
 
         {/* Module 3: Trade Markup vs Gross Margin */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase text-slate-800 dark:text-slate-200">
               3. Trade Markup &amp; Gross Margin
@@ -154,7 +154,7 @@ export function ToolPercentage() {
               value={costPrice}
               onChange={(e) => setCostPrice(e.target.value)}
               placeholder="Cost Price (₦)"
-              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-mono"
+              className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono"
             />
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold">+</span>
@@ -163,13 +163,13 @@ export function ToolPercentage() {
                 value={markupPercent}
                 onChange={(e) => setMarkupPercent(e.target.value)}
                 placeholder="Markup %"
-                className="w-24 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs text-center font-mono"
+                className="w-24 min-w-0 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-center font-mono"
               />
               <span className="text-xs font-bold">%</span>
             </div>
           </div>
 
-          <div className="p-3 bg-teal-50/70 dark:bg-[#071526] rounded-xl border border-teal-500/30 grid grid-cols-3 gap-2 text-center text-xs">
+          <div className="p-3 bg-[#FCEBDD]/70 dark:bg-[#1F2328] rounded-xl border border-teal-500/30 grid grid-cols-3 gap-2 text-center text-xs">
             <div>
               <span className="text-slate-400 block text-[10px]">Selling Price</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono">
@@ -178,7 +178,7 @@ export function ToolPercentage() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px]">Gross Profit</span>
-              <span className="font-bold text-[#0D9488] font-mono">
+              <span className="font-bold text-[#E8590C] font-mono">
                 ₦{Math.round(grossProfit).toLocaleString()}
               </span>
             </div>
@@ -192,7 +192,7 @@ export function ToolPercentage() {
         </div>
 
         {/* Module 4: 7.5% Nigerian VAT */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-bold uppercase text-slate-800 dark:text-slate-200">
               4. Statutory 7.5% Nigerian VAT
@@ -206,7 +206,7 @@ export function ToolPercentage() {
               onClick={() => setGrossOrNet("add")}
               className={`flex-1 py-1.5 rounded-lg font-bold transition cursor-pointer ${
                 grossOrNet === "add"
-                  ? "bg-[#0D9488] text-white"
+                  ? "bg-[#E8590C] text-white"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
               }`}
             >
@@ -217,7 +217,7 @@ export function ToolPercentage() {
               onClick={() => setGrossOrNet("remove")}
               className={`flex-1 py-1.5 rounded-lg font-bold transition cursor-pointer ${
                 grossOrNet === "remove"
-                  ? "bg-[#0D9488] text-white"
+                  ? "bg-[#E8590C] text-white"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
               }`}
             >
@@ -231,11 +231,11 @@ export function ToolPercentage() {
               value={vatAmountInput}
               onChange={(e) => setVatAmountInput(e.target.value)}
               placeholder="Enter Amount in Naira (₦)"
-              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-mono"
+              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono"
             />
           </div>
 
-          <div className="p-3 bg-teal-50/70 dark:bg-[#071526] rounded-xl border border-teal-500/30 grid grid-cols-3 gap-2 text-center text-xs">
+          <div className="p-3 bg-[#FCEBDD]/70 dark:bg-[#1F2328] rounded-xl border border-teal-500/30 grid grid-cols-3 gap-2 text-center text-xs">
             <div>
               <span className="text-slate-400 block text-[10px]">Net Base</span>
               <span className="font-bold text-slate-900 dark:text-white font-mono">
@@ -250,7 +250,7 @@ export function ToolPercentage() {
             </div>
             <div>
               <span className="text-slate-400 block text-[10px]">Gross Total</span>
-              <span className="font-bold text-[#0D9488] font-mono">
+              <span className="font-bold text-[#E8590C] font-mono">
                 ₦{Math.round(vatResultGross).toLocaleString()}
               </span>
             </div>
@@ -263,7 +263,7 @@ export function ToolPercentage() {
         <button
           type="button"
           onClick={() => setIsPreviewOpen(true)}
-          className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+          className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
         >
           <span>👁️ View Pricing &amp; VAT Audit Sheet</span>
         </button>
@@ -279,7 +279,7 @@ export function ToolPercentage() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Financial Analysis &amp; Tax Computation
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -305,7 +305,7 @@ export function ToolPercentage() {
               </div>
               <div className="flex justify-between border-t border-slate-200 pt-1 font-bold text-slate-900">
                 <span>Recommended Selling Price:</span>
-                <span className="font-mono text-[#0D9488]">₦{Math.round(sellingPrice).toLocaleString()}</span>
+                <span className="font-mono text-[#E8590C]">₦{Math.round(sellingPrice).toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-emerald-700">
                 <span>Gross Margin:</span>
@@ -327,12 +327,12 @@ export function ToolPercentage() {
               </div>
               <div className="flex justify-between border-t border-slate-200 pt-1 font-bold text-slate-900">
                 <span>Gross Customer Invoice:</span>
-                <span className="font-mono text-[#0D9488]">₦{Math.round(vatResultGross).toLocaleString()}</span>
+                <span className="font-mono text-[#E8590C]">₦{Math.round(vatResultGross).toLocaleString()}</span>
               </div>
             </div>
           </div>
 
-          <div className="p-4 bg-teal-50 border border-teal-200 rounded-xl text-xs space-y-1">
+          <div className="p-4 bg-[#FCEBDD] border border-[#E8590C]/30 rounded-xl text-xs space-y-1">
             <span className="font-bold text-teal-900 block">Summary Computation Notes</span>
             <p className="text-teal-800 leading-relaxed">
               Calculations assume a standard commercial trading model with immediate VAT liability payable to the Federal Inland Revenue Service by the 21st day of the following calendar month.

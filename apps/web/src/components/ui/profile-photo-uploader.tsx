@@ -83,7 +83,7 @@ export function ProfilePhotoUploader({
       <div className="flex items-center gap-4">
         {/* Avatar Display */}
         <div
-          className={`relative ${dimClass} rounded-2xl bg-teal-800 text-white flex items-center justify-center font-bold ${textClass} uppercase shadow-md overflow-hidden border-2 border-slate-200 dark:border-slate-700 shrink-0`}
+          className={`relative ${dimClass} rounded-2xl bg-[#1F2328] text-white flex items-center justify-center font-bold ${textClass} uppercase shadow-md overflow-hidden border-2 border-[#E6E0D8] dark:border-[#2E343B] shrink-0`}
         >
           {avatarUrl ? (
             <img
@@ -122,7 +122,7 @@ export function ProfilePhotoUploader({
               type="button"
               disabled={isPending}
               onClick={() => fileInputRef.current?.click()}
-              className="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] shadow-xs transition-colors cursor-pointer disabled:opacity-50"
+              className="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] shadow-xs transition-colors cursor-pointer disabled:opacity-50"
             >
               {avatarUrl ? "Change Photo" : "Upload Photo"}
             </button>

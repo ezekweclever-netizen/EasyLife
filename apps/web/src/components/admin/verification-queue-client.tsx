@@ -231,7 +231,7 @@ export function VerificationQueueClient({
   return (
     <div className="space-y-6">
       {/* Filters Toolbar */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl p-4 sm:p-5 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-bold text-slate-700 dark:text-slate-200">Filter Documents:</span>
           <div className="flex flex-wrap gap-1.5">
@@ -257,7 +257,7 @@ export function VerificationQueueClient({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Filter by business or owner..."
-            className="h-9 w-60 sm:w-72 px-3 rounded-xl border border-slate-200 dark:border-[#163654] text-xs text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-teal-500/30 focus:outline-none"
+            className="h-9 w-60 sm:w-72 px-3 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-teal-500/30 focus:outline-none"
           />
           <div className="text-xs text-slate-500 dark:text-slate-400 shrink-0">
             Showing <strong className="text-slate-800 dark:text-slate-100">{filteredDocs.length}</strong> documents
@@ -266,10 +266,10 @@ export function VerificationQueueClient({
       </div>
 
       {/* Verification Queue Table */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-[#071526]/80 border-b border-slate-200 dark:border-[#163654] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+            <thead className="bg-slate-50 dark:bg-[#1F2328]/80 border-b border-slate-200 dark:border-[#2E343B] text-2xs font-extrabold uppercase text-slate-500 dark:text-slate-400 tracking-wider">
               <tr>
                 <th className="py-3.5 px-4">Professional &amp; Trade</th>
                 <th className="py-3.5 px-4">Document Evidence</th>
@@ -292,7 +292,7 @@ export function VerificationQueueClient({
                   const eligibilities = pro?.service_eligibilities || {};
 
                   return (
-                    <tr key={doc.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/60 transition align-top">
+                    <tr key={doc.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/60 transition align-top">
                       <td className="py-3.5 px-4 space-y-1">
                         <div className="font-bold text-slate-900 dark:text-white">
                           {pro?.business_name || "Professional"}
@@ -350,7 +350,7 @@ export function VerificationQueueClient({
                           services.slice(0, 3).map((s) => {
                             const elig = s.service_id ? eligibilities[s.service_id] : undefined;
                             return (
-                              <div key={s.id} className="text-[11px] border-l-2 border-slate-200 dark:border-[#163654] pl-2">
+                              <div key={s.id} className="text-[11px] border-l-2 border-slate-200 dark:border-[#2E343B] pl-2">
                                 <div className="flex flex-wrap items-center gap-1">
                                   <span className="font-semibold text-slate-800 dark:text-slate-100">
                                     {s.service_title || s.services?.name || s.service_categories?.name || "Service"}
@@ -486,7 +486,7 @@ export function VerificationQueueClient({
       {/* Action Modals */}
       {modalMode && activeDoc && (
         <div className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654]">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#2E343B]">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="font-extrabold text-sm text-slate-900 dark:text-white">
                 {modalMode === "approve" && "Confirm Document Approval"}
@@ -513,12 +513,12 @@ export function VerificationQueueClient({
             </p>
 
             {/* Identity & Account Match Cross-Check Card */}
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs space-y-2">
+            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-xs space-y-2">
               <div className="flex items-center justify-between">
                 <span className="font-bold text-slate-800 dark:text-slate-100 uppercase text-[11px] tracking-wider">
                   Identity &amp; Registration Cross-Check
                 </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-teal-100 text-teal-800 dark:text-[#5CD3D5]">
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-teal-100 text-teal-800 dark:text-[#F06A1F]">
                   Audited
                 </span>
               </div>

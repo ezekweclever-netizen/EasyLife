@@ -5,7 +5,7 @@
 
 import { TransactionalEmailType } from "./types";
 
-const BRAND_COLOR = "#0D9488";
+const BRAND_COLOR = "#E8590C";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://easylife.ng";
 
 function baseHtmlLayout(title: string, contentHtml: string): string {
@@ -16,15 +16,15 @@ function baseHtmlLayout(title: string, contentHtml: string): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #FAF7F3; color: #1F2328; margin: 0; padding: 0; }
     .container { max-width: 600px; margin: 24px auto; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; }
-    .header { background: #0f172a; padding: 24px 32px; color: #ffffff; }
+    .header { background: #1F2328; padding: 24px 32px; color: #ffffff; }
     .header h1 { margin: 0; font-size: 20px; font-weight: 800; }
     .header h1 span { color: #2dd4bf; }
-    .body { padding: 32px; font-size: 14px; line-height: 1.6; color: #334155; }
+    .body { padding: 32px; font-size: 14px; line-height: 1.6; color: #4A525C; }
     .btn { display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff !important; padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none; margin: 20px 0; }
-    .card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin: 16px 0; }
-    .footer { background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 20px 32px; text-align: center; font-size: 12px; color: #64748b; }
+    .card { background: #FAF7F3; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .footer { background: #FAF7F3; border-top: 1px solid #e2e8f0; padding: 20px 32px; text-align: center; font-size: 12px; color: #64748b; }
     .alert { background: #fef3c7; border: 1px solid #fde68a; border-radius: 10px; padding: 12px; font-size: 13px; color: #92400e; margin: 16px 0; }
   </style>
 </head>
@@ -58,7 +58,7 @@ export function renderAccountVerificationEmail(params: {
     <p>Please verify your email address to activate your account and start booking verified artisans or offering professional services.</p>
     <div class="card" style="text-align: center;">
       <span style="font-size: 12px; text-transform: uppercase; color: #64748b; font-weight: bold;">Your 6-Digit Verification Code</span>
-      <div style="font-size: 28px; font-weight: 900; letter-spacing: 4px; color: #0d9488; margin-top: 8px;">${code}</div>
+      <div style="font-size: 28px; font-weight: 900; letter-spacing: 4px; color: #E8590C; margin-top: 8px;">${code}</div>
     </div>
     <p style="text-align: center;">
       <a href="${params.verificationUrl}" class="btn">Verify Account Online →</a>

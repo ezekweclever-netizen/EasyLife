@@ -153,7 +153,7 @@ export function ToolContracts() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Legal Instruments &amp; Compliance
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -164,7 +164,7 @@ export function ToolContracts() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         {/* Template Selector */}
         <div className="flex gap-2 overflow-x-auto pb-1">
           {(Object.keys(CONTRACTS) as ContractKey[]).map((k) => (
@@ -174,8 +174,8 @@ export function ToolContracts() {
               onClick={() => setContractType(k)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition cursor-pointer ${
                 contractType === k
-                  ? "bg-[#0D9488] text-white shadow-xs"
-                  : "bg-white dark:bg-[#0D223A] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
+                  ? "bg-[#E8590C] text-white shadow-xs"
+                  : "bg-white dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700"
               }`}
             >
               {CONTRACTS[k]?.name}
@@ -191,7 +191,7 @@ export function ToolContracts() {
               type="text"
               value={partyA}
               onChange={(e) => setPartyA(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
             />
           </div>
           <div>
@@ -200,7 +200,7 @@ export function ToolContracts() {
               type="text"
               value={partyB}
               onChange={(e) => setPartyB(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
             />
           </div>
 
@@ -210,7 +210,7 @@ export function ToolContracts() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] font-mono"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
             />
           </div>
           <div>
@@ -219,7 +219,7 @@ export function ToolContracts() {
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
           </div>
 
@@ -229,7 +229,7 @@ export function ToolContracts() {
               type="text"
               value={scope}
               onChange={(e) => setScope(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
           </div>
         </div>
@@ -239,7 +239,7 @@ export function ToolContracts() {
           <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
             Live Agreement Instrument Preview
           </span>
-          <pre className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-mono text-slate-800 dark:text-slate-200 whitespace-pre-wrap leading-relaxed max-h-56 overflow-y-auto">
+          <pre className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-mono text-slate-800 dark:text-slate-200 whitespace-pre-wrap leading-relaxed max-h-56 overflow-y-auto">
             {generatedText}
           </pre>
         </div>
@@ -248,7 +248,7 @@ export function ToolContracts() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Binding Legal Document</span>
           </button>
@@ -265,7 +265,7 @@ export function ToolContracts() {
       >
         <div className="space-y-6 text-slate-800 text-xs sm:text-sm leading-relaxed">
           <div className="border-b-2 border-slate-900 pb-4 text-center">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Legal Instrument &amp; Binding Agreement
             </span>
             <h1 className="text-xl sm:text-2xl font-black text-slate-900 mt-1 uppercase tracking-tight">

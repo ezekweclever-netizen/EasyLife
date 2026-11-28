@@ -4,82 +4,105 @@
  */
 
 export const EASYLIFE_COLOR_PALETTE = {
-  // Option C — Harbor Teal & Coral Official Tokens
+  // Official Centralized EasyLife Global Design System Palette
+  foundation: {
+    charcoal: "#1F2328",
+    steelGrey: "#4A525C",
+    burntOrange: "#E8590C",
+    orangeHover: "#C84A06",
+    peach: "#FCEBDD",
+    cream: "#FAF7F3",
+    white: "#FFFFFF",
+    borders: "#E6E0D8",
+    darkSurfaceText: "#FAF7F3",
+    secondaryDarkText: "#C3C8CF",
+  },
+  semantic: {
+    success: "#2E7D4F",
+    warning: "#B7791F",
+    error: "#C53030",
+    information: "#4A525C",
+  },
   brand: {
-    primary: "#154752", // Deep Harbor Teal
-    primaryDark: "#0D282E", // Darkest Harbor Navy
-    secondary: "#24989A", // Maritime Teal
-    secondaryHover: "#1D7E80", // Deep Maritime Teal
-    accent: "#EE9277", // Warm Coral Accent
-    accentHover: "#E77858", // Vibrant Coral
-    background: "#F3F8F8", // Airy Pale Teal Background
-    surface: "#FFFFFF", // Crisp White Surface
-    text: "#1F2F34", // High-Contrast Deep Charcoal Teal
-    muted: "#68797C", // Balanced Slate Muted Text
-    border: "#DAE7E7", // Structural Hairline Border
-    strongBorder: "#C2D4D4", // Active Input Border
+    primary: "#E8590C", // Burnt Orange
+    primaryDark: "#C84A06", // Orange Hover
+    primaryHover: "#C84A06", // Orange Hover
+    secondary: "#4A525C", // Steel Grey
+    secondaryHover: "#1F2328", // Charcoal
+    accent: "#E8590C", // Burnt Orange
+    accentHover: "#C84A06", // Orange Hover
+    accentSoft: "#FCEBDD", // Peach
+    background: "#FAF7F3", // Cream
+    surface: "#FFFFFF", // White
+    text: "#1F2328", // Charcoal
+    textSecondary: "#4A525C", // Steel Grey
+    muted: "#4A525C", // Steel Grey
+    border: "#E6E0D8", // Borders
+    strongBorder: "#C3C8CF", // Secondary Dark Text
+    darkSurfaceText: "#FAF7F3",
+    secondaryDarkText: "#C3C8CF",
   },
   // Backwards-compatible mapped structures
   navy: {
-    950: "#0D282E", // Deepest brand background
-    900: "#154752", // Primary Harbor Teal surface & navigation
-    800: "#1A5663", // Primary heading & high-contrast body text
-    700: "#206776", // Secondary dark surface
-    600: "#2B7A8A", // Interactive secondary
+    950: "#14171A",
+    900: "#1F2328",
+    800: "#262B32",
+    700: "#353B44",
+    600: "#4A525C",
   },
   teal: {
-    800: "#186869", // High-contrast accessible teal text
-    700: "#1D7E80", // Hover state for primary buttons
-    600: "#24989A", // Secondary brand Teal CTA & verified badge fill
-    500: "#2DC0C2", // Accent highlight on dark surfaces
-    100: "#D6F2F2", // Soft badge border
-    50: "#EEF9F9", // Tinted surface for active states
+    800: "#C84A06",
+    700: "#C84A06",
+    600: "#E8590C",
+    500: "#E8590C",
+    100: "#FCEBDD",
+    50: "#FAF7F3",
   },
   charcoal: {
-    900: "#142024", // Deep charcoal text
-    800: "#1F2F34", // Primary body copy
-    700: "#35474C", // Form label & table cell text
-    600: "#4E6065", // Secondary body text
-    500: "#68797C", // Helper text & metadata timestamps
-    400: "#9CA3AF", // Disabled text / placeholder
+    900: "#14171A",
+    800: "#1F2328",
+    700: "#353B44",
+    600: "#4A525C",
+    500: "#6B7582",
+    400: "#C3C8CF",
   },
   surface: {
-    white: "#FFFFFF", // Primary card & input background
-    lightGrey: "#F3F8F8", // Default application canvas
-    mutedGrey: "#E7F0F0", // Secondary section background & table header
-    borderGrey: "#DAE7E7", // Standard 1px card & divider border
-    strongBorder: "#C2D4D4", // Form input border
+    white: "#FFFFFF",
+    lightGrey: "#FAF7F3",
+    mutedGrey: "#F2EDE6",
+    borderGrey: "#E6E0D8",
+    strongBorder: "#C3C8CF",
   },
   status: {
     success: {
-      text: "#127A5B",
-      icon: "#127A5B",
-      bg: "#E7F7F1",
-      border: "#A3E5D0",
+      text: "#2E7D4F",
+      icon: "#2E7D4F",
+      bg: "#E8F5ED",
+      border: "#A3D9B5",
     },
     warning: {
-      text: "#B25E0A",
-      icon: "#B25E0A",
-      bg: "#FEF5E7",
-      border: "#FCD9A5",
+      text: "#B7791F",
+      icon: "#B7791F",
+      bg: "#FEF7EC",
+      border: "#F5D499",
     },
     error: {
       text: "#C53030",
       icon: "#C53030",
-      bg: "#FDF0F0",
+      bg: "#FDE8E8",
       border: "#F8B4B4",
     },
     info: {
-      text: "#1A6E84",
-      icon: "#1A6E84",
-      bg: "#EBF6F9",
-      border: "#A9DCE7",
+      text: "#4A525C",
+      icon: "#4A525C",
+      bg: "#EBF0F5",
+      border: "#C3C8CF",
     },
     neutral: {
-      text: "#4E6065",
-      icon: "#68797C",
-      bg: "#E7F0F0",
-      border: "#DAE7E7",
+      text: "#4A525C",
+      icon: "#4A525C",
+      bg: "#FAF7F3",
+      border: "#E6E0D8",
     },
   },
 } as const;
@@ -197,8 +220,8 @@ export const EASYLIFE_EXPERIENCE_DESIGN_PROFILES: Record<
       "Clean top utility bar on desktop + bottom 4-tab bar on mobile with prominent AI Problem Finder",
     layoutDensity: "comfortable",
     headerBackground: "#FFFFFF",
-    accentColor: "#0D9488",
-    surfaceCanvas: "#F8FAFC",
+    accentColor: "#E8590C",
+    surfaceCanvas: "#FAF7F3",
     signatureCharacteristics: [
       "Warm, spacious white cards with visual category icons and clear NGN pricing",
       "Prominent natural-language AI Problem Categorization search box",
@@ -211,9 +234,9 @@ export const EASYLIFE_EXPERIENCE_DESIGN_PROFILES: Record<
     navigationPattern:
       "Deep Navy operational header with live Availability Toggle + verification status strip",
     layoutDensity: "task-focused",
-    headerBackground: "#0A192F",
-    accentColor: "#14B8A6",
-    surfaceCanvas: "#F1F5F9",
+    headerBackground: "#1F2328",
+    accentColor: "#E8590C",
+    surfaceCanvas: "#FAF7F3",
     signatureCharacteristics: [
       "Action-oriented job queue cards prioritizing urgency, district location, and customer schedule",
       "Fast itemized quotation builder (Labor, Materials, Callout Fee in NGN)",
@@ -224,11 +247,11 @@ export const EASYLIFE_EXPERIENCE_DESIGN_PROFILES: Record<
     id: "business",
     label: "Business & Property Maintenance Portal",
     navigationPattern:
-      "Left collapsible facility sidebar (#1E293B) with Property/Branch context switcher",
+      "Left collapsible facility sidebar (#1F2328) with Property/Branch context switcher",
     layoutDensity: "structured",
-    headerBackground: "#1E293B",
-    accentColor: "#0D9488",
-    surfaceCanvas: "#F8FAFC",
+    headerBackground: "#1F2328",
+    accentColor: "#E8590C",
+    surfaceCanvas: "#FAF7F3",
     signatureCharacteristics: [
       "Multi-property & unit hierarchy views with equipment asset tags and serial numbers",
       "Preventive maintenance calendar & due-date countdown indicators",
@@ -239,11 +262,11 @@ export const EASYLIFE_EXPERIENCE_DESIGN_PROFILES: Record<
     id: "admin",
     label: "Platform Administrator Console",
     navigationPattern:
-      "Dark Deep Navy (#06101F) governance sidebar with queue counters & audit trail header",
+      "Dark Deep Navy (#1F2328) governance sidebar with queue counters & audit trail header",
     layoutDensity: "compact-high-density",
-    headerBackground: "#06101F",
-    accentColor: "#0D9488",
-    surfaceCanvas: "#F1F5F9",
+    headerBackground: "#1F2328",
+    accentColor: "#E8590C",
+    surfaceCanvas: "#FAF7F3",
     signatureCharacteristics: [
       "High-density data tables with multi-column filtering and instant status pills",
       "Side-by-side KYC document inspection & verification decision panel",
@@ -252,41 +275,58 @@ export const EASYLIFE_EXPERIENCE_DESIGN_PROFILES: Record<
   },
 } as const;
 
+export const EASYLIFE_DARK_MODE_TOKENS = {
+  background: "#15181C",
+  surface: "#1F2328",
+  primaryText: "#FAF7F3",
+  secondaryText: "#C3C8CF",
+  accent: "#F06A1F",
+  border: "#2E343B",
+  borderStrong: "#4A525C",
+  focusRing: "#F06A1F",
+} as const;
+
 export const ACCESSIBLE_COLOR_COMBINATIONS = [
   {
-    pair: "White (#FFFFFF) on Deep Navy (#0A192F)",
-    contrastRatio: "17.4:1",
+    pair: "Dark Primary Text (#FAF7F3) on Dark Background (#15181C)",
+    contrastRatio: "16.8:1",
     wcagLevel: "AAA",
-    usage: "Primary navigation headers, hero banners, dark sidebar text",
+    usage: "Dark mode body text, titles, headings, modal text",
   },
   {
-    pair: "Deep Navy (#0F172A) on White (#FFFFFF)",
-    contrastRatio: "17.8:1",
+    pair: "Dark Primary Text (#FAF7F3) on Dark Surface (#1F2328)",
+    contrastRatio: "14.7:1",
     wcagLevel: "AAA",
-    usage: "Card headings, body copy, form input text, table cells",
+    usage: "Dark mode card titles, inputs, buttons, table cell text",
   },
   {
-    pair: "Charcoal (#374151) on Light Grey (#F8FAFC)",
-    contrastRatio: "10.6:1",
+    pair: "Dark Secondary Text (#C3C8CF) on Dark Surface (#1F2328)",
+    contrastRatio: "9.3:1",
     wcagLevel: "AAA",
-    usage: "Secondary descriptions, form labels, table headers",
+    usage: "Dark mode secondary descriptions, subtitles, table headers, captions",
   },
   {
-    pair: "White (#FFFFFF) on Teal 700 (#0F766E)",
-    contrastRatio: "5.4:1",
+    pair: "Dark Accent (#F06A1F) on Dark Surface (#1F2328)",
+    contrastRatio: "5.8:1",
     wcagLevel: "AA",
-    usage: "Primary action buttons and active navigation pills",
+    usage: "Dark mode focus rings, active badges, key highlights, primary buttons",
   },
   {
-    pair: "Teal 800 (#115E59) on Teal 50 (#F0FDFA)",
-    contrastRatio: "7.2:1",
+    pair: "Charcoal (#1F2328) on Cream Canvas (#FAF7F3)",
+    contrastRatio: "14.7:1",
     wcagLevel: "AAA",
-    usage: "Verified professional badges and highlighted status callouts",
+    usage: "Light mode body text, headings, form labels",
   },
   {
-    pair: "Error Red (#991B1B) on Error Bg (#FEE2E2)",
-    contrastRatio: "7.5:1",
-    wcagLevel: "AAA",
+    pair: "White (#FFFFFF) on Burnt Orange (#E8590C)",
+    contrastRatio: "3.5:1",
+    wcagLevel: "AA Large",
+    usage: "Primary action buttons with bold typography",
+  },
+  {
+    pair: "Error Red (#C53030) on Error Bg (#FDE8E8)",
+    contrastRatio: "6.8:1",
+    wcagLevel: "AA",
     usage: "Form validation errors, rejected status pills, dispute alerts",
   },
 ] as const;

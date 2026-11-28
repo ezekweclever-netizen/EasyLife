@@ -122,7 +122,7 @@ export function DocumentUploadCard({
   };
 
   return (
-    <div id="documents" className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-6">
+    <div id="documents" className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
           <h3 className="text-base font-bold text-slate-900 dark:text-white">
@@ -132,7 +132,7 @@ export function DocumentUploadCard({
             Upload your required identity documents and trade credentials based on the services you offer.
           </p>
         </div>
-        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] border border-teal-200 dark:border-teal-800 self-start">
+        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-[#E8590C] border border-teal-200 dark:border-teal-800 self-start">
           Admin Approval Guarded
         </span>
       </div>
@@ -173,7 +173,7 @@ export function DocumentUploadCard({
               return (
                 <div
                   key={item.key}
-                  className="p-3 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs"
+                  className="p-3 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs"
                 >
                   <div>
                     <span className="font-bold text-slate-900 dark:text-white block">{item.label}</span>
@@ -209,7 +209,7 @@ export function DocumentUploadCard({
             <select
               value={documentType}
               onChange={(e) => setDocumentType(e.target.value as DocumentType)}
-              className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white font-medium"
+              className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white font-medium"
             >
               {Object.entries(docTypeLabels).map(([val, label]) => (
                 <option key={val} value={val}>
@@ -248,7 +248,7 @@ export function DocumentUploadCard({
               const f = e.target.files?.[0] ?? null;
               setSelectedFile(f);
             }}
-            className="w-full text-xs text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal-50 dark:bg-teal-950/60 file:text-[#0D9488] hover:file:bg-teal-100"
+            className="w-full text-xs text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-teal-50 dark:bg-teal-950/60 file:text-[#E8590C] hover:file:bg-teal-100"
           />
         </div>
 
@@ -269,7 +269,7 @@ export function DocumentUploadCard({
           <button
             type="submit"
             disabled={isPending}
-            className="px-5 py-2.5 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50 transition shadow-xs ml-auto"
+            className="px-5 py-2.5 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50 transition shadow-xs ml-auto"
           >
             {isPending ? "Submitting for Vetting..." : "Upload & Submit Document"}
           </button>
@@ -283,13 +283,13 @@ export function DocumentUploadCard({
         </h4>
 
         {existingDocuments.length === 0 ? (
-          <div className="text-center py-6 px-4 rounded-xl border border-dashed border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]">
+          <div className="text-center py-6 px-4 rounded-xl border border-dashed border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]">
             <p className="text-xs text-slate-500 dark:text-slate-400">
               No verification documents submitted yet. Upload your National ID (NIN) to begin the verification process.
             </p>
           </div>
         ) : (
-          <div className="divide-y divide-slate-100 border border-slate-200 dark:border-[#163654] rounded-xl overflow-hidden">
+          <div className="divide-y divide-slate-100 border border-slate-200 dark:border-[#2E343B] rounded-xl overflow-hidden">
             {existingDocuments.map((doc) => {
               const isVerifiedDoc =
                 doc.verification_status === "approved" || doc.verification_status === "verified";
@@ -315,7 +315,7 @@ export function DocumentUploadCard({
               return (
                 <div
                   key={doc.id}
-                  className="p-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+                  className="p-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
                 >
                   <div>
                     <span className="text-xs font-bold text-slate-900 dark:text-white block">

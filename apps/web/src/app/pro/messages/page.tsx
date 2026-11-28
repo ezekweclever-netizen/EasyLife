@@ -83,7 +83,7 @@ export default async function ProMessagesPage({ searchParams }: ProMessagesPageP
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
           Communications Desk
         </span>
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">

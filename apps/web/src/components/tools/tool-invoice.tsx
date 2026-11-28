@@ -70,7 +70,7 @@ export function ToolInvoice() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Commercial Invoicing
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -81,11 +81,11 @@ export function ToolInvoice() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         {/* Company & Client Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
-            <span className="text-xs font-bold text-[#0D9488] uppercase tracking-wider block">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+            <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider block">
               Billed From (Your Business)
             </span>
             <input
@@ -93,14 +93,14 @@ export function ToolInvoice() {
               value={bizName}
               onChange={(e) => setBizName(e.target.value)}
               placeholder="Business Name"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-bold"
             />
             <input
               type="text"
               value={bizAddress}
               onChange={(e) => setBizAddress(e.target.value)}
               placeholder="Business Address"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
             />
             <div className="grid grid-cols-2 gap-2">
               <input
@@ -108,19 +108,19 @@ export function ToolInvoice() {
                 value={bizPhone}
                 onChange={(e) => setBizPhone(e.target.value)}
                 placeholder="Phone Number"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
               />
               <input
                 type="text"
                 value={bizCac}
                 onChange={(e) => setBizCac(e.target.value)}
                 placeholder="CAC RC / BN Number"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
               />
             </div>
           </div>
 
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2">
             <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
               Billed To (Client / Customer)
             </span>
@@ -129,34 +129,34 @@ export function ToolInvoice() {
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               placeholder="Client / Company Name"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-bold"
             />
             <input
               type="text"
               value={clientAddress}
               onChange={(e) => setClientAddress(e.target.value)}
               placeholder="Delivery / Project Address"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
             />
             <input
               type="text"
               value={clientPhone}
               onChange={(e) => setClientPhone(e.target.value)}
               placeholder="Client Phone Number"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs"
             />
           </div>
         </div>
 
         {/* Invoice Metadata */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
           <div>
             <label className="block font-bold mb-1">Invoice Number</label>
             <input
               type="text"
               value={invNum}
               onChange={(e) => setInvNum(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
           </div>
           <div>
@@ -165,7 +165,7 @@ export function ToolInvoice() {
               type="date"
               value={invDate}
               onChange={(e) => setInvDate(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
           </div>
           <div>
@@ -174,7 +174,7 @@ export function ToolInvoice() {
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
           </div>
         </div>
@@ -188,7 +188,7 @@ export function ToolInvoice() {
             <button
               type="button"
               onClick={addItem}
-              className="px-3 py-1 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0B7A6F] transition cursor-pointer"
+              className="px-3 py-1 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#0B7A6F] transition cursor-pointer"
             >
               + Add Line Item
             </button>
@@ -198,14 +198,14 @@ export function ToolInvoice() {
             {items.map((it) => (
               <div
                 key={it.id}
-                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 text-xs"
+                className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 p-3 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 text-xs"
               >
                 <input
                   type="text"
                   value={it.desc}
                   onChange={(e) => updateItem(it.id, "desc", e.target.value)}
                   placeholder="Item description"
-                  className="flex-1 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                  className="flex-1 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
                 />
                 <div className="flex items-center gap-2">
                   <input
@@ -213,14 +213,14 @@ export function ToolInvoice() {
                     value={it.qty}
                     onChange={(e) => updateItem(it.id, "qty", parseFloat(e.target.value) || 0)}
                     placeholder="Qty"
-                    className="w-16 px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-center"
+                    className="w-16 px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-center"
                   />
                   <input
                     type="number"
                     value={it.rate}
                     onChange={(e) => updateItem(it.id, "rate", parseFloat(e.target.value) || 0)}
                     placeholder="Rate (₦)"
-                    className="w-28 px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-right font-mono"
+                    className="w-28 px-2 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-right font-mono"
                   />
                   <span className="w-28 text-right font-bold text-slate-900 dark:text-white font-mono">
                     ₦{((it.qty || 0) * (it.rate || 0)).toLocaleString()}
@@ -242,7 +242,7 @@ export function ToolInvoice() {
         {/* Financial Calculation Box */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
           {/* Bank Settlement Account */}
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
             <span className="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block">
               Direct Bank Settlement Details
             </span>
@@ -251,7 +251,7 @@ export function ToolInvoice() {
               value={bankName}
               onChange={(e) => setBankName(e.target.value)}
               placeholder="Bank Name (e.g. Zenith Bank)"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
             <div className="grid grid-cols-2 gap-2">
               <input
@@ -259,20 +259,20 @@ export function ToolInvoice() {
                 value={acctNum}
                 onChange={(e) => setAcctNum(e.target.value)}
                 placeholder="NUBAN Account Number"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
               <input
                 type="text"
                 value={acctName}
                 onChange={(e) => setAcctName(e.target.value)}
                 placeholder="Account Name"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
           </div>
 
           {/* Totals Summary */}
-          <div className="p-4 bg-teal-50/70 dark:bg-[#0D223A] rounded-xl border border-teal-200/90 dark:border-slate-700 space-y-2 text-xs">
+          <div className="p-4 bg-[#FCEBDD]/70 dark:bg-[#1F2328] rounded-xl border border-[#E8590C]/30/90 dark:border-slate-700 space-y-2 text-xs">
             <div className="flex justify-between text-slate-600 dark:text-slate-400">
               <span>Subtotal:</span>
               <span className="font-mono font-bold">₦{subtotal.toLocaleString()}</span>
@@ -290,9 +290,9 @@ export function ToolInvoice() {
               <span className="font-mono">{applyVat ? `₦${Math.round(vatAmount).toLocaleString()}` : "₦0"}</span>
             </div>
 
-            <div className="border-t border-teal-200 dark:border-slate-700 pt-2 flex justify-between items-center text-sm">
+            <div className="border-t border-[#E8590C]/30 dark:border-slate-700 pt-2 flex justify-between items-center text-sm">
               <span className="font-black text-slate-900 dark:text-white uppercase">Total Due:</span>
-              <span className="text-xl font-black text-[#0D9488] dark:text-[#5CD3D5] font-mono">
+              <span className="text-xl font-black text-[#E8590C] dark:text-[#F06A1F] font-mono">
                 ₦{Math.round(grandTotal).toLocaleString()}
               </span>
             </div>
@@ -304,7 +304,7 @@ export function ToolInvoice() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Formatted Commercial Invoice</span>
           </button>
@@ -405,7 +405,7 @@ export function ToolInvoice() {
               )}
               <div className="border-t-2 border-slate-900 pt-2 flex justify-between items-center gap-2 text-sm">
                 <span className="font-black text-slate-900 uppercase whitespace-nowrap">Total Due:</span>
-                <span className="font-black text-base text-[#0D9488] font-mono whitespace-nowrap">
+                <span className="font-black text-base text-[#E8590C] font-mono whitespace-nowrap">
                   ₦{Math.round(grandTotal).toLocaleString()}
                 </span>
               </div>

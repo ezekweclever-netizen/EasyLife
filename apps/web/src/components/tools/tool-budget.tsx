@@ -48,7 +48,7 @@ export function ToolBudget() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Personal &amp; SME Cashflow
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -59,10 +59,10 @@ export function ToolBudget() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         {/* Income Inputs */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
-          <span className="text-xs font-bold text-[#0D9488] uppercase tracking-wider block">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+          <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider block">
             1. Monthly Take-Home Cashflow (₦)
           </span>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -72,7 +72,7 @@ export function ToolBudget() {
                 type="number"
                 value={incomeSalary}
                 onChange={(e) => setIncomeSalary(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -81,7 +81,7 @@ export function ToolBudget() {
                 type="number"
                 value={incomeSide}
                 onChange={(e) => setIncomeSide(e.target.value)}
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
           </div>
@@ -90,10 +90,10 @@ export function ToolBudget() {
         {/* Expenses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Needs */}
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
               <span className="font-bold text-slate-900 dark:text-white uppercase">Essential Needs</span>
-              <span className="text-[11px] font-bold text-[#0D9488]">{needsPercent}%</span>
+              <span className="text-[11px] font-bold text-[#E8590C]">{needsPercent}%</span>
             </div>
             <div>
               <label className="text-[11px] text-slate-500">Rent / Housing (₦)</label>
@@ -101,7 +101,7 @@ export function ToolBudget() {
                 type="number"
                 value={housing}
                 onChange={(e) => setHousing(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -110,7 +110,7 @@ export function ToolBudget() {
                 type="number"
                 value={powerFuel}
                 onChange={(e) => setPowerFuel(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -119,7 +119,7 @@ export function ToolBudget() {
                 type="number"
                 value={food}
                 onChange={(e) => setFood(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -128,13 +128,13 @@ export function ToolBudget() {
                 type="number"
                 value={transport}
                 onChange={(e) => setTransport(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
           </div>
 
           {/* Wants */}
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
               <span className="font-bold text-slate-900 dark:text-white uppercase">Lifestyle / Wants</span>
               <span className="text-[11px] font-bold text-amber-600">{wantsPercent}%</span>
@@ -145,7 +145,7 @@ export function ToolBudget() {
                 type="number"
                 value={familySupport}
                 onChange={(e) => setFamilySupport(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -154,7 +154,7 @@ export function ToolBudget() {
                 type="number"
                 value={internetData}
                 onChange={(e) => setInternetData(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -163,13 +163,13 @@ export function ToolBudget() {
                 type="number"
                 value={entertainment}
                 onChange={(e) => setEntertainment(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
           </div>
 
           {/* Savings & Investments */}
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-700 pb-2">
               <span className="font-bold text-slate-900 dark:text-white uppercase">Savings &amp; Debt</span>
               <span className="text-[11px] font-bold text-emerald-600">{savingsPercent}%</span>
@@ -180,7 +180,7 @@ export function ToolBudget() {
                 type="number"
                 value={emergencySavings}
                 onChange={(e) => setEmergencySavings(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
             <div>
@@ -189,14 +189,14 @@ export function ToolBudget() {
                 type="number"
                 value={cooperativeAjo}
                 onChange={(e) => setCooperativeAjo(e.target.value)}
-                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-mono"
+                className="w-full px-2.5 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-mono"
               />
             </div>
           </div>
         </div>
 
         {/* 50/30/20 Benchmark Audit Summary Card */}
-        <div className="p-6 rounded-2xl bg-teal-50/70 dark:bg-[#0D223A] border border-teal-200/90 dark:border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div className="p-6 rounded-2xl bg-[#FCEBDD]/70 dark:bg-[#1F2328] border border-[#E8590C]/30/90 dark:border-slate-700 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
           <div>
             <span className="text-[10px] font-bold text-slate-500 uppercase">Total Income</span>
             <div className="text-base sm:text-xl font-black text-slate-900 dark:text-white font-mono mt-0.5">
@@ -231,7 +231,7 @@ export function ToolBudget() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Comprehensive Budget Statement</span>
           </button>
@@ -248,7 +248,7 @@ export function ToolBudget() {
       >
         <div className="space-y-6 text-slate-800">
           <div className="border-b border-slate-900 pb-4">
-            <span className="text-[10px] font-bold text-[#0D9488] uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
               Household &amp; SME Financial Statement
             </span>
             <h1 className="text-2xl font-black text-slate-900 mt-1">
@@ -262,7 +262,7 @@ export function ToolBudget() {
           <div className="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs text-center">
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Total Inflow</span>
-              <span className="font-bold text-[#0D9488] font-mono text-sm">₦{totalIncome.toLocaleString()}</span>
+              <span className="font-bold text-[#E8590C] font-mono text-sm">₦{totalIncome.toLocaleString()}</span>
             </div>
             <div>
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Total Outflow</span>
@@ -286,7 +286,7 @@ export function ToolBudget() {
               </thead>
               <tbody className="divide-y divide-slate-200 text-[11px]">
                 <tr>
-                  <td className="p-2 font-bold text-[#0D9488]">Essential Needs</td>
+                  <td className="p-2 font-bold text-[#E8590C]">Essential Needs</td>
                   <td className="p-2 text-slate-600">Rent, NEPA, Food, Fuel &amp; Transport</td>
                   <td className="p-2 text-right font-mono font-bold">₦{needsTotal.toLocaleString()}</td>
                   <td className="p-2 text-right font-mono">{needsPercent}% (Target: 50%)</td>

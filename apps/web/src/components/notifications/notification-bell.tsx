@@ -227,7 +227,7 @@ export function NotificationBell({
         aria-label="View notifications"
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className="relative p-1.5 sm:p-2 rounded-xl text-[#64748B] hover:text-[#0F172A] hover:bg-slate-100 dark:bg-slate-800 transition cursor-pointer"
+        className="relative p-1.5 sm:p-2 rounded-xl text-[#64748B] hover:text-[#1F2328] hover:bg-slate-100 dark:bg-slate-800 transition cursor-pointer"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path
@@ -250,14 +250,14 @@ export function NotificationBell({
         <div
           role="region"
           aria-label="Notifications panel"
-          className="fixed sm:absolute left-3 right-3 sm:left-auto sm:right-0 top-[74px] sm:top-auto sm:mt-2 sm:w-96 bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] shadow-xl z-50 overflow-hidden"
+          className="fixed sm:absolute left-3 right-3 sm:left-auto sm:right-0 top-[74px] sm:top-auto sm:mt-2 sm:w-96 bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] shadow-xl z-50 overflow-hidden"
         >
           {/* Header */}
-          <div className="p-3.5 border-b border-[#E2E8F0] flex items-center justify-between bg-[#F8FAFC]">
+          <div className="p-3.5 border-b border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-between bg-[#FAF7F3] dark:bg-[#15181C]">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-xs text-[#0F172A]">Notifications</span>
+              <span className="font-bold text-xs text-[#1F2328] dark:text-[#FAF7F3]">Notifications</span>
               {unreadCount > 0 && (
-                <span className="px-2 py-0.5 rounded-full bg-teal-100 text-[#0F766E] font-extrabold text-[10px]">
+                <span className="px-2 py-0.5 rounded-full bg-[#FCEBDD] text-[#E8590C] font-extrabold text-[10px]">
                   {unreadCount} new
                 </span>
               )}
@@ -268,7 +268,7 @@ export function NotificationBell({
                 type="button"
                 onClick={() => void handleMarkAllRead()}
                 disabled={isSaving}
-                className="text-[11px] font-bold text-[#0F766E] hover:underline disabled:opacity-50 cursor-pointer"
+                className="text-[11px] font-bold text-[#E8590C] hover:underline disabled:opacity-50 cursor-pointer"
               >
                 Mark all as read
               </button>
@@ -276,16 +276,16 @@ export function NotificationBell({
           </div>
 
           {/* List */}
-          <div className="max-h-[360px] overflow-y-auto divide-y divide-[#F1F5F9]">
+          <div className="max-h-[360px] overflow-y-auto divide-y divide-[#E6E0D8]/50 dark:divide-[#2E343B]">
             {isLoadingList && notifications.length === 0 ? (
-              <div className="p-6 text-center text-xs text-[#64748B]">
+              <div className="p-6 text-center text-xs text-[#4A525C] dark:text-[#C3C8CF]">
                 Loading notifications...
               </div>
             ) : notifications.length === 0 ? (
               <div className="p-8 text-center space-y-1">
                 <span className="text-2xl">🔔</span>
-                <p className="text-xs font-bold text-[#0F172A]">No notifications</p>
-                <p className="text-[11px] text-[#64748B]">
+                <p className="text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3]">No notifications</p>
+                <p className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF]">
                   Updates about quotes, messages, and appointments will appear here.
                 </p>
               </div>
@@ -300,7 +300,7 @@ export function NotificationBell({
                     type="button"
                     onClick={() => handleMarkAsRead(n)}
                     className={`w-full text-left p-3.5 cursor-pointer transition-colors space-y-1.5 block ${
-                      !n.is_read ? "bg-teal-50 dark:bg-teal-950/60/40 hover:bg-teal-50 dark:bg-teal-950/60/70" : "hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                      !n.is_read ? "bg-[#FCEBDD]/40 hover:bg-[#FCEBDD]/70 dark:bg-[#E8590C]/10 dark:hover:bg-[#E8590C]/20" : "hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                     }`}
                   >
                     <div className="flex items-start gap-2.5">
@@ -311,17 +311,17 @@ export function NotificationBell({
                         <div className="flex items-center justify-between gap-1">
                           <p
                             className={`text-xs truncate ${
-                              !n.is_read ? "font-bold text-[#0F172A]" : "font-medium text-[#475569]"
+                              !n.is_read ? "font-bold text-[#1F2328] dark:text-[#FAF7F3]" : "font-medium text-[#4A525C] dark:text-[#C3C8CF]"
                             }`}
                           >
                             {n.title}
                           </p>
-                          <span className="text-[10px] text-[#94A3B8] shrink-0 font-medium">
+                          <span className="text-[10px] text-[#4A525C] dark:text-[#C3C8CF] shrink-0 font-medium">
                             {formatRelativeTime(n.created_at)}
                           </span>
                         </div>
 
-                        <p className="text-[11px] text-[#64748B] line-clamp-2 leading-relaxed">
+                        <p className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF] line-clamp-2 leading-relaxed">
                           {n.body}
                         </p>
 
@@ -332,8 +332,8 @@ export function NotificationBell({
                               key={ch}
                               className={`px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
                                 isRejected && ch === "email"
-                                  ? "bg-red-100 text-red-700 dark:text-red-400"
-                                  : "bg-[#F1F5F9] text-[#64748B]"
+                                  ? "bg-[#FDE8E8] text-[#C53030]"
+                                  : "bg-[#FAF7F3] dark:bg-[#1F2328] text-[#4A525C] dark:text-[#C3C8CF]"
                               }`}
                             >
                               {ch === "in_app" ? "In-App" : ch.toUpperCase()}
@@ -342,7 +342,7 @@ export function NotificationBell({
                           ))}
 
                           {!n.is_read && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#0F766E] ml-auto" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#E8590C] ml-auto" />
                           )}
                         </div>
                       </div>
@@ -354,11 +354,11 @@ export function NotificationBell({
           </div>
 
           {/* Footer */}
-          <div className="p-2.5 border-t border-[#E2E8F0] bg-[#F8FAFC] text-center">
+          <div className="p-2.5 border-t border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#15181C] text-center">
             <Link
               href="/notifications"
               onClick={() => setIsOpen(false)}
-              className="text-xs font-bold text-[#0F766E] hover:underline"
+              className="text-xs font-bold text-[#E8590C] hover:underline"
             >
               View All Notifications →
             </Link>

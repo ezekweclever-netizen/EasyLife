@@ -23,10 +23,10 @@ export default async function AdminDirectoriesPage() {
   const facilities: HealthcareFacilityRow[] = facilitiesRes.ok && Array.isArray(facilitiesRes.data) ? facilitiesRes.data : [];
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#071526] py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#1F2328] py-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Navigation Breadcrumb & Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#163654]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-[#2E343B]">
           <div>
             <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-1">
               <Link href="/admin/categories" className="hover:text-slate-800 dark:text-slate-100">
@@ -46,13 +46,13 @@ export default async function AdminDirectoriesPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/admin/categories"
-              className="px-4 py-2 rounded-lg bg-white dark:bg-[#0D223A] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+              className="px-4 py-2 rounded-lg bg-white dark:bg-[#1F2328] border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
             >
               Categories Manager
             </Link>
             <Link
               href="/dashboard"
-              className="px-4 py-2 rounded-lg bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition"
+              className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition"
             >
               Back to Dashboard
             </Link>

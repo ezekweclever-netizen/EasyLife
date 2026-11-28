@@ -83,9 +83,9 @@ export function PostVacancyForm() {
   };
 
   return (
-    <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-6 sm:p-10 shadow-xl space-y-8 max-w-3xl mx-auto">
+    <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-10 shadow-xl space-y-8 max-w-3xl mx-auto">
       <div>
-        <span className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
           Employer Portal
         </span>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">
@@ -115,7 +115,7 @@ export function PostVacancyForm() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="e.g. Senior Solar Inverter & Battery Storage Technician"
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
           {fieldErrors.title && (
             <p className="text-xs text-red-600">{fieldErrors.title}</p>
@@ -132,7 +132,7 @@ export function PostVacancyForm() {
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
             placeholder="e.g. Apex Industrial Solutions Ltd / Prime Facility Works"
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
           <p className="text-[11px] text-slate-400">
             If you already manage a registered business on EasyLife, your verified business profile will be linked automatically.
@@ -148,7 +148,7 @@ export function PostVacancyForm() {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             >
               <option value="Electrical & Solar">Electrical &amp; Solar</option>
               <option value="AC & Refrigeration">AC &amp; Refrigeration</option>
@@ -167,7 +167,7 @@ export function PostVacancyForm() {
             <select
               value={employmentType}
               onChange={(e) => setEmploymentType(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             >
               <option value="full_time">Full Time</option>
               <option value="contract">Contract</option>
@@ -187,7 +187,7 @@ export function PostVacancyForm() {
             <select
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             >
               <option value="Port Harcourt">Port Harcourt (Rivers State)</option>
               <option value="Lagos">Lagos (Lagos State)</option>
@@ -202,7 +202,7 @@ export function PostVacancyForm() {
             <select
               value={workplaceType}
               onChange={(e) => setWorkplaceType(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             >
               <option value="on_site">On-Site / Field Work</option>
               <option value="hybrid">Hybrid</option>
@@ -221,7 +221,7 @@ export function PostVacancyForm() {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="e.g. Plot 14 Peter Odili Road, Trans-Amadi, Port Harcourt"
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
         </div>
 
@@ -236,7 +236,7 @@ export function PostVacancyForm() {
               value={minSalary}
               onChange={(e) => setMinSalary(e.target.value)}
               placeholder="e.g. 180,000"
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
             {fieldErrors.minSalaryNaira && (
               <p className="text-xs text-red-600">{fieldErrors.minSalaryNaira}</p>
@@ -252,7 +252,7 @@ export function PostVacancyForm() {
               value={maxSalary}
               onChange={(e) => setMaxSalary(e.target.value)}
               placeholder="e.g. 250,000"
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
           </div>
 
@@ -263,7 +263,7 @@ export function PostVacancyForm() {
             <select
               value={salaryPeriod}
               onChange={(e) => setSalaryPeriod(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             >
               <option value="month">Per Month</option>
               <option value="week">Per Week</option>
@@ -284,7 +284,7 @@ export function PostVacancyForm() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Detail the scope of work, types of equipment serviced, work environment, and team setup..."
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
           {fieldErrors.description && (
             <p className="text-xs text-red-600">{fieldErrors.description}</p>
@@ -302,7 +302,7 @@ export function PostVacancyForm() {
             value={requirements}
             onChange={(e) => setRequirements(e.target.value)}
             placeholder="e.g. 3+ years inverter wiring, valid trade test, valid driver's license..."
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+            className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           />
           {fieldErrors.requirements && (
             <p className="text-xs text-red-600">{fieldErrors.requirements}</p>
@@ -320,7 +320,7 @@ export function PostVacancyForm() {
               value={benefits}
               onChange={(e) => setBenefits(e.target.value)}
               placeholder="e.g. Health HMO, Tool set provided, Transport stipend"
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
           </div>
 
@@ -333,7 +333,7 @@ export function PostVacancyForm() {
               min="1"
               value={positionsAvailable}
               onChange={(e) => setPositionsAvailable(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full px-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
           </div>
         </div>
@@ -349,7 +349,7 @@ export function PostVacancyForm() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-8 py-3 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-all shadow-md flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+            className="px-8 py-3 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-all shadow-md flex items-center gap-2 disabled:opacity-50 cursor-pointer"
           >
             {isSubmitting ? (
               <>

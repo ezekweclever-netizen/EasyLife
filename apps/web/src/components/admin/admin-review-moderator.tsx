@@ -88,26 +88,26 @@ export function AdminReviewModerator({ initialReviews }: AdminReviewModeratorPro
     <div className="space-y-6">
       {/* Metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Reviews</span>
           <div className="text-2xl font-black text-slate-900 dark:text-white">{reviews.length}</div>
           <span className="text-[11px] text-slate-400">All submitted feedback</span>
         </div>
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Published</span>
           <div className="text-2xl font-black text-emerald-600">
             {reviews.filter((r) => r.is_published).length}
           </div>
           <span className="text-[11px] text-slate-400">Live on specialist profiles</span>
         </div>
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Flagged</span>
           <div className="text-2xl font-black text-amber-600">
             {reviews.filter((r) => r.is_flagged || r.moderation_status === "flagged").length}
           </div>
           <span className="text-[11px] text-slate-400">Under content inspection</span>
         </div>
-        <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-1">
+        <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-1">
           <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Rejected</span>
           <div className="text-2xl font-black text-red-600">
             {reviews.filter((r) => r.moderation_status === "rejected").length}
@@ -129,7 +129,7 @@ export function AdminReviewModerator({ initialReviews }: AdminReviewModeratorPro
       )}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white dark:bg-[#0D223A] p-4 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white dark:bg-[#1F2328] p-4 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-1 overflow-x-auto w-full sm:w-auto">
           {[
             { key: "all", label: "All Reviews" },
@@ -143,7 +143,7 @@ export function AdminReviewModerator({ initialReviews }: AdminReviewModeratorPro
               onClick={() => setFilter(tab.key)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition ${
                 filter === tab.key
-                  ? "bg-[#0F172A] text-white shadow-xs"
+                  ? "bg-[#1F2328] text-white shadow-xs"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
               }`}
             >
@@ -158,7 +158,7 @@ export function AdminReviewModerator({ initialReviews }: AdminReviewModeratorPro
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search comment, pro, or booking..."
-            className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+            className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
           />
         </div>
       </div>
@@ -166,12 +166,12 @@ export function AdminReviewModerator({ initialReviews }: AdminReviewModeratorPro
       {/* Reviews List */}
       <div className="space-y-4">
         {filteredReviews.length === 0 ? (
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] p-12 text-center text-slate-400 text-xs">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B] p-12 text-center text-slate-400 text-xs">
             No reviews match your filter criteria.
           </div>
         ) : (
           filteredReviews.map((r) => (
-            <div key={r.id} className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs space-y-4">
+            <div key={r.id} className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B] p-6 shadow-xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b pb-3">
                 <div className="flex items-center gap-3">
                   <span className="text-amber-400 text-base">
@@ -209,7 +209,7 @@ export function AdminReviewModerator({ initialReviews }: AdminReviewModeratorPro
                   "{r.comment}"
                 </p>
                 {r.original_comment && r.original_comment !== r.comment && (
-                  <div className="p-3 bg-slate-50 dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-[#163654] text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-1">
+                  <div className="p-3 bg-slate-50 dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-1">
                     <span className="font-bold block text-slate-700 dark:text-slate-200">Original Submission:</span>
                     "{r.original_comment}"
                   </div>

@@ -13,7 +13,7 @@ export const EASYLIFE_BRAND = {
     symbol: "₦",
     locale: "en-NG",
   },
-  palette: "Option C — Harbor Teal & Coral",
+  palette: "EasyLife Centralized Palette (Charcoal, Burnt Orange, Cream)",
   pilotCities: [
     {
       id: "port-harcourt",
@@ -37,33 +37,56 @@ export const EASYLIFE_BRAND = {
 } as const;
 
 export const EASYLIFE_THEME_COLORS = {
-  primary: "#154752",
-  secondary: "#24989A",
-  accent: "#EE9277",
-  background: "#F3F8F8",
+  // Official Centralized Palette Foundation
+  charcoal: "#1F2328",
+  steelGrey: "#4A525C",
+  burntOrange: "#E8590C",
+  orangeHover: "#C84A06",
+  peach: "#FCEBDD",
+  cream: "#FAF7F3",
+  white: "#FFFFFF",
+  borders: "#E6E0D8",
+  darkSurfaceText: "#FAF7F3",
+  secondaryDarkText: "#C3C8CF",
+
+  // Semantic
+  semantic: {
+    success: "#2E7D4F",
+    warning: "#B7791F",
+    error: "#C53030",
+    information: "#4A525C",
+  },
+
+  // Functional Role Mappings
+  primary: "#E8590C",
+  primaryHover: "#C84A06",
+  secondary: "#4A525C",
+  accent: "#E8590C",
+  accentSoft: "#FCEBDD",
+  background: "#FAF7F3",
   surface: "#FFFFFF",
-  text: "#1F2F34",
-  muted: "#68797C",
-  border: "#DAE7E7",
+  text: "#1F2328",
+  muted: "#4A525C",
+  border: "#E6E0D8",
 
   // Legacy mappings for backwards-compatibility
   navy: {
-    950: "#0D282E",
-    900: "#154752",
-    800: "#1A5663",
-    700: "#206776",
+    950: "#14171A",
+    900: "#1F2328",
+    800: "#262B32",
+    700: "#353B44",
   },
   teal: {
-    700: "#1D7E80",
-    600: "#24989A",
-    500: "#2DC0C2",
-    50: "#EEF9F9",
+    700: "#C84A06",
+    600: "#E8590C",
+    500: "#E8590C",
+    50: "#FAF7F3",
   },
   surfaceTokens: {
     white: "#FFFFFF",
-    lightGrey: "#F3F8F8",
-    mutedGrey: "#E7F0F0",
-    borderGrey: "#DAE7E7",
+    lightGrey: "#FAF7F3",
+    mutedGrey: "#F2EDE6",
+    borderGrey: "#E6E0D8",
   },
 } as const;
 

@@ -18,7 +18,7 @@ export default async function AdminRiskFlagsPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-[#2E343B]">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-rose-600 flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse" />

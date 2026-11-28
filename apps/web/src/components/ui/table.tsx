@@ -36,11 +36,11 @@ export function DataTable<T>({
   }
 
   return (
-    <div className="w-full overflow-x-auto rounded-2xl border border-[#DAE7E7] bg-white dark:bg-[#0D223A] shadow-xs">
+    <div className="w-full overflow-x-auto rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] shadow-xs">
       <table className="w-full border-collapse text-left text-sm">
         {caption && <caption className="sr-only">{caption}</caption>}
         <thead>
-          <tr className="bg-[#F3F8F8] border-b border-[#DAE7E7]">
+          <tr className="bg-[#FAF7F3] dark:bg-[#1F2328] border-b border-[#E6E0D8] dark:border-[#2E343B]">
             {columns.map((col) => {
               const alignClass =
                 col.align === "right"
@@ -52,7 +52,7 @@ export function DataTable<T>({
                 <th
                   key={col.key}
                   scope="col"
-                  className={`px-4 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#68797C] ${alignClass}`}
+                  className={`px-4 py-3.5 text-xs font-semibold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF] ${alignClass}`}
                 >
                   {col.header}
                 </th>
@@ -60,11 +60,11 @@ export function DataTable<T>({
             })}
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#DAE7E7]">
+        <tbody className="divide-y divide-[#E6E0D8] dark:divide-[#2E343B]">
           {rows.map((row) => (
             <tr
               key={getRowKey(row)}
-              className="hover:bg-[#F3F8F8] transition-colors"
+              className="hover:bg-[#FAF7F3] dark:hover:bg-[#15181C] transition-colors"
             >
               {columns.map((col) => {
                 const alignClass =
@@ -76,7 +76,7 @@ export function DataTable<T>({
                 return (
                   <td
                     key={col.key}
-                    className={`px-4 py-3.5 text-[#1F2F34] align-middle ${alignClass}`}
+                    className={`px-4 py-3.5 text-[#1F2328] dark:text-[#FAF7F3] align-middle ${alignClass}`}
                   >
                     {col.render(row)}
                   </td>

@@ -126,18 +126,18 @@ export function DisputeModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
-      <div className="bg-white dark:bg-[#0E2238] rounded-3xl max-w-lg w-full p-4 sm:p-6 md:p-8 space-y-5 shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto overscroll-contain">
+    <div className="fixed inset-0 z-50 bg-[#15181C]/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-lg w-full p-4 sm:p-6 md:p-8 space-y-5 shadow-2xl border border-[#E6E0D8] dark:border-[#2E343B] max-h-[90vh] overflow-y-auto overscroll-contain">
         <div className="flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse" />
-              <h3 className="text-xl font-black text-slate-900 dark:text-white">
+              <h3 className="text-xl font-black text-[#1F2328] dark:text-[#FAF7F3]">
                 File Service Dispute
               </h3>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-              Booking #{referenceCode} with <span className="font-semibold text-slate-700 dark:text-slate-200">{proName}</span>
+            <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1">
+              Booking #{referenceCode} with <span className="font-semibold text-[#1F2328] dark:text-[#FAF7F3]">{proName}</span>
             </p>
           </div>
           <button
@@ -178,7 +178,7 @@ export function DisputeModal({
                   className={`flex items-start gap-3 p-3 rounded-xl border text-xs cursor-pointer transition ${
                     category === cat.value
                       ? "border-red-500 bg-red-50 dark:bg-red-950/60/50 text-slate-900 dark:text-white"
-                      : "border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-slate-600 dark:text-slate-300"
+                      : "border-slate-200 dark:border-[#2E343B] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] text-slate-600 dark:text-slate-300"
                   }`}
                 >
                   <input
@@ -210,7 +210,7 @@ export function DisputeModal({
               required
               value={disputedAmount}
               onChange={(e) => setDisputedAmount(parseFloat(e.target.value) || 0)}
-              className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] font-mono font-bold"
+              className="w-full p-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] font-mono font-bold focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <span className="text-[10px] text-slate-400 mt-0.5 block">
               Default is agreed escrow total (₦{agreedAmountNaira.toLocaleString("en-NG")}).
@@ -219,7 +219,7 @@ export function DisputeModal({
 
           {/* Description */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider mb-1">
               Describe the Issue in Detail *
             </label>
             <textarea
@@ -228,7 +228,7 @@ export function DisputeModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Provide chronological facts: dates, actions promised vs executed, defects observed, unapproved charges demanded..."
-              className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+              className="w-full p-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] focus:outline-none focus:ring-2 focus:ring-red-500"
             />
             <div className="flex justify-between items-center text-[10px] text-slate-400 mt-1">
               <span>Minimum 10 characters</span>
@@ -238,7 +238,7 @@ export function DisputeModal({
 
           {/* Evidence Uploads */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] uppercase tracking-wider mb-1">
               Supporting Evidence (Photographs / Documents / Receipts)
             </label>
             <div className="space-y-2">
@@ -248,7 +248,7 @@ export function DisputeModal({
                   accept=".pdf,.jpg,.jpeg,.png,.webp"
                   onChange={handleEvidenceFileUpload}
                   disabled={isUploadingEvidence}
-                  className="flex-1 p-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs bg-white dark:bg-[#0D223A] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-900 file:text-white"
+                  className="flex-1 p-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs bg-white dark:bg-[#1F2328] file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#1F2328] file:text-white"
                 />
               </div>
               <input
@@ -256,7 +256,7 @@ export function DisputeModal({
                 value={evidenceInput}
                 onChange={(e) => setEvidenceInput(e.target.value)}
                 placeholder="Or paste existing evidence URL / storage path (optional)"
-                className="w-full p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs"
+                className="w-full p-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3]"
               />
               <div className="flex gap-2">
                 <input
@@ -280,7 +280,7 @@ export function DisputeModal({
             {evidenceList.length > 0 && (
               <div className="mt-3 space-y-1.5">
                 {evidenceList.map((ev, idx) => (
-                  <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 dark:bg-[#071526] p-2.5 rounded-xl border border-slate-200 dark:border-[#163654]">
+                  <div key={idx} className="flex items-center justify-between text-[11px] bg-slate-50 dark:bg-[#1F2328] p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B]">
                     <div className="truncate mr-2">
                       <span className="font-bold text-slate-800 dark:text-slate-100 block truncate">{ev.file_name}</span>
                       {ev.description && <span className="text-slate-500 dark:text-slate-400 block truncate">{ev.description}</span>}

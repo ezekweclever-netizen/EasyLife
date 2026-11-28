@@ -100,11 +100,11 @@ export function ThemeToggle({
         aria-label={`Theme: ${activeLabel}. Click to change theme.`}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold shadow-xs transition-colors cursor-pointer backdrop-blur-xs"
+        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white/90 dark:bg-[#1F2328]/90 hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] text-xs font-semibold shadow-xs transition-colors cursor-pointer backdrop-blur-xs"
       >
         {/* Active Icon */}
         {!mounted || theme === "system" ? (
-          <svg className="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-4 h-4 text-[#E8590C] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
         ) : theme === "dark" ? (
@@ -119,7 +119,7 @@ export function ThemeToggle({
 
         {!compact && <span className="hidden sm:inline">{activeLabel}</span>}
 
-        <svg className={`w-3 h-3 text-slate-400 transition-transform ${isOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className={`w-3 h-3 text-[#4A525C] dark:text-[#C3C8CF] transition-transform ${isOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
@@ -128,9 +128,9 @@ export function ThemeToggle({
         <div
           role="menu"
           aria-orientation="vertical"
-          className="absolute right-0 mt-2 w-44 rounded-2xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-1.5 shadow-xl z-50 animate-in fade-in zoom-in-95 duration-100"
+          className="absolute right-0 mt-2 w-44 rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] p-1.5 shadow-xl z-50 animate-in fade-in zoom-in-95 duration-100"
         >
-          <div className="px-2.5 py-1 text-[11px] font-bold text-slate-400 dark:text-slate-400 uppercase tracking-wider">
+          <div className="px-2.5 py-1 text-[11px] font-bold text-[#4A525C] dark:text-[#C3C8CF] uppercase tracking-wider">
             Appearance
           </div>
 
@@ -140,8 +140,8 @@ export function ThemeToggle({
             onClick={() => applyTheme("light")}
             className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${
               theme === "light"
-                ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
-                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-bold"
+                : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
             }`}
           >
             <span className="flex items-center gap-2">
@@ -150,7 +150,7 @@ export function ThemeToggle({
               </svg>
               Light Mode
             </span>
-            {theme === "light" && <span className="text-teal-600 dark:text-teal-400">✓</span>}
+            {theme === "light" && <span className="text-[#E8590C]">✓</span>}
           </button>
 
           <button
@@ -159,8 +159,8 @@ export function ThemeToggle({
             onClick={() => applyTheme("dark")}
             className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${
               theme === "dark"
-                ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
-                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-bold"
+                : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
             }`}
           >
             <span className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export function ThemeToggle({
               </svg>
               Dark Mode
             </span>
-            {theme === "dark" && <span className="text-teal-600 dark:text-teal-400">✓</span>}
+            {theme === "dark" && <span className="text-[#E8590C]">✓</span>}
           </button>
 
           <button
@@ -178,17 +178,17 @@ export function ThemeToggle({
             onClick={() => applyTheme("system")}
             className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${
               theme === "system"
-                ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
-                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800"
+                ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-bold"
+                : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
             }`}
           >
             <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 text-[#E8590C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               System Default
             </span>
-            {theme === "system" && <span className="text-teal-600 dark:text-teal-400">✓</span>}
+            {theme === "system" && <span className="text-[#E8590C]">✓</span>}
           </button>
         </div>
       )}

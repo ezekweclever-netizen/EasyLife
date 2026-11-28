@@ -384,7 +384,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
 
   const content = (
     <>
-      <section className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[560px] flex items-center justify-center bg-[#071E28] text-white border-b border-[#24989A]/20">
+      <section className="relative w-full overflow-hidden min-h-[520px] sm:min-h-[560px] flex items-center justify-center bg-[#1F2328] text-white border-b border-[#2E343B]">
         {/* Full-bleed Hero Background Image */}
         <div className="absolute inset-0 z-0 select-none">
           <Image
@@ -403,13 +403,13 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
         {/* Content container: Fully Centered Horizontally and Vertically */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center text-center">
           <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#E8590C] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Accredited Trades &amp; Professional Marketplace
             </p>
             <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
               Find &amp; Book Verified Service Professionals
             </h1>
-            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#FAF7F3] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Connect with accredited artisans, technicians, and trade specialists across Port Harcourt, Lagos, and Abuja. Browse by trade, filter by neighbourhood, or explore standardised service scopes.
             </p>
 
@@ -442,7 +442,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                     }`}
                     className={`px-3 py-1 rounded-full font-semibold transition ${
                       normalizedCat === catItem.slug
-                        ? "bg-[#F87116] text-white shadow-xs"
+                        ? "bg-[#E8590C] text-white shadow-xs"
                         : "bg-black/40 hover:bg-black/60 text-white border border-white/20"
                     }`}
                   >
@@ -457,16 +457,16 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         {/* Marketplace Mode Switcher */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#DAE7E7] dark:border-[#163654]">
-          <div className="bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl inline-flex items-center gap-1 text-xs font-bold">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-[#E6E0D8] dark:border-[#2E343B]">
+          <div className="bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-1 rounded-2xl inline-flex items-center gap-1 text-xs font-bold">
             <Link
               href={`/services${trimmedQuery ? `?q=${encodeURIComponent(trimmedQuery)}` : ""}${
                 normalizedCat ? `&cat=${encodeURIComponent(normalizedCat)}` : ""
               }`}
               className={`px-4 py-2.5 rounded-xl transition ${
                 !isCatalogueView
-                  ? "bg-white dark:bg-[#0D223A] text-[#154752] dark:text-white shadow-xs"
-                  : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                  ? "bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] shadow-xs"
+                  : "text-[#4A525C] dark:text-[#C3C8CF] hover:text-[#1F2328] dark:hover:text-[#FAF7F3]"
               }`}
             >
               🔧 Verified Professionals ({proMatchRes.totalCount})
@@ -477,8 +477,8 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
               }${normalizedCat ? `&cat=${encodeURIComponent(normalizedCat)}` : ""}`}
               className={`px-4 py-2.5 rounded-xl transition ${
                 isCatalogueView
-                  ? "bg-white dark:bg-[#0D223A] text-[#154752] dark:text-white shadow-xs"
-                  : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                  ? "bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] shadow-xs"
+                  : "text-[#4A525C] dark:text-[#C3C8CF] hover:text-[#1F2328] dark:hover:text-[#FAF7F3]"
               }`}
             >
               📚 Standard Service Catalogue
@@ -488,14 +488,14 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
           <div className="flex items-center gap-3">
             <Link
               href="/post-a-need"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#154752] dark:bg-teal-700 text-white hover:bg-[#0D282E] transition shadow-xs"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold bg-[#E8590C] hover:bg-[#C84A06] text-white transition shadow-xs"
             >
               <span>📝 Post a Need</span>
               <span className="text-[10px] opacity-80">(Get Quotes)</span>
             </Link>
             <Link
               href="/business-hub"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold border border-[#DAE7E7] dark:border-[#163654] text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold border border-[#E6E0D8] dark:border-[#2E343B] text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] transition"
             >
               <span>🏢 Business Hub</span>
             </Link>
@@ -539,17 +539,17 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
               method="get"
               role="search"
               aria-label="Filter EasyLife service catalogue"
-              className="rounded-2xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] p-5 shadow-xs space-y-4"
+              className="rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-xs space-y-4"
             >
               <input type="hidden" name="view" value="catalogue" />
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-sm sm:text-base font-bold text-[#154752] dark:text-slate-100">
+                <h2 className="text-sm sm:text-base font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                   Search &amp; Filter Standardised Services
                 </h2>
                 {(trimmedQuery || normalizedCat || certifiedOnly) && (
                   <Link
                     href="/services?view=catalogue"
-                    className="text-xs font-semibold text-[#24989A] hover:underline"
+                    className="text-xs font-semibold text-[#E8590C] hover:underline"
                   >
                     Reset Catalogue Filters
                   </Link>
@@ -560,7 +560,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                 <div>
                   <label
                     htmlFor="cat-q"
-                    className="block text-[11px] font-bold uppercase tracking-wider text-[#68797C] dark:text-slate-400 mb-1"
+                    className="block text-[11px] font-bold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF] mb-1"
                   >
                     Service Name or Keyword
                   </label>
@@ -570,14 +570,14 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                     type="search"
                     defaultValue={trimmedQuery}
                     placeholder="e.g. AC recharge, plumbing leak, generator rewinding"
-                    className="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-[#1F2F34] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#24989A]"
+                    className="w-full h-10 px-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] text-sm text-[#1F2328] dark:text-[#FAF7F3] focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="cat-filter"
-                    className="block text-[11px] font-bold uppercase tracking-wider text-[#68797C] dark:text-slate-400 mb-1"
+                    className="block text-[11px] font-bold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF] mb-1"
                   >
                     Major Category
                   </label>
@@ -585,7 +585,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                     id="cat-filter"
                     name="cat"
                     defaultValue={normalizedCat}
-                    className="w-full h-10 px-3 rounded-xl border border-[#CBD5E1] dark:border-slate-700 bg-white dark:bg-[#071526] text-sm text-[#1F2F34] dark:text-white"
+                    className="w-full h-10 px-3 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] text-sm text-[#1F2328] dark:text-[#FAF7F3]"
                   >
                     <option value="">All Categories ({tree.length})</option>
                     {tree.map((c) => (
@@ -597,19 +597,19 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                 </div>
 
                 <div className="flex items-end gap-3">
-                  <label className="inline-flex items-center gap-2 text-xs font-semibold text-[#154752] dark:text-slate-200 cursor-pointer pb-2.5">
+                  <label className="inline-flex items-center gap-2 text-xs font-semibold text-[#1F2328] dark:text-[#FAF7F3] cursor-pointer pb-2.5">
                     <input
                       type="checkbox"
                       name="certified"
                       value="true"
                       defaultChecked={certifiedOnly}
-                      className="rounded border-[#CBD5E1] text-[#24989A]"
+                      className="rounded border-[#E6E0D8] dark:border-[#2E343B] text-[#E8590C]"
                     />
                     <span>Trade Certification Required</span>
                   </label>
                   <button
                     type="submit"
-                    className="h-10 px-5 rounded-xl bg-[#24989A] hover:bg-[#1D7E80] text-white text-sm font-bold transition-colors cursor-pointer ml-auto"
+                    className="h-10 px-5 rounded-xl bg-[#E8590C] hover:bg-[#C84A06] text-white text-sm font-bold transition-colors cursor-pointer ml-auto"
                   >
                     Filter
                   </button>
@@ -621,12 +621,12 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
             {paginatedCatalogueSearch && paginatedCatalogueSearch.items.length > 0 ? (
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-base font-bold text-[#154752] dark:text-slate-100">
+                  <h3 className="text-base font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                     Standardised Services ({totalCatalogueMatches})
                   </h3>
                   <Link
                     href={`/services?${trimmedQuery ? `q=${encodeURIComponent(trimmedQuery)}` : ""}`}
-                    className="text-xs font-bold text-[#24989A] hover:underline"
+                    className="text-xs font-bold text-[#E8590C] hover:underline"
                   >
                     Switch to Verified Professionals View →
                   </Link>
@@ -638,56 +638,56 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                     return (
                       <article
                         key={srv.id}
-                        className="rounded-2xl border border-[#DAE7E7] dark:border-[#163654] bg-white dark:bg-[#0D223A] p-5 flex flex-col justify-between hover:border-[#24989A] transition-colors shadow-xs"
+                        className="rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] p-5 flex flex-col justify-between hover:border-[#E8590C] transition-colors shadow-xs"
                       >
                         <div>
                           <div className="flex items-center justify-between gap-2 text-[11px]">
-                            <span className="font-mono font-bold text-[#68797C] dark:text-slate-400">
+                            <span className="font-mono font-bold text-[#4A525C] dark:text-[#C3C8CF]">
                               {srv.service_code}
                             </span>
                             <div className="flex items-center gap-1">
                               {srv.requires_trade_certification && (
-                                <span className="rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 px-2 py-0.5 text-[10px] font-bold text-[#0F766E] dark:text-teal-300">
+                                <span className="rounded-full bg-[#FCEBDD] border border-[#E8590C]/30 px-2 py-0.5 text-[10px] font-bold text-[#E8590C]">
                                   Certified Trade
                                 </span>
                               )}
                               {srv.available_provider_count > 0 && (
-                                <span className="rounded-full bg-[#EEF6F7] dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold text-[#154752] dark:text-teal-200">
+                                <span className="rounded-full bg-[#FAF7F3] dark:bg-[#1F2328] px-2 py-0.5 text-[10px] font-bold text-[#4A525C] dark:text-[#C3C8CF]">
                                   {srv.available_provider_count} pros
                                 </span>
                               )}
                             </div>
                           </div>
 
-                          <p className="mt-2 text-[11px] font-semibold text-[#24989A] uppercase tracking-wider truncate">
+                          <p className="mt-2 text-[11px] font-semibold text-[#E8590C] uppercase tracking-wider truncate">
                             {srv.category_name}
                             {srv.subcategory_name ? ` • ${srv.subcategory_name}` : ""}
                           </p>
 
                           <Link
                             href={`/services/${srv.slug}`}
-                            className="mt-1 block text-base font-bold text-[#154752] dark:text-white hover:text-[#24989A] leading-snug"
+                            className="mt-1 block text-base font-bold text-[#1F2328] dark:text-[#FAF7F3] hover:text-[#E8590C] leading-snug"
                           >
                             {srv.name}
                           </Link>
 
                           {srv.short_description && (
-                            <p className="mt-1.5 text-xs text-[#4E6065] dark:text-slate-300 line-clamp-2 leading-relaxed">
+                            <p className="mt-1.5 text-xs text-[#4A525C] dark:text-[#C3C8CF] line-clamp-2 leading-relaxed">
                               {srv.short_description}
                             </p>
                           )}
                         </div>
 
-                        <div className="mt-4 pt-3 border-t border-[#EEF6F7] dark:border-slate-800 flex items-center justify-between gap-2 text-xs">
+                        <div className="mt-4 pt-3 border-t border-[#E6E0D8] dark:border-[#2E343B] flex items-center justify-between gap-2 text-xs">
                           <div>
-                            <span className="font-extrabold text-[#154752] dark:text-slate-100 block">
+                            <span className="font-extrabold text-[#1F2328] dark:text-[#FAF7F3] block">
                               {formatServicePriceRange(
                                 srv.base_price_min_kobo,
                                 srv.base_price_max_kobo
                               )}
                             </span>
                             {dur && (
-                              <span className="text-[11px] text-[#68797C] dark:text-slate-400">
+                              <span className="text-[11px] text-[#4A525C] dark:text-[#C3C8CF]">
                                 Est. {dur}
                               </span>
                             )}
@@ -696,13 +696,13 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                           <div className="flex items-center gap-2 shrink-0">
                             <Link
                               href={`/services/${srv.slug}`}
-                              className="rounded-lg border border-[#DAE7E7] dark:border-[#163654] bg-[#F8FBFB] dark:bg-slate-800 px-3 py-1.5 font-semibold text-[#154752] dark:text-slate-200 hover:bg-[#EEF6F7]"
+                              className="rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] px-3 py-1.5 font-semibold text-[#1F2328] dark:text-[#FAF7F3] hover:bg-white"
                             >
                               Details
                             </Link>
                             <Link
                               href={`/book?category=${encodeURIComponent(srv.category_id)}&service=${encodeURIComponent(srv.id)}&title=${encodeURIComponent(srv.name)}`}
-                              className="rounded-lg bg-[#24989A] px-3 py-1.5 font-bold text-white hover:bg-[#1D7E80]"
+                              className="rounded-lg bg-[#E8590C] px-3 py-1.5 font-bold text-white hover:bg-[#C84A06]"
                             >
                               Book
                             </Link>
@@ -717,21 +717,21 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                 {totalCataloguePages > 1 && (
                   <nav
                     aria-label="Catalogue pagination"
-                    className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#DAE7E7] dark:border-[#163654]"
+                    className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B]"
                   >
-                    <p className="text-xs font-medium text-[#4E6065] dark:text-slate-400">
+                    <p className="text-xs font-medium text-[#4A525C] dark:text-[#C3C8CF]">
                       Page {currentPage} of {totalCataloguePages}
                     </p>
                     <div className="flex items-center gap-1.5">
                       {currentPage > 1 ? (
                         <Link
                           href={buildCatalogueHref(currentPage - 1)}
-                          className="px-3.5 py-2 rounded-xl border border-[#DAE7E7] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] dark:text-slate-200 hover:bg-[#EEF6F7]"
+                          className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3]"
                         >
                           ← Previous
                         </Link>
                       ) : (
-                        <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
+                        <span className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] text-xs font-semibold text-slate-400">
                           ← Previous
                         </span>
                       )}
@@ -743,8 +743,8 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                           aria-current={p === currentPage ? "page" : undefined}
                           className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition-colors ${
                             p === currentPage
-                              ? "bg-[#154752] text-white border-[#154752]"
-                              : "bg-white dark:bg-[#0D223A] text-[#154752] dark:text-slate-200 border-[#DAE7E7] dark:border-[#163654] hover:bg-[#EEF6F7]"
+                              ? "bg-[#1F2328] text-white border-[#1F2328]"
+                              : "bg-white dark:bg-[#1F2328] text-[#1F2328] dark:text-[#FAF7F3] border-[#E6E0D8] dark:border-[#2E343B] hover:bg-[#FAF7F3] hover:text-[#E8590C]"
                           }`}
                         >
                           {p}
@@ -754,12 +754,12 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                       {currentPage < totalCataloguePages ? (
                         <Link
                           href={buildCatalogueHref(currentPage + 1)}
-                          className="px-3.5 py-2 rounded-xl border border-[#DAE7E7] dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#154752] dark:text-slate-200 hover:bg-[#EEF6F7]"
+                          className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3]"
                         >
                           Next →
                         </Link>
                       ) : (
-                        <span className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-semibold text-slate-400">
+                        <span className="px-3.5 py-2 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] bg-[#FAF7F3] dark:bg-[#1F2328] text-xs font-semibold text-slate-400">
                           Next →
                         </span>
                       )}
@@ -772,13 +772,13 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
               <div className="space-y-10">
                 <nav
                   aria-label="Catalogue category jump links"
-                  className="flex flex-wrap gap-2 pb-4 border-b border-[#DAE7E7] dark:border-[#163654]"
+                  className="flex flex-wrap gap-2 pb-4 border-b border-[#E6E0D8] dark:border-[#2E343B]"
                 >
                   {tree.map((catNode) => (
                     <a
                       key={catNode.id}
                       href={`#cat-${catNode.slug}`}
-                      className="inline-flex items-center gap-1.5 rounded-full bg-white dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] px-3.5 py-1.5 text-xs font-semibold text-[#154752] dark:text-slate-200 hover:border-[#24989A] hover:text-[#24989A] transition-colors shadow-xs"
+                      className="inline-flex items-center gap-1.5 rounded-full bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] px-3.5 py-1.5 text-xs font-semibold text-[#1F2328] dark:text-[#FAF7F3] hover:border-[#E8590C] hover:text-[#E8590C] transition-colors shadow-xs"
                     >
                       <Icon
                         name={resolveCatalogueIcon(catNode.icon_name, catNode.slug)}
@@ -803,11 +803,11 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                       <section
                         key={catItem.id}
                         id={`cat-${catItem.slug}`}
-                        className="scroll-mt-24 rounded-3xl bg-white dark:bg-[#0D223A] border border-[#DAE7E7] dark:border-[#163654] p-6 sm:p-8 shadow-xs space-y-6"
+                        className="scroll-mt-24 rounded-3xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-8 shadow-xs space-y-6"
                       >
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#EEF6F7] dark:border-slate-800">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-[#E6E0D8] dark:border-[#2E343B]">
                           <div className="flex items-start gap-3.5">
-                            <span className="h-12 w-12 rounded-2xl bg-[#EEF6F7] dark:bg-slate-800 border border-[#DAE7E7] dark:border-[#163654] text-[#154752] dark:text-teal-300 flex items-center justify-center shrink-0">
+                            <span className="h-12 w-12 rounded-2xl bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30 flex items-center justify-center shrink-0">
                               <Icon
                                 name={resolveCatalogueIcon(catItem.icon_name, catItem.slug)}
                                 className="h-6 w-6"
@@ -815,21 +815,21 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                             </span>
                             <div>
                               <div className="flex flex-wrap items-center gap-2">
-                                <h3 className="text-xl sm:text-2xl font-bold text-[#154752] dark:text-white">
+                                <h3 className="text-xl sm:text-2xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                                   {catItem.name}
                                 </h3>
                                 {catItem.is_featured && (
-                                  <span className="rounded-full bg-[#EEF6F7] dark:bg-teal-950/60 border border-[#24989A]/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#24989A] dark:text-teal-300">
+                                  <span className="rounded-full bg-[#FCEBDD] border border-[#E8590C]/30 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#E8590C]">
                                     Featured
                                   </span>
                                 )}
                               </div>
                               {catItem.description && (
-                                <p className="text-sm text-[#4E6065] dark:text-slate-300 mt-1 max-w-3xl">
+                                <p className="text-sm text-[#4A525C] dark:text-[#C3C8CF] mt-1 max-w-3xl">
                                   {catItem.description}
                                 </p>
                               )}
-                              <p className="text-xs text-[#68797C] dark:text-slate-400 mt-1 font-medium">
+                              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1 font-medium">
                                 {subCount} subcategor{subCount === 1 ? "y" : "ies"} • {serviceCount} service{serviceCount === 1 ? "" : "s"}
                               </p>
                             </div>
@@ -838,13 +838,13 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                           <div className="flex items-center gap-2.5 shrink-0">
                             <Link
                               href={`/services?cat=${encodeURIComponent(catItem.slug)}`}
-                              className="rounded-xl bg-[#EEF6F7] dark:bg-slate-800 px-4 py-2 text-xs font-bold text-[#154752] dark:text-teal-200 hover:bg-[#DAE7E7] transition-colors"
+                              className="rounded-xl bg-[#FCEBDD] text-[#E8590C] hover:bg-[#FCEBDD]/80 px-4 py-2 text-xs font-bold transition-colors"
                             >
                               Match Pros in Category →
                             </Link>
                             <Link
                               href={`/book?category=${encodeURIComponent(catItem.id)}`}
-                              className="rounded-xl bg-[#154752] dark:bg-teal-700 px-4 py-2 text-xs font-bold text-white hover:bg-[#0D282E] transition-colors"
+                              className="rounded-xl bg-[#E8590C] hover:bg-[#C84A06] px-4 py-2 text-xs font-bold text-white transition-colors"
                             >
                               Book
                             </Link>
@@ -856,25 +856,25 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
                           {(catItem.subcategories || []).map((subItem) => (
                             <div
                               key={subItem.id}
-                              className="p-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#071526] border border-[#EEF6F7] dark:border-slate-800 space-y-2"
+                              className="p-4 rounded-2xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] space-y-2"
                             >
                               <div className="flex items-center justify-between">
-                                <h4 className="text-sm font-bold text-[#154752] dark:text-slate-200">
+                                <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                                   {subItem.name}
                                 </h4>
-                                <span className="text-[10px] font-bold text-[#68797C] dark:text-slate-400">
+                                <span className="text-[10px] font-bold text-[#4A525C] dark:text-[#C3C8CF]">
                                   {(subItem.services || []).length} services
                                 </span>
                               </div>
                               {subItem.description && (
-                                <p className="text-xs text-[#68797C] dark:text-slate-400 line-clamp-2">
+                                <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] line-clamp-2">
                                   {subItem.description}
                                 </p>
                               )}
                               <div className="pt-2 flex items-center justify-between text-xs">
                                 <Link
                                   href={`/services?cat=${encodeURIComponent(catItem.slug)}&sub=${encodeURIComponent(subItem.slug)}`}
-                                  className="font-bold text-[#24989A] hover:underline"
+                                  className="font-bold text-[#E8590C] hover:underline"
                                 >
                                   Find Specialists →
                                 </Link>
@@ -896,7 +896,7 @@ export default async function ServicesPage({ searchParams }: ServicesPageProps) 
 
   if (auth) {
     return (
-      <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#071526] pb-24 md:pb-12 text-[#0F172A] dark:text-slate-100">
+      <div className="min-h-screen bg-[#FAF7F3] dark:bg-[#15181C] pb-24 md:pb-12 text-[#1F2328] dark:text-[#FAF7F3]">
         <CustomerHeader
           user={{
             id: auth.user.id,

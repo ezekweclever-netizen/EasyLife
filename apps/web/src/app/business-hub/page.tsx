@@ -103,7 +103,7 @@ export default async function BusinessHubPage({
 
   return (
     <PublicShell>
-      <section className="relative w-full overflow-hidden min-h-[460px] sm:min-h-[500px] flex items-center justify-center bg-[#071E28] text-white border-b border-[#24989A]/20">
+      <section className="relative w-full overflow-hidden min-h-[460px] sm:min-h-[500px] flex items-center justify-center bg-[#1F2328] text-white border-b border-[#2E343B]">
         {/* Full-bleed Hero Background Image */}
         <div className="absolute inset-0 z-0 select-none">
           <Image
@@ -122,13 +122,13 @@ export default async function BusinessHubPage({
         {/* Content container: Fully Centered Horizontally and Vertically */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center text-center">
           <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#E8590C] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               EasyLife Business Hub
             </p>
             <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
               Verified Local Businesses, Trade Centres &amp; Corporate Maintenance
             </h1>
-            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#FAF7F3] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Discover accredited workshops, commercial suppliers, bespoke contractors, and special member promotions across Port Harcourt, Lagos, and Abuja.
             </p>
           </div>
@@ -140,12 +140,12 @@ export default async function BusinessHubPage({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <a
             href="#directory"
-            className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-5 shadow-sm space-y-2 hover:border-[#0D9488]/40 transition group"
+            className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-sm space-y-2 hover:border-[#E8590C]/40 transition group"
           >
-            <div className="w-9 h-9 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-[#5CD3D5] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-xl bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] flex items-center justify-center">
               <Icon name="building" className="w-5 h-5" />
             </div>
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#0D9488] transition-colors">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-[#E8590C] transition-colors">
               Local Directory &darr;
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400">
@@ -155,7 +155,7 @@ export default async function BusinessHubPage({
 
           <a
             href="#promotions"
-            className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-5 shadow-sm space-y-2 hover:border-[#0D9488]/40 transition group"
+            className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-sm space-y-2 hover:border-[#E8590C]/40 transition group"
           >
             <div className="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center">
               <Icon name="receipt" className="w-5 h-5" />
@@ -170,7 +170,7 @@ export default async function BusinessHubPage({
 
           <Link
             href="/business"
-            className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-5 shadow-sm space-y-2 hover:border-[#0D9488]/40 transition group"
+            className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-sm space-y-2 hover:border-[#E8590C]/40 transition group"
           >
             <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
               <Icon name="shield" className="w-5 h-5" />
@@ -185,7 +185,7 @@ export default async function BusinessHubPage({
 
           <Link
             href="/register?role=business"
-            className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-5 shadow-sm space-y-2 hover:border-[#0D9488]/40 transition group"
+            className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-sm space-y-2 hover:border-[#E8590C]/40 transition group"
           >
             <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
               <Icon name="check-circle" className="w-5 h-5" />
@@ -200,10 +200,10 @@ export default async function BusinessHubPage({
         </div>
 
         {/* Active Business Promotions & Deals */}
-        <div id="promotions" className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
+        <div id="promotions" className="space-y-4 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
                 Special Offers &amp; Member Rates
               </span>
               <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
@@ -222,7 +222,7 @@ export default async function BusinessHubPage({
             {promotions.map((promo) => (
               <div
                 key={promo.id}
-                className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-5 shadow-sm flex flex-col justify-between space-y-4 relative overflow-hidden"
+                className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-sm flex flex-col justify-between space-y-4 relative overflow-hidden"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between gap-2">
@@ -239,7 +239,7 @@ export default async function BusinessHubPage({
                   </h3>
                   <Link
                     href={`/business-hub/${promo.business_slug}`}
-                    className="text-[11px] font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline block"
+                    className="text-[11px] font-semibold text-[#E8590C] hover:underline block"
                   >
                     🏢 {promo.business_name}
                   </Link>
@@ -254,7 +254,7 @@ export default async function BusinessHubPage({
                   </div>
                   <Link
                     href={`/business-hub/${promo.business_slug}`}
-                    className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0D9488] hover:bg-[#0F766E] text-white transition shadow-xs"
+                    className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#E8590C] hover:bg-[#C84A06] text-white transition shadow-xs"
                   >
                     View Offer &rarr;
                   </Link>
@@ -265,10 +265,10 @@ export default async function BusinessHubPage({
         </div>
 
         {/* Directory Search & Directory Client */}
-        <div id="directory" className="space-y-4 pt-4 border-t border-slate-200/80 dark:border-slate-800">
+        <div id="directory" className="space-y-4 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B]">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="text-[10px] font-bold text-[#E8590C] uppercase tracking-wider">
                 Directory Discovery
               </span>
               <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
@@ -292,12 +292,12 @@ export default async function BusinessHubPage({
         </div>
 
         {/* Commercial Maintenance Solutions Banner */}
-        <div className="rounded-3xl bg-linear-to-r from-slate-900 to-[#154752] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="rounded-3xl bg-[#1F2328] border border-[#2E343B] p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-2 text-center md:text-left">
-            <span className="text-[10px] font-bold uppercase tracking-widest text-teal-300">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#E8590C]">
               Corporate &amp; Facility Management
             </span>
-            <h3 className="text-lg sm:text-xl font-bold">
+            <h3 className="text-lg sm:text-xl font-bold text-white">
               Manage multiple properties, assets and schedules effortlessly
             </h3>
             <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
@@ -316,7 +316,7 @@ export default async function BusinessHubPage({
             <ButtonLink
               href="/business"
               size="md"
-              className="bg-[#24989A] hover:bg-[#1E7D7F] text-white"
+              className="bg-[#E8590C] hover:bg-[#C84A06] text-white"
             >
               Open Maintenance Portal
             </ButtonLink>
@@ -324,7 +324,7 @@ export default async function BusinessHubPage({
         </div>
 
         {/* Food Discovery Notice */}
-        <div className="p-4 rounded-2xl bg-slate-100/80 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs text-slate-600 dark:text-slate-400 text-center space-y-1">
+        <div className="p-4 rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-slate-600 dark:text-slate-400 text-center space-y-1">
           <p className="font-semibold text-slate-800 dark:text-slate-200">
             🍽️ EasyLife Directory Discovery Standards
           </p>

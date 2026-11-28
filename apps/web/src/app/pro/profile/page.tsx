@@ -56,7 +56,7 @@ export default async function ProProfilePage() {
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Page Title */}
       <div>
-        <span className="text-xs font-bold uppercase tracking-wider text-[#0D9488]">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
           Account &amp; Vetting
         </span>
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">

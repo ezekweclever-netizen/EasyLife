@@ -43,7 +43,7 @@ export default async function ProRegisterPage() {
   return (
     <div className="max-w-4xl mx-auto py-6">
       <div className="mb-6 text-center">
-        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-[#0D9488] text-xs font-semibold mb-3">
+        <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-[#E8590C] text-xs font-semibold mb-3">
           Technician &amp; Artisan Registration
         </span>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -60,13 +60,13 @@ export default async function ProRegisterPage() {
             <span className="font-bold text-teal-950 block">
               You already have an EasyLife Professional Profile (Status: {existingProStatus})
             </span>
-            <span className="text-teal-800 dark:text-[#5CD3D5]">
+            <span className="text-teal-800 dark:text-[#F06A1F]">
               You can manage services, locations, availability, and KYC documents directly from your Professional Profile.
             </span>
           </div>
           <Link
             href="/pro/profile"
-            className="px-4 py-2 rounded-xl bg-[#0D9488] text-white font-bold text-xs hover:bg-[#0F766E] transition shrink-0 text-center"
+            className="px-4 py-2 rounded-xl bg-[#E8590C] text-white font-bold text-xs hover:bg-[#E8590C] transition shrink-0 text-center"
           >
             Manage Pro Profile →
           </Link>

@@ -131,12 +131,12 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 text-xs text-[#64748B] mb-1">
-            <Link href="/bookings" className="hover:text-[#0F766E] font-medium">
+            <Link href="/bookings" className="hover:text-[#E8590C] font-medium">
               ← Back to My Bookings
             </Link>
           </div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1F2328]">
               Booking #{booking.reference_code}
             </h1>
             <span
@@ -146,7 +146,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                   : booking.status === "in_progress"
                   ? "bg-blue-100 text-blue-800"
                   : booking.status === "confirmed"
-                  ? "bg-teal-100 text-teal-800 dark:text-[#5CD3D5]"
+                  ? "bg-teal-100 text-teal-800 dark:text-[#F06A1F]"
                   : booking.status === "accepted"
                   ? "bg-cyan-100 text-cyan-800"
                   : booking.status === "cancelled"
@@ -199,7 +199,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
             This booking is currently subject to formal arbitration. Automatic completion and escrow payout have been strictly halted. An EasyLife administrator is examining evidence from both parties to document a binding resolution.
           </p>
           {booking.active_dispute?.resolution_summary && (
-            <div className="p-3 bg-white dark:bg-[#0D223A]/80 rounded-xl border border-purple-200 text-xs text-purple-900">
+            <div className="p-3 bg-white dark:bg-[#1F2328]/80 rounded-xl border border-purple-200 text-xs text-purple-900">
               <strong>Resolution Summary:</strong> {booking.active_dispute.resolution_summary}
             </div>
           )}
@@ -207,8 +207,8 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       )}
 
       {/* Status Progress Timeline */}
-      <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-6">
-        <h2 className="text-base font-bold text-[#0F172A]">Service Lifecycle &amp; Appointment Progress</h2>
+      <section className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-6 sm:p-8 shadow-xs space-y-6">
+        <h2 className="text-base font-bold text-[#1F2328]">Service Lifecycle &amp; Appointment Progress</h2>
 
         {isCancelled ? (
           <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/60/70 border border-red-200 dark:border-red-800 text-xs text-red-900 space-y-1">
@@ -227,16 +227,16 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                     <div
                       className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs ${
                         state === "completed"
-                          ? "bg-[#0F766E] text-white"
-                          : "bg-[#E2E8F0] text-[#64748B]"
+                          ? "bg-[#E8590C] text-white"
+                          : "bg-[#E6E0D8] text-[#64748B]"
                       }`}
                     >
                       {state === "completed" ? "✓" : idx + 1}
                     </div>
-                    <div className="h-0.5 flex-1 bg-[#E2E8F0] hidden lg:block" />
+                    <div className="h-0.5 flex-1 bg-[#E6E0D8] hidden lg:block" />
                   </div>
                   <div>
-                    <p className="font-bold text-xs text-[#0F172A]">{s.label}</p>
+                    <p className="font-bold text-xs text-[#1F2328]">{s.label}</p>
                     <p className="text-[10px] text-[#64748B] leading-tight">{s.desc}</p>
                   </div>
                 </div>
@@ -263,7 +263,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
 
       {/* Verified Customer Review (if published) */}
       {booking.review && (
-        <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-4">
+        <section className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-6 sm:p-8 shadow-xs space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-amber-400 text-lg">
@@ -272,7 +272,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
               <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
                 {booking.review.rating}.0 / 5.0 Rating
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800 dark:text-[#5CD3D5] uppercase tracking-wider ml-1">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-100 text-teal-800 dark:text-[#F06A1F] uppercase tracking-wider ml-1">
                 Verified Customer
               </span>
             </div>
@@ -295,7 +295,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
               </span>
               <div className="flex gap-2 flex-wrap">
                 {booking.review.photos.map((photo, pIdx) => (
-                  <div key={pIdx} className="px-3 py-1.5 rounded-xl border bg-slate-50 dark:bg-[#071526] text-[11px] font-mono text-slate-600 dark:text-slate-300 truncate max-w-xs">
+                  <div key={pIdx} className="px-3 py-1.5 rounded-xl border bg-slate-50 dark:bg-[#1F2328] text-[11px] font-mono text-slate-600 dark:text-slate-300 truncate max-w-xs">
                     📷 {photo.split("/").pop()}
                   </div>
                 ))}
@@ -322,13 +322,13 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
         <section className="bg-gradient-to-r from-teal-50 to-emerald-50 rounded-3xl border border-teal-200 dark:border-teal-800 p-6 sm:p-8 shadow-xs space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#0D9488] text-white uppercase tracking-wider mb-1">
+              <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#E8590C] text-white uppercase tracking-wider mb-1">
                 ✓ Confirmed Appointment
               </span>
               <h2 className="text-lg font-bold text-teal-950">
                 Scheduled for {new Date(booking.scheduled_start_at).toLocaleDateString("en-NG", { weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "Africa/Lagos" })}
               </h2>
-              <p className="text-xs text-teal-800 dark:text-[#5CD3D5]">
+              <p className="text-xs text-teal-800 dark:text-[#F06A1F]">
                 Time Window: {new Date(booking.scheduled_start_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })}
                 {booking.scheduled_end_at && ` – ${new Date(booking.scheduled_end_at).toLocaleTimeString("en-NG", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" })}`}
               </p>
@@ -338,7 +338,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
               <div className="text-right sm:border-l sm:border-teal-200 dark:border-teal-800 sm:pl-6 space-y-2">
                 <div>
                   <span className="text-[11px] text-teal-700 dark:text-teal-400 block font-medium">Agreed Escrow Value</span>
-                  <span className="text-xl font-extrabold text-[#0D9488]">
+                  <span className="text-xl font-extrabold text-[#E8590C]">
                     ₦{(booking.agreed_amount_kobo / 100).toLocaleString("en-NG")}
                   </span>
                 </div>
@@ -353,7 +353,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                       }
                     });
                   }}
-                  className="px-3 py-1.5 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white text-[11px] font-bold transition flex items-center gap-1.5 ml-auto shadow-xs"
+                  className="px-3 py-1.5 rounded-xl bg-[#E8590C] hover:bg-[#C84A06] text-white text-[11px] font-bold transition flex items-center gap-1.5 ml-auto shadow-xs"
                 >
                   💬 Chat with Specialist
                 </button>
@@ -364,7 +364,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       )}
 
       {/* Quotations Review & Comparison Section */}
-      <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-6">
+      <section className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-6 sm:p-8 shadow-xs space-y-6">
         <QuotationComparison
           bookingId={booking.id}
           preferredDate={booking.preferred_date}
@@ -379,17 +379,17 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       {/* Problem Details & Service Location */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="lg:col-span-2 space-y-6">
-          <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-4">
-            <h2 className="text-base font-bold text-[#0F172A]">Problem Details &amp; Diagnosis</h2>
+          <section className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-6 sm:p-8 shadow-xs space-y-4">
+            <h2 className="text-base font-bold text-[#1F2328]">Problem Details &amp; Diagnosis</h2>
             
             <div className="space-y-1">
               <span className="text-xs text-[#64748B] block">Summary</span>
-              <p className="font-bold text-sm text-[#0F172A]">{booking.title}</p>
+              <p className="font-bold text-sm text-[#1F2328]">{booking.title}</p>
             </div>
 
             <div className="space-y-1">
               <span className="text-xs text-[#64748B] block">Full Description</span>
-              <p className="text-xs sm:text-sm text-[#334155] whitespace-pre-line bg-[#F8FAFC] p-4 rounded-xl border border-[#E2E8F0]">
+              <p className="text-xs sm:text-sm text-[#4A525C] whitespace-pre-line bg-[#FAF7F3] p-4 rounded-xl border border-[#E6E0D8]">
                 {booking.description}
               </p>
             </div>
@@ -401,7 +401,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                 </span>
                 <div className="grid grid-cols-2 gap-3">
                   {booking.attachments.map((att) => (
-                    <div key={att.id} className="p-3 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] text-xs">
+                    <div key={att.id} className="p-3 rounded-xl border border-[#E6E0D8] bg-[#FAF7F3] text-xs">
                       <span className="font-semibold block truncate">{att.file_name}</span>
                       <span className="text-[10px] text-[#64748B]">{(att.file_size_bytes / 1024).toFixed(0)} KB</span>
                     </div>
@@ -413,8 +413,8 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
 
           {/* Historical Status Log */}
           {booking.status_history && booking.status_history.length > 0 && (
-            <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 sm:p-8 shadow-xs space-y-3">
-              <h2 className="text-sm font-bold text-[#0F172A]">Status History &amp; Audit Trail</h2>
+            <section className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-6 sm:p-8 shadow-xs space-y-3">
+              <h2 className="text-sm font-bold text-[#1F2328]">Status History &amp; Audit Trail</h2>
               <div className="divide-y divide-slate-100 text-xs">
                 {booking.status_history.map((hist, idx) => (
                   <div key={idx} className="py-2.5 flex items-start justify-between gap-4">
@@ -438,24 +438,24 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
 
         {/* Sidebar: Location & Cancellation Policy */}
         <div className="space-y-6">
-          <section className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-6 shadow-xs space-y-3 text-xs">
-            <h2 className="text-sm font-bold text-[#0F172A]">Service Location</h2>
+          <section className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-6 shadow-xs space-y-3 text-xs">
+            <h2 className="text-sm font-bold text-[#1F2328]">Service Location</h2>
             <div>
               <span className="text-[#64748B] block">City &amp; State</span>
-              <span className="font-bold text-[#0F172A]">{booking.city}, {booking.state}</span>
+              <span className="font-bold text-[#1F2328]">{booking.city}, {booking.state}</span>
             </div>
             <div>
               <span className="text-[#64748B] block">Physical Address</span>
-              <span className="font-bold text-[#0F172A]">{booking.service_address}</span>
+              <span className="font-bold text-[#1F2328]">{booking.service_address}</span>
             </div>
             <div>
               <span className="text-[#64748B] block">Urgency</span>
-              <span className="font-bold text-[#0D9488] capitalize">{booking.urgency}</span>
+              <span className="font-bold text-[#E8590C] capitalize">{booking.urgency}</span>
             </div>
           </section>
 
           {/* Cancellation Policy Box */}
-          <div className="bg-slate-50 dark:bg-[#071526] rounded-3xl border border-slate-200 dark:border-[#163654] p-6 space-y-2 text-xs text-slate-600 dark:text-slate-300">
+          <div className="bg-slate-50 dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B] p-6 space-y-2 text-xs text-slate-600 dark:text-slate-300">
             <span className="font-bold text-slate-900 dark:text-white block">Cancellation Policy</span>
             <p className="text-[11px] leading-relaxed">
               • Free cancellation while awaiting or reviewing quotations.
@@ -473,7 +473,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
       {/* Cancellation Modal */}
       {showCancelModal && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200 dark:border-[#163654]">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-md w-full p-6 sm:p-8 space-y-5 shadow-2xl border border-slate-200 dark:border-[#2E343B]">
             <div>
               <h3 className="text-lg font-bold text-slate-900 dark:text-white">Cancel Service Request</h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -498,7 +498,7 @@ export function BookingDetailClient({ booking, customerEmail }: BookingDetailCli
                   value={cancelReason}
                   onChange={(e) => setCancelReason(e.target.value)}
                   placeholder="e.g. Issue resolved independently, emergency reschedule required..."
-                  className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#0D223A]"
+                  className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs text-slate-900 dark:text-white bg-white dark:bg-[#1F2328]"
                 />
               </div>
 

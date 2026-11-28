@@ -111,7 +111,7 @@ export function GoogleSignInButton({
         type="button"
         onClick={handleGoogleSignIn}
         disabled={isLoading}
-        className="w-full h-10.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] active:bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold flex items-center justify-center gap-3 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
+        className="w-full h-10.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] active:bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 text-sm font-semibold flex items-center justify-center gap-3 transition-colors shadow-2xs disabled:opacity-60 cursor-pointer"
       >
         <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
           <path

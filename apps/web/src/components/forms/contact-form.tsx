@@ -50,7 +50,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="fullName"
-            className="block text-base font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5"
           >
             Your Full Name
           </label>
@@ -62,10 +62,10 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.fullName ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.fullName)}
-            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] ${
               state.fieldErrors?.fullName
                 ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                : "border-[#E6E0D8] dark:border-[#2E343B] hover:border-slate-400"
             }`}
             placeholder="e.g. Amaka Danladi"
           />
@@ -79,7 +79,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="email"
-            className="block text-base font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5"
           >
             Email Address
           </label>
@@ -91,10 +91,10 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.email ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.email)}
-            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] ${
               state.fieldErrors?.email
                 ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                : "border-[#E6E0D8] dark:border-[#2E343B] hover:border-slate-400"
             }`}
             placeholder="e.g. amaka@example.com"
           />
@@ -111,7 +111,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="phone"
-            className="block text-base font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5"
           >
             Phone Number (Optional)
           </label>
@@ -121,7 +121,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             type="tel"
             autoComplete="tel"
             defaultValue={state.values?.phone ?? ""}
-            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-base text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] hover:border-slate-400"
             placeholder="e.g. 0802 000 0000"
           />
           {state.fieldErrors?.phone && (
@@ -134,7 +134,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="inquiryType"
-            className="block text-base font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5"
           >
             Topic / Category
           </label>
@@ -148,7 +148,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             }
             required
             aria-invalid={Boolean(state.fieldErrors?.inquiryType)}
-            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-base text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] hover:border-slate-400"
           >
             {CONTACT_INQUIRY_TYPES.map((type) => (
               <option key={type} value={type}>
@@ -169,7 +169,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="city"
-            className="block text-base font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5"
           >
             Your Location / City (Optional)
           </label>
@@ -177,7 +177,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             id="city"
             name="city"
             defaultValue={state.values?.city ?? ""}
-            className="w-full h-12 px-3.5 rounded-lg border border-[#CBD5E1] text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] hover:border-slate-400"
+            className="w-full h-12 px-3.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-base text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] hover:border-slate-400"
           >
             <option value="">Select a city (or nationwide)</option>
             {PILOT_CITIES.map((city) => (
@@ -191,7 +191,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
         <div>
           <label
             htmlFor="subject"
-            className="block text-base font-semibold text-[#0F172A] mb-1.5"
+            className="block text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5"
           >
             Subject
           </label>
@@ -202,10 +202,10 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
             defaultValue={state.values?.subject ?? ""}
             required
             aria-invalid={Boolean(state.fieldErrors?.subject)}
-            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+            className={`w-full h-12 px-3.5 rounded-lg border text-base text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] ${
               state.fieldErrors?.subject
                 ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
-                : "border-[#CBD5E1] hover:border-slate-400"
+                : "border-[#E6E0D8] dark:border-[#2E343B] hover:border-slate-400"
             }`}
             placeholder="Brief description of your query"
           />
@@ -221,7 +221,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
       <div>
         <label
           htmlFor="message"
-          className="block text-base font-semibold text-[#0F172A] mb-1.5"
+          className="block text-base font-semibold text-[#1F2328] dark:text-[#FAF7F3] mb-1.5"
         >
           Message Details
         </label>
@@ -232,10 +232,10 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: string }) {
           defaultValue={state.values?.message ?? ""}
           required
           aria-invalid={Boolean(state.fieldErrors?.message)}
-          className={`w-full p-3.5 rounded-lg border text-base text-[#0F172A] bg-white dark:bg-[#0D223A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#0D9488] ${
+          className={`w-full p-3.5 rounded-lg border text-base text-[#1F2328] dark:text-[#FAF7F3] bg-white dark:bg-[#1F2328] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E8590C] ${
             state.fieldErrors?.message
               ? "border-red-500 bg-red-50 dark:bg-red-950/60/20"
-              : "border-[#CBD5E1] hover:border-slate-400"
+              : "border-[#E6E0D8] dark:border-[#2E343B] hover:border-slate-400"
           }`}
           placeholder="Please explain how we can assist you..."
         />

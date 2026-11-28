@@ -22,8 +22,8 @@ export function RegisterBusinessClient() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#071526] text-slate-900 dark:text-slate-100 flex flex-col">
-      <header className="border-b border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] shrink-0">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#1F2328] text-slate-900 dark:text-slate-100 flex flex-col">
+      <header className="border-b border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="w-9 h-9 rounded-lg bg-teal-600 text-white font-bold flex items-center justify-center text-lg shadow-xs">
@@ -37,7 +37,7 @@ export function RegisterBusinessClient() {
       </header>
 
       <div className="max-w-2xl mx-auto py-12 px-4 sm:px-6 w-full flex-1">
-        <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B] p-6 sm:p-8 shadow-xs">
           <div className="text-center max-w-md mx-auto mb-8">
             <span className="w-12 h-12 rounded-2xl bg-teal-600 text-white font-black text-2xl flex items-center justify-center mx-auto mb-4 shadow-xs">
               EL
@@ -73,7 +73,7 @@ export function RegisterBusinessClient() {
                   name="name"
                   required
                   placeholder="e.g. Niger Delta Logistics Ltd"
-                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -86,7 +86,7 @@ export function RegisterBusinessClient() {
                   name="slug"
                   required
                   placeholder="e.g. nd-logistics"
-                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
             </div>
@@ -101,7 +101,7 @@ export function RegisterBusinessClient() {
                   name="contactEmail"
                   required
                   placeholder="facilities@ndlogistics.ng"
-                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -113,7 +113,7 @@ export function RegisterBusinessClient() {
                   type="tel"
                   name="contactPhone"
                   placeholder="+234 803 000 0000"
-                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
             </div>
@@ -125,7 +125,7 @@ export function RegisterBusinessClient() {
                 </label>
                 <select
                   name="industry"
-                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#0D223A]"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 bg-white dark:bg-[#1F2328]"
                 >
                   <option value="Real Estate & Property Management">Real Estate & Property Management</option>
                   <option value="Oil & Gas / Energy">Oil & Gas / Energy</option>
@@ -146,7 +146,7 @@ export function RegisterBusinessClient() {
                   type="text"
                   name="registrationNumber"
                   placeholder="RC-1928374"
-                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
             </div>
@@ -164,7 +164,7 @@ export function RegisterBusinessClient() {
                   type="text"
                   name="address"
                   placeholder="e.g. Plot 12 Stadium Road, GRA Phase 4"
-                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -178,7 +178,7 @@ export function RegisterBusinessClient() {
                     name="city"
                     defaultValue="Port Harcourt"
                     required
-                    className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
 
@@ -191,7 +191,7 @@ export function RegisterBusinessClient() {
                     name="state"
                     defaultValue="Rivers State"
                     required
-                    className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="h-11 w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>

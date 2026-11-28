@@ -19,7 +19,7 @@ export function ProfileCompletionMeter({
   steps,
 }: ProfileCompletionMeterProps) {
   return (
-    <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs">
+    <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] p-5 shadow-xs">
       <div className="flex items-center justify-between mb-3">
         <div>
           <h3 className="text-sm font-bold text-slate-900 dark:text-white">
@@ -30,7 +30,7 @@ export function ProfileCompletionMeter({
           </p>
         </div>
         <div className="text-right">
-          <span className="text-xl font-extrabold text-[#0D9488]">
+          <span className="text-xl font-extrabold text-[#E8590C]">
             {percentage}%
           </span>
         </div>
@@ -43,7 +43,7 @@ export function ProfileCompletionMeter({
             percentage === 100
               ? "bg-emerald-500"
               : percentage >= 60
-              ? "bg-[#0D9488]"
+              ? "bg-[#E8590C]"
               : "bg-amber-500"
           }`}
           style={{ width: `${Math.max(percentage, 5)}%` }}
@@ -58,7 +58,7 @@ export function ProfileCompletionMeter({
             className={`p-2.5 rounded-lg border text-xs transition-colors ${
               s.completed
                 ? "bg-emerald-50 dark:bg-emerald-950/60/50 border-emerald-200 dark:border-emerald-800 text-emerald-950"
-                : "bg-slate-50 dark:bg-[#071526] border-slate-200 dark:border-[#163654] text-slate-700 dark:text-slate-200"
+                : "bg-slate-50 dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] text-slate-700 dark:text-slate-200"
             }`}
           >
             <div className="flex items-center gap-1.5 font-bold mb-0.5">
@@ -82,7 +82,7 @@ export function ProfileCompletionMeter({
         <div className="mt-3.5 text-right">
           <Link
             href="/pro/profile"
-            className="text-xs font-semibold text-[#0D9488] hover:underline"
+            className="text-xs font-semibold text-[#E8590C] hover:underline"
           >
             Finish profile setup →
           </Link>

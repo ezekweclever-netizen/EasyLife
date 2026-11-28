@@ -902,7 +902,7 @@ export function AdminServiceManager({
     <div className="space-y-6">
       {/* KPI Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Catalogue Services
           </div>
@@ -926,7 +926,7 @@ export function AdminServiceManager({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Homepage Visibility
           </div>
@@ -940,7 +940,7 @@ export function AdminServiceManager({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Credential-Gated
           </div>
@@ -954,7 +954,7 @@ export function AdminServiceManager({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-4 shadow-xs">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-4 shadow-xs">
           <div className="text-xs font-bold uppercase tracking-wider text-slate-400">
             Active Service Rules
           </div>
@@ -970,7 +970,7 @@ export function AdminServiceManager({
       </div>
 
       {/* Filter Toolbar */}
-      <div className="bg-white dark:bg-[#0D223A] p-5 rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-3 items-center">
           <div className="lg:col-span-4">
             <input
@@ -990,7 +990,7 @@ export function AdminServiceManager({
                 setSubcategoryFilter("");
               }}
               aria-label="Filter by main category"
-              className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-100"
+              className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-100"
             >
               <option value="">All Main Categories</option>
               {mainCategories.map((c) => (
@@ -1007,7 +1007,7 @@ export function AdminServiceManager({
               disabled={!categoryFilter || filterSubcategories.length === 0}
               onChange={(e) => setSubcategoryFilter(e.target.value)}
               aria-label="Filter by subcategory"
-              className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-100 disabled:bg-slate-50 dark:bg-[#071526] disabled:text-slate-400"
+              className="w-full h-10 px-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-100 disabled:bg-slate-50 dark:bg-[#1F2328] disabled:text-slate-400"
             >
               <option value="">
                 {categoryFilter
@@ -1028,7 +1028,7 @@ export function AdminServiceManager({
             <button
               type="button"
               onClick={openAddServiceModal}
-              className="w-full lg:w-auto px-4 py-2.5 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition shadow-xs"
+              className="w-full lg:w-auto px-4 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] transition shadow-xs"
             >
               + Add Service
             </button>
@@ -1060,7 +1060,7 @@ export function AdminServiceManager({
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold transition border ${
                   statusFilter === val
                     ? "bg-slate-900 text-white border-slate-900"
-                    : "bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#163654] hover:bg-slate-100 dark:bg-slate-800"
+                    : "bg-slate-50 dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#2E343B] hover:bg-slate-100 dark:bg-slate-800"
                 }`}
               >
                 {label}
@@ -1074,7 +1074,7 @@ export function AdminServiceManager({
               value={pageSize}
               onChange={(e) => setPageSize(Number(e.target.value))}
               aria-label="Rows per page"
-              className="h-8 px-2 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-semibold text-slate-700 dark:text-slate-200"
+              className="h-8 px-2 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs font-semibold text-slate-700 dark:text-slate-200"
             >
               <option value={25}>25 / page</option>
               <option value={50}>50 / page</option>
@@ -1104,10 +1104,10 @@ export function AdminServiceManager({
       )}
 
       {/* Services Table */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] shadow-xs overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-[#163654]">
+            <thead className="bg-slate-50 dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider border-b border-slate-200 dark:border-[#2E343B]">
               <tr>
                 <th className="py-3 px-4 w-20 text-center">Order</th>
                 <th className="py-3 px-4 min-w-[260px]">
@@ -1149,7 +1149,7 @@ export function AdminServiceManager({
                   const lifecycle = resolveServiceStatus(srv);
 
                   return (
-                    <tr key={srv.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/70 transition">
+                    <tr key={srv.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/70 transition">
                       <td className="py-3.5 px-4 text-center">
                         {srv.deleted_at ? (
                           <span className="text-[11px] font-mono text-slate-400">
@@ -1198,10 +1198,10 @@ export function AdminServiceManager({
                             <img
                               src={srv.image_url}
                               alt={srv.name}
-                              className="w-11 h-11 rounded-xl object-cover border border-slate-200 dark:border-[#163654] bg-slate-100 dark:bg-slate-800 shrink-0"
+                              className="w-11 h-11 rounded-xl object-cover border border-slate-200 dark:border-[#2E343B] bg-slate-100 dark:bg-slate-800 shrink-0"
                             />
                           ) : (
-                            <div className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654] text-slate-600 dark:text-slate-300 flex items-center justify-center font-mono text-[10px] font-bold shrink-0">
+                            <div className="w-11 h-11 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#2E343B] text-slate-600 dark:text-slate-300 flex items-center justify-center font-mono text-[10px] font-bold shrink-0">
                               {srv.icon_name || "tool"}
                             </div>
                           )}
@@ -1218,7 +1218,7 @@ export function AdminServiceManager({
                                 /{srv.slug}
                               </span>
                             </div>
-                            <div className="text-[11px] text-teal-800 dark:text-[#5CD3D5] font-semibold mt-1">
+                            <div className="text-[11px] text-teal-800 dark:text-[#F06A1F] font-semibold mt-1">
                               {mainCat?.name || "Category"}
                               {subCat ? ` → ${subCat.name}` : ""}
                             </div>
@@ -1327,11 +1327,11 @@ export function AdminServiceManager({
                             {/* Independent Homepage Visibility Indicator */}
                             <div className="flex items-center gap-1.5 flex-wrap">
                               {srv.show_on_homepage ? (
-                                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800 text-[10px] font-bold">
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border border-teal-200 dark:border-teal-800 text-[10px] font-bold">
                                   Shown on Homepage
                                 </span>
                               ) : (
-                                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-50 dark:bg-[#071526] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-[#163654] text-[10px] font-semibold">
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-50 dark:bg-[#1F2328] text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-[#2E343B] text-[10px] font-semibold">
                                   Hidden from Homepage
                                 </span>
                               )}
@@ -1348,7 +1348,7 @@ export function AdminServiceManager({
                                 className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
                                   srv.is_featured
                                     ? "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800"
-                                    : "bg-white dark:bg-[#0D223A] text-slate-400 border-slate-200 dark:border-[#163654] hover:text-slate-600 dark:text-slate-300"
+                                    : "bg-white dark:bg-[#1F2328] text-slate-400 border-slate-200 dark:border-[#2E343B] hover:text-slate-600 dark:text-slate-300"
                                 }`}
                               >
                                 Featured
@@ -1362,7 +1362,7 @@ export function AdminServiceManager({
                                 className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${
                                   srv.is_popular
                                     ? "bg-indigo-50 text-indigo-800 border-indigo-200"
-                                    : "bg-white dark:bg-[#0D223A] text-slate-400 border-slate-200 dark:border-[#163654] hover:text-slate-600 dark:text-slate-300"
+                                    : "bg-white dark:bg-[#1F2328] text-slate-400 border-slate-200 dark:border-[#2E343B] hover:text-slate-600 dark:text-slate-300"
                                 }`}
                               >
                                 Popular
@@ -1379,7 +1379,7 @@ export function AdminServiceManager({
                               type="button"
                               disabled={isPending}
                               onClick={() => handleRestoreService(srv)}
-                              className="px-2.5 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-[11px] font-bold text-teal-800 dark:text-[#5CD3D5] hover:bg-teal-100"
+                              className="px-2.5 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-[11px] font-bold text-teal-800 dark:text-[#F06A1F] hover:bg-teal-100"
                             >
                               Restore
                             </button>
@@ -1410,7 +1410,7 @@ export function AdminServiceManager({
                                         service: srv,
                                       })
                                     }
-                                    className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654] text-[11px] font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 disabled:opacity-40"
+                                    className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#2E343B] text-[11px] font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 disabled:opacity-40"
                                   >
                                     Deactivate
                                   </button>
@@ -1438,7 +1438,7 @@ export function AdminServiceManager({
                                         service: srv,
                                       })
                                     }
-                                    className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654] text-[11px] font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 disabled:opacity-40"
+                                    className="px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#2E343B] text-[11px] font-bold text-slate-700 dark:text-slate-200 hover:bg-slate-200 disabled:opacity-40"
                                   >
                                     Deactivate
                                   </button>
@@ -1465,8 +1465,8 @@ export function AdminServiceManager({
                                 onClick={() => handleToggleHomepage(srv)}
                                 className={`px-2.5 py-1.5 rounded-lg border text-[11px] font-bold transition disabled:opacity-40 ${
                                   srv.show_on_homepage
-                                    ? "bg-white dark:bg-[#0D223A] border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
-                                    : "bg-teal-50 dark:bg-teal-950/60 border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#5CD3D5] hover:bg-teal-100"
+                                    ? "bg-white dark:bg-[#1F2328] border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
+                                    : "bg-teal-50 dark:bg-teal-950/60 border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#F06A1F] hover:bg-teal-100"
                                 }`}
                               >
                                 {srv.show_on_homepage
@@ -1477,7 +1477,7 @@ export function AdminServiceManager({
                               <button
                                 type="button"
                                 onClick={() => openEditServiceModal(srv)}
-                                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
+                                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
                               >
                                 Edit
                               </button>
@@ -1485,7 +1485,7 @@ export function AdminServiceManager({
                               <button
                                 type="button"
                                 onClick={() => openRequirementsModal(srv)}
-                                className="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
+                                className="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
                               >
                                 Rules ({activeReqsCount})
                               </button>
@@ -1517,7 +1517,7 @@ export function AdminServiceManager({
 
         {/* Pagination Controls */}
         {totalPages > 1 && (
-          <div className="px-5 py-3.5 border-t border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] flex items-center justify-between text-xs">
+          <div className="px-5 py-3.5 border-t border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328] flex items-center justify-between text-xs">
             <span className="text-slate-600 dark:text-slate-300 font-medium">
               Page {safePage} of {totalPages}
             </span>
@@ -1526,7 +1526,7 @@ export function AdminServiceManager({
                 type="button"
                 disabled={safePage <= 1}
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] font-semibold text-slate-700 dark:text-slate-200 disabled:opacity-40"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] font-semibold text-slate-700 dark:text-slate-200 disabled:opacity-40"
               >
                 Previous
               </button>
@@ -1534,7 +1534,7 @@ export function AdminServiceManager({
                 type="button"
                 disabled={safePage >= totalPages}
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] font-semibold text-slate-700 dark:text-slate-200 disabled:opacity-40"
+                className="px-3 py-1.5 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] font-semibold text-slate-700 dark:text-slate-200 disabled:opacity-40"
               >
                 Next
               </button>
@@ -1546,7 +1546,7 @@ export function AdminServiceManager({
       {/* Create / Edit Service Modal */}
       {isServiceModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border border-slate-200 dark:border-[#163654] shadow-2xl p-6 sm:p-8">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border border-slate-200 dark:border-[#2E343B] shadow-2xl p-6 sm:p-8">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800 mb-5">
               <div>
                 <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">
@@ -1570,7 +1570,7 @@ export function AdminServiceManager({
             <form onSubmit={handleSaveService} className="space-y-6">
               {/* Section 1: Hierarchy & Identity */}
               <div className="space-y-3">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5]">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#F06A1F]">
                   1. Hierarchy &amp; Identification
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -1585,7 +1585,7 @@ export function AdminServiceManager({
                         setSrvCategoryId(e.target.value);
                         setSrvSubcategoryId("");
                       }}
-                      className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs sm:text-sm text-slate-900 dark:text-white"
+                      className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-slate-900 dark:text-white"
                     >
                       <option value="">Select Main Category...</option>
                       {mainCategories.map((c) => (
@@ -1604,7 +1604,7 @@ export function AdminServiceManager({
                       value={srvSubcategoryId}
                       disabled={modalSubcategories.length === 0}
                       onChange={(e) => setSrvSubcategoryId(e.target.value)}
-                      className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs sm:text-sm text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800 disabled:text-slate-500 dark:text-slate-400"
+                      className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs sm:text-sm text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800 disabled:text-slate-500 dark:text-slate-400"
                     >
                       <option value="">
                         {modalSubcategories.length > 0
@@ -1663,7 +1663,7 @@ export function AdminServiceManager({
 
               {/* Section 2: Content & Media */}
               <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5]">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#F06A1F]">
                   2. Descriptions, Keywords &amp; Media
                 </h4>
                 <div>
@@ -1711,7 +1711,7 @@ export function AdminServiceManager({
                     <select
                       value={srvIcon}
                       onChange={(e) => setSrvIcon(e.target.value)}
-                      className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                      className="w-full h-10 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                     >
                       {SERVICE_ICONS.map((ic) => (
                         <option key={ic} value={ic}>
@@ -1723,7 +1723,7 @@ export function AdminServiceManager({
                 </div>
 
                 {/* Image Upload */}
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] space-y-2.5">
+                <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] space-y-2.5">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-slate-800 dark:text-slate-100">
                       Service Image (PNG / JPG / WEBP, max 5 MB)
@@ -1746,10 +1746,10 @@ export function AdminServiceManager({
                       <img
                         src={srvImagePreview}
                         alt="Service preview"
-                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] shrink-0"
+                        className="w-14 h-14 rounded-xl object-cover border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] shrink-0"
                       />
                     ) : (
-                      <div className="w-14 h-14 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] flex items-center justify-center text-[10px] text-slate-400 shrink-0">
+                      <div className="w-14 h-14 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] flex items-center justify-center text-[10px] text-slate-400 shrink-0">
                         No img
                       </div>
                     )}
@@ -1767,7 +1767,7 @@ export function AdminServiceManager({
                           setSrvRemoveImage(false);
                           setSrvImagePreview(URL.createObjectURL(file));
                         }}
-                        className="block w-full text-xs text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-teal-50 dark:bg-teal-950/60 file:text-teal-800 dark:text-[#5CD3D5] hover:file:bg-teal-100"
+                        className="block w-full text-xs text-slate-600 dark:text-slate-300 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-teal-50 dark:bg-teal-950/60 file:text-teal-800 dark:text-[#F06A1F] hover:file:bg-teal-100"
                       />
                       <input
                         type="text"
@@ -1780,7 +1780,7 @@ export function AdminServiceManager({
                           }
                         }}
                         placeholder="Or paste image URL / /path..."
-                        className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-mono text-slate-800 dark:text-slate-100"
+                        className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono text-slate-800 dark:text-slate-100"
                       />
                     </div>
                   </div>
@@ -1789,7 +1789,7 @@ export function AdminServiceManager({
 
               {/* Section 3: Pricing & Visibility */}
               <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5]">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#F06A1F]">
                   3. Pricing Guidance, Commission &amp; Visibility
                 </h4>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -1866,7 +1866,7 @@ export function AdminServiceManager({
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvIsActive}
@@ -1874,7 +1874,7 @@ export function AdminServiceManager({
                     />
                     <span>Active</span>
                   </label>
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvIsFeatured}
@@ -1882,7 +1882,7 @@ export function AdminServiceManager({
                     />
                     <span>Featured</span>
                   </label>
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvIsPopular}
@@ -1890,7 +1890,7 @@ export function AdminServiceManager({
                     />
                     <span>Popular</span>
                   </label>
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvShowOnHomepage}
@@ -1903,12 +1903,12 @@ export function AdminServiceManager({
 
               {/* Section 4: Provider Eligibility & Verification Rules */}
               <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5]">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#F06A1F]">
                   4. Provider Eligibility &amp; Verification Requirements
                 </h4>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvReqVerifiedId}
@@ -1916,7 +1916,7 @@ export function AdminServiceManager({
                     />
                     <span>Verified ID</span>
                   </label>
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvReqTradeCert}
@@ -1924,7 +1924,7 @@ export function AdminServiceManager({
                     />
                     <span>Trade Cert</span>
                   </label>
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvReqBusinessReg}
@@ -1932,7 +1932,7 @@ export function AdminServiceManager({
                     />
                     <span>CAC Reg</span>
                   </label>
-                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
+                  <label className="flex items-center gap-2 p-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs font-semibold text-slate-800 dark:text-slate-100 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={srvReqSiteInspection}
@@ -1965,7 +1965,7 @@ export function AdminServiceManager({
                     {PROVIDER_TYPE_OPTIONS.map((opt) => (
                       <label
                         key={opt.value}
-                        className="flex items-center gap-2 p-2 rounded-lg border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] text-xs font-medium text-slate-800 dark:text-slate-100 cursor-pointer"
+                        className="flex items-center gap-2 p-2 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328] text-xs font-medium text-slate-800 dark:text-slate-100 cursor-pointer"
                       >
                         <input
                           type="checkbox"
@@ -1986,7 +1986,7 @@ export function AdminServiceManager({
                     {DOCUMENT_TYPE_OPTIONS.map((opt) => (
                       <label
                         key={opt.value}
-                        className="flex items-center gap-2 p-2 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-xs font-medium text-slate-700 dark:text-slate-200 cursor-pointer"
+                        className="flex items-center gap-2 p-2 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-xs font-medium text-slate-700 dark:text-slate-200 cursor-pointer"
                       >
                         <input
                           type="checkbox"
@@ -2004,14 +2004,14 @@ export function AdminServiceManager({
                 <button
                   type="button"
                   onClick={() => setIsServiceModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                  className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="px-5 py-2.5 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50 transition shadow-xs"
+                  className="px-5 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50 transition shadow-xs"
                 >
                   {isPending
                     ? "Saving..."
@@ -2028,10 +2028,10 @@ export function AdminServiceManager({
       {/* Service Requirements Modal */}
       {activeReqService && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border border-slate-200 dark:border-[#163654] shadow-2xl p-6 sm:p-8 space-y-6">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-3xl w-full max-h-[92vh] overflow-y-auto border border-slate-200 dark:border-[#2E343B] shadow-2xl p-6 sm:p-8 space-y-6">
             <div className="flex items-start justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
               <div>
-                <span className="px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800 text-[10px] font-bold uppercase">
+                <span className="px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border border-teal-200 dark:border-teal-800 text-[10px] font-bold uppercase">
                   Per-Service Requirements
                 </span>
                 <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-1">
@@ -2069,7 +2069,7 @@ export function AdminServiceManager({
               {activeReqService.requirements.filter(
                 (r) => showArchivedReqs || !r.deleted_at
               ).length === 0 ? (
-                <div className="p-6 rounded-xl border border-dashed border-slate-200 dark:border-[#163654] text-center text-xs text-slate-500 dark:text-slate-400">
+                <div className="p-6 rounded-xl border border-dashed border-slate-200 dark:border-[#2E343B] text-center text-xs text-slate-500 dark:text-slate-400">
                   No specific requirements configured yet for this service. Use the form below to add one.
                 </div>
               ) : (
@@ -2079,7 +2079,7 @@ export function AdminServiceManager({
                     .map((req) => (
                       <div
                         key={req.id}
-                        className="p-3.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
+                        className="p-3.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
                       >
                         <div className="space-y-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap">
@@ -2089,7 +2089,7 @@ export function AdminServiceManager({
                             <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
                               {req.title}
                             </span>
-                            <span className="px-2 py-0.5 rounded bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] text-[10px] font-mono text-slate-600 dark:text-slate-300">
+                            <span className="px-2 py-0.5 rounded bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-[10px] font-mono text-slate-600 dark:text-slate-300">
                               {req.requirement_key}
                             </span>
                             <span className="px-2 py-0.5 rounded bg-indigo-50 text-indigo-800 text-[10px] font-bold">
@@ -2117,7 +2117,7 @@ export function AdminServiceManager({
                               className={`px-2 py-1 rounded-full text-[10px] font-bold border ${
                                 req.is_required
                                   ? "bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800"
-                                  : "bg-white dark:bg-[#0D223A] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-[#163654]"
+                                  : "bg-white dark:bg-[#1F2328] text-slate-500 dark:text-slate-400 border-slate-200 dark:border-[#2E343B]"
                               }`}
                             >
                               {req.is_required ? "Required" : "Optional"}
@@ -2131,7 +2131,7 @@ export function AdminServiceManager({
                               className={`px-2 py-1 rounded-full text-[10px] font-bold border ${
                                 req.is_active
                                   ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
-                                  : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-[#163654]"
+                                  : "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-[#2E343B]"
                               }`}
                             >
                               {req.is_active ? "Active" : "Disabled"}
@@ -2139,7 +2139,7 @@ export function AdminServiceManager({
                             <button
                               type="button"
                               onClick={() => startEditingReq(req)}
-                              className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
+                              className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-[11px] font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:bg-slate-800"
                             >
                               Edit
                             </button>
@@ -2147,7 +2147,7 @@ export function AdminServiceManager({
                               type="button"
                               disabled={isPending}
                               onClick={() => handleArchiveReq(req)}
-                              className="px-2.5 py-1 rounded-lg border border-red-200 dark:border-red-800 bg-white dark:bg-[#0D223A] text-[11px] font-semibold text-red-700 dark:text-red-400 hover:bg-red-50 dark:bg-red-950/60"
+                              className="px-2.5 py-1 rounded-lg border border-red-200 dark:border-red-800 bg-white dark:bg-[#1F2328] text-[11px] font-semibold text-red-700 dark:text-red-400 hover:bg-red-50 dark:bg-red-950/60"
                             >
                               Archive
                             </button>
@@ -2162,10 +2162,10 @@ export function AdminServiceManager({
             {/* Add / Edit Requirement Form */}
             <form
               onSubmit={handleSaveRequirement}
-              className="p-4 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] space-y-3"
+              className="p-4 rounded-2xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] space-y-3"
             >
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5]">
+                <h4 className="text-xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#F06A1F]">
                   {editingReqId
                     ? "Edit Requirement Rule"
                     : "+ Add New Requirement Rule"}
@@ -2192,7 +2192,7 @@ export function AdminServiceManager({
                     value={reqTitle}
                     onChange={(e) => setReqTitle(e.target.value)}
                     placeholder="e.g. Upload Inverter Wattage Photo"
-                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                   />
                 </div>
                 <div>
@@ -2205,7 +2205,7 @@ export function AdminServiceManager({
                     value={reqKey}
                     onChange={(e) => setReqKey(e.target.value)}
                     placeholder="e.g. inverter_wattage_photo"
-                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-mono text-slate-900 dark:text-white"
+                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono text-slate-900 dark:text-white"
                   />
                 </div>
                 <div>
@@ -2219,7 +2219,7 @@ export function AdminServiceManager({
                     onChange={(e) =>
                       setReqDisplayOrder(parseInt(e.target.value, 10) || 0)
                     }
-                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                   />
                 </div>
               </div>
@@ -2234,7 +2234,7 @@ export function AdminServiceManager({
                     onChange={(e) =>
                       setReqType(e.target.value as ServiceRequirementType)
                     }
-                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                   >
                     {REQUIREMENT_TYPE_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value}>
@@ -2255,7 +2255,7 @@ export function AdminServiceManager({
                         e.target.value as ServiceRequirementAppliesTo
                       )
                     }
-                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                    className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                   >
                     <option value="both">Both Customer &amp; Professional</option>
                     <option value="customer">Customer Only</option>
@@ -2273,7 +2273,7 @@ export function AdminServiceManager({
                   value={reqDesc}
                   onChange={(e) => setReqDesc(e.target.value)}
                   placeholder="Instructions displayed to the customer or provider..."
-                  className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                  className="w-full h-9 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                 />
               </div>
 
@@ -2286,7 +2286,7 @@ export function AdminServiceManager({
                   value={reqConfigJson}
                   onChange={(e) => setReqConfigJson(e.target.value)}
                   placeholder='{"min_photos": 1}'
-                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-mono text-slate-800 dark:text-slate-100"
+                  className="w-full p-2.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-mono text-slate-800 dark:text-slate-100"
                 />
               </div>
 
@@ -2313,7 +2313,7 @@ export function AdminServiceManager({
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="px-4 py-2 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] disabled:opacity-50"
+                  className="px-4 py-2 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50"
                 >
                   {isPending
                     ? "Saving..."
@@ -2334,7 +2334,7 @@ export function AdminServiceManager({
           role="dialog"
           aria-modal="true"
         >
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-[#163654] space-y-4">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-[#2E343B] space-y-4">
             <div>
               <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
                 {pendingConfirm.type === "pause" && "Pause Service?"}
@@ -2376,7 +2376,7 @@ export function AdminServiceManager({
               <button
                 type="button"
                 onClick={() => setPendingConfirm(null)}
-                className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] text-xs font-bold text-slate-700 dark:text-slate-200"
+                className="px-4 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] text-xs font-bold text-slate-700 dark:text-slate-200"
               >
                 Cancel
               </button>

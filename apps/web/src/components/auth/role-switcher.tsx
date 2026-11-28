@@ -93,12 +93,12 @@ export function RoleSwitcher({
   // Variant: Mobile Drawer view
   if (variant === "mobile") {
     return (
-      <div className="p-3 space-y-2 bg-slate-50/80 dark:bg-[#071526]/60 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+      <div className="p-3 space-y-2 bg-[#FAF7F3] dark:bg-[#15181C] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B]">
         <div className="flex items-center justify-between px-1">
-          <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+          <span className="text-[11px] font-bold text-[#4A525C] dark:text-[#C3C8CF] uppercase tracking-wider">
             Switch Dashboard Role
           </span>
-          <span className="text-[10px] font-semibold text-[#0D9488] dark:text-[#5CD3D5]">
+          <span className="text-[10px] font-semibold text-[#E8590C]">
             {dashboards.length} Roles Active
           </span>
         </div>
@@ -112,21 +112,21 @@ export function RoleSwitcher({
                 onClick={onSelect}
                 className={`flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold transition-all ${
                   isCurrent
-                    ? "bg-teal-50 dark:bg-teal-950/70 text-[#0F766E] dark:text-[#5CD3D5] ring-1 ring-teal-500/30"
-                    : "text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-800"
+                    ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] ring-1 ring-[#E8590C]/30"
+                    : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-white dark:hover:bg-[#1F2328]"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
                   <span className="text-base">{dash.icon}</span>
                   <div>
                     <span className="block">{dash.label}</span>
-                    <span className="text-[10px] text-slate-400 dark:text-slate-500 font-normal">
+                    <span className="text-[10px] text-[#4A525C] dark:text-[#C3C8CF] font-normal">
                       {dash.description}
                     </span>
                   </div>
                 </div>
                 {isCurrent && (
-                  <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                  <span className="text-[10px] font-bold text-[#2E7D4F] bg-[#E8F5ED] px-2 py-0.5 rounded-full border border-[#A3D9B5]">
                     Active
                   </span>
                 )}
@@ -141,8 +141,8 @@ export function RoleSwitcher({
   // Variant: Sidebar view (e.g., in Admin or Business sidebars)
   if (variant === "sidebar") {
     return (
-      <div className="px-3 py-2 space-y-1.5 border-t border-slate-200 dark:border-slate-800">
-        <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider block px-2">
+      <div className="px-3 py-2 space-y-1.5 border-t border-[#E6E0D8] dark:border-[#2E343B]">
+        <span className="text-[10px] font-bold text-[#4A525C] dark:text-[#C3C8CF] uppercase tracking-wider block px-2">
           Role Views
         </span>
         <div className="space-y-1">
@@ -154,8 +154,8 @@ export function RoleSwitcher({
                 href={dash.href}
                 className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                   isCurrent
-                    ? "bg-teal-50 dark:bg-teal-950/70 text-[#0F766E] dark:text-[#5CD3D5] font-bold"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+                    ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-bold"
+                    : "text-[#4A525C] dark:text-[#C3C8CF] hover:text-[#1F2328] dark:hover:text-white hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                 }`}
               >
                 <span>{dash.icon}</span>
@@ -176,7 +176,7 @@ export function RoleSwitcher({
         onClick={() => setIsOpen((prev) => !prev)}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-teal-200 dark:border-teal-800/80 bg-teal-50/70 dark:bg-teal-950/50 text-[#0F766E] dark:text-[#5CD3D5] text-xs font-bold hover:bg-teal-100/70 dark:hover:bg-teal-950/80 transition-all cursor-pointer shadow-2xs"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#E8590C]/30 bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] text-xs font-bold hover:bg-[#FCEBDD]/80 transition-all cursor-pointer shadow-2xs"
         title="Switch active role dashboard"
       >
         <span>{currentDashboard?.icon || "🔄"}</span>
@@ -190,13 +190,13 @@ export function RoleSwitcher({
         <div
           role="menu"
           aria-orientation="vertical"
-          className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] shadow-xl p-2 z-50 space-y-1 focus:outline-none animate-in fade-in zoom-in-95 duration-100"
+          className="absolute right-0 mt-2 w-64 rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] shadow-xl p-2 z-50 space-y-1 focus:outline-none animate-in fade-in zoom-in-95 duration-100"
         >
-          <div className="px-3 py-1.5 border-b border-slate-100 dark:border-slate-800 mb-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
+          <div className="px-3 py-1.5 border-b border-[#E6E0D8] dark:border-[#2E343B] mb-1">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-[#4A525C] dark:text-[#C3C8CF] block">
               Multi-Role Dashboard Switcher
             </span>
-            <span className="text-xs text-slate-600 dark:text-slate-300 font-medium">
+            <span className="text-xs text-[#1F2328] dark:text-[#FAF7F3] font-medium">
               Switch your workspace mode:
             </span>
           </div>
@@ -214,8 +214,8 @@ export function RoleSwitcher({
                 }}
                 className={`flex items-start gap-2.5 p-2.5 rounded-xl text-xs font-semibold transition-all ${
                   isCurrent
-                    ? "bg-teal-50 dark:bg-teal-950/70 text-[#0F766E] dark:text-[#5CD3D5] ring-1 ring-teal-500/30"
-                    : "text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/80"
+                    ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] ring-1 ring-[#E8590C]/30"
+                    : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                 }`}
               >
                 <span className="text-base shrink-0 mt-0.5">{dash.icon}</span>
@@ -223,12 +223,12 @@ export function RoleSwitcher({
                   <div className="flex items-center justify-between">
                     <span className="truncate">{dash.label}</span>
                     {isCurrent && (
-                      <span className="text-[9px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-1.5 py-0.2 rounded-full border border-emerald-200 dark:border-emerald-800 shrink-0">
+                      <span className="text-[9px] font-bold text-[#2E7D4F] bg-[#E8F5ED] px-1.5 py-0.2 rounded-full border border-[#A3D9B5] shrink-0">
                         Active
                       </span>
                     )}
                   </div>
-                  <span className="text-[10px] text-slate-400 dark:text-slate-400 font-normal line-clamp-1">
+                  <span className="text-[10px] text-[#4A525C] dark:text-[#C3C8CF] font-normal line-clamp-1">
                     {dash.description}
                   </span>
                 </div>

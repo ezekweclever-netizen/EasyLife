@@ -118,11 +118,11 @@ export default function HowItWorksPage() {
           <StepList steps={customerSteps} />
         </div>
 
-        <div className="mt-12 rounded-2xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 p-6 sm:p-8">
-          <h3 className="text-base font-bold text-teal-950">
+        <div className="mt-12 rounded-2xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-8">
+          <h3 className="text-base font-bold text-[#1F2328] dark:text-[#FAF7F3]">
             Why Escrow Protection Matters in Nigeria
           </h3>
-          <p className="mt-2 text-sm text-teal-900 leading-relaxed">
+          <p className="mt-2 text-sm text-[#4A525C] dark:text-[#C3C8CF] leading-relaxed">
             In Nigeria, paying 100% upfront to an unvetted technician often leads to abandoned jobs, substandard materials, or inflated extra charges. On EasyLife, your funds are safely locked in escrow. The technician knows you have paid and can afford the work, while you know they cannot collect payment until you verify that the problem is completely fixed.
           </p>
         </div>
@@ -141,8 +141,8 @@ export default function HowItWorksPage() {
         </div>
 
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs">
-            <h4 className="text-base font-bold text-[#0F172A] mb-3">
+          <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 shadow-xs">
+            <h4 className="text-base font-bold text-[#1F2328] dark:text-[#FAF7F3] mb-3">
               What We Provide Every Verified Technician
             </h4>
             <CheckList
@@ -156,16 +156,16 @@ export default function HowItWorksPage() {
             />
           </div>
 
-          <div className="bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-[#163654] p-6 shadow-xs flex flex-col justify-between">
+          <div className="bg-white dark:bg-[#1F2328] rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 shadow-xs flex flex-col justify-between">
             <div>
-              <h4 className="text-base font-bold text-[#0F172A] mb-3">
+              <h4 className="text-base font-bold text-[#1F2328] dark:text-[#FAF7F3] mb-3">
                 Professional Conduct Standards
               </h4>
               <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                 EasyLife holds all technicians to strict professional conduct: punctuality, respectful communication, honest sourcing of genuine replacement parts, and maintaining safe working conditions in homes and offices.
               </p>
             </div>
-            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <div className="mt-6 pt-4 border-t border-[#E6E0D8] dark:border-[#2E343B]">
               <ButtonLink href="/become-a-professional" className="w-full text-center">
                 Apply to Join as a Professional
               </ButtonLink>
@@ -186,12 +186,12 @@ export default function HowItWorksPage() {
           <StepList steps={businessSteps} />
         </div>
 
-        <div className="mt-12 rounded-2xl bg-[#0A192F] text-white p-6 sm:p-10">
+        <div className="mt-12 rounded-2xl bg-[#1F2328] border border-[#2E343B] text-[#FAF7F3] p-6 sm:p-10">
           <div className="max-w-2xl">
-            <h3 className="text-xl font-bold">
+            <h3 className="text-xl font-bold text-white">
               Looking for a Corporate Service Agreement?
             </h3>
-            <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+            <p className="mt-2 text-sm text-[#C3C8CF] leading-relaxed">
               We offer customised facility maintenance packages for multi-branch organizations in Port Harcourt, Lagos, and Abuja, with dedicated SLA response times and designated account managers.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

@@ -215,7 +215,7 @@ export function AIAssistantChat({
 
       {/* Starter Suggestions Carousel / Pills */}
       {messages.length === 1 && (
-        <div className="bg-white dark:bg-[#0D223A] rounded-3xl p-5 border border-slate-200 dark:border-[#163654]/80 shadow-xs space-y-3">
+        <div className="bg-white dark:bg-[#1F2328] rounded-3xl p-5 border border-slate-200 dark:border-[#2E343B]/80 shadow-xs space-y-3">
           <div className="text-2xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center justify-between">
             <span>Common Fault Examples (Tap to Try)</span>
             <span className="text-teal-600 font-semibold">1-Click Quick Fill</span>
@@ -225,7 +225,7 @@ export function AIAssistantChat({
               <button
                 key={idx}
                 onClick={() => handleSendMessage(s)}
-                className="text-left px-3.5 py-2 rounded-xl text-xs bg-slate-50 dark:bg-[#071526] hover:bg-teal-50 dark:bg-teal-950/60 hover:text-teal-900 border border-slate-200 dark:border-[#163654] hover:border-teal-300 dark:border-teal-700 transition text-slate-700 dark:text-slate-200 leading-snug"
+                className="text-left px-3.5 py-2 rounded-xl text-xs bg-slate-50 dark:bg-[#1F2328] hover:bg-teal-50 dark:bg-teal-950/60 hover:text-teal-900 border border-slate-200 dark:border-[#2E343B] hover:border-teal-300 dark:border-teal-700 transition text-slate-700 dark:text-slate-200 leading-snug"
               >
                 "{s}"
               </button>
@@ -235,7 +235,7 @@ export function AIAssistantChat({
       )}
 
       {/* Main Conversation & Assistant Stream */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654]/80 shadow-xs flex flex-col min-h-[480px] overflow-hidden">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs flex flex-col min-h-[480px] overflow-hidden">
         {/* Messages Scroll Area */}
         <div className="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto max-h-[620px]">
           {messages.map((msg, index) => (
@@ -262,7 +262,7 @@ export function AIAssistantChat({
                 className={`max-w-[88%] sm:max-w-2xl px-4 py-3 rounded-2xl text-xs sm:text-sm leading-relaxed ${
                   msg.role === "user"
                     ? "bg-slate-900 text-white rounded-tr-xs shadow-xs"
-                    : "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-xs border border-slate-200 dark:border-[#163654]/60"
+                    : "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-tl-xs border border-slate-200 dark:border-[#2E343B]/60"
                 }`}
               >
                 {msg.content}
@@ -276,7 +276,7 @@ export function AIAssistantChat({
                     <div className="bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
                         <div className="flex items-center gap-2">
-                          <span className="text-2xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#5CD3D5]">
+                          <span className="text-2xs font-extrabold uppercase tracking-wider text-teal-800 dark:text-[#F06A1F]">
                             Recommended Category
                           </span>
                           <span
@@ -292,19 +292,19 @@ export function AIAssistantChat({
                         <div className="text-base font-extrabold text-teal-950 mt-0.5">
                           {msg.structuredData.categoryRecommendation.categoryName}
                         </div>
-                        <p className="text-2xs text-teal-800 dark:text-[#5CD3D5] mt-0.5">
+                        <p className="text-2xs text-teal-800 dark:text-[#F06A1F] mt-0.5">
                           {msg.structuredData.categoryRecommendation.reasoning}
                         </p>
                       </div>
 
-                      <div className="shrink-0 text-2xs font-bold text-teal-700 dark:text-teal-400 bg-white dark:bg-[#0D223A] px-3 py-1.5 rounded-xl border border-teal-200 dark:border-teal-800 shadow-2xs">
+                      <div className="shrink-0 text-2xs font-bold text-teal-700 dark:text-teal-400 bg-white dark:bg-[#1F2328] px-3 py-1.5 rounded-xl border border-teal-200 dark:border-teal-800 shadow-2xs">
                         Trade: {msg.structuredData.problemSummary.suggestedProfessionalType}
                       </div>
                     </div>
                   )}
 
                   {/* Problem Summary & Diagnosis Disclaimer */}
-                  <div className="bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] rounded-2xl p-4 space-y-2">
+                  <div className="bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] rounded-2xl p-4 space-y-2">
                     <div className="text-2xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                       Reported Symptoms Summary
                     </div>
@@ -315,7 +315,7 @@ export function AIAssistantChat({
                     </ul>
 
                     {/* Crucial Safety & Diagnosis Rule */}
-                    <div className="mt-2 pt-2 border-t border-slate-200 dark:border-[#163654] text-2xs text-slate-500 dark:text-slate-400 italic bg-white dark:bg-[#0D223A] p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <div className="mt-2 pt-2 border-t border-slate-200 dark:border-[#2E343B] text-2xs text-slate-500 dark:text-slate-400 italic bg-white dark:bg-[#1F2328] p-2.5 rounded-xl border border-slate-100 dark:border-slate-800">
                       ⚠️ <strong>Note on Diagnosis:</strong>{" "}
                       {msg.structuredData.problemSummary.potentialCausesDisclaimer}
                     </div>
@@ -329,7 +329,7 @@ export function AIAssistantChat({
 
                   {/* Clarifying Questions & Quick Reply Buttons */}
                   {msg.structuredData.clarifyingQuestions.length > 0 && (
-                    <div className="bg-white dark:bg-[#0D223A] border border-slate-200 dark:border-[#163654] rounded-2xl p-4 space-y-2.5 shadow-2xs">
+                    <div className="bg-white dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] rounded-2xl p-4 space-y-2.5 shadow-2xs">
                       <div className="text-2xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
                         <span>❓ Clarifying Details for the Technician</span>
                       </div>
@@ -352,7 +352,7 @@ export function AIAssistantChat({
                               <button
                                 key={rIdx}
                                 onClick={() => handleSendMessage(reply)}
-                                className="px-3 py-1.5 rounded-xl text-2xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:bg-teal-950/60 hover:text-teal-800 dark:text-[#5CD3D5] hover:border-teal-300 dark:border-teal-700 border border-slate-200 dark:border-[#163654] transition text-slate-700 dark:text-slate-200"
+                                className="px-3 py-1.5 rounded-xl text-2xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:bg-teal-950/60 hover:text-teal-800 dark:text-[#F06A1F] hover:border-teal-300 dark:border-teal-700 border border-slate-200 dark:border-[#2E343B] transition text-slate-700 dark:text-slate-200"
                               >
                                 {reply}
                               </button>
@@ -366,7 +366,7 @@ export function AIAssistantChat({
                   {/* Structured Service Request Card & Review/Confirm Action */}
                   {msg.structuredData.structuredRequest && (
                     <div className="bg-gradient-to-br from-white to-slate-50 border-2 border-teal-500 rounded-2xl p-4 sm:p-5 shadow-md space-y-3">
-                      <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-[#163654]">
+                      <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-[#2E343B]">
                         <div className="flex items-center gap-2">
                           <span className="w-2.5 h-2.5 rounded-full bg-teal-500" />
                           <span className="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">
@@ -391,7 +391,7 @@ export function AIAssistantChat({
                           {editingRequest?.suggestedTitle ||
                             msg.structuredData.structuredRequest.suggestedTitle}
                         </div>
-                        <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed bg-white dark:bg-[#0D223A] p-3 rounded-xl border border-slate-200 dark:border-[#163654]">
+                        <p className="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed bg-white dark:bg-[#1F2328] p-3 rounded-xl border border-slate-200 dark:border-[#2E343B]">
                           {editingRequest?.recommendedDescription ||
                             msg.structuredData.structuredRequest.recommendedDescription}
                         </p>
@@ -411,7 +411,7 @@ export function AIAssistantChat({
                               setIsEditModalOpen(true);
                             }
                           }}
-                          className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-[#0D223A] border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition shadow-2xs cursor-pointer"
+                          className="px-3.5 py-2 rounded-xl text-xs font-bold text-slate-700 dark:text-slate-200 bg-white dark:bg-[#1F2328] border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition shadow-2xs cursor-pointer"
                         >
                           ✏️ Edit Request Details
                         </button>
@@ -437,7 +437,7 @@ export function AIAssistantChat({
 
           {/* Pending Typing Indicator */}
           {isPending && (
-            <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-[#071526] p-3 rounded-2xl w-fit border border-slate-200 dark:border-[#163654]">
+            <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-[#1F2328] p-3 rounded-2xl w-fit border border-slate-200 dark:border-[#2E343B]">
               <span className="w-2 h-2 rounded-full bg-teal-500 animate-ping" />
               <span>Analyzing problem description and checking accredited trade categories...</span>
             </div>
@@ -453,7 +453,7 @@ export function AIAssistantChat({
         </div>
 
         {/* Input Bar */}
-        <div className="p-4 border-t border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526]/70 flex flex-col sm:flex-row items-center gap-3">
+        <div className="p-4 border-t border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328]/70 flex flex-col sm:flex-row items-center gap-3">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -467,7 +467,7 @@ export function AIAssistantChat({
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="E.g. My generator starts normally but switches off after a few minutes..."
               disabled={isPending}
-              className="flex-1 px-4 py-3 rounded-2xl border border-slate-200 dark:border-[#163654] text-xs sm:text-sm bg-white dark:bg-[#0D223A] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none disabled:opacity-50"
+              className="flex-1 px-4 py-3 rounded-2xl border border-slate-200 dark:border-[#2E343B] text-xs sm:text-sm bg-white dark:bg-[#1F2328] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none disabled:opacity-50"
             />
             <button
               type="submit"
@@ -498,7 +498,7 @@ export function AIAssistantChat({
         >
           <form
             onSubmit={handleSaveEdit}
-            className="bg-white dark:bg-[#0D223A] rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#163654] max-h-[90vh] overflow-y-auto"
+            className="bg-white dark:bg-[#1F2328] rounded-3xl max-w-lg w-full p-6 space-y-4 shadow-2xl border border-slate-200 dark:border-[#2E343B] max-h-[90vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-1.5">
@@ -523,7 +523,7 @@ export function AIAssistantChat({
                 required
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
               />
             </div>
 
@@ -535,7 +535,7 @@ export function AIAssistantChat({
                 <select
                   value={editCategorySlug}
                   onChange={(e) => setEditCategorySlug(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                 >
                   {initialCategories.map((c) => (
                     <option key={c.id} value={c.slug}>
@@ -552,7 +552,7 @@ export function AIAssistantChat({
                 <select
                   value={editUrgency}
                   onChange={(e) => setEditUrgency(e.target.value as any)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                 >
                   <option value="normal">Normal (Within 24-48 hours)</option>
                   <option value="high">High (Same day)</option>
@@ -570,7 +570,7 @@ export function AIAssistantChat({
                 rows={4}
                 value={editDesc}
                 onChange={(e) => setEditDesc(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
               />
             </div>
 

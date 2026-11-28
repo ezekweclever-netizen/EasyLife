@@ -26,7 +26,7 @@ export default async function NotificationsPage() {
   ]);
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] pb-24 md:pb-12 text-[#0F172A]">
+    <div className="min-h-screen bg-[#FAF7F3] pb-24 md:pb-12 text-[#1F2328]">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -40,10 +40,10 @@ export default async function NotificationsPage() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#0F766E]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#E8590C]">
               Activity Feed
             </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight mt-0.5">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1F2328] tracking-tight mt-0.5">
               Notifications &amp; Alerts
             </h1>
             <p className="text-xs sm:text-sm text-[#64748B] mt-1">
@@ -53,7 +53,7 @@ export default async function NotificationsPage() {
 
           <Link
             href="/messages"
-            className="self-start sm:self-auto px-4 py-2 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#0D223A] text-xs font-bold text-[#0F172A] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition"
+            className="self-start sm:self-auto px-4 py-2 rounded-xl border border-[#CBD5E1] bg-white dark:bg-[#1F2328] text-xs font-bold text-[#1F2328] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition"
           >
             Go to Messages →
           </Link>

@@ -21,8 +21,8 @@ export default function PrivacyPolicyPage() {
       />
 
       <Section tone="white">
-        <div className="max-w-4xl mx-auto prose prose-slate prose-headings:text-[#0A192F] prose-a:text-[#0D9488]">
-          <div className="p-4 rounded-xl bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs text-teal-950 mb-8 leading-relaxed">
+        <div className="max-w-4xl mx-auto prose prose-slate prose-headings:text-[#1F2328] dark:prose-headings:text-[#FAF7F3] prose-a:text-[#E8590C]">
+          <div className="p-4 rounded-xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] mb-8 leading-relaxed">
             <strong>Summary:</strong> We collect only the information necessary to match you with verified technicians, secure your payments in escrow, and safeguard our community. We never sell your personal data to third parties.
           </div>
 
@@ -93,8 +93,8 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-xl font-bold mt-8 mb-4">7. Contact the Data Protection Officer (DPO)</h2>
           <p className="text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
-            If you have questions regarding this Privacy Policy or wish to exercise your statutory rights, please contact our Data Protection Officer via email at <span className="font-semibold text-[#0F172A]">privacy@easylife.ng</span> or submit an inquiry through our{" "}
-            <Link href="/contact?topic=privacy_request" className="text-[#0D9488] font-semibold underline">
+            If you have questions regarding this Privacy Policy or wish to exercise your statutory rights, please contact our Data Protection Officer via email at <span className="font-semibold text-[#1F2328]">privacy@easylife.ng</span> or submit an inquiry through our{" "}
+            <Link href="/contact?topic=privacy_request" className="text-[#E8590C] font-semibold underline">
               Contact Portal
             </Link>
             .

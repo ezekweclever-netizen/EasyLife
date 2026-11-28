@@ -44,7 +44,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
   const totalPages = Math.max(1, Math.ceil(totalCount / BOOKINGS_PAGE_SIZE));
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#071526] pb-24 md:pb-12 text-[#0F172A] dark:text-slate-100">
+    <div className="min-h-screen bg-[#FAF7F3] dark:bg-[#1F2328] pb-24 md:pb-12 text-[#1F2328] dark:text-slate-100">
       <CustomerHeader
         user={{
           id: auth.user.id,
@@ -57,14 +57,14 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-white">My Bookings</h1>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#1F2328] dark:text-white">My Bookings</h1>
             <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
               Track and manage all your home &amp; facility service requests
             </p>
           </div>
           <Link
             href="/book"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-sm self-start sm:self-auto"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm self-start sm:self-auto"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -74,7 +74,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
         </div>
 
         {/* Tab Filters: All, Active, Completed, Cancelled */}
-        <div className="flex items-center gap-2 border-b border-[#E2E8F0] dark:border-[#163654] pb-2 overflow-x-auto">
+        <div className="flex items-center gap-2 border-b border-[#E6E0D8] dark:border-[#2E343B] pb-2 overflow-x-auto">
           {[
             { id: "all", label: "All Bookings" },
             { id: "active", label: "Active Requests" },
@@ -88,8 +88,8 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
                 href={`/bookings?tab=${t.id}`}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-colors shrink-0 ${
                   isActive
-                    ? "bg-[#0F766E] text-white shadow-xs"
-                    : "text-[#64748B] dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-white hover:bg-[#F1F5F9] dark:hover:bg-slate-800"
+                    ? "bg-[#E8590C] text-white shadow-xs"
+                    : "text-[#64748B] dark:text-slate-400 hover:text-[#1F2328] dark:hover:text-white hover:bg-[#FAF7F3] dark:hover:bg-slate-800"
                 }`}
               >
                 {t.label}
@@ -118,18 +118,18 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
               return (
                 <div
                   key={booking.id}
-                  className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] dark:border-[#163654] p-5 sm:p-6 shadow-xs hover:border-[#CBD5E1] dark:hover:border-[#24989A] transition-all flex flex-col md:flex-row md:items-center justify-between gap-5"
+                  className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 sm:p-6 shadow-xs hover:border-[#CBD5E1] dark:hover:border-[#E8590C] transition-all flex flex-col md:flex-row md:items-center justify-between gap-5"
                 >
                   <div className="space-y-2 max-w-2xl">
                     <div className="flex flex-wrap items-center gap-2 text-xs">
-                      <span className="font-mono font-bold text-[#0F766E] dark:text-teal-300 bg-[#F0FDFA] dark:bg-teal-950/60 px-2.5 py-0.5 rounded-md border border-[#CCFBF1] dark:border-teal-800">
+                      <span className="font-mono font-bold text-[#E8590C] dark:text-teal-300 bg-[#FCEBDD] dark:bg-teal-950/60 px-2.5 py-0.5 rounded-md border border-[#FCEBDD] dark:border-teal-800">
                         {booking.reference_code}
                       </span>
                       <span className={`px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] ${badgeClass}`}>
                         {booking.status.replace(/_/g, " ")}
                       </span>
                       {booking.category && (
-                        <span className="px-2.5 py-0.5 rounded-md bg-[#F1F5F9] dark:bg-slate-800 text-[#475569] dark:text-slate-300 font-medium">
+                        <span className="px-2.5 py-0.5 rounded-md bg-[#FAF7F3] dark:bg-slate-800 text-[#475569] dark:text-slate-300 font-medium">
                           {booking.category.name}
                         </span>
                       )}
@@ -140,7 +140,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
                       )}
                     </div>
 
-                    <h2 className="text-base sm:text-lg font-bold text-[#0F172A] dark:text-white">
+                    <h2 className="text-base sm:text-lg font-bold text-[#1F2328] dark:text-white">
                       {booking.title}
                     </h2>
 
@@ -160,7 +160,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
                   <div className="flex items-center gap-3 self-end md:self-auto shrink-0">
                     <Link
                       href={`/bookings/${booking.id}`}
-                      className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-xs"
+                      className="px-5 py-2.5 rounded-xl font-bold text-xs bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-xs"
                     >
                       View Details
                     </Link>
@@ -170,34 +170,34 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
             })}
 
             {totalPages > 1 && (
-              <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] px-5 py-3.5 text-xs text-[#64748B]">
+              <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] px-5 py-3.5 text-xs text-[#64748B]">
                 <span>
-                  Showing <strong className="text-[#0F172A]">{offset + 1}</strong>–
-                  <strong className="text-[#0F172A]">{Math.min(offset + bookings.length, totalCount)}</strong> of{" "}
-                  <strong className="text-[#0F172A]">{totalCount}</strong> bookings (Page {currentPage} of {totalPages})
+                  Showing <strong className="text-[#1F2328]">{offset + 1}</strong>–
+                  <strong className="text-[#1F2328]">{Math.min(offset + bookings.length, totalCount)}</strong> of{" "}
+                  <strong className="text-[#1F2328]">{totalCount}</strong> bookings (Page {currentPage} of {totalPages})
                 </span>
                 <div className="flex items-center gap-2">
                   {currentPage > 1 ? (
                     <Link
                       href={`/bookings?tab=${encodeURIComponent(tab)}&page=${currentPage - 1}`}
-                      className="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] font-semibold text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
+                      className="px-3.5 py-1.5 rounded-lg border border-[#CBD5E1] font-semibold text-[#1F2328] hover:bg-[#FAF7F3] transition-colors"
                     >
                       ← Previous
                     </Link>
                   ) : (
-                    <span className="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-[#94A3B8]">
+                    <span className="px-3.5 py-1.5 rounded-lg border border-[#E6E0D8] text-[#94A3B8]">
                       ← Previous
                     </span>
                   )}
                   {currentPage < totalPages ? (
                     <Link
                       href={`/bookings?tab=${encodeURIComponent(tab)}&page=${currentPage + 1}`}
-                      className="px-3.5 py-1.5 rounded-lg bg-[#0F766E] font-semibold text-white hover:bg-[#0D655E] transition-colors"
+                      className="px-3.5 py-1.5 rounded-lg bg-[#E8590C] font-semibold text-white hover:bg-[#C84A06] transition-colors"
                     >
                       Next →
                     </Link>
                   ) : (
-                    <span className="px-3.5 py-1.5 rounded-lg border border-[#E2E8F0] text-[#94A3B8]">
+                    <span className="px-3.5 py-1.5 rounded-lg border border-[#E6E0D8] text-[#94A3B8]">
                       Next →
                     </span>
                   )}
@@ -206,12 +206,12 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
             )}
           </div>
         ) : (
-          <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] p-12 text-center space-y-4 max-w-lg mx-auto shadow-xs">
-            <div className="w-16 h-16 rounded-full bg-[#F0FDFA] text-[#0F766E] text-2xl mx-auto flex items-center justify-center font-bold">
+          <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] p-12 text-center space-y-4 max-w-lg mx-auto shadow-xs">
+            <div className="w-16 h-16 rounded-full bg-[#FCEBDD] text-[#E8590C] text-2xl mx-auto flex items-center justify-center font-bold">
               📋
             </div>
             <div className="space-y-1">
-              <h3 className="text-lg font-bold text-[#0F172A]">No bookings in this tab</h3>
+              <h3 className="text-lg font-bold text-[#1F2328]">No bookings in this tab</h3>
               <p className="text-xs sm:text-sm text-[#64748B]">
                 {tab === "all"
                   ? "You haven't placed any service requests yet. When you request a repair, it will appear here with live dispatch updates."
@@ -221,7 +221,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
             <div className="pt-2">
               <Link
                 href="/book"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm bg-[#0F766E] text-white hover:bg-[#0D655E] transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm"
               >
                 Request a Service Now
               </Link>

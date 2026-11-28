@@ -89,7 +89,7 @@ export function BusinessDirectoryClient({
   return (
     <div className="space-y-8">
       {/* Search Header & City Filter */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs space-y-4">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="relative flex-1">
             <input
@@ -97,14 +97,14 @@ export function BusinessDirectoryClient({
               value={searchQuery}
               onChange={(e) => handleSearchChange(e.target.value)}
               placeholder="Search local businesses by trade, company name, or service..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D9488]"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#E6E0D8] dark:border-[#2E343B] text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             />
             <span className="absolute left-3.5 top-3 text-slate-400 text-sm">🔍</span>
           </div>
 
           <Link
             href="/register?role=business"
-            className="px-4 py-2.5 rounded-xl bg-[#0A2540] hover:bg-[#1E3A5F] text-white text-xs font-bold transition shadow-xs text-center whitespace-nowrap"
+            className="px-4 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#C84A06] text-white text-xs font-bold transition shadow-xs text-center whitespace-nowrap"
           >
             + Register Your Business
           </Link>
@@ -122,7 +122,7 @@ export function BusinessDirectoryClient({
               onClick={() => handleCityChange(city)}
               className={`px-3 py-1 rounded-full text-xs font-semibold transition cursor-pointer ${
                 selectedCity === city
-                  ? "bg-[#0A2540] dark:bg-slate-700 text-white shadow-xs"
+                  ? "bg-[#1F2328] dark:bg-[#E8590C] text-white shadow-xs"
                   : "bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200"
               }`}
             >
@@ -140,7 +140,7 @@ export function BusinessDirectoryClient({
               onClick={() => handleCategoryChange(cat)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition cursor-pointer ${
                 selectedCategory === cat
-                  ? "bg-[#0D9488] text-white shadow-xs"
+                  ? "bg-[#E8590C] text-white shadow-xs"
                   : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200"
               }`}
             >
@@ -152,7 +152,7 @@ export function BusinessDirectoryClient({
 
       {/* Directory Roster */}
       {businesses.length === 0 ? (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-12 text-center space-y-3">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-12 text-center space-y-3">
           <div className="text-3xl">🏢</div>
           <h3 className="text-sm font-bold text-slate-900 dark:text-white">
             No local businesses currently match your search
@@ -175,7 +175,7 @@ export function BusinessDirectoryClient({
             </button>
             <Link
               href="/register?role=business"
-              className="px-4 py-2 bg-[#0D9488] hover:bg-[#0F766E] text-white rounded-lg text-xs font-bold transition"
+              className="px-4 py-2 bg-[#E8590C] hover:bg-[#C84A06] text-white rounded-lg text-xs font-bold transition"
             >
               Register Business Profile
             </Link>
@@ -193,11 +193,11 @@ export function BusinessDirectoryClient({
             return (
               <div
                 key={biz.id}
-                className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-xs hover:border-[#0D9488]/50 hover:shadow-md transition flex flex-col justify-between group"
+                className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] dark:border-[#2E343B] p-5 shadow-xs hover:border-[#E8590C]/50 hover:shadow-md transition flex flex-col justify-between group"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-[#163654]">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FAF7F3] dark:bg-[#1F2328] text-slate-700 dark:text-slate-200 border border-[#E6E0D8] dark:border-[#2E343B]">
                       {biz.business_category || biz.industry || "Local Enterprise"}
                     </span>
                     {biz.verification_status === "approved" && (
@@ -210,7 +210,7 @@ export function BusinessDirectoryClient({
                   <div>
                     <Link
                       href={profileUrl}
-                      className="text-base font-bold text-slate-900 dark:text-white leading-snug group-hover:text-[#0D9488] transition-colors block"
+                      className="text-base font-bold text-slate-900 dark:text-white leading-snug group-hover:text-[#E8590C] transition-colors block"
                     >
                       {biz.name}
                     </Link>
@@ -244,7 +244,7 @@ export function BusinessDirectoryClient({
                       {biz.services_offered.slice(0, 4).map((srv, idx) => (
                         <span
                           key={idx}
-                          className="px-2 py-0.5 bg-slate-50 dark:bg-[#071526] text-slate-600 dark:text-slate-300 rounded text-[10px] border border-slate-200 dark:border-[#163654]"
+                          className="px-2 py-0.5 bg-[#FAF7F3] dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 rounded text-[10px] border border-[#E6E0D8] dark:border-[#2E343B]"
                         >
                           {srv}
                         </span>
@@ -262,7 +262,7 @@ export function BusinessDirectoryClient({
                   <div className="flex items-center justify-between gap-2">
                     <Link
                       href={profileUrl}
-                      className="flex-1 text-center px-3.5 py-2 bg-[#0D9488] hover:bg-[#0F766E] text-white rounded-xl text-xs font-bold transition shadow-xs"
+                      className="flex-1 text-center px-3.5 py-2 bg-[#E8590C] hover:bg-[#C84A06] text-white rounded-xl text-xs font-bold transition shadow-xs"
                     >
                       View Profile &amp; Services &rarr;
                     </Link>

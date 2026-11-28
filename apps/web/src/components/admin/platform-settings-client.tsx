@@ -138,7 +138,7 @@ function SettingSwitchRow({
       >
         <span
           aria-hidden="true"
-          className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white dark:bg-[#0D223A] shadow-sm transition ${
+          className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white dark:bg-[#1F2328] shadow-sm transition ${
             checked ? "translate-x-5" : "translate-x-0"
           }`}
         />
@@ -283,7 +283,7 @@ export function PlatformSettingsClient({
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       {/* Left Navigation Menu */}
-      <aside className="lg:col-span-3 bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654]/80 shadow-xs p-2 space-y-1 lg:sticky lg:top-24">
+      <aside className="lg:col-span-3 bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs p-2 space-y-1 lg:sticky lg:top-24">
         <div className="px-3 py-2 text-2xs font-extrabold uppercase tracking-wider text-slate-400">
           Settings Sections
         </div>
@@ -350,10 +350,10 @@ export function PlatformSettingsClient({
 
         <form
           onSubmit={(e) => handleSaveSection(activeTab, e)}
-          className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654]/80 shadow-xs overflow-hidden"
+          className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B]/80 shadow-xs overflow-hidden"
         >
           {/* Section Header */}
-          <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 dark:bg-[#071526]/60">
+          <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 dark:bg-[#1F2328]/60">
             <div>
               <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">
                 {currentSectionMeta.title}
@@ -394,7 +394,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, platform_name: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Displayed across the website header, emails, and customer receipts.
@@ -417,7 +417,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, website_url: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Primary public web address used in links and notifications.
@@ -441,7 +441,7 @@ export function PlatformSettingsClient({
                       setGeneral((p) => ({ ...p, platform_description: e.target.value }));
                       markDirty("general");
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                   />
                   <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                     Short public summary describing EasyLife&apos;s marketplace mission.
@@ -465,7 +465,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, platform_logo_url: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Path to the official brand logo displayed in navigation bars.
@@ -488,7 +488,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, business_address: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Shown on official correspondence and legal notices when configured.
@@ -513,7 +513,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, contact_email: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Primary customer support and operations email address.
@@ -536,7 +536,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, contact_phone: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Official support phone number (leave blank if phone support is not active).
@@ -559,7 +559,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, default_currency: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     >
                       {CURRENCY_OPTIONS.map((c) => (
                         <option key={c.code} value={c.code}>
@@ -583,7 +583,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, default_country: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     >
                       {COUNTRY_OPTIONS.map((country) => (
                         <option key={country} value={country}>
@@ -607,7 +607,7 @@ export function PlatformSettingsClient({
                         setGeneral((p) => ({ ...p, default_timezone: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#0D223A] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white bg-white dark:bg-[#1F2328] focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     >
                       {TIMEZONE_OPTIONS.map((tz) => (
                         <option key={tz.value} value={tz.value}>
@@ -630,7 +630,7 @@ export function PlatformSettingsClient({
                     {general.supported_cities.map((city) => (
                       <span
                         key={city}
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800"
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border border-teal-200 dark:border-teal-800"
                       >
                         {city}
                         {general.supported_cities.length > 1 && (
@@ -658,7 +658,7 @@ export function PlatformSettingsClient({
                         }
                       }}
                       placeholder="Add a city (e.g. Enugu, Ibadan)"
-                      className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="flex-1 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <button
                       type="button"
@@ -679,7 +679,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Account Registration Controls
                   </h3>
-                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 px-4">
                     <SettingSwitchRow
                       id="enable_customer_registration"
                       label="Enable Customer Registration"
@@ -717,7 +717,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Verification &amp; Approval Requirements
                   </h3>
-                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 px-4">
                     <SettingSwitchRow
                       id="require_email_verification"
                       label="Require Email Verification"
@@ -765,7 +765,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Password &amp; Authentication Policies
                   </h3>
-                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 space-y-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 p-4 space-y-4">
                     <div className="max-w-xs">
                       <label
                         htmlFor="min_password_length"
@@ -786,7 +786,7 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("registration");
                         }}
-                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
                       <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Recommended minimum is 8 to 12 characters.
@@ -810,7 +810,7 @@ export function PlatformSettingsClient({
             {/* 3. SERVICE MARKETPLACE SETTINGS */}
             {activeTab === "marketplace" && (
               <div className="space-y-6">
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
+                <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 px-4">
                   <SettingSwitchRow
                     id="enable_service_bookings"
                     label="Enable Service Bookings"
@@ -887,7 +887,7 @@ export function PlatformSettingsClient({
                         }));
                         markDirty("marketplace");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Number of hours before an unaccepted quotation automatically expires.
@@ -914,7 +914,7 @@ export function PlatformSettingsClient({
                         }));
                         markDirty("marketplace");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Hours before an unreviewed customer dispute triggers a supervisor alert.
@@ -954,14 +954,14 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("marketplace");
                         }}
-                        className="w-full px-3.5 py-2 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-[#0D223A] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 focus:outline-none"
+                        className="w-full px-3.5 py-2 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-[#1F2328] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 focus:outline-none"
                       />
                     </div>
                   )}
                 </div>
 
                 {/* Quick Links to Catalogue Management */}
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <div className="text-xs font-bold text-slate-900 dark:text-white">
                       Service Categories &amp; Service Availability
@@ -973,7 +973,7 @@ export function PlatformSettingsClient({
                   <div className="flex items-center gap-2 shrink-0">
                     <Link
                       href="/admin/categories"
-                      className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
+                      className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
                     >
                       Manage Categories
                     </Link>
@@ -992,7 +992,7 @@ export function PlatformSettingsClient({
             {activeTab === "financial" && (
               <div className="space-y-6">
                 {/* Payment Provider Status Card */}
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 bg-slate-50 dark:bg-[#071526]/70 space-y-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 p-4 bg-slate-50 dark:bg-[#1F2328]/70 space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                       <div className="text-sm font-bold text-slate-900 dark:text-white">
@@ -1033,7 +1033,7 @@ export function PlatformSettingsClient({
                 </div>
 
                 {/* Commission Settings */}
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 space-y-4">
+                <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 p-4 space-y-4">
                   <SettingSwitchRow
                     id="commission_enabled"
                     label="Enable Platform Commission"
@@ -1068,7 +1068,7 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("financial");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800 disabled:text-slate-400 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white disabled:bg-slate-100 dark:bg-slate-800 disabled:text-slate-400 focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
                       <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Set between 0% and 50%. Only applied when commission is enabled.
@@ -1095,7 +1095,7 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("financial");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
                       <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Leave at 0 if no platform-wide callout minimum is enforced.
@@ -1122,8 +1122,8 @@ export function PlatformSettingsClient({
                           onClick={() => toggleCurrency(curr.code)}
                           className={`px-3.5 py-2 rounded-xl text-xs font-bold border transition ${
                             selected
-                              ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border-teal-300 dark:border-teal-700"
-                              : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#163654] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]"
+                              ? "bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border-teal-300 dark:border-teal-700"
+                              : "bg-white dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 border-slate-200 dark:border-[#2E343B] hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]"
                           }`}
                         >
                           {selected ? "✓ " : ""}
@@ -1135,7 +1135,7 @@ export function PlatformSettingsClient({
                 </div>
 
                 {/* Tax Configuration */}
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 p-4 space-y-4">
+                <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 p-4 space-y-4">
                   <SettingSwitchRow
                     id="tax_enabled"
                     label="Enable Tax Calculation"
@@ -1165,7 +1165,7 @@ export function PlatformSettingsClient({
                             setFinancial((p) => ({ ...p, tax_label: e.target.value }));
                             markDirty("financial");
                           }}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                         />
                       </div>
                       <div>
@@ -1189,14 +1189,14 @@ export function PlatformSettingsClient({
                             }));
                             markDirty("financial");
                           }}
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                         />
                       </div>
                     </div>
                   )}
                 </div>
 
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] p-4 flex items-center justify-between gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328] p-4 flex items-center justify-between gap-3">
                   <div>
                     <div className="text-xs font-bold text-slate-900 dark:text-white">
                       City &amp; Category Commission Rules
@@ -1207,7 +1207,7 @@ export function PlatformSettingsClient({
                   </div>
                   <Link
                     href="/admin/commissions"
-                    className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition shrink-0"
+                    className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition shrink-0"
                   >
                     Open Commission Rules
                   </Link>
@@ -1222,7 +1222,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Delivery Channels
                   </h3>
-                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 px-4">
                     <SettingSwitchRow
                       id="email_notifications_enabled"
                       label="Email Notifications"
@@ -1299,7 +1299,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Event Triggers
                   </h3>
-                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 px-4">
                     <SettingSwitchRow
                       id="booking_notifications_enabled"
                       label="Booking &amp; Quotation Notifications"
@@ -1355,7 +1355,7 @@ export function PlatformSettingsClient({
                       setNotifications((p) => ({ ...p, admin_alert_email: e.target.value }));
                       markDirty("notifications");
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                   />
                   <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                     Email address receiving escalated platform alerts and operational notices.
@@ -1371,7 +1371,7 @@ export function PlatformSettingsClient({
                   <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
                     Administrative Access &amp; Governance
                   </h3>
-                  <div className="rounded-xl border border-slate-200 dark:border-[#163654]/80 px-4">
+                  <div className="rounded-xl border border-slate-200 dark:border-[#2E343B]/80 px-4">
                     <SettingSwitchRow
                       id="restrict_admin_registration"
                       label="Restrict Administrator Role Assignment"
@@ -1440,7 +1440,7 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("security");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
                       <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Idle session timeout window (15 – 1,440 mins).
@@ -1467,7 +1467,7 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("security");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
                       <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Consecutive failures before temporary lockout.
@@ -1494,7 +1494,7 @@ export function PlatformSettingsClient({
                           }));
                           markDirty("security");
                         }}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
                       />
                       <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                         Cooldown period after repeated failed sign-ins.
@@ -1503,7 +1503,7 @@ export function PlatformSettingsClient({
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 dark:border-[#163654] bg-slate-50 dark:bg-[#071526] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="rounded-xl border border-slate-200 dark:border-[#2E343B] bg-slate-50 dark:bg-[#1F2328] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <div className="text-xs font-bold text-slate-900 dark:text-white">
                       Roles, Permissions &amp; Security Audit Trail
@@ -1515,7 +1515,7 @@ export function PlatformSettingsClient({
                   <div className="flex items-center gap-2 shrink-0">
                     <Link
                       href="/admin/users"
-                      className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
+                      className="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] hover:bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
                     >
                       Manage User Roles
                     </Link>
@@ -1532,7 +1532,7 @@ export function PlatformSettingsClient({
           </div>
 
           {/* Section Footer Save Bar */}
-          <div className="px-6 py-4 bg-slate-50 dark:bg-[#071526] border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="px-6 py-4 bg-slate-50 dark:bg-[#1F2328] border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {dirtySections[activeTab] ? (
                 <span className="font-semibold text-amber-700 dark:text-amber-300">

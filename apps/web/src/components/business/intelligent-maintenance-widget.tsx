@@ -52,13 +52,13 @@ export function IntelligentMaintenanceWidget({
   });
 
   return (
-    <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] shadow-sm p-6 sm:p-8 space-y-6">
+    <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B] shadow-sm p-6 sm:p-8 space-y-6">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-teal-500 animate-pulse" />
-            <span className="text-2xs font-bold uppercase tracking-wider text-[#0D9488]">
+            <span className="text-2xs font-bold uppercase tracking-wider text-[#E8590C]">
               Automated Operations Assistant
             </span>
           </div>
@@ -71,7 +71,7 @@ export function IntelligentMaintenanceWidget({
         </div>
 
         {/* Explicit Policy Disclaimer */}
-        <div className="p-3 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200 dark:border-[#163654] text-xs text-slate-600 dark:text-slate-300 max-w-sm">
+        <div className="p-3 rounded-2xl bg-slate-50 dark:bg-[#1F2328] border border-slate-200 dark:border-[#2E343B] text-xs text-slate-600 dark:text-slate-300 max-w-sm">
           <strong className="font-bold text-slate-800 dark:text-slate-100 block text-[11px] uppercase tracking-wider">
             ⚙️ Non-Predictive Interval Policy
           </strong>
@@ -87,7 +87,7 @@ export function IntelligentMaintenanceWidget({
           className={`p-4 rounded-2xl text-left border transition ${
             statusTab === "all"
               ? "bg-slate-900 text-white border-slate-900 shadow-md"
-              : "bg-slate-50 dark:bg-[#071526] border-slate-200 dark:border-[#163654] text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:bg-slate-800"
+              : "bg-slate-50 dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:bg-slate-800"
           }`}
         >
           <span className="text-2xs font-bold uppercase tracking-wider block opacity-80">
@@ -159,7 +159,7 @@ export function IntelligentMaintenanceWidget({
       {/* Reminder Cards Grid */}
       <div className="space-y-3">
         {filteredReminders.length === 0 ? (
-          <div className="py-12 text-center text-slate-400 text-xs font-medium bg-slate-50 dark:bg-[#071526] rounded-2xl border border-dashed border-slate-200 dark:border-[#163654]">
+          <div className="py-12 text-center text-slate-400 text-xs font-medium bg-slate-50 dark:bg-[#1F2328] rounded-2xl border border-dashed border-slate-200 dark:border-[#2E343B]">
             No maintenance reminders found under the &quot;{statusTab}&quot; tab.
           </div>
         ) : (
@@ -184,7 +184,7 @@ export function IntelligentMaintenanceWidget({
                     ? "bg-rose-50/40 border-rose-200"
                     : isDueToday
                     ? "bg-amber-50 dark:bg-amber-950/60/40 border-amber-200 dark:border-amber-800"
-                    : "bg-white dark:bg-[#0D223A] border-slate-200 dark:border-[#163654] hover:border-slate-300 dark:border-slate-700"
+                    : "bg-white dark:bg-[#1F2328] border-slate-200 dark:border-[#2E343B] hover:border-slate-300 dark:border-slate-700"
                 }`}
               >
                 <div className="space-y-1.5 flex-1">
@@ -231,14 +231,14 @@ export function IntelligentMaintenanceWidget({
                     type="button"
                     onClick={() => handleMarkCompleted(rem.schedule_id)}
                     disabled={isPending}
-                    className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526] transition shadow-2xs disabled:opacity-50"
+                    className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328] transition shadow-2xs disabled:opacity-50"
                   >
                     Mark Done
                   </button>
 
                   <Link
                     href={`/business/maintenance?propertyId=${rem.property_id}&assetId=${rem.asset_id || ""}`}
-                    className="px-3.5 py-1.5 rounded-xl bg-[#0D9488] hover:bg-teal-700 text-white text-xs font-bold transition shadow-2xs flex items-center gap-1.5"
+                    className="px-3.5 py-1.5 rounded-xl bg-[#E8590C] hover:bg-teal-700 text-white text-xs font-bold transition shadow-2xs flex items-center gap-1.5"
                   >
                     Request Quote →
                   </Link>

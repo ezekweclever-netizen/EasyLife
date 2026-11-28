@@ -44,7 +44,7 @@ export function AdminLoginForm({ nextPath = "/admin" }: { nextPath?: string }) {
           autoComplete="email"
           defaultValue={state.values?.email ?? ""}
           required
-          className="w-full h-11 px-3.5 rounded-xl border border-slate-700 bg-slate-950/70 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#24989A]"
+          className="w-full h-11 px-3.5 rounded-xl border border-slate-700 bg-slate-950/70 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
           placeholder="admin@easylife.ng"
         />
         {state.fieldErrors?.email && (
@@ -66,7 +66,7 @@ export function AdminLoginForm({ nextPath = "/admin" }: { nextPath?: string }) {
             type={showPassword ? "text" : "password"}
             autoComplete="current-password"
             required
-            className="w-full h-11 px-3.5 pr-14 rounded-xl border border-slate-700 bg-slate-950/70 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#24989A]"
+            className="w-full h-11 px-3.5 pr-14 rounded-xl border border-slate-700 bg-slate-950/70 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
             placeholder="Enter administrator password"
           />
           <button

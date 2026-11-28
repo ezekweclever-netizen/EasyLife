@@ -87,7 +87,7 @@ export function PropertyManagerClient({
   return (
     <div className="space-y-6">
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1F2328] p-6 rounded-2xl border border-slate-200 dark:border-[#2E343B]">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Managed Properties
@@ -112,13 +112,13 @@ export function PropertyManagerClient({
             placeholder="Search properties by name, code, or address..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
           />
         </div>
         <select
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
-          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
         >
           <option value="all">All Property Types</option>
           <option value="commercial">Commercial</option>
@@ -130,7 +130,7 @@ export function PropertyManagerClient({
 
       {/* Properties Grid */}
       {filtered.length === 0 ? (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
           <div className="text-4xl mb-3">🏢</div>
           <h3 className="text-base font-semibold text-slate-800 dark:text-slate-100">No properties found</h3>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
@@ -150,14 +150,14 @@ export function PropertyManagerClient({
           {filtered.map((prop) => (
             <div
               key={prop.id}
-              className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
+              className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <span className="inline-block px-2.5 py-0.5 rounded-md text-xs font-bold uppercase tracking-wider bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
                     {prop.code}
                   </span>
-                  <span className="inline-block px-2 py-0.5 rounded-md text-xs font-semibold capitalize bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#5CD3D5] border border-teal-200 dark:border-teal-800">
+                  <span className="inline-block px-2 py-0.5 rounded-md text-xs font-semibold capitalize bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-[#F06A1F] border border-teal-200 dark:border-teal-800">
                     {prop.property_type.replace("_", " ")}
                   </span>
                 </div>
@@ -182,7 +182,7 @@ export function PropertyManagerClient({
                 </div>
 
                 {prop.notes && (
-                  <p className="mt-2.5 text-xs text-slate-500 dark:text-slate-400 italic bg-slate-50 dark:bg-[#071526] p-2 rounded-lg">
+                  <p className="mt-2.5 text-xs text-slate-500 dark:text-slate-400 italic bg-slate-50 dark:bg-[#1F2328] p-2 rounded-lg">
                     "{prop.notes}"
                   </p>
                 )}
@@ -191,7 +191,7 @@ export function PropertyManagerClient({
               <div className="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                 <Link
                   href={`/business/assets?propertyId=${prop.id}`}
-                  className="text-xs font-semibold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:text-[#5CD3D5]"
+                  className="text-xs font-semibold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:text-[#F06A1F]"
                 >
                   View Equipment →
                 </Link>
@@ -218,7 +218,7 @@ export function PropertyManagerClient({
       {/* Modal for Add / Edit Property */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#2E343B] my-8">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 {editingProperty ? "Edit Property" : "Register New Property"}
@@ -254,7 +254,7 @@ export function PropertyManagerClient({
                   defaultValue={editingProperty?.name || ""}
                   required
                   placeholder="e.g. Trans-Amadi Regional Office"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -269,7 +269,7 @@ export function PropertyManagerClient({
                     defaultValue={editingProperty?.code || ""}
                     required
                     placeholder="e.g. PH-HQ-01"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -279,7 +279,7 @@ export function PropertyManagerClient({
                   <select
                     name="propertyType"
                     defaultValue={editingProperty?.property_type || "commercial"}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     <option value="commercial">Commercial</option>
                     <option value="residential">Residential</option>
@@ -299,7 +299,7 @@ export function PropertyManagerClient({
                   defaultValue={editingProperty?.address || ""}
                   required
                   placeholder="e.g. 14 Trans-Amadi Industrial Layout"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -313,7 +313,7 @@ export function PropertyManagerClient({
                     name="city"
                     defaultValue={editingProperty?.city || business.city || "Port Harcourt"}
                     required
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -325,7 +325,7 @@ export function PropertyManagerClient({
                     name="state"
                     defaultValue={editingProperty?.state || business.state || "Rivers State"}
                     required
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
                 <div>
@@ -337,7 +337,7 @@ export function PropertyManagerClient({
                     name="unitsCount"
                     min="1"
                     defaultValue={editingProperty?.units_count || 1}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>
@@ -351,7 +351,7 @@ export function PropertyManagerClient({
                   name="lga"
                   defaultValue={editingProperty?.lga_or_district || ""}
                   placeholder="e.g. Port Harcourt City LGA / GRA Phase 2"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -364,7 +364,7 @@ export function PropertyManagerClient({
                   rows={2}
                   defaultValue={editingProperty?.notes || ""}
                   placeholder="Access instructions, security contacts, generator room locations..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 

@@ -87,7 +87,7 @@ export default async function PostANeedPage({
 
   return (
     <PublicShell>
-      <section className="relative w-full overflow-hidden min-h-[460px] sm:min-h-[500px] flex items-center justify-center bg-[#071E28] text-white border-b border-[#24989A]/20">
+      <section className="relative w-full overflow-hidden min-h-[460px] sm:min-h-[500px] flex items-center justify-center bg-[#1F2328] text-white border-b border-[#2E343B]">
         {/* Full-bleed Hero Background Image */}
         <div className="absolute inset-0 z-0 select-none">
           <Image
@@ -106,13 +106,13 @@ export default async function PostANeedPage({
         {/* Content container: Fully Centered Horizontally and Vertically */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center text-center">
           <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#EE9277] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#E8590C] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Everyday Problems. Smarter Solutions.
             </p>
             <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
               Post a Need — Describe Your Problem, Get Honest Quotes
             </h1>
-            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#E1EEF0] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
+            <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#FAF7F3] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               Whether it&apos;s an urgent emergency repair or a planned project, describe your problem in plain English. EasyLife AI diagnoses your fault and connects you with accredited local trade specialists across Port Harcourt, Lagos, and Abuja.
             </p>
           </div>
@@ -146,59 +146,59 @@ export default async function PostANeedPage({
         {/* How Post a Need Works (The 4-Step Escrow & Quotation Guarantee) */}
         <div className="space-y-6 pt-6">
           <div className="text-center max-w-xl mx-auto space-y-1.5">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
               How Post a Need Works
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+            <p className="text-xs sm:text-sm text-[#4A525C] dark:text-[#C3C8CF]">
               Complete transparency from request submission to final sign-off.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-5 border border-slate-200/80 dark:border-[#163654] space-y-2">
-              <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/60 text-[#0D9488] dark:text-[#5CD3D5] text-xs font-black flex items-center justify-center">
+            <div className="bg-white dark:bg-[#1F2328] rounded-2xl p-5 border border-[#E6E0D8] dark:border-[#2E343B] space-y-2">
+              <div className="w-8 h-8 rounded-full bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30 text-xs font-black flex items-center justify-center">
                 1
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                 Describe in Plain Words
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
                 Detail your problem in Port Harcourt, Lagos, or Abuja, upload fault photos, and specify your preferred timing.
               </p>
             </div>
 
-            <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-5 border border-slate-200/80 dark:border-[#163654] space-y-2">
-              <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/60 text-[#0D9488] dark:text-[#5CD3D5] text-xs font-black flex items-center justify-center">
+            <div className="bg-white dark:bg-[#1F2328] rounded-2xl p-5 border border-[#E6E0D8] dark:border-[#2E343B] space-y-2">
+              <div className="w-8 h-8 rounded-full bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30 text-xs font-black flex items-center justify-center">
                 2
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                 Receive Itemized Quotes
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
                 Accredited pros review your scope and submit transparent breakdowns of labour, materials, and callout fees.
               </p>
             </div>
 
-            <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-5 border border-slate-200/80 dark:border-[#163654] space-y-2">
-              <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/60 text-[#0D9488] dark:text-[#5CD3D5] text-xs font-black flex items-center justify-center">
+            <div className="bg-white dark:bg-[#1F2328] rounded-2xl p-5 border border-[#E6E0D8] dark:border-[#2E343B] space-y-2">
+              <div className="w-8 h-8 rounded-full bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30 text-xs font-black flex items-center justify-center">
                 3
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                 Choose Your Professional
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
                 Compare ratings, reviews, past jobs, and pricing. Accept the quote that fits your timeline and budget.
               </p>
             </div>
 
-            <div className="bg-white dark:bg-[#0D223A] rounded-2xl p-5 border border-slate-200/80 dark:border-[#163654] space-y-2">
-              <div className="w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/60 text-[#0D9488] dark:text-[#5CD3D5] text-xs font-black flex items-center justify-center">
+            <div className="bg-white dark:bg-[#1F2328] rounded-2xl p-5 border border-[#E6E0D8] dark:border-[#2E343B] space-y-2">
+              <div className="w-8 h-8 rounded-full bg-[#FCEBDD] text-[#E8590C] border border-[#E8590C]/30 text-xs font-black flex items-center justify-center">
                 4
               </div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
                 Protected Escrow Release
               </h4>
-              <p className="text-xs text-slate-600 dark:text-slate-400">
+              <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
                 Your payment is securely held in escrow until the technician finishes the job and you approve the quality inspection.
               </p>
             </div>
@@ -206,20 +206,19 @@ export default async function PostANeedPage({
         </div>
 
         {/* Customer Trust Banner */}
-        <div className="rounded-3xl bg-linear-to-r from-[#0D9488] to-[#154752] p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg">
+        <div className="rounded-3xl bg-[#1F2328] border border-[#2E343B] p-8 text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-lg">
           <div className="space-y-1.5 text-center sm:text-left">
-            <h3 className="text-lg sm:text-xl font-bold">
+            <h3 className="text-lg sm:text-xl font-bold text-[#FAF7F3]">
               Looking for a specific verified professional instead?
             </h3>
-            <p className="text-xs sm:text-sm text-teal-100 max-w-xl">
+            <p className="text-xs sm:text-sm text-[#C3C8CF] max-w-xl">
               Browse our accredited directory of verified technicians across Port Harcourt, Lagos, and Abuja. Filter by trade, rating, and neighbourhood.
             </p>
           </div>
           <ButtonLink
             href="/services"
-            variant="secondary"
             size="lg"
-            className="shrink-0 bg-white text-[#154752] hover:bg-slate-100 font-bold"
+            className="shrink-0 bg-[#E8590C] hover:bg-[#C84A06] text-white font-bold"
           >
             Browse Verified Pros &rarr;
           </ButtonLink>

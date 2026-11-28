@@ -116,7 +116,7 @@ export function ScheduleManagerClient({
   return (
     <div className="space-y-6">
       {/* Header bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-2xl border border-slate-200 dark:border-[#163654]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1F2328] p-6 rounded-2xl border border-slate-200 dark:border-[#2E343B]">
         <div>
           <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Maintenance Reminders & Recurring Schedules
@@ -137,13 +137,13 @@ export function ScheduleManagerClient({
       </div>
 
       {/* Status Filter Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 border-b border-slate-200 dark:border-[#163654]">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 border-b border-slate-200 dark:border-[#2E343B]">
         <button
           onClick={() => setFilter("all")}
           className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition ${
             filter === "all"
               ? "bg-slate-900 text-white shadow-xs"
-              : "bg-white dark:bg-[#0D223A] text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#163654]"
+              : "bg-white dark:bg-[#1F2328] text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-[#2E343B]"
           }`}
         >
           All Schedules ({schedules.length})
@@ -153,7 +153,7 @@ export function ScheduleManagerClient({
           className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition ${
             filter === "upcoming"
               ? "bg-purple-700 text-white shadow-xs"
-              : "bg-white dark:bg-[#0D223A] text-purple-700 hover:bg-purple-50 border border-purple-200"
+              : "bg-white dark:bg-[#1F2328] text-purple-700 hover:bg-purple-50 border border-purple-200"
           }`}
         >
           <span>📅</span> Upcoming Maintenance ({upcomingCount})
@@ -163,7 +163,7 @@ export function ScheduleManagerClient({
           className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition ${
             filter === "overdue"
               ? "bg-amber-600 text-white shadow-xs"
-              : "bg-white dark:bg-[#0D223A] text-amber-700 dark:text-amber-300 hover:bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800"
+              : "bg-white dark:bg-[#1F2328] text-amber-700 dark:text-amber-300 hover:bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800"
           }`}
         >
           <span>⚠️</span> Overdue Maintenance ({overdueCount})
@@ -173,7 +173,7 @@ export function ScheduleManagerClient({
           className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold transition ${
             filter === "completed"
               ? "bg-emerald-700 text-white shadow-xs"
-              : "bg-white dark:bg-[#0D223A] text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800"
+              : "bg-white dark:bg-[#1F2328] text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800"
           }`}
         >
           <span>✅</span> Completed Cycles ({completedCount})
@@ -188,13 +188,13 @@ export function ScheduleManagerClient({
             placeholder="Search maintenance schedules by title or description..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+            className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
           />
         </div>
         <select
           value={propertyFilter}
           onChange={(e) => setPropertyFilter(e.target.value)}
-          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#163654] bg-white dark:bg-[#0D223A] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+          className="px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] bg-white dark:bg-[#1F2328] text-sm text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
         >
           <option value="all">All Properties ({properties.length})</option>
           {properties.map((p) => (
@@ -207,7 +207,7 @@ export function ScheduleManagerClient({
 
       {/* Schedules Grid */}
       {filtered.length === 0 ? (
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 p-12 text-center">
           <div className="text-4xl mb-3">📅</div>
           <h3 className="text-base font-semibold text-slate-800 dark:text-slate-100">No maintenance schedules found</h3>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-md mx-auto">
@@ -234,7 +234,7 @@ export function ScheduleManagerClient({
             return (
               <div
                 key={s.id}
-                className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200 dark:border-[#163654] p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
+                className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200 dark:border-[#2E343B] p-5 shadow-2xs hover:shadow-sm transition flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-2">
@@ -261,7 +261,7 @@ export function ScheduleManagerClient({
                     <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{s.description}</p>
                   )}
 
-                  <div className="mt-4 p-3 bg-slate-50 dark:bg-[#071526] rounded-xl space-y-1 text-xs">
+                  <div className="mt-4 p-3 bg-slate-50 dark:bg-[#1F2328] rounded-xl space-y-1 text-xs">
                     <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
                       <span>Property:</span>
                       <span className="font-semibold text-slate-800 dark:text-slate-100">
@@ -307,7 +307,7 @@ export function ScheduleManagerClient({
                   )}
                   <Link
                     href={`/business/maintenance?action=report-fault&propertyId=${s.property_id}&assetId=${s.asset_id || ""}`}
-                    className="px-2.5 py-1 bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 text-teal-800 dark:text-[#5CD3D5] font-semibold text-xs rounded-lg transition"
+                    className="px-2.5 py-1 bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 text-teal-800 dark:text-[#F06A1F] font-semibold text-xs rounded-lg transition"
                   >
                     Dispatch Service →
                   </Link>
@@ -321,7 +321,7 @@ export function ScheduleManagerClient({
       {/* Modal: Create Maintenance Schedule */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white dark:bg-[#0D223A] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#163654] my-8">
+          <div className="bg-white dark:bg-[#1F2328] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200 dark:border-[#2E343B] my-8">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-4">
               <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                 Create Recurring Maintenance Schedule
@@ -356,7 +356,7 @@ export function ScheduleManagerClient({
                   name="title"
                   required
                   placeholder="e.g. Monthly Generator Filter Check & Lube"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -370,7 +370,7 @@ export function ScheduleManagerClient({
                     value={selectedPropInForm}
                     onChange={(e) => setSelectedPropInForm(e.target.value)}
                     required
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     {properties.map((p) => (
                       <option key={p.id} value={p.id}>
@@ -385,7 +385,7 @@ export function ScheduleManagerClient({
                   </label>
                   <select
                     name="assetId"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     <option value="">General Facility</option>
                     {formAssets.map((a) => (
@@ -405,7 +405,7 @@ export function ScheduleManagerClient({
                   <select
                     name="frequency"
                     defaultValue="monthly"
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   >
                     <option value="weekly">Weekly (Every 7 Days)</option>
                     <option value="biweekly">Bi-Weekly (Every 14 Days)</option>
@@ -424,7 +424,7 @@ export function ScheduleManagerClient({
                     name="nextDueDate"
                     required
                     defaultValue={todayStr}
-                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                    className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                   />
                 </div>
               </div>
@@ -439,7 +439,7 @@ export function ScheduleManagerClient({
                   min="0"
                   step="500"
                   placeholder="e.g. 25000"
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 
@@ -451,7 +451,7 @@ export function ScheduleManagerClient({
                   name="description"
                   rows={2}
                   placeholder="Inspect cooling fins, lubricate bearings, test battery voltage..."
-                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#163654] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-[#2E343B] text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500"
                 />
               </div>
 

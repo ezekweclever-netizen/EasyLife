@@ -35,19 +35,19 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
       <div>
         <Link
           href="/business-hub"
-          className="text-xs font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline inline-flex items-center gap-1"
+          className="text-xs font-semibold text-[#E8590C] hover:underline inline-flex items-center gap-1"
         >
           <span>&larr; Back to Business Hub &amp; Directory</span>
         </Link>
       </div>
 
       {/* Main Business Profile Card */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-6 sm:p-10 shadow-xl space-y-8">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] p-6 sm:p-10 shadow-xl space-y-8">
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 pb-6 border-b border-slate-100 dark:border-slate-800">
           <div className="space-y-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] uppercase tracking-wider">
                 {business.business_category || business.industry || "Local Enterprise"}
               </span>
 
@@ -68,7 +68,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
 
             <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               <span className="flex items-center gap-1.5 font-medium">
-                <Icon name="map-pin" className="w-4 h-4 text-[#0D9488]" />
+                <Icon name="map-pin" className="w-4 h-4 text-[#E8590C]" />
                 <span>
                   {business.address ? `${business.address}, ` : ""}
                   {business.city}, {business.state}
@@ -90,7 +90,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
             {business.contact_phone && (
               <a
                 href={`tel:${business.contact_phone}`}
-                className="px-6 py-2.5 rounded-xl font-bold text-xs bg-[#0F766E] text-white hover:bg-[#0D655E] transition-all shadow-md text-center flex items-center justify-center gap-2"
+                className="px-6 py-2.5 rounded-xl font-bold text-xs bg-[#E8590C] text-white hover:bg-[#C84A06] transition-all shadow-md text-center flex items-center justify-center gap-2"
               >
                 <span>📞 Call Business</span>
               </a>
@@ -108,7 +108,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
                 href={business.website.startsWith("http") ? business.website : `https://${business.website}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] font-semibold text-[#0D9488] dark:text-[#5CD3D5] hover:underline text-center"
+                className="text-[11px] font-semibold text-[#E8590C] hover:underline text-center"
               >
                 Visit Official Website &rarr;
               </a>
@@ -140,7 +140,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
                   {business.services_offered.map((srv, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1.5 rounded-xl bg-teal-50 dark:bg-teal-950/50 border border-teal-200/80 dark:border-teal-800 text-xs font-semibold text-[#0F766E] dark:text-[#5CD3D5]"
+                      className="px-3 py-1.5 rounded-xl bg-[#FCEBDD] dark:bg-[#E8590C]/20 border border-[#E8590C]/30 text-xs font-semibold text-[#E8590C]"
                     >
                       ✓ {srv}
                     </span>
@@ -156,7 +156,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
                   <h2 className="text-lg font-bold text-slate-900 dark:text-white">
                     Exclusive Deals &amp; Member Offers
                   </h2>
-                  <span className="text-xs text-[#0D9488] dark:text-[#5CD3D5] font-semibold">
+                  <span className="text-xs text-[#E8590C] font-semibold">
                     {business.promotions.length} Active {business.promotions.length === 1 ? "Deal" : "Deals"}
                   </span>
                 </div>
@@ -179,7 +179,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
 
                         {promo.discount_code && (
                           <div className="flex items-center gap-1.5">
-                            <span className="px-2 py-1 font-mono text-xs font-bold bg-white dark:bg-[#071526] border border-amber-300 dark:border-amber-800 rounded text-slate-800 dark:text-slate-200">
+                            <span className="px-2 py-1 font-mono text-xs font-bold bg-white dark:bg-[#1F2328] border border-amber-300 dark:border-amber-800 rounded text-slate-800 dark:text-slate-200">
                               {promo.discount_code}
                             </span>
                             <button
@@ -224,7 +224,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
           {/* Sidebar Column (1 span) */}
           <div className="space-y-6">
             {/* Operating Hours Card */}
-            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200/90 dark:border-slate-800 space-y-3">
+            <div className="p-5 rounded-2xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] space-y-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-1.5">
                 <span>🕒 Operating Hours</span>
               </h3>
@@ -252,7 +252,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
             </div>
 
             {/* Location & Physical Address Card */}
-            <div className="p-5 rounded-2xl bg-slate-50 dark:bg-[#071526] border border-slate-200/90 dark:border-slate-800 space-y-2">
+            <div className="p-5 rounded-2xl bg-[#FAF7F3] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] space-y-2">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
                 📍 Physical Location
               </h3>
@@ -265,8 +265,8 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
             </div>
 
             {/* Commercial Maintenance Connect */}
-            <div className="p-5 rounded-2xl bg-linear-to-br from-slate-900 to-[#0A2540] text-white space-y-2.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-teal-300">
+            <div className="p-5 rounded-2xl bg-[#1F2328] border border-[#2E343B] text-white space-y-2.5">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#E8590C]">
                 Corporate Maintenance
               </span>
               <h4 className="text-xs font-bold leading-snug">
@@ -277,7 +277,7 @@ export function BusinessProfileClient({ business }: BusinessProfileClientProps) 
               </p>
               <Link
                 href="/business"
-                className="inline-block px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#0D9488] hover:bg-[#0F766E] text-white transition shadow-xs"
+                className="inline-block px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#E8590C] hover:bg-[#C84A06] text-white transition shadow-xs"
               >
                 Open Maintenance Portal &rarr;
               </Link>

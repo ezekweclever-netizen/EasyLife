@@ -109,7 +109,7 @@ export function NotificationsClient({
   return (
     <div className="space-y-4">
       {/* Controls & Filter Bar */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-[#E2E8F0] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+      <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-[#E6E0D8] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
           {[
             { id: "all", label: "All Alerts" },
@@ -123,7 +123,7 @@ export function NotificationsClient({
               onClick={() => setSelectedChannel(tab.id)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition ${
                 selectedChannel === tab.id
-                  ? "bg-[#0F766E] text-white shadow-xs"
+                  ? "bg-[#E8590C] text-white shadow-xs"
                   : "bg-slate-100 dark:bg-slate-800 text-[#64748B] hover:bg-slate-200/70"
               }`}
             >
@@ -137,7 +137,7 @@ export function NotificationsClient({
             type="button"
             onClick={handleMarkAllRead}
             disabled={isPending}
-            className="text-xs font-bold text-[#0F766E] hover:underline self-end sm:self-auto disabled:opacity-50"
+            className="text-xs font-bold text-[#E8590C] hover:underline self-end sm:self-auto disabled:opacity-50"
           >
             Mark all as read
           </button>
@@ -145,11 +145,11 @@ export function NotificationsClient({
       </div>
 
       {/* Notifications List */}
-      <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-[#E2E8F0] shadow-sm overflow-hidden divide-y divide-[#F1F5F9]">
+      <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-[#E6E0D8] shadow-sm overflow-hidden divide-y divide-[#FAF7F3]">
         {filtered.length === 0 ? (
           <div className="p-12 text-center space-y-2">
             <span className="text-3xl">🔔</span>
-            <p className="text-sm font-bold text-[#0F172A]">No notifications found</p>
+            <p className="text-sm font-bold text-[#1F2328]">No notifications found</p>
             <p className="text-xs text-[#64748B]">
               You are all caught up with your service appointments and communications.
             </p>
@@ -163,25 +163,25 @@ export function NotificationsClient({
               <div
                 key={n.id}
                 className={`p-4 sm:p-5 transition-colors space-y-3 ${
-                  !n.is_read ? "bg-teal-50 dark:bg-teal-950/60/30" : "hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#071526]/50"
+                  !n.is_read ? "bg-teal-50 dark:bg-teal-950/60/30" : "hover:bg-slate-50 dark:hover:bg-slate-800/60 dark:bg-[#1F2328]/50"
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#0D223A] border border-[#E2E8F0] shadow-2xs flex items-center justify-center text-lg shrink-0">
+                    <div className="w-10 h-10 rounded-2xl bg-white dark:bg-[#1F2328] border border-[#E6E0D8] shadow-2xs flex items-center justify-center text-lg shrink-0">
                       {getEventIcon(n.notification_type)}
                     </div>
                     <div className="space-y-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3
                           className={`text-sm ${
-                            !n.is_read ? "font-bold text-[#0F172A]" : "font-semibold text-[#334155]"
+                            !n.is_read ? "font-bold text-[#1F2328]" : "font-semibold text-[#4A525C]"
                           }`}
                         >
                           {n.title}
                         </h3>
                         {!n.is_read && (
-                          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#0F766E] text-white">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#E8590C] text-white">
                             NEW
                           </span>
                         )}
@@ -196,7 +196,7 @@ export function NotificationsClient({
                 </div>
 
                 {/* Footer bar with Channel Delivery Badges & Actions */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-[#F1F5F9]">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-t border-[#FAF7F3]">
                   {/* Delivery Status Badges */}
                   <div className="flex items-center gap-2 flex-wrap">
                     <span className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider">
@@ -232,7 +232,7 @@ export function NotificationsClient({
                         onClick={() =>
                           setExpandedDeliveryId(isDeliveriesExpanded ? null : n.id)
                         }
-                        className="text-[11px] font-semibold text-[#0F766E] hover:underline"
+                        className="text-[11px] font-semibold text-[#E8590C] hover:underline"
                       >
                         {isDeliveriesExpanded ? "Hide Audit Details" : "View Delivery Audit"}
                       </button>
@@ -245,7 +245,7 @@ export function NotificationsClient({
                       <button
                         type="button"
                         onClick={() => handleMarkAsRead(n)}
-                        className="text-xs font-semibold text-[#64748B] hover:text-[#0F172A]"
+                        className="text-xs font-semibold text-[#64748B] hover:text-[#1F2328]"
                       >
                         Mark as read
                       </button>
@@ -255,7 +255,7 @@ export function NotificationsClient({
                       <Link
                         href={n.action_url}
                         onClick={() => handleMarkAsRead(n)}
-                        className="px-3.5 py-1.5 rounded-xl bg-[#0F766E] hover:bg-[#0D655E] text-white font-bold text-xs shadow-xs transition"
+                        className="px-3.5 py-1.5 rounded-xl bg-[#E8590C] hover:bg-[#C84A06] text-white font-bold text-xs shadow-xs transition"
                       >
                         View Details →
                       </Link>
@@ -265,8 +265,8 @@ export function NotificationsClient({
 
                 {/* Expandable Delivery Audit Panel */}
                 {isDeliveriesExpanded && n.deliveries && (
-                  <div className="p-3 bg-slate-50 dark:bg-[#071526] rounded-xl border border-slate-200 dark:border-[#163654] text-xs space-y-2 mt-2">
-                    <p className="font-bold text-[#0F172A] text-[11px] uppercase tracking-wider">
+                  <div className="p-3 bg-slate-50 dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-[#2E343B] text-xs space-y-2 mt-2">
+                    <p className="font-bold text-[#1F2328] text-[11px] uppercase tracking-wider">
                       Multi-Channel Delivery Audit Record
                     </p>
                     <div className="divide-y divide-slate-200">

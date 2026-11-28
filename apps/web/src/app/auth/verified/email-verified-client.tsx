@@ -31,9 +31,9 @@ export function EmailVerifiedClient() {
   const isSuccess = status === "success";
 
   return (
-    <div className="py-12 sm:py-16 lg:py-20 bg-[#F8FAFC] dark:bg-[#071526] min-h-[calc(100vh-6rem)] flex items-center justify-center">
+    <div className="py-12 sm:py-16 lg:py-20 bg-[#FAF7F3] dark:bg-[#1F2328] min-h-[calc(100vh-6rem)] flex items-center justify-center">
       <div className="w-full max-w-md mx-auto px-4 sm:px-6">
-        <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200 dark:border-[#163654] p-6 sm:p-8 shadow-sm text-center space-y-6">
+        <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200 dark:border-[#2E343B] p-6 sm:p-8 shadow-sm text-center space-y-6">
           {isSuccess ? (
             <>
               {/* Verified Success State */}
@@ -104,7 +104,7 @@ export function EmailVerifiedClient() {
                     value={resendEmail}
                     onChange={(e) => setResendEmail(e.target.value)}
                     disabled={isPending}
-                    className="w-full h-10.5 px-3.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#24989A]"
+                    className="w-full h-10.5 px-3.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#E8590C]"
                   />
                   <Button
                     type="submit"
@@ -119,7 +119,7 @@ export function EmailVerifiedClient() {
               <div className="pt-2">
                 <Link
                   href="/login"
-                  className="text-xs font-semibold text-[#0F766E] dark:text-[#5CD3D5] hover:underline"
+                  className="text-xs font-semibold text-[#E8590C] dark:text-[#F06A1F] hover:underline"
                 >
                   ← Return to Login
                 </Link>

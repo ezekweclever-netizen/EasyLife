@@ -236,7 +236,7 @@ export function CustomerHeader({
   return (
     <>
       {/* Top Header */}
-      <header className="sticky top-0 z-40 border-b border-[#E2E8F0] dark:border-[#163654] bg-white/95 dark:bg-[#0D223A]/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 dark:supports-[backdrop-filter]:bg-[#0D223A]/90">
+      <header className="sticky top-0 z-40 border-b border-[#E6E0D8] dark:border-[#2E343B] bg-white/95 dark:bg-[#1F2328]/95 backdrop-blur supports-[backdrop-filter]:bg-white/90 dark:supports-[backdrop-filter]:bg-[#1F2328]/90">
         <div className="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-2 sm:gap-3">
           {/* Logo & City Selector */}
           <div className="flex items-center gap-1.5 sm:gap-3 min-w-0 shrink-0">
@@ -257,24 +257,24 @@ export function CustomerHeader({
                   setIsProfileMenuOpen(false);
                   setIsTabletMenuOpen(false);
                 }}
-                className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-[#F0FDFA] dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] border border-[#CCFBF1] dark:border-teal-800 hover:bg-[#CCFBF1] dark:hover:bg-teal-900/60 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] border border-[#E8590C]/30 hover:bg-[#FCEBDD]/80 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
                 aria-expanded={isCityDropdownOpen}
                 aria-haspopup="true"
                 aria-label="Select service location"
               >
-                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#0F766E] dark:text-[#5CD3D5] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#E8590C] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <span className="max-w-[84px] sm:max-w-none truncate">{city}</span>
-                <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#0F766E] dark:text-[#5CD3D5] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#E8590C] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {isCityDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-60 sm:w-64 bg-white dark:bg-[#0D223A] rounded-xl shadow-lg border border-[#E2E8F0] dark:border-[#163654] py-2 z-50">
-                  <div className="px-3 py-1.5 text-xs font-medium text-[#64748B] dark:text-slate-400 border-b border-[#F1F5F9] dark:border-slate-800">
+                <div className="absolute left-0 mt-2 w-60 sm:w-64 bg-white dark:bg-[#1F2328] rounded-xl shadow-lg border border-[#E6E0D8] dark:border-[#2E343B] py-2 z-50">
+                  <div className="px-3 py-1.5 text-xs font-medium text-[#4A525C] dark:text-[#C3C8CF] border-b border-[#E6E0D8] dark:border-[#2E343B]">
                     Select Your City
                   </div>
                   {PILOT_CITIES.map((c) => (
@@ -282,16 +282,16 @@ export function CustomerHeader({
                       key={c.name}
                       type="button"
                       onClick={() => handleSelectCity(c.name)}
-                      className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between hover:bg-[#F8FAFC] dark:hover:bg-slate-800 transition-colors cursor-pointer ${
-                        city === c.name ? "bg-[#F0FDFA] dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] font-semibold" : "text-[#1E293B] dark:text-slate-200"
+                      className={`w-full text-left px-3 py-2 text-sm flex items-center justify-between hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] transition-colors cursor-pointer ${
+                        city === c.name ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-semibold" : "text-[#1F2328] dark:text-[#FAF7F3]"
                       }`}
                     >
                       <div>
                         <div>{c.name}</div>
-                        <div className="text-xs text-[#64748B] dark:text-slate-400">{c.state}</div>
+                        <div className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">{c.state}</div>
                       </div>
                       {city === c.name && (
-                        <svg className="w-4 h-4 text-[#0F766E] dark:text-[#5CD3D5]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-4 h-4 text-[#E8590C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       )}
@@ -302,7 +302,7 @@ export function CustomerHeader({
             </div>
           </div>
 
-          {/* Desktop Navigation Links (>= 1280px only — prevents mid-width wrapping/overlap) */}
+          {/* Desktop Navigation Links (>= 1280px only) */}
           <nav aria-label="Customer Primary" className="hidden xl:block">
             <ul className="flex items-center gap-0.5 2xl:gap-1">
               {CUSTOMER_NAV.map((item) => {
@@ -314,8 +314,8 @@ export function CustomerHeader({
                       aria-current={active ? "page" : undefined}
                       className={`px-2.5 2xl:px-3.5 py-2 rounded-lg text-[13.5px] 2xl:text-[15px] font-medium transition-colors inline-flex items-center gap-1.5 whitespace-nowrap ${
                         active
-                          ? "bg-[#F0FDFA] dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] font-semibold"
-                          : "text-[#334155] dark:text-slate-300 hover:bg-[#F1F5F9] dark:hover:bg-slate-800 hover:text-[#0F172A] dark:hover:text-white"
+                          ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-semibold"
+                          : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] hover:text-[#E8590C] dark:hover:text-[#E8590C]"
                       }`}
                     >
                       {item.label}
@@ -326,16 +326,16 @@ export function CustomerHeader({
             </ul>
           </nav>
 
-          {/* Action CTAs: Mode Switch, Book a Service, Notifications, Theme Toggle, User Profile, Tablet Drawer Toggle */}
+          {/* Action CTAs */}
           <div className="flex items-center gap-1 sm:gap-2.5 shrink-0">
             {/* Mode Switches for Pro & Business in Customer View */}
             {sessionMeta.hasProRole && (
               <Link
                 href="/pro/dashboard"
-                className="hidden lg:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 transition whitespace-nowrap shrink-0"
+                className="hidden lg:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-[#E8F5ED] text-[#2E7D4F] border border-[#A3D9B5] hover:bg-[#E8F5ED]/80 transition whitespace-nowrap shrink-0"
                 title="Switch back to Professional Dashboard"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#2E7D4F] animate-pulse" />
                 Pro Mode
               </Link>
             )}
@@ -343,17 +343,17 @@ export function CustomerHeader({
             {sessionMeta.hasBusinessRole && (
               <Link
                 href="/business"
-                className="hidden lg:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition whitespace-nowrap shrink-0"
+                className="hidden lg:inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold bg-[#EBF0F5] text-[#4A525C] border border-[#C3C8CF] hover:bg-[#EBF0F5]/80 transition whitespace-nowrap shrink-0"
                 title="Switch back to Business Portal"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E8590C] animate-pulse" />
                 Business Mode
               </Link>
             )}
 
             <Link
               href={bookHref}
-              className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-[#0F766E] text-white hover:bg-[#0D655E] shadow-sm transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold bg-[#E8590C] text-white hover:bg-[#C84A06] shadow-sm transition-colors whitespace-nowrap shrink-0"
             >
               <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -380,12 +380,12 @@ export function CustomerHeader({
                   setIsCityDropdownOpen(false);
                   setIsTabletMenuOpen(false);
                 }}
-                className="flex items-center gap-2 p-1 rounded-full hover:bg-[#F1F5F9] dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="flex items-center gap-2 p-1 rounded-full hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] transition-colors cursor-pointer"
                 aria-label="User account menu"
                 aria-expanded={isProfileMenuOpen}
                 aria-haspopup="true"
               >
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#0F766E] text-white flex items-center justify-center font-semibold text-xs uppercase shadow-sm overflow-hidden">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1F2328] text-white border border-[#E8590C]/40 flex items-center justify-center font-semibold text-xs uppercase shadow-sm overflow-hidden">
                   {sessionMeta.avatarUrl ? (
                     <img
                       src={sessionMeta.avatarUrl}
@@ -399,14 +399,14 @@ export function CustomerHeader({
               </button>
 
               {isProfileMenuOpen && (
-                <div className="absolute right-0 mt-2 w-60 bg-white dark:bg-[#0E2238] rounded-xl shadow-lg border border-[#E2E8F0] dark:border-[#163654] py-2 z-50">
-                  <div className="px-4 py-2 border-b border-[#F1F5F9] dark:border-slate-800">
-                    <p className="text-xs text-[#64748B] dark:text-slate-400">Signed in as</p>
-                    <p className="text-sm font-semibold text-[#0F172A] dark:text-white truncate">
+                <div className="absolute right-0 mt-2 w-60 bg-white dark:bg-[#1F2328] rounded-xl shadow-lg border border-[#E6E0D8] dark:border-[#2E343B] py-2 z-50">
+                  <div className="px-4 py-2 border-b border-[#E6E0D8] dark:border-[#2E343B]">
+                    <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">Signed in as</p>
+                    <p className="text-sm font-semibold text-[#1F2328] dark:text-[#FAF7F3] truncate">
                       {user?.fullName || user?.email || "Customer"}
                     </p>
                     {user?.email && (
-                      <p className="text-xs text-[#94A3B8] truncate">{user.email}</p>
+                      <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] truncate">{user.email}</p>
                     )}
                   </div>
 
@@ -415,64 +415,64 @@ export function CustomerHeader({
                     <Link
                       href="/pro/dashboard"
                       onClick={() => setIsProfileMenuOpen(false)}
-                      className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 dark:bg-emerald-950/40 hover:bg-emerald-100 transition border-b border-emerald-100 dark:border-emerald-900/40"
+                      className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#2E7D4F] bg-[#E8F5ED] hover:bg-[#E8F5ED]/80 transition border-b border-[#A3D9B5]"
                     >
                       <span>Switch to Pro Mode</span>
-                      <span className="text-[10px] bg-emerald-600 text-white px-1.5 py-0.5 rounded-full font-bold">PRO</span>
+                      <span className="text-[10px] bg-[#2E7D4F] text-white px-1.5 py-0.5 rounded-full font-bold">PRO</span>
                     </Link>
                   )}
                   {sessionMeta.hasBusinessRole && (
                     <Link
                       href="/business"
                       onClick={() => setIsProfileMenuOpen(false)}
-                      className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 transition border-b border-indigo-100 dark:border-indigo-900/40"
+                      className="flex items-center justify-between px-4 py-2.5 text-xs font-bold text-[#1F2328] dark:text-[#FAF7F3] bg-[#FAF7F3] dark:bg-[#1F2328] hover:bg-[#E6E0D8] transition border-b border-[#E6E0D8] dark:border-[#2E343B]"
                     >
                       <span>Switch to Business Mode</span>
-                      <span className="text-[10px] bg-indigo-600 text-white px-1.5 py-0.5 rounded-full font-bold">BIZ</span>
+                      <span className="text-[10px] bg-[#E8590C] text-white px-1.5 py-0.5 rounded-full font-bold">BIZ</span>
                     </Link>
                   )}
 
                   <Link
                     href="/dashboard"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
+                    className="block px-4 py-2 text-sm text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                   >
                     Dashboard
                   </Link>
                   <Link
                     href="/bookings"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
+                    className="block px-4 py-2 text-sm text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                   >
                     My Bookings
                   </Link>
                   <Link
                     href="/notifications"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
+                    className="block px-4 py-2 text-sm text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                   >
                     Notifications
                   </Link>
                   <Link
                     href="/profile"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
+                    className="block px-4 py-2 text-sm text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                   >
                     Profile Settings
                   </Link>
                   <Link
                     href="/help"
                     onClick={() => setIsProfileMenuOpen(false)}
-                    className="block px-4 py-2 text-sm text-[#334155] dark:text-slate-200 hover:bg-[#F8FAFC] dark:hover:bg-slate-800"
+                    className="block px-4 py-2 text-sm text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328]"
                   >
                     Help &amp; Support
                   </Link>
 
-                  <div className="border-t border-[#F1F5F9] dark:border-slate-800 mt-1 pt-1">
+                  <div className="border-t border-[#E6E0D8] dark:border-[#2E343B] mt-1 pt-1">
                     <form action={logoutAction}>
                       <button
                         type="submit"
-                        className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:bg-red-950/60 dark:hover:bg-red-950/40 font-medium cursor-pointer"
+                        className="w-full text-left px-4 py-2 text-sm text-[#C53030] hover:bg-[#FDE8E8] dark:hover:bg-[#C53030]/20 font-medium cursor-pointer"
                       >
                         Sign out
                       </button>
@@ -494,7 +494,7 @@ export function CustomerHeader({
               aria-expanded={isTabletMenuOpen}
               aria-controls="customer-tablet-navigation"
               aria-label={isTabletMenuOpen ? "Close customer menu" : "Open customer menu"}
-              className="hidden md:inline-flex xl:hidden items-center justify-center h-9 w-9 rounded-lg border border-[#E2E8F0] dark:border-[#163654] text-[#334155] dark:text-slate-300 hover:bg-[#F1F5F9] dark:hover:bg-slate-800 transition-colors shrink-0 cursor-pointer"
+              className="hidden md:inline-flex xl:hidden items-center justify-center h-9 w-9 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] transition-colors shrink-0 cursor-pointer"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 {isTabletMenuOpen ? (
@@ -513,7 +513,7 @@ export function CustomerHeader({
             ref={tabletDrawerRef}
             id="customer-tablet-navigation"
             aria-label="Customer Tablet Navigation"
-            className="hidden md:block xl:hidden border-t border-[#E2E8F0] dark:border-[#163654] bg-white dark:bg-[#0D223A] shadow-lg"
+            className="hidden md:block xl:hidden border-t border-[#E6E0D8] dark:border-[#2E343B] bg-white dark:bg-[#1F2328] shadow-lg"
           >
             <div className="max-w-[1440px] mx-auto px-6 py-3 grid grid-cols-3 gap-2">
               {CUSTOMER_NAV.map((item) => {
@@ -526,8 +526,8 @@ export function CustomerHeader({
                     onClick={() => setIsTabletMenuOpen(false)}
                     className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors whitespace-nowrap ${
                       active
-                        ? "bg-[#F0FDFA] dark:bg-teal-950/60 text-[#0F766E] dark:text-[#5CD3D5] font-semibold border border-[#CCFBF1] dark:border-teal-800"
-                        : "text-[#334155] dark:text-slate-300 hover:bg-[#F1F5F9] dark:hover:bg-slate-800 hover:text-[#0F172A] dark:hover:text-white"
+                        ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20 text-[#E8590C] font-semibold border border-[#E8590C]/30"
+                        : "text-[#1F2328] dark:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] hover:text-[#E8590C] dark:hover:text-[#E8590C]"
                     }`}
                   >
                     {item.icon}
@@ -546,7 +546,7 @@ export function CustomerHeader({
       {/* Mobile Bottom Navigation Bar (< 768px thumb reachability) */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-[#0D223A] border-t border-[#E2E8F0] dark:border-[#163654] shadow-lg pb-safe"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-[#1F2328] border-t border-[#E6E0D8] dark:border-[#2E343B] shadow-lg pb-safe"
       >
         <ul className="flex items-center justify-around h-16 max-w-md mx-auto px-1">
           {CUSTOMER_NAV.map((item) => {
@@ -557,10 +557,10 @@ export function CustomerHeader({
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={`flex flex-col items-center justify-center py-1 text-center transition-colors ${
-                    active ? "text-[#0F766E] dark:text-[#5CD3D5] font-semibold" : "text-[#64748B] dark:text-slate-400 hover:text-[#0F172A] dark:hover:text-white"
+                    active ? "text-[#E8590C] font-semibold" : "text-[#4A525C] dark:text-[#C3C8CF] hover:text-[#1F2328] dark:hover:text-[#FAF7F3]"
                   }`}
                 >
-                  <div className={`p-1 rounded-full ${active ? "bg-[#F0FDFA] dark:bg-teal-950/60" : ""}`}>
+                  <div className={`p-1 rounded-full ${active ? "bg-[#FCEBDD] dark:bg-[#E8590C]/20" : ""}`}>
                     {item.icon}
                   </div>
                   <span className="text-[11px] mt-0.5 leading-tight whitespace-nowrap truncate max-w-full px-0.5">

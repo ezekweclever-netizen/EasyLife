@@ -159,10 +159,10 @@ export function EmployerJobsClient({
   return (
     <div className="space-y-8">
       {/* Top Banner & Title */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#0D223A] p-6 rounded-3xl border border-slate-200/90 dark:border-[#163654] shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-[#1F2328] p-6 rounded-3xl border border-slate-200/90 dark:border-[#2E343B] shadow-sm">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+            <span className="text-xs font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
               Employer Recruitment Console
             </span>
             {businessName && (
@@ -186,7 +186,7 @@ export function EmployerJobsClient({
           </Link>
           <Link
             href="/jobs/post"
-            className="px-5 py-2.5 rounded-xl bg-[#0F766E] text-white text-xs sm:text-sm font-bold hover:bg-[#0D655E] transition shadow-md flex items-center gap-1.5 whitespace-nowrap"
+            className="px-5 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs sm:text-sm font-bold hover:bg-[#C84A06] transition shadow-md flex items-center gap-1.5 whitespace-nowrap"
           >
             <span>+</span>
             <span>Post New Vacancy</span>
@@ -196,7 +196,7 @@ export function EmployerJobsClient({
 
       {/* Metrics Strip */}
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-4 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200/90 dark:border-[#2E343B] p-4 text-center">
           <div className="text-2xl font-black text-slate-900 dark:text-white">
             {data.summary.totalVacancies}
           </div>
@@ -205,7 +205,7 @@ export function EmployerJobsClient({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-4 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200/90 dark:border-[#2E343B] p-4 text-center">
           <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400">
             {data.summary.openVacancies}
           </div>
@@ -214,7 +214,7 @@ export function EmployerJobsClient({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-4 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200/90 dark:border-[#2E343B] p-4 text-center">
           <div className="text-2xl font-black text-indigo-600 dark:text-indigo-400">
             {data.summary.totalApplications}
           </div>
@@ -223,7 +223,7 @@ export function EmployerJobsClient({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-4 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200/90 dark:border-[#2E343B] p-4 text-center">
           <div className="text-2xl font-black text-amber-600 dark:text-amber-400">
             {data.summary.pendingApplications}
           </div>
@@ -232,7 +232,7 @@ export function EmployerJobsClient({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-4 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200/90 dark:border-[#2E343B] p-4 text-center">
           <div className="text-2xl font-black text-teal-600 dark:text-teal-400">
             {data.summary.shortlistedApplications}
           </div>
@@ -241,7 +241,7 @@ export function EmployerJobsClient({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-4 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200/90 dark:border-[#2E343B] p-4 text-center">
           <div className="text-2xl font-black text-purple-600 dark:text-purple-400">
             {data.summary.interviewedApplications}
           </div>
@@ -250,7 +250,7 @@ export function EmployerJobsClient({
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0D223A] rounded-2xl border border-slate-200/90 dark:border-[#163654] p-4 text-center">
+        <div className="bg-white dark:bg-[#1F2328] rounded-2xl border border-slate-200/90 dark:border-[#2E343B] p-4 text-center">
           <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400">
             {data.summary.offeredApplications}
           </div>
@@ -284,7 +284,7 @@ export function EmployerJobsClient({
           onClick={() => setActiveTab("vacancies")}
           className={`pb-3 px-3 font-bold text-sm border-b-2 transition-all cursor-pointer ${
             activeTab === "vacancies"
-              ? "border-[#0F766E] text-[#0F766E] dark:text-[#5CD3D5]"
+              ? "border-[#E8590C] text-[#E8590C] dark:text-[#F06A1F]"
               : "border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400"
           }`}
         >
@@ -294,7 +294,7 @@ export function EmployerJobsClient({
           onClick={() => setActiveTab("applications")}
           className={`pb-3 px-3 font-bold text-sm border-b-2 transition-all cursor-pointer ${
             activeTab === "applications"
-              ? "border-[#0F766E] text-[#0F766E] dark:text-[#5CD3D5]"
+              ? "border-[#E8590C] text-[#E8590C] dark:text-[#F06A1F]"
               : "border-transparent text-slate-500 hover:text-slate-800 dark:text-slate-400"
           }`}
         >
@@ -306,7 +306,7 @@ export function EmployerJobsClient({
       {activeTab === "vacancies" && (
         <div className="space-y-4">
           {vacancies.length === 0 ? (
-            <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-12 text-center space-y-4">
+            <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200/90 dark:border-[#2E343B] p-12 text-center space-y-4">
               <div className="w-14 h-14 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 text-2xl mx-auto flex items-center justify-center">
                 💼
               </div>
@@ -321,7 +321,7 @@ export function EmployerJobsClient({
               <div className="pt-2">
                 <Link
                   href="/jobs/post"
-                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#0F766E] text-white text-xs sm:text-sm font-bold hover:bg-[#0D655E] transition shadow-md"
+                  className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs sm:text-sm font-bold hover:bg-[#C84A06] transition shadow-md"
                 >
                   + Post a Vacancy Now
                 </Link>
@@ -347,11 +347,11 @@ export function EmployerJobsClient({
                 return (
                   <div
                     key={vac.id}
-                    className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-6"
+                    className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200/90 dark:border-[#2E343B] p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col md:flex-row md:items-center justify-between gap-6"
                   >
                     <div className="space-y-2 max-w-2xl">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 dark:bg-teal-950/60 text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
                           {vac.category}
                         </span>
                         <span
@@ -412,7 +412,7 @@ export function EmployerJobsClient({
                             setSelectedVacancyId(vac.id);
                             setActiveTab("applications");
                           }}
-                          className="px-4 py-2 rounded-xl text-xs font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] transition shadow-xs flex items-center gap-1.5 cursor-pointer"
+                          className="px-4 py-2 rounded-xl text-xs font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] transition shadow-xs flex items-center gap-1.5 cursor-pointer"
                         >
                           <span>👥</span>
                           <span>
@@ -455,7 +455,7 @@ export function EmployerJobsClient({
       {activeTab === "applications" && (
         <div className="space-y-6">
           {/* Filters Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#0D223A] p-4 rounded-2xl border border-slate-200/90 dark:border-[#163654]">
+          <div className="flex flex-wrap items-center justify-between gap-3 bg-white dark:bg-[#1F2328] p-4 rounded-2xl border border-slate-200/90 dark:border-[#2E343B]">
             <div className="flex flex-wrap items-center gap-3">
               <div>
                 <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 block mb-1">
@@ -464,7 +464,7 @@ export function EmployerJobsClient({
                 <select
                   value={selectedVacancyId}
                   onChange={(e) => setSelectedVacancyId(e.target.value)}
-                  className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-medium text-slate-800 dark:text-white"
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium text-slate-800 dark:text-white"
                 >
                   <option value="all">All Vacancies ({allApplications.length})</option>
                   {vacancies.map((v) => (
@@ -482,7 +482,7 @@ export function EmployerJobsClient({
                 <select
                   value={statusFilter}
                   onChange={(e) => setStatusFilter(e.target.value)}
-                  className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs font-medium text-slate-800 dark:text-white"
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium text-slate-800 dark:text-white"
                 >
                   <option value="all">All Statuses</option>
                   <option value="submitted">Submitted</option>
@@ -498,7 +498,7 @@ export function EmployerJobsClient({
             {selectedVacancyId !== "all" && (
               <button
                 onClick={() => setSelectedVacancyId("all")}
-                className="text-xs font-semibold text-[#0F766E] dark:text-[#5CD3D5] hover:underline"
+                className="text-xs font-semibold text-[#E8590C] dark:text-[#F06A1F] hover:underline"
               >
                 Clear Vacancy Filter &times;
               </button>
@@ -506,7 +506,7 @@ export function EmployerJobsClient({
           </div>
 
           {filteredApplications.length === 0 ? (
-            <div className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-12 text-center space-y-4">
+            <div className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200/90 dark:border-[#2E343B] p-12 text-center space-y-4">
               <div className="w-14 h-14 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-400 text-2xl mx-auto flex items-center justify-center">
                 📋
               </div>
@@ -523,7 +523,7 @@ export function EmployerJobsClient({
               {selectedVacancyId !== "all" && (
                 <button
                   onClick={() => setSelectedVacancyId("all")}
-                  className="text-xs font-bold text-[#0F766E] dark:text-[#5CD3D5] hover:underline"
+                  className="text-xs font-bold text-[#E8590C] dark:text-[#F06A1F] hover:underline"
                 >
                   View All Vacancy Applications
                 </button>
@@ -555,7 +555,7 @@ export function EmployerJobsClient({
                 return (
                   <div
                     key={app.id}
-                    className="bg-white dark:bg-[#0D223A] rounded-3xl border border-slate-200/90 dark:border-[#163654] p-6 shadow-sm space-y-4"
+                    className="bg-white dark:bg-[#1F2328] rounded-3xl border border-slate-200/90 dark:border-[#2E343B] p-6 shadow-sm space-y-4"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div>
@@ -590,12 +590,12 @@ export function EmployerJobsClient({
                     </div>
 
                     {/* Contact details */}
-                    <div className="flex flex-wrap items-center gap-4 text-xs bg-slate-50 dark:bg-[#071526]/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <div className="flex flex-wrap items-center gap-4 text-xs bg-slate-50 dark:bg-[#1F2328]/50 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
                       <div className="flex items-center gap-1.5">
                         <span className="text-slate-400">✉️</span>
                         <a
                           href={`mailto:${app.applicant_email}`}
-                          className="font-medium text-[#0F766E] dark:text-[#5CD3D5] hover:underline"
+                          className="font-medium text-[#E8590C] dark:text-[#F06A1F] hover:underline"
                         >
                           {app.applicant_email}
                         </a>
@@ -605,7 +605,7 @@ export function EmployerJobsClient({
                         <span className="text-slate-400">📞</span>
                         <a
                           href={`tel:${app.applicant_phone}`}
-                          className="font-medium text-[#0F766E] dark:text-[#5CD3D5] hover:underline"
+                          className="font-medium text-[#E8590C] dark:text-[#F06A1F] hover:underline"
                         >
                           {app.applicant_phone}
                         </a>
@@ -649,7 +649,7 @@ export function EmployerJobsClient({
                         <span className="font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px]">
                           Candidate Introduction / Pitch:
                         </span>
-                        <p className="bg-white dark:bg-[#0D223A] p-3 rounded-xl border border-slate-200 dark:border-slate-800 leading-relaxed">
+                        <p className="bg-white dark:bg-[#1F2328] p-3 rounded-xl border border-slate-200 dark:border-slate-800 leading-relaxed">
                           {app.cover_letter}
                         </p>
                       </div>
@@ -691,7 +691,7 @@ export function EmployerJobsClient({
                             setTargetStatus(app.status);
                             setNotesInput(app.employer_notes || "");
                           }}
-                          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] transition cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] transition cursor-pointer"
                         >
                           Update Status &amp; Notes
                         </button>
@@ -700,7 +700,7 @@ export function EmployerJobsClient({
 
                     {/* Inline Status & Notes Editing Modal */}
                     {editingNotesAppId === app.id && (
-                      <div className="bg-slate-50 dark:bg-[#071526] p-4 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 mt-3">
+                      <div className="bg-slate-50 dark:bg-[#1F2328] p-4 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 mt-3">
                         <div className="flex items-center justify-between">
                           <h5 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                             Update Candidate Status for {app.applicant_name}
@@ -725,7 +725,7 @@ export function EmployerJobsClient({
                                   e.target.value as JobApplicationStatus
                                 )
                               }
-                              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs font-medium text-slate-900 dark:text-white"
+                              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs font-medium text-slate-900 dark:text-white"
                             >
                               <option value="submitted">Submitted</option>
                               <option value="under_review">Under Review</option>
@@ -745,7 +745,7 @@ export function EmployerJobsClient({
                               value={notesInput}
                               onChange={(e) => setNotesInput(e.target.value)}
                               placeholder="e.g. Passed initial technical screening. Interview Friday 10 AM."
-                              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0D223A] text-xs text-slate-900 dark:text-white"
+                              className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs text-slate-900 dark:text-white"
                             />
                           </div>
                         </div>
@@ -768,7 +768,7 @@ export function EmployerJobsClient({
                                 notesInput.trim()
                               )
                             }
-                            className="px-4 py-1.5 rounded-xl text-xs font-bold bg-[#0F766E] text-white hover:bg-[#0D655E] transition shadow-xs disabled:opacity-50 cursor-pointer"
+                            className="px-4 py-1.5 rounded-xl text-xs font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] transition shadow-xs disabled:opacity-50 cursor-pointer"
                           >
                             {isUpdating === app.id
                               ? "Saving..."

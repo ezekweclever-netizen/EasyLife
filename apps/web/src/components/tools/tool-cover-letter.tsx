@@ -38,7 +38,7 @@ export function ToolCoverLetter() {
   return (
     <div className="space-y-6">
       <div>
-        <span className="text-[10px] font-bold text-[#0D9488] dark:text-[#5CD3D5] uppercase tracking-wider">
+        <span className="text-[10px] font-bold text-[#E8590C] dark:text-[#F06A1F] uppercase tracking-wider">
           Job Applications &amp; Career
         </span>
         <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white mt-1">
@@ -49,11 +49,11 @@ export function ToolCoverLetter() {
         </p>
       </div>
 
-      <div className="bg-slate-50 dark:bg-[#071526] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
+      <div className="bg-slate-50 dark:bg-[#1F2328] p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Applicant Info */}
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
-            <span className="font-bold text-[#0D9488] uppercase tracking-wider block">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+            <span className="font-bold text-[#E8590C] uppercase tracking-wider block">
               1. Your Contact Information
             </span>
             <input
@@ -61,14 +61,14 @@ export function ToolCoverLetter() {
               value={applicantName}
               onChange={(e) => setApplicantName(e.target.value)}
               placeholder="Your Full Name"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
             />
             <input
               type="text"
               value={applicantAddress}
               onChange={(e) => setApplicantAddress(e.target.value)}
               placeholder="Your Address / City"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
             />
             <div className="grid grid-cols-2 gap-2">
               <input
@@ -76,20 +76,20 @@ export function ToolCoverLetter() {
                 value={applicantPhone}
                 onChange={(e) => setApplicantPhone(e.target.value)}
                 placeholder="Phone Number"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
               <input
                 type="email"
                 value={applicantEmail}
                 onChange={(e) => setApplicantEmail(e.target.value)}
                 placeholder="Email Address"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
           </div>
 
           {/* Employer Info */}
-          <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
+          <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-2 text-xs">
             <span className="font-bold text-slate-500 uppercase tracking-wider block">
               2. Employer &amp; Target Role
             </span>
@@ -99,14 +99,14 @@ export function ToolCoverLetter() {
                 value={recipientName}
                 onChange={(e) => setRecipientName(e.target.value)}
                 placeholder="Hiring Manager Name"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-bold"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
               />
               <input
                 type="text"
                 value={recipientTitle}
                 onChange={(e) => setRecipientTitle(e.target.value)}
                 placeholder="Hiring Manager Title"
-                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526]"
+                className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328]"
               />
             </div>
             <input
@@ -114,21 +114,21 @@ export function ToolCoverLetter() {
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
               placeholder="Company Name"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] font-bold"
             />
             <input
               type="text"
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
               placeholder="Target Job Title"
-              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-[#0D9488] font-bold"
+              className="w-full px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-[#E8590C] font-bold"
             />
           </div>
         </div>
 
         {/* Paragraphs Editing */}
-        <div className="p-4 bg-white dark:bg-[#0D223A] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
-          <span className="font-bold text-[#0D9488] uppercase tracking-wider block">
+        <div className="p-4 bg-white dark:bg-[#1F2328] rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-xs">
+          <span className="font-bold text-[#E8590C] uppercase tracking-wider block">
             3. Letter Narrative &amp; Arguments
           </span>
 
@@ -138,7 +138,7 @@ export function ToolCoverLetter() {
               value={openingPara}
               onChange={(e) => setOpeningPara(e.target.value)}
               rows={3}
-              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs leading-relaxed"
+              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs leading-relaxed"
             />
           </div>
 
@@ -148,7 +148,7 @@ export function ToolCoverLetter() {
               value={bodyPara1}
               onChange={(e) => setBodyPara1(e.target.value)}
               rows={3}
-              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs leading-relaxed"
+              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs leading-relaxed"
             />
           </div>
 
@@ -158,7 +158,7 @@ export function ToolCoverLetter() {
               value={bodyPara2}
               onChange={(e) => setBodyPara2(e.target.value)}
               rows={2}
-              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs leading-relaxed"
+              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs leading-relaxed"
             />
           </div>
 
@@ -168,7 +168,7 @@ export function ToolCoverLetter() {
               value={closingPara}
               onChange={(e) => setClosingPara(e.target.value)}
               rows={2}
-              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#071526] text-xs leading-relaxed"
+              className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1F2328] text-xs leading-relaxed"
             />
           </div>
         </div>
@@ -177,7 +177,7 @@ export function ToolCoverLetter() {
           <button
             type="button"
             onClick={() => setIsPreviewOpen(true)}
-            className="px-6 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
+            className="px-6 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#0B7A6F] text-white text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <span>👁️ View Application Cover Letter</span>
           </button>
