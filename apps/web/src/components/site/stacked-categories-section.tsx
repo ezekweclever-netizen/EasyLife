@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -106,9 +106,24 @@ export const EASYLIFE_PURPOSE_CARDS: readonly StickyPurposeCard[] = [
 ];
 
 export function StackedCategoriesSection() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const stickyRefs = useRef<Array<HTMLDivElement | null>>([]);
   const cardSurfaceRefs = useRef<Array<HTMLElement | null>>([]);
+  const labelRefs = useRef<Array<HTMLParagraphElement | null>>([]);
+  const actionsRefs = useRef<Array<HTMLDivElement | null>>([]);
   const dimOverlayRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  // Default baseline fallback values
+  const [metrics, setMetrics] = useState({
+    stackBase: 93,
+    top0: 93,
+    top1: 146,
+    top2: 215,
+    stackStep: 54,
+  });
+
+  const metricsRef = useRef(metrics);
+  metricsRef.current = metrics;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -117,36 +132,136 @@ export function StackedCategoriesSection() {
     let reducedMotion = motionQuery.matches;
     let rafId = 0;
 
-    const resetStyles = () => {
+    /**
+     * Measure actual navbar height and card top padding + label height
+     * to set precise CSS variables for index-based sticky positioning:
+     * Card 0 top = navbar height + 12px
+     * Card 1 top = Card 0 top + step0 (Card 0 top padding + label height + 12px)
+     * Card 2 top = Card 1 top + step1 (Card 1 top padding + label height + 12px)
+     */
+    const updateStackMetrics = () => {
+      // 1. Measure Navbar height (fixed header)
+      const headerEl = document.querySelector("header");
+      let navHeight = 80;
+      if (headerEl) {
+        const navRect = headerEl.getBoundingClientRect();
+        navHeight = Math.max(64, Math.round(navRect.height));
+      } else {
+        navHeight = window.innerWidth >= 640 ? 92 : 80;
+      }
+
+      // Card 1 top = navbar height + 12px
+      const calculatedStackBase = navHeight + 12;
+
+      // 2. Measure per-card step heights from actual card top padding and label height
+      const stepHeights: number[] = [53, 53, 53];
+
       for (let i = 0; i < EASYLIFE_PURPOSE_CARDS.length; i++) {
-        const surface = cardSurfaceRefs.current[i];
-        const overlay = dimOverlayRefs.current[i];
-        if (surface) {
-          surface.style.transform = "translate3d(0, 0, 0) scale(1)";
+        const cardEl = cardSurfaceRefs.current[i];
+        const labelEl = labelRefs.current[i];
+
+        if (cardEl && labelEl) {
+          const cardRect = cardEl.getBoundingClientRect();
+          const labelRect = labelEl.getBoundingClientRect();
+          // Distance from card's top edge to the bottom of the eyebrow label
+          const labelBottomFromCardTop = labelRect.bottom - cardRect.top;
+          // Step height = distance from top to label bottom + 12px gap
+          const step = Math.round(labelBottomFromCardTop + 12);
+          if (step > 30) {
+            stepHeights[i] = step;
+          }
         }
-        if (overlay) {
-          overlay.style.opacity = "0";
-        }
+      }
+
+      const calculatedTop0 = calculatedStackBase;
+      const calculatedTop1 = calculatedTop0 + (stepHeights[0] ?? 53);
+      const calculatedTop2 = calculatedTop1 + (stepHeights[1] ?? 53);
+      const calculatedMaxStep = Math.max(...stepHeights);
+
+      const nextMetrics = {
+        stackBase: calculatedStackBase,
+        top0: calculatedTop0,
+        top1: calculatedTop1,
+        top2: calculatedTop2,
+        stackStep: calculatedMaxStep,
+      };
+
+      setMetrics(nextMetrics);
+
+      if (containerRef.current) {
+        containerRef.current.style.setProperty("--stack-base", `${calculatedStackBase}px`);
+        containerRef.current.style.setProperty("--stack-step", `${calculatedMaxStep}px`);
+        containerRef.current.style.setProperty("--top-0", `${calculatedTop0}px`);
+        containerRef.current.style.setProperty("--top-1", `${calculatedTop1}px`);
+        containerRef.current.style.setProperty("--top-2", `${calculatedTop2}px`);
       }
     };
 
+    /**
+     * Manage depth shading, lockstep exit synchronization, and prevent covered cards'
+     * buttons/chips from receiving pointer clicks or keyboard Tab focus.
+     */
     const updateDepth = () => {
-      if (reducedMotion) {
-        resetStyles();
-        return;
+      const currentMetrics = metricsRef.current;
+      const step0 = currentMetrics.top1 - currentMetrics.top0;
+      const step1 = currentMetrics.top2 - currentMetrics.top1;
+
+      const card1Wrapper = stickyRefs.current[0];
+      const card2Wrapper = stickyRefs.current[1];
+      const card3Wrapper = stickyRefs.current[2];
+
+      // Invariant lock on exit:
+      // When Card 3 reaches its final stacked position (top2), Card 2 MUST remain
+      // exactly step1 above Card 3, and Card 1 MUST remain exactly step0 above Card 2.
+      if (card3Wrapper && card2Wrapper && card1Wrapper) {
+        const c3_y = card3Wrapper.getBoundingClientRect().top;
+
+        if (c3_y <= currentMetrics.top2) {
+          const targetY2 = c3_y - step1;
+          const targetY1 = targetY2 - step0;
+
+          // Compute raw position of Card 2 and Card 1 without current translation
+          const currentTrans2 = parseFloat(card2Wrapper.dataset.transY || "0");
+          const c2_raw = card2Wrapper.getBoundingClientRect().top - currentTrans2;
+
+          const currentTrans1 = parseFloat(card1Wrapper.dataset.transY || "0");
+          const c1_raw = card1Wrapper.getBoundingClientRect().top - currentTrans1;
+
+          const deltaY2 = Math.round(targetY2 - c2_raw);
+          const deltaY1 = Math.round(targetY1 - c1_raw);
+
+          card2Wrapper.style.transform = `translate3d(0, ${deltaY2}px, 0)`;
+          card2Wrapper.dataset.transY = `${deltaY2}`;
+
+          card1Wrapper.style.transform = `translate3d(0, ${deltaY1}px, 0)`;
+          card1Wrapper.dataset.transY = `${deltaY1}`;
+        } else {
+          if (card2Wrapper.dataset.transY) {
+            card2Wrapper.style.transform = "";
+            delete card2Wrapper.dataset.transY;
+          }
+          if (card1Wrapper.dataset.transY) {
+            card1Wrapper.style.transform = "";
+            delete card1Wrapper.dataset.transY;
+          }
+        }
       }
 
       for (let i = 0; i < EASYLIFE_PURPOSE_CARDS.length; i++) {
         const currentSticky = stickyRefs.current[i];
         const nextSticky = stickyRefs.current[i + 1];
-        const surface = cardSurfaceRefs.current[i];
         const overlay = dimOverlayRefs.current[i];
+        const actions = actionsRefs.current[i];
 
-        if (!surface) continue;
+        if (!currentSticky) continue;
 
-        if (!currentSticky || !nextSticky) {
-          surface.style.transform = "translate3d(0, 0, 0) scale(1)";
+        if (!nextSticky) {
+          // Last card (Card 3) is never covered
           if (overlay) overlay.style.opacity = "0";
+          if (actions) {
+            actions.removeAttribute("inert");
+            actions.querySelectorAll("a").forEach((a) => a.removeAttribute("tabindex"));
+          }
           continue;
         }
 
@@ -155,26 +270,46 @@ export function StackedCategoriesSection() {
         const overlap = currentRect.bottom - nextRect.top;
 
         if (overlap <= 0) {
-          surface.style.transform = "translate3d(0, 0, 0) scale(1)";
+          // Not overlapping yet
           if (overlay) overlay.style.opacity = "0";
+          if (actions) {
+            actions.removeAttribute("inert");
+            actions.querySelectorAll("a").forEach((a) => a.removeAttribute("tabindex"));
+          }
           continue;
         }
 
-        const cardHeight = Math.max(260, currentRect.height);
-        const progress = Math.min(1, Math.max(0, overlap / cardHeight));
-        const scale = 1 - progress * 0.04;
-        const dimOpacity = progress * 0.22;
+        // Accessibility requirement 14:
+        // Disable click and keyboard focus on covered card buttons & chips
+        if (actions) {
+          const actionsRect = actions.getBoundingClientRect();
+          const isCovered = nextRect.top <= actionsRect.bottom;
+          if (isCovered) {
+            actions.setAttribute("inert", "");
+            actions.querySelectorAll("a").forEach((a) => a.setAttribute("tabindex", "-1"));
+          } else {
+            actions.removeAttribute("inert");
+            actions.querySelectorAll("a").forEach((a) => a.removeAttribute("tabindex"));
+          }
+        }
 
-        surface.style.transform = `translate3d(0, 0, 0) scale(${scale.toFixed(4)})`;
-        if (overlay) {
-          overlay.style.opacity = dimOpacity.toFixed(4);
+        // Dimming overlay on covered content (eyebrow label sits above overlay with z-30)
+        if (overlay && !reducedMotion) {
+          const cardHeight = Math.max(200, currentRect.height);
+          const progress = Math.min(1, Math.max(0, overlap / cardHeight));
+          const dimOpacity = progress * 0.22;
+          overlay.style.opacity = dimOpacity.toFixed(3);
+        } else if (overlay) {
+          overlay.style.opacity = "0";
         }
       }
     };
 
     const scheduleUpdate = () => {
       cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(updateDepth);
+      rafId = requestAnimationFrame(() => {
+        updateDepth();
+      });
     };
 
     const handleMotionChange = (e: MediaQueryListEvent) => {
@@ -182,13 +317,37 @@ export function StackedCategoriesSection() {
       scheduleUpdate();
     };
 
+    // Initial measurements and observers
+    updateStackMetrics();
     updateDepth();
+
+    // ResizeObserver watches for label wraps, font loading, or layout shifts
+    const resizeObserver = new ResizeObserver(() => {
+      updateStackMetrics();
+      scheduleUpdate();
+    });
+
+    labelRefs.current.forEach((el) => el && resizeObserver.observe(el));
+    cardSurfaceRefs.current.forEach((el) => el && resizeObserver.observe(el));
+
+    // Watch font loading to recalibrate line heights accurately
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        updateStackMetrics();
+        scheduleUpdate();
+      });
+    }
+
     window.addEventListener("scroll", scheduleUpdate, { passive: true });
-    window.addEventListener("resize", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", () => {
+      updateStackMetrics();
+      scheduleUpdate();
+    });
     motionQuery.addEventListener("change", handleMotionChange);
 
     return () => {
       cancelAnimationFrame(rafId);
+      resizeObserver.disconnect();
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
       motionQuery.removeEventListener("change", handleMotionChange);
@@ -199,12 +358,12 @@ export function StackedCategoriesSection() {
     <section
       id="popular-categories"
       aria-label="What You Can Do on EasyLife"
-      className="relative bg-[#FAF7F3] dark:bg-[#15181C] py-16 sm:py-24 border-b border-[#E6E0D8] dark:border-[#2E343B]"
+      className="relative bg-[#FAF7F3] dark:bg-[#15181C] pt-12 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-20 border-b border-[#E6E0D8] dark:border-[#2E343B]"
       style={{ overflowX: "clip" }}
     >
       <div className="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading above Sticky Stack */}
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
           <span className="text-xs sm:text-sm font-bold tracking-wider text-[#E8590C] uppercase">
             Everyday Problems. Smarter Solutions.
           </span>
@@ -216,10 +375,22 @@ export function StackedCategoriesSection() {
           </p>
         </div>
 
-        {/* Sticky 3-Card Stack Container */}
-        <div className="relative flex flex-col gap-[220px] sm:gap-[250px] md:gap-[280px] pb-16 sm:pb-24">
+        {/* Sticky 3-Card Stack Container with tightly coupled spacing */}
+        <div
+          ref={containerRef}
+          className="relative flex flex-col gap-6 md:gap-10 pb-0"
+          style={
+            {
+              "--stack-base": `${metrics.stackBase}px`,
+              "--stack-step": `${metrics.stackStep}px`,
+              "--top-0": `${metrics.top0}px`,
+              "--top-1": `${metrics.top1}px`,
+              "--top-2": `${metrics.top2}px`,
+            } as React.CSSProperties
+          }
+        >
           {EASYLIFE_PURPOSE_CARDS.map((card, index) => {
-            const topOffsetStyle = `calc(max(84px, (100vh - 360px) / 2) + ${index * 16}px)`;
+            const topVar = index === 0 ? "var(--top-0)" : index === 1 ? "var(--top-1)" : "var(--top-2)";
 
             return (
               <div
@@ -227,11 +398,14 @@ export function StackedCategoriesSection() {
                 ref={(el) => {
                   stickyRefs.current[index] = el;
                 }}
-                style={{
-                  position: "sticky",
-                  top: topOffsetStyle,
-                  zIndex: 10 + index * 10,
-                }}
+                style={
+                  {
+                    position: "sticky",
+                    top: `var(--card-top-${index}, ${topVar})`,
+                    zIndex: 10 + index * 10,
+                    "--i": index,
+                  } as React.CSSProperties
+                }
                 className="w-full"
               >
                 <article
@@ -241,25 +415,23 @@ export function StackedCategoriesSection() {
                   style={{
                     background: card.gradientStyle,
                     boxShadow: `0 24px 54px -18px ${card.shadowColor}, 0 8px 20px -10px rgba(7, 17, 34, 0.25)`,
-                    transformOrigin: "top center",
-                    willChange: "transform",
                   }}
-                  className="relative overflow-hidden min-h-[300px] sm:min-h-[330px] md:min-h-[350px] rounded-[22px] md:rounded-[28px] p-6 sm:p-8 md:p-10 flex items-center justify-between gap-4 sm:gap-6 lg:gap-10 transition-transform duration-150 ease-out"
+                  className="relative overflow-hidden h-auto rounded-[22px] md:rounded-[28px] p-6 sm:p-8 md:p-10 flex items-start sm:items-center justify-between gap-4 sm:gap-6 lg:gap-10"
                 >
-                  {/* Depth dim overlay when next card stacks above */}
+                  {/* Depth dim overlay when next card stacks above - sits behind the label */}
                   <div
                     ref={(el) => {
                       dimOverlayRefs.current[index] = el;
                     }}
                     aria-hidden="true"
                     style={{ opacity: 0 }}
-                    className="pointer-events-none absolute inset-0 bg-[#050C1A] z-30 transition-opacity duration-150 ease-out"
+                    className="pointer-events-none absolute inset-0 bg-[#050C1A] z-20 transition-opacity duration-150 ease-out"
                   />
 
                   {/* Subtle top hairline sheen */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent z-20"
+                    className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent z-10"
                   />
 
                   {/* Subtle ambient radial lighting accents */}
@@ -279,12 +451,18 @@ export function StackedCategoriesSection() {
                   />
 
                   {/* Left Content Column */}
-                  <div className="relative z-10 flex-1 min-w-0 max-w-[620px] flex flex-col justify-center">
-                    <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.11em] sm:tracking-[0.14em] text-white/75">
+                  <div className="relative z-10 flex-1 min-w-0 max-w-[620px] flex flex-col justify-start sm:justify-center">
+                    {/* Eyebrow Label with z-30 ensuring it stays in front of dim overlay with high contrast */}
+                    <p
+                      ref={(el) => {
+                        labelRefs.current[index] = el;
+                      }}
+                      className="relative z-30 text-[10px] sm:text-xs font-bold uppercase tracking-[0.11em] sm:tracking-[0.14em] text-white/95 mb-3 sm:mb-4 select-none"
+                    >
                       {card.label}
                     </p>
 
-                    <h3 className="mt-1 sm:mt-2 text-[1.35rem] sm:text-[1.85rem] md:text-[2.2rem] font-bold tracking-[-0.02em] text-white leading-[1.15]">
+                    <h3 className="text-[1.35rem] sm:text-[1.85rem] md:text-[2.2rem] font-bold tracking-[-0.02em] text-white leading-[1.15]">
                       {card.title}
                     </h3>
 
@@ -303,7 +481,12 @@ export function StackedCategoriesSection() {
                     </ul>
 
                     {/* Direct CTA Action & Category Pills */}
-                    <div className="mt-4 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-3">
+                    <div
+                      ref={(el) => {
+                        actionsRefs.current[index] = el;
+                      }}
+                      className="mt-4 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-3"
+                    >
                       <Link
                         href={card.ctaHref}
                         className="inline-flex items-center gap-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold px-4 py-2 sm:py-2.5 text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] shrink-0"

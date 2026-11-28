@@ -459,13 +459,13 @@ export function PlatformSettingsClient({
                     <input
                       id="platform_logo_url"
                       type="text"
-                      placeholder="/images/easylife-logo.png"
+                      placeholder="/brand/easylife-logo-charcoal-orange.png"
                       value={general.platform_logo_url}
                       onChange={(e) => {
                         setGeneral((p) => ({ ...p, platform_logo_url: e.target.value }));
                         markDirty("general");
                       }}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500/30 focus:border-teal-500 focus:outline-none"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-[#2E343B] text-sm text-slate-900 dark:text-white focus:ring-2 focus:ring-[#E8590C]/30 focus:border-[#E8590C] focus:outline-none"
                     />
                     <p className="text-2xs text-slate-500 dark:text-slate-400 mt-1">
                       Path to the official brand logo displayed in navigation bars.

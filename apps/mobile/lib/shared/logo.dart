@@ -120,7 +120,7 @@ class _EasyLifeSymbolPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     final tealPaint = Paint()
-      ..color = const Color(0xFF24989A)
+      ..color = EasyLifeColors.burntOrange
       ..strokeWidth = size.width * 0.085
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round

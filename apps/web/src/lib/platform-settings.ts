@@ -14,7 +14,7 @@ export const DEFAULT_GENERAL_SETTINGS: GeneralPlatformSettings = {
   platform_name: "EasyLife",
   platform_description:
     "Trusted home, facility, and business service marketplace connecting verified professionals with customers across Nigeria.",
-  platform_logo_url: "/images/easylife-logo.png",
+  platform_logo_url: "/brand/easylife-logo-charcoal-orange.png",
   contact_email: "support@easylife.ng",
   contact_phone: "",
   website_url: "https://easylife.ng",

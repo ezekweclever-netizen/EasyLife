@@ -599,7 +599,7 @@ function validateSectionPayload<K extends PlatformSettingsSectionKey>(
       clean: {
         platform_name: platformName,
         platform_description: String(g.platform_description || "").trim().slice(0, 500),
-        platform_logo_url: logoUrl || "/images/easylife-logo.png",
+        platform_logo_url: logoUrl || "/brand/easylife-logo-charcoal-orange.png",
         contact_email: contactEmail,
         contact_phone: String(g.contact_phone || "").trim().slice(0, 40),
         website_url: websiteUrl,

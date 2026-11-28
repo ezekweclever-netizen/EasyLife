@@ -98,7 +98,7 @@ export function ProHeader({
         <div className="flex items-center justify-between h-16 sm:h-18 gap-2 sm:gap-3">
           {/* Left: Brand & Pro Badge */}
           <div className="flex items-center gap-3 xl:gap-4 shrink-0">
-            <Link href="/pro/dashboard" className="flex items-center gap-2 shrink-0 max-sm:[&_img]:h-6.5">
+            <Link href="/pro/dashboard" className="flex items-center gap-2 shrink-0 max-sm:[&_img]:h-12">
               <EasyLifeLogo theme="light" size="sm" />
               <span className="px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-[#1F2328] text-[#E8590C] rounded whitespace-nowrap shrink-0">
                 PRO

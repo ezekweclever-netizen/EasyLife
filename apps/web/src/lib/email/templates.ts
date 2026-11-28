@@ -20,7 +20,7 @@ function baseHtmlLayout(title: string, contentHtml: string): string {
     .container { max-width: 600px; margin: 24px auto; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; }
     .header { background: #1F2328; padding: 24px 32px; color: #ffffff; }
     .header h1 { margin: 0; font-size: 20px; font-weight: 800; }
-    .header h1 span { color: #2dd4bf; }
+    .header h1 span { color: #E8590C; }
     .body { padding: 32px; font-size: 14px; line-height: 1.6; color: #4A525C; }
     .btn { display: inline-block; background-color: ${BRAND_COLOR}; color: #ffffff !important; padding: 12px 24px; border-radius: 10px; font-weight: 700; text-decoration: none; margin: 20px 0; }
     .card { background: #FAF7F3; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin: 16px 0; }

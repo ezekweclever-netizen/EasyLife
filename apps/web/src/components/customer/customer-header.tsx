@@ -243,7 +243,7 @@ export function CustomerHeader({
             <Link
               href="/dashboard"
               aria-label="EasyLife Customer Home"
-              className="shrink-0 max-sm:[&_img]:h-6.5"
+              className="shrink-0 max-sm:[&_img]:h-12"
             >
               <EasyLifeLogo theme="light" size="sm" />
             </Link>

@@ -28,12 +28,12 @@ export default async function AdminLoginPage({
     <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full mx-auto space-y-8">
         <div className="flex flex-col items-center text-center space-y-4">
-          <Link href="/" className="focus-visible:outline-2 focus-visible:outline-teal-400 rounded-lg">
+          <Link href="/" className="focus-visible:outline-2 focus-visible:outline-[#E8590C] rounded-lg">
             <EasyLifeLogo theme="dark" size="md" showSlogan={false} />
           </Link>
 
           <div className="space-y-1.5">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-bold">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8590C]/10 border border-[#E8590C]/30 text-[#E8590C] text-xs font-bold">
               🛡️ Marketplace Operations Security
             </span>
             <h1 className="text-2xl font-extrabold tracking-tight text-white">

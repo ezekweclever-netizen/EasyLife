@@ -14,9 +14,9 @@
 The EasyLife logo combines a **Deep Navy (`#0A192F`) rounded architectural shield** with a geometric **White "E"** whose lower crossbar resolves into a **Teal (`#14B8A6`) verified checkmark**.
 
 ### Logo Asset Files (`apps/web/public/brand/`)
-- [`easylife-mark.svg`](./apps/web/public/brand/easylife-mark.svg) — Standalone app icon & favicon emblem (`64×64` viewBox).
-- [`easylife-logo-light.svg`](./apps/web/public/brand/easylife-logo-light.svg) — Horizontal lockup for white/light grey backgrounds (`Easy` in `#0A192F`, `Life` in `#0D9488`).
-- [`easylife-logo-dark.svg`](./apps/web/public/brand/easylife-logo-dark.svg) — Horizontal lockup for Deep Navy backgrounds (`Easy` in `#FFFFFF`, `Life` in `#14B8A6`).
+- [`easylife-official-mark.png`](./apps/web/public/brand/easylife-official-mark.png) — Standalone app icon & favicon emblem (`180×180` px).
+- [`easylife-logo-charcoal-orange.png`](./apps/web/public/brand/easylife-logo-charcoal-orange.png) — Horizontal lockup for light backgrounds (`Easy` in Charcoal `#1F2328`, `Life` in Burnt Orange `#E8590C`).
+- [`easylife-logo-dark-mode.png`](./apps/web/public/brand/easylife-logo-dark-mode.png) — Horizontal lockup for dark backgrounds (`Easy` in White `#FFFFFF`, `Life` in Burnt Orange `#E8590C`).
 - **React Component:** `<EasyLifeLogo theme="light" | "dark" size="sm" | "md" | "lg" showSlogan markOnly />` in [`apps/web/src/components/ui/logo.tsx`](./apps/web/src/components/ui/logo.tsx).
 
 ---

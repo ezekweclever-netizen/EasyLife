@@ -68,7 +68,7 @@ export function AdminSidebar({
       <div className="lg:hidden flex items-center justify-between bg-slate-900 text-white px-4 py-3 border-b border-slate-800 sticky top-0 z-40">
         <div className="flex items-center gap-2.5">
           <EasyLifeLogo theme="dark" size="sm" />
-          <span className="px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 font-bold text-xs uppercase tracking-wider">
+          <span className="px-2 py-0.5 rounded bg-[#E8590C]/20 text-[#E8590C] font-bold text-xs uppercase tracking-wider">
             Admin
           </span>
         </div>
@@ -100,7 +100,7 @@ export function AdminSidebar({
           <Link href="/admin" className="flex items-center gap-2">
             <EasyLifeLogo theme="dark" size="sm" />
           </Link>
-          <span className="px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 font-bold text-xs uppercase tracking-wider">
+          <span className="px-2 py-0.5 rounded bg-[#E8590C]/20 text-[#E8590C] font-bold text-xs uppercase tracking-wider">
             Ops
           </span>
         </div>

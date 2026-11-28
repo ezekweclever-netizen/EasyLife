@@ -13,19 +13,19 @@ export interface EasyLifeLogoProps {
 
 const LOCKUP_DIMENSIONS = {
   sm: {
-    width: 150,
-    height: 42,
-    imgClass: "h-9 sm:h-10.5 w-auto",
+    width: 156,
+    height: 76,
+    imgClass: "h-[58px] sm:h-[72px] w-auto",
   },
   md: {
-    width: 178,
-    height: 50,
-    imgClass: "h-11 sm:h-12.5 w-auto",
+    width: 186,
+    height: 90,
+    imgClass: "h-[72px] sm:h-[88px] w-auto",
   },
   lg: {
-    width: 214,
-    height: 60,
-    imgClass: "h-13 sm:h-15 w-auto",
+    width: 228,
+    height: 110,
+    imgClass: "h-[88px] sm:h-[108px] w-auto",
   },
 } as const;
 
@@ -78,7 +78,7 @@ export function EasyLifeLogo({
     return (
       <span className={`inline-flex items-center select-none shrink-0 ${className}`}>
         <Image
-          src="/brand/easylife-official-logo-dark.png"
+          src="/brand/easylife-logo-dark-mode.png"
           alt={`${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`}
           width={dim.width}
           height={dim.height}
@@ -95,7 +95,7 @@ export function EasyLifeLogo({
   return (
     <span className={`inline-flex items-center select-none shrink-0 ${className}`}>
       <Image
-        src="/brand/easylife-official-logo.png"
+        src="/brand/easylife-logo-charcoal-orange.png"
         alt={`${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`}
         width={dim.width}
         height={dim.height}
@@ -105,7 +105,7 @@ export function EasyLifeLogo({
         className={`${dim.imgClass} object-contain shrink-0 dark:hidden`}
       />
       <Image
-        src="/brand/easylife-official-logo-dark.png"
+        src="/brand/easylife-logo-dark-mode.png"
         alt={`${EASYLIFE_BRAND.name} — ${EASYLIFE_BRAND.slogan}`}
         width={dim.width}
         height={dim.height}

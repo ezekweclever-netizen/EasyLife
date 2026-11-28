@@ -48,7 +48,7 @@ async function runTests() {
   pass('Anti-flash theme initialization script is embedded in <head>');
 
   // 2. Official logo lockups
-  assert(homeHtml.includes('easylife-official-logo.png') || homeHtml.includes('easylife-official-logo'), 'Official brand logo must be present');
+  assert(homeHtml.includes('easylife-logo-charcoal-orange.png') || homeHtml.includes('easylife-official-logo.png') || homeHtml.includes('easylife-logo'), 'Official brand logo must be present');
   pass('Official EasyLife logo lockup configured with responsive dark-mode variant');
 
   // 3. Six-section primary navigation in exact order

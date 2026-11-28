@@ -80,7 +80,7 @@ export default function DesignSystemShowcasePage() {
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="text-xs font-semibold text-teal-300 hover:text-white px-3 py-1.5 rounded-lg border border-teal-800/70 bg-teal-950/50"
+              className="text-xs font-semibold text-[#E8590C] hover:text-white px-3 py-1.5 rounded-lg border border-[#E8590C]/40 bg-[#E8590C]/10 transition-colors"
             >
               Back to Home
             </Link>
