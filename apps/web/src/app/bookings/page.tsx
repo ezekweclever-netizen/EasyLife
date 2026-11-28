@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { getAuthenticatedUser } from "@/lib/auth/session";
 import { getCustomerBookingsPaginated, getCustomerProfile } from "@/lib/supabase/customer";
 import { CustomerHeader } from "@/components/customer/customer-header";
+import { getSimpleBookingStatus } from "@/lib/catalogue-display";
 
 export const metadata: Metadata = {
   title: "My Bookings — EasyLife",
@@ -102,18 +103,7 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
         {bookings.length > 0 ? (
           <div className="space-y-4">
             {bookings.map((booking) => {
-              const statusColors: Record<string, string> = {
-                open: "bg-blue-100 text-blue-800",
-                matched: "bg-purple-100 text-purple-800",
-                quoted: "bg-amber-100 text-amber-800",
-                accepted: "bg-emerald-100 text-emerald-800",
-                scheduled: "bg-teal-100 text-teal-800",
-                in_progress: "bg-indigo-100 text-indigo-800",
-                completed: "bg-green-100 text-green-800",
-                cancelled: "bg-gray-100 text-gray-800",
-              };
-
-              const badgeClass = statusColors[booking.status] || "bg-gray-100 text-gray-800";
+              const { label: statusLabel, badgeClass } = getSimpleBookingStatus(booking.status);
 
               return (
                 <div
@@ -125,8 +115,8 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
                       <span className="font-mono font-bold text-[#E8590C] dark:text-teal-300 bg-[#FCEBDD] dark:bg-teal-950/60 px-2.5 py-0.5 rounded-md border border-[#FCEBDD] dark:border-teal-800">
                         {booking.reference_code}
                       </span>
-                      <span className={`px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider text-[10px] ${badgeClass}`}>
-                        {booking.status.replace(/_/g, " ")}
+                      <span className={`px-2.5 py-0.5 rounded-full font-bold text-xs ${badgeClass}`}>
+                        {statusLabel}
                       </span>
                       {booking.category && (
                         <span className="px-2.5 py-0.5 rounded-md bg-[#FAF7F3] dark:bg-slate-800 text-[#475569] dark:text-slate-300 font-medium">
@@ -214,16 +204,16 @@ export default async function CustomerBookingsPage({ searchParams }: BookingsPag
               <h3 className="text-lg font-bold text-[#1F2328]">No bookings in this tab</h3>
               <p className="text-xs sm:text-sm text-[#64748B]">
                 {tab === "all"
-                  ? "You haven't placed any service requests yet. When you request a repair, it will appear here with live dispatch updates."
+                  ? "You have not placed any service requests yet. When you request a service, you can track it here."
                   : `You have no ${tab} service requests.`}
               </p>
             </div>
             <div className="pt-2">
               <Link
-                href="/book"
+                href="/post-a-need"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm"
               >
-                Request a Service Now
+                Send a Request
               </Link>
             </div>
           </div>

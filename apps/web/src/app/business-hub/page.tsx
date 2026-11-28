@@ -126,10 +126,10 @@ export default async function BusinessHubPage({
               EasyLife Business Hub
             </p>
             <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-              Verified Local Businesses, Trade Centres &amp; Corporate Maintenance
+              Verified Local Businesses &amp; Trade Centres
             </h1>
             <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#FAF7F3] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              Discover accredited workshops, commercial suppliers, bespoke contractors, and special member promotions across Port Harcourt, Lagos, and Abuja.
+              Find verified workshops, suppliers, contractors, and member deals in Port Harcourt, Lagos, and Abuja.
             </p>
           </div>
         </div>
@@ -176,10 +176,10 @@ export default async function BusinessHubPage({
               <Icon name="shield" className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
-              Maintenance Portal &rarr;
+              Business Repairs &rarr;
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400">
-              Multi-property facility management, equipment QR codes, and preventive schedules.
+              Track equipment and schedule regular maintenance for your business.
             </p>
           </Link>
 
@@ -191,10 +191,10 @@ export default async function BusinessHubPage({
               <Icon name="check-circle" className="w-5 h-5" />
             </div>
             <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
-              List Your Enterprise &rarr;
+              List Your Business &rarr;
             </h3>
             <p className="text-xs text-slate-600 dark:text-slate-400">
-              Onboard your business, publish services, offer promo codes, and receive direct inquiries.
+              Register your business, publish services, offer promo deals, and get new customers.
             </p>
           </Link>
         </div>
@@ -214,7 +214,7 @@ export default async function BusinessHubPage({
               </p>
             </div>
             <ButtonLink href="/register?role=business" variant="outline" size="sm">
-              Publish Business Promotion
+              Post a Deal
             </ButtonLink>
           </div>
 

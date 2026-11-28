@@ -10,6 +10,7 @@ import {
 } from "@/lib/supabase/customer";
 import { CustomerHeader } from "@/components/customer/customer-header";
 import { WhatsAppFloatingButton } from "@/components/ui/whatsapp-floating-button";
+import { getSimpleBookingStatus } from "@/lib/catalogue-display";
 
 export const metadata = {
   title: "Customer Dashboard — EasyLife",
@@ -269,12 +270,17 @@ export default async function CustomerDashboardPage({
                 >
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs font-bold text-[#E8590C] dark:text-[#F06A1F] bg-[#FCEBDD] dark:bg-teal-950/60 px-2 py-0.5 rounded">
+                      <span className="font-mono text-xs font-bold text-[#E8590C] dark:text-[#F06A1F] bg-[#FCEBDD] dark:bg-[#2E343B] px-2 py-0.5 rounded">
                         {b.reference_code}
                       </span>
-                      <span className="text-xs font-semibold px-2 py-0.5 rounded-full capitalize bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300">
-                        {b.status.replace(/_/g, " ")}
-                      </span>
+                      {(() => {
+                        const { label, badgeClass } = getSimpleBookingStatus(b.status);
+                        return (
+                          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${badgeClass}`}>
+                            {label}
+                          </span>
+                        );
+                      })()}
                       {b.urgency === "emergency" && (
                         <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-400 dark:text-red-300 animate-pulse">
                           🚨 Emergency
@@ -308,13 +314,13 @@ export default async function CustomerDashboardPage({
               </div>
               <h3 className="text-base font-bold text-[#1F2328] dark:text-white">No active service requests</h3>
               <p className="text-sm text-[#64748B] dark:text-slate-400 max-w-md mx-auto">
-                Need an electrician, plumber, AC technician, or generator mechanic? Post a request and our operations team will match you with a verified pro.
+                Need something fixed? Send a request and verified pros in your city will send you quotes in minutes.
               </p>
               <Link
-                href="/book"
+                href="/post-a-need"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm"
               >
-                Create Service Request
+                Send a Request
               </Link>
             </div>
           )}

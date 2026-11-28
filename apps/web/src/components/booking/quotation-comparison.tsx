@@ -452,7 +452,7 @@ export function QuotationComparison({
                     onClick={() => setSelectedQuoteForAccept(quote)}
                     className="w-full py-2.5 px-4 rounded-xl bg-[#E8590C] hover:bg-[#E8590C] text-white font-bold text-xs shadow-xs transition"
                   >
-                    Accept Quote &amp; Book →
+                    Accept Quote →
                   </button>
                 )}
 
@@ -567,7 +567,7 @@ export function QuotationComparison({
                   disabled={isPending}
                   className="px-5 py-2.5 rounded-xl bg-[#E8590C] hover:bg-[#E8590C] text-white text-xs font-bold shadow-xs transition"
                 >
-                  {isPending ? "Confirming..." : "Confirm & Accept Quotation"}
+                  {isPending ? "Confirming..." : "Accept Quote"}
                 </button>
               </div>
             </form>

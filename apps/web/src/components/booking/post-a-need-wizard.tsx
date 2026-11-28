@@ -483,14 +483,14 @@ export function PostANeedWizard({
 
         <div className="space-y-2">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FCEBDD] dark:bg-[#2E343B] text-[#E8590C] border border-[#E8590C]/30">
-            Request Successfully Broadcast
+            Request Sent Successfully
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
-            Your Need Has Been Posted!
+            Your Request Has Been Sent!
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
-            Accredited professionals in {city} have been notified. You will
-            receive itemized quotations with breakdown of labour and materials
+            Verified technicians in {city} have been notified. You will
+            receive clear quotes with a breakdown of labour and materials
             shortly.
           </p>
         </div>
@@ -596,10 +596,10 @@ export function PostANeedWizard({
       <div className="bg-slate-50 dark:bg-[#1F2328] border-b border-slate-200/80 dark:border-[#2E343B] px-6 py-4">
         <div className="flex items-center justify-between max-w-xl mx-auto">
           {[
-            { num: 1, label: "Problem & AI" },
-            { num: 2, label: "Fault Photos" },
-            { num: 3, label: "Location & Schedule" },
-            { num: 4, label: "Review & Broadcast" },
+            { num: 1, label: "Describe Need" },
+            { num: 2, label: "Add Photos" },
+            { num: 3, label: "Location & Time" },
+            { num: 4, label: "Review & Send" },
           ].map((s, idx) => (
             <div key={s.num} className="flex items-center">
               <div className="flex flex-col items-center">
@@ -650,13 +650,13 @@ export function PostANeedWizard({
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
               <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
-                Step 1 of 4: Describe Your Problem in Plain English
+                Step 1 of 4: Describe What You Need
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                Tell us what needs fixing or doing
+                Tell us what needs fixing
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                You don't need to know technical terms or trade classifications. Describe what's happening and our AI will identify the right service and specialist.
+                Describe what happened in your own words. We will match you with the right verified specialist.
               </p>
             </div>
 
@@ -959,7 +959,7 @@ export function PostANeedWizard({
                 onClick={handleNext}
                 className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm flex items-center gap-1.5"
               >
-                <span>Next: Attach Photos</span>
+                <span>Next: Add Photos</span>
                 <span>&rarr;</span>
               </button>
             </div>
@@ -973,13 +973,13 @@ export function PostANeedWizard({
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
               <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
-                Step 2 of 4: Fault Photos &amp; Documents
+                Step 2 of 4: Add Photos (Optional)
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                Upload photos of what needs fixing
+                Add photos of the problem
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                Technicians provide significantly more accurate, itemized quotations when they can inspect clear photos of the fault or appliance model label.
+                Clear photos help technicians give you accurate price quotes faster.
               </p>
             </div>
 
@@ -990,14 +990,14 @@ export function PostANeedWizard({
               </div>
               <div>
                 <p className="text-sm font-bold text-slate-900 dark:text-white">
-                  Drag and drop fault photographs or device labels
+                  Drag and drop photos here
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                   Supports JPEG, PNG, WebP, and PDF (Up to 5 files, 8MB each)
                 </p>
               </div>
               <label className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-[#E8590C] text-white hover:bg-[#C84A06] cursor-pointer transition-colors shadow-xs">
-                <span>Browse Files from Device</span>
+                <span>Choose Photos</span>
                 <input
                   type="file"
                   multiple
@@ -1057,7 +1057,7 @@ export function PostANeedWizard({
                 onClick={handleNext}
                 className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm flex items-center gap-1.5"
               >
-                <span>Next: Location &amp; Schedule</span>
+                <span>Next: Location &amp; Time</span>
                 <span>&rarr;</span>
               </button>
             </div>
@@ -1071,13 +1071,13 @@ export function PostANeedWizard({
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
               <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
-                Step 3 of 4: Service Location &amp; Preferred Timing
+                Step 3 of 4: Location &amp; Preferred Time
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                Where and when should the pro arrive?
+                Where and when do you need the service?
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                Operating in Port Harcourt, Lagos, and Abuja. Select your neighbourhood and preferred time slot.
+                Active in Port Harcourt, Lagos, and Abuja. Select your area and preferred time.
               </p>
             </div>
 
@@ -1088,7 +1088,7 @@ export function PostANeedWizard({
                   htmlFor="city-select"
                   className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider"
                 >
-                  Pilot City <span className="text-red-500">*</span>
+                  City <span className="text-red-500">*</span>
                 </label>
                 <select
                   id="city-select"
@@ -1319,7 +1319,7 @@ export function PostANeedWizard({
                 onClick={handleNext}
                 className="px-6 py-2.5 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-sm flex items-center gap-1.5"
               >
-                <span>Next: Review &amp; Broadcast</span>
+                <span>Next: Review &amp; Send</span>
                 <span>&rarr;</span>
               </button>
             </div>
@@ -1333,13 +1333,13 @@ export function PostANeedWizard({
           <div className="space-y-6">
             <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
               <span className="text-xs font-bold text-[#E8590C] uppercase tracking-wider">
-                Step 4 of 4: Review &amp; Broadcast Request
+                Step 4 of 4: Review &amp; Send Request
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                Verify your need details before broadcasting
+                Check your request details before sending
               </h2>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                Verified trade professionals in {city} will receive your request and prepare itemized quotes.
+                Verified trade professionals in {city} will receive your request and send clear quotes.
               </p>
             </div>
 
@@ -1504,10 +1504,10 @@ export function PostANeedWizard({
                   {isSubmitting ? (
                     <>
                       <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Broadcasting to Dispatch...</span>
+                      <span>Sending Request...</span>
                     </>
                   ) : (
-                    <span>Confirm &amp; Broadcast Need ✓</span>
+                    <span>Send Request ✓</span>
                   )}
                 </button>
               ) : (
@@ -1515,7 +1515,7 @@ export function PostANeedWizard({
                   href={`/login?next=${encodeURIComponent("/post-a-need")}`}
                   className="px-8 py-3 rounded-xl font-bold text-sm bg-[#E8590C] text-white hover:bg-[#C84A06] transition-colors shadow-md flex items-center gap-2"
                 >
-                  <span>Log In to Broadcast &rarr;</span>
+                  <span>Log In to Send Request &rarr;</span>
                 </Link>
               )}
             </div>

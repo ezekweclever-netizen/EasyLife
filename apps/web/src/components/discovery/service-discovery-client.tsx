@@ -679,7 +679,7 @@ export function ServiceDiscoveryClient({
               onClick={handleReset}
               className="px-3 py-1.5 rounded-lg border border-[#E6E0D8] dark:border-[#2E343B] text-[#4A525C] dark:text-[#C3C8CF] hover:text-[#1F2328] dark:hover:text-[#FAF7F3] hover:bg-[#FAF7F3] dark:hover:bg-[#1F2328] bg-white dark:bg-[#1F2328]"
             >
-              Reset Filters
+              Clear Filters
             </button>
             <button
               type="button"
@@ -687,7 +687,7 @@ export function ServiceDiscoveryClient({
               disabled={isPending}
               className="px-4 py-1.5 rounded-lg bg-[#E8590C] text-white font-bold hover:bg-[#C84A06] transition shadow-xs disabled:opacity-60"
             >
-              {isPending ? "Updating..." : "Apply Matching"}
+              {isPending ? "Searching..." : "Search"}
             </button>
           </div>
         </div>
@@ -702,7 +702,7 @@ export function ServiceDiscoveryClient({
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
               <span className="inline-block rounded-full bg-amber-200/70 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-950">
-                Temporarily Unavailable {unavailableNotice.kind}
+                Temporarily Unavailable
               </span>
               <h3 className="text-base font-bold text-amber-950 mt-1">
                 &ldquo;{unavailableNotice.name}&rdquo; is currently paused
@@ -720,13 +720,13 @@ export function ServiceDiscoveryClient({
               }
               className="px-4 py-2 rounded-xl bg-[#1F2328] text-white text-xs font-bold hover:bg-[#15181C] shrink-0 self-start sm:self-center"
             >
-              Submit Custom Request →
+              Send Request →
             </Link>
           </div>
 
           {unavailableNotice.alternatives.length > 0 && (
             <div className="flex flex-wrap items-center gap-2 pt-1">
-              <span className="text-xs font-bold text-amber-950">Active Alternatives:</span>
+              <span className="text-xs font-bold text-amber-950">Available Options:</span>
               {unavailableNotice.alternatives.map((alt) => (
                 <Link
                   key={alt.href}
@@ -745,13 +745,13 @@ export function ServiceDiscoveryClient({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white">
-            Matched Professionals ({resolvedTotalCount})
+            Available Professionals ({resolvedTotalCount})
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             {resolvedTotalCount > 0 && totalPages > 1
-              ? `Showing ${showingFrom}–${showingTo} of ${resolvedTotalCount} verified professionals • `
+              ? `Showing ${showingFrom}–${showingTo} of ${resolvedTotalCount} verified pros • `
               : ""}
-            Ranked by Service &amp; Category Match, Proximity ({city}), Verified Availability, Experience, and Ratings.
+            Ranked by match, distance ({city}), ratings, and completed jobs.
           </p>
         </div>
 
@@ -759,7 +759,7 @@ export function ServiceDiscoveryClient({
           href={activeServiceBookingHref || `/book${city !== "All Cities" ? `?city=${encodeURIComponent(city)}` : ""}`}
           className="px-4 py-2 rounded-lg bg-[#1F2328] text-[#FAF7F3] text-xs font-bold hover:bg-[#15181C] hover:text-[#E8590C] transition self-start sm:self-auto"
         >
-          Post a Service Request →
+          Send a Request →
         </Link>
       </div>
 
@@ -771,10 +771,10 @@ export function ServiceDiscoveryClient({
           </div>
           <div>
             <h3 className="text-base font-bold text-[#1F2328] dark:text-[#FAF7F3]">
-              No direct profile matches in {city} under this specific filter
+              No professionals found in {city} with these filters
             </h3>
             <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF] mt-1 leading-relaxed">
-              No individual provider records match your exact search filters. Rather than showing fabricated results, EasyLife allows you to post an everyday task or custom request, and our accredited providers will prepare quotations for you.
+              Try clearing your filters, or send a request and our verified pros will send you quotes directly.
             </p>
           </div>
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
@@ -782,7 +782,7 @@ export function ServiceDiscoveryClient({
               href={activeServiceBookingHref || `/book?city=${encodeURIComponent(city)}`}
               className="px-5 py-2.5 rounded-xl bg-[#E8590C] text-white text-xs font-bold hover:bg-[#C84A06] transition shadow-xs"
             >
-              Submit Service Request
+              Send Request
             </Link>
             <Link
               href="/post-a-need"

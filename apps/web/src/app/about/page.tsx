@@ -23,27 +23,27 @@ export default function AboutPage() {
   const coreValues = [
     {
       icon: "file-text" as const,
-      title: "Radical Transparency",
+      title: "Clear Pricing",
       description:
-        "No hidden charges, mysterious markups, or vague artisan estimates. Every quotation itemises replacement parts and technician labour before work starts.",
+        "No hidden fees or surprise costs. Every quote clearly shows parts and labour before work begins.",
     },
     {
       icon: "shield" as const,
-      title: "Safety Through Verification",
+      title: "Checked & Verified",
       description:
-        "Every service provider must pass multi-stage vetting: national ID validation, residential and workshop verification, trade credentials, and credible guarantors.",
+        "Every technician has a verified government ID, checked physical workshop, proven skills, and trusted guarantors.",
     },
     {
       icon: "lock" as const,
-      title: "Escrow Financial Protection",
+      title: "Safe Escrow Payments",
       description:
-        "We eliminate the age-old risk of upfront abandonment and non-payment. Customer funds are held securely until the work is inspected and approved.",
+        "Your money is held safely until the job is done. We only release payment after you approve the work.",
     },
     {
       icon: "users" as const,
-      title: "Dignity for Skilled Artisans",
+      title: "Fair Pay for Technicians",
       description:
-        "Great technicians deserve steady, respectful work and guaranteed prompt payouts. We empower skilled tradespeople to build sustainable careers.",
+        "Skilled technicians get steady jobs and guaranteed prompt pay for their hard work.",
     },
   ];
 
@@ -52,7 +52,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="Our Mission &amp; Purpose"
         title="Everyday Problems. Smarter Solutions."
-        description="EasyLife was built to bring structure, safety, and accountability to everyday home services and facility maintenance across Nigeria."
+        description="EasyLife connects households and businesses with verified technicians, clear prices, and safe payments across Nigeria."
       >
         <div className="flex flex-wrap gap-4">
           <ButtonLink href="/explore-services" size="lg">

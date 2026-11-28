@@ -107,7 +107,7 @@ export function JobStatusActions({
             disabled={isPending}
             className="px-4 py-2 rounded-lg bg-[#E8590C] text-white text-xs font-bold hover:bg-[#E8590C] disabled:opacity-50 transition shadow-xs"
           >
-            {isPending ? "Starting..." : "▶ Start Accepted Job"}
+            {isPending ? "Starting..." : "▶ Start Job"}
           </button>
         )}
 
@@ -119,21 +119,21 @@ export function JobStatusActions({
             disabled={isPending}
             className="px-4 py-2 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 disabled:opacity-50 transition shadow-xs"
           >
-            ✓ Submit Completion Request
+            ✓ Mark Job as Done
           </button>
         )}
 
         {/* If completion already requested */}
         {currentStatus === "pro_marked_complete" && (
           <span className="px-3 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-teal-800 dark:text-[#F06A1F] text-xs font-semibold">
-            ⏳ Completion Submitted — Awaiting Customer Sign-off &amp; Escrow Release
+            ⏳ Waiting for customer inspection and payment release
           </span>
         )}
 
         {/* If completed */}
         {currentStatus === "completed" && (
           <span className="px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 text-xs font-semibold">
-            ✓ Job Completed &amp; Signed Off
+            ✓ Done
           </span>
         )}
 

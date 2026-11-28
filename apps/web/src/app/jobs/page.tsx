@@ -228,13 +228,13 @@ export default async function JobsOpportunitiesPage({
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center text-center">
           <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
             <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#E8590C] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              Jobs &amp; Vocational Opportunities
+              Jobs &amp; Opportunities
             </p>
             <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-              Find Meaningful Work, Trade Gigs &amp; Apprenticeships
+              Find Trade Jobs &amp; Apprenticeships
             </h1>
             <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#FAF7F3] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              Connect directly with verified local businesses, trade contractors, and facility managers across Port Harcourt, Lagos, and Abuja. 100% free with zero application fees.
+              Connect directly with verified employers in Port Harcourt, Lagos, and Abuja. Always 100% free to apply.
             </p>
           </div>
         </div>
@@ -287,7 +287,7 @@ export default async function JobsOpportunitiesPage({
               className="w-full py-2.5 px-4 rounded-xl bg-[#E8590C] hover:bg-[#C84A06] text-white text-xs sm:text-sm font-bold transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
               <Icon name="search" className="w-4 h-4" />
-              <span>Filter Roles</span>
+              <span>Search Jobs</span>
             </button>
           </form>
 
@@ -332,7 +332,7 @@ export default async function JobsOpportunitiesPage({
                 className="flex items-center gap-1.5 whitespace-nowrap"
               >
                 <Icon name="briefcase" className="w-3.5 h-3.5" />
-                <span>Post a Vacancy</span>
+                <span>Post a Job</span>
               </ButtonLink>
             </div>
           </div>
@@ -343,14 +343,14 @@ export default async function JobsOpportunitiesPage({
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
-                Available Opportunities ({displayList.length})
+                Available Jobs ({displayList.length})
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 Verified openings across Port Harcourt, Lagos, and Abuja
               </p>
             </div>
             <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1 rounded-full border border-emerald-200 dark:border-emerald-800">
-              ✓ Verified Employer Postings
+              ✓ Verified Employers
             </span>
           </div>
 
@@ -452,7 +452,7 @@ export default async function JobsOpportunitiesPage({
                           size="sm"
                           className="text-xs font-bold"
                         >
-                          View &amp; Apply &rarr;
+                          Apply Now &rarr;
                         </ButtonLink>
                       </div>
                     </div>
@@ -467,10 +467,10 @@ export default async function JobsOpportunitiesPage({
         <div className="rounded-3xl border border-[#E6E0D8] dark:border-[#2E343B] bg-linear-to-r from-[#FCEBDD]/40 to-[#FAF7F3] dark:from-[#1F2328] dark:to-[#15181C] p-6 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-1.5 text-center sm:text-left">
             <h3 className="text-lg sm:text-xl font-bold text-[#1F2328] dark:text-[#FAF7F3]">
-              Hiring skilled technicians, apprentices, or maintenance staff?
+              Looking to Hire Skilled Technicians?
             </h3>
             <p className="text-xs sm:text-sm text-[#4A525C] dark:text-[#C3C8CF] max-w-xl">
-              Post your job vacancies directly to thousands of verified professionals, artisans, and vocational trainees across Port Harcourt, Lagos, and Abuja.
+              Post your job to reach verified technicians and apprentices in Port Harcourt, Lagos, and Abuja.
             </p>
           </div>
           <ButtonLink
@@ -478,7 +478,7 @@ export default async function JobsOpportunitiesPage({
             size="md"
             className="shrink-0 font-bold"
           >
-            Post a Vacancy Now &rarr;
+            Post a Job &rarr;
           </ButtonLink>
         </div>
       </section>

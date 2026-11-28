@@ -103,3 +103,56 @@ export function formatDurationLabel(minutes?: number | null): string | null {
   if (mins === 0) return `${hrs} hr${hrs > 1 ? "s" : ""}`;
   return `${hrs}h ${mins}m`;
 }
+
+export function getSimpleBookingStatus(status: string): {
+  label: string;
+  badgeClass: string;
+} {
+  switch (status) {
+    case "open":
+    case "matched":
+    case "submitted":
+      return {
+        label: "Waiting for quotes",
+        badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300",
+      };
+    case "quoted":
+      return {
+        label: "Waiting for quotes",
+        badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300",
+      };
+    case "accepted":
+      return {
+        label: "Awaiting payment",
+        badgeClass: "bg-purple-100 text-purple-800 dark:bg-purple-950/60 dark:text-purple-300",
+      };
+    case "scheduled":
+    case "confirmed":
+    case "in_progress":
+    case "pro_marked_complete":
+      return {
+        label: "In progress",
+        badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300",
+      };
+    case "completed":
+      return {
+        label: "Done",
+        badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300",
+      };
+    case "cancelled":
+      return {
+        label: "Cancelled",
+        badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300",
+      };
+    case "disputed":
+      return {
+        label: "Under review",
+        badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300",
+      };
+    default:
+      return {
+        label: status.replace(/_/g, " "),
+        badgeClass: "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300",
+      };
+  }
+}

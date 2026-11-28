@@ -275,13 +275,13 @@ export function BookingWizard({
 
         <div className="space-y-2">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#FCEBDD] text-[#E8590C] border border-[#FCEBDD]">
-            Request Successfully Submitted
+            Request Sent Successfully
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1F2328]">
-            Service Request Confirmed!
+            Your Request Has Been Sent!
           </h2>
           <p className="text-sm text-[#64748B] max-w-md mx-auto">
-            Your request has been broadcast to accredited technicians in {city}. You will receive quotation(s) shortly.
+            Verified technicians in {city} have been notified. You will receive quotes shortly.
           </p>
         </div>
 
@@ -919,10 +919,10 @@ export function BookingWizard({
                 {isSubmitting ? (
                   <>
                     <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>Submitting to Dispatch...</span>
+                    <span>Sending Request...</span>
                   </>
                 ) : (
-                  <span>Confirm & Submit Request ✓</span>
+                  <span>Send Request ✓</span>
                 )}
               </button>
             </div>

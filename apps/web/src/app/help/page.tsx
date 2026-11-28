@@ -23,40 +23,40 @@ export default function HelpCentrePage() {
     {
       question: "How do I request a service on EasyLife?",
       answer:
-        "You can explore categories on our website or mobile app, select the trade needed, provide a detailed description and photos of the problem, and submit your request. Vetted technicians in your city will review your request and submit itemised quotations.",
+        "Choose the service you need, describe what's wrong, and add photos if you have them. Verified technicians in your city will review your request and send price quotes.",
     },
     {
       question: "How does the escrow payment system work?",
       answer:
-        "When you accept a quote, you deposit the agreed sum into EasyLife's secure escrow. The technician is alerted that funds are locked, and work begins. The money is never released to the technician until you inspect the finished work and click 'Approve Completion'.",
+        "When you accept a quote, your money is held safely in escrow. The technician starts the job knowing payment is secured, but they only receive the money after you inspect and approve the completed work.",
     },
     {
-      question: "What if the technician does substandard work or does not finish?",
+      question: "What if the technician does poor work or does not finish?",
       answer:
-        "Do not click 'Approve Completion'. Instead, select 'Raise a Dispute' within your booking view. You will be prompted to attach photos and notes. Our local resolution team in Port Harcourt, Lagos, or Abuja will review the case, inspect if necessary, and ensure either the work is corrected or your escrowed funds are refunded.",
+        "Do not approve completion. Click 'Report an Issue' in your booking. Our local support team will review photos and help make sure the job is fixed or your money is refunded.",
     },
     {
       question: "Can I cancel a booking after accepting a quote?",
       answer:
-        "Yes. If the technician has not yet purchased approved custom materials or travelled to the site, a full refund of your escrow deposit is issued. If custom non-refundable parts were already procured with your explicit approval, those parts belong to you and only labour is refunded.",
+        "Yes. If the technician has not yet travelled or purchased custom materials, you receive a full refund. If custom parts were already bought with your approval, those parts belong to you.",
     },
   ];
 
   const proFaqs = [
     {
-      question: "How long does professional verification take?",
+      question: "How long does verification take?",
       answer:
-        "Once you submit your NIN, workshop or residential address proof, trade credentials, and guarantor information, our compliance team reviews and verifies your documents within 2 to 3 business days.",
+        "Our team reviews your government ID, workshop address, and trade credentials within 2 to 3 business days.",
     },
     {
-      question: "How and when do I receive my earnings?",
+      question: "When do I get paid?",
       answer:
-        "Funds are disbursed to your registered Nigerian bank account within 24 hours of the customer approving the completed job. EasyLife deducts a modest platform commission, and the balance is sent via direct bank transfer.",
+        "Payments are sent to your Nigerian bank account within 24 hours after the customer confirms the job is done.",
     },
     {
       question: "How do I quote for unforeseen repairs discovered on site?",
       answer:
-        "If a hidden problem is discovered during execution, you can submit an amended quotation through the app. The customer must review and fund the additional milestone in escrow before you proceed with the extra work.",
+        "If you find an unexpected problem while on site, you can send an updated quote through the app. The customer reviews and funds the extra work before you proceed.",
     },
   ];
 

@@ -23,12 +23,12 @@ interface BookingDetailClientProps {
 }
 
 const ORDERED_LIFECYCLE_STEPS = [
-  { key: "submitted", label: "Request Placed", desc: "Broadcast to accredited specialists" },
-  { key: "quoted", label: "Quotation Received", desc: "Itemized quote submitted" },
-  { key: "accepted", label: "Quote Accepted", desc: "Professional selected by customer" },
-  { key: "confirmed", label: "Appointment Confirmed", desc: "Time slot locked & conflict-free" },
-  { key: "in_progress", label: "In Progress", desc: "Technician on site executing repair" },
-  { key: "completed", label: "Completed", desc: "Job inspected and approved" },
+  { key: "submitted", label: "Request Sent", desc: "Sent to verified specialists" },
+  { key: "quoted", label: "Quotes Ready", desc: "Technicians submitted quotes" },
+  { key: "accepted", label: "Quote Accepted", desc: "You chose your technician" },
+  { key: "confirmed", label: "Time Confirmed", desc: "Appointment time locked in" },
+  { key: "in_progress", label: "In Progress", desc: "Technician is on the job" },
+  { key: "completed", label: "Done", desc: "Work inspected and approved" },
 ];
 
 export function BookingDetailClient({ booking, customerEmail }: BookingDetailClientProps) {

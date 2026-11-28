@@ -110,10 +110,10 @@ export default async function PostANeedPage({
               Everyday Problems. Smarter Solutions.
             </p>
             <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-              Post a Need — Describe Your Problem, Get Honest Quotes
+              Tell Us What You Need, Get Honest Quotes
             </h1>
             <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#FAF7F3] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              Whether it&apos;s an urgent emergency repair or a planned project, describe your problem in plain English. EasyLife AI diagnoses your fault and connects you with accredited local trade specialists across Port Harcourt, Lagos, and Abuja.
+              Describe your repair in plain words. We match you with verified technicians in Port Harcourt, Lagos, and Abuja who send you clear price quotes.
             </p>
           </div>
         </div>
@@ -160,10 +160,10 @@ export default async function PostANeedPage({
                 1
               </div>
               <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
-                Describe in Plain Words
+                Describe the Problem
               </h4>
               <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
-                Detail your problem in Port Harcourt, Lagos, or Abuja, upload fault photos, and specify your preferred timing.
+                Tell us what needs fixing, select your city, and upload photos if you have them.
               </p>
             </div>
 
@@ -172,10 +172,10 @@ export default async function PostANeedPage({
                 2
               </div>
               <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
-                Receive Itemized Quotes
+                Receive Clear Quotes
               </h4>
               <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
-                Accredited pros review your scope and submit transparent breakdowns of labour, materials, and callout fees.
+                Verified technicians send you price quotes showing parts and labour costs.
               </p>
             </div>
 
@@ -184,10 +184,10 @@ export default async function PostANeedPage({
                 3
               </div>
               <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
-                Choose Your Professional
+                Choose Your Technician
               </h4>
               <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
-                Compare ratings, reviews, past jobs, and pricing. Accept the quote that fits your timeline and budget.
+                Compare ratings, reviews, and prices, then accept the quote you like.
               </p>
             </div>
 
@@ -196,10 +196,10 @@ export default async function PostANeedPage({
                 4
               </div>
               <h4 className="text-sm font-bold text-[#1F2328] dark:text-[#FAF7F3]">
-                Protected Escrow Release
+                Pay Safely
               </h4>
               <p className="text-xs text-[#4A525C] dark:text-[#C3C8CF]">
-                Your payment is securely held in escrow until the technician finishes the job and you approve the quality inspection.
+                Your payment is held safely until the technician finishes the job and you approve the work.
               </p>
             </div>
           </div>

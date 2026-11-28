@@ -48,6 +48,24 @@ export default function VerificationPolicyPage() {
         </div>
       </PageHero>
 
+      {/* Plain-English Summary Box */}
+      <Section tone="white" className="pb-0">
+        <div className="max-w-4xl mx-auto">
+          <div className="p-6 rounded-2xl bg-[#FCEBDD] dark:bg-[#1F2328] border-2 border-[#E8590C]/30 text-sm text-[#1F2328] dark:text-[#FAF7F3] shadow-xs">
+            <h2 className="text-base font-bold text-[#E8590C] mb-2 flex items-center gap-2">
+              <span>🛡️</span>
+              <span>Quick Plain-English Summary</span>
+            </h2>
+            <ul className="space-y-1.5 text-xs sm:text-sm list-disc pl-5 leading-relaxed text-[#4A525C] dark:text-[#C3C8CF]">
+              <li><strong>Checked ID:</strong> Every technician must provide a verified Nigerian government ID (NIN, Driver’s Licence, or Voter’s Card).</li>
+              <li><strong>Physical workshop check:</strong> We confirm the technician has a real physical workshop or verifiable address.</li>
+              <li><strong>Proven trade skills:</strong> Technicians must show trade certificates or apprenticeships before taking jobs.</li>
+              <li><strong>Trusted guarantors:</strong> Every pro must provide two credible character references who vouch for their honesty.</li>
+            </ul>
+          </div>
+        </div>
+      </Section>
+
       {/* 3-Tier Overview */}
       <Section tone="white">
         <SectionHeading

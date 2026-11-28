@@ -25,14 +25,14 @@ export function BusinessDashboardClient({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-300 border border-teal-500/30 mb-3">
-              Corporate & Property Maintenance Management
+              Property &amp; Equipment Maintenance
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              {business.name} Maintenance Center
+              {business.name} Business Portal
             </h1>
             <p className="text-sm text-slate-300 mt-1 max-w-2xl">
-              Centralised facility oversight across {business.city}, {business.state}.
-              Monitor equipment health, manage repairs, track service intervals, and control costs.
+              Manage your properties and equipment in {business.city}, {business.state}.
+              Schedule routine servicing and track repairs.
             </p>
           </div>
 
@@ -89,21 +89,21 @@ export function BusinessDashboardClient({
         {/* Registered Assets */}
         <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Assets</span>
+            <span className="text-xs font-bold uppercase tracking-wider">Equipment</span>
             <span className="text-base">⚙️</span>
           </div>
           <div className="text-2xl font-black text-slate-900 dark:text-white">{metrics.registered_assets}</div>
-          <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Equipment items</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Tracked units</div>
         </div>
 
         {/* Open Requests */}
         <div className="bg-white dark:bg-[#1F2328] p-5 rounded-xl border border-slate-200 dark:border-[#2E343B] shadow-2xs">
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Open Faults</span>
+            <span className="text-xs font-bold uppercase tracking-wider">Active Requests</span>
             <span className="text-base">🛠️</span>
           </div>
           <div className="text-2xl font-black text-teal-800 dark:text-[#F06A1F]">{metrics.open_maintenance_requests}</div>
-          <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Active jobs</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Repairs in progress</div>
         </div>
 
         {/* Upcoming Maintenance */}

@@ -28,13 +28,13 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/30 text-teal-300 text-xs font-bold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            Marketplace Command Console
+            Admin Dashboard
           </div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-            Operations &amp; Governance Center
+            Operations Overview
           </h1>
           <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
-            Real-time oversight over Port Harcourt, Lagos, and Abuja markets. Every administrative action is protected by strict role-based authorization and an immutable audit trail.
+            Live marketplace metrics and activity for Port Harcourt, Lagos, and Abuja.
           </p>
         </div>
 
@@ -44,7 +44,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             className="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs shadow-md transition flex items-center gap-2"
           >
             <span>🛡️</span>
-            <span>Review KYC Queue</span>
+            <span>Review ID Checks</span>
             {metrics.pending_verification_requests > 0 && (
               <span className="px-1.5 py-0.5 rounded-full bg-white dark:bg-[#1F2328] text-teal-800 dark:text-[#F06A1F] text-2xs font-black">
                 {metrics.pending_verification_requests}
@@ -56,7 +56,7 @@ export function AdminDashboardOverview({ metrics }: AdminDashboardOverviewProps)
             className="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition flex items-center gap-2"
           >
             <span>⚖️</span>
-            <span>Arbitrate Disputes</span>
+            <span>Review Disputes</span>
             {metrics.open_disputes > 0 && (
               <span className="px-1.5 py-0.5 rounded-full bg-amber-400 text-slate-900 dark:text-white text-2xs font-black">
                 {metrics.open_disputes}

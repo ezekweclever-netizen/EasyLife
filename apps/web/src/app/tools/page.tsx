@@ -44,13 +44,13 @@ export default async function FreeToolsPage({
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24 flex flex-col items-center justify-center text-center">
           <div className="max-w-3xl mx-auto text-center flex flex-col items-center justify-center">
             <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.14em] text-[#E8590C] drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              100% Free Everyday Utilities
+              100% Free Tools
             </p>
             <h1 className="mt-3 text-3xl sm:text-5xl lg:text-[3.3rem] font-bold tracking-tight leading-[1.12] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-              Smart Problem Solvers, Calculators &amp; Document Generators
+              Free Calculators &amp; Helpful Tools
             </h1>
             <p className="mt-4 sm:mt-5 text-base sm:text-lg lg:text-xl text-[#FAF7F3] leading-relaxed max-w-2xl mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
-              Free, practical AI assistants, financial calculators, and trade document templates built for Nigerian homes, artisans, and businesses. No account, login, or payment required.
+              Instant cost calculators and planning tools for Nigerian homes and businesses. No sign-up, login, or payment needed.
             </p>
           </div>
         </div>

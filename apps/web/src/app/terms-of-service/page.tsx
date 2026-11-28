@@ -22,8 +22,17 @@ export default function TermsOfServicePage() {
 
       <Section tone="white">
         <div className="max-w-4xl mx-auto prose prose-slate prose-headings:text-[#1F2328] dark:prose-headings:text-[#FAF7F3] prose-a:text-[#E8590C]">
-          <div className="p-4 rounded-xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] mb-8 leading-relaxed">
-            <strong>Key Principle:</strong> EasyLife protects customers through escrow payment holding and protects service professionals through guaranteed payment upon verified completion. By using our platform, you agree to conduct all transactions and communications transparently.
+          <div className="p-6 rounded-2xl bg-[#FCEBDD] dark:bg-[#1F2328] border-2 border-[#E8590C]/30 text-sm text-[#1F2328] dark:text-[#FAF7F3] mb-8 shadow-xs">
+            <h2 className="text-base font-bold text-[#E8590C] mb-2 flex items-center gap-2 not-prose">
+              <span>📋</span>
+              <span>Quick Plain-English Summary</span>
+            </h2>
+            <ul className="space-y-1.5 text-xs sm:text-sm list-disc pl-5 leading-relaxed text-[#4A525C] dark:text-[#C3C8CF] not-prose">
+              <li><strong>Safe payments:</strong> Your money is held securely in escrow and only paid to the technician after you inspect and approve the job.</li>
+              <li><strong>Clear quotes:</strong> Technicians must list parts and labour costs separately before work begins. No surprise charges.</li>
+              <li><strong>Stay on the platform:</strong> All messages, bookings, and payments must happen on EasyLife so our guarantees and support protect you.</li>
+              <li><strong>Dispute help:</strong> If you are not satisfied with a job, our local support team will step in to inspect and resolve it fairly.</li>
+            </ul>
           </div>
 
           <h2 className="text-xl font-bold mt-8 mb-4">1. Scope of the Platform</h2>

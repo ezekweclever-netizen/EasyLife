@@ -22,8 +22,17 @@ export default function PrivacyPolicyPage() {
 
       <Section tone="white">
         <div className="max-w-4xl mx-auto prose prose-slate prose-headings:text-[#1F2328] dark:prose-headings:text-[#FAF7F3] prose-a:text-[#E8590C]">
-          <div className="p-4 rounded-xl bg-[#FCEBDD] dark:bg-[#1F2328] border border-[#E6E0D8] dark:border-[#2E343B] text-xs text-[#1F2328] dark:text-[#FAF7F3] mb-8 leading-relaxed">
-            <strong>Summary:</strong> We collect only the information necessary to match you with verified technicians, secure your payments in escrow, and safeguard our community. We never sell your personal data to third parties.
+          <div className="p-6 rounded-2xl bg-[#FCEBDD] dark:bg-[#1F2328] border-2 border-[#E8590C]/30 text-sm text-[#1F2328] dark:text-[#FAF7F3] mb-8 shadow-xs">
+            <h2 className="text-base font-bold text-[#E8590C] mb-2 flex items-center gap-2 not-prose">
+              <span>🔒</span>
+              <span>Quick Plain-English Summary</span>
+            </h2>
+            <ul className="space-y-1.5 text-xs sm:text-sm list-disc pl-5 leading-relaxed text-[#4A525C] dark:text-[#C3C8CF] not-prose">
+              <li><strong>What we collect:</strong> Your name, phone number, and location so technicians can reach you and complete your job.</li>
+              <li><strong>Technician vetting:</strong> We collect government ID (NIN) and address proof from technicians to ensure safety in your home.</li>
+              <li><strong>No selling:</strong> We will never sell your personal data or phone number to advertisers or third parties.</li>
+              <li><strong>Safe payments:</strong> We do not store complete bank card numbers or CVV security codes on our servers.</li>
+            </ul>
           </div>
 
           <h2 className="text-xl font-bold mt-8 mb-4">1. Introduction &amp; Data Controller</h2>
